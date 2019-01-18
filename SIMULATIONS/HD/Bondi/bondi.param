@@ -1,0 +1,74 @@
+% OUTPUT FILE AND DIRECTORY
+outputdirectory = Bondi/
+outputfile      = bondi_
+
+% RESTART SIMULATION (1 -> true, 0 -> false)
+restart_simulation = 0
+restartfile = DATA/sph_acc/bondi/data_400.dat
+restart_filecount = 400
+
+% Define mesh
+
+Nx1 = 1000
+Nx2 = 0
+Nx3 = 0
+
+% Sph
+x1max = 10.0
+x2max = 0.0
+x3max = 0.0
+x1min = 0.1
+x2min = 0.0
+x3min = 0.0
+
+% Time parameters
+tmax = 5000.0
+timefile = 10.0
+cou = 0.5
+
+% Polytorpic index
+%K = 1.6666666666666666666666666
+K = 1.00000001
+%K = 1.5
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Boundary conditions %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% ACCRETION DOMAIN
+r_out = 10.0
+
+% DENSITY PROFILE
+% (theta_0 should be in units of pi, delta_theta is the width of the step function)
+% 1 = const., 2 = gaussian, 3 = step function
+rho_boundary = 1 
+theta_0 = 0.6
+delta_theta = 0.02
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Initial conditions %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% BONDI ACCRETION (Gamma = 1, r0 = 10 r_B)
+density_0 =  1.1051141e+00
+pressure_0 = 1.1051141e+00
+velocity_0 = -1.01385e-02
+
+% BONDI ACCRETION (Gamma = 4/3, r0 = 10 r_B)
+%density_0 =  1.1033484
+%pressure_0 = 0.8550893
+%velocity_0 = -0.0064087 
+
+% BONDI ACCRETION (Gamma = 5/3, r0 = 10 r_B)
+%density_0 =  1.1016569
+%pressure_0 = 0.7050522
+%velocity_0 = -0.00226933
+
+% BONDI ACCRETION (Gamma = 1.5, r0 = 10 r_B)
+%density_0 =  1.102489
+%pressure_0 = 0.771738
+%velocity_0 = -0.004535191
+
+%density_0 =  0.000327
+%pressure_0 = 0.001
+%velocity_0 = 0.0
