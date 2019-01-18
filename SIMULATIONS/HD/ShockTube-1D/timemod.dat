@@ -1,0 +1,83 @@
+Time:0.000000e+00, dt: 7.807205e-04, dx:1.000000e-02 
+itprint 0 
+Time:1.014912e-02, dt: 7.807007e-04, dx:1.000000e-02 
+itprint 1 
+Time:2.029807e-02, dt: 7.806997e-04, dx:1.000000e-02 
+itprint 2 
+Time:3.044696e-02, dt: 7.806801e-04, dx:1.000000e-02 
+itprint 3 
+Time:4.059586e-02, dt: 7.806792e-04, dx:1.000000e-02 
+itprint 4 
+Time:5.074481e-02, dt: 7.806831e-04, dx:1.000000e-02 
+itprint 5 
+Time:6.011310e-02, dt: 7.806816e-04, dx:1.000000e-02 
+itprint 6 
+Time:7.026208e-02, dt: 7.806819e-04, dx:1.000000e-02 
+itprint 7 
+Time:8.041105e-02, dt: 7.806826e-04, dx:1.000000e-02 
+itprint 8 
+Time:9.056001e-02, dt: 7.806851e-04, dx:1.000000e-02 
+itprint 9 
+Time:1.007090e-01, dt: 7.806900e-04, dx:1.000000e-02 
+itprint 10 
+Time:1.100772e-01, dt: 7.807042e-04, dx:1.000000e-02 
+itprint 11 
+Time:1.202262e-01, dt: 7.806898e-04, dx:1.000000e-02 
+itprint 12 
+Time:1.303751e-01, dt: 7.806814e-04, dx:1.000000e-02 
+itprint 13 
+Time:1.405241e-01, dt: 7.806792e-04, dx:1.000000e-02 
+itprint 14 
+Time:1.506730e-01, dt: 7.806821e-04, dx:1.000000e-02 
+itprint 15 
+Time:1.600413e-01, dt: 7.806948e-04, dx:1.000000e-02 
+itprint 16 
+Time:1.701902e-01, dt: 7.807033e-04, dx:1.000000e-02 
+itprint 17 
+Time:1.803392e-01, dt: 7.806903e-04, dx:1.000000e-02 
+itprint 18 
+Time:1.904881e-01, dt: 7.806816e-04, dx:1.000000e-02 
+itprint 19 
+Time:2.006371e-01, dt: 7.806797e-04, dx:1.000000e-02 
+itprint 20 
+Time:2.100053e-01, dt: 7.806864e-04, dx:1.000000e-02 
+itprint 21 
+Time:2.201543e-01, dt: 7.806918e-04, dx:1.000000e-02 
+itprint 22 
+Time:2.303032e-01, dt: 7.806987e-04, dx:1.000000e-02 
+itprint 23 
+Time:2.404522e-01, dt: 7.807050e-04, dx:1.000000e-02 
+itprint 24 
+Time:2.506012e-01, dt: 7.807202e-04, dx:1.000000e-02 
+itprint 25 
+Time:2.607660e-01, dt: 7.880213e-04, dx:1.000000e-02 
+itprint 26 
+Time:2.702070e-01, dt: 1.148246e-03, dx:1.000000e-02 
+itprint 27 
+Time:2.813717e-01, dt: 2.103982e-03, dx:1.000000e-02 
+itprint 28 
+Time:2.900922e-01, dt: 2.261395e-03, dx:1.000000e-02 
+itprint 29 
+Time:3.015026e-01, dt: 2.290833e-03, dx:1.000000e-02 
+itprint 30 
+Time:3.106700e-01, dt: 2.293018e-03, dx:1.000000e-02 
+itprint 31 
+Time:3.221388e-01, dt: 2.295297e-03, dx:1.000000e-02 
+itprint 32 
+Time:3.313200e-01, dt: 2.297993e-03, dx:1.000000e-02 
+itprint 33 
+Time:3.405076e-01, dt: 2.296824e-03, dx:1.000000e-02 
+itprint 34 
+Time:3.519939e-01, dt: 2.297502e-03, dx:1.000000e-02 
+itprint 35 
+Time:3.611869e-01, dt: 2.297990e-03, dx:1.000000e-02 
+itprint 36 
+Time:3.703850e-01, dt: 2.299577e-03, dx:1.000000e-02 
+itprint 37 
+Time:3.818897e-01, dt: 2.300911e-03, dx:1.000000e-02 
+itprint 38 
+Time:3.910968e-01, dt: 2.302159e-03, dx:1.000000e-02 
+itprint 39 
+Time:4.003042e-01, dt: 2.302384e-03, dx:1.000000e-02 
+itprint 40 
+Delta 0.05533 seconds with 4 threads

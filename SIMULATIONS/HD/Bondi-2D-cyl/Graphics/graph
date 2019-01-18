@@ -1,0 +1,19 @@
+#!/bin/bash -e
+
+t=300;
+
+dat=$1
+while [ $dat -lt $t ];
+do
+g=$(echo "scale=5; ($dat)/$t" | bc)
+
+if [ $g -eq 0 ] 
+then
+g=.00000
+fi
+
+./pytlog-ref jet_$dat.dat $g
+dat=$((dat+1))
+done
+
+for i in *.png; do j=`echo $i | sed 's/-./-/'`; mv $i $j; done

@@ -1,0 +1,96 @@
+#!/bin/bash
+
+python<<EOF
+import numpy as np
+import matplotlib
+matplotlib.rcParams['text.usetex'] = True
+matplotlib.rcParams['text.latex.unicode'] = True
+import matplotlib.pyplot as plt
+from matplotlib import colors, ticker, cm
+import linecache
+from PIL import Image
+
+#Time reading
+time = float(linecache.getline("$1",2))
+
+#Mesh reading
+Nx1 = int(linecache.getline("$1",3))
+Nx2 = int(linecache.getline("$1",4))
+
+#Data reading
+xx, yy, n, p, u, v = np.loadtxt("$1",skiprows=5,unpack=True)
+
+n = n.reshape(Nx1,Nx2)
+n = n.T
+
+p = p.reshape(Nx1,Nx2)
+p = p.T
+
+u = u.reshape(Nx1,Nx2)
+u = u.T
+
+v = v.reshape(Nx1,Nx2)
+v = v.T
+
+nx = np.linspace(np.min(xx), np.max(xx), Nx1)
+ny = np.linspace(np.min(yy), np.max(yy), Nx2)
+X,Y = np.meshgrid(nx,ny)
+
+plt.rc('font', family='serif')
+plt.rc('text', usetex=True)
+
+plt.figure(figsize=(18,12),dpi=100)
+#plt.figure(figsize=(8,6),dpi=100)
+plt.xlabel(r'\$r\$',fontsize=12)
+plt.ylabel(r'\$z\$',fontsize=12)
+plt.title(r'Time = %.2f s'%time,fontsize=12)
+
+#Logaritmic linspace
+levels = np.linspace(np.min(np.log10(n)),np.max(np.log10(n)),400)
+#levels = np.linspace(-3.5,1.1,400)
+
+#Linear linspace
+#levels = np.linspace(0.0,np.max(n),400)
+
+#Space between vectors
+qx = 5
+qy = 5
+
+#Heat Colour - Axisymmetric
+#cn = plt.contourf(X,Y,np.log10(n),levels=levels,cmap=plt.cm.Reds)
+#cn = plt.contourf(-X,Y,np.log10(n),levels=levels,cmap=plt.cm.Blues)
+
+#Jet Colour - Axisymmetric
+cn = plt.contourf(X,Y,np.log10(n),levels=levels,cmap=plt.cm.YlOrBr)
+cn = plt.contourf(-X,Y,np.log10(n),levels=levels,cmap=plt.cm.YlOrBr)
+#cn = plt.contourf(X,Y,np.log10(n),levels=levels,cmap=plt.cm.jet)
+#cn = plt.contourf(X,Y,n,levels=levels,cmap=plt.cm.gray)
+#cn = plt.contourf(-X,Y,n,levels=levels,cmap=plt.cm.YlOrBr)
+
+#Vertical colorbar
+cbarn = plt.colorbar(cn,format="%.2f")
+cbarn.set_label(r'Density \$\log \rho\$',rotation=270,fontsize=12,labelpad=20)
+
+#Horizontal colorbar
+#cbarn = plt.colorbar(cn, format="%.2f",orientation='horizontal')
+#cbarn.set_label(r'Density \$\log \rho\$',fontsize=12,labelpad=20)
+
+#Vector plotting
+uut= u/np.sqrt(u**2 + v**2)
+vvt= v/np.sqrt(u**2 + v**2)
+uu = np.nan_to_num(u)
+vv = np.nan_to_num(v)
+plt.quiver(X[::qx,::qy],Y[::qx,::qy],uu[::qx,::qy],vv[::qx,::qy],
+		  units='width',scale=55.5,cmap='Reds')
+#plt.quiver(-X[::qx,::qy],Y[::qx,::qy],-uu[::qx,::qy],vv[::qx,::qy],
+#		  units='width',scale=25.5,cmap='Reds')
+
+#Rectangular graph
+plt.axes().set_aspect('equal')
+
+#Graph name
+plt.savefig("N$2_py.png",dpi=100,bbox_inches="tight")
+#plt.show()
+plt.close()
+
+EOF
