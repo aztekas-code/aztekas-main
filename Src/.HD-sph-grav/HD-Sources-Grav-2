@@ -1,5 +1,0 @@
-s1 : 0;
-s2 : - (u*n/r^2);
-s3 : 2*p/r + n*(v*v + w*w)/r - (n/r^2);
-s4 : - n*u*v/r + (n*w*w + p)*cos(theta)/(r*sin(theta));
-s5 : - n*u*w/r - n*v*w*cos(theta)/(r*sin(theta));
