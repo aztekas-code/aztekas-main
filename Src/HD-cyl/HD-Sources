@@ -1,0 +1,5 @@
+s1 : -u*n/R;
+s2 : -u*(E)/R;
+s3 : -u*(n*u)/R + n*w*w/R;
+s4 : -u*(n*v)/R; 
+s5 : -u*(n*w)/R - n*u*w/R;

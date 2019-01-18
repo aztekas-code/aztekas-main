@@ -1,0 +1,6 @@
+/*Conservate charges*/
+q1 : n;
+q2 : 0.5*n*(u*u + v*v + w*w) + e;
+q3 : n*u;
+q4 : n*v;
+q5 : n*w;

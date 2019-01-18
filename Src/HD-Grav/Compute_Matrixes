@@ -1,0 +1,95 @@
+#!/bin/bash
+maxima<<EOF
+
+/*Parameters*/
+
+	batch("EOS");
+	batch("HD-Charges");
+	batch("HD-FluxesF");
+	batch("HD-FluxesG");
+	batch("HD-FluxesH");
+	batch("HD-Sources-Grav");
+  
+	/*Computes the jacobian matrix of q(U) and its inverse*/
+	q: jacobian([q1,q2,q3,q4,q5],[n,p,u,v,w])$
+   iq: invert(q)$
+  
+ 	/*Computes the jacobian matrix of f(U)*/
+   f: jacobian([f1,f2,f3,f4,f5],[n,p,u,v,w])$
+
+ 	/*Computes the jacobian matrix of g(U)*/
+   g: jacobian([g1,g2,g3,g4,g5],[n,p,u,v,w])$
+ 	
+	/*Computes the jacobian matrix of h(U)*/
+   h: jacobian([h1,h2,h3,h4,h5],[n,p,u,v,w])$
+   
+	/*Computes the M matrix and output the file MATRIX_M*/
+   M: iq . f$
+
+	/*Computes the N matrix and output the file MATRIX_M*/
+   N: iq . g$
+
+	/*Computes the O matrix and output the file MATRIX_M*/
+   O: iq . h$
+	
+	/*Computes the eigenvectors and eigenvalues(characteristic velocities) of M*/
+	m : matrix([M[1,1],M[1,2],M[1,3]],[M[2,1],M[2,2],M[2,3]],[M[3,1],M[3,2],M[3,3]]);	
+	[vals,vecs] : eigenvectors(ev(m))$
+	[m1,m2,m3]: vals[1]$
+	
+	/*Computes the eigenvectors and eigenvalues(characteristic velocities) of N*/
+	[vals,vecs] : eigenvectors(N)$
+	[n1,n2,n3]: vals[1]$
+	
+	/*Computes the eigenvectors and eigenvalues(characteristic velocities) of O*/
+	[vals,vecs] : eigenvectors(O)$
+	[o1,o2,o3]: vals[1]$
+
+   /*Computes the matrix D = diag[m1,m2,m3] and output the file MATRIX_Dm*/
+   Dm: matrix([m1,m2,m3])$
+   stringout("MATRIX_Dm",ratsimp(Dm[1,1]),ratsimp(Dm[1,2]),
+   ratsimp(Dm[1,3]));
+   
+	/*Computes the matrix D = diag[n1,n2,n3] and output the file MATRIX_Dn*/
+   Dn: matrix([n1,n2,n3])$
+   stringout("MATRIX_Dn",ratsimp(Dn[1,1]),ratsimp(Dn[1,2]),
+   ratsimp(Dn[1,3]));
+   
+	/*Computes the matrix D = diag[o1,o2,o3] and output the file MATRIX_Do*/
+   Do: matrix([o1,o2,o3])$
+   stringout("MATRIX_Do",ratsimp(Do[1,1]),ratsimp(Do[1,2]),
+   ratsimp(Do[1,3]));
+	
+	/*Output the file VECTOR_Q*/
+	Q: matrix([q1],[q2],[q3],[q4],[q5])$
+	stringout("VECTOR_Q",ratsimp(Q[1,1]),ratsimp(Q[2,1]),ratsimp(Q[3,1]),
+	ratsimp(Q[4,1]),ratsimp(Q[5,1]))$
+
+	/*Output the file VECTOR_F*/
+	F: matrix([f1],[f2],[f3],[f4],[f5])$
+	stringout("VECTOR_F",ratsimp(F[1,1]),ratsimp(F[2,1]),ratsimp(F[3,1]),
+	ratsimp(F[4,1]),ratsimp(F[5,1]))$
+
+	/*Output the file VECTOR_G*/
+	G: matrix([g1],[g2],[g3],[g4],[g5])$
+	stringout("VECTOR_G",ratsimp(G[1,1]),ratsimp(G[2,1]),ratsimp(G[3,1]),
+	ratsimp(G[4,1]),ratsimp(G[5,1]))$
+
+	/*Output the file VECTOR_H*/
+	H: matrix([h1],[h2],[h3],[h4],[h5])$
+	stringout("VECTOR_H",ratsimp(H[1,1]),ratsimp(H[2,1]),ratsimp(H[3,1]),
+	ratsimp(H[4,1]),ratsimp(H[5,1]))$
+
+	/*Output the file VECTOR_S*/
+	S: matrix([s1],[s2],[s3],[s4],[s5])$
+	stringout("VECTOR_S",ratsimp(S[1,1]),ratsimp(S[2,1]),ratsimp(S[3,1]),
+	ratsimp(S[4,1]),ratsimp(S[5,1]))$
+
+	/*Output the file MATRIX_A, which is the inverse jacobian matriz of q(U)*/
+   A: iq$
+   stringout("MATRIX_A",ratsimp(A[1,1]),ratsimp(A[1,2]),ratsimp(A[1,3]),ratsimp(A[1,4]),ratsimp(A[1,5]),
+	ratsimp(A[2,1]),ratsimp(A[2,2]),ratsimp(A[2,3]),ratsimp(A[2,4]),ratsimp(A[2,5]),
+	ratsimp(A[3,1]),ratsimp(A[3,2]),ratsimp(A[3,3]),ratsimp(A[3,4]),ratsimp(A[3,5]),
+	ratsimp(A[4,1]),ratsimp(A[4,2]),ratsimp(A[4,3]),ratsimp(A[4,4]),ratsimp(A[4,5]),
+	ratsimp(A[5,1]),ratsimp(A[5,2]),ratsimp(A[5,3]),ratsimp(A[5,4]),ratsimp(A[5,5]));
+EOF

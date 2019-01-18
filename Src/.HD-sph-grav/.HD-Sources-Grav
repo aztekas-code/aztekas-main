@@ -1,0 +1,5 @@
+s1 : -2.0*u*n/r - v*n*cos(theta)/(r*sin(theta));
+s2 : -2.0*u*(E + p)/r - v*(E + p)*cos(theta)/(r*sin(theta)) - (u*n/r^2);
+s3 : -2.0*u*(n*u)/r - v*(n*u)*cos(theta)/(r*sin(theta)) - (n/r^2);
+s4 : -2.0*u*(n*v)/r - v*(n*v)*cos(theta)/(r*sin(theta));
+s5 : -2.0*u*(n*w)/r - v*(n*w)*cos(theta)/(r*sin(theta));

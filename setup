@@ -1,0 +1,594 @@
+#!/bin/bash
+
+echo 'Enter the physics of the problem (hd or rhd)'
+read phy
+
+echo 'Enter the number of dimensions (1, 2, or 3. Enter 4 for 2.5)'
+read dim
+
+echo 'Enter the coordinate system (cart, cyl or sph)'
+read coord
+
+if [[ $phy == "hd"  ]]
+then
+   echo 'Do you want gravity as a external force? (y/n)'
+   read grav
+fi
+
+cat << EOF > Makefile
+######################################
+#### Define simulation parameters ####
+######################################
+#----------------------------------------------------------------------
+# From the list below, please activate/deactivate the options that     
+# apply to your run. If you modify any of these options, make sure     
+# that you recompile the whole code by typing "make clean; make" 
+#----------------------------------------------------------------------
+
+#####################################
+# Ghost cells
+#####################################
+
+PARAM += -Dgc=3
+
+#####################################
+
+#####################################
+# Physics (rhd,hd,mhd,rmhd)
+#####################################
+
+PHY = $phy
+ifeq (\$(PHY),hd)
+        PARAM += -DPHYSICS=1
+endif
+ifeq (\$(PHY),rhd)
+        PARAM += -DPHYSICS=2
+endif
+
+#####################################
+
+#####################################
+# Dimension
+#####################################
+
+DIM = $dim
+
+ifeq (\$(DIM),1)
+	PARAM += -Ddim=1
+	PARAM += -Deq=3
+	PARAM += -Dgraf=1
+endif
+ifeq (\$(DIM),2)
+	PARAM += -Ddim=2
+	PARAM += -Deq=4
+	PARAM += -Dgraf=2
+endif
+ifeq (\$(DIM),4)
+	PARAM += -Ddim=2
+	PARAM += -Deq=4
+	PARAM += -Dgraf=2
+endif
+ifeq (\$(DIM),3)
+	PARAM += -Ddim=3
+	PARAM += -Deq=5
+	PARAM += -Dgraf=3
+endif
+
+#####################################
+
+#####################################
+# Coordinates (cart,cyl,sph)
+#####################################
+
+COORD = $coord
+
+ifeq (\$(COORD),cart)
+	PARAM += -Dalfa=0
+endif
+ifeq (\$(COORD),cyl)
+	PARAM += -Dalfa=1
+endif
+ifeq (\$(COORD),sph)
+	PARAM += -Dalfa=2
+endif
+
+#####################################
+
+#####################################
+# PATH TO AZTEKAS
+#####################################
+AZTPATH = /home/aaguayoo/DriveCiencias/Articles/AZTEKAS/aguayo-mendoza_aztekas/code
+#####################################
+
+#####################################
+# Integration method
+#####################################
+
+#####################################
+
+#####################################
+# Compilation
+#####################################
+
+ifeq (\$(PHY),hd)
+SOURCES = \$(AZTPATH)/Src/main.c \\
+	  \$(AZTPATH)/Src/alloc.c \\
+	  \$(AZTPATH)/Src/array.c \\
+	  \$(AZTPATH)/Src/mesh.c \\
+	  ./initial.c \\
+	  \$(AZTPATH)/Src/timestep.c \\
+	  \$(AZTPATH)/Src/input.c \\
+	  \$(AZTPATH)/Src/output.c \\
+	  \$(AZTPATH)/Src/integration.c \\
+	  \$(AZTPATH)/Src/flux.c \\
+	  \$(AZTPATH)/Src/rk-clas-\$(COORD).c \\
+	  \$(AZTPATH)/Src/limiters.c \\
+	  \$(AZTPATH)/Src/vectors.c \\
+	  \$(AZTPATH)/Src/restart.c\\
+	  ./boundaries.c \\
+	  \$(AZTPATH)/Src/bound_cond.c \\
+	  \$(AZTPATH)/Src/HD-\$(COORD)/amatrix.c \\
+	  \$(AZTPATH)/Src/HD-\$(COORD)/dmmatrix.c \\
+	  \$(AZTPATH)/Src/HD-\$(COORD)/dnmatrix.c \\
+	  \$(AZTPATH)/Src/HD-\$(COORD)/domatrix.c \\
+	  \$(AZTPATH)/Src/HD-\$(COORD)/q2uvector.c \\
+	  \$(AZTPATH)/Src/HD-\$(COORD)/u2qvector.c \\
+	  \$(AZTPATH)/Src/HD-\$(COORD)/qvector.c \\
+	  \$(AZTPATH)/Src/HD-\$(COORD)/fvector.c \\
+	  \$(AZTPATH)/Src/HD-\$(COORD)/gvector.c \\
+	  \$(AZTPATH)/Src/HD-\$(COORD)/hvector.c \\
+	  \$(AZTPATH)/Src/HD-\$(COORD)\$(grav)/svector.c \\
+	  \$(AZTPATH)/Src/HD-\$(COORD)\$(grav)/gauge.c \\
+	  ./extforce.c
+endif 
+
+ifeq (\$(PHY),rhd)
+SOURCES = \$(AZTPATH)/Src/main.c \\
+	  \$(AZTPATH)/Src/alloc.c \\
+	  \$(AZTPATH)/Src/array.c \\
+	  \$(AZTPATH)/Src/mesh.c \\
+	  ./initial.c \\
+	  \$(AZTPATH)/Src/timestep.c \\
+	  \$(AZTPATH)/Src/input.c \\
+	  \$(AZTPATH)/Src/output.c \\
+	  \$(AZTPATH)/Src/integration.c \\
+	  \$(AZTPATH)/Src/flux.c \\
+	  \$(AZTPATH)/Src/rk-rel.c \\
+	  \$(AZTPATH)/Src/limiters.c \\
+	  \$(AZTPATH)/Src/vectors.c \\
+	  \$(AZTPATH)/Src/restart.c\\
+	  ./boundaries.c \\
+	  \$(AZTPATH)/Src/bound_cond.c \\
+	  \$(AZTPATH)/Src/RHD-\$(COORD)/amatrix.c \\
+	  \$(AZTPATH)/Src/RHD-\$(COORD)/dmmatrix.c \\
+	  \$(AZTPATH)/Src/RHD-\$(COORD)/dnmatrix.c \\
+	  \$(AZTPATH)/Src/RHD-\$(COORD)/domatrix.c \\
+	  \$(AZTPATH)/Src/RHD-\$(COORD)/q2uvector.c \\
+	  \$(AZTPATH)/Src/RHD-\$(COORD)/u2qvector.c \\
+	  \$(AZTPATH)/Src/RHD-\$(COORD)/qvector.c \\
+	  \$(AZTPATH)/Src/RHD-\$(COORD)/fvector.c \\
+	  \$(AZTPATH)/Src/RHD-\$(COORD)/gvector.c \\
+	  \$(AZTPATH)/Src/RHD-\$(COORD)/hvector.c \\
+	  \$(AZTPATH)/Src/RHD-\$(COORD)/svector.c \\
+	  \$(AZTPATH)/Src/RHD-\$(COORD)/gauge.c  
+	  ./extforce.c
+endif
+
+#OBJS = \$(SOURCES:.c=.o)
+
+FLAGS = -Ofast -lm
+
+COMPILER = gcc
+AZT_HEAD = /home/aaguayoo/DriveCiencias/Articles/AZTEKAS/aguayo-mendoza_aztekas/code/Src/Headers
+CFLAGS = -I\$(AZT_HEAD) -I.
+EXEC = aztekas
+
+#####################################
+
+\$(EXEC): \$(SOURCES)
+	@echo ""
+	@echo "Compiling problem file ..."
+	\$(COMPILER) \$(PARAM) -fopenmp \$(SOURCES) \$(FLAGS) \$(CFLAGS) -o \$(EXEC)  
+	@echo "\$(bla)"
+	@echo "aztekas compiled successfully"
+clean:
+	rm -f \$(EXEC)
+EOF
+
+if [ $dim -eq 1 ]
+then
+   echo 'Set boundary in X1max (outflow,reflective,periodic,inflow)'
+   read bound_x1max
+   if [[ $bound_x1max == "periodic" ]]
+   then
+      bound_x1min="periodic"
+   else
+      echo 'Set boundary in X1min (outflow,reflective,inflow)'
+      read bound_x1min
+   fi
+fi
+
+if [ $dim -eq 2 ] || [ $dim -eq 4 ]
+then
+   echo 'Set boundary in X1max (outflow,reflective,periodic,inflow)'
+   read bound_x1max
+   if [[ $bound_x1max == "periodic" ]]
+   then
+      bound_x1min="periodic"
+   else
+      echo 'Set boundary in X1min (outflow,reflective,inflow)'
+      read bound_x1min
+   fi
+
+   echo 'Set boundary in X2max (outflow,reflective,periodic,inflow)'
+   read bound_x2max
+   if [[ $bound_x2max == "periodic" ]]
+   then
+      bound_x2min="periodic"
+   else
+      echo 'Set boundary in X2min (outflow,reflective,inflow)'
+      read bound_x2min
+   fi
+fi
+
+if [ $dim -eq 3 ]
+then
+   echo 'Set boundary in X1max (outflow,reflective,periodic,inflow)'
+   read bound_x1max
+   if [[ $bound_x1max == "periodic" ]]
+   then
+      bound_x1min="periodic"
+   else
+      echo 'Set boundary in X1min (outflow,reflective,inflow)'
+      read bound_x1min
+   fi
+
+   echo 'Set boundary in X2max (outflow,reflective,periodic,inflow)'
+   read bound_x2max
+   if [[ $bound_x2max == "periodic" ]]
+   then
+      bound_x2min="periodic"
+   else
+      echo 'Set boundary in X2min (outflow,reflective,inflow)'
+      read bound_x2min
+   fi
+
+   echo 'Set boundary in X3max (outflow,reflective,periodic,inflow)'
+   read bound_x3max
+   if [[ $bound_x3max == "periodic" ]]
+   then
+      bound_x3min="periodic"
+   else
+      echo 'Set boundary in X3min (outflow,reflective,inflow)'
+      read bound_x3min
+   fi
+fi
+
+if [ $dim -eq 1 ]
+then
+cat << EOF > param.h
+// Define boundaries TRUE = 1 , FALSE = 0
+// Set as cond_X whereas
+// cond : {outflow,reflective,periodic,inflow}
+// X : {x1max,x1min,x2max,x2min,x3max,x3min}
+
+#define ${bound_x1max}_x1max 1
+#define ${bound_x1min}_x1min 1
+EOF
+fi
+
+if [ $dim -eq 2 ] || [ $dim -eq 4 ]
+then
+cat << EOF > param.h
+// Define boundaries TRUE = 1 , FALSE = 0
+// Set as cond_X whereas
+// cond : {outflow,reflective,periodic,inflow}
+// X : {x1max,x1min,x2max,x2min,x3max,x3min}
+
+#define ${bound_x1max}_x1max 1
+#define ${bound_x1min}_x1min 1
+#define ${bound_x2max}_x2max 1
+#define ${bound_x2min}_x2min 1
+EOF
+fi
+
+if [ $dim -eq 3 ]
+then
+cat << EOF > param.h
+// Define boundaries TRUE = 1 , FALSE = 0
+// Set as cond_X whereas
+// cond : {outflow,reflective,periodic,inflow}
+// X : {x1max,x1min,x2max,x2min,x3max,x3min}
+
+#define ${bound_x1max}_x1max 1
+#define ${bound_x1min}_x1min 1
+#define ${bound_x2max}_x2max 1
+#define ${bound_x2min}_x2min 1
+#define ${bound_x3max}_x3max 1
+#define ${bound_x3min}_x3min 1
+EOF
+fi
+
+date="$(date "+%d-%m-%Y %H:%M:%S")"
+echo "Author"
+read author
+cat << EOF > initial.c
+/* 
+ *  aztekas initial module
+ *  Date of creation: $date
+ *  author: $author 
+ */
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
+#include<stdlib.h>
+#include"main.h"
+#include"param.h"
+
+void INITIAL(double *dtprint)
+{
+   int n, i, j, k, cell;
+
+   //Initialize time
+   time = 0.0;
+
+   //Initialize dt
+   dt = 0.0;
+}
+EOF
+
+cat << EOF > boundaries.c
+/* 
+ *  aztekas boundaries module
+ *  Date of creation: $date
+ *  author: $author 
+ */
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
+#include"main.h"
+#include"param.h"
+
+int BOUNDARIES(double *B)
+{
+   int n, i, j, k, cell;
+
+EOF
+
+if [ $dim -eq 1 ]
+then
+   if [[ $bound_x1max == "outflow" ]] || [[ $bound_x1min == "outflow" ]]
+   then
+      BOUND="OUTFLOW"
+
+cat << EOF >> boundaries.c
+   $BOUND(B);
+EOF
+   fi
+
+   if [[ $bound_x1max == "periodic" ]] || [[ $bound_x1min == "periodic" ]]
+   then
+      BOUND="PERIODIC"
+
+cat << EOF >> boundaries.c
+   $BOUND(B);
+EOF
+   fi
+
+   if [[ $bound_x1max == "reflective" ]] || [[ $bound_x1min == "reflective" ]]
+   then
+      BOUND="REFLECTIVE"
+
+cat << EOF >> boundaries.c
+   $BOUND(B);
+EOF
+   fi
+fi
+
+if [ $dim -eq 2 ] || [ $dim -eq 4 ]
+then
+   if [[ $bound_x1max == "outflow" ]] || [[ $bound_x1min == "outflow" ]] || [[ $bound_x2max == "outflow" ]] || [[ $bound_x2min == "outflow" ]]
+
+
+   then
+      BOUND="OUTFLOW"
+
+cat << EOF >> boundaries.c
+   $BOUND(B);
+EOF
+   fi
+
+   if [[ $bound_x1max == "periodic" ]] || [[ $bound_x1min == "periodic"  ]] || [[ $bound_x2max == "periodic" ]] || [[ $bound_x2min == "periodic"  ]]
+
+   then
+      BOUND="PERIODIC"
+
+cat << EOF >> boundaries.c
+   $BOUND(B);
+EOF
+   fi
+
+   if [[ $bound_x1max == "reflective" ]] || [[ $bound_x1min == "reflective"  ]] || [[ $bound_x2max == "reflective" ]] || [[ $bound_x2min == "reflective"  ]]
+   then
+      BOUND="REFLECTIVE"
+
+cat << EOF >> boundaries.c
+   $BOUND(B);
+EOF
+   fi
+fi
+cat << EOF >> boundaries.c
+
+   return 0;
+}
+EOF
+
+cat << EOF > extforce.c
+/* 
+ *  aztekas boundaries module
+ *  Date of creation: $date
+ *  author: $author 
+ */
+#include<stdio.h>
+#include<math.h>
+#include<string.h>
+#include"main.h"
+#include"param.h"
+
+int EXTFORCE(double *a, double *uu)
+{
+   int i;
+   double n, p, u=0, v=0, w=0;
+   n = uu[0];
+   p = uu[1];
+#if dim == 1
+   u = uu[2];
+#elif dim == 2
+   u = uu[2];
+   v = uu[3];
+#elif dim == 3 || dim == 4
+   u = uu[2];
+   v = uu[3];
+   w = uu[4];
+#endif
+
+EOF
+
+if [[ $grav == 'n' ]]
+then
+
+cat << EOF >> extforce.c
+   for(i = 0; i <= eq; i++)
+   {
+      if(i == 0)
+      {
+         a[i] = 0;
+      }
+      else if(i == 1)
+      {
+         a[i] = 0;
+      }
+      else if(i == 2)
+      {
+         a[i] = 0;
+      }
+      else if(i == 3)
+      {
+         a[i] = 0;
+      }
+      else if(i == 4)
+      {
+         a[i] = 0;
+      }
+   }
+
+   return 0;
+}
+EOF
+fi
+
+if [[ $grav == 'y' ]]
+then
+if [[ $coord == 'cart' ]]
+then
+cat << EOF >> extforce.c
+   double r = sqrt(x1*x1 + x2*x2 + x3*x3);
+
+   for(i = 0; i <= eq; i++)
+   {
+      if(i == 0)
+      {
+         a[i] = 0;
+      }
+      else if(i == 1)
+      {
+         a[i] = -(n*w*x3+n*v*x2+n*u*x1)/pow(r,3.0);
+      }
+      else if(i == 2)
+      {
+         a[i] = -(n*x1)/pow(r,3.0);
+      }
+      else if(i == 3)
+      {
+         a[i] = -(n*x2)/pow(r,3.0);
+      }
+      else if(i == 4)
+      {
+         a[i] = -(n*x3)/pow(r,3.0);
+      }
+   }
+
+   return 0;
+}
+EOF
+fi
+if [[ $coord == 'cyl' ]]
+then
+cat << EOF >> extforce.c
+   for(i = 0; i <= eq; i++)
+   {
+      if(i == 0)
+      {
+         a[i] = 0;
+      }
+      else if(i == 1)
+      {
+         a[i] = 0;
+      }
+      else if(i == 2)
+      {
+         a[i] = bla;
+      }
+      else if(i == 3)
+      {
+         a[i] = 0;
+      }
+      else if(i == 4)
+      {
+         a[i] = 0;
+      }
+   }
+
+   return 0;
+}
+EOF
+fi
+if [[ $coord == 'sph' ]]
+then
+cat << EOF >> extforce.c
+   for(i = 0; i <= eq; i++)
+   {
+      if(i == 0)
+      {
+         a[i] = 0;
+      }
+      else if(i == 1)
+      {
+         a[i] = 0;
+      }
+      else if(i == 2)
+      {
+         a[i] = bla;
+      }
+      else if(i == 3)
+      {
+         a[i] = 0;
+      }
+      else if(i == 4)
+      {
+         a[i] = 0;
+      }
+   }
+
+   return 0;
+}
+EOF
+fi
+fi
+
+mkdir Paramfiles Headerfiles Boundaryfiles Initialfiles
+mkdir Graphics
+if [[ $coord == 'cart' ]]
+then
+   cp $AZTEKAS_PATH/Graphics/pyt .
+fi

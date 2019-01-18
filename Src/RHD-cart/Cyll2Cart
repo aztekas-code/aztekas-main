@@ -1,0 +1,62 @@
+#!/bin/bash
+
+maxima << EOF
+
+t : t$
+x : r*cos(theta)$
+y : r*sin(theta)$
+z : z$
+
+J : jacobian([t,x,y,z],[t,r,theta,z])$
+iJ : trigsimp(J^^-1)$
+/*g : matrix([-(1-2*M/r),2*M/r,0,0],[2*M/r,(1 + 2*M/r),0,0],[0,0,r^2,0],[0,0,0,1])$ */
+g : matrix([-1,0,0,0],[0,1,0,0],[0,0,r^2,0],[0,0,0,1])$ 
+string(g)$
+
+dt     : matrix([iJ[1,1]],[iJ[1,2]],[iJ[1,3]],[iJ[1,4]])$
+dr     : matrix([iJ[2,1]],[iJ[2,2]],[iJ[2,3]],[iJ[2,4]])$
+dtheta : matrix([iJ[3,1]],[iJ[3,2]],[iJ[3,3]],[iJ[3,4]])$
+dz     : matrix([iJ[4,1]],[iJ[4,2]],[iJ[4,3]],[iJ[4,4]])$
+
+dT      : g[1,1] * dt . transpose(dt)$
+dTR     : g[1,2] * dt . transpose(dr)$
+dTTheta : g[1,3] * dt . transpose(dtheta)$
+dTZ     : g[1,4] * dt . transpose(dz)$
+
+dRT     : g[2,1] * dr . transpose(dt)$
+dR      : g[2,2] * dr . transpose(dr)$
+dRTheta : g[2,3] * dr . transpose(dtheta)$
+dRZ     : g[2,4] * dr . transpose(dz)$
+
+dThetaT : g[3,1] * dtheta . transpose(dt)$
+dThetaR : g[3,2] * dtheta . transpose(dr)$
+dTheta  : g[3,3] * dtheta . transpose(dtheta)$
+dThetaZ : g[3,4] * dtheta . transpose(dz)$
+
+dZT     : g[4,1] * dz . transpose(dt)$
+dZR     : g[4,2] * dz . transpose(dr)$
+dZTheta : g[4,3] * dz . transpose(dtheta)$
+dZ      : g[4,4] * dz . transpose(dz)$
+
+
+gg : trigsimp(dT + dTR + dTTheta + dTZ + dRT + dR + dRTheta + dRZ + dThetaT + dThetaR + dTheta + dThetaZ + dZT + dZR + dZTheta + dZ)$
+gg : factor(gg)$
+
+eq1 : cos(theta) = u$
+eq2 : sin(theta) = v$
+gg : scsimp(gg,eq1)$
+gg : psubst(eq1,gg)$
+gg : scsimp(gg,eq2)$
+gg : psubst(eq2,gg)$
+
+
+kill(x,y,z,g)$
+r : sqrt(x^2 + y^2)$
+u : x/r$
+v : y/r$
+G : factor(ev(gg))$
+
+kill(eq1,eq2,u,v,bestlength,trylength,t,x,y,z,J,iJ,g,dt,dr,dtheta,dz,dT,dTR,dTTheta,dTZ,dRT,dR,dRTheta,dRZ,dThetaT,dThetaR,dTheta,dThetaZ,dZT,dZR,dZTheta,dZ,gg,gg1,r)$ 
+stringout("Metric",values)$
+
+EOF

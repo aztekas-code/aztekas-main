@@ -1,0 +1,6 @@
+/*Fluxes along first dimension*/
+f1 : n*u;
+f2 : u*(0.5*n*(u^2 + v^2 + w^2) + e + p);
+f3 : n*u^2 + p;
+f4 : n*u*v;
+f5 : n*u*w;

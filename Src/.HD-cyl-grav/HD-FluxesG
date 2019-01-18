@@ -1,0 +1,6 @@
+/*Fluxes along second dimension*/
+g1 : n*v;
+g2 : v*(0.5*n*(u^2 + v^2 + w^2) + e + p);
+g3 : n*v*u;
+g4 : n*v^2 + p;
+g5 : n*v*w;

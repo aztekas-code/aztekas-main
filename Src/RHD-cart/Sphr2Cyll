@@ -1,0 +1,67 @@
+#!/bin/bash
+
+maxima << EOF
+
+t : t$
+R : r*sin(theta)$
+phi : phi$
+z : r*cos(theta)$
+
+J : jacobian([t,R,z,phi],[t,r,theta,phi])$
+iJ : trigsimp(J^^-1)$
+g : matrix([-(1-2*M/r),2*M/r,0,0],[2*M/r,(1 + 2*M/r),0,0],[0,0,r^2,0],[0,0,0,r^2*sin(theta)^2])$ 
+/*g : matrix([-1,0,0,0],[0,1,0,0],[0,0,r^2,0],[0,0,0,(r^2)*sin(theta)^2])$ */
+string(g)$
+
+dt     : matrix([iJ[1,1]],[iJ[1,2]],[iJ[1,3]],[iJ[1,4]])$
+dr     : matrix([iJ[2,1]],[iJ[2,2]],[iJ[2,3]],[iJ[2,4]])$
+dtheta : matrix([iJ[3,1]],[iJ[3,2]],[iJ[3,3]],[iJ[3,4]])$
+dphi   : matrix([iJ[4,1]],[iJ[4,2]],[iJ[4,3]],[iJ[4,4]])$
+
+dT      : g[1,1] * dt . transpose(dt)$
+dTR     : g[1,2] * dt . transpose(dr)$
+dTTheta : g[1,3] * dt . transpose(dtheta)$
+dTPhi   : g[1,4] * dt . transpose(dphi)$
+
+dRT     : g[2,1] * dr . transpose(dt)$
+dR      : g[2,2] * dr . transpose(dr)$
+dRTheta : g[2,3] * dr . transpose(dtheta)$
+dRPhi   : g[2,4] * dr . transpose(dphi)$
+
+dThetaT   : g[3,1] * dtheta . transpose(dt)$
+dThetaR   : g[3,2] * dtheta . transpose(dr)$
+dTheta    : g[3,3] * dtheta . transpose(dtheta)$
+dThetaPhi : g[3,4] * dtheta . transpose(dphi)$
+
+dPhiT     : g[4,1] * dphi . transpose(dt)$
+dPhiR     : g[4,2] * dphi . transpose(dr)$
+dPhiTheta : g[4,3] * dphi . transpose(dtheta)$
+dPhi      : g[4,4] * dphi . transpose(dphi)$
+
+gg : trigsimp(dT + dTR + dTTheta + dTPhi + dRT + dR + dRTheta + dRPhi + dThetaT + dThetaR + dTheta + dThetaPhi + dPhiT + dPhiR + dPhiTheta + dPhi)$
+gg : factor(gg)$
+
+eq1 : sin(theta) = u$
+eq2 : cos(theta) = v$
+gg : scsimp(gg,eq1)$
+gg : psubst(eq1,gg)$
+gg : scsimp(gg,eq2)$
+gg : psubst(eq2,gg)$
+
+kill(R,z,phi,g,r)$
+r : sqrt(R^2 + z^2)$
+u : R/r$
+v : z/r$
+
+G : factor(ev(gg));
+
+kill(R,r)$
+R : r$
+
+G : factor(ev(G));
+
+
+kill(eq1,eq2,eq3,eq4,eq5,u,v,w,bestlength,trylength,t,x,y,phi,J,iJ,g,dt,dr,dtheta,dphi,dT,dTR,dTTheta,dTPhi,dRT,dR,dRTheta,dRPhi,dThetaT,dThetaR,dTheta,dThetaPhi,dPhiT,dPhiR,dPhiTheta,dPhi,gg,gg1,r,R)$ 
+stringout("Metric",values)$
+
+EOF

@@ -1,0 +1,12 @@
+int funct_A(double *a, double *uu);
+int funct_Dm(double *a, double *uu);
+int funct_Dn(double *a, double *uu);
+int funct_Do(double *a, double *uu);
+int funct_U2Q(double *a, double *uu);
+int funct_Q2U(double *a, double *uu);
+int funct_Q(double *a, double *uu);
+int funct_F(double *a, double *uu);
+int funct_G(double *a, double *uu);
+int funct_H(double *a, double *uu);
+int funct_S(double *a, double *uu);
+int GAUGE(double *a, double g1, double g2, double g3);
