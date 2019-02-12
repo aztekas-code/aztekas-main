@@ -37,15 +37,12 @@ int INTEGRATION()
    
 #elif dim == 2 
 
-   funct_U2Q(Q,U);
+   RK2D(U,U,U1,U2,1):
+   BOUNDARIES(U1);
 
-   RK2D(U,Q,Q1,Q2,1);
-   funct_Q2U(U,Q1);
-   BOUNDARIES(U);
-
-   RK2D(U,Q,Q1,Q2,2);
-   funct_Q2U(U,Q2);
-   BOUNDARIES(U);
+   RK2D(U1,U,U1,U2,2);
+   BOUNDARIES(U2);
+   U = U2;
    
 #elif dim == 3 
    
