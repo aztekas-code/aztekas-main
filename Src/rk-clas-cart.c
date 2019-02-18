@@ -111,9 +111,16 @@ int RK2D(double *u, double *q, double *q1, double *q2, int order)
                F[n] = (v.Fp[n] - v.Fm[n])/(Dx1) + \
                (v.Gp[n] - v.Gm[n])/(Dx2) - \
                v.S[n];
-               //F[n] = roundgen(F[n]);
             }
 
+#if integration == 1 //PVRS
+            for(n = 0; n < eq; n++)
+            {
+               L[n] = F[n];
+            }
+
+            MxV(v.A,L,F);
+#endif
             switch(order)
             {
                case 1:
@@ -130,54 +137,6 @@ int RK2D(double *u, double *q, double *q1, double *q2, int order)
                   }
                break;
             }
-//            if((i == gc && j == Nx2/2-3))
-//            {
-//               printf("0 %e %e Fp %e Fm %e Gp %e Gm %e S %e\n",X1[i],X2[j],Fp[0],Fm[0],Gp[0],Gm[0],S[0]);
-//               printf("1 %e %e Fp %e Fm %e Gp %e Gm %e S %e\n",X1[i],X2[j],Fp[1],Fm[1],Gp[1],Gm[1],S[1]);
-//               printf("2 %e %e Fp %e Fm %e Gp %e Gm %e S %e\n",X1[i],X2[j],Fp[2],Fm[2],Gp[2],Gm[2],S[2]);
-//               printf("3 %e %e Fp %e Fm %e Gp %e Gm %e S %e\n",X1[i],X2[j],Fp[3],Fm[3],Gp[3],Gm[3],S[3]);
-//               printf("0 dF %e dG %e\n",Fp[0]-Fm[0],Gp[0]-Gm[0]);
-//               printf("1 dF %e dG %e\n",Fp[1]-Fm[1],Gp[1]-Gm[1]);
-//               printf("2 dF %e dG %e\n",Fp[2]-Fm[2],Gp[2]-Gm[2]);
-//               printf("3 dF %e dG %e\n",Fp[3]-Fm[3],Gp[3]-Gm[3]);
-//               printf("0 F %e \n",F[0]);
-//               printf("1 F %e \n",F[1]);
-//               printf("2 F %e \n",F[2]);
-//               printf("3 F %e \n",F[3]);
-//               printf("0 q1 %e \n",q1[c2(0,i,j)]);
-//               printf("1 q1 %e \n",q1[c2(1,i,j)]);
-//               printf("2 q1 %e \n",q1[c2(2,i,j)]);
-//               printf("3 q1 %e \n",q1[c2(3,i,j)]);
-//               printf("0 q2 %e \n",q2[c2(0,i,j)]);
-//               printf("1 q2 %e \n",q2[c2(1,i,j)]);
-//               printf("2 q2 %e \n",q2[c2(2,i,j)]);
-//               printf("3 q2 %e \n",q2[c2(3,i,j)]);
-//               getchar();                                         
-//            }                                                     
-//            if((j == gc && i == Nx1/2-3))                         
-//            {                                                     
-//               printf("0 %e %e Fp %e Fm %e Gp %e Gm %e S %e\n",X1[i],X2[j],Gp[0],Gm[0],Fp[0],Fm[0],S[0]);
-//               printf("1 %e %e Fp %e Fm %e Gp %e Gm %e S %e\n",X1[i],X2[j],Gp[1],Gm[1],Fp[1],Fm[1],S[1]);
-//               printf("3 %e %e Gp %e Gm %e Fp %e Fm %e S %e\n",X1[i],X2[j],Gp[3],Gm[3],Fp[3],Fm[3],S[3]);
-//               printf("2 %e %e Gp %e Gm %e Fp %e Fm %e S %e\n",X1[i],X2[j],Gp[2],Gm[2],Fp[2],Fm[2],S[2]);
-//               printf("0 dF %e dG %e\n",Fp[0]-Fm[0],Gp[0]-Gm[0]);
-//               printf("1 dF %e dG %e\n",Fp[1]-Fm[1],Gp[1]-Gm[1]);
-//               printf("3 dF %e dG %e\n",Fp[3]-Fm[3],Gp[3]-Gm[3]);
-//               printf("2 dF %e dG %e\n",Fp[2]-Fm[2],Gp[2]-Gm[2]);
-//               printf("0 F %e \n",F[0]);
-//               printf("1 F %e \n",F[1]);
-//               printf("2 F %e \n",F[2]);
-//               printf("3 F %e \n",F[3]);
-//               printf("0 q1 %e \n",q1[c2(0,i,j)]);
-//               printf("1 q1 %e \n",q1[c2(1,i,j)]);
-//               printf("2 q1 %e \n",q1[c2(2,i,j)]);
-//               printf("3 q1 %e \n",q1[c2(3,i,j)]);
-//               printf("0 q2 %e \n",q2[c2(0,i,j)]);
-//               printf("1 q2 %e \n",q2[c2(1,i,j)]);
-//               printf("2 q2 %e \n",q2[c2(2,i,j)]);
-//               printf("3 q2 %e \n",q2[c2(3,i,j)]);
-//               getchar();
-//            }
          }
       }
    }
