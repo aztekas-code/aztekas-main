@@ -225,7 +225,7 @@ void REFLECTIVE(double *B)
          #if alfa <= 1 
             B[c2(n,i,Nx2-cell)] = B[c2(n,i,Nx2-2*gc+cell+1)];
          #elif alfa == 2
-            if(fabs(x2max - M_PI) <= 1.0e-05)
+            if(fabs(x2max - M_PI) <= 1.0e-05 || fabs(x2max - M_PI_2) <= 1.0e-05)
             {
                B[c2(n,i,Nx2-cell)] = B[c2(n,i,Nx2-2*gc+cell)];
                B[c2(n,i,Nx2-gc)] = B[c2(n,i,Nx2-gc-1)];
@@ -233,6 +233,7 @@ void REFLECTIVE(double *B)
             else
             {
                B[c2(n,i,Nx2-cell)] = B[c2(n,i,Nx2-2*gc+cell+1)];
+             
             }
          #endif
          }
@@ -240,7 +241,7 @@ void REFLECTIVE(double *B)
          #if alfa <= 1 
          B[c2(3,i,Nx2-cell)] = -B[c2(3,i,Nx2-2*gc+cell+1)];
          #elif alfa == 2
-         if(fabs(x2max - M_PI) <= 1.0e-05)
+         if(fabs(x2max - M_PI) <= 1.0e-05 || fabs(x2max - M_PI_2) <= 1.0e-05)
          {
             B[c2(3,i,Nx2-cell)] = -B[c2(3,i,Nx2-2*gc+cell)];
             B[c2(3,i,Nx2-gc)] = 0.0;

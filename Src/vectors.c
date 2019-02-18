@@ -62,6 +62,10 @@ int AMATRIX2D(double *u, vec_ *v, int *I)
    funct_S(geoS,u);
    EXTFORCE(extS,u);
 
+#if integration == 1
+   funct_A(v->A,u);
+#endif
+
    for(n = 0; n < eq; n++)
    {
       v->S[n] = geoS[n] + extS[n];
