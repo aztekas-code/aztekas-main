@@ -37,7 +37,7 @@ int INTEGRATION()
    
 #elif dim == 2 
 
-   RK2D(U,U,U1,U2,1):
+   RK2D(U,U,U1,U2,1);
    BOUNDARIES(U1);
 
    RK2D(U1,U,U1,U2,2);
