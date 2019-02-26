@@ -198,16 +198,16 @@ if orientation == 'v':
     ax.set_xticklabels(['{:.1f}'.format(x) for x in x1labels],fontsize=fontsize)
     plt.yticks(x2labels)
     ax.set_yticklabels(['{:.1f}'.format(x) for x in x2labels],fontsize=fontsize)
-    plt.xlabel(r'$r$',fontsize=fontsize)
-    plt.ylabel(r'$z$',fontsize=fontsize)
+    plt.xlabel(r'$x$',fontsize=fontsize)
+    plt.ylabel(r'$y$',fontsize=fontsize)
 
 if orientation == 'h':
     plt.xticks(x2labels)
     ax.set_xticklabels(['{:.1f}'.format(x) for x in x2labels],fontsize=fontsize)
     plt.yticks(x1labels)
     ax.set_yticklabels(['{:.1f}'.format(x) for x in x1labels],fontsize=fontsize)
-    plt.xlabel(r'$z$',fontsize=fontsize)
-    plt.ylabel(r'$r$',fontsize=fontsize)
+    plt.xlabel(r'$x$',fontsize=fontsize)
+    plt.ylabel(r'$y$',fontsize=fontsize)
 
 ############################################
 # Colorbar positon (right,left,top,bottom) #
