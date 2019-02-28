@@ -48,6 +48,15 @@ int RK1D(double *u, double *q, double *q1, double *q2, int order)
          v.S[n];
       }
 
+#if integration == 1 //PVRS
+      for(n = 0; n < eq; n++)
+      {
+         L[n] = F[n];
+      }
+
+      MxV(v.A,L,F);
+#endif
+
       switch(order)
       {
          case 1:
@@ -100,6 +109,15 @@ int RK2D(double *u, double *q, double *q1, double *q2, int order)
             (v.Gp[n] - v.Gm[n])/(X1[i]*Dx2) - \
             v.S[n];
          }
+
+#if integration == 1 //PVRS
+         for(n = 0; n < eq; n++)
+         {
+            L[n] = F[n];
+         }
+
+         MxV(v.A,L,F);
+#endif
 
          switch(order)
          {
