@@ -7,12 +7,15 @@ while [ $dat -lt $t ];
 do
 g=$(echo "scale=5; ($dat)/$t" | bc)
 
-if [ $g -eq 0 ] 
+if [ $dat -eq 0 ] 
 then
 g=.00000
 fi
 
-~/DriveCiencias/aztekas-code/DATA/Graphics/pytlog $dat $g
+echo $dat
+../Graphics/cyl-density-log.py jet_"$dat".dat jet-"$g".png
+j=`echo jet-"$g".png | sed 's/-./-/'`
+mv jet-"$g".png $j
 dat=$((dat+1))
 done
 
