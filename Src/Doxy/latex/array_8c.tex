@@ -1,0 +1,42 @@
+\hypertarget{array_8c}{}\doxysection{array.\+c File Reference}
+\label{array_8c}\index{array.c@{array.c}}
+
+
+Functions to simplify the index vector access.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}param.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{array_8c_a746aed0e0c6e7e3724b690f300e6679c}\label{array_8c_a746aed0e0c6e7e3724b690f300e6679c}} 
+int {\bfseries c1} (int n, int i)
+\item 
+\mbox{\Hypertarget{array_8c_a3d054590d3278c7ed2fd5ec98f54ef87}\label{array_8c_a3d054590d3278c7ed2fd5ec98f54ef87}} 
+int {\bfseries c2} (int n, int i, int j)
+\item 
+\mbox{\Hypertarget{array_8c_ae5286c899e1a4baa77a55be8b2d03bba}\label{array_8c_ae5286c899e1a4baa77a55be8b2d03bba}} 
+int {\bfseries c3} (int n, int i, int j, int k)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Functions to simplify the index vector access. 
+
+\begin{DoxyAuthor}{Author}
+Alejandro Aguayo-\/\+Ortiz
+\end{DoxyAuthor}
+In this file we include three functions for passing the standard C notation for a vector\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{U[i*N\_j*N\_k + j*N\_k + k]}
+\end{DoxyCode}
+ to a much simpler notation 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{U[(i,j,k)]}
+\end{DoxyCode}
+ 
