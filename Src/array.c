@@ -7,7 +7,7 @@
  *
  * In this file we include three functions for passing the standard C
  * notation for a vector:
- * @code
+ * @code{.py}
  *    U[i*N_j*N_k + j*N_k + k]
  * @endcode
  * to a much simpler notation
