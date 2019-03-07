@@ -1,0 +1,24 @@
+\begin{theindex}
+
+  \item {alloc.c}, \hyperpage{5}
+  \item {array.c}, \hyperpage{6}
+  \item {auxfunc.c}, \hyperpage{6}
+
+  \indexspace
+
+  \item {bound\_cond.c}, \hyperpage{7}
+
+  \indexspace
+
+  \item {flux.c}, \hyperpage{7}
+
+  \indexspace
+
+  \item {input.c}, \hyperpage{8}
+  \item {integration.c}, \hyperpage{8}
+
+  \indexspace
+
+  \item {main.c}, \hyperpage{9}
+
+\end{theindex}
