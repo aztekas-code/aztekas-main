@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2018.9.23)  7 MAR 2019 13:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016/Debian) (preloaded format=pdflatex 2018.9.23)  8 MAR 2019 16:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1389,30 +1389,41 @@ Underfull \hbox (badness 10000) detected at line 26
 [][][]
  []
 
-) (./timestep_8c.tex [9]
+) (./output_8c.tex [9]
+Underfull \hbox (badness 10000) detected at line 42
+[][][]
+ []
+
+) (./restart_8c.tex
+Underfull \hbox (badness 10000) detected at line 27
+[][][]
+ []
+
+) (./timestep_8c.tex [10]
 Underfull \hbox (badness 10000) detected at line 33
 [][][]
  []
 
-) [10] (./refman.ind [11
+) [11] [12
 
+] (./refman.ind [13
 
 
 
 ])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 186.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 186.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 188.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 188.
  (./refman.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 186.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 186.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 188.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 188.
 Package rerunfilecheck Info: File `refman.out' has not changed.
-(rerunfilecheck)             Checksum: 773EEE48AA267C3A9A0D472EB37EFEC6;5377.
+(rerunfilecheck)             Checksum: AC29957C5EF29AFAC42C19A19277DDCA;6423.
  ) 
 Here is how much of TeX's memory you used:
- 16460 strings out of 493013
- 234287 string characters out of 6135682
- 336350 words of memory out of 5000000
- 19631 multiletter control sequences out of 15000+600000
+ 16500 strings out of 493013
+ 235395 string characters out of 6135682
+ 337881 words of memory out of 5000000
+ 19648 multiletter control sequences out of 15000+600000
  53506 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  53i,15n,92p,938b,406s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1426,10 +1437,10 @@ rier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.
 pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8ac.pfb></usr/s
 hare/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on refman.pdf (15 pages, 103739 bytes).
+Output written on refman.pdf (17 pages, 107014 bytes).
 PDF statistics:
- 362 PDF objects out of 1000 (max. 8388607)
- 331 compressed objects within 4 object streams
- 79 named destinations out of 1000 (max. 500000)
- 273 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 420 PDF objects out of 1000 (max. 8388607)
+ 387 compressed objects within 4 object streams
+ 98 named destinations out of 1000 (max. 500000)
+ 321 words of extra memory for PDF output out of 10000 (max. 10000000)
 

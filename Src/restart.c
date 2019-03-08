@@ -1,7 +1,7 @@
-/*
+/**
  * @file restart.c
  *
- * @authors Emilio Tejeda
+ * @author Emilio Tejeda
  *
  * @brief Functions to restart from a given file
  */
