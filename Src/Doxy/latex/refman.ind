@@ -23,6 +23,14 @@
 
   \indexspace
 
-  \item {timestep.c}, \hyperpage{9}
+  \item {output.c}, \hyperpage{9}
+
+  \indexspace
+
+  \item {restart.c}, \hyperpage{10}
+
+  \indexspace
+
+  \item {timestep.c}, \hyperpage{10}
 
 \end{theindex}
