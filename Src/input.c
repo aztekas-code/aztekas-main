@@ -74,6 +74,11 @@ int read_parameters_file(char const *paramfile_name)
                restart_filecount = atoi(t_value);
             }
 
+            if(strcmp(t_key,"binary")==0)
+            {
+               binary = atoi(t_value);
+            }
+
             if(strcmp(t_key,"tmax")==0)
             {
                tmax = atof(t_value);

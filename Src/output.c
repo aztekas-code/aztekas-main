@@ -1,16 +1,9 @@
-/*
- *   This program is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
+/**
+ * @file output.c
  *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details.
+ * @authors Alejandro Aguayo-Oritz and Emilio Tejeda
  *
- *   You should have received a copy of the GNU General Public License
- *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * @brief Output functions: ASCII and Binary.
  */
 
 //Do not erase any of these libraries//
@@ -18,7 +11,7 @@
 #include<math.h>
 #include<stdlib.h>
 #include<string.h>
-#include"./Headers/main.h"
+#include"main.h"
 
 int PrintValues(double *tprint, double *dtprint, int *itprint)
 {
@@ -30,15 +23,36 @@ int PrintValues(double *tprint, double *dtprint, int *itprint)
 
       if(graf == 1)
       {
-         Output1(itprint);
+         if(binary == 1)
+         {
+            Output1_bin(itprint);
+         }
+         else
+         {
+            Output1(itprint);
+         }
       }
       else if(graf == 2)
       {
-         Output2(itprint);
+         if(binary == 1)
+         {
+            Output2_bin(itprint);
+         }
+         else
+         {
+            Output2(itprint);
+         }
       }
       else if(graf == 3)
       {
-         Output3(itprint);
+         if(binary == 1)
+         {
+            Output3_bin(itprint);
+         }
+         else
+         {
+            Output3(itprint);
+         }
       }
 
       *tprint = *tprint + *dtprint;
@@ -86,6 +100,44 @@ int Output1(int *itprint)
    return 0;
 }
 
+int Output1_bin(int *itprint)
+{
+   FILE *file;
+   int n, i, j, k, size_X1;
+   char ext[20];
+   char dat[20];
+   char archivo[20];
+   int num;
+   
+   size_X1 = Nx1-2*gc+1;
+   
+   num = *itprint;
+   strcpy(ext,".bin");
+   snprintf(dat,8,"%d",num);
+   strcpy(archivo,outputdirectory);
+   strcat(archivo,outputfile);
+   strcat(archivo,dat);
+   strcat(archivo,ext);
+   file = fopen(archivo,"wb");
+
+   fwrite(&time, sizeof time, 1, file);
+   fwrite(&size_X1, sizeof size_X1, 1, file);
+   fwrite(&X1[gc], sizeof X1[gc], 1, file);
+   fwrite(&X1[Nx1-gc], sizeof X1[gc], 1, file);   
+         
+   for(i = gc; i <= Nx1-gc; i++)
+	{
+      fwrite(&U[c1(0,i)], sizeof U[c1(0,i)], 1, file);
+      fwrite(&U[c1(1,i)], sizeof U[c1(1,i)], 1, file);
+      fwrite(&U[c1(2,i)], sizeof U[c1(2,i)], 1, file);
+   }
+
+   printf("itprint %d \n",*itprint);
+   fclose(file);
+
+   return 0;
+}
+
 int Output2(int *itprint)
 {
    FILE *file;
@@ -118,6 +170,52 @@ int Output2(int *itprint)
          U[c2(1,i,j)],\
          U[c2(2,i,j)],\
          U[c2(3,i,j)]);
+      }
+   }
+
+   printf("itprint %d \n",*itprint);
+   fclose(file);
+
+   return 0;
+}
+
+int Output2_bin(int *itprint)
+{
+   FILE *file;
+   int n, i, j, k, size_X1, size_X2;
+   char ext[20];
+   char dat[20];
+   char archivo[20];
+   int num;
+   
+   size_X1 = Nx1-2*gc+1;
+   size_X2 = Nx2-2*gc+1;
+   
+   num = *itprint;
+   strcpy(ext,".bin");
+   snprintf(dat,8,"%d",num);
+   strcpy(archivo,outputdirectory);
+   strcat(archivo,outputfile);
+   strcat(archivo,dat);
+   strcat(archivo,ext);
+   file = fopen(archivo,"wb");
+
+   fwrite(&time, sizeof time, 1, file);
+   fwrite(&size_X1, sizeof size_X1, 1, file);
+   fwrite(&size_X2, sizeof size_X2, 1, file);
+   fwrite(&X1[gc], sizeof X1[gc], 1, file);
+   fwrite(&X1[Nx1-gc], sizeof X1[gc], 1, file);   
+   fwrite(&X2[gc], sizeof X2[gc], 1, file);
+   fwrite(&X2[Nx2-gc], sizeof X2[gc], 1, file);  
+         
+   for(i = gc; i <= Nx1-gc; i++)
+	 {
+      for(j = gc; j <= Nx2-gc; j++)
+      {
+         fwrite(&U[c2(0,i,j)], sizeof U[c2(0,i,j)], 1, file);
+         fwrite(&U[c2(1,i,j)], sizeof U[c2(1,i,j)], 1, file);
+         fwrite(&U[c2(2,i,j)], sizeof U[c2(2,i,j)], 1, file);
+         fwrite(&U[c2(3,i,j)], sizeof U[c2(3,i,j)], 1, file);
       }
    }
 
@@ -173,3 +271,58 @@ int Output3(int *itprint)
 
    return 0;
 }
+
+int Output3_bin(int *itprint)
+{
+   FILE *file;
+   int n, i, j, k, size_X1, size_X2, size_X3;
+   char ext[20];
+   char dat[20];
+   char archivo[20];
+   int num;
+   
+   size_X1 = Nx1-2*gc+1;
+   size_X2 = Nx2-2*gc+1;
+   size_X3 = Nx3-2*gc+1;
+   
+   num = *itprint;
+   strcpy(ext,".bin");
+   snprintf(dat,8,"%d",num);
+   strcpy(archivo,outputdirectory);
+   strcat(archivo,outputfile);
+   strcat(archivo,dat);
+   strcat(archivo,ext);
+   file = fopen(archivo,"wb");
+
+   fwrite(&time, sizeof time, 1, file);
+   fwrite(&size_X1, sizeof size_X1, 1, file);
+   fwrite(&size_X2, sizeof size_X2, 1, file);
+   fwrite(&size_X3, sizeof size_X3, 1, file);
+   fwrite(&X1[gc], sizeof X1[gc], 1, file);
+   fwrite(&X1[Nx1-gc], sizeof X1[gc], 1, file);   
+   fwrite(&X2[gc], sizeof X2[gc], 1, file);
+   fwrite(&X2[Nx2-gc], sizeof X2[gc], 1, file);  
+   fwrite(&X3[gc], sizeof X3[gc], 1, file);
+   fwrite(&X3[Nx3-gc], sizeof X3[gc], 1, file);  
+         
+   for(i = gc; i <= Nx1-gc; i++)
+	 {
+      for(j = gc; j <= Nx2-gc; j++)
+      {
+         for(k = gc; k <= Nx2-gc; k++)
+         {
+            fwrite(&U[c3(0,i,j,k)], sizeof U[c3(0,i,j,k)], 1, file);
+            fwrite(&U[c3(1,i,j,k)], sizeof U[c3(1,i,j,k)], 1, file);
+            fwrite(&U[c3(2,i,j,k)], sizeof U[c3(2,i,j,k)], 1, file);
+            fwrite(&U[c3(3,i,j,k)], sizeof U[c3(3,i,j,k)], 1, file);
+            fwrite(&U[c3(4,i,j,k)], sizeof U[c3(4,i,j,k)], 1, file);
+         }
+      }
+   }
+
+   printf("itprint %d \n",*itprint);
+   fclose(file);
+
+   return 0;
+}
+

@@ -1,16 +1,9 @@
 /*
- *   This program is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
+ * @file restart.c
  *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details.
+ * @authors Emilio Tejeda
  *
- *   You should have received a copy of the GNU General Public License
- *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * @brief Functions to restart from a given file
  */
 
 //Do not erase any of these libraries//
@@ -89,4 +82,223 @@ void RESTART()
     BOUNDARIES(U);
 
     fclose(file);
+}                                        
+
+void RESTART_BIN()
+{
+   FILE *file;
+   int i, j, k, idum, ignore;
+   double dum;
+   char line[100];
+
+   //Initialize dt
+   dt = 0.1;
+
+   file = fopen(restartfile,"rb");
+
+   // Read time
+   ignore = fread(&time, sizeof time, 1, file);
+
+#if dim == 1
+
+   // Read Nx1
+   ignore = fread(&idum, sizeof idum, 1, file);
+
+   if (idum + 2*gc - 1 != Nx1) 
+   {
+      printf("Size of input file incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }
+
+   // check domain limits
+   ignore = fread(&dum, sizeof dum, 1, file);
+   if (dum != X1[gc]) 
+   {
+      printf("Domain size incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }     
+   ignore = fread(&dum, sizeof dum, 1, file);
+   if (dum != X1[Nx1-gc]) 
+   {
+      printf("Domain size incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }     
+
+   // Read rest of file and initialize variables      
+   for(i = gc; i <= Nx1-gc; i++)
+   {
+        ignore = fread(&U[c1(0,i)], sizeof dum, 1, file);
+        ignore = fread(&U[c1(1,i)], sizeof dum, 1, file);
+        ignore = fread(&U[c1(2,i)], sizeof dum, 1, file);         
+   }
+    
+#elif dim == 2 || dim == 4
+
+   // Read Nx1
+   ignore = fread(&idum, sizeof idum, 1, file);
+
+   if (idum + 2*gc - 1 != Nx1) 
+   {
+      printf("Size of input file incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }
+
+   // Read Nx2
+   ignore = fread(&idum, sizeof idum, 1, file);
+   
+   if (idum + 2*gc - 1 != Nx2) 
+   {
+      printf("Size of input file incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }
+
+   // check domain limits
+   ignore = fread(&dum, sizeof dum, 1, file);
+   if (dum != X1[gc]) 
+   {
+      printf("Domain size incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }     
+   ignore = fread(&dum, sizeof dum, 1, file);
+   if (dum != X1[Nx1-gc]) 
+   {
+      printf("Domain size incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }     
+   ignore = fread(&dum, sizeof dum, 1, file);
+   if (dum != X2[gc]) 
+   {
+      printf("Domain size incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }     
+   ignore = fread(&dum, sizeof dum, 1, file);
+   if (dum != X2[Nx2-gc]) 
+   {
+      printf("Domain size incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }   
+   
+   // Read rest of file and initialize variables      
+   for(i = gc; i <= Nx1-gc; i++)
+   {
+        ignore = fread(&U[c1(0,i)], sizeof dum, 1, file);
+        ignore = fread(&U[c1(1,i)], sizeof dum, 1, file);
+        ignore = fread(&U[c1(2,i)], sizeof dum, 1, file);         
+   }
+   for(i = gc; i <= Nx1-gc; i++)
+   {
+      for(j = gc; j <= Nx2-gc; j++)
+      {
+        ignore = fread(&U[c2(0,i,j)], sizeof dum, 1, file);
+        ignore = fread(&U[c2(1,i,j)], sizeof dum, 1, file);
+        ignore = fread(&U[c2(2,i,j)], sizeof dum, 1, file);
+        ignore = fread(&U[c2(3,i,j)], sizeof dum, 1, file);
+      }
+   }
+    
+#elif dim == 3
+
+   // Read Nx1
+   ignore = fread(&idum, sizeof idum, 1, file);
+
+   if (idum + 2*gc - 1 != Nx1) 
+   {
+      printf("Size of input file incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }
+
+   // Read Nx2
+   ignore = fread(&idum, sizeof idum, 1, file);
+   
+   if (idum + 2*gc - 1 != Nx2) 
+   {
+      printf("Size of input file incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }
+
+   // Read Nx3
+   ignore = fread(&idum, sizeof idum, 1, file);
+   
+   if (idum + 2*gc - 1 != Nx3) 
+   {
+      printf("Size of input file incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }
+
+   // check domain limits
+   ignore = fread(&dum, sizeof dum, 1, file);
+   if (dum != X1[gc]) 
+   {
+      printf("Domain size incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }     
+   ignore = fread(&dum, sizeof dum, 1, file);
+   if (dum != X1[Nx1-gc]) 
+   {
+      printf("Domain size incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }     
+   ignore = fread(&dum, sizeof dum, 1, file);
+   if (dum != X2[gc]) 
+   {
+      printf("Domain size incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }     
+   ignore = fread(&dum, sizeof dum, 1, file);
+   if (dum != X2[Nx2-gc]) 
+   {
+      printf("Domain size incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }   
+   ignore = fread(&dum, sizeof dum, 1, file);
+   if (dum != X3[gc]) 
+   {
+      printf("Domain size incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }     
+   ignore = fread(&dum, sizeof dum, 1, file);
+   if (dum != X3[Nx3-gc]) 
+   {
+      printf("Domain size incompatible with simulation parameters!\n");
+      exit(EXIT_FAILURE);
+   }   
+   
+   // Read rest of file and initialize variables      
+   for(i = gc; i <= Nx1-gc; i++)
+   {
+        ignore = fread(&U[c1(0,i)], sizeof dum, 1, file);
+        ignore = fread(&U[c1(1,i)], sizeof dum, 1, file);
+        ignore = fread(&U[c1(2,i)], sizeof dum, 1, file);         
+   }
+   for(i = gc; i <= Nx1-gc; i++)
+   {
+      for(j = gc; j <= Nx2-gc; j++)
+      {
+        ignore = fread(&U[c2(0,i,j)], sizeof dum, 1, file);
+        ignore = fread(&U[c2(1,i,j)], sizeof dum, 1, file);
+        ignore = fread(&U[c2(2,i,j)], sizeof dum, 1, file);
+        ignore = fread(&U[c2(3,i,j)], sizeof dum, 1, file);
+      }
+   }
+   for(i = gc; i <= Nx1-gc; i++)
+   {
+      for(j = gc; j <= Nx2-gc; j++)
+      {
+         for(k = gc; k <= Nx3-gc; k++)
+         {
+            ignore = fread(&U[c3(0,i,j,k)], sizeof dum, 1, file);
+            ignore = fread(&U[c3(1,i,j,k)], sizeof dum, 1, file);
+            ignore = fread(&U[c3(2,i,j,k)], sizeof dum, 1, file);
+            ignore = fread(&U[c3(3,i,j,k)], sizeof dum, 1, file);               
+            ignore = fread(&U[c3(4,i,j,k)], sizeof dum, 1, file);                 
+         }
+      }
+   }
+
+#endif
+   
+   // CALLING BOUNDARIES TO GET GHOST CELLS RIGHT
+   BOUNDARIES(U);
+
+   fclose(file);
 }                                        

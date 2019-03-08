@@ -519,6 +519,76 @@ EOF
 fi
 fi
 
+echo 
+
+echo 'Enter characteristic name for the simulation'
+read char_name
+
+cat << EOF > $char_name.param
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OUTPUT FILE AND DIRECTORY %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+outputdirectory = DATA/
+outputfile      = data_
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OUTPUT FORMAT (1 -> BINARY, 0 -> ASCII) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+binary = 0
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RESTART SIMULATION (1 -> TRUE, 0 -> FALSE) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+restart_simulation = 0
+restartfile        = DATA/data_0.dat
+restart_filecount  = 15
+
+%%%%%%%%%%%%%%%
+% DEFINE MESH %
+%%%%%%%%%%%%%%%
+Nx1 = 800
+Nx2 = 1200
+Nx3 = 0
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% DEFINE DOMAIN LIMITS %
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+X_norm = 1.0
+
+x1max = 1.0
+x2max = 1.0
+x3max = 1.0
+x1min = 1.0
+x2min = 1.0
+x3min = 1.0
+
+%%%%%%%%%%%%%%%%%%%
+% TIME PARAMETERS %
+%%%%%%%%%%%%%%%%%%%
+tmax     = 1.0
+timefile = 0.1
+
+%%%%%%%%%%%%%%%%%%
+% COURANT FACTOR %
+%%%%%%%%%%%%%%%%%%
+cou = 0.25
+
+%%%%%%%%%%%%%%%%%%%%
+% POLYTROPIC INDEX %
+%%%%%%%%%%%%%%%%%%%%
+K = 1.6666666666666666666666666666666666666
+
+%%%%%%%%%%%%%%%%%%%%%%%
+% BOUNDARY PARAMETERS %
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%
+% INITIAL PARAMETERS %
+%%%%%%%%%%%%%%%%%%%%%%
+EOF
+
 mkdir Paramfiles Headerfiles Boundaryfiles Initialfiles
 mkdir Graphics
 cp $aztekas_path/Graphics/* ./Graphics/
