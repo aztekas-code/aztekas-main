@@ -46,6 +46,8 @@ double r_out, r_in;
 double theta_0, delta_theta;
 double density_0, pressure_0, velocity_0;
 
+int binary;
+
 //Paramfile
 char paramfile_name[50], outputdirectory[50], outputfile[50];
 char restartfile[50];
@@ -133,6 +135,12 @@ int Output1(int *itprint);
 int Output2(int *itprint);
 
 int Output3(int *itprint);
+
+int Output1_bin(int *itprint);
+
+int Output2_bin(int *itprint);
+
+int Output3_bin(int *itprint);
 
 int INTEGRATION();
 
