@@ -10,8 +10,10 @@
 #include<stdio.h>
 #include<math.h>
 #include<string.h>
+#include<stdlib.h>
 #include"main.h"
 #include"param.h"
+
 void RESTART()
 {
    FILE *file;
