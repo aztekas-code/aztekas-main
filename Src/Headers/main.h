@@ -40,6 +40,9 @@ double z_jet;
 double n_jet, p_jet, vx1_jet, vx2_jet, vx3_jet;
 double n_atm, p_atm, vx1_atm, vx2_atm, vx3_atm;
 
+double n_post, p_post, vx1_post, vx2_post, vx3_post;
+double n_pre, p_pre, vx1_pre, vx2_pre, vx3_pre;
+
 //Spherical Accretion
 int rho_boundary;
 double r_out, r_in;

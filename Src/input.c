@@ -310,6 +310,56 @@ int read_parameters_file(char const *paramfile_name)
             {
                z_jet = atof(t_value);
             }
+
+            if(strcmp(t_key,"n_post")==0)
+            {
+               n_post = atof(t_value);
+            }
+
+            if(strcmp(t_key,"p_post")==0)
+            {
+               p_post = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx1_post")==0)
+            {
+               vx1_post = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx2_post")==0)
+            {
+               vx2_post = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx3_post")==0)
+            {
+               vx3_post = atof(t_value);
+            }
+
+            if(strcmp(t_key,"n_pre")==0)
+            {
+               n_pre = atof(t_value);
+            }
+
+            if(strcmp(t_key,"p_pre")==0)
+            {
+               p_pre = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx1_pre")==0)
+            {
+               vx1_pre = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx2_pre")==0)
+            {
+               vx2_pre = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx3_pre")==0)
+            {
+               vx3_pre = atof(t_value);
+            }
          }
       }
             
