@@ -127,6 +127,7 @@ SOURCES = \$(AZTPATH)/Src/main.c \\
 	  \$(AZTPATH)/Src/limiters.c \\
 	  \$(AZTPATH)/Src/vectors.c \\
 	  \$(AZTPATH)/Src/restart.c\\
+	  \$(AZTPATH)/Src/auxfunc.c\\
 	  ./boundaries.c \\
 	  \$(AZTPATH)/Src/bound_cond.c \\
 	  \$(AZTPATH)/Src/HD-\$(COORD)/amatrix.c \\
@@ -159,6 +160,7 @@ SOURCES = \$(AZTPATH)/Src/main.c \\
 	  \$(AZTPATH)/Src/limiters.c \\
 	  \$(AZTPATH)/Src/vectors.c \\
 	  \$(AZTPATH)/Src/restart.c\\
+	  \$(AZTPATH)/Src/auxfunc.c\\
 	  ./boundaries.c \\
 	  \$(AZTPATH)/Src/bound_cond.c \\
 	  \$(AZTPATH)/Src/RHD-\$(COORD)/amatrix.c \\
@@ -311,7 +313,7 @@ cat << EOF > param.h
 EOF
 fi
 
-cat << EOF > param.h
+cat << EOF >> param.h
 
 #define limiter 'C'
 #define riemann 2
@@ -542,13 +544,13 @@ binary = 0
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 restart_simulation = 0
 restartfile        = DATA/data_0.dat
-restart_filecount  = 15
+restart_filecount  = 0
 
 %%%%%%%%%%%%%%%
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
-Nx1 = 800
-Nx2 = 1200
+Nx1 = 200
+Nx2 = 200
 Nx3 = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -560,9 +562,9 @@ X_norm = 1.0
 x1max = 1.0
 x2max = 1.0
 x3max = 1.0
-x1min = 1.0
-x2min = 1.0
-x3min = 1.0
+x1min = 0.0
+x2min = 0.0
+x3min = 0.0
 
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
