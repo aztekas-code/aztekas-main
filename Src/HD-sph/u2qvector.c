@@ -47,6 +47,26 @@ int funct_U2Q(double *a, double *uu)
          }
       }
    }
+   else if(dim == 4)
+   {
+      for(i = 0; i <= Nx1; i++)
+      {
+         for(j = 0; j <= Nx2; j++)
+         {
+            n = uu[c2(0,i,j)];
+            p = uu[c2(1,i,j)];
+            u = uu[c2(2,i,j)];
+            v = uu[c2(3,i,j)];
+            w = uu[c2(4,i,j)];
+    
+            a[c2(0,i,j)] = n;
+            a[c2(1,i,j)] = ((K-1)*n*pow(w,2.0)+(K-1)*n*pow(v,2.0)+(K-1)*n*pow(u,2.0)+2*p)/(2*K-2);
+            a[c2(2,i,j)] = n*u;
+            a[c2(3,i,j)] = n*v;
+            a[c2(4,i,j)] = n*w;
+         }
+      }
+   }
    if(dim == 3)
    {
       for(i = 0; i <= Nx1; i++)

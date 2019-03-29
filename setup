@@ -67,7 +67,7 @@ ifeq (\$(DIM),2)
 endif
 ifeq (\$(DIM),4)
 	PARAM += -Ddim=2
-	PARAM += -Deq=4
+	PARAM += -Deq=5
 	PARAM += -Dgraf=2
 endif
 ifeq (\$(DIM),3)

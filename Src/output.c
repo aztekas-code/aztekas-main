@@ -162,6 +162,7 @@ int Output2(int *itprint)
    fprintf(file,"%d \n",Nx2-2*gc+1);
    fprintf(file,"###################################\n");
 
+#if dim == 2
    for(i = gc; i <= Nx1-gc; i++)
 	 {
       for(j = gc; j <= Nx2-gc; j++)
@@ -172,6 +173,19 @@ int Output2(int *itprint)
          U[c2(3,i,j)]);
       }
    }
+#elif dim == 4
+   for(i = gc; i <= Nx1-gc; i++)
+	 {
+      for(j = gc; j <= Nx2-gc; j++)
+      {
+         fprintf(file,"%e %e %e %e %e %e %e\n",X1[i],X2[j],U[c2(0,i,j)],\
+         U[c2(1,i,j)],\
+         U[c2(2,i,j)],\
+         U[c2(3,i,j)],\
+         U[c2(4,i,j)]);
+      }
+   }
+#endif 
 
    printf("itprint %d \n",*itprint);
    fclose(file);
