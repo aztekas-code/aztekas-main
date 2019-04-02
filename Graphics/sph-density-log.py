@@ -151,18 +151,24 @@ if vector == 1:
 
     uu = np.nan_to_num(u)
     vv = np.nan_to_num(v)
+
+    uu = u
+    vv = v/(r*r)
+    ur = uu*X1/r + X2*vv
+    uz = uu*X2/r - X1*vv
+
     if orientation == 'v':
-        q = plt.quiver(X1[::qx,::qy],X2[::qx,::qy],uu[::qx,::qy],vv[::qx,::qy],
+        q = plt.quiver(X1[::qx,::qy],X2[::qx,::qy],ur[::qx,::qy],uz[::qx,::qy],
                     units='width')
         ax.quiverkey(q,0.9,0.9,1,r'',labelpos='E',coordinates='figure')
-        q = plt.quiver(-X1[::qx,::qy],X2[::qx,::qy],-uu[::qx,::qy],vv[::qx,::qy],
+        q = plt.quiver(-X1[::qx,::qy],X2[::qx,::qy],-ur[::qx,::qy],uz[::qx,::qy],
                     units='width')
         ax.quiverkey(q,0.9,0.9,1,r'',labelpos='E',coordinates='figure')
     if orientation == 'h':
-        q = plt.quiver(X2[::qx,::qy],X1[::qx,::qy],vv[::qx,::qy],uu[::qx,::qy],
+        q = plt.quiver(X2[::qx,::qy],X1[::qx,::qy],uz[::qx,::qy],ur[::qx,::qy],
                     units='width')
         ax.quiverkey(q,0.9,0.9,1,r'',labelpos='E',coordinates='figure')
-        q = plt.quiver(X2[::qx,::qy],-X1[::qx,::qy],vv[::qx,::qy],-uu[::qx,::qy],
+        q = plt.quiver(X2[::qx,::qy],-X1[::qx,::qy],uz[::qx,::qy],-ur[::qx,::qy],
                     units='width')
         ax.quiverkey(q,0.9,0.9,1,r'',labelpos='E',coordinates='figure')
 
@@ -172,6 +178,14 @@ if vector == 1:
 stream = 0
 
 if stream == 1:
+    uu = np.nan_to_num(u)
+    vv = np.nan_to_num(v)
+
+    uu = u
+    vv = v/(r*r)
+    ur = uu*X1/r + X2*vv
+    uz = uu*X2/r - X1*vv
+
     if orientation == 'v':
         sx1 = np.linspace(X1.min(),X1.max(),Nx1)
         sx2 = np.linspace(X2.min(),X2.max(),Nx2)
@@ -179,8 +193,8 @@ if stream == 1:
 
         px1 = X1.flatten()
         px2 = X2.flatten()
-        pu = u.flatten()
-        pv = v.flatten()
+        pu = ur.flatten()
+        pv = uz.flatten()
 
         gu = griddata((px1,px2),pu,(sX1,sX2))
         gv = griddata((px1,px2),pv,(sX1,sX2))
@@ -195,8 +209,8 @@ if stream == 1:
 
         px1 = X1.flatten()
         px2 = X2.flatten()
-        pu = u.flatten()
-        pv = v.flatten()
+        pu = ur.flatten()
+        pv = uz.flatten()
 
         gu = griddata((px2,px1),pu,(sX2,sX1))
         gv = griddata((px2,px1),pv,(sX2,sX1))
