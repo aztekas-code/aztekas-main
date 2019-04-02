@@ -20,6 +20,7 @@
 #include<string.h>
 #include"main.h"
 #include"vector.h"
+#include"param.h"
 
 int AMATRIX1D(double *u, vec_ *v, int *I)
 {
@@ -59,6 +60,10 @@ int AMATRIX2D(double *u, vec_ *v, int *I)
    x2  = X2[I[1]];
    x3  = 0;
 
+#if polar == 1
+   x2 = M_PI_2;
+#endif
+   
    funct_S(geoS,u);
    EXTFORCE(extS,u);
 

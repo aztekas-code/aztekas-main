@@ -323,7 +323,7 @@ void PERIODIC(double *B)
    // Periodic on X1 //
    ////////////////////
   
-   #if periodic_x1max == 1 && periodic_x1min == 1
+   #if periodic_x1 == 1
    for(n = 0; n < eq; n++)
    {
       for(cell = 0; cell <= gc; cell++)
@@ -342,7 +342,7 @@ void PERIODIC(double *B)
    // Periodic on X2 //
    ////////////////////
 
-   #if periodic_x2max && periodic_x2min == 1
+   #if periodic_x2 == 1
    for(n = 0; n < eq; n++)
    {
       for(cell = 0; cell <= gc; cell++)
