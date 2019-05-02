@@ -99,6 +99,7 @@ int RK2D(double *u, double *q, double *q1, double *q2, int order)
          I[0] = i;
          I[1] = j;
          r = limiter;
+         Dx1 = X1p[i] - X1m[i];
 
          RECONST2D(u,r,&l,I);
          FLUX2D(&v,&l,I);
