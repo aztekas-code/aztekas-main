@@ -43,11 +43,12 @@ int MESH()
       X1p[i] = x1min + (i+0.5-gc)*(dx1);
       X1m[i] = x1min + (i-0.5-gc)*(dx1);
 
-   #if LOGMESH == 1
-      X1[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-gc)/(Nx1));
-      X1p[i] = x1min + exp(log((x1max - x1min + 1.0))*(i+0.5-gc)/(Nx1));
-      X1m[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-0.5-gc)/(Nx1));
-   #endif
+      if(logmesh == 1)
+      {
+         X1[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-gc)/(Nx1-2*gc)) - 1;
+         X1p[i] = x1min + exp(log((x1max - x1min + 1.0))*(i+0.5-gc)/(Nx1-2*gc)) - 1;
+         X1m[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-0.5-gc)/(Nx1-2*gc)) - 1;
+      }
    }
    
 #elif dim == 2  || dim == 4
