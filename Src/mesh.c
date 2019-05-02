@@ -17,7 +17,8 @@
 #include<stdio.h>
 #include<math.h>
 #include<string.h>
-#include"./Headers/main.h"
+#include"main.h"
+#include"param.h"
 
 int MESH()
 {
@@ -41,6 +42,12 @@ int MESH()
       X1[i] = x1min + (i-gc)*(dx1);
       X1p[i] = x1min + (i+0.5-gc)*(dx1);
       X1m[i] = x1min + (i-0.5-gc)*(dx1);
+
+   #if LOGMESH == 1
+      X1[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-gc)/(Nx1));
+      X1p[i] = x1min + exp(log((x1max - x1min + 1.0))*(i+0.5-gc)/(Nx1));
+      X1m[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-0.5-gc)/(Nx1));
+   #endif
    }
    
 #elif dim == 2  || dim == 4
@@ -50,6 +57,13 @@ int MESH()
       X1[i]  = x1min + (i-gc)*(dx1);
       X1p[i] = x1min + (i+0.5-gc)*(dx1);
       X1m[i] = x1min + (i-0.5-gc)*(dx1);
+
+      if(logmesh == 1)
+      {
+         X1[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-gc)/(Nx1-2*gc)) - 1;
+         X1p[i] = x1min + exp(log((x1max - x1min + 1.0))*(i+0.5-gc)/(Nx1-2*gc)) - 1;
+         X1m[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-0.5-gc)/(Nx1-2*gc)) - 1;
+      }
    }
 
    for(j = 0; j <= Nx2; j++)
