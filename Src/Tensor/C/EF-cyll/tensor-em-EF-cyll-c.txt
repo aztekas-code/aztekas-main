@@ -1,0 +1,10 @@
+(2.0*M + r)*(pow(W, 2)*h*rho - p)/r
+(2.0*M*R*p*pow(r, 2)*(2.0*M + r) - pow(W, 2)*h*rho*(2.0*M*R*pow(r, 2)*(2.0*M + r) + pow(r, 1.5)*pow(2.0*M + r, 0.5)*(2.0*M*R*v*z - u*(2.0*M*pow(z, 2) + pow(r, 3)))))/(pow(r, 4)*(2.0*M + r))
+(2.0*M*p*pow(r, 2)*z*(2.0*M + r) - pow(W, 2)*h*rho*(2.0*M*pow(r, 2)*z*(2.0*M + r) + pow(r, 1.5)*pow(2.0*M + r, 0.5)*(2.0*M*R*u*z - v*(2.0*M*pow(R, 2) + pow(r, 3)))))/(pow(r, 4)*(2.0*M + r))
+pow(W, 2)*h*pow(r, -0.5)*rho*w*pow(2.0*M + r, 0.5)/pow(R, 2)
+(pow(W, 2)*h*rho*pow(2.0*M*R*pow(r, 2)*(2.0*M + r) + pow(r, 1.5)*pow(2.0*M + r, 0.5)*(2.0*M*R*v*z - u*(2.0*M*pow(z, 2) + pow(r, 3))), 2) - p*pow(r, 4)*pow(2.0*M + r, 3)*(2.0*M*pow(R, 2) - pow(r, 3)))/(pow(r, 7)*pow(2.0*M + r, 3))
+(-M*R*p*pow(r, 4)*z*pow(2.0*M + r, 3) + pow(W, 2)*h*rho*(2.0*M*R*pow(r, 2)*(2.0*M + r) + pow(r, 1.5)*pow(2.0*M + r, 0.5)*(2.0*M*R*v*z - u*(2.0*M*pow(z, 2) + pow(r, 3))))*(2.0*M*pow(r, 2)*z*(2.0*M + r) + pow(r, 1.5)*pow(2.0*M + r, 0.5)*(2.0*M*R*u*z - v*(2.0*M*pow(R, 2) + pow(r, 3)))))/(pow(r, 7)*pow(2.0*M + r, 3))
+-pow(W, 2)*h*pow(r, -3.5)*rho*w*pow(2.0*M + r, -1.5)*(2.0*M*R*pow(r, 2)*(2.0*M + r) + pow(r, 1.5)*pow(2.0*M + r, 0.5)*(2.0*M*R*v*z - u*(2.0*M*pow(z, 2) + pow(r, 3))))/pow(R, 2)
+(pow(W, 2)*h*rho*pow(2.0*M*pow(r, 2)*z*(2.0*M + r) + pow(r, 1.5)*pow(2.0*M + r, 0.5)*(2.0*M*R*u*z - v*(2.0*M*pow(R, 2) + pow(r, 3))), 2) - p*pow(r, 4)*pow(2.0*M + r, 3)*(2.0*M*pow(z, 2) - pow(r, 3)))/(pow(r, 7)*pow(2.0*M + r, 3))
+-pow(W, 2)*h*pow(r, -3.5)*rho*w*pow(2.0*M + r, -1.5)*(2.0*M*pow(r, 2)*z*(2.0*M + r) + pow(r, 1.5)*pow(2.0*M + r, 0.5)*(2.0*M*R*u*z - v*(2.0*M*pow(R, 2) + pow(r, 3))))/pow(R, 2)
+(pow(R, 2)*p + pow(W, 2)*h*rho*pow(w, 2))/pow(R, 4)

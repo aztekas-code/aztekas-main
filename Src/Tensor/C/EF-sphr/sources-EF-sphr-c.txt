@@ -1,0 +1,8 @@
+pow(r, 0.5)*pow(2.0*M + r, -0.5)*(-M*T00*(pow(r, -1) + (2.0*M - r)/pow(r, 2))/r + M*T01/(r*(2.0*M + r)) + 2.0*M*T22 + 2.0*M*T33*pow(sin(theta), 2) + T01*(2.0*M + r)*(-1/r - (2.0*M - r)/pow(r, 2))/r - T11*(M*(pow(r, -1) - (2.0*M + r)/pow(r, 2))/r + 2.0*M*(2.0*M + r)/pow(r, 3)))
+-2.0*M*T01/pow(r, 2) - 2.0*M*(M*T00*(pow(r, -1) + (2.0*M - r)/pow(r, 2))/r - 2.0*M*T22 - 2.0*M*T33*pow(sin(theta), 2) - T01*(2.0*M + r)*(-1/r - (2.0*M - r)/pow(r, 2))/r + T11*(M*(pow(r, -1) - (2.0*M + r)/pow(r, 2))/r + 2.0*M*(2.0*M + r)/pow(r, 3)))/r + T11*(pow(r, -1) - (2.0*M + r)/pow(r, 2)) - (2.0*M + r)*(2.0*M*T01*(-1/r - (2.0*M - r)/pow(r, 2))/r + 0.5*T00*(-2.0*M + r)*(pow(r, -1) + (2.0*M - r)/pow(r, 2))/r + T11*(-4.0*pow(M, 2)/pow(r, 3) + 0.5*(-2.0*M + r)*(pow(r, -1) - (2.0*M + r)/pow(r, 2))/r) + T22*(2.0*M - r) - T33*(-2.0*M + r)*pow(sin(theta), 2))/r
+2.0*T12*r - pow(r, 2)*(2.0*T12/r - T33*sin(theta)*cos(theta))
+2.0*T13*r*pow(sin(theta), 2) + 2.0*T23*pow(r, 2)*sin(theta)*cos(theta) - pow(r, 2)*(2.0*T13/r + 2.0*T23*cos(theta)/sin(theta))*pow(sin(theta), 2)
+0
+0
+0
+0

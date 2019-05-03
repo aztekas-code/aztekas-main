@@ -1,0 +1,8 @@
+-pow(r, -5.5)*pow(2.0*M + r, -2.5)*(p*pow(r, 3.5)*pow(2.0*M + r, 1.5)*(2.0*M*u*x*y + 2.0*M*w*y*z - v*(2.0*M*pow(x, 2) + 2.0*M*pow(z, 2) + pow(r, 3))) + pow(r, 2)*(2.0*M + r)*(pow(W, 2)*h*rho - p)*(2.0*M*pow(r, 2)*y*(2.0*M + r) + pow(r, 1.5)*pow(2.0*M + r, 0.5)*(2.0*M*u*x*y + 2.0*M*w*y*z - v*(2.0*M*pow(x, 2) + 2.0*M*pow(z, 2) + pow(r, 3)))))
+pow(W, 2)*h*rho*u*(-2.0*M*pow(r, -1.5)*y*pow(2.0*M + r, -0.5) - 2.0*M*u*x*y/(pow(r, 2)*(2.0*M + r)) - 2.0*M*w*y*z/(pow(r, 2)*(2.0*M + r)) + v*(2.0*M*pow(x, 2) + 2.0*M*pow(z, 2) + pow(r, 3))/(pow(r, 2)*(2.0*M + r)))
+pow(W, 2)*h*rho*v*(-2.0*M*pow(r, -1.5)*y*pow(2.0*M + r, -0.5) - 2.0*M*u*x*y/(pow(r, 2)*(2.0*M + r)) - 2.0*M*w*y*z/(pow(r, 2)*(2.0*M + r)) + v*(2.0*M*pow(x, 2) + 2.0*M*pow(z, 2) + pow(r, 3))/(pow(r, 2)*(2.0*M + r))) + p
+pow(W, 2)*h*rho*w*(-2.0*M*pow(r, -1.5)*y*pow(2.0*M + r, -0.5) - 2.0*M*u*x*y/(pow(r, 2)*(2.0*M + r)) - 2.0*M*w*y*z/(pow(r, 2)*(2.0*M + r)) + v*(2.0*M*pow(x, 2) + 2.0*M*pow(z, 2) + pow(r, 3))/(pow(r, 2)*(2.0*M + r)))
+0
+0
+0
+W*rho*(-2.0*M*pow(r, -1.5)*y*pow(2.0*M + r, -0.5) - 2.0*M*u*x*y/(pow(r, 2)*(2.0*M + r)) - 2.0*M*w*y*z/(pow(r, 2)*(2.0*M + r)) + v*(2.0*M*pow(x, 2) + 2.0*M*pow(z, 2) + pow(r, 3))/(pow(r, 2)*(2.0*M + r)))

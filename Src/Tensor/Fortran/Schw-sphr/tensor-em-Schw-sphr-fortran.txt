@@ -1,0 +1,10 @@
+r*(-W**2*h*rho + p)/(2.0*M - r)
+W**2*h*r**(-0.5)*rho*u*(-1/(2.0*M - r))**0.5*(-2.0*M + r)
+W**2*h*r**(-1.5)*rho*v*(-1/(2.0*M - r))**0.5
+W**2*h*r**(-1.5)*rho*w*(-1/(2.0*M - r))**0.5/sin(theta)**2
+(2.0*M - r)*(W**2*h*rho*u**2*(2.0*M - r) - p*r)/r**2
+W**2*h*rho*u*v*(-2.0*M + r)/r**3
+W**2*h*rho*u*w*(-2.0*M + r)/(r**3*sin(theta)**2)
+(W**2*h*rho*v**2 + p*r**2)/r**4
+W**2*h*rho*v*w/(r**4*sin(theta)**2)
+(W**2*h*rho*w**2/sin(theta)**4 + p*r**2/sin(theta)**2)/r**4

@@ -1,0 +1,10 @@
+pow(W, 2)*h*rho - p
+pow(W, 2)*h*rho*u
+pow(W, 2)*h*rho*v/pow(r, 2)
+pow(W, 2)*h*rho*w/(pow(r, 2)*pow(sin(theta), 2))
+pow(W, 2)*h*rho*pow(u, 2) + p
+pow(W, 2)*h*rho*u*v/pow(r, 2)
+pow(W, 2)*h*rho*u*w/(pow(r, 2)*pow(sin(theta), 2))
+(pow(W, 2)*h*rho*pow(v, 2) + p*pow(r, 2))/pow(r, 4)
+pow(W, 2)*h*rho*v*w/(pow(r, 4)*pow(sin(theta), 2))
+(pow(W, 2)*h*rho*pow(w, 2)/pow(sin(theta), 4) + p*pow(r, 2)/pow(sin(theta), 2))/pow(r, 4)

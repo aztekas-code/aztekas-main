@@ -1,0 +1,2 @@
+1.0*pow(-u*(-2.0*M*v*x*y/pow(r, 3) - 2.0*M*w*x*z/pow(r, 3) + u*(-2.0*M*pow(x, 2)/pow(r, 3) + 1.0)) - v*(-2.0*M*u*x*y/pow(r, 3) - 2.0*M*w*y*z/pow(r, 3) + v*(-2.0*M*pow(y, 2)/pow(r, 3) + 1.0)) - w*(-2.0*M*u*x*z/pow(r, 3) - 2.0*M*v*y*z/pow(r, 3) + w*(-2.0*M*pow(z, 2)/pow(r, 3) + 1.0)) + 1.0, -0.5)
+e + p/rho + 1.0

@@ -1,0 +1,10 @@
+W**2*h*rho - p
+W**2*h*rho*u
+W**2*h*rho*v/r**2
+W**2*h*rho*w/(r**2*sin(theta)**2)
+W**2*h*rho*u**2 + p
+W**2*h*rho*u*v/r**2
+W**2*h*rho*u*w/(r**2*sin(theta)**2)
+(W**2*h*rho*v**2 + p*r**2)/r**4
+W**2*h*rho*v*w/(r**4*sin(theta)**2)
+(W**2*h*rho*w**2/sin(theta)**4 + p*r**2/sin(theta)**2)/r**4

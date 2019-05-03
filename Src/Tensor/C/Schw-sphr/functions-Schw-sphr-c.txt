@@ -1,0 +1,2 @@
+1.0*pow(1.0 - pow(u, 2)*(-2.0*M + r)/r - pow(v, 2)/pow(r, 2) - pow(w, 2)/(pow(r, 2)*pow(sin(theta), 2)), -0.5)
+e + p/rho + 1.0

@@ -1,0 +1,8 @@
+0
+T22*r + T33*r*pow(sin(theta), 2)
+2.0*T12*r - pow(r, 2)*(2.0*T12/r - T33*sin(theta)*cos(theta))
+2.0*T13*r*pow(sin(theta), 2) + 2.0*T23*pow(r, 2)*sin(theta)*cos(theta) - pow(r, 2)*(2.0*T13/r + 2.0*T23*cos(theta)/sin(theta))*pow(sin(theta), 2)
+0
+0
+0
+0

@@ -1,0 +1,8 @@
+W**2*h*rho*w/R**2
+W**2*h*rho*u*w/R**2
+W**2*h*rho*v*w/R**2
+p + W**2*h*rho*w**2/R**2
+0
+0
+0
+W*rho*w/R**2

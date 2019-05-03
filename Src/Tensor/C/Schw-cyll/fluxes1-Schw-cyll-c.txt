@@ -1,0 +1,8 @@
+-pow(W, 2)*h*rho*(2.0*M*R*v*z + u*(2.0*M*pow(R, 2) - pow(r, 3)))/pow(r, 3)
+-pow(W, 2)*h*rho*u*(2.0*M*R*v*z + u*(2.0*M*pow(R, 2) - pow(r, 3)))/pow(r, 3) + p
+-pow(W, 2)*h*rho*v*(2.0*M*R*v*z + u*(2.0*M*pow(R, 2) - pow(r, 3)))/pow(r, 3)
+-pow(W, 2)*h*rho*w*(2.0*M*R*v*z + u*(2.0*M*pow(R, 2) - pow(r, 3)))/pow(r, 3)
+0
+0
+0
+-W*rho*(2.0*M*R*v*z + u*(2.0*M*pow(R, 2) - pow(r, 3)))/pow(r, 3)

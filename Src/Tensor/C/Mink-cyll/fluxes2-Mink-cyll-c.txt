@@ -1,0 +1,8 @@
+pow(W, 2)*h*rho*v
+pow(W, 2)*h*rho*u*v
+pow(W, 2)*h*rho*pow(v, 2) + p
+pow(W, 2)*h*rho*v*w
+0
+0
+0
+W*rho*v
