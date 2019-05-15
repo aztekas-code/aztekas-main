@@ -14,4 +14,5 @@ void WIND_BOUND(double *B);
 void BOUND_CUSTOM();
 
 void RESTART();
+void RESTART_BIN();
 void EXTFORCE(double *a, double *uu);

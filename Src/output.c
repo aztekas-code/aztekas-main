@@ -17,10 +17,9 @@ int PrintValues(double *tprint, double *dtprint, int *itprint)
 {
    int n, i, j, k;
 
-   printf("Time:%e, dt: %e\r", time, dt);
-   fflush(stdout);
    if(time >= *tprint)
    {
+      printf("Time = %e, dt = %e\n",time,dt);
       if(graf == 1)
       {
          if(binary == 1)

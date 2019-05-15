@@ -68,7 +68,14 @@ int main(int argc, char* argv[])
    //We set the initial parameters func_planarINITIAL.c
    if( restart_simulation == 1 )
    {
-      RESTART();
+      if( binary == 1 )
+      {
+         RESTART_BIN();
+      }
+      else
+      {
+         RESTART();
+      }
 
       tprint = time;
       itprint = restart_filecount;
@@ -91,12 +98,15 @@ int main(int argc, char* argv[])
 
       //In here we set the integration method (Finite volume method)
       INTEGRATION();
+
+      printf("Time = %e, dt = %e\r",time,dt);
+      fflush(stdout); 
    }
 
    PrintValues(&tprint,&dtprint,&itprint);
 
    delta = omp_get_wtime() - start;
-   printf("Delta %.4g seconds with %d threads\n",delta,4);
+   printf("Delta %.4g seconds with %d threads\n",delta,1);
 
    free(X1);
    free(X2);
