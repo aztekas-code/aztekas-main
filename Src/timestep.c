@@ -85,7 +85,6 @@ double TIMESTEP()
    dt = cou*min(dx1,dx2);
    #endif 
 #endif
-   printf("%e\r",dt);
 
    return dt;
 }

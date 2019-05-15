@@ -17,10 +17,10 @@ int PrintValues(double *tprint, double *dtprint, int *itprint)
 {
    int n, i, j, k;
 
+   printf("Time:%e, dt: %e\r", time, dt);
+   fflush(stdout);
    if(time >= *tprint)
    {
-      printf("Time:%e, dt: %e, dx:%e \n", time, dt, dx1);
-
       if(graf == 1)
       {
          if(binary == 1)
@@ -67,9 +67,9 @@ int Output1(int *itprint)
 {
    FILE *file;
    int n, i, j, k;
-   char ext[20];
-   char dat[20];
-   char archivo[20];
+   char ext[50];
+   char dat[50];
+   char archivo[50];
    int num;
 
    num = *itprint;
@@ -94,7 +94,7 @@ int Output1(int *itprint)
       U[c1(2,i)]);
    }
 
-   printf("itprint %d \n",*itprint);
+   printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
 
    return 0;
@@ -104,9 +104,9 @@ int Output1_bin(int *itprint)
 {
    FILE *file;
    int n, i, j, k, size_X1;
-   char ext[20];
-   char dat[20];
-   char archivo[20];
+   char ext[50];
+   char dat[50];
+   char archivo[50];
    int num;
    
    size_X1 = Nx1-2*gc+1;
@@ -132,7 +132,7 @@ int Output1_bin(int *itprint)
       fwrite(&U[c1(2,i)], sizeof U[c1(2,i)], 1, file);
    }
 
-   printf("itprint %d \n",*itprint);
+   printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
 
    return 0;
@@ -142,9 +142,9 @@ int Output2(int *itprint)
 {
    FILE *file;
    int n, i, j, k;
-   char ext[20];
-   char dat[20];
-   char archivo[20];
+   char ext[50];
+   char dat[50];
+   char archivo[50];
    int num;
 
    num = *itprint;
@@ -187,7 +187,7 @@ int Output2(int *itprint)
    }
 #endif 
 
-   printf("itprint %d \n",*itprint);
+   printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
 
    return 0;
@@ -197,9 +197,9 @@ int Output2_bin(int *itprint)
 {
    FILE *file;
    int n, i, j, k, size_X1, size_X2;
-   char ext[20];
-   char dat[20];
-   char archivo[20];
+   char ext[50];
+   char dat[50];
+   char archivo[50];
    int num;
    
    size_X1 = Nx1-2*gc+1;
@@ -222,6 +222,7 @@ int Output2_bin(int *itprint)
    fwrite(&X2[gc], sizeof X2[gc], 1, file);
    fwrite(&X2[Nx2-gc], sizeof X2[gc], 1, file);  
          
+#if dim == 2
    for(i = gc; i <= Nx1-gc; i++)
 	 {
       for(j = gc; j <= Nx2-gc; j++)
@@ -232,8 +233,21 @@ int Output2_bin(int *itprint)
          fwrite(&U[c2(3,i,j)], sizeof U[c2(3,i,j)], 1, file);
       }
    }
+#elif dim == 4
+   for(i = gc; i <= Nx1-gc; i++)
+	 {
+      for(j = gc; j <= Nx2-gc; j++)
+      {
+         fwrite(&U[c2(0,i,j)], sizeof U[c2(0,i,j)], 1, file);
+         fwrite(&U[c2(1,i,j)], sizeof U[c2(1,i,j)], 1, file);
+         fwrite(&U[c2(2,i,j)], sizeof U[c2(2,i,j)], 1, file);
+         fwrite(&U[c2(3,i,j)], sizeof U[c2(3,i,j)], 1, file);
+         fwrite(&U[c2(4,i,j)], sizeof U[c2(4,i,j)], 1, file);
+      }
+   }
+#endif
 
-   printf("itprint %d \n",*itprint);
+   printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
 
    return 0;
@@ -243,9 +257,9 @@ int Output3(int *itprint)
 {
    FILE *file;
    int n, i, j, k;
-   char ext[20];
-   char dat[20];
-   char archivo[20];
+   char ext[50];
+   char dat[50];
+   char archivo[50];
    int num;
 
    num = *itprint;
@@ -280,7 +294,7 @@ int Output3(int *itprint)
       }
    }
 
-   printf("itprint %d \n",*itprint);
+   printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
 
    return 0;
@@ -290,9 +304,9 @@ int Output3_bin(int *itprint)
 {
    FILE *file;
    int n, i, j, k, size_X1, size_X2, size_X3;
-   char ext[20];
-   char dat[20];
-   char archivo[20];
+   char ext[50];
+   char dat[50];
+   char archivo[50];
    int num;
    
    size_X1 = Nx1-2*gc+1;
@@ -334,7 +348,7 @@ int Output3_bin(int *itprint)
       }
    }
 
-   printf("itprint %d \n",*itprint);
+   printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
 
    return 0;
