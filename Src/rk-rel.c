@@ -37,7 +37,6 @@ int RK1D(double *u, double *q, double *q1, double *q2, int order)
 
    for(i = gc; i <= Nx1-gc; i++)
    {
-      //#pragma omp atomic read
       I[0] = i;
       r = limiter;
  
@@ -62,6 +61,7 @@ int RK1D(double *u, double *q, double *q1, double *q2, int order)
 
       MxV(v.A,L,F);
 #endif
+
       switch(order)
       {
          case 1:

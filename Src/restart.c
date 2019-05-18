@@ -44,41 +44,52 @@ void RESTART()
    idum = fscanf(file,"%s\n",line) ;
 
    // Read rest of file an initialize variables      
-   if(dim == 1)
+#if dim == 1
+   for(i = gc; i <= Nx1-gc; i++)
    {
-      for(i = gc; i <= Nx1-gc; i++)
+      idum = fscanf(file,"%lf %lf %lf %lf\n",&dum,\
+      &U[c1(0,i)],&U[c1(1,i)],&U[c1(2,i)]);
+   }
+
+#elif dim == 2
+
+   for(i = gc; i <= Nx1-gc; i++)
+   {
+      for(j = gc; j <= Nx2-gc; j++)
       {
-         idum = fscanf(file,"%lf %lf %lf %lf\n",&dum,\
-         &U[c1(0,i)],&U[c1(1,i)],&U[c1(2,i)]);
+         idum = fscanf(file,"%lf %lf %lf %lf %lf %lf\n",&dum,&dum,\
+         &U[c2(0,i,j)],&U[c2(1,i,j)],&U[c2(2,i,j)],&U[c2(3,i,j)]);
       }
    }
-   else if(dim == 2)
+
+#elif dim == 4
+
+   for(i = gc; i <= Nx1-gc; i++)
    {
-      for(i = gc; i <= Nx1-gc; i++)
+      for(j = gc; j <= Nx2-gc; j++)
       {
-         for(j = gc; j <= Nx2-gc; j++)
+         idum = fscanf(file,"%lf %lf %lf %lf %lf %lf %lf\n",&dum,&dum,\
+         &U[c2(0,i,j)],&U[c2(1,i,j)],&U[c2(2,i,j)],&U[c2(3,i,j)],&U[c2(4,i,j)]);
+      }
+   }
+
+#elif dim == 3
+
+   for(i = gc; i <= Nx1-gc; i++)
+   {
+      for(j = gc; j <= Nx2-gc; j++)
+      {
+         for(k = gc; k <= Nx3-gc; k++)
          {
-            idum = fscanf(file,"%lf %lf %lf %lf %lf %lf\n",&dum,&dum,\
-            &U[c2(0,i,j)],&U[c2(1,i,j)],&U[c2(2,i,j)],&U[c2(3,i,j)]);
+            idum = fscanf(file,"%lf %lf %lf %lf %lf %lf %lf %lf\n",\
+            &dum,&dum,&dum,\
+            &U[c3(0,i,j,k)],&U[c3(1,i,j,k)],\
+            &U[c3(2,i,j,k)],&U[c3(3,i,j,k)],&U[c3(4,i,j,k)]);
          }
       }
    }
-   else if(dim == 3)
-   {
-      for(i = gc; i <= Nx1-gc; i++)
-      {
-         for(j = gc; j <= Nx2-gc; j++)
-         {
-            for(k = gc; k <= Nx3-gc; k++)
-            {
-               idum = fscanf(file,"%lf %lf %lf %lf %lf %lf %lf %lf\n",\
-               &dum,&dum,&dum,\
-               &U[c3(0,i,j,k)],&U[c3(1,i,j,k)],\
-               &U[c3(2,i,j,k)],&U[c3(3,i,j,k)],&U[c3(4,i,j,k)]);
-            }
-         }
-      }
-    }
+
+#endif
 
    // CALLING BOUNDARIES TO GET GHOST CELLS RIGHT
     BOUNDARIES(U);

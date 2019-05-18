@@ -18,10 +18,10 @@ int funct_Do(double *a, double *uu)
    if(dim == 3){w = uu[4];}
 
    R    = x1;
-   V    = ((x1+2*MM)*pow(w,2.0)+(x1+2*MM)*pow(sin(x2),2.0)*pow(v,2.0)+pow(x1,3.0)*pow(sin(x2),2.0)*pow(u,2.0))/((pow(x1,3.0)+2*MM*pow(x1,2.0))*pow(sin(x2),2.0));
-   yt33 = 1/(pow(x1,2.0)*pow(sin(x2),2.0));
+   V    = ((x1+2*MM)*pow(w,2.0)+(x1+2*MM)*pow(v,2.0)+pow(x1,3.0)*pow(u,2.0))/(pow(x1,3.0)+2*MM*pow(x1,2.0));
+   yt33 = 1/pow(x1,2.0);
    Bt3  = 0;
-   Vt3  = w/(pow(x1,2.0)*pow(sin(x2),2.0));
+   Vt3  = w/pow(x1,2.0);
    c    = sqrt(((pow(K,2.0)-K)*p)/(K*p+(K-1)*n));
 
    a[0] = -((c)*sqrt(x1)*sqrt(((pow(V,2.0)-V)*pow(c,2.0)-V+1)*yt33+(1-V)*pow(Vt3,2.0)*pow(c,2.0)+(V-1)*pow(Vt3,2.0))+(Bt3*V*pow(c,2.0)-Bt3)*sqrt(x1+2*MM)+(Vt3-Vt3*pow(c,2.0))*sqrt(x1))/((V*pow(c,2.0)-1)*sqrt(x1+2*MM));

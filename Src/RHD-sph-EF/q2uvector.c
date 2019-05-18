@@ -29,7 +29,7 @@ int funct_Q2U(double *a, double *uu)
          x2 = 0;
          x3 = 0;
 
-         SS = ((pow(m,2.0)*pow(x1,3.0)+pow(n,2.0)*x1+2*MM*pow(n,2.0))*pow(sin(x2),2.0)+pow(o,2.0)*x1+2*MM*pow(o,2.0))/((pow(x1,3.0)+2*MM*pow(x1,2.0))*pow(sin(x2),2.0));
+         SS = (pow(m,2.0)*pow(x1,3.0)+(pow(o,2.0)+pow(n,2.0))*x1+2*MM*pow(o,2.0)+2*MM*pow(n,2.0))/(pow(x1,3.0)+2*MM*pow(x1,2.0));
 
          theta_0 = 0.0;
          f = 2.0;
@@ -71,7 +71,7 @@ int funct_Q2U(double *a, double *uu)
             x2 = X2[j];
             x3 = 0;
 
-            SS = ((pow(m,2.0)*pow(x1,3.0)+pow(n,2.0)*x1+2*MM*pow(n,2.0))*pow(sin(x2),2.0)+pow(o,2.0)*x1+2*MM*pow(o,2.0))/((pow(x1,3.0)+2*MM*pow(x1,2.0))*pow(sin(x2),2.0));
+            SS = (pow(m,2.0)*pow(x1,3.0)+(pow(o,2.0)+pow(n,2.0))*x1+2*MM*pow(o,2.0)+2*MM*pow(n,2.0))/(pow(x1,3.0)+2*MM*pow(x1,2.0));
 
             theta_0 = 0.0;
             f = 2.0;
@@ -117,7 +117,7 @@ int funct_Q2U(double *a, double *uu)
                x2 = X2[j];
                x3 = X3[k];
 
-               SS = ((pow(m,2.0)*pow(x1,3.0)+pow(n,2.0)*x1+2*MM*pow(n,2.0))*pow(sin(x2),2.0)+pow(o,2.0)*x1+2*MM*pow(o,2.0))/((pow(x1,3.0)+2*MM*pow(x1,2.0))*pow(sin(x2),2.0));
+               SS = (pow(m,2.0)*pow(x1,3.0)+(pow(o,2.0)+pow(n,2.0))*x1+2*MM*pow(o,2.0)+2*MM*pow(n,2.0))/(pow(x1,3.0)+2*MM*pow(x1,2.0));
 
                theta_0 = 0.0;
                f = 2.0;
