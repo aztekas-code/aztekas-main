@@ -41,10 +41,11 @@ PARAM += -Dgc=3
 
 PHY = $phy
 ifeq (\$(PHY),hd)
-        PARAM += -DPHYSICS=1
+   PARAM += -DPHYSICS=1
 endif
 ifeq (\$(PHY),rhd)
-        PARAM += -DPHYSICS=2
+   PARAM += -DPHYSICS=2
+   metric = -EF
 endif
 
 #####################################
@@ -56,24 +57,24 @@ endif
 DIM = $dim
 
 ifeq (\$(DIM),1)
-	PARAM += -Ddim=1
-	PARAM += -Deq=3
-	PARAM += -Dgraf=1
+   PARAM += -Ddim=1
+   PARAM += -Deq=3
+   PARAM += -Dgraf=1
 endif
 ifeq (\$(DIM),2)
-	PARAM += -Ddim=2
-	PARAM += -Deq=4
-	PARAM += -Dgraf=2
+   PARAM += -Ddim=2
+   PARAM += -Deq=4
+   PARAM += -Dgraf=2
 endif
 ifeq (\$(DIM),4)
-	PARAM += -Ddim=2
-	PARAM += -Deq=5
-	PARAM += -Dgraf=2
+   PARAM += -Ddim=2
+   PARAM += -Deq=5
+   PARAM += -Dgraf=2
 endif
 ifeq (\$(DIM),3)
-	PARAM += -Ddim=3
-	PARAM += -Deq=5
-	PARAM += -Dgraf=3
+   PARAM += -Ddim=3
+   PARAM += -Deq=5
+   PARAM += -Dgraf=3
 endif
 
 #####################################
@@ -85,13 +86,13 @@ endif
 COORD = $coord
 
 ifeq (\$(COORD),cart)
-	PARAM += -Dalfa=0
+   PARAM += -Dalfa=0
 endif
 ifeq (\$(COORD),cyl)
-	PARAM += -Dalfa=1
+   PARAM += -Dalfa=1
 endif
 ifeq (\$(COORD),sph)
-	PARAM += -Dalfa=2
+   PARAM += -Dalfa=2
 endif
 
 #####################################
@@ -465,7 +466,7 @@ void EXTFORCE(double *a, double *uu)
 
 EOF
 
-if [[ $grav == 'n' ]]
+if [[ $grav == 'n' ]] || [[ $phy == 'rhd'  ]]
 then
 
 cat << EOF >> extforce.c

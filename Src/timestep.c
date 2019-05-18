@@ -23,7 +23,7 @@ double TIMESTEP()
    double c, dt, cmax;
    double r;
 
-   dtmin = 100000;
+   dtmin = 0.1;
 
    if(dim == 1)
    {

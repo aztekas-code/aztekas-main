@@ -16,7 +16,7 @@ int funct_Dn(double *a, double *uu)
    if(dim == 3){w = uu[4];}
 
    R    = x1;
-   V    = ((x1+2*MM)*pow(w,2.0)+(x1+2*MM)*pow(sin(x2),2.0)*pow(v,2.0)+pow(x1,3.0)*pow(sin(x2),2.0)*pow(u,2.0))/((pow(x1,3.0)+2*MM*pow(x1,2.0))*pow(sin(x2),2.0));
+   V    = ((x1+2*MM)*pow(w,2.0)+(x1+2*MM)*pow(v,2.0)+pow(x1,3.0)*pow(u,2.0))/(pow(x1,3.0)+2*MM*pow(x1,2.0));
    yt22 = 1/pow(x1,2.0);
    Bt2  = 0;
    Vt2  = v/pow(x1,2.0);

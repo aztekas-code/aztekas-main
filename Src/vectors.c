@@ -110,6 +110,7 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
 
 #if dim == 1
    x1 = X1[I[0]];
+   x2 = M_PI_2;
 #elif dim == 2
    x1 = X1[I[0]];
    x2 = X2[I[1]];

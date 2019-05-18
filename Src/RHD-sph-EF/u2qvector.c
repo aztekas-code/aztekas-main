@@ -27,11 +27,11 @@ int funct_U2Q(double *a, double *uu)
          x3 = 0.0;
 
          R = x1;
-         W = (x1*(sin(x2)))/sqrt(-((x1+2*MM)*pow(w,2.0)+(x1+2*MM)*pow(sin(x2),2.0)*pow(v,2.0)+pow(x1,3.0)*pow(sin(x2),2.0)*pow(u,2.0)+((-pow(x1,3.0))-2*MM*pow(x1,2.0))*pow(sin(x2),2.0))/(x1+2*MM));
+         W = x1/sqrt(-((x1+2*MM)*pow(w,2.0)+(x1+2*MM)*pow(v,2.0)+pow(x1,3.0)*pow(u,2.0)-pow(x1,3.0)-2*MM*pow(x1,2.0))/(x1+2*MM));
          h = (K*p+(K-1)*n)/((K-1)*n);
 
          lapse = sqrt(x1)/sqrt(x1+2*MM);
-         dety  = pow(x1,3.0/2.0)*sqrt(x1+2*MM)*(sin(x2));
+         dety  = pow(x1,3.0/2.0)*sqrt(x1+2*MM);
 
          a[c1(0,i)] = W*n;
          a[c1(1,i)] = (pow(W,2.0)*h-W)*n-p;
@@ -57,11 +57,11 @@ int funct_U2Q(double *a, double *uu)
             x3 = 0.0;
 
             R = x1;
-            W = (x1*(sin(x2)))/sqrt(-((x1+2*MM)*pow(w,2.0)+(x1+2*MM)*pow(sin(x2),2.0)*pow(v,2.0)+pow(x1,3.0)*pow(sin(x2),2.0)*pow(u,2.0)+((-pow(x1,3.0))-2*MM*pow(x1,2.0))*pow(sin(x2),2.0))/(x1+2*MM));
+            W = x1/sqrt(-((x1+2*MM)*pow(w,2.0)+(x1+2*MM)*pow(v,2.0)+pow(x1,3.0)*pow(u,2.0)-pow(x1,3.0)-2*MM*pow(x1,2.0))/(x1+2*MM));
             h = (K*p+(K-1)*n)/((K-1)*n);
 
             lapse = sqrt(x1)/sqrt(x1+2*MM);
-            dety  = pow(x1,3.0/2.0)*sqrt(x1+2*MM)*(sin(x2));
+            dety  = pow(x1,3.0/2.0)*sqrt(x1+2*MM);
 
             a[c2(0,i,j)] = W*n;
             a[c2(1,i,j)] = (pow(W,2.0)*h-W)*n-p;
@@ -90,7 +90,7 @@ int funct_U2Q(double *a, double *uu)
                x3 = X3[k];
 
                R = x1;
-               W = (x1*(sin(x2)))/sqrt(-((x1+2*MM)*pow(w,2.0)+(x1+2*MM)*pow(sin(x2),2.0)*pow(v,2.0)+pow(x1,3.0)*pow(sin(x2),2.0)*pow(u,2.0)+((-pow(x1,3.0))-2*MM*pow(x1,2.0))*pow(sin(x2),2.0))/(x1+2*MM));
+               W = x1/sqrt(-((x1+2*MM)*pow(w,2.0)+(x1+2*MM)*pow(v,2.0)+pow(x1,3.0)*pow(u,2.0)-pow(x1,3.0)-2*MM*pow(x1,2.0))/(x1+2*MM));
                h = (K*p+(K-1)*n)/((K-1)*n);
 
                lapse = sqrt(x1)/sqrt(x1+2*MM);

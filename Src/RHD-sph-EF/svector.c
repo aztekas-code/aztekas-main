@@ -17,13 +17,13 @@ int funct_S(double *a, double *uu)
    if(dim == 3){w = uu[4];}
 
    R = x1;
-   W = (x1*(sin(x2)))/sqrt(-((x1+2*MM)*pow(w,2.0)+(x1+2*MM)*pow(sin(x2),2.0)*pow(v,2.0)+pow(x1,3.0)*pow(sin(x2),2.0)*pow(u,2.0)+((-pow(x1,3.0))-2*MM*pow(x1,2.0))*pow(sin(x2),2.0))/(x1+2*MM));
+   W = x1/sqrt(-((x1+2*MM)*pow(w,2.0)+(x1+2*MM)*pow(v,2.0)+pow(x1,3.0)*pow(u,2.0)-pow(x1,3.0)-2*MM*pow(x1,2.0))/(x1+2*MM));
    h = (K*p+(K-1)*n)/((K-1)*n);
 
    a[0] = 0;
-   a[1] = -(((-2*MM*pow(W,2.0)*h*n*pow(x1,2.0))-8*pow(MM,2.0)*pow(W,2.0)*h*n*x1-8*pow(MM,3.0)*pow(W,2.0)*h*n)*pow(w,2.0)+((-2*MM*pow(W,2.0)*h*n*pow(x1,2.0))-8*pow(MM,2.0)*pow(W,2.0)*h*n*x1-8*pow(MM,3.0)*pow(W,2.0)*h*n)*pow(sin(x2),2.0)*pow(v,2.0)+(2*MM*pow(W,2.0)*h*n*pow(x1,4.0)+2*pow(MM,2.0)*pow(W,2.0)*h*n*pow(x1,3.0))*pow(sin(x2),2.0)*pow(u,2.0)+MM*pow(W,2.0)*h*n*pow(x1,7.0/2.0)*sqrt(x1+2*MM)*pow(sin(x2),2.0)*u+((-2*MM*p*pow(x1,4.0))-10*pow(MM,2.0)*p*pow(x1,3.0)-12*pow(MM,3.0)*p*pow(x1,2.0))*pow(sin(x2),2.0))/(sqrt(x1)*sqrt(x1+2*MM)*(pow(x1,5.0)+4*MM*pow(x1,4.0)+4*pow(MM,2.0)*pow(x1,3.0))*pow(sin(x2),2.0));
-   a[2] = -(((-pow(W,2.0)*h*n*pow(x1,2.0))-4*MM*pow(W,2.0)*h*n*x1-4*pow(MM,2.0)*pow(W,2.0)*h*n)*pow(w,2.0)+((-pow(W,2.0)*h*n*pow(x1,2.0))-4*MM*pow(W,2.0)*h*n*x1-4*pow(MM,2.0)*pow(W,2.0)*h*n)*pow(sin(x2),2.0)*pow(v,2.0)+MM*pow(W,2.0)*h*n*pow(x1,3.0)*pow(sin(x2),2.0)*pow(u,2.0)+2*MM*pow(W,2.0)*h*n*pow(x1,5.0/2.0)*sqrt(x1+2*MM)*pow(sin(x2),2.0)*u+((-2*p*pow(x1,4.0))+(MM*pow(W,2.0)*h*n-8*MM*p)*pow(x1,3.0)+(2*pow(MM,2.0)*pow(W,2.0)*h*n-8*pow(MM,2.0)*p)*pow(x1,2.0))*pow(sin(x2),2.0))/((pow(x1,5.0)+4*MM*pow(x1,4.0)+4*pow(MM,2.0)*pow(x1,3.0))*pow(sin(x2),2.0));
-   a[3] = (pow(W,2.0)*h*n*cos(x2)*pow(w,2.0)+p*pow(x1,2.0)*cos(x2)*pow(sin(x2),2.0))/(pow(x1,2.0)*pow(sin(x2),3.0));
+   a[1] = -(((-2*MM*pow(W,2.0)*h*n*pow(x1,2.0))-8*pow(MM,2.0)*pow(W,2.0)*h*n*x1-8*pow(MM,3.0)*pow(W,2.0)*h*n)*pow(w,2.0)+((-2*MM*pow(W,2.0)*h*n*pow(x1,2.0))-8*pow(MM,2.0)*pow(W,2.0)*h*n*x1-8*pow(MM,3.0)*pow(W,2.0)*h*n)*pow(v,2.0)+(2*MM*pow(W,2.0)*h*n*pow(x1,4.0)+2*pow(MM,2.0)*pow(W,2.0)*h*n*pow(x1,3.0))*pow(u,2.0)+MM*pow(W,2.0)*h*n*pow(x1,7.0/2.0)*sqrt(x1+2*MM)*u-2*MM*p*pow(x1,4.0)-10*pow(MM,2.0)*p*pow(x1,3.0)-12*pow(MM,3.0)*p*pow(x1,2.0))/(sqrt(x1)*sqrt(x1+2*MM)*(pow(x1,5.0)+4*MM*pow(x1,4.0)+4*pow(MM,2.0)*pow(x1,3.0)));
+   a[2] = -(((-pow(W,2.0)*h*n*pow(x1,2.0))-4*MM*pow(W,2.0)*h*n*x1-4*pow(MM,2.0)*pow(W,2.0)*h*n)*pow(w,2.0)+((-pow(W,2.0)*h*n*pow(x1,2.0))-4*MM*pow(W,2.0)*h*n*x1-4*pow(MM,2.0)*pow(W,2.0)*h*n)*pow(v,2.0)+MM*pow(W,2.0)*h*n*pow(x1,3.0)*pow(u,2.0)+2*MM*pow(W,2.0)*h*n*pow(x1,5.0/2.0)*sqrt(x1+2*MM)*u-2*p*pow(x1,4.0)+(MM*pow(W,2.0)*h*n-8*MM*p)*pow(x1,3.0)+(2*pow(MM,2.0)*pow(W,2.0)*h*n-8*pow(MM,2.0)*p)*pow(x1,2.0))/(pow(x1,5.0)+4*MM*pow(x1,4.0)+4*pow(MM,2.0)*pow(x1,3.0));
+   a[3] = 0;
    a[4] = 0;
 
    return 0;
