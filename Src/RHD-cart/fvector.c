@@ -1,8 +1,7 @@
 #include<stdio.h>
 #include<math.h>
-#include"vector.h"
-#include"main.h"
-#include"param.h"
+#include"../Headers/vector.h"
+#include"../Headers/main.h"
 
 int funct_F(double *a, double *uu)
 {
@@ -13,16 +12,9 @@ int funct_F(double *a, double *uu)
    double dhn, dhp;
    n = uu[0];
    p = uu[1];
-#if dim == 1
    u = uu[2];
-#elif dim == 2
-   u = uu[2];
-   v = uu[3];
-#elif dim == 3 || dim == 4
-   u = uu[2];
-   v = uu[3];
-   w = uu[4];
-#endif
+   if(dim >= 2){v = uu[3];}
+   if(dim == 3){w = uu[4];}
 
    R = sqrt(pow(x2,2.0)+pow(x1,2.0));
    W = 1/sqrt((-pow(w,2.0))-pow(v,2.0)-pow(u,2.0)+1);

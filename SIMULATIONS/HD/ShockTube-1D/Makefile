@@ -32,7 +32,7 @@ PARAM += -Dgc=3
 # Physics (rhd,hd,mhd,rmhd)
 #####################################
 
-PHY = hd
+PHY = rhd
 ifeq ($(PHY),hd)
         PARAM += -DPHYSICS=1
 endif
@@ -91,7 +91,7 @@ endif
 #####################################
 # PATH TO AZTEKAS
 #####################################
-AZTPATH = /home/aaguayoo/DriveCiencias/Articles/AZTEKAS/aguayo-mendoza_aztekas/code
+AZTPATH = /home/aaguayoo/AZTEKAS/Github/aztekas-main/
 #####################################
 
 #####################################

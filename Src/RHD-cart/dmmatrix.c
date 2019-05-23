@@ -17,7 +17,6 @@ int funct_Dm(double *a, double *uu)
 
    R    = sqrt(pow(x2,2.0)+pow(x1,2.0));
    V    = pow(w,2.0)+pow(v,2.0)+pow(u,2.0);
-   W    = 1/sqrt(1 - V);
    yt11 = 1;
    Bt1  = 0;
    Vt1  = u;
