@@ -1,5 +1,5 @@
 % OUTPUT FILE AND DIRECTORY
-outputdirectory = ./Shock/
+outputdirectory = ./Shock-RHD/
 outputfile      = shock_
 
 % RESTART SIMULATION (1 -> true, 0 -> false)
@@ -8,7 +8,7 @@ restartfile = ./Shock/dx1_10.dat
 restart_filecount = 10
 
 % Define mesh
-Nx1 = 500
+Nx1 = 400
 Nx2 = 0
 Nx3 = 0
 
@@ -34,15 +34,15 @@ K = 1.6666666666666666666666666
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % LEFT STATE
-nl   = 1.0
-pl   = 1.0
+nl   = 10.0
+pl   = 13.33
 vx1l = 0.0
 vx2l = 0.0
 vx3l = 0.0
 
 % RIGHT STATE
-nr   = 0.125
-pr   = 0.1
+nr   = 1.0
+pr   = 0.000001
 vx1r = 0.0
 vx2r = 0.0
 vx3r = 0.0

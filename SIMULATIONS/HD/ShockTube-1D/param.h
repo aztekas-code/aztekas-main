@@ -10,5 +10,6 @@
 
 #define x1min_exc  1
 
-#define limiter 'W'
-#define riemann 2
+#define limiter 'C'
+#define riemann 1
+#define logmesh 0
