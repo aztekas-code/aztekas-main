@@ -1,5 +1,5 @@
-//typedef struct
-//{
+typedef struct
+{
    double time;
    double *X1;
    double *X1p, *X1m;
@@ -11,13 +11,13 @@
    double *S1p, *S1m;
    double *S2p, *S2m;
    double *S3p, *S3m;
-//}grid_;
+}grid_;
 
 double dx1, dx2, dx3;
 double dt;
 double tmax, timefile, cou;
 
-//grid_ grid;
+grid_ grid;
 
 int Mesh(); 
 void Surface_Volume();

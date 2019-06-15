@@ -22,10 +22,10 @@ int AMATRIX1D(double *u, vec_ *v, int *I)
    int i;
    double geoS[eq + 1], extS[eq + 1];
 
-   x1 = X1[I[0]];
-#if alfa == 0 || alfa == 1
+   x1 = grid.X1[I[0]];
+#if COORDINATES == 0 || COORDINATES == 1
    x2 = 0;
-#elif alfa == 2
+#elif COORDINATES == 2
    x2 = M_PI_2;
 #endif
    x3 = 0;
@@ -50,8 +50,8 @@ int AMATRIX2D(double *u, vec_ *v, int *I)
    int m, n;
    double geoS[eq + 1], extS[eq + 1];
 
-   x1  = X1[I[0]];
-   x2  = X2[I[1]];
+   x1  = grid.X1[I[0]];
+   x2  = grid.X2[I[1]];
    x3  = 0;
 
 #if polar == 1
@@ -77,9 +77,9 @@ int AMATRIX3D(double *u, vec_ *v, int *I)
 {
    int m, n;
 
-   x1  = X1[I[0]];
-   x2  = X2[I[1]];
-   x3  = X3[I[2]];
+   x1  = grid.X1[I[0]];
+   x2  = grid.X2[I[1]];
+   x3  = grid.X3[I[2]];
 
    return 0;
 }
@@ -101,15 +101,15 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
    x3 = 0.0;
 
 #if DIM == 1
-   x1 = X1[I[0]];
+   x1 = grid.X1[I[0]];
    x2 = M_PI_2;
 #elif DIM == 2
-   x1 = X1[I[0]];
-   x2 = X2[I[1]];
+   x1 = grid.X1[I[0]];
+   x2 = grid.X2[I[1]];
 #elif DIM == 3 
-   x1 = X1[I[0]];
-   x2 = X2[I[1]];
-   x3 = X3[I[2]];
+   x1 = grid.X1[I[0]];
+   x2 = grid.X2[I[1]];
+   x3 = grid.X3[I[2]];
 #endif
 
    if(pm == 1)
@@ -118,17 +118,17 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
       {
          case 'f':
             u = l->ux1p;
-            x1 = X1p[I[0]];
+            x1 = grid.X1p[I[0]];
          break;
 
          case 'g':
             u = l->ux2p;
-            x2 = X2p[I[1]];
+            x2 = grid.X2p[I[1]];
          break;
 
          case 'h':
             u = l->ux3p;
-            x3 = X3p[I[2]];
+            x3 = grid.X3p[I[2]];
          break;
       }
    }
@@ -138,17 +138,17 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
       {
          case 'f':
             u = l->ux1m;
-            x1 = X1m[I[0]];
+            x1 = grid.X1m[I[0]];
          break;
 
          case 'g':
             u = l->ux2m;
-            x2 = X2m[I[1]];
+            x2 = grid.X2m[I[1]];
          break;
 
          case 'h':
             u = l->ux3m;
-            x3 = X3m[I[2]];
+            x3 = grid.X3m[I[2]];
          break;
       }
    }

@@ -20,8 +20,8 @@ void Initial()
 {
    int n, i, j, k, cell;
 
-   //Initialize time
-   time = 0.0;
+   //Initialize grid.time
+   grid.time = 0.0;
 
    //Initialize dt
    dt = 0.0;
@@ -34,9 +34,9 @@ void Initial()
 
    for(i = 0; i <= Nx1; i++)
    {
-      U[c1(0,i)] = density_0;
-      U[c1(1,i)] = pressure_0;
-      U[c1(2,i)] = velocity_0;
+      U(0,i) = density_0;
+      U(1,i) = pressure_0;
+      U(2,i) = velocity_0;
    }
 
 #elif DIM == 2
@@ -49,10 +49,10 @@ void Initial()
    {
       for(j = 0; j <= Nx2; j++)
       {
-         U[c2(0,i,j)] = density_0;
-         U[c2(1,i,j)] = pressure_0;
-         U[c2(2,i,j)] = velocity_0;
-         U[c2(3,i,j)] = 0.0;
+         U(0,i,j) = density_0;
+         U(1,i,j) = pressure_0;
+         U(2,i,j) = velocity_0;
+         U(3,i,j) = 0.0;
       }
    }
 
@@ -66,11 +66,11 @@ void Initial()
    {
       for(j = 0; j <= Nx2; j++)
       {
-         U[c2(0,i,j)] = density_0;
-         U[c2(1,i,j)] = pressure_0;
-         U[c2(2,i,j)] = velocity_0;
-         U[c2(3,i,j)] = 0.0;
-         U[c2(4,i,j)] = 0.0;
+         U(0,i,j) = density_0;
+         U(1,i,j) = pressure_0;
+         U(2,i,j) = velocity_0;
+         U(3,i,j) = 0.0;
+         U(4,i,j) = 0.0;
       }
    }
 

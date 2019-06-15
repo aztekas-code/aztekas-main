@@ -72,7 +72,7 @@ int main(int argc, char* argv[])
          Restart();
       }
 
-      tprint = time;
+      tprint = grid.time;
       itprint = restart_filecount;
    }
    else
@@ -83,7 +83,7 @@ int main(int argc, char* argv[])
    }
 
    start = omp_get_wtime();
-   while(time <= tmax)
+   while(grid.time <= tmax)
    {
       //In this part we compute the time step
       dt = TimeStep();
@@ -94,7 +94,7 @@ int main(int argc, char* argv[])
       //In here we set the integration method (Finite volume method)
       Integration();
 
-      printf("Time = %e, dt = %e\r",time,dt);
+      printf("Time = %e, dt = %e\r",grid.time,dt);
       fflush(stdout); 
    }
 
@@ -103,9 +103,9 @@ int main(int argc, char* argv[])
    delta = omp_get_wtime() - start;
    printf("Delta %.4g seconds with %d threads\n",delta,1);
 
-   free(X1);
-   free(X2);
-   free(X3);
+   free(grid.X1);
+   free(grid.X2);
+   free(grid.X3);
 
    return 0;
 }

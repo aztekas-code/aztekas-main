@@ -5,12 +5,12 @@
 // cond : {outflow,reflective,periodic,inflow}
 // X : {x1max,x1min,x2max,x2min,x3max,x3min}
 
-#define outflow_x1max 1
-#define outflow_x1min 1
-#define reflective_x2max 1
-#define reflective_x2min 1
+#define outflow_x1max      TRUE
+#define outflow_x1min      TRUE
+#define reflective_x2max   TRUE
+#define reflective_x2min   TRUE
 
-#define limiter 'C'
+#define RECONST   MC
 #define riemann 1
 
 #define logmesh  0
