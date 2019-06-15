@@ -79,7 +79,7 @@ endif
 # Coordinates (cart,cyl,sph)
 #####################################
 
-COORD = cart
+COORD = sph
 
 ifeq ($(COORD),cart)
 	PARAM += -Dalfa=0

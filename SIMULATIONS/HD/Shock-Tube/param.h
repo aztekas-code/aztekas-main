@@ -13,10 +13,9 @@
 #define limiter 'C'
 #define riemann 2
 
-#define interface 2
+#define interface 0
 #define logmesh   0
 
-double density_0, pressure_0, velocity_0;
 double nl, pl, vx1l, vx2l, vx3l;
 double nr, pr, vx1r, vx2r, vx3r;
 double x_0;

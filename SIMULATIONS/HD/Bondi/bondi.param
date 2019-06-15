@@ -1,63 +1,60 @@
 % OUTPUT FILE AND DIRECTORY
-outputdirectory = Bondi/
-outputfile      = bondi_
+outputdirectory = ./prueba/
+outputfile      = prueba_
 
 % RESTART SIMULATION (1 -> true, 0 -> false)
 restart_simulation = 0
-restartfile = DATA/sph_acc/bondi/data_400.dat
-restart_filecount = 400
+restartfile = ./Shock/dx1_10.dat
+restart_filecount = 10
 
 % Define mesh
-
-Nx1 = 1000
-Nx2 = 0
+Nx1 = 100
+Nx2 = 100
 Nx3 = 0
 
-% Sph
+% Define domain limits
 x1max = 10.0
-x2max = 0.0
-x3max = 0.0
-x1min = 0.1
+x2max = 0.5
+x3max = 1.0 
+x1min = 0.3
 x2min = 0.0
 x3min = 0.0
 
 % Time parameters
-tmax = 5000.0
+tmax = 1500.0
 timefile = 10.0
-cou = 0.5
+cou = 0.25
 
 % Polytorpic index
-%K = 1.6666666666666666666666666
-K = 1.00000001
+K = 1.00001
+%K = 1.3333333333333333333333333
+%K = 1.4
 %K = 1.5
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% Boundary conditions %%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% ACCRETION DOMAIN
-r_out = 10.0
-
-% DENSITY PROFILE
-% (theta_0 should be in units of pi, delta_theta is the width of the step function)
-% 1 = const., 2 = gaussian, 3 = step function
-rho_boundary = 1 
-theta_0 = 0.6
-delta_theta = 0.02
+%K = 1.6666666666666666666666666
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Initial conditions %%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % BONDI ACCRETION (Gamma = 1, r0 = 10 r_B)
-density_0 =  1.1051141e+00
-pressure_0 = 1.1051141e+00
-velocity_0 = -1.01385e-02
+density_0 =  1.1051141194928027
+pressure_0 = 1.1051141194928027
+velocity_0 = -0.010138520971017357
 
 % BONDI ACCRETION (Gamma = 4/3, r0 = 10 r_B)
 %density_0 =  1.1033484
 %pressure_0 = 0.8550893
 %velocity_0 = -0.0064087 
+
+% BONDI ACCRETION (Gamma = 1.4, r0 = 10 r_B)
+%density_0  = 1.103003 
+%pressure_0 = 0.819369
+%velocity_0 = -0.0056663
+
+% BONDI ACCRETION (Gamma = 1.4, r0 = 5 r_B)
+%density_0  = 1.211919
+%pressure_0 = 0.934835
+%velocity_0 = -0.0206284
 
 % BONDI ACCRETION (Gamma = 5/3, r0 = 10 r_B)
 %density_0 =  1.1016569
@@ -69,6 +66,7 @@ velocity_0 = -1.01385e-02
 %pressure_0 = 0.771738
 %velocity_0 = -0.004535191
 
-%density_0 =  0.000327
-%pressure_0 = 0.001
-%velocity_0 = 0.0
+% BONDI ACCRETION (Gamma = 7/5, r0 = 10 r_B)
+%density_0 =  1.1030028
+%pressure_0 = 0.8193684
+%velocity_0 = -0.0055563 

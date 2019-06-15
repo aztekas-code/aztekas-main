@@ -22,16 +22,16 @@ int Reconst1D(double *u, int r, lim_ *l, int *I)
    double dup2, dup1, dum1, dum2;
 
    i = I[0];
-#if x1min_exc == 1
-   if (i <= 2*gc && limiter == 'W')
-   {
-      r = 'C';
-   }
-   if (i <= 2*gc && limiter != 'W')
-   {
-      r = 'G';
-   }
-#endif
+//#if x1min_exc == 1
+//   if (i <= 2*gc && limiter == 'W')
+//   {
+//      r = 'C';
+//   }
+//   if (i <= 2*gc && limiter != 'W')
+//   {
+//      r = 'G';
+//   }
+//#endif
 
    for(n = 0; n < eq; n++)
    {

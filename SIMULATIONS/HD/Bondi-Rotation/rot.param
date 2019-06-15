@@ -1,0 +1,76 @@
+% OUTPUT FILE AND DIRECTORY
+outputdirectory = ./prueba/
+outputfile      = prueba_
+
+% RESTART SIMULATION (1 -> true, 0 -> false)
+restart_simulation = 0
+restartfile = ./Shock/dx1_10.dat
+restart_filecount = 10
+
+% Define mesh
+Nx1 = 100
+Nx2 = 100
+Nx3 = 0
+
+% Define domain limits
+x1max = 10.0
+x2max = 0.5
+x3max = 1.0 
+x1min = 0.5
+x2min = 0.0
+x3min = 0.0
+
+% Time parameters
+tmax = 500.0
+timefile = 1.0
+cou = 0.25
+
+% Polytorpic index
+K = 1.00001
+%K = 1.3333333333333333333333333
+%K = 1.4
+%K = 1.5
+%K = 1.6666666666666666666666666
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Initial conditions %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% BONDI ACCRETION (Gamma = 1, r0 = 10 r_B)
+%density_0 =  1.1051141194928027
+%pressure_0 = 1.1051141194928027
+%velocity_0 = -0.010138520971017357
+
+% BONDI ACCRETION (Gamma = 4/3, r0 = 10 r_B)
+%density_0 =  1.1033484
+%pressure_0 = 0.8550893
+%velocity_0 = -0.0064087 
+
+% BONDI ACCRETION (Gamma = 1.4, r0 = 10 r_B)
+%density_0  = 1.103003 
+%pressure_0 = 0.819369
+%velocity_0 = -0.0056663
+
+% BONDI ACCRETION (Gamma = 1.4, r0 = 5 r_B)
+%density_0  = 1.211919
+%pressure_0 = 0.934835
+%velocity_0 = -0.0206284
+
+% BONDI ACCRETION (Gamma = 5/3, r0 = 10 r_B)
+%density_0 =  1.1016569
+%pressure_0 = 0.7050522
+%velocity_0 = -0.00226933
+
+% BONDI ACCRETION (Gamma = 1.5, r0 = 10 r_B)
+%density_0 =  1.102489
+%pressure_0 = 0.771738
+%velocity_0 = -0.004535191
+
+% BONDI ACCRETION (Gamma = 7/5, r0 = 10 r_B)
+%density_0 =  1.1030028
+%pressure_0 = 0.8193684
+%velocity_0 = -0.0055563 
+
+density_0  = 1.0
+pressure_0 = 0.000001
+velocity_0 = -0.4472
