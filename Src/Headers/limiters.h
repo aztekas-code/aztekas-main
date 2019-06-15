@@ -1,34 +1,34 @@
-/*typedef struct
+typedef struct
 {
-	double *ux1p;
-	double *ux1m;
-	double *sx1;
-	double *promx;
-	double *ux2p;
-	double *ux2m;
-	double *sx2;
-	double *ux3p;
-	double *ux3m;
-	double *sx3;
+	double ux1p[2*eq];
+	double ux1m[2*eq];
+	double sx1[2*eq];
+	double ux2p[2*eq];
+	double ux2m[2*eq];
+	double sx2[2*eq];
+	double ux3p[2*eq];
+	double ux3m[2*eq];
+	double sx3[2*eq];
+	double ux[2*eq];
 }lim_;
 
-lim_* l;
+double Limiter(double A, double B, int r);
 
-lim_* alloc_lim(); 
+double Godunov(double A, double B);
 
-void free_lim(lim_* l);
+double Maxmod(double A, double B);
 
-double LIMITER(double A, double B, char r);
+double Minmod(double A, double B);
 
-double GODUNOV(double A, double B);
+double Mc(double A, double B);
 
-double MAXMOD(double A, double B);
+double Superbee(double A, double B);
 
-double MINMOD(double A, double B);
+double Weno5(double v1, double v2, double v3, double v4, double v5);
 
-double MC(double A, double B);
+int Reconst1D(double *u, int r, lim_ *l, int *I);
 
-double SUPERBEE(double A, double B);
+int Reconst2D(double *u, int r, lim_ *l, int *I);
 
-double WENO5(double v1, double v2, double v3, double v4, double v5);
-*/
+int Reconst3D(double *u, int r, lim_ *l, int *I);
+

@@ -1,8 +1,4 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<math.h>
-#include"../Headers/vector.h"
-#include"../Headers/main.h"
+#include"main.h"
 
 int GAUGE(double *a, double g1, double g2, double g3)
 {
@@ -10,7 +6,7 @@ int GAUGE(double *a, double g1, double g2, double g3)
    x2 = g2;
    x3 = g3;
 
-   if (dim == 1)
+   if (DIM == 1)
    {
       x2 = M_PI_2;
    }

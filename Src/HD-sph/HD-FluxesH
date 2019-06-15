@@ -1,4 +1,4 @@
-/*Fluxes along third dimension*/
+/*Fluxes along third DIMension*/
 h1 : n*w;
 h2 : w*(0.5*n*(u^2 + v^2 + w^2) + e + p);
 h3 : n*w*u;

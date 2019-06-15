@@ -14,12 +14,7 @@
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<math.h>
-#include<stdlib.h>
-#include<string.h>
 #include"main.h"
-#include"param.h"
 
 int RK1D(double *u, double *q, double *q1, double *q2, int order)
 {
@@ -39,8 +34,8 @@ int RK1D(double *u, double *q, double *q1, double *q2, int order)
       I[0] = i;
       r = limiter;
  
-      RECONST1D(u,r,&l,I);
-      FLUX1D(&v,&l,I);
+      Reconst1D(u,r,&l,I);
+      Flux1D(&v,&l,I);
  
       for(n = 0; n < eq; n++)
       {
@@ -101,8 +96,8 @@ int RK2D(double *u, double *q, double *q1, double *q2, int order)
          r = limiter;
          Dx1 = X1p[i] - X1m[i];
 
-         RECONST2D(u,r,&l,I);
-         FLUX2D(&v,&l,I);
+         Reconst2D(u,r,&l,I);
+         Flux2D(&v,&l,I);
 
          for(n = 0; n < eq; n++)
          {
@@ -169,8 +164,8 @@ int RK3D(double *u, double *q, double *q1, double *q2, int order)
             I[2] = k;
             r = 'C';
 
-            RECONST3D(u,r,&l,I);
-            FLUX3D(&v,&l,I);
+            Reconst3D(u,r,&l,I);
+            Flux3D(&v,&l,I);
 
             for(n = 0; n < eq; n++)
             {

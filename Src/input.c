@@ -7,16 +7,11 @@
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<omp.h>
-#include<math.h>
-#include<stdlib.h>
-#include<string.h>
 #include"main.h"
 
 FILE *paramfile;
 
-int read_parameters_file(char const *paramfile_name)
+int Read_Parameters_File(char const *paramfile_name)
 {
    int   BUFFER_SIZE = 612;
    char t_key[BUFFER_SIZE], t_value[BUFFER_SIZE], t_firstChar;
@@ -121,20 +116,20 @@ int read_parameters_file(char const *paramfile_name)
 
             if(strcmp(t_key,"x2max")==0)
             {
-#if alfa == 0 || alfa == 1
+               #if COORDINATES == CARTESIAN || COORDINATES == CYLINDRICAL
                x2max = atof(t_value);
-#elif alfa == 2
+               #elif COORDINATES == SPHERICAL
                x2max = M_PI*atof(t_value);
-#endif
+               #endif
             }
 
             if(strcmp(t_key,"x3max")==0)
             {
-#if alfa == 0 
+               #if COORDINATES == CARTESIAN 
                x3max = atof(t_value);
-#elif alfa == 1 || alfa == 2
+               #elif COORDINATES == CYLINDRICAL || COORDINATES == SPHERICAL
                x3max = M_PI*atof(t_value);
-#endif
+               #endif
             }
 
             if(strcmp(t_key,"x1min")==0)
@@ -144,221 +139,16 @@ int read_parameters_file(char const *paramfile_name)
 
             if(strcmp(t_key,"x2min")==0)
             {
-#if alfa == 0 || alfa == 1
+               #if COORDINATES == CARTESIAN || COORDINATES == CYLINDRICAL
                x2min = atof(t_value);
-#elif alfa == 2
+               #elif COORDINATES == SPHERICAL
                x2min = M_PI*atof(t_value);
-#endif
+               #endif
             }
 
             if(strcmp(t_key,"x3min")==0)
             {
                x3min = atof(t_value);
-            }
-
-            if(strcmp(t_key,"r_out")==0)
-            {
-               r_out = atof(t_value);
-            }
-
-            if(strcmp(t_key,"r_in")==0)
-            {
-               r_in = atof(t_value);
-            }
-
-            if(strcmp(t_key,"rho_boundary")==0)
-            {
-               rho_boundary = atoi(t_value);
-            }
-
-            if(strcmp(t_key,"theta_0")==0)
-            {
-               theta_0 = atof(t_value)*M_PI;
-            }
-
-            if(strcmp(t_key,"delta_theta")==0)
-            {
-               delta_theta = atof(t_value);
-            }
-
-            if(strcmp(t_key,"density_0")==0)
-            {
-               density_0 = atof(t_value);
-            }
-
-            if(strcmp(t_key,"pressure_0")==0)
-            {
-               pressure_0 = atof(t_value);
-            }
-
-            if(strcmp(t_key,"velocity_0")==0)
-            {
-               velocity_0 = atof(t_value);
-            }
-
-            if(strcmp(t_key,"nl")==0)
-            {
-               nl = atof(t_value);
-            }
-
-            if(strcmp(t_key,"pl")==0)
-            {
-               pl = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx1l")==0)
-            {
-               vx1l = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx2l")==0)
-            {
-               vx2l = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx3l")==0)
-            {
-               vx3l = atof(t_value);
-            }
-
-            if(strcmp(t_key,"nr")==0)
-            {
-               nr = atof(t_value);
-            }
-
-            if(strcmp(t_key,"pr")==0)
-            {
-               pr = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx1r")==0)
-            {
-               vx1r = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx2r")==0)
-            {
-               vx2r = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx3r")==0)
-            {
-               vx3r = atof(t_value);
-            }
-
-            if(strcmp(t_key,"x_0")==0)
-            {
-               x_0 = atof(t_value);
-            }
-
-            if(strcmp(t_key,"n_jet")==0)
-            {
-               n_jet = atof(t_value);
-            }
-
-            if(strcmp(t_key,"p_jet")==0)
-            {
-               p_jet = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx1_jet")==0)
-            {
-               vx1_jet = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx2_jet")==0)
-            {
-               vx2_jet = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx3_jet")==0)
-            {
-               vx3_jet = atof(t_value);
-            }
-
-            if(strcmp(t_key,"n_atm")==0)
-            {
-               n_atm = atof(t_value);
-            }
-
-            if(strcmp(t_key,"p_atm")==0)
-            {
-               p_atm = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx1_atm")==0)
-            {
-               vx1_atm = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx2_atm")==0)
-            {
-               vx2_atm = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx3_atm")==0)
-            {
-               vx3_atm = atof(t_value);
-            }
-
-            if(strcmp(t_key,"r_jet")==0)
-            {
-               r_jet = atof(t_value);
-            }
-
-            if(strcmp(t_key,"z_jet")==0)
-            {
-               z_jet = atof(t_value);
-            }
-
-            if(strcmp(t_key,"n_post")==0)
-            {
-               n_post = atof(t_value);
-            }
-
-            if(strcmp(t_key,"p_post")==0)
-            {
-               p_post = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx1_post")==0)
-            {
-               vx1_post = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx2_post")==0)
-            {
-               vx2_post = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx3_post")==0)
-            {
-               vx3_post = atof(t_value);
-            }
-
-            if(strcmp(t_key,"n_pre")==0)
-            {
-               n_pre = atof(t_value);
-            }
-
-            if(strcmp(t_key,"p_pre")==0)
-            {
-               p_pre = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx1_pre")==0)
-            {
-               vx1_pre = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx2_pre")==0)
-            {
-               vx2_pre = atof(t_value);
-            }
-
-            if(strcmp(t_key,"vx3_pre")==0)
-            {
-               vx3_pre = atof(t_value);
             }
          }
       }
