@@ -35,13 +35,23 @@ int RK1D(double *u, double *q, double *q1, double *q2, int order)
    {
       I[0] = i;
  
+      Dx1 = grid.X1p[i] - grid.X1m[i];
+
       Reconst1D(u,&l,I);
       Flux1D(&v,&l,I);
  
       for(n = 0; n < eq; n++)
       {
+         #if COORDINATES == CARTESIAN
          F[n] = (v.Fp[n] - v.Fm[n])/(Dx1) - \
          v.S[n];
+         #elif COORDINATES == CYLINDRICAL
+         F[n] = (grid.X1p[i]*v.Fp[n] - grid.X1m[i]*v.Fm[n])/(grid.X1[i]*Dx1) - \
+         v.S[n];
+         #elif COORDINATES == SPHERICAL
+         F[n] = (v.Fp[n] - v.Fm[n])/(Dx1) - \
+         v.S[n];
+         #endif
       }
 
 #if integration == 1 //PVRS
@@ -98,15 +108,26 @@ int RK2D(double *u, double *q, double *q1, double *q2, int order)
          I[1] = j;
 
          Dx1 = grid.X1p[i] - grid.X1m[i];
+         Dx2 = grid.X2p[j] - grid.X2m[j];
 
          Reconst2D(u,&l,I);
          Flux2D(&v,&l,I);
 
          for(n = 0; n < eq; n++)
          {
+            #if COORDINATES == CARTESIAN
             F[n] = (v.Fp[n] - v.Fm[n])/(Dx1) + \
-            (v.Gp[n] - v.Gm[n])/(grid.X1[i]*Dx2) - \
-            v.S[n];
+                   (v.Gp[n] - v.Gm[n])/(Dx2) - \
+                   v.S[n];
+            #elif COORDINATES == CYLINDRICAL
+            F[n] = (grid.X1p[i]*v.Fp[n] - grid.X1m[i]*v.Fm[n])/(grid.X1[i]*Dx1) + \
+                   (v.Gp[n] - v.Gm[n])/(Dx2) - \
+                   v.S[n];
+            #elif COORDINATES == SPHERICAL
+            F[n] = (v.Fp[n] - v.Fm[n])/(Dx1) + \
+                   (v.Gp[n] - v.Gm[n])/(grid.X1[i]*Dx2) - \
+                   v.S[n];
+            #endif
          }
 
 #if integration == 1 //PVRS
@@ -168,15 +189,31 @@ int RK3D(double *u, double *q, double *q1, double *q2, int order)
             I[1] = j;
             I[2] = k;
 
+            Dx1 = grid.X1p[i] - grid.X1m[i];
+            Dx2 = grid.X2p[j] - grid.X2m[j];
+            Dx3 = grid.X2p[k] - grid.X2m[k];
+
             Reconst3D(u,&l,I);
             Flux3D(&v,&l,I);
 
             for(n = 0; n < eq; n++)
             {
-               F[n] = (g1p[2]*v.Fp[n] - g1m[2]*v.Fm[n])/(g[1]*Dx1) + \
-               (g2p[2]*v.Gp[n] - g2m[2]*v.Gm[n])/(g[1]*Dx2) + \
-               (g3p[2]*v.Hp[n] - g3m[2]*v.Gm[n])/(g[1]*Dx3) - \
-               g[2]*v.S[n]/g[1];
+               #if COORDINATES == CARTESIAN
+               F[n] = (v.Fp[n] - v.Fm[n])/(Dx1) + \
+                      (v.Gp[n] - v.Gm[n])/(Dx2) + \
+                      (v.Hp[n] - v.Hm[n])/(Dx3) - \
+                      v.S[n];
+               #elif COORDINATES == CYLINDRICAL
+               F[n] = (grid.X1p[i]*v.Fp[n] - grid.X1m[i]*v.Fm[n])/(grid.X1[i]*Dx1) + \
+                      (v.Gp[n] - v.Gm[n])/(Dx2) + \
+                      (v.Hp[n] - v.Hm[n])/(grid.X1[i]*Dx3) - \
+                      v.S[n];
+               #elif COORDINATES == SPHERICAL
+               F[n] = (v.Fp[n] - v.Fm[n])/(Dx1) + \
+                      (v.Gp[n] - v.Gm[n])/(grid.X1[i]*Dx2) - \
+                      (v.Hp[n] - v.Hm[n])/(grid.X1[i]*sin(grid.X2[j])*Dx3) - \
+                      v.S[n];
+               #endif
             }
 
             switch(order)

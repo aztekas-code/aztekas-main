@@ -34,10 +34,10 @@ PARAM += -Dgc=3
 
 PHY = hd
 ifeq ($(PHY),hd)
-        PARAM += -DPHYSICS=1
+        PARAM += -DPHYSICS=HD
 endif
 ifeq ($(PHY),rhd)
-        PARAM += -DPHYSICS=2
+        PARAM += -DPHYSICS=RHD
 endif
 
 # -Grav if you want classical gravity
@@ -50,7 +50,7 @@ grav = #-grav
 # Dimension
 #####################################
 
-DIM = 2
+DIM = 4
 
 ifeq ($(DIM),1)
 	PARAM += -DDIM=1
@@ -64,7 +64,7 @@ ifeq ($(DIM),2)
 endif
 ifeq ($(DIM),4)
 	PARAM += -DDIM=4
-	PARAM += -Deq=4
+	PARAM += -Deq=5
 	PARAM += -Dgraf=2
 endif
 ifeq ($(DIM),3)
@@ -82,13 +82,13 @@ endif
 COORD = sph
 
 ifeq ($(COORD),cart)
-	PARAM += -Dalfa=0
+	PARAM += -DCOORDINATES=CARTESIAN
 endif
 ifeq ($(COORD),cyl)
-	PARAM += -Dalfa=1
+	PARAM += -DCOORDINATES=CYLINDRICAL
 endif
 ifeq ($(COORD),sph)
-	PARAM += -Dalfa=2
+	PARAM += -DCOORDINATES=SPHERICAL
 endif
 
 #####################################
@@ -123,7 +123,6 @@ endif
 ifeq ($(PHY),hd)
 SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/alloc.c \
-	  $(AZTPATH)/Src/array.c \
 	  $(AZTPATH)/Src/mesh.c \
 	  ./initial.c \
 	  $(AZTPATH)/Src/timestep.c \
@@ -131,7 +130,7 @@ SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/output.c \
 	  $(AZTPATH)/Src/integration$(INT).c \
 	  $(AZTPATH)/Src/flux.c \
-	  $(AZTPATH)/Src/rk-clas-$(COORD).c \
+	  $(AZTPATH)/Src/runge-kutta.c \
 	  $(AZTPATH)/Src/limiters.c \
 	  $(AZTPATH)/Src/vectors.c \
 	  $(AZTPATH)/Src/restart.c \
@@ -149,6 +148,7 @@ SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/HD-$(COORD)/hvector.c \
 	  $(AZTPATH)/Src/HD-$(COORD)/svector.c \
 	  $(AZTPATH)/Src/HD-$(COORD)/gauge.c \
+	  $(AZTPATH)/Src/HD-$(COORD)/metric.c \
 	  ./extforce.c \
 	  ./user_input.c
 endif 
@@ -156,7 +156,6 @@ endif
 ifeq ($(PHY),rhd)
 SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/alloc.c \
-	  $(AZTPATH)/Src/array.c \
 	  $(AZTPATH)/Src/mesh.c \
 	  ./initial.c \
 	  $(AZTPATH)/Src/timestep.c \

@@ -20,8 +20,8 @@ void Initial()
 {
    int n, i, j, k, cell;
 
-   //Initialize time
-   time = 0.0;
+   //Initialize grid.time
+   grid.time = 0.0;
 
    //Initialize dt
    dt = 0.0;
@@ -34,17 +34,17 @@ void Initial()
 
    for(i = 0; i <= Nx1; i++)
    {
-      if(X1[i] < x_0)
+      if(grid.X1[i] < x_0)
       {
-         U[c1(0,i)] = nl;
-         U[c1(1,i)] = pl;
-         U[c1(2,i)] = vx1l;
+         U(0,i) = nl;
+         U(1,i) = pl;
+         U(2,i) = vx1l;
       }
       else
       {
-         U[c1(0,i)] = nr;
-         U[c1(1,i)] = pr;
-         U[c1(2,i)] = vx1r;
+         U(0,i) = nr;
+         U(1,i) = pr;
+         U(2,i) = vx1r;
       }
    }
 
@@ -54,66 +54,66 @@ void Initial()
    //-------Riemann-1D--------//
    /////////////////////////////
 
-   #if interface == 0 // Interface in x
+   #if INTERFACE == HORIZONTAL
    for(i = 0; i <= Nx1; i++)
    {
       for(j = 0; j <= Nx2; j++)
       {
-         if(X1[i] < x_0)
+         if(grid.X1[i] < x_0)
          {
-            U[c2(0,i,j)] = nl;
-            U[c2(1,i,j)] = pl;
-            U[c2(2,i,j)] = vx1l;
-            U[c2(3,i,j)] = vx2l;
+            U(0,i,j) = nl;
+            U(1,i,j) = pl;
+            U(2,i,j) = vx1l;
+            U(3,i,j) = vx2l;
          }
          else 
          {
-            U[c2(0,i,j)] = nr;
-            U[c2(1,i,j)] = pr;
-            U[c2(2,i,j)] = vx1r;
-            U[c2(3,i,j)] = vx2r;
+            U(0,i,j) = nr;
+            U(1,i,j) = pr;
+            U(2,i,j) = vx1r;
+            U(3,i,j) = vx2r;
          }
       }
    }
-   #elif interface == 1 // Interface in y
+   #elif INTERFACE == VERTICAL
    for(i = 0; i <= Nx1; i++)
    {
       for(j = 0; j <= Nx2; j++)
       {
-         if(X2[j] > x_0)
+         if(grid.X2[j] > x_0)
          {
-            U[c2(0,i,j)] = nl;
-            U[c2(1,i,j)] = pl;
-            U[c2(2,i,j)] = vx1l;
-            U[c2(3,i,j)] = vx2l;
+            U(0,i,j) = nl;
+            U(1,i,j) = pl;
+            U(2,i,j) = vx1l;
+            U(3,i,j) = vx2l;
          }
          else 
          {
-            U[c2(0,i,j)] = nr;
-            U[c2(1,i,j)] = pr;
-            U[c2(2,i,j)] = vx1r;
-            U[c2(3,i,j)] = vx2r;
+            U(0,i,j) = nr;
+            U(1,i,j) = pr;
+            U(2,i,j) = vx1r;
+            U(3,i,j) = vx2r;
          }
       }
    }
-   #elif interface == 2 // Interface in a diagonal
+   #elif INTERFACE == DIAGONAL
    for(i = 0; i <= Nx1; i++)
    {
       for(j = 0; j <= Nx2; j++)
       {
-         if(X1[i] + X2[j] - 1 < 0.0)
+         if(grid.X1[i] + grid.X2[j] - 1 < 0.0)
          {
-            U[c2(0,i,j)] = nl;
-            U[c2(1,i,j)] = pl;
-            U[c2(2,i,j)] = vx1l;
-            U[c2(3,i,j)] = vx2l;
+            U(0,i,j) = nl;
+            U(1,i,j) = pl;
+            U(2,i,j) = vx1l;
+            U(3,i,j) = vx2l;
          }
          else 
          {
-            U[c2(0,i,j)] = nr;
-            U[c2(1,i,j)] = pr;
-            U[c2(2,i,j)] = vx1r;
-            U[c2(3,i,j)] = vx2r;
+            U(0,i,j) = nr;
+            U(1,i,j) = pr;
+            U(2,i,j) = vx1r;
+            U(3,i,j) = vx2r;
          }
       }
    }

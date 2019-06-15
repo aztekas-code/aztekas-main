@@ -10,7 +10,7 @@
 #define reflective_x2max 1
 #define reflective_x2min 1
 
-#define limiter 'C'
+#define RECONST   MC
 #define riemann 2
 
 #define logmesh  0

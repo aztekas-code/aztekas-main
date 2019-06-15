@@ -35,11 +35,11 @@ int Boundaries(double *B)
          {
             if(i > Nx1-gc)
             {
-               B[c2(n,i,j)] = B[c2(n,i-2,j)] + ((X1[i] - X1[i-2])/(X1[i-1] - X1[i-2]))*(B[c2(n,i-1,j)] - B[c2(n,i-2,j)]); 
+               B(n,i,j) = B(n,i-2,j) + ((X1[i] - X1[i-2])/(X1[i-1] - X1[i-2]))*(B(n,i-1,j) - B(n,i-2,j)); 
             }
             if(j > Nx2-gc)
             {
-               B[c2(n,i,j)] = B[c2(n,i,j-2)] + ((X2[j] - X2[j-2])/(X2[j-1] - X2[j-2]))*(B[c2(n,i,j-1)] - B[c2(n,i,j-2)]); 
+               B(n,i,j) = B(n,i,j-2) + ((X2[j] - X2[j-2])/(X2[j-1] - X2[j-2]))*(B(n,i,j-1) - B(n,i,j-2)); 
             }
          }
       }
@@ -53,11 +53,11 @@ int Boundaries(double *B)
          {
             if(i > Nx1-gc)
             {
-               B[c2(n,i,j)] = B[c2(n,i+2,j)] + ((X1[i] - X1[i+2])/(X1[i+1] - X1[i+2]))*(B[c2(n,i+1,j)] - B[c2(n,i+2,j)]); 
+               B(n,i,j) = B(n,i+2,j) + ((X1[i] - X1[i+2])/(X1[i+1] - X1[i+2]))*(B(n,i+1,j) - B(n,i+2,j)); 
             }
             if(j > Nx2-gc)
             {
-               B[c2(n,i,j)] = B[c2(n,i,j+2)] + ((X2[j] - X2[j+2])/(X2[j+1] - X2[j+2]))*(B[c2(n,i,j+1)] - B[c2(n,i,j+2)]); 
+               B(n,i,j) = B(n,i,j+2) + ((X2[j] - X2[j+2])/(X2[j+1] - X2[j+2]))*(B(n,i,j+1) - B(n,i,j+2)); 
             }
          }
       }
