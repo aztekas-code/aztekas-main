@@ -16,13 +16,13 @@ Nx3 = 0
 x1max = 10.0
 x2max = 0.5
 x3max = 1.0 
-x1min = 0.3
+x1min = 0.5
 x2min = 0.0
 x3min = 0.0
 
 % Time parameters
-tmax = 1500.0
-timefile = 10.0
+tmax = 500.0
+timefile = 1.0
 cou = 0.25
 
 % Polytorpic index
@@ -37,9 +37,9 @@ K = 1.00001
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % BONDI ACCRETION (Gamma = 1, r0 = 10 r_B)
-density_0 =  1.1051141194928027
-pressure_0 = 1.1051141194928027
-velocity_0 = -0.010138520971017357
+%density_0 =  1.1051141194928027
+%pressure_0 = 1.1051141194928027
+%velocity_0 = -0.010138520971017357
 
 % BONDI ACCRETION (Gamma = 4/3, r0 = 10 r_B)
 %density_0 =  1.1033484
@@ -70,3 +70,7 @@ velocity_0 = -0.010138520971017357
 %density_0 =  1.1030028
 %pressure_0 = 0.8193684
 %velocity_0 = -0.0055563 
+
+density_0  = 1.0
+pressure_0 = 0.000001
+velocity_0 = -0.4472

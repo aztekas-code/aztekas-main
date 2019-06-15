@@ -11,7 +11,7 @@
 #define reflective_x2min 1
 
 #define limiter 'C'
-#define riemann 1
+#define riemann 2
 
 #define logmesh  0
 

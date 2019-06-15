@@ -1,54 +1,70 @@
-/* 
- *  aztekas boundaries module
- *  Date of creation: 17-01-2019 16:10:43
- *  author: Alejandro Aguayo Ortiz 
+/*
+ *   This program is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include<stdio.h>
-#include<math.h>
-#include<string.h>
+
+//Do not erase any of these libraries//
 #include"main.h"
-#include"param.h"
 
-int BOUNDARIES(double *B)
+int Boundaries(double *B)
 {
-   int n, i, j, k, cell;
-   double r;
+   int i, j, k, n, cell;
 
-   OUTFLOW(B);
+   Outflow(B);
+   Reflection(B);
 
-#if dim == 1
+#if DIM == 1
 
    for(i = 0; i <= Nx1; i++)
    {
-      r = X1[i];
-
-      if(i == Nx1-gc)
+      if(i >= Nx1-gc)
       {
          B[c1(0,i)] = density_0;
          B[c1(1,i)] = pressure_0;
          B[c1(2,i)] = velocity_0;
       }
-      if(i > Nx1-gc)
+   }
+
+#elif DIM == 2
+
+   for(i = 0; i <= Nx1; i++)
+   {
+      for(j = 0; j <= Nx2; j++)
       {
-         for(n = 0; n < eq; n++)
+         if(i >= Nx1-gc)
          {
-            B[c1(n,i)] = B[c1(n,i-2)] + (B[c1(n,i-1)] - B[c1(n,i-2)])*(X1[i] - X1[i-2])/(X1[i-1] - X1[i-2]);
-         }
-      }
-      if(i < gc)
-      {
-         for(n = 0; n < eq; n++)
-         {
-            B[c1(n,i)] = B[c1(n,i+2)] + (B[c1(n,i+1)] - B[c1(n,i+2)])*(X1[i] - X1[i+2])/(X1[i+1] - X1[i+2]);
+            B[c2(0,i,j)] = density_0;
+            B[c2(1,i,j)] = pressure_0;
+            B[c2(2,i,j)] = velocity_0;
+            B[c2(3,i,j)] = 0.0;
          }
       }
    }
 
+#elif DIM == 4
+
    for(i = 0; i <= Nx1; i++)
    {
-      for(n = 0; n < eq; n++)
+      for(j = 0; j <= Nx2; j++)
       {
-         roundgen(&B[c1(n,i)]);
+         if(i >= Nx1-gc)
+         {
+            B[c2(0,i,j)] = density_0;
+            B[c2(1,i,j)] = pressure_0;
+            B[c2(2,i,j)] = velocity_0;
+            B[c2(3,i,j)] = 0.0;
+            B[c2(4,i,j)] = 0.0;
+         }
       }
    }
 

@@ -70,7 +70,7 @@ void Initial()
          U[c2(1,i,j)] = pressure_0;
          U[c2(2,i,j)] = velocity_0;
          U[c2(3,i,j)] = 0.0;
-         U[c2(4,i,j)] = 0.0;
+         U[c2(4,i,j)] = 0.02*X1[i]*sin(X2[j]);
       }
    }
 

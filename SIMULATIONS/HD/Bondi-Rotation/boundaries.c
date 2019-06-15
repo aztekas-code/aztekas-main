@@ -16,63 +16,61 @@
 //Do not erase any of these libraries//
 #include"main.h"
 
-void Initial()
+int Boundaries(double *B)
 {
-   int n, i, j, k, cell;
+   int i, j, k, n, cell;
 
-   //Initialize time
-   time = 0.0;
+   Outflow(B);
+   Reflection(B);
 
-   //Initialize dt
-   dt = 0.0;
-
-#if DIM == 1 
-
-   ///////////////////////////
-   //-------Bondi-1D--------//
-   ///////////////////////////
+#if DIM == 1
 
    for(i = 0; i <= Nx1; i++)
    {
-      U[c1(0,i)] = density_0;
-      U[c1(1,i)] = pressure_0;
-      U[c1(2,i)] = velocity_0;
+      if(i >= Nx1-gc)
+      {
+         B[c1(0,i)] = density_0;
+         B[c1(1,i)] = pressure_0;
+         B[c1(2,i)] = velocity_0;
+      }
    }
 
 #elif DIM == 2
-
-   ///////////////////////////
-   //-------Bondi-2D--------//
-   ///////////////////////////
 
    for(i = 0; i <= Nx1; i++)
    {
       for(j = 0; j <= Nx2; j++)
       {
-         U[c2(0,i,j)] = density_0;
-         U[c2(1,i,j)] = pressure_0;
-         U[c2(2,i,j)] = velocity_0;
-         U[c2(3,i,j)] = 0.0;
+         if(i >= Nx1-gc)
+         {
+            B[c2(0,i,j)] = density_0;
+            B[c2(1,i,j)] = pressure_0;
+            B[c2(2,i,j)] = velocity_0;
+            B[c2(3,i,j)] = 0.0;
+         }
       }
    }
 
 #elif DIM == 4
 
-   ///////////////////////////
-   //-------Bondi-2D--------//
-   ///////////////////////////
-
    for(i = 0; i <= Nx1; i++)
    {
       for(j = 0; j <= Nx2; j++)
       {
-         U[c2(0,i,j)] = density_0;
-         U[c2(1,i,j)] = pressure_0;
-         U[c2(2,i,j)] = velocity_0;
-         U[c2(3,i,j)] = 0.0;
-         U[c2(4,i,j)] = 0.0;
+         if(i >= Nx1-gc)
+         {
+            B[c2(0,i,j)] = density_0;
+            B[c2(1,i,j)] = pressure_0;
+            B[c2(2,i,j)] = velocity_0;
+            B[c2(3,i,j)] = 0.0;
+            B[c2(4,i,j)] = 0.02*X1[i]*sin(X2[j]);
+         }
+
+         B[c2(1,i,j)] = pressure_0;
       }
    }
 
 #endif
+
+   return 0;
 }

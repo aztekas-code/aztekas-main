@@ -50,7 +50,7 @@ grav = #-grav
 # Dimension
 #####################################
 
-DIM = 2
+DIM = 4
 
 ifeq ($(DIM),1)
 	PARAM += -DDIM=1
@@ -64,7 +64,7 @@ ifeq ($(DIM),2)
 endif
 ifeq ($(DIM),4)
 	PARAM += -DDIM=4
-	PARAM += -Deq=4
+	PARAM += -Deq=5
 	PARAM += -Dgraf=2
 endif
 ifeq ($(DIM),3)
