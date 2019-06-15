@@ -4,16 +4,11 @@
  * @brief Essential allocation functions for \a aztekas.
  */
 
-#include<stdio.h>
-#include<math.h>
-#include<stdlib.h>
-#include<string.h>
 #include"main.h"
-#include"param.h"
 
-void allocateArray()
+void Allocate_Array()
 {
-#if dim == 1
+#if DIM == 1
    X1  = (double *)malloc((Nx1+1)*sizeof(double));
    X1p = (double *)malloc((Nx1+1)*sizeof(double));
    X1m = (double *)malloc((Nx1+1)*sizeof(double));
@@ -23,7 +18,7 @@ void allocateArray()
    U   = (double *)malloc((Nx1+1)*(eq+1)*sizeof(double));
    U1  = (double *)malloc((Nx1+1)*(eq+1)*sizeof(double));
    U2  = (double *)malloc((Nx1+1)*(eq+1)*sizeof(double));
-#elif dim == 2 || dim == 4
+#elif DIM == 2 || DIM == 4
    X1  = (double *)malloc((Nx1+1)*sizeof(double));
    X1p = (double *)malloc((Nx1+1)*sizeof(double));
    X1m = (double *)malloc((Nx1+1)*sizeof(double));
@@ -36,7 +31,7 @@ void allocateArray()
    Q   = (double *)malloc((Nx1+1)*(Nx2+1)*(eq+1)*sizeof(double));
    Q1  = (double *)malloc((Nx1+1)*(Nx2+1)*(eq+1)*sizeof(double));
    Q2  = (double *)malloc((Nx1+1)*(Nx2+1)*(eq+1)*sizeof(double));
-#elif dim == 3
+#elif DIM == 3
    X1  = (double *)malloc((Nx1+1)*sizeof(double));
    X1p = (double *)malloc((Nx1+1)*sizeof(double));
    X1m = (double *)malloc((Nx1+1)*sizeof(double));
@@ -52,7 +47,7 @@ void allocateArray()
 #endif
 }
 
-void new_SIZE()
+void New_Size() 
 {
    Nx1 = Nx1 + 2*gc;
    Nx2 = Nx2 + 2*gc;

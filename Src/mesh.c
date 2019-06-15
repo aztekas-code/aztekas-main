@@ -14,28 +14,24 @@
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<math.h>
-#include<string.h>
 #include"main.h"
-#include"param.h"
 
-int MESH()
+int Mesh()
 {
    int i, j, k;
 
-#if dim == 1
+#if DIM == 1
    dx1 = (x1max - x1min)/((double)Nx1-2*gc);
-#elif dim == 2 || dim == 4
+#elif DIM == 2 || DIM == 4
    dx1 = (x1max - x1min)/((double)Nx1-2*gc);
    dx2 = (x2max - x2min)/((double)Nx2-2*gc);
-#elif dim == 3
+#elif DIM == 3
    dx1 = (x1max - x1min)/((double)Nx1-2*gc);
    dx2 = (x2max - x2min)/((double)Nx2-2*gc);
    dx3 = (x3max - x3min)/((double)Nx3-2*gc);
 #endif
 
-#if dim == 1
+#if DIM == 1
    
    for(i = 0; i <= Nx1; i++)
    {
@@ -51,7 +47,7 @@ int MESH()
       }
    }
    
-#elif dim == 2  || dim == 4
+#elif DIM == 2  || DIM == 4
    
    for(i = 0; i <= Nx1; i++)
    {
@@ -74,7 +70,7 @@ int MESH()
       X2m[j] = x2min + (j-0.5-gc)*(dx2);
    }
    
-#elif dim == 3 
+#elif DIM == 3 
    
    for(i = 0; i <= Nx1; i++)
    {

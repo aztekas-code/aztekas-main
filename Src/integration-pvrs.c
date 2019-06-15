@@ -26,7 +26,7 @@ int INTEGRATION()
    int n, i, j, k;
 
    //Runge-Kutta 2th-Order and Piecewie Polynomial Reconstruction
-#if dim == 1 
+#if DIM == 1 
    
    RK1D(U,U,U1,U2,1);
    BOUNDARIES(U1);
@@ -35,7 +35,7 @@ int INTEGRATION()
    BOUNDARIES(U2);
    U = U2;
    
-#elif dim == 2 
+#elif DIM == 2 
 
    RK2D(U,U,U1,U2,1);
    BOUNDARIES(U1);
@@ -44,7 +44,7 @@ int INTEGRATION()
    BOUNDARIES(U2);
    U = U2;
    
-#elif dim == 3 
+#elif DIM == 3 
    
    funct_U2Q(Q,U);
    RK3D(U,Q,Q1,Q2,1);

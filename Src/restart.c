@@ -14,7 +14,7 @@
 #include"main.h"
 #include"param.h"
 
-void RESTART()
+void Restart()
 {
    FILE *file;
    int i, j, k, idum;
@@ -44,14 +44,14 @@ void RESTART()
    idum = fscanf(file,"%s\n",line) ;
 
    // Read rest of file an initialize variables      
-#if dim == 1
+#if DIM == 1
    for(i = gc; i <= Nx1-gc; i++)
    {
       idum = fscanf(file,"%lf %lf %lf %lf\n",&dum,\
       &U[c1(0,i)],&U[c1(1,i)],&U[c1(2,i)]);
    }
 
-#elif dim == 2
+#elif DIM == 2
 
    for(i = gc; i <= Nx1-gc; i++)
    {
@@ -62,7 +62,7 @@ void RESTART()
       }
    }
 
-#elif dim == 4
+#elif DIM == 4
 
    for(i = gc; i <= Nx1-gc; i++)
    {
@@ -73,7 +73,7 @@ void RESTART()
       }
    }
 
-#elif dim == 3
+#elif DIM == 3
 
    for(i = gc; i <= Nx1-gc; i++)
    {
@@ -92,12 +92,12 @@ void RESTART()
 #endif
 
    // CALLING BOUNDARIES TO GET GHOST CELLS RIGHT
-    BOUNDARIES(U);
+    Boundaries(U);
 
     fclose(file);
 }                                        
 
-void RESTART_BIN()
+void Restart_Bin()
 {
    FILE *file;
    int i, j, k, idum, ignore;
@@ -112,7 +112,7 @@ void RESTART_BIN()
    // Read time
    ignore = fread(&time, sizeof time, 1, file);
 
-#if dim == 1
+#if DIM == 1
 
    // Read Nx1
    ignore = fread(&idum, sizeof idum, 1, file);
@@ -145,7 +145,7 @@ void RESTART_BIN()
         ignore = fread(&U[c1(2,i)], sizeof dum, 1, file);         
    }
     
-#elif dim == 2 || dim == 4
+#elif DIM == 2 || DIM == 4
 
    // Read Nx1
    ignore = fread(&idum, sizeof idum, 1, file);
@@ -209,7 +209,7 @@ void RESTART_BIN()
       }
    }
     
-#elif dim == 3
+#elif DIM == 3
 
    // Read Nx1
    ignore = fread(&idum, sizeof idum, 1, file);
@@ -311,7 +311,7 @@ void RESTART_BIN()
 #endif
    
    // CALLING BOUNDARIES TO GET GHOST CELLS RIGHT
-   BOUNDARIES(U);
+   Boundaries(U);
 
    fclose(file);
 }                                        

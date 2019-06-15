@@ -1,7 +1,4 @@
-#include<stdio.h>
-#include<math.h>
-#include"../Headers/vector.h"
-#include"../Headers/main.h"
+#include"main.h"
     
 int funct_Q2U(double *a, double *uu)
 {
@@ -10,7 +7,7 @@ int funct_Q2U(double *a, double *uu)
    double D, E, m1, m2, m3;
    R = sqrt(x1*x1 + x2*x2);
    
-   if(dim == 1)
+   if(DIM == 1)
    {
       for(i = 0; i <= Nx1; i++)
       {
@@ -27,7 +24,7 @@ int funct_Q2U(double *a, double *uu)
          a[c1(4,i)] = m3/D;
       }
    }
-   else if(dim == 2)
+   else if(DIM == 2)
    {
       for(i = 0; i <= Nx1; i++)
       {
@@ -47,7 +44,7 @@ int funct_Q2U(double *a, double *uu)
          }
       }
    }
-   else if(dim == 4)
+   else if(DIM == 4)
    {
       for(i = 0; i <= Nx1; i++)
       {
@@ -67,7 +64,7 @@ int funct_Q2U(double *a, double *uu)
          }
       }
    }
-   if(dim == 3)
+   if(DIM == 3)
    {
       for(i = 0; i <= Nx1; i++)
       {

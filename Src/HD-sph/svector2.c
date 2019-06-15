@@ -11,12 +11,12 @@ int funct_S(double *a, double *uu)
    p = uu[1];
    double E = 0.5*n*(u*u + v*v + w*w) + p/(K-1);
 
-#if dim == 1
+#if DIM == 1
    u = uu[2];
-#elif dim == 2
+#elif DIM == 2
    u = uu[2];
    v = uu[3];
-#elif dim == 3 || dim == 4
+#elif DIM == 3 || DIM == 4
    u = uu[2];
    v = uu[3];
    w = uu[4];

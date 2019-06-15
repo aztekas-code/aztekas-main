@@ -14,13 +14,7 @@
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<math.h>
-#include<stdlib.h>
-#include<string.h>
 #include"main.h"
-#include"vector.h"
-#include"param.h"
 
 int AMATRIX1D(double *u, vec_ *v, int *I)
 {
@@ -36,8 +30,8 @@ int AMATRIX1D(double *u, vec_ *v, int *I)
 #endif
    x3 = 0;
 
-   funct_S(geoS,u);
-   EXTFORCE(extS,u);
+   Source_Terms(geoS,u);
+   User_Source_Terms(extS,u);
 
 #if integration == 1
    funct_A(v->A,u);
@@ -64,8 +58,8 @@ int AMATRIX2D(double *u, vec_ *v, int *I)
    x2 = M_PI_2;
 #endif
    
-   funct_S(geoS,u);
-   EXTFORCE(extS,u);
+   Source_Terms(geoS,u);
+   User_Source_Terms(extS,u);
 
 #if integration == 1
    funct_A(v->A,u);
@@ -87,8 +81,6 @@ int AMATRIX3D(double *u, vec_ *v, int *I)
    x2  = X2[I[1]];
    x3  = X3[I[2]];
 
-   funct_S(v->S,u);
-
    return 0;
 }
 
@@ -108,13 +100,13 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
    x2 = 0.0;
    x3 = 0.0;
 
-#if dim == 1
+#if DIM == 1
    x1 = X1[I[0]];
    x2 = M_PI_2;
-#elif dim == 2
+#elif DIM == 2
    x1 = X1[I[0]];
    x2 = X2[I[1]];
-#elif dim == 3 
+#elif DIM == 3 
    x1 = X1[I[0]];
    x2 = X2[I[1]];
    x3 = X3[I[2]];
@@ -167,53 +159,53 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
       f->um[n] = u[0*eq + n];
    }
 
-   funct_Q(f->qp,f->up);
-   funct_Q(f->qm,f->um);
+   Prim2Cons(f->qp,f->up);
+   Prim2Cons(f->qm,f->um);
 
    switch(flux)
    {
       case 'f':
-         funct_F(f->fp,f->up);
+         Prim2FluxF(f->fp,f->up);
          funct_Dm(dp,f->up);
 
-         funct_F(f->fm,f->um);
+         Prim2FluxF(f->fm,f->um);
          funct_Dm(dm,f->um);
       break;
 
       case 'g':
-         funct_G(f->fp,f->up);
+         Prim2FluxG(f->fp,f->up);
          funct_Dn(dp,f->up);
 
-         funct_G(f->fm,f->um);
+         Prim2FluxG(f->fm,f->um);
          funct_Dn(dm,f->um);
       break;
 
       case 'h':
-         funct_H(f->fp,f->up);
+         Prim2FluxH(f->fp,f->up);
          funct_Do(dp,f->up);
 
-         funct_H(f->fm,f->um);
+         Prim2FluxH(f->fm,f->um);
          funct_Do(dm,f->um);
       break;
    }
 
-   lr = max(dp[0],dp[1]);
-   lr = max(lr,dp[2]);
-   lr = max(0.0,lr);
-   ll = max(dm[0],dm[1]);
-   ll = max(ll,dm[2]);
-   ll = max(0.0,ll);
+   lr = MAX(dp[0],dp[1]);
+   lr = MAX(lr,dp[2]);
+   lr = MAX(0.0,lr);
+   ll = MAX(dm[0],dm[1]);
+   ll = MAX(ll,dm[2]);
+   ll = MAX(0.0,ll);
 
-   f->lp = max(lr,ll);
+   f->lp = MAX(lr,ll);
 
-   lr = min(dp[0],dp[1]);
-   lr = min(lr,dp[2]);
-   lr = min(0.0,lr);
-   ll = min(dm[0],dm[1]);
-   ll = min(ll,dm[2]);
-   ll = min(0.0,ll);
+   lr = MIN(dp[0],dp[1]);
+   lr = MIN(lr,dp[2]);
+   lr = MIN(0.0,lr);
+   ll = MIN(dm[0],dm[1]);
+   ll = MIN(ll,dm[2]);
+   ll = MIN(0.0,ll);
 
-   f->lm = min(lr,ll);
+   f->lm = MIN(lr,ll);
 
    return 0;
 }

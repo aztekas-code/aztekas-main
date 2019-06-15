@@ -1,5 +1,5 @@
-s1 : 0;
-s2 : 0;
-s3 : 0;
-s4 : 0;
-s5 : 0;
+s1 : - 2.0*u*n/r - v*n*cos(theta)/(x1*sin(theta));
+s2 : - 2.0*u*(E + p)/r - v*(E + p)*cos(theta)/(x1*sin(theta));
+s3 : - 2.0*u*(n*u)/r - v*(n*u)*cos(theta)/(x1*sin(theta)) + n*(v*v + w*w)/r;
+s4 : - 2.0*u*(n*v)/r - v*(n*v)*cos(theta)/(x1*sin(theta)) - n*u*v/r + n*w*w*cos(theta)/(r*sin(theta));
+s5 : - 2.0*u*(n*w)/r - v*(n*w)*cos(theta)/(x1*sin(theta)) - n*u*w/r - n*v*w*cos(theta)/(r*sin(theta));
