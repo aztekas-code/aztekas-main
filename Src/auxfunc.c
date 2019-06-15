@@ -33,7 +33,7 @@ int MxV(double *M, double *V, double *L)
    return 0;
 }
 
-void roundgen(double *num)
+void RoundGen(double *num)
 {
    double r;
    double bla;
