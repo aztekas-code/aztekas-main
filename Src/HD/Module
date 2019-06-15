@@ -1,5 +1,0 @@
-#!/bin/bash
-
-./Compute_Matrixes >&/dev/null
-perl Functions.pl
-rm MATRIX* VECTOR*

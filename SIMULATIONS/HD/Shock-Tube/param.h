@@ -17,7 +17,7 @@
 #define RECONST   MC
 #define riemann   2
 
-#define INTERFACE    DIAGONAL
+#define INTERFACE    HORIZONTAL
 #define GRID         UNIFORM
 
 double nl, pl, vx1l, vx2l, vx3l;

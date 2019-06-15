@@ -45,9 +45,9 @@ int GAUGE(double *a, double g1, double g2, double g3);
 
 void Prim2Cons(double *a, double *uu);
 void Prim2Cons_All(double *u, double *q);
-void Prim2FluxF(double *f, double *uu);
-void Prim2FluxG(double *f, double *uu);
-void Prim2FluxH(double *f, double *uu);
+void Prim2FluxF(double *f, double *v, double *uu);
+void Prim2FluxG(double *f, double *v, double *uu);
+void Prim2FluxH(double *f, double *v, double *uu);
 int funct_Dm(double *a, double *uu);
 int funct_Dn(double *a, double *uu);
 int funct_Do(double *a, double *uu);
