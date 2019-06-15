@@ -1,28 +1,77 @@
 #include"main.h"
     
-void Source_Terms(double *a, double *uu)
+void Source_Terms(double *s, double *u)
 {
-   int i;
-   double n, p, u=0, v=0, w=0;
-   n = uu[0];
-   p = uu[1];
+   double rho, p, vx1=0, vx2=0, vx3=0;
+   double x[4];
+
+   x[0] = grid.time;
+   x[1] = x1;
+   x[2] = x2;
+   x[3] = x3;
+
+   rho = u[0];
+   p = u[1];
 
 #if DIM == 1
-   u = uu[2];
+   vx1 = u[2];
 #elif DIM == 2
-   u = uu[2];
-   v = uu[3];
+   vx1 = u[2];
+   vx2 = u[3];
 #elif DIM == 3 || DIM == 4
-   u = uu[2];
-   v = uu[3];
-   w = uu[4];
+   vx1 = u[2];
+   vx2 = u[3];
+   vx3 = u[4];
 #endif
 
-   double E = 0.5*n*(u*u + v*v + w*w) + p/(K-1);
-   
-   a[0] = -(2*n*sin(x2)*u*x1+n*x1*cos(x2)*v)/(x1*sin(x2)*x1);
-   a[1] = -((2*sin(x2)*u*x1+x1*cos(x2)*v)*E+2*p*sin(x2)*u*x1+p*x1*cos(x2)*v)/(x1*sin(x2)*x1);
-   a[2] = ((n*sin(x2)*pow(w,2.0)+n*sin(x2)*pow(v,2.0)-2*n*sin(x2)*pow(u,2.0))*x1-n*x1*cos(x2)*u*v)/(x1*sin(x2)*x1);
-   a[3] = ((n*cos(x2)*pow(w,2.0)-3*n*sin(x2)*u*v)*x1-n*x1*cos(x2)*pow(v,2.0))/(x1*sin(x2)*x1);
-   a[4] = -((n*cos(x2)*v+3*n*sin(x2)*u)*w*x1+n*x1*cos(x2)*v*w)/(x1*sin(x2)*x1);
+#if COORDINATES == CARTESIAN
+
+   double t = x[0];
+   double X = x[1];
+   double Y = x[2];
+   double Z = x[3];
+
+   s[0] = 0.0;
+   s[1] = 0.0;
+   s[2] = 0.0;
+   s[3] = 0.0;
+   s[4] = 0.0;
+
+#elif COORDINATES == CYLINDRICAL
+
+   double t   = x[0];
+   double R   = x[1];
+   double Z   = x[2];
+   double phi = x[3];
+
+   s[0] = 0;
+   s[1] = 0;
+   s[2] = (rho * vx3 * vx3 + p)/R;
+   s[3] = 0;
+   s[4] = - rho * vx1 * vx3/R;
+
+#elif COORDINATES == SPHERICAL
+
+   double E;
+   eos_ eos;
+   double t     = x[0];
+   double r     = x[1];
+   double theta = x[2];
+   double phi   = x[3];
+
+   #if EOS == IDEAL
+   E = 0.5*rho*(vx1*vx1 + vx2*vx2 + vx3*vx3) + p/(K-1);
+   #endif
+
+   s[0] = -2.0*vx1*rho/r - vx2*rho*cos(theta)/(r*sin(theta));
+   s[1] = -2.0*vx1*(E+p)/r -vx2*(E+p)*cos(theta)/(r*sin(theta));
+   s[2] = -2.0*vx1*(rho*vx1)/r - vx2*(rho*vx1)*cos(theta)/(r*sin(theta)) +\
+          rho*(vx2*vx2 + vx3*vx3)/r;
+   s[3] = -2.0*vx1*(rho*vx2)/r - vx2*(rho*vx2)*cos(theta)/(r*sin(theta)) -\
+          rho*vx1*vx2/r + rho*vx3*vx3*cos(theta)/(r*sin(theta));
+   s[4] = -2.0*vx1*(rho*vx3)/r - vx2*(rho*vx3)*cos(theta)/(r*sin(theta)) -\
+          rho*vx1*vx3/r - rho*vx2*vx3*cos(theta)/(r*sin(theta));
+
+#endif
+
 }

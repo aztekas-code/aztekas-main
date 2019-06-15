@@ -137,18 +137,14 @@ SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/auxfunc.c \
 	  ./boundaries.c \
 	  $(AZTPATH)/Src/bound_cond.c \
-	  $(AZTPATH)/Src/HD-$(COORD)/dmmatrix.c \
-	  $(AZTPATH)/Src/HD-$(COORD)/dnmatrix.c \
-	  $(AZTPATH)/Src/HD-$(COORD)/domatrix.c \
-	  $(AZTPATH)/Src/HD-$(COORD)/q2uvector.c \
-	  $(AZTPATH)/Src/HD-$(COORD)/u2qvector.c \
-	  $(AZTPATH)/Src/HD-$(COORD)/qvector.c \
-	  $(AZTPATH)/Src/HD-$(COORD)/fvector.c \
-	  $(AZTPATH)/Src/HD-$(COORD)/gvector.c \
-	  $(AZTPATH)/Src/HD-$(COORD)/hvector.c \
-	  $(AZTPATH)/Src/HD-$(COORD)/svector.c \
-	  $(AZTPATH)/Src/HD-$(COORD)/gauge.c \
-	  $(AZTPATH)/Src/HD-$(COORD)/metric.c \
+	  $(AZTPATH)/Src/HD/q2uvector.c \
+	  $(AZTPATH)/Src/HD/u2qvector.c \
+	  $(AZTPATH)/Src/HD/qvector.c \
+	  $(AZTPATH)/Src/HD/fvector.c \
+	  $(AZTPATH)/Src/HD/gvector.c \
+	  $(AZTPATH)/Src/HD/hvector.c \
+	  $(AZTPATH)/Src/HD/svector.c \
+	  $(AZTPATH)/Src/HD/metric.c \
 	  ./extforce.c \
 	  ./user_input.c
 endif 

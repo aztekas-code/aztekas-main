@@ -1,92 +1,99 @@
 #include"main.h"
     
-int funct_Q2U(double *a, double *uu)
+int funct_Q2U(double *u, double *q)
 {
    int i, j, k;
-   double R;
-   double D, E, m1, m2, m3;
-   R = sqrt(x1*x1 + x2*x2);
+   double D, E, S1, S2, S3;
    
-   if(DIM == 1)
+#if DIM == 1
+
+   for(i = 0; i <= Nx1-0; i++)
    {
-      for(i = 0; i <= Nx1; i++)
+      D  = q(0,i);
+      E  = q(1,i);
+      S1 = q(2,i);
+      S2 = 0;
+      S3 = 0;
+ 
+      u(0,i) = D;
+      #if EOS == IDEAL
+      u(1,i) = ((2.0*K-2.0)*D*E+(1.0-K)*pow(S3,2.0)+(1.0-K)*pow(S2,2.0)+(1.0-K)*pow(S1,2.0))/(2.0*D);
+      #endif
+      u(2,i) = S1/D;
+      u(3,i) = S2/D;
+      u(4,i) = S3/D;
+   }
+
+#elif DIM == 2
+
+   for(i = 0; i <= Nx1-0; i++)
+   {
+      for(j = 0; j <= Nx2-0; j++)
       {
-         D  = uu[c1(0,i)];
-         E  = uu[c1(1,i)];
-         m1 = uu[c1(2,i)];
-         m2 = 0;
-         m3 = 0;
-    
-         a[c1(0,i)] = D;
-         a[c1(1,i)] = ((2*K-2)*D*E+(1-K)*pow(m3,2.0)+(1-K)*pow(m2,2.0)+(1-K)*pow(m1,2.0))/(2*D);
-         a[c1(2,i)] = m1/D;
-         a[c1(3,i)] = m2/D;
-         a[c1(4,i)] = m3/D;
+         D  = q(0,i,j);
+         E  = q(1,i,j);
+         S1 = q(2,i,j);
+         S2 = q(3,i,j);
+         S3 = 0;
+ 
+         u(0,i,j) = D;
+         #if EOS == IDEAL
+         u(1,i,j) = ((2.0*K-2.0)*D*E+(1.0-K)*pow(S3,2.0)+(1.0-K)*pow(S2,2.0)+(1.0-K)*pow(S1,2.0))/(2.0*D);
+         #endif
+         u(2,i,j) = S1/D;
+         u(3,i,j) = S2/D;
+         u(4,i,j) = S3/D;
       }
    }
-   else if(DIM == 2)
+
+#elif DIM == 4
+
+   for(i = 0; i <= Nx1-0; i++)
    {
-      for(i = 0; i <= Nx1; i++)
+      for(j = 0; j <= Nx2-0; j++)
       {
-         for(j = 0; j <= Nx2; j++)
+         D  = q(0,i,j);
+         E  = q(1,i,j);
+         S1 = q(2,i,j);
+         S2 = q(3,i,j);
+         S3 = q(4,i,j);
+ 
+         u(0,i,j) = D;
+         #if EOS == IDEAL
+         u(1,i,j) = ((2.0*K-2.0)*D*E+(1.0-K)*pow(S3,2.0)+(1.0-K)*pow(S2,2.0)+(1.0-K)*pow(S1,2.0))/(2.0*D);
+         #endif
+         u(2,i,j) = S1/D;
+         u(3,i,j) = S2/D;
+         u(4,i,j) = S3/D;
+      }
+   }
+
+#elif DIM == 3
+
+   for(i = 0; i <= Nx1; i++)
+   {
+      for(j = 0; j <= Nx2; j++)
+      {
+         for(k = 0; k <= Nx3; k++)
          {
-            D  = uu[c2(0,i,j)];
-            E  = uu[c2(1,i,j)];
-            m1 = uu[c2(2,i,j)];
-            m2 = uu[c2(3,i,j)];
-            m3 = 0;
-    
-            a[c2(0,i,j)] = D;
-            a[c2(1,i,j)] = ((2*K-2)*D*E+(1-K)*pow(m3,2.0)+(1-K)*pow(m2,2.0)+(1-K)*pow(m1,2.0))/(2*D);
-            a[c2(2,i,j)] = m1/D;
-            a[c2(3,i,j)] = m2/D;
-            a[c2(4,i,j)] = m3/D;
+            D  = q(0,i,j,k);
+            E  = q(1,i,j,k);
+            S1 = q(2,i,j,k);
+            S2 = q(3,i,j,k);
+            S3 = q(4,i,j,k);
+ 
+            u(0,i,j,k) = D;
+            #if EOS == IDEAL
+            u(1,i,j,k) = ((2.0*K-2.0)*D*E+(1.0-K)*pow(S3,2.0)+(1.0-K)*pow(S2,2.0)+(1.0-K)*pow(S1,2.0))/(2.0*D);
+            #endif
+            u(2,i,j,k) = S1/D;
+            u(3,i,j,k) = S2/D;
+            u(4,i,j,k) = S3/D;
          }
       }
    }
-   else if(DIM == 4)
-   {
-      for(i = 0; i <= Nx1; i++)
-      {
-         for(j = 0; j <= Nx2; j++)
-         {
-            D  = uu[c2(0,i,j)];
-            E  = uu[c2(1,i,j)];
-            m1 = uu[c2(2,i,j)];
-            m2 = uu[c2(3,i,j)];
-            m3 = uu[c2(4,i,j)];
-    
-            a[c2(0,i,j)] = D;
-            a[c2(1,i,j)] = ((2*K-2)*D*E+(1-K)*pow(m3,2.0)+(1-K)*pow(m2,2.0)+(1-K)*pow(m1,2.0))/(2*D);
-            a[c2(2,i,j)] = m1/D;
-            a[c2(3,i,j)] = m2/D;
-            a[c2(4,i,j)] = m3/D;
-         }
-      }
-   }
-   if(DIM == 3)
-   {
-      for(i = 0; i <= Nx1; i++)
-      {
-         for(j = 0; j <= Nx2; j++)
-         {
-            for(k = 0; k <= Nx3; k++)
-            {
-               D  = uu[c3(0,i,j,k)];
-               E  = uu[c3(1,i,j,k)];
-               m1 = uu[c3(2,i,j,k)];
-               m2 = uu[c3(3,i,j,k)];
-               m3 = uu[c3(4,i,j,k)];
-    
-               a[c3(0,i,j,k)] = D;
-               a[c3(1,i,j,k)] = ((2*K-2)*D*E+(1-K)*pow(m3,2.0)+(1-K)*pow(m2,2.0)+(1-K)*pow(m1,2.0))/(2*D);
-               a[c3(2,i,j,k)] = m1/D;
-               a[c3(3,i,j,k)] = m2/D;
-               a[c3(4,i,j,k)] = m3/D;
-            }
-         }
-      }
-   }
+
+#endif
    
    return 0;
 }

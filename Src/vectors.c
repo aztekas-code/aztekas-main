@@ -165,27 +165,21 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
    switch(flux)
    {
       case 'f':
-         Prim2FluxF(f->fp,f->up);
-         funct_Dm(dp,f->up);
+         Prim2FluxF(f->fp,dp,f->up);
 
-         Prim2FluxF(f->fm,f->um);
-         funct_Dm(dm,f->um);
+         Prim2FluxF(f->fm,dm,f->um);
       break;
 
       case 'g':
-         Prim2FluxG(f->fp,f->up);
-         funct_Dn(dp,f->up);
+         Prim2FluxG(f->fp,dp,f->up);
 
-         Prim2FluxG(f->fm,f->um);
-         funct_Dn(dm,f->um);
+         Prim2FluxG(f->fm,dm,f->um);
       break;
 
       case 'h':
-         Prim2FluxH(f->fp,f->up);
-         funct_Do(dp,f->up);
+         Prim2FluxH(f->fp,dp,f->up);
 
-         Prim2FluxH(f->fm,f->um);
-         funct_Do(dm,f->um);
+         Prim2FluxH(f->fm,dm,f->um);
       break;
    }
 
