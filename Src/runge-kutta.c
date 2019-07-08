@@ -103,6 +103,7 @@ int RK2D(double *u, double *q, double *q1, double *q2, int order)
          Dx2 = grid.X2p[j] - grid.X2m[j];
 
          Reconst2D(u,&l,I);
+         Sources(l.ux,&v,I);
          Flux2D(&v,&l,I);
 
          for(n = 0; n < eq; n++)

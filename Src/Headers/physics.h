@@ -51,6 +51,7 @@ void Prim2FluxH(double *f, double *v, double *uu);
 int funct_Dm(double *a, double *uu);
 int funct_Dn(double *a, double *uu);
 int funct_Do(double *a, double *uu);
+void Sources(double *u, vec_ *v, int *I);
 void Source_Terms(double *s, double *uu, double *x);
 
 void EoS_Ideal(eos_ *e, double *u, double *x);
