@@ -46,7 +46,7 @@ void Initial();
 
 int Boundaries(double *B);
 
-int Integration();
+void Integration();
 
 int RK1D(double *u, double *q, double *q1, double *q2, int order);
 

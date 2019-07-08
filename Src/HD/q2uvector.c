@@ -1,6 +1,6 @@
 #include"main.h"
     
-int funct_Q2U(double *u, double *q)
+int Cons2Prim(double *u, double *q)
 {
    int i, j, k;
    double D, E, S1, S2, S3;
@@ -18,6 +18,8 @@ int funct_Q2U(double *u, double *q)
       u(0,i) = D;
       #if EOS == IDEAL
       u(1,i) = ((2.0*K-2.0)*D*E+(1.0-K)*pow(S3,2.0)+(1.0-K)*pow(S2,2.0)+(1.0-K)*pow(S1,2.0))/(2.0*D);
+      #elif EOS == DUST
+      u(1,i) = 0.0;
       #endif
       u(2,i) = S1/D;
       u(3,i) = S2/D;
@@ -39,6 +41,8 @@ int funct_Q2U(double *u, double *q)
          u(0,i,j) = D;
          #if EOS == IDEAL
          u(1,i,j) = ((2.0*K-2.0)*D*E+(1.0-K)*pow(S3,2.0)+(1.0-K)*pow(S2,2.0)+(1.0-K)*pow(S1,2.0))/(2.0*D);
+         #elif EOS == DUST
+         u(1,i,j) = 0.0;
          #endif
          u(2,i,j) = S1/D;
          u(3,i,j) = S2/D;
@@ -61,6 +65,8 @@ int funct_Q2U(double *u, double *q)
          u(0,i,j) = D;
          #if EOS == IDEAL
          u(1,i,j) = ((2.0*K-2.0)*D*E+(1.0-K)*pow(S3,2.0)+(1.0-K)*pow(S2,2.0)+(1.0-K)*pow(S1,2.0))/(2.0*D);
+         #elif EOS == DUST
+         u(1,i,j) = 0.0;
          #endif
          u(2,i,j) = S1/D;
          u(3,i,j) = S2/D;
@@ -85,6 +91,8 @@ int funct_Q2U(double *u, double *q)
             u(0,i,j,k) = D;
             #if EOS == IDEAL
             u(1,i,j,k) = ((2.0*K-2.0)*D*E+(1.0-K)*pow(S3,2.0)+(1.0-K)*pow(S2,2.0)+(1.0-K)*pow(S1,2.0))/(2.0*D);
+            #elif EOS == DUST
+            u(1,i,j,k) = 0.0;
             #endif
             u(2,i,j,k) = S1/D;
             u(3,i,j,k) = S2/D;

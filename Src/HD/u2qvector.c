@@ -30,10 +30,6 @@ void Prim2Cons_All(double *q, double *u)
       P[0] = rho;
       P[1] = p;
 
-      #if EOS == IDEAL
-      E = 0.5*rho*(vx1*vx1 + vx2*vx2 + vx3*vx3) + p/(K-1);
-      #endif
- 
       q(0,i) = rho;
       q(1,i) = E;
       q(2,i) = rho*vx1;
@@ -64,9 +60,9 @@ void Prim2Cons_All(double *q, double *u)
          P[0] = rho;
          P[1] = p;
 
-         #if EOS == IDEAL
-         E = 0.5*rho*(vx1*vx1 + vx2*vx2 + vx3*vx3) + p/(K-1);
-         #endif
+         EoS(&eos,p,x);
+
+         E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
  
          q(0,i,j) = rho;
          q(1,i,j) = E;
@@ -96,9 +92,9 @@ void Prim2Cons_All(double *q, double *u)
          P[0] = rho;
          P[1] = p;
 
-         #if EOS == IDEAL
-         E = 0.5*rho*(vx1*vx1 + vx2*vx2 + vx3*vx3) + p/(K-1);
-         #endif
+         EoS(&eos,P,x);
+
+         E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
  
          q(0,i,j) = rho;
          q(1,i,j) = E;

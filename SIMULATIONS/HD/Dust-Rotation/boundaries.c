@@ -65,8 +65,6 @@ int Boundaries(double *B)
             B(3,i,j) = 0.0;
             B(4,i,j) = 0.02*grid.X1[i]*sin(grid.X2[j]);
          }
-
-         B(1,i,j) = pressure_0;
       }
    }
 
