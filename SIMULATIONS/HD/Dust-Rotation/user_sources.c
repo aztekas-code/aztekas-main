@@ -5,7 +5,7 @@
  */
 #include"main.h"
 
-void User_Source_Terms(double *a, double *uu)
+void User_Source_Terms(double *a, double *uu, double *x)
 {
    double n, p, u=0, v=0, w=0;
    n = uu[0];
@@ -22,8 +22,8 @@ void User_Source_Terms(double *a, double *uu)
 #endif
 
    a[0] = 0.0;
-   a[1] = -n*u/(x1*x1);
-   a[2] = -n/(x1*x1);
+   a[1] = -n*u/(x[1]*x[1]);
+   a[2] = -n/(x[1]*x[1]);
    a[3] = 0.0;
    a[4] = 0.0;
 }

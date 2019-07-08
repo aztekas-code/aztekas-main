@@ -145,7 +145,7 @@ SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/HD/hvector.c \
 	  $(AZTPATH)/Src/HD/svector.c \
 	  $(AZTPATH)/Src/HD/metric.c \
-	  ./extforce.c \
+	  ./user_sources.c \
 	  ./user_input.c
 endif 
 

@@ -1,14 +1,8 @@
 #include"main.h"
     
-void Source_Terms(double *s, double *u)
+void Source_Terms(double *s, double *u, double *x)
 {
    double rho, p, vx1=0, vx2=0, vx3=0;
-   double x[4];
-
-   x[0] = grid.time;
-   x[1] = x1;
-   x[2] = x2;
-   x[3] = x3;
 
    rho = u[0];
    p = u[1];

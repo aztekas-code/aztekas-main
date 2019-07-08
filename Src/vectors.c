@@ -19,19 +19,21 @@
 int AMATRIX1D(double *u, vec_ *v, int *I)
 {
    int m, n;
-   int i;
+   double x[4];
    double geoS[eq + 1], extS[eq + 1];
 
-   x1 = grid.X1[I[0]];
-#if COORDINATES == 0 || COORDINATES == 1
-   x2 = 0;
-#elif COORDINATES == 2
-   x2 = M_PI_2;
-#endif
-   x3 = 0;
+   x[0] = grid.time;
 
-   Source_Terms(geoS,u);
-   User_Source_Terms(extS,u);
+   x[1] = grid.X1[I[0]];
+#if COORDINATES == 0 || COORDINATES == 1
+   x[2] = 0;
+#elif COORDINATES == 2
+   x[2] = M_PI_2;
+#endif
+   x[3] = 0;
+
+   Source_Terms(geoS,u,x);
+   User_Source_Terms(extS,u,x);
 
 #if integration == 1
    funct_A(v->A,u);
@@ -48,18 +50,20 @@ int AMATRIX1D(double *u, vec_ *v, int *I)
 int AMATRIX2D(double *u, vec_ *v, int *I)
 {
    int m, n;
+   double x[4];
    double geoS[eq + 1], extS[eq + 1];
 
-   x1  = grid.X1[I[0]];
-   x2  = grid.X2[I[1]];
-   x3  = 0;
+   x[0] = grid.time;
+   x[1] = grid.X1[I[0]];
+   x[2] = grid.X2[I[1]];
+   x[3] = 0;
 
 #if polar == 1
-   x2 = M_PI_2;
+   x[2] = M_PI_2;
 #endif
    
-   Source_Terms(geoS,u);
-   User_Source_Terms(extS,u);
+   Source_Terms(geoS,u,x);
+   User_Source_Terms(extS,u,x);
 
 #if integration == 1
    funct_A(v->A,u);
