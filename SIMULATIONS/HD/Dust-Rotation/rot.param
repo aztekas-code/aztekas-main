@@ -7,8 +7,8 @@ binary = 0
 
 % RESTART SIMULATION (1 -> true, 0 -> false)
 restart_simulation = 0
-restartfile = ./prueba/prueba_0.bin
-restart_filecount = 0
+restartfile = ./prueba/prueba_19.dat
+restart_filecount = 19
 
 % Define mesh
 Nx1 = 100
