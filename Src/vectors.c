@@ -72,20 +72,26 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
    double dm[3];
    double dup[eq + 1];
    double dum[eq + 1];
-   x1 = 0.0;
-   x2 = 0.0;
-   x3 = 0.0;
+   double x[4];
+
+   x[0] = grid.time;
 
 #if DIM == 1
-   x1 = grid.X1[I[0]];
-   x2 = M_PI_2;
+
+   x[1] = grid.X1[I[0]];
+   x[2] = M_PI_2;
+
 #elif DIM == 2
-   x1 = grid.X1[I[0]];
-   x2 = grid.X2[I[1]];
+
+   x[1] = grid.X1[I[0]];
+   x[2] = grid.X2[I[1]];
+
 #elif DIM == 3 
-   x1 = grid.X1[I[0]];
-   x2 = grid.X2[I[1]];
-   x3 = grid.X3[I[2]];
+
+   x[1] = grid.X1[I[0]];
+   x[2] = grid.X2[I[1]];
+   x[3] = grid.X3[I[2]];
+   
 #endif
 
    if(pm == 1)
@@ -94,17 +100,17 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
       {
          case 'f':
             u = l->ux1p;
-            x1 = grid.X1p[I[0]];
+            x[1] = grid.X1p[I[0]];
          break;
 
          case 'g':
             u = l->ux2p;
-            x2 = grid.X2p[I[1]];
+            x[2] = grid.X2p[I[1]];
          break;
 
          case 'h':
             u = l->ux3p;
-            x3 = grid.X3p[I[2]];
+            x[3] = grid.X3p[I[2]];
          break;
       }
    }
@@ -114,17 +120,17 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
       {
          case 'f':
             u = l->ux1m;
-            x1 = grid.X1m[I[0]];
+            x[1] = grid.X1m[I[0]];
          break;
 
          case 'g':
             u = l->ux2m;
-            x2 = grid.X2m[I[1]];
+            x[2] = grid.X2m[I[1]];
          break;
 
          case 'h':
             u = l->ux3m;
-            x3 = grid.X3m[I[2]];
+            x[3] = grid.X3m[I[2]];
          break;
       }
    }
@@ -135,27 +141,27 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
       f->um[n] = u[0*eq + n];
    }
 
-   Prim2Cons(f->qp,f->up);
-   Prim2Cons(f->qm,f->um);
+   Prim2Cons(f->qp,f->up,x);
+   Prim2Cons(f->qm,f->um,x);
 
    switch(flux)
    {
       case 'f':
-         Prim2FluxF(f->fp,dp,f->up);
+         Prim2FluxF(f->fp,dp,f->up,x);
 
-         Prim2FluxF(f->fm,dm,f->um);
+         Prim2FluxF(f->fm,dm,f->um,x);
       break;
 
       case 'g':
-         Prim2FluxG(f->fp,dp,f->up);
+         Prim2FluxG(f->fp,dp,f->up,x);
 
-         Prim2FluxG(f->fm,dm,f->um);
+         Prim2FluxG(f->fm,dm,f->um,x);
       break;
 
       case 'h':
-         Prim2FluxH(f->fp,dp,f->up);
+         Prim2FluxH(f->fp,dp,f->up,x);
 
-         Prim2FluxH(f->fm,dm,f->um);
+         Prim2FluxH(f->fm,dm,f->um,x);
       break;
    }
 

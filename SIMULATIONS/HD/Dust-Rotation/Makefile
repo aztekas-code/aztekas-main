@@ -40,9 +40,12 @@ ifeq ($(PHY),rhd)
         PARAM += -DPHYSICS=RHD
 endif
 
-eos = ideal
+eos = dust
 ifeq ($(eos),ideal)
         PARAM += -DEOS=IDEAL
+endif
+ifeq ($(eos),dust)
+        PARAM += -DEOS=DUST
 endif
 
 #####################################
@@ -146,7 +149,7 @@ SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/HD/hvector.c \
 	  $(AZTPATH)/Src/HD/svector.c \
 	  $(AZTPATH)/Src/HD/metric.c \
-	  $(AZTPATH)/Src/EOS/eos-$(eos).c \
+	  $(AZTPATH)/Src/EOS/eos.c \
 	  ./user_sources.c \
 	  ./user_input.c
 endif 

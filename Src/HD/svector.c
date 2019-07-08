@@ -5,7 +5,7 @@ void Source_Terms(double *s, double *u, double *x)
    double rho, p, vx1=0, vx2=0, vx3=0;
 
    rho = u[0];
-   p = u[1];
+   p   = u[1];
 
 #if DIM == 1
    vx1 = u[2];
@@ -53,9 +53,7 @@ void Source_Terms(double *s, double *u, double *x)
    double theta = x[2];
    double phi   = x[3];
 
-   #if EOS == IDEAL
-   EoS_Ideal(&eos,u,x);
-   #endif
+   EoS(&eos,u,x);
 
    E = 0.5*rho*(vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
 

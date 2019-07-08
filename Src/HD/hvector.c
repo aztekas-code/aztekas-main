@@ -1,6 +1,6 @@
 #include"main.h"
     
-void Prim2FluxH(double *f, double *v, double *u)
+void Prim2FluxH(double *f, double *v, double *u, double *x)
 {
    double E, cs;
    eos_ eos;
@@ -19,11 +19,9 @@ void Prim2FluxH(double *f, double *v, double *u)
    vx3 = u[4];
 #endif
 
-#if EOS == IDEAL
-   E  = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + p/(K-1);
-   cs = sqrt(K*p/rho);
-#endif
+   EoS(&eos,u,x);
 
+   E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
 
    f[0] = rho * vx3;
    f[1] = vx3 * (E + p);
