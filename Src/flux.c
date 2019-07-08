@@ -13,7 +13,6 @@ int Flux1D(vec_ *v, lim_ *l, int *I)
 {
    flx_ f;
 
-   AMATRIX1D(l->ux,v,I);
 #if riemann == 1 //Hll
    VECTOR(1,'f',l,&f,I);
    Hll(v->Fp,&f,1);
@@ -62,7 +61,6 @@ int Flux3D(vec_ *v, lim_ *l, int *I)
 
    flx_ f;
 
-   AMATRIX3D(l->ux,v,I);
    VECTOR(1,'f',l,&f,I);
    Hll(v->Fp,&f,1);
    VECTOR(1,'g',l,&f,I);

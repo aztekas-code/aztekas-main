@@ -54,8 +54,10 @@ void Source_Terms(double *s, double *u, double *x)
    double phi   = x[3];
 
    #if EOS == IDEAL
-   E = 0.5*rho*(vx1*vx1 + vx2*vx2 + vx3*vx3) + p/(K-1);
+   EoS_Ideal(&eos,u,x);
    #endif
+
+   E = 0.5*rho*(vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
 
    s[0] = -2.0*vx1*rho/r - vx2*rho*cos(theta)/(r*sin(theta));
    s[1] = -2.0*vx1*(E+p)/r -vx2*(E+p)*cos(theta)/(r*sin(theta));
