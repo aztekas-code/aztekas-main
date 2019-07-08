@@ -7,11 +7,6 @@
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<math.h>
-#include<stdlib.h>
-#include<string.h>
-#include"param.h"
 #include"main.h"
 
 int Flux1D(vec_ *v, lim_ *l, int *I)
