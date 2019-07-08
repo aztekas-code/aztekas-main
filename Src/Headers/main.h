@@ -60,8 +60,6 @@ int Flux2D(vec_ *v, lim_ *l, int *I);
                                    
 int Flux3D(vec_ *v, lim_ *l, int *I);
 
-int Sources(double *u, vec_ *v, int *I);
-
 int Hll(double *F, flx_ *f, int x);
 
 int Hllc(double *F, flx_ *f, int x);

@@ -33,7 +33,6 @@ int Flux2D(vec_ *v, lim_ *l, int *I)
 {
    flx_ f;
 
-   AMATRIX2D(l->ux,v,I);
 #if riemann == 1//Hll
    VECTOR(1,'f',l,&f,I);
    Hll(v->Fp,&f,1);

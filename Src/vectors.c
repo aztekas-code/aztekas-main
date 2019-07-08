@@ -16,76 +16,48 @@
 //Do not erase any of these libraries//
 #include"main.h"
 
-int AMATRIX1D(double *u, vec_ *v, int *I)
+void Sources(double *u, vec_ *v, int *I)
 {
-   int m, n;
+   int n;
    double x[4];
-   double geoS[eq + 1], extS[eq + 1];
+   double default_S[eq+1], user_S[eq+1];
 
    x[0] = grid.time;
+
+#if DIM == 1
 
    x[1] = grid.X1[I[0]];
-#if COORDINATES == 0 || COORDINATES == 1
-   x[2] = 0;
-#elif COORDINATES == 2
+   x[2] = 0.0;
+   x[3] = 0.0;
+   #if COORDINATES == SPHERICAL
    x[2] = M_PI_2;
-#endif
-   x[3] = 0;
+   #endif
 
-   Source_Terms(geoS,u,x);
-   User_Source_Terms(extS,u,x);
+#elif DIM == 2 || DIM == 4
 
-#if integration == 1
-   funct_A(v->A,u);
-#endif
-
-   for(n = 0; n < eq; n++)
-   {
-      v->S[n] = geoS[n] + extS[n];
-   }
-
-   return 0;
-}
-
-int AMATRIX2D(double *u, vec_ *v, int *I)
-{
-   int m, n;
-   double x[4];
-   double geoS[eq + 1], extS[eq + 1];
-
-   x[0] = grid.time;
    x[1] = grid.X1[I[0]];
    x[2] = grid.X2[I[1]];
-   x[3] = 0;
-
-#if polar == 1
+   x[3] = 0.0;
+   #if POLAR == TRUE
    x[2] = M_PI_2;
-#endif
-   
-   Source_Terms(geoS,u,x);
-   User_Source_Terms(extS,u,x);
+   #endif
 
-#if integration == 1
-   funct_A(v->A,u);
+#elif DIM == 3
+
+   x[1] = grid.X1[I[0]];
+   x[2] = grid.X2[I[1]];
+   x[3] = grid.X3[I[2]];
+
 #endif
+
+   Source_Terms(default_S,u,x);
+   User_Source_Terms(user_S,u,x);
 
    for(n = 0; n < eq; n++)
    {
-      v->S[n] = geoS[n] + extS[n];
+      v->S[n] = default_S[n] + user_S[n];
    }
 
-   return 0;
-}
-
-int AMATRIX3D(double *u, vec_ *v, int *I)
-{
-   int m, n;
-
-   x1  = grid.X1[I[0]];
-   x2  = grid.X2[I[1]];
-   x3  = grid.X3[I[2]];
-
-   return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////
