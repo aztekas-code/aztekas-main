@@ -29,7 +29,7 @@ matplotlib.rcParams['ytick.direction'] = 'out'
 matplotlib.rcParams['xtick.top'] = False
 matplotlib.rcParams['ytick.right'] = False
 matplotlib.rcParams['text.usetex'] = True
-matplotlib.rcParams['text.latex.unicode'] = True
+#matplotlib.rcParams['text.latex.unicode'] = True
 
 # Fontsize and orientation
 fontsize = 12
@@ -127,7 +127,9 @@ norm = BoundaryNorm(levels, ncolors=cmap.N) # Normalization
 # Contour plot #
 ################
 if orientation == 'v':
+    cn = ax.contour(X1,X2,np.log10(n),20,colors='k',linewidths=0.1)
     cn = ax.contourf(X1,X2,np.log10(n),cmap=cmap,levels=levels,norm=norm)
+    cn = ax.contour(-X1,X2,np.log10(n),20,colors='k',linewidths=0.1)
     cn = ax.contourf(-X1,X2,np.log10(n),cmap=cmap,levels=levels,norm=norm)
 
 if orientation == 'h':
@@ -235,7 +237,7 @@ if orientation == 'c':
 #################
 # X1 and X2 ticks #
 #################
-x1labels = np.linspace(x1min,x1max, num=5, endpoint=True) # num of ticks in X1 axis
+x1labels = np.linspace(x1min,x1max, num=11, endpoint=True) # num of ticks in X1 axis
 x2labels = np.linspace(x2min,x2max, num=6, endpoint=True) # num of ticks in X2 axis
 
 if orientation == 'v':
