@@ -2,7 +2,8 @@
     
 void Prim2FluxG(double *f, double *v, double *u)
 {
-   double E, cs;
+   double E;
+   double x[4];
    eos_ eos;
    double rho, p, vx1=0, vx2=0, vx3=0;
    rho = u[0];
@@ -20,10 +21,10 @@ void Prim2FluxG(double *f, double *v, double *u)
 #endif
 
 #if EOS == IDEAL
-   E  = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + p/(K-1);
-   cs = sqrt(K*p/rho);
+   EoS_Ideal(&eos,u,x);
 #endif
 
+   E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
 
    f[0] = rho * vx2;
    f[1] = vx2 * (E + p);
@@ -31,7 +32,7 @@ void Prim2FluxG(double *f, double *v, double *u)
    f[3] = rho * vx2 * vx2 + p;
    f[4] = rho * vx3 * vx2;
 
-   v[0] = vx2 - cs;
-   v[1] = vx2 + cs;
+   v[0] = vx2 - eos.cs;
+   v[1] = vx2 + eos.cs;
    v[2] = vx2;
 }

@@ -40,9 +40,10 @@ ifeq ($(PHY),rhd)
         PARAM += -DPHYSICS=RHD
 endif
 
-# -Grav if you want classical gravity
-# nothing if you don't.
-grav = #-grav
+eos = ideal
+ifeq ($(eos),ideal)
+        PARAM += -DEOS=IDEAL
+endif
 
 #####################################
 
@@ -145,6 +146,7 @@ SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/HD/hvector.c \
 	  $(AZTPATH)/Src/HD/svector.c \
 	  $(AZTPATH)/Src/HD/metric.c \
+	  $(AZTPATH)/Src/EOS/eos-$(eos).c \
 	  ./user_sources.c \
 	  ./user_input.c
 endif 

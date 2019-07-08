@@ -38,6 +38,7 @@ int RK1D(double *u, double *q, double *q1, double *q2, int order)
       Dx1 = grid.X1p[i] - grid.X1m[i];
 
       Reconst1D(u,&l,I);
+      Sources(l.ux,&v,I);
       Flux1D(&v,&l,I);
  
       for(n = 0; n < eq; n++)
