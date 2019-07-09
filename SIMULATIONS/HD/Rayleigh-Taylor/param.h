@@ -7,5 +7,5 @@
 #define reflective_x2max   TRUE
 #define reflective_x2min   TRUE
 
-#define RECONST      WENO5
-#define riemann      2
+#define RECONST      MC
+#define riemann      1

@@ -5,25 +5,25 @@
  */
 #include"main.h"
 
-void User_Source_Terms(double *a, double *uu)
+void User_Source_Terms(double *a, double *u, double *x)
 {
    int i;
-   double n, p, u=0, v=0, w=0;
-   n = uu[0];
-   p = uu[1];
+   double n, p, vx1=0.0, vx2=0.0, vx3=0.0;
+   n = u[0];
+   p = u[1];
 #if DIM == 1
-   u = uu[2];
+   vx1 = u[2];
 #elif DIM == 2
-   u = uu[2];
-   v = uu[3];
+   vx1 = u[2];
+   vx2 = u[3];
 #elif DIM == 3 || DIM == 4
-   u = uu[2];
-   v = uu[3];
-   w = uu[4];
+   vx1 = u[2];
+   vx2 = u[3];
+   vx3 = u[4];
 #endif
 
    a[0] = 0.0;
-   a[1] = -n*v;
+   a[1] = -n*vx2;
    a[2] = 0.0;
    a[3] = -n;
    a[4] = 0.0;
