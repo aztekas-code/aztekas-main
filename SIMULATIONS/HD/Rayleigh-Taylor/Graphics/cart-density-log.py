@@ -29,7 +29,6 @@ matplotlib.rcParams['ytick.direction'] = 'out'
 matplotlib.rcParams['xtick.top'] = False
 matplotlib.rcParams['ytick.right'] = False
 matplotlib.rcParams['text.usetex'] = True
-matplotlib.rcParams['text.latex.unicode'] = True
 
 # Fontsize and orientation
 fontsize = 6

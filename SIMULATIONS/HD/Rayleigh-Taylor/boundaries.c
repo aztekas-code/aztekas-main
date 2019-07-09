@@ -12,16 +12,5 @@ int Boundaries(double *B)
    Periodic(B);
    Reflection(B);
 
-//   for(n = 0; n < eq; n++)
-//   {
-//      for(i = 0; i <= Nx1; i++)
-//      {
-//         for(j = 0; j <= Nx2; j++)
-//         {
-//            RoundGen(&B(n,i,j));
-//         }
-//      }
-//   }
-
    return 0;
 }

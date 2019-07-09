@@ -10,9 +10,9 @@
 #define reflective_x2max   TRUE
 #define reflective_x2min   TRUE
 
-#define RECONST   MC
-#define riemann 1
+#define RECONST            MC
+#define riemann            1
 
-#define logmesh  0
+#define logmesh            0
 
 double density_0, pressure_0, velocity_0;
