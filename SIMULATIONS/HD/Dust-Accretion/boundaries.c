@@ -31,7 +31,7 @@ int Boundaries(double *B)
       {
          B(0,i) = density_0;
          B(1,i) = pressure_0;
-         B(2,i) = velocity_0;
+         B(2,i) = r_dot_0;
       }
    }
 
@@ -45,7 +45,7 @@ int Boundaries(double *B)
          {
             B(0,i,j) = density_0;
             B(1,i,j) = pressure_0;
-            B(2,i,j) = velocity_0;
+            B(2,i,j) = r_dot_0;
             B(3,i,j) = 0.0;
          }
       }
@@ -61,9 +61,9 @@ int Boundaries(double *B)
          {
             B(0,i,j) = density_0;
             B(1,i,j) = pressure_0;
-            B(2,i,j) = velocity_0;
+            B(2,i,j) = r_dot_0;
             B(3,i,j) = 0.0;
-            B(4,i,j) = 0.02*grid.X1[i]*sin(grid.X2[j]);
+            B(4,i,j) = phi_dot_0*grid.X1[i]*sin(grid.X2[j]);
          }
       }
    }

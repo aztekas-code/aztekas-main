@@ -1,5 +1,3 @@
-#include"macros.h"
-
 // Define boundaries TRUE = 1 , FALSE = 0
 // Set as cond_X whereas
 // cond : {outflow,reflective,periodic,inflow}
@@ -11,8 +9,9 @@
 #define reflective_x2min   TRUE
 
 #define RECONST            MC
-#define riemann            2
+#define FLUX               HLL
+#define GRID               UNIFORM
 
-#define logmesh            0
-
-double density_0, pressure_0, velocity_0;
+double n_jet, p_jet, vx1_jet, vx2_jet, vx3_jet;
+double n_atm, p_atm, vx1_atm, vx2_atm, vx3_atm;
+double r_jet, z_jet;

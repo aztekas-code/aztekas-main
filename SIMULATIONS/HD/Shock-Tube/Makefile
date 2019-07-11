@@ -1,24 +1,11 @@
 #####################################
-#### define dimension parameters ####
+#### Define dimension parameters ####
 #####################################
 #----------------------------------------------------------------------
 # From the list below, please activate/deactivate the options that     
 # apply to your run. If you modify any of these options, make sure     
 # that you recompile the whole code by typing "make clean; make" 
 #----------------------------------------------------------------------
-
-#####################################
-# Tests
-# 0. Custom problem
-# 1. Riemann problem (1D, 2D, 3D)
-# 2. Kelvin-Helmholtz (2D, 3D)
-# 3. Jet (1D, 2D, 3D)
-# 4. Spherical Accretion (1D, 2D, 3D)
-# 5. Wind (2D, 3D)
-#####################################
-
-# Set test 
-PARAM += -DTEST=1
 
 #####################################
 # Ghost cells
@@ -40,9 +27,13 @@ ifeq ($(PHY),rhd)
         PARAM += -DPHYSICS=RHD
 endif
 
-# -Grav if you want classical gravity
-# nothing if you don't.
-grav = #-grav
+eos = ideal
+ifeq ($(eos),ideal)
+        PARAM += -DEOS=IDEAL
+endif
+ifeq ($(eos),dust)
+        PARAM += -DEOS=DUST
+endif
 
 #####################################
 
@@ -50,11 +41,11 @@ grav = #-grav
 # Dimension
 #####################################
 
-DIM = 2
+DIM = 1
 
 ifeq ($(DIM),1)
 	PARAM += -DDIM=1
-	PARAM += -Deq=3
+	PARAM += -Deq=4
 	PARAM += -Dgraf=1
 endif
 ifeq ($(DIM),2)
@@ -79,7 +70,7 @@ endif
 # Coordinates (cart,cyl,sph)
 #####################################
 
-COORD = sph
+COORD = cart
 
 ifeq ($(COORD),cart)
 	PARAM += -DCOORDINATES=CARTESIAN
@@ -143,9 +134,10 @@ SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/HD/fvector.c \
 	  $(AZTPATH)/Src/HD/gvector.c \
 	  $(AZTPATH)/Src/HD/hvector.c \
-	  $(AZTPATH)/Src/HD-sph/svector.c \
+	  $(AZTPATH)/Src/HD/svector.c \
 	  $(AZTPATH)/Src/HD/metric.c \
-	  ./extforce.c \
+	  $(AZTPATH)/Src/EOS/eos.c \
+	  ./user_sources.c \
 	  ./user_input.c
 endif 
 

@@ -13,12 +13,12 @@ int Flux1D(vec_ *v, lim_ *l, int *I)
 {
    flx_ f;
 
-#if riemann == 1 //Hll
+#if FLUX == HLL
    VECTOR(1,'f',l,&f,I);
    Hll(v->Fp,&f,1);
    VECTOR(0,'f',l,&f,I);
    Hll(v->Fm,&f,1);
-#elif riemann == 2//Hllc
+#elif FLUX == HLLC
    VECTOR(1,'f',l,&f,I);
    Hllc(v->Fp,&f,1);
    VECTOR(0,'f',l,&f,I);
@@ -32,7 +32,7 @@ int Flux2D(vec_ *v, lim_ *l, int *I)
 {
    flx_ f;
 
-#if riemann == 1//Hll
+#if FLUX == HLL
    VECTOR(1,'f',l,&f,I);
    Hll(v->Fp,&f,1);
    VECTOR(1,'g',l,&f,I);
@@ -41,7 +41,7 @@ int Flux2D(vec_ *v, lim_ *l, int *I)
    Hll(v->Fm,&f,1);
    VECTOR(0,'g',l,&f,I);
    Hll(v->Gm,&f,2);
-#elif riemann == 2//Hllc
+#elif FLUX == HLLC
    VECTOR(1,'f',l,&f,I);
    Hllc(v->Fp,&f,1);
    VECTOR(1,'g',l,&f,I);

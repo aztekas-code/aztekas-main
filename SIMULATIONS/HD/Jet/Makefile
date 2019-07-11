@@ -70,7 +70,7 @@ endif
 # Coordinates (cart,cyl,sph)
 #####################################
 
-COORD = cart
+COORD = cyl
 
 ifeq ($(COORD),cart)
 	PARAM += -DCOORDINATES=CARTESIAN

@@ -36,7 +36,7 @@ void Initial()
    {
       U(0,i) = density_0;
       U(1,i) = pressure_0;
-      U(2,i) = velocity_0;
+      U(2,i) = r_dot_0;
    }
 
 #elif DIM == 2
@@ -51,7 +51,7 @@ void Initial()
       {
          U(0,i,j) = density_0;
          U(1,i,j) = pressure_0;
-         U(2,i,j) = velocity_0;
+         U(2,i,j) = r_dot_0;
          U(3,i,j) = 0.0;
       }
    }
@@ -68,9 +68,9 @@ void Initial()
       {
          U(0,i,j) = density_0;
          U(1,i,j) = pressure_0;
-         U(2,i,j) = velocity_0;
+         U(2,i,j) = r_dot_0;
          U(3,i,j) = 0.0;
-         U(4,i,j) = 0.02*grid.X1[i]*sin(grid.X2[j]);
+         U(4,i,j) = phi_dot_0*grid.X1[i]*sin(grid.X2[j]);
       }
    }
 

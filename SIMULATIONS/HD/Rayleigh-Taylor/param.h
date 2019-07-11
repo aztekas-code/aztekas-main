@@ -7,5 +7,6 @@
 #define reflective_x2max   TRUE
 #define reflective_x2min   TRUE
 
-#define RECONST      MC
-#define riemann      1
+#define RECONST            MC
+#define FLUX               HLL
+#define GRID               UNIFORM
