@@ -1,0 +1,50 @@
+% OUTPUT FILE AND DIRECTORY
+outputdirectory = ./prueba/
+outputfile      = kh_
+
+% RESTART SIMULATION (1 -> true, 0 -> false)
+restart_simulation = 0
+restartfile = ./Kelvin-Helmholtz-01/kh_67.dat
+restart_filecount = 67
+
+% Define mesh
+Nx1 = 100
+Nx2 = 100
+Nx3 = 0
+
+% Define domain limits
+x1max =  0.5
+x2max =  0.5
+x3max =  0.0
+x1min = -0.5
+x2min = -0.5
+x3min =  0.0
+
+% Time parameters
+tmax = 10.0
+timefile = 0.1
+cou = 0.5
+
+% Polytorpic index
+K = 1.4
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Initial conditions %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% OUT STATE
+nl   = 2.0
+pl   = 2.5
+vx1l = 0.5
+vx2l = 0.0
+vx3l = 0.0
+
+% IN STATE
+nr   =  1.0
+pr   =  2.5
+vx1r = -0.5
+vx2r =  0.0
+vx3r =  0.0
+
+% INTERFACE
+x_0 = 0.25

@@ -11,8 +11,8 @@
 #define reflective_x2min   TRUE
 
 #define RECONST            MC
-#define riemann            1
+#define FLUX               HLLC
+#define GRID               UNIFORM
 
-#define logmesh            0
 
 double density_0, pressure_0, velocity_0;

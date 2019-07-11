@@ -22,7 +22,7 @@ x3min = 0.0
 
 % Time parameters
 tmax = 0.2
-timefile = 0.000000000000000002
+timefile = 0.2
 cou = 0.5
 
 % Polytorpic index
