@@ -20,9 +20,6 @@
 
 // dummy
 double x1, x2, x3;
-int c1(int n, int i);
-int c2(int n, int i, int j);
-int c3(int n, int i, int j, int k);
 
 /* Define pointers */
 double *U, *U1, *U2, *U3;
@@ -75,3 +72,5 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I);
 int MxV(double *M, double *V, double *L);
 
 void RoundGen(double *num);
+
+void CheckSimParameters();

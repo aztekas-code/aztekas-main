@@ -49,6 +49,10 @@ int main(int argc, char* argv[])
 	strcat(create_dir,outputdirectory);	
 	int sysret = system(create_dir);
 
+   // Print Simulation Parameters
+   CheckSimParameters();
+   if (check_param == TRUE) getchar();
+
    // Include the ghost cells
    New_Size();
 

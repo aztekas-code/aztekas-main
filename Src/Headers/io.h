@@ -1,5 +1,6 @@
 //Paramfile
 int binary;
+int check_param;
 int restart_simulation, restart_filecount;
 char paramfile_name[50], outputdirectory[50], outputfile[50];
 char restartfile[50];
