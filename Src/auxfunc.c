@@ -7,12 +7,7 @@
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<math.h>
-#include<stdlib.h>
-#include<string.h>
 #include"main.h"
-#include"param.h"
 
 int MxV(double *M, double *V, double *L)
 {
@@ -47,4 +42,29 @@ void RoundGen(double *num)
       decnum = roundf(decnum*1.0e+15)/1.0e+15;
       *num = decnum*pow(10,(double)expnum);
    }
+}
+
+void CheckSimParameters()
+{
+   printf("\n");
+   printf("aaaaa  zzzzz  ttttt  eeeee  k   k  aaaaa  sssss\n");
+   printf("    a     zz    t    e   e  k  k       a  ss   \n");
+   printf("aaaaa   zzz     t    eeeee  kkk    aaaaa  sssss\n");
+   printf("a   a  zz       t    e      k  k   a   a     ss\n");
+   printf("aaaaa  zzzzz    t    eeeee  k   k  aaaaa  sssss\n");
+   printf("\n");
+   printf("Running aztekas simulation...\n");
+   printf("\n");
+
+   // Print physics used
+   if(PHYSICS == HD)
+   {
+      printf("Performing a HD simulation.\n");
+   }
+   else if(PHYSICS == RHD)
+   {
+      printf("Performing a RHD simulation.\n");
+   }
+
+   // Print spatial numerical methods
 }

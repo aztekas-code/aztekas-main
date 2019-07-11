@@ -58,6 +58,11 @@ int Read_Parameters_File(char const *paramfile_name)
             {
                restart_simulation = atoi(t_value);
             }
+            
+            if(strcmp(t_key,"check_param")==0)
+            {
+               check_param = atoi(t_value);
+            }
 
             if(strcmp(t_key,"restartfile")==0)
             {
