@@ -1,0 +1,13 @@
+#!/usr/bin/gnuplot
+
+set terminal epslatex colour input "" 12
+set output "lnorm.tex"
+set xlabel "$\\log (N)$"
+set ylabel "$\\log (L_1-\\mathrm{norm})$"
+set xrange[1.5:3.8]
+set yrange[-2:-1]
+set xtics 1.5,0.5,3.8
+set ytics -2,0.2,-1
+plot \
+"lnorm.dat" u (log10($1)):(log10($2)) notitle w lp pt 3 lt rgb "black"
+set out

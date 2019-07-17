@@ -1,0 +1,40 @@
+% OUTPUT FILE AND DIRECTORY
+outputdirectory = ./prueba/
+outputfile      = sedov_
+
+% RESTART SIMULATION (1 -> true, 0 -> false)
+restart_simulation = 0
+restartfile = ./Shock/dx1_10.dat
+restart_filecount = 10
+
+% Define mesh
+Nx1 = 400
+Nx2 = 0
+Nx3 = 0
+
+% Define domain limits
+x1max = 8.0
+x2max = 0.5
+x3max = 1.0 
+x1min = 0.0
+x2min = 0.0
+x3min = 0.0
+
+% Time parameters
+tmax = 0.1
+timefile = 0.1
+cou = 0.25
+
+% Polytorpic index
+K = 1.6666666666666666666666666
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Initial conditions %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+n_0 = 1.0
+p_0 = 0.00001
+E_0 = 125000
+
+% INTERFACE
+x_0 = 8
