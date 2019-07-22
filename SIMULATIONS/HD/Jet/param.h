@@ -4,8 +4,8 @@
 // X : {x1max,x1min,x2max,x2min,x3max,x3min}
 
 #define outflow_x1max      TRUE
-#define outflow_x1min      TRUE
-#define reflective_x2max   TRUE
+#define reflective_x1min   TRUE
+#define outflow_x2max      TRUE
 #define reflective_x2min   TRUE
 
 #define RECONST            MC
