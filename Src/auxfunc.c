@@ -57,14 +57,17 @@ void CheckSimParameters()
    printf("\n");
 
    // Print physics used
-   if(PHYSICS == HD)
-   {
-      printf("Performing a HD simulation.\n");
-   }
-   else if(PHYSICS == RHD)
-   {
-      printf("Performing a RHD simulation.\n");
-   }
+   if(PHYSICS == HD)  printf("Performing a HD simulation.\n");
+   if(PHYSICS == RHD) printf("Performing a RHD simulation.\n");
 
-   // Print spatial numerical methods
+   // Print MoL-RK order
+   printf("Time integration using a second order MoL-Runge Kutta.\n");
+
+   // Print spatial numerical methods, algorithms and parameters.
+   // Primitive variable reconstruction.
+   if(RECONST == GODUNOV)  printf("Using a zero-order piecewise reconstruction.\n");
+   if(RECONST == MINMOD)   printf("Using a MINMOD reconstruction.\n");
+   if(RECONST == MC)       printf("Using a MC reconstruction.\n");
+   if(RECONST == SUPERBEE) printf("Using a SUPERBEE reconstruction.\n");
+   if(RECONST == WENO5)    printf("Using a WENO5 reconstruction.\n");
 }
