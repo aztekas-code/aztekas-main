@@ -19,10 +19,7 @@ void Prim2Cons(double *q, double *u, double *x)
    vx3 = u[4];
 #endif
 
-#if EOS == IDEAL
-   //EoS_Ideal(&eos,u,x);
    EoS(&eos,u,x);
-#endif
 
    E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
 
