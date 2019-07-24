@@ -60,14 +60,22 @@ void CheckSimParameters()
    if(PHYSICS == HD)  printf("Performing a HD simulation.\n");
    if(PHYSICS == RHD) printf("Performing a RHD simulation.\n");
 
+   // Equation of state
+   if(EOS == IDEAL) printf("Ideal equation of state.\n");
+   if(EOS == DUST)  printf("Dust.\n");
+
    // Print MoL-RK order
    printf("Time integration using a second order MoL-Runge Kutta.\n");
 
    // Print spatial numerical methods, algorithms and parameters.
    // Primitive variable reconstruction.
-   if(RECONST == GODUNOV)  printf("Using a zero-order piecewise reconstruction.\n");
-   if(RECONST == MINMOD)   printf("Using a MINMOD reconstruction.\n");
-   if(RECONST == MC)       printf("Using a MC reconstruction.\n");
-   if(RECONST == SUPERBEE) printf("Using a SUPERBEE reconstruction.\n");
-   if(RECONST == WENO5)    printf("Using a WENO5 reconstruction.\n");
+   if(RECONST == GODUNOV)  printf("Zero-order piecewise reconstruction.\n");
+   if(RECONST == MINMOD)   printf("MINMOD reconstruction.\n");
+   if(RECONST == MC)       printf("MC reconstruction.\n");
+   if(RECONST == SUPERBEE) printf("SUPERBEE reconstruction.\n");
+   if(RECONST == WENO5)    printf("WENO5 reconstruction.\n");
+
+   // Flux solver
+   if(FLUX == HLL)  printf("HLL Riemann solver.\n");
+   if(FLUX == HLLC) printf("HLLC Riemann solver.\n");
 }
