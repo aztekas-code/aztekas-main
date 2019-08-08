@@ -16,8 +16,8 @@ binary = 0
 % Define mesh
 
 % Classic jet
-Nx1 = 80
-Nx2 = 200
+Nx1 = 160
+Nx2 = 400
 
 % Define domain limits
 x1max = 8.0
