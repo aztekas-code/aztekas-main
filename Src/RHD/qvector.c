@@ -1,6 +1,6 @@
 #include"main.h"
     
-void Prim2Cons(double *q, double *u, grid_ local_grid)
+void Prim2Cons(double *q, double *u, double *x)
 {
    double E;
    eos_ eos;
@@ -19,7 +19,7 @@ void Prim2Cons(double *q, double *u, grid_ local_grid)
    vx3 = u[4];
 #endif
 
-   EoS(&eos,u,local_grid);
+   EoS(&eos,u,x);
 
    E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
 

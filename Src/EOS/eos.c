@@ -2,7 +2,7 @@
 
 #if EOS == IDEAL
 
-void EoS(eos_ *eos, double *u, double *x)
+void EoS(eos_ *eos, double *u, grid_ local_grid)
 {
    double rho, p, h;
    rho = u[0];
@@ -20,7 +20,7 @@ void EoS(eos_ *eos, double *u, double *x)
 
 #elif EOS == DUST
 
-void EoS(eos_ *eos, double *u, double *x)
+void EoS(eos_ *eos, double *u, grid_ local_grid)
 {
    double rho, p, h;
    rho = u[0];
