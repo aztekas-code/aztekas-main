@@ -6,7 +6,6 @@
 
 #include"physics.h"
 
-#include"mesh.h"
 #include"metric.h"
 #include"boundaries.h"
 

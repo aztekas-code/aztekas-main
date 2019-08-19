@@ -11,6 +11,17 @@ typedef struct
    double *S1p, *S1m;
    double *S2p, *S2m;
    double *S3p, *S3m;
+
+   double x[4];
+
+   double lapse;
+   double *beta_cov;
+   double *beta_conv;
+   double *gamma_cov;
+   double *gamma_con;
+
+   double *g_cov;
+   double *g_con;
 }grid_;
 
 double dx1, dx2, dx3;
