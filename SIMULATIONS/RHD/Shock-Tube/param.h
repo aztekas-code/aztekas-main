@@ -14,7 +14,7 @@
 #define outflow_x2max      TRUE
 #define outflow_x2min      TRUE
 
-#define RECONST            MC
+#define RECONST            WENO5
 #define FLUX               HLL
 #define GRID               UNIFORM
 

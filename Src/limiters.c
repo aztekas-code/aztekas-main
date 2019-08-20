@@ -413,23 +413,23 @@ double Mc(double A, double B)
    double sig;
    double C;
 
-   C = (A + B) / 2.0;
+   C = (A + B) / 2.0e+00;
 
-   if(A*B < 0)
+   if(A*B <= 0)
    {
-      sig = 0.0;
+      sig = 0.0e+00;
    }
-   else if(A*B >= 0)
+   else if(A*B > 0)
    {
-      if(fabs(A) < fabs(B) && 2.0*fabs(A) <= fabs(C))
+      if(fabs(A) < fabs(B) && 2.0e+00*fabs(A) <= fabs(C))
       {
-         sig = 2.0*A;
+         sig = 2.0e+00*A;
       }
-      else if(fabs(A) >= fabs(B) && 2.0*fabs(B) <= fabs(C))
+      else if(fabs(A) >= fabs(B) && 2.0e+00*fabs(B) <= fabs(C))
       {
-         sig = 2.0*B;
+         sig = 2.0e+00*B;
       }
-      else if(fabs(C) <= 2.0*fabs(A) && fabs(C) <= 2.0*fabs(B))
+      else if(fabs(C) <= 2.0e+00*fabs(A) && fabs(C) <= 2.0e+00*fabs(B))
       {
          sig= C;
       }
@@ -458,19 +458,19 @@ double Godunov(double A, double B)
 
 double Weno5(double v1, double v2, double v3, double v4, double v5)
 {
-   double c13d12 = 13.0 / 12.0;
-   double c1d4   = 1.0 / 4.0;
-   double c11d6  = 11.0 / 6.0;
-   double c2d6  = 2.0 / 6.0;
-   double c7d6  = 7.0 / 6.0;
-   double c5d6  = 5.0 / 6.0;
-   double c1d6  = 1.0 / 6.0;
-   double c1d3  = 1.0 / 3.0;
+   double c13d12 = 1.3e+01 / 1.2e+01;
+   double c1d4   = 1.0e+00 / 4.0e+00;
+   double c11d6  = 1.1e+01 / 6.0e+00;
+   double c2d6  = 2.0e+00 / 6.0e+00;
+   double c7d6  = 7.0e+00 / 6.0e+00;
+   double c5d6  = 5.0e+00 / 6.0e+00;
+   double c1d6  = 1.0e+00 / 6.0e+00;
+   double c1d3  = 1.0e+00 / 3.0e+00;
 
    double fs1, fs2, fs3;
    double bs1, bs2, bs3;
 
-   double ep = 0.000001;
+   double ep = 1.0e-06;
 
    double P1, P2, P3;
    double s1, s2, s3;
@@ -483,29 +483,29 @@ double Weno5(double v1, double v2, double v3, double v4, double v5)
    double om1, om2, om3;
    double R;
 
-   d1 = 0.1;
-   d2 = 0.6;
-   d3 = 0.3;
+   d1 = 1.0e-01;
+   d2 = 6.0e-01;
+   d3 = 3.0e-01;
 
    P1 =  c1d3*v1 - c7d6*v2 + c11d6*v3;
    P2 = -c1d6*v2 + c5d6*v3 +  c1d3*v4;
    P3 =  c1d3*v3 + c5d6*v4 -  c1d6*v5;
 
-   fs1 = (v1 - 2.0 * v2 + v3);
-   fs2 = (v2 - 2.0 * v3 + v4);
-   fs3 = (v3 - 2.0 * v4 + v5);
+   fs1 = (v1 - 2.0e+00 * v2 + v3);
+   fs2 = (v2 - 2.0e+00 * v3 + v4);
+   fs3 = (v3 - 2.0e+00 * v4 + v5);
 
-   bs1 = (v1 - 4.0*v2 + 3.0*v3);
+   bs1 = (v1 - 4.0e+00*v2 + 3.0e+00*v3);
    bs2 = (v2 - v4);
-   bs3 = (3.0*v3 - 4.0*v4 + v5);
+   bs3 = (3.0e+00*v3 - 4.0e+00*v4 + v5);
 
    s1 = c13d12*fs1*fs1 + c1d4*bs1*bs1;
    s2 = c13d12*fs2*fs2 + c1d4*bs2*bs2;
    s3 = c13d12*fs3*fs3 + c1d4*bs3*bs3;
 
-   a1 = d1 * (1.0 / pow(s1 + ep,2.0));
-   a2 = d2 * (1.0 / pow(s2 + ep,2.0));
-   a3 = d3 * (1.0 / pow(s3 + ep,2.0));
+   a1 = d1 * (1.0e+00 / pow(s1 + ep,2.0e+00));
+   a2 = d2 * (1.0e+00 / pow(s2 + ep,2.0e+00));
+   a3 = d3 * (1.0e+00 / pow(s3 + ep,2.0e+00));
 
    asum = a1 + a2 + a3;
 
