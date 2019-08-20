@@ -73,7 +73,6 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
    double dm[3];
    double dup[eq + 1];
    double dum[eq + 1];
-
    grid_ local_grid;
 
    local_grid.x[0] = grid.time;
@@ -136,6 +135,10 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
          break;
       }
    }
+
+#if PHYSICS == RHD
+   Get_Metric_Components(&local_grid);
+#endif
 
    for(n = 0; n < eq; n++)
    {

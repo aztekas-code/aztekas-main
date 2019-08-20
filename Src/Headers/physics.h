@@ -38,6 +38,7 @@ typedef struct
 {
    double e;
    double cs;
+   double h;
 }eos_;
 
 int funct_A(double *a, double *uu);
@@ -57,3 +58,9 @@ void Source_Terms(double *s, double *u, grid_ local_grid);
 void User_Source_Terms(double *s, double *u, grid_ local_grid);
 
 void EoS(eos_ *e, double *u, grid_ local_grid);
+
+void Get_Metric_Components(grid_ *local_grid);
+void Scalar_Contraction_Range1(double *scalar, double *cov, double *con);
+void Raise_Index_Range1(double *con, double *cov, grid_ *local_grid);
+void Low_Index_Range1(double *cov, double *con, grid_ *local_grid);
+void Low_Index_Range2(double **diag, double **con, grid_ *local_grid);

@@ -3,6 +3,7 @@
 //void Prim2FluxF(double *f, double *v, double *u, double *x)
 void Prim2FluxF(double *f, double *v, double *u, grid_ local_grid)
 {
+
    double E;
    eos_ eos;
    double rho, p, vx1=0, vx2=0, vx3=0;
@@ -33,4 +34,5 @@ void Prim2FluxF(double *f, double *v, double *u, grid_ local_grid)
    v[0] = vx1 - eos.cs;
    v[1] = vx1 + eos.cs;
    v[2] = vx1;
+
 }
