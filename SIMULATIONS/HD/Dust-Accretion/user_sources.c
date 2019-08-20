@@ -5,12 +5,13 @@
  */
 #include"main.h"
 
-void User_Source_Terms(double *s, double *u, grid_ local_grid)
+void User_Source_Terms(double *s, double *u, gauge_ local_grid)
 {
-   double n, p, vx1=0.0, vx2=0.0, vx3=0.0;
+   double rho, p, vx1=0.0, vx2=0.0, vx3=0.0;
    double r;
-   n = u[0];
-   p = u[1];
+
+   rho = u[0];
+   p   = u[1];
 #if DIM == 1
    vx1 = u[2];
 #elif DIM == 2
@@ -25,8 +26,8 @@ void User_Source_Terms(double *s, double *u, grid_ local_grid)
    r = local_grid.x[1];
 
    s[0] = 0.0;
-   s[1] = -n*vx1/(r*r);
-   s[2] = -n/(r*r);
+   s[1] = -rho*vx1/(r*r);
+   s[2] = -rho/(r*r);
    s[3] = 0.0;
    s[4] = 0.0;
 }

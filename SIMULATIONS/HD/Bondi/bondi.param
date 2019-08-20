@@ -1,6 +1,6 @@
 % OUTPUT FILE AND DIRECTORY
 outputdirectory = ./prueba/
-outputfile      = prueba_
+outputfile      = bondi_ 
 
 % RESTART SIMULATION (1 -> true, 0 -> false)
 restart_simulation = 0
