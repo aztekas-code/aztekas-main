@@ -8,7 +8,7 @@ restartfile = ./Shock/dx1_10.dat
 restart_filecount = 10
 
 % Define mesh
-Nx1 = 6400
+Nx1 = 400
 Nx2 = 0
 Nx3 = 0
 
@@ -23,7 +23,7 @@ x3min = 0.0
 % Time parameters
 tmax = 0.35
 timefile = 0.35
-cou = 0.5
+cou = 0.1
 
 % Polytorpic index
 K = 1.6666666666666666666666666
