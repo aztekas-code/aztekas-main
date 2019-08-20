@@ -135,7 +135,7 @@ SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/HD/gvector.c \
 	  $(AZTPATH)/Src/HD/hvector.c \
 	  $(AZTPATH)/Src/HD/svector.c \
-	  $(AZTPATH)/Src/HD/metric.c \
+	  $(AZTPATH)/Src/HD/surface.c \
 	  $(AZTPATH)/Src/EOS/eos.c \
 	  ./user_sources.c \
 	  ./user_input.c

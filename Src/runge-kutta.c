@@ -109,11 +109,8 @@ int RK2D(double *u, double *q, double *q1, double *q2, int order)
 
          for(n = 0; n < eq; n++)
          {
-            //F[n] = (S1p(i,j)*v.Fp[n] - S1m(i,j)*v.Fm[n])/(Dx1) + \
+            F[n] = (S1p(i,j)*v.Fp[n] - S1m(i,j)*v.Fm[n])/(Dx1) + \
                    (S2p(i,j)*v.Gp[n] - S2m(i,j)*v.Gm[n])/(Dx2) - \
-                   v.S[n];
-            F[n] = (v.Fp[n] - v.Fm[n])/(Dx1) + \
-                   (v.Gp[n] - v.Gm[n])/(Dx2) - \
                    v.S[n];
          }
 

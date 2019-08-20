@@ -8,7 +8,7 @@ restartfile = DATA/jet/data_41.dat
 restart_filecount = 41
 
 % CHECK SIMULATION PARAMETERS (1 -> true, 0 -> false)
-check_param = 1
+check_param = 0
 
 % Binary Output (1 -> true, 0 -> false)
 binary = 0
