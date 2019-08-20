@@ -46,7 +46,7 @@ int Mesh()
       #endif
    }
 
-   //Surface_Volume();
+   Surface_Volume();
 
 #elif DIM == 2  || DIM == 4
    

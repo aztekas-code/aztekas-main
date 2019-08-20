@@ -51,6 +51,10 @@ void Sources(double *u, vec_ *v, int *I)
 
 #endif
 
+#if PHYSICS == RHD
+   Get_Metric_Components(&local_grid);
+#endif
+
    Source_Terms(default_S,u,local_grid);
    User_Source_Terms(user_S,u,local_grid);
 

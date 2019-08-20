@@ -48,6 +48,7 @@ void User_Source_Terms(double *s, double *u, gauge_ local_grid);
 void EoS(eos_ *e, double *u, gauge_ local_grid);
 
 void Get_Metric_Components(gauge_ *local_grid);
+void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid);
 void Scalar_Contraction_Range1(double *scalar, double *cov, double *con);
 void Raise_Index_Range1(double *con, double *cov, gauge_ *local_grid);
 void Low_Index_Range1(double *cov, double *con, gauge_ *local_grid);
