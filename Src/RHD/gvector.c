@@ -83,7 +83,7 @@ void Prim2FluxG(double *f, double *v, double *u, gauge_ local_grid)
    f[4] = lapse*W[1][2] - beta*S_cov[2];
 
    // Computed characteristic velocities
-   vel  = v_con[1];
+   vel   = v_con[1];
    double cs2  = cs*cs;
    double vel2 = vel*vel;
 

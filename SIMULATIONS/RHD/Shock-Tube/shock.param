@@ -8,8 +8,8 @@ restartfile = ./Shock/dx1_10.dat
 restart_filecount = 10
 
 % Define mesh
-Nx1 = 2500
-Nx2 = 0
+Nx1 = 100
+Nx2 = 100
 Nx3 = 0
 
 % Define domain limits
@@ -23,7 +23,7 @@ x3min = 0.0
 % Time parameters
 tmax = 0.3
 timefile = 0.3
-cou = 0.5
+cou = 0.25
 
 % Polytorpic index
 %K = 1.6666666666666666666666666

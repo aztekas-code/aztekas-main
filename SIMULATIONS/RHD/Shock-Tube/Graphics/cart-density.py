@@ -29,7 +29,6 @@ matplotlib.rcParams['ytick.direction'] = 'out'
 matplotlib.rcParams['xtick.top'] = False
 matplotlib.rcParams['ytick.right'] = False
 matplotlib.rcParams['text.usetex'] = True
-matplotlib.rcParams['text.latex.unicode'] = True
 
 # Fontsize and orientation
 fontsize = 12
@@ -94,14 +93,13 @@ x2min = X2.min()
 x2max = X2.max()
 
 # Colorbar limits
-cbar_min = 0.0#n.min() # Min
-cbar_max = 1.0#n.max() # Max
+cbar_min = n.min() # Min
+cbar_max = n.max() # Max
 
 # Contour levels
 levels = np.linspace(cbar_min,cbar_max,400) # Levels
 
 # Contour colormap 
-#cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["orange","brown","black"])
 cmap = plt.get_cmap('YlOrBr') # Colormap
 # RdYlGn
 # YlOrBr
@@ -119,15 +117,11 @@ norm = BoundaryNorm(levels, ncolors=cmap.N) # Normalization
 ################
 if orientation == 'v':
     cn = ax.contourf(X1,X2,n,cmap=cmap,levels=levels,norm=norm)
-    cn = ax.contourf(X1,X2,n,cmap=cmap,levels=levels,norm=norm)
-    cn = ax.contourf(X1,X2,n,cmap=cmap,levels=levels,norm=norm)
+    cn = ax.contourf(-X1,X2,n,cmap=cmap,levels=levels,norm=norm)
 
-    plt.xlim(x1min,x1max)
-    plt.ylim(x2min,x2max)
 if orientation == 'h':
     cn = ax.contourf(X2,X1,n,cmap=cmap,levels=levels,norm=norm)
-    cn = ax.contourf(X2,X1,n,cmap=cmap,levels=levels,norm=norm)
-    cn = ax.contourf(X2,X1,n,cmap=cmap,levels=levels,norm=norm)
+    cn = ax.contourf(X2,-X1,n,cmap=cmap,levels=levels,norm=norm)
 
     plt.xlim(x2min,x2max)
     plt.ylim(x1min,x1max)
@@ -171,7 +165,7 @@ if stream == 1:
         gu = griddata((px1,px2),pu,(sX1,sX2))
         gv = griddata((px1,px2),pv,(sX1,sX2))
 
-        ax.streamplot(sx1,sx2,gu,gv,density=[1,2],color='k',linewidth=np.sqrt(gu*gu + gv*gv))
+        ax.streamplot( sx1,sx2, gu,gv,density=[1,2],color='k',linewidth=np.sqrt(gu*gu + gv*gv))
 
     if orientation == 'h':
         sx1 = np.linspace(X1.min(),X1.max(),Nx1)
@@ -186,7 +180,17 @@ if stream == 1:
         gu = griddata((px2,px1),pu,(sX2,sX1))
         gv = griddata((px2,px1),pv,(sX2,sX1))
 
-        ax.streamplot(sx2, sx1,gv,gu,density=[2,1],color='k',linewidth=np.sqrt(gu*gu + gv*gv))
+        ax.streamplot(sx2, sx1,gv, gu,density=[2,1],color='k',linewidth=np.sqrt(gu*gu + gv*gv))
+
+############
+# Set ZOOM #
+############
+if orientation == 'v':
+    plt.xlim(x1min,x1max)
+    plt.ylim(x2min,x2max)
+if orientation == 'h':
+    plt.xlim(x2min,x2max)
+    plt.ylim(x1min,x1max)
 
 #################
 # X1 and X2 ticks #
@@ -223,7 +227,7 @@ if (cbpos == "top") or (cbpos == "bottom"):
 
 cax = inset_axes(ax,width='5%',height="100%",loc = 'lower right',bbox_to_anchor = (0.1,0.0,1,1),bbox_transform = ax.transAxes,borderpad = 0)
 cbarn = fig.colorbar(cn,orientation=cbor,cax=cax)
-cbarn.set_label(r'$\rho/\rho_0$',rotation=rotation,fontsize=fontsize,labelpad=20)
+cbarn.set_label(r'$\rho$',rotation=rotation,fontsize=fontsize,labelpad=20)
 if (cbpos == "right") or (cbpos == "left"):
    cax.yaxis.set_ticks_position(cbpos) 
    cax.yaxis.set_label_position(cbpos) 
