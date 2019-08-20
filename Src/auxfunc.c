@@ -88,6 +88,11 @@ void CheckSimParameters()
    if(PHYSICS == HD)  printf("Performing a HD simulation.\n");
    if(PHYSICS == RHD) printf("Performing a RHD simulation.\n");
 
+   // Coordinates
+   if(COORDINATES == CARTESIAN) printf("Cartesian coordinates.\n")
+   if(COORDINATES == CYLINDRICAL) printf("Cylindrical coordinates.\n")
+   if(COORDINATES == SPHERICAL) printf("Spherical coordinates.\n")
+
    // Equation of state
    if(EOS == IDEAL) printf("Ideal equation of state.\n");
    if(EOS == DUST)  printf("Dust.\n");
