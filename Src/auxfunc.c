@@ -44,6 +44,51 @@ void RoundGen(double *num)
    }
 }
 
+void Scalar_Contraction_Range1(double *scalar, double *cov, double *con)
+{
+   *scalar = cov[0]*con[0] + cov[1]*con[1] + cov[2]*con[2];
+}
+
+void Raise_Index_Range1(double *con, double *cov, grid_ *local_grid)
+{
+   int i, j;
+
+   con[0] = local_grid->gamma_con[0][0]*cov[0] + local_grid->gamma_con[0][1]*cov[1] + local_grid->gamma_con[0][2]*cov[2];
+   con[1] = local_grid->gamma_con[1][0]*cov[0] + local_grid->gamma_con[1][1]*cov[1] + local_grid->gamma_con[1][2]*cov[2];
+   con[2] = local_grid->gamma_con[2][0]*cov[0] + local_grid->gamma_con[2][1]*cov[1] + local_grid->gamma_con[2][2]*cov[2];
+
+
+}
+
+void Low_Index_Range1(double *cov, double *con, grid_ *local_grid)
+{
+   int i, j;
+
+   for(i = 0; i < 3; i++)
+   {
+      for(j = 0; j < 3; j++)
+      {
+         cov[i] += local_grid->gamma_cov[i][j]*con[j];
+      }
+   }
+}
+
+void Low_Index_Range2(double **diag, double **con, grid_ *local_grid)
+{
+   int i, j, k;
+
+   for(i = 0; i < 3; i++)
+   {
+      for(j = 0; j < 3; j++)
+      {
+         for(k = 0; k < 3; k++)
+         {
+            diag[i][k] += local_grid->gamma_cov[i][j]*con[j][k];
+         }
+      }
+   }
+}
+
 void CheckSimParameters()
 {
    printf("\n");
@@ -79,3 +124,4 @@ void CheckSimParameters()
    if(FLUX == HLL)  printf("HLL Riemann solver.\n");
    if(FLUX == HLLC) printf("HLLC Riemann solver.\n");
 }
+

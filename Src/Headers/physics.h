@@ -1,3 +1,5 @@
+#include<mesh.h>
+
 typedef struct
 {
 	double up[eq+1];
@@ -36,6 +38,7 @@ typedef struct
 {
    double e;
    double cs;
+   double h;
 }eos_;
 
 int funct_A(double *a, double *uu);
@@ -43,16 +46,21 @@ int Cons2Prim(double *q, double *u);
 
 int GAUGE(double *a, double g1, double g2, double g3);
 
-void Prim2Cons(double *a, double *u, double *x);
 void Prim2Cons_All(double *u, double *q);
 
-void Prim2FluxF(double *f, double *v, double *u, double *x);
-void Prim2FluxG(double *f, double *v, double *u, double *x);
-void Prim2FluxH(double *f, double *v, double *u, double *x);
+void Prim2Cons(double *q, double *u, grid_ local_grid);
+void Prim2FluxF(double *f, double *v, double *u, grid_ local_grid);
+void Prim2FluxG(double *f, double *v, double *u, grid_ local_grid);
+void Prim2FluxH(double *f, double *v, double *u, grid_ local_grid);
 
 void Sources(double *u, vec_ *v, int *I);
-void Source_Terms(double *s, double *uu, double *x);
+void Source_Terms(double *s, double *u, grid_ local_grid);
+void User_Source_Terms(double *s, double *u, grid_ local_grid);
 
-void EoS(eos_ *e, double *u, double *x);
-void EoS_Ideal(eos_ *e, double *u, double *x);
-void EoS_Dust(eos_ *e, double *u, double *x);
+void EoS(eos_ *e, double *u, grid_ local_grid);
+
+void Get_Metric_Components(grid_ *local_grid);
+void Scalar_Contraction_Range1(double *scalar, double *cov, double *con);
+void Raise_Index_Range1(double *con, double *cov, grid_ *local_grid);
+void Low_Index_Range1(double *cov, double *con, grid_ *local_grid);
+void Low_Index_Range2(double **diag, double **con, grid_ *local_grid);

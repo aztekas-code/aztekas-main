@@ -3,8 +3,9 @@
 void Prim2Cons_All(double *q, double *u)
 {
    int i, j, k;
-   double E;
-   double rho, p, vx1, vx2, vx3;
+   double rho, p, v_cov[3], v_con[3];
+   double D, tau, S_cov[3], S_con[3];
+   double Lorentz, W[3][3], U, VV, V[3];
    double P[eq+1];
    eos_ eos;
    grid_ local_grid;
@@ -21,24 +22,33 @@ void Prim2Cons_All(double *q, double *u)
       local_grid.x[2] = M_PI_2;
       #endif
     
-      rho = u(0,i);
-      p   = u(1,i);
-      vx1 = u(2,i);
-      vx2 = 0.0;
-      vx3 = 0.0;
+      Get_Metric_Components(&local_grid);
+
+      rho      = u(0,i);
+      p        = u(1,i);
+      v_cov[0] = u(2,i);
+      v_cov[1] = 0.0;
+      v_cov[2] = 0.0;
 
       P[0] = rho;
       P[1] = p;
 
+      Raise_Index_Range1(v_con,v_cov,&local_grid);
+      Scalar_Contraction_Range1(&VV,v_cov,v_con);
       EoS(&eos,P,local_grid);
 
-      E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
+      Lorentz = 1.0/sqrt(1.0 - VV);
 
-      q(0,i) = rho;
-      q(1,i) = E;
-      q(2,i) = rho*vx1;
-      q(3,i) = rho*vx2;
-      q(4,i) = rho*vx3;
+      D        = rho*Lorentz;
+      U        = rho*eos.h*Lorentz*Lorentz - p;
+      tau      = U - D;
+      S_cov[0] = rho*eos.h*Lorentz*Lorentz*v_cov[0];
+      S_cov[1] = rho*eos.h*Lorentz*Lorentz*v_cov[1];
+      S_cov[2] = rho*eos.h*Lorentz*Lorentz*v_cov[2];
+
+      q(0,i) = D;
+      q(1,i) = tau;
+      q(2,i) = S_cov[0];
    }
 
 #elif DIM == 2
