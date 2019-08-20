@@ -22,6 +22,13 @@ typedef struct
    double dety;
 }gauge_;
 
+typedef struct
+{
+   double dlapse[3];
+   double dbeta[3][3];
+   double dgam[3][3][3];
+}der_gauge_;
+
 double dx1, dx2, dx3;
 double dt;
 double tmax, timefile, cou;
