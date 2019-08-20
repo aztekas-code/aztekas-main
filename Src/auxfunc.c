@@ -49,7 +49,7 @@ void Scalar_Contraction_Range1(double *scalar, double *cov, double *con)
    *scalar = cov[0]*con[0] + cov[1]*con[1] + cov[2]*con[2];
 }
 
-void Raise_Index_Range1(double *con, double *cov, grid_ *local_grid)
+void Raise_Index_Range1(double *con, double *cov, gauge_ *local_grid)
 {
    int i, j;
 
@@ -60,33 +60,16 @@ void Raise_Index_Range1(double *con, double *cov, grid_ *local_grid)
 
 }
 
-void Low_Index_Range1(double *cov, double *con, grid_ *local_grid)
+void Low_Index_Range1(double *cov, double *con, gauge_ *local_grid)
 {
    int i, j;
 
-   for(i = 0; i < 3; i++)
-   {
-      for(j = 0; j < 3; j++)
-      {
-         cov[i] += local_grid->gamma_cov[i][j]*con[j];
-      }
-   }
 }
 
-void Low_Index_Range2(double **diag, double **con, grid_ *local_grid)
+void Low_Index_Range2(double **diag, double **con, gauge_ *local_grid)
 {
    int i, j, k;
 
-   for(i = 0; i < 3; i++)
-   {
-      for(j = 0; j < 3; j++)
-      {
-         for(k = 0; k < 3; k++)
-         {
-            diag[i][k] += local_grid->gamma_cov[i][j]*con[j][k];
-         }
-      }
-   }
 }
 
 void CheckSimParameters()

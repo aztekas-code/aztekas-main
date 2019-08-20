@@ -5,7 +5,7 @@
  */
 #include"main.h"
 
-void User_Source_Terms(double *s, double *u, grid_ local_grid)
+void User_Source_Terms(double *s, double *u, gauge_ local_grid)
 {
    int i;
    double n, p, vx1=0.0, vx2=0.0, vx3=0.0;

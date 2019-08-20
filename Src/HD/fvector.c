@@ -1,7 +1,6 @@
 #include"main.h"
     
-//void Prim2FluxF(double *f, double *v, double *u, double *x)
-void Prim2FluxF(double *f, double *v, double *u, grid_ local_grid)
+void Prim2FluxF(double *f, double *v, double *u, gauge_ local_grid)
 {
 
    double E;
@@ -34,5 +33,4 @@ void Prim2FluxF(double *f, double *v, double *u, grid_ local_grid)
    v[0] = vx1 - eos.cs;
    v[1] = vx1 + eos.cs;
    v[2] = vx1;
-
 }

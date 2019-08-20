@@ -43,7 +43,9 @@ int RK1D(double *u, double *q, double *q1, double *q2, int order)
  
       for(n = 0; n < eq; n++)
       {
-         F[n] = (S1p(i)*v.Fp[n] - S1m(i)*v.Fm[n])/(Dx1) - \
+         //F[n] = (S1p(i)*v.Fp[n] - S1m(i)*v.Fm[n])/(Dx1) - \
+         v.S[n];
+         F[n] = (v.Fp[n] - v.Fm[n])/(Dx1) - \
          v.S[n];
       }
 

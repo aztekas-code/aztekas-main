@@ -1,6 +1,6 @@
 #include"main.h"
     
-void Source_Terms(double *s, double *u, grid_ local_grid)
+void Source_Terms(double *s, double *u, gauge_ local_grid)
 {
    double rho, p, vx1=0, vx2=0, vx3=0;
 
