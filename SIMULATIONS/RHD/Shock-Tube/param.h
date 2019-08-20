@@ -14,11 +14,11 @@
 #define outflow_x2max      TRUE
 #define outflow_x2min      TRUE
 
-#define RECONST            WENO5
+#define RECONST            MC
 #define FLUX               HLL
 #define GRID               UNIFORM
 
-#define INTERFACE          DIAGONAL
+#define INTERFACE          VERTICAL
 
 double nl, pl, vx1l, vx2l, vx3l;
 double nr, pr, vx1r, vx2r, vx3r;
