@@ -1,16 +1,23 @@
 #include"main.h"
     
-void Prim2FluxH(double *f, double *v, double *u, grid_ local_grid)
+void Prim2FluxH(double *f, double *v, double *u, gauge_ local_grid)
 {
-   int i, j;
+   int i;
    double rho, p, v_cov[3], v_con[3];
-   double D, tau, S_cov[3], S_con[3];
-   double Lorentz, W[3][3], U, VV, V[3];
+   double D, U, tau, Lorentz, h, cs, VV;
+   double W[3][3], S_cov[3], S_con[3], V[3];
+   double gamma, beta, lapse, vel;
    eos_ eos;
 
+   gamma = local_grid.gamma_con[2][2];
+   beta  = local_grid.beta_con[2];
+   lapse = local_grid.lapse;
+
+   // Density and Pressure
    rho = u[0];
    p   = u[1];
 
+   // Covariant components of the 3-velocity
 #if DIM == 1
    v_cov[0] = u[2];
    v_cov[1] = 0.0;
@@ -25,49 +32,58 @@ void Prim2FluxH(double *f, double *v, double *u, grid_ local_grid)
    v_cov[2] = u[4];
 #endif
 
+   // Contravariant components of the 3-velocity
+   v_con[0] = local_grid.gamma_con[0][0]*v_cov[0] + \
+              local_grid.gamma_con[0][1]*v_cov[1] + \
+              local_grid.gamma_con[0][2]*v_cov[2];
+   v_con[1] = local_grid.gamma_con[1][0]*v_cov[0] + \
+              local_grid.gamma_con[1][1]*v_cov[1] + \
+              local_grid.gamma_con[1][2]*v_cov[2];
+   v_con[2] = local_grid.gamma_con[2][0]*v_cov[0] + \
+              local_grid.gamma_con[2][1]*v_cov[1] + \
+              local_grid.gamma_con[2][2]*v_cov[2];
+
+   // Contraction v_i v^i
+   VV = v_con[0]*v_cov[0] + v_con[1]*v_cov[1] + v_con[2]*v_cov[2];
+
+   // Lorentz Factor
+   Lorentz = 1/sqrt(1 - VV);
+
+   // Equation of State
+   EoS(&eos,u,local_grid);
+   h  = eos.h;
+   cs = eos.cs;
+
+   // Define conservative density D, variable U and conservative energy \tau
+   D   = rho*Lorentz;
+   U   = rho*h*Lorentz*Lorentz - p;
+   tau = U - D;
+
+   // Velocity affected by the coordinates
+   V[2] = lapse*v_con[2] - beta;
+
+   // Compute the covariant and contravariant components of the 3-momentum
    for(i = 0; i < 3; i++)
    {
-      for(j = 0; j < 3; j++)
-      {
-         v_con[i] = local_grid.gamma_con[i][j]*v_cov[j];
-         V[i] = local_grid.lapse*v_con[i] - local_grid.beta_con[i];
-      }
-
       S_cov[i] = rho*eos.h*Lorentz*Lorentz*v_cov[i];
       S_con[i] = rho*eos.h*Lorentz*Lorentz*v_con[i];
    }
 
-   Scalar_Contraction_Range1(&VV,v_cov,v_con);
-   EoS(&eos,u,local_grid);
+   // Compute useful 2-tensor W^i_j (see BHAC article)
+   W[2][0] = S_con[2]*v_cov[0] + p;
+   W[2][1] = S_con[2]*v_cov[1];
+   W[2][2] = S_con[2]*v_cov[2];
 
-   Lorentz = 1.0/sqrt(1.0 - VV);
+   // Compute fluxes
+   f[0] = D*V[2];
+   f[1] = lapse*(S_con[2] - v_con[2]*D) - beta*tau;
+   f[2] = lapse*W[2][0] - beta*S_cov[0];
+   f[3] = lapse*W[2][1] - beta*S_cov[1];
+   f[4] = lapse*W[2][2] - beta*S_cov[2];
 
-   D   = rho*Lorentz;
-   U   = rho*eos.h*Lorentz*Lorentz - p;
-   tau = U - D;
-
-   W[2][0] = S_con[2]*v_con[0] + p*local_grid.gamma_con[2][0];
-   W[2][1] = S_con[2]*v_con[1] + p*local_grid.gamma_con[2][1];
-   W[2][2] = S_con[2]*v_con[2] + p*local_grid.gamma_con[2][2];
-
-   f[0] = D*V[0];
-   f[1] = local_grid.lapse*(S_con[2] - v_con[2]*D) - local_grid.beta_con[2]*tau;
-   f[2] = local_grid.lapse*W[2][0] - local_grid.beta_con[2]*S_cov[0];
-   f[3] = local_grid.lapse*W[2][1] - local_grid.beta_con[2]*S_cov[1];
-   f[4] = local_grid.lapse*W[2][2] - local_grid.beta_con[2]*S_cov[2];
-
-   double a2, vel, v2, gamma;
-   double lambda_plus, lambda_minus;
-
-   a2    = eos.cs*eos.cs;
+   // Computed characteristic velocities
    vel   = v_con[2];
-   v2    = vel*vel;
-   gamma = local_grid.gamma_con[2][2];
-
-   lambda_plus = ((1 - a2)*vel + sqrt(a2*(1 - VV)*(1 - VV*a2)*gamma - (1 - a2)*v2))/(1 - VV*a2);
-   lambda_plus = ((1 - a2)*vel - sqrt(a2*(1 - VV)*(1 - VV*a2)*gamma - (1 - a2)*v2))/(1 - VV*a2);
-
-   v[0] = local_grid.lapse*vel - local_grid.beta_con[2];
-   v[1] = local_grid.lapse*lambda_plus  - local_grid.beta_con[2];
-   v[2] = local_grid.lapse*lambda_minus - local_grid.beta_con[2];
+   v[0] = (cs/(1 - VV*cs*cs))*(vel*(1 - cs*cs) + sqrt(cs*cs*(1 - VV)*(gamma*(1 - VV*cs*cs) - vel*vel*(1 - cs*cs)))) - beta;
+   v[1] = (cs/(1 - VV*cs*cs))*(vel*(1 - cs*cs) - sqrt(cs*cs*(1 - VV)*(gamma*(1 - VV*cs*cs) - vel*vel*(1 - cs*cs)))) - beta;
+   v[2] = lapse*vel - beta;
 }

@@ -8,7 +8,7 @@ void Prim2Cons_All(double *q, double *u)
    double Lorentz, W[3][3], U, VV, V[3];
    double P[eq+1];
    eos_ eos;
-   grid_ local_grid;
+   gauge_ local_grid;
 
 #if DIM == 1
 
@@ -21,7 +21,7 @@ void Prim2Cons_All(double *q, double *u)
       #if COORDINATES == SPHERICAL
       local_grid.x[2] = M_PI_2;
       #endif
-    
+  
       Get_Metric_Components(&local_grid);
 
       rho      = u(0,i);
@@ -33,11 +33,21 @@ void Prim2Cons_All(double *q, double *u)
       P[0] = rho;
       P[1] = p;
 
-      Raise_Index_Range1(v_con,v_cov,&local_grid);
-      Scalar_Contraction_Range1(&VV,v_cov,v_con);
-      EoS(&eos,P,local_grid);
+      v_con[0] = local_grid.gamma_con[0][0]*v_cov[0] + \
+                 local_grid.gamma_con[0][1]*v_cov[1] + \
+                 local_grid.gamma_con[0][2]*v_cov[2];
+      v_con[1] = local_grid.gamma_con[1][0]*v_cov[0] + \
+                 local_grid.gamma_con[1][1]*v_cov[1] + \
+                 local_grid.gamma_con[1][2]*v_cov[2];
+      v_con[2] = local_grid.gamma_con[2][0]*v_cov[0] + \
+                 local_grid.gamma_con[2][1]*v_cov[1] + \
+                 local_grid.gamma_con[2][2]*v_cov[2];
+                 
+      VV = v_cov[0]*v_con[0] + v_cov[1]*v_con[1] + v_cov[2]*v_con[2];
 
       Lorentz = 1.0/sqrt(1.0 - VV);
+
+      EoS(&eos,P,local_grid);
 
       D        = rho*Lorentz;
       U        = rho*eos.h*Lorentz*Lorentz - p;

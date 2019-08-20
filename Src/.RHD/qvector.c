@@ -24,7 +24,7 @@ void Prim2Cons(double *q, double *u, gauge_ local_grid)
    v_cov[1] = u[3];
    v_cov[2] = u[4];
 #endif
-
+/*
    v_con[0] = local_grid.gamma_con[0][0]*v_cov[0] + \
               local_grid.gamma_con[0][1]*v_cov[1] + \
               local_grid.gamma_con[0][2]*v_cov[2];
@@ -34,12 +34,16 @@ void Prim2Cons(double *q, double *u, gauge_ local_grid)
    v_con[2] = local_grid.gamma_con[2][0]*v_cov[0] + \
               local_grid.gamma_con[2][1]*v_cov[1] + \
               local_grid.gamma_con[2][2]*v_cov[2];
-              
+*/              
+   v_con[0] = v_cov[0];
+   v_con[1] = v_cov[1];
+   v_con[2] = v_cov[2];
    VV = v_cov[0]*v_con[0] + v_cov[1]*v_con[1] + v_cov[2]*v_con[2];
 
    Lorentz = 1.0/sqrt(1.0 - VV);
 
-   EoS(&eos,u,local_grid);
+   //EoS(&eos,u,local_grid);
+   eos.h = 1.0 + p*K/(rho*(K-1.0));
 
    D        = rho*Lorentz;
    U        = rho*eos.h*Lorentz*Lorentz - p;

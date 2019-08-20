@@ -8,10 +8,6 @@ typedef struct
 	double qm[eq+1];
 	double fp[eq+1];
 	double fm[eq+1];
-	double gp[eq+1];
-	double gm[eq+1];
-	double hp[eq+1];
-	double hm[eq+1];
 	double lp;
 	double lm;
 }flx_;
@@ -19,13 +15,7 @@ typedef struct
 typedef struct
 {
 	double A[(eq+1)*(eq+1)];
-   double Q[eq+1];
-   double Q1[eq+1];
-   double Q2[eq+1];
 	double S[eq+1];
-   double F[eq+1];
-   double G[eq+1];
-   double H[eq+1];
 	double Fp[eq+1];
 	double Fm[eq+1];
 	double Gp[eq+1];
@@ -44,23 +34,21 @@ typedef struct
 int funct_A(double *a, double *uu);
 int Cons2Prim(double *q, double *u);
 
-int GAUGE(double *a, double g1, double g2, double g3);
-
 void Prim2Cons_All(double *u, double *q);
 
-void Prim2Cons(double *q, double *u, grid_ local_grid);
-void Prim2FluxF(double *f, double *v, double *u, grid_ local_grid);
-void Prim2FluxG(double *f, double *v, double *u, grid_ local_grid);
-void Prim2FluxH(double *f, double *v, double *u, grid_ local_grid);
+void Prim2Cons(double *q, double *u, gauge_ local_grid);
+void Prim2FluxF(double *f, double *v, double *u, gauge_ local_grid);
+void Prim2FluxG(double *f, double *v, double *u, gauge_ local_grid);
+void Prim2FluxH(double *f, double *v, double *u, gauge_ local_grid);
 
 void Sources(double *u, vec_ *v, int *I);
-void Source_Terms(double *s, double *u, grid_ local_grid);
-void User_Source_Terms(double *s, double *u, grid_ local_grid);
+void Source_Terms(double *s, double *u, gauge_ local_grid);
+void User_Source_Terms(double *s, double *u, gauge_ local_grid);
 
-void EoS(eos_ *e, double *u, grid_ local_grid);
+void EoS(eos_ *e, double *u, gauge_ local_grid);
 
-void Get_Metric_Components(grid_ *local_grid);
+void Get_Metric_Components(gauge_ *local_grid);
 void Scalar_Contraction_Range1(double *scalar, double *cov, double *con);
-void Raise_Index_Range1(double *con, double *cov, grid_ *local_grid);
-void Low_Index_Range1(double *cov, double *con, grid_ *local_grid);
-void Low_Index_Range2(double **diag, double **con, grid_ *local_grid);
+void Raise_Index_Range1(double *con, double *cov, gauge_ *local_grid);
+void Low_Index_Range1(double *cov, double *con, gauge_ *local_grid);
+void Low_Index_Range2(double **diag, double **con, gauge_ *local_grid);

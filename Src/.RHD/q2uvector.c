@@ -7,21 +7,21 @@ int Cons2Prim(double *u, double *q)
    double h, derh, f, derf;
    double Lorentz, SS;
    double theta, theta_0;
-   gauge_ local_grid;
+   //gauge_ local_grid;
    
 #if DIM == 1
 
    for(i = 0; i <= Nx1-0; i++)
    {
-      local_grid.x[0] = grid.time;
-      local_grid.x[1] = grid.X1[i];
-      local_grid.x[2] = 0.0;
-      local_grid.x[3] = 0.0;
+      //local_grid.x[0] = grid.time;
+      //local_grid.x[1] = grid.X1[i];
+      //local_grid.x[2] = 0.0;
+      //local_grid.x[3] = 0.0;
       #if COORDINATES == SPHERICAL
-      local_grid.x[2] = M_PI_2;
+      //local_grid.x[2] = M_PI_2;
       #endif
 
-      Get_Metric_Components(&local_grid);
+      //Get_Metric_Components(&local_grid);
 
       D        = q(0,i);
       tau      = q(1,i);
@@ -29,16 +29,19 @@ int Cons2Prim(double *u, double *q)
       S_cov[1] = 0.0;
       S_cov[2] = 0.0;
 
-      S_con[0] = local_grid.gamma_con[0][0]*S_cov[0] + \
-                 local_grid.gamma_con[0][1]*S_cov[1] + \
-                 local_grid.gamma_con[0][2]*S_cov[2];
-      S_con[1] = local_grid.gamma_con[1][0]*S_cov[0] + \
-                 local_grid.gamma_con[1][1]*S_cov[1] + \
-                 local_grid.gamma_con[1][2]*S_cov[2];
-      S_con[2] = local_grid.gamma_con[2][0]*S_cov[0] + \
-                 local_grid.gamma_con[2][1]*S_cov[1] + \
-                 local_grid.gamma_con[2][2]*S_cov[2];
+      //S_con[0] = local_grid.gamma_con[0][0]*S_cov[0] + \
+      //           local_grid.gamma_con[0][1]*S_cov[1] + \
+      //           local_grid.gamma_con[0][2]*S_cov[2];
+      //S_con[1] = local_grid.gamma_con[1][0]*S_cov[0] + \
+      //           local_grid.gamma_con[1][1]*S_cov[1] + \
+      //           local_grid.gamma_con[1][2]*S_cov[2];
+      //S_con[2] = local_grid.gamma_con[2][0]*S_cov[0] + \
+      //           local_grid.gamma_con[2][1]*S_cov[1] + \
+      //           local_grid.gamma_con[2][2]*S_cov[2];
       
+      S_con[0] = S_cov[0];
+      S_con[1] = S_cov[1];
+      S_con[2] = S_cov[2];
       SS = S_cov[0]*S_con[0] + S_cov[1]*S_con[1] + S_cov[2]*S_con[2];
 
       theta_0 = U(1,i)/U(0,i);

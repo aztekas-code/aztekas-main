@@ -7,10 +7,6 @@
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<math.h>
-#include<stdlib.h>
-#include<string.h>
 #include"main.h"
 
 int PrintValues(double *tprint, double *dtprint, int *itprint)

@@ -21,7 +21,7 @@ void Sources(double *u, vec_ *v, int *I)
    int n;
    double x[4];
    double default_S[eq+1], user_S[eq+1];
-   grid_ local_grid;
+   gauge_ local_grid;
 
    local_grid.x[0] = grid.time;
 
@@ -71,28 +71,34 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
    double um[eq + 1];
    double dp[3];
    double dm[3];
-   double dup[eq + 1];
-   double dum[eq + 1];
-   grid_ local_grid;
+   gauge_ local_grid;
 
    local_grid.x[0] = grid.time;
 
 #if DIM == 1
 
    local_grid.x[1] = grid.X1[I[0]];
+   local_grid.x[2] = 0.0;
+   local_grid.x[3] = 0.0;
+   #if COORDINATES == SPHERICAL
    local_grid.x[2] = M_PI_2;
+   #endif
 
-#elif DIM == 2
+#elif DIM == 2 || DIM == 4
 
    local_grid.x[1] = grid.X1[I[0]];
    local_grid.x[2] = grid.X2[I[1]];
+   local_grid.x[3] = 0.0;
+   #if POLAR == TRUE
+   local_grid.x[2] = M_PI_2;
+   #endif
 
-#elif DIM == 3 
+#elif DIM == 3
 
    local_grid.x[1] = grid.X1[I[0]];
    local_grid.x[2] = grid.X2[I[1]];
    local_grid.x[3] = grid.X3[I[2]];
-   
+
 #endif
 
    if(pm == 1)
