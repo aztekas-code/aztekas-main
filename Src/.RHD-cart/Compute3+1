@@ -1,0 +1,426 @@
+#!/bin/bash
+
+maxima<<EOF
+
+/*Select how to start the calculations:*/ 
+/*If metric = 4 then you have to introduce */
+/*the 4D metric (g). If metric = 3 then you */
+/*have introduce the 3D metric (Y), the shift */
+/*vector (B) and the lapse function (a)*/
+
+kill(all)$
+reset(all)$
+
+load(itensor)$
+load(ctensor)$
+assume(r>0)$
+
+/*Number of spatial dimensions*/
+N : 3$
+
+/*Spatial shape (cord = cart,sphr)*/
+
+ct_coordsys([t,x,y,z,[t,x,y,z]])$ 
+/*ct_coordsys([t,r,z,theta,[t,r,z,theta]])$ */
+/*ct_coordsys([t,r,theta,phi,[t,r,theta,phi]])$ */
+
+Vv1 : u$
+Vv2 : v$
+Vv3 : w$
+
+batch("Metric")$
+iG : factor(invert(G))$
+
+/* 3D-Metric */
+Y : factor(submatrix(1,G,1))$
+imetric(yy)$
+ 
+lg : factor(Y)$
+ug : factor(trigsimp(invert(Y)))$
+
+yv11 : lg[1,1]$
+yv12 : lg[1,2]$
+yv13 : lg[1,3]$
+yv22 : lg[2,2]$
+yv23 : lg[2,3]$
+yv33 : lg[3,3]$
+
+yt11 : ug[1,1]$
+yt12 : ug[1,2]$
+yt13 : ug[1,3]$
+yt22 : ug[2,2]$
+yt23 : ug[2,3]$
+yt33 : ug[3,3]$
+
+/*Lapse Function (a)*/
+
+a2 : factor(-(determinant(G))/((determinant(Y))))$
+a2 : factor(trigsimp(a2))$
+a  : factor((a2)^(1/2));
+
+/*Shift Vector Covariant Components (B_i)*/
+
+Bv1 : factor(G[1,2])$
+Bv2 : factor(G[1,3])$
+Bv3 : factor(G[1,4])$
+
+Bv : [Bv1,Bv2,Bv3]$
+
+/*Shift Vector Contravariant Components (B^i)*/
+Bt : ug . transpose(Bv)$
+Bt1 : factor(Bt[1,1])$
+Bt2 : factor(Bt[2,1])$
+Bt3 : factor(Bt[3,1])$
+
+kill(Bt,Bv)$
+kill(Beta,Eq)$
+
+/*3D-Velocity Covariant Components (V_i)*/
+
+Vv : [Vv1,Vv2,Vv3]$
+Vv$
+
+/*3D-Velocity Contravariant Components (V^i)*/
+
+Vt  : ug . transpose(Vv)$
+Vt1 : factor(Vt[1,1])$
+Vt2 : factor(Vt[2,1])$
+Vt3 : factor(Vt[3,1])$
+
+/*Computes the product (V_i)(V^i) = (Y_i j)(V^i)(V^j)*/
+
+VV : lg . transpose(Vt)$
+VV : VV . Vt$
+
+mv : [m,n,o]$
+mvmt : ug . mv$
+mvmt : mvmt . transpose(mv)$
+
+kill(Bv,Vv,Bt,Vt,vel,Eq,yy)$
+
+imetric(g)$
+
+lg : factor(ev(G))$
+ug : factor(trigsimp(invert(ev(G))))$
+
+dety : factor(sqrt(determinant(Y)))$
+detg : factor(sqrt(-determinant(G)))$
+
+/*Four Velocity Contravariant Components (U^mu)*/
+
+ut0 : factor(W/a)$ 
+ut1 : factor(W*(Vt1 - Bt1/a))$
+ut2 : factor(W*(Vt2 - Bt2/a))$
+ut3 : factor(W*(Vt3 - Bt3/a))$
+ 
+ut : [ut0,ut1,ut2,ut3]$
+  
+/*Four Velocity Covariant Components (U_mu)*/
+
+uv : factor(lg . transpose(ut))$
+
+uv0 : uv[1,1]$
+uv1 : uv[2,1]$
+uv2 : uv[3,1]$
+uv3 : uv[4,1]$
+
+/* -------------------------- */
+
+Eq1 : ishow((T([],[i,j])) = ((n)*(h)*(U([],[i]))*(U([],[j])) + p*(g([],[i,j]))))$
+Eq1 : ic_convert(Eq1)$
+
+T : zeromatrix(dim,dim)$
+U : ut$
+
+ev(Eq1)$
+T : factor(T)$
+
+Eq2 : ishow(S([],[l]) = a*(TT([],[l,i])*A([],[],i) - ichr2([j,k],[l])*TT([],[j,k])))$
+Eq2 : ic_convert(Eq2)$
+
+S : [0,0,0,0]$
+TT : T$
+A : log(a)$
+
+ev(Eq2)$
+S : factor(S)$
+kill(TT)$
+
+Eq3 : ishow(SS([l],[]) = TT([],[i,j])*(g([l,j],[],i) - g([l,s],[])*ichr2([i,j],[s])))$
+Eq3 : ic_convert(Eq3)$
+
+SS : [0,0,0,0]$
+TT : T$
+
+ev(Eq3)$
+SS : factor(SS)$
+
+/* -------------------------- */
+
+D : factor(n*W)$
+E : factor(D*h*W - p)$
+Mv1 : factor(D*h*W*Vv1)$
+Mv2 : factor(D*h*W*Vv2)$
+Mv3 : factor(D*h*W*Vv3)$
+
+q1 : factor(D)$
+q2 : factor(E - D)$
+q3 : factor(Mv1)$
+q4 : factor(Mv2)$
+q5 : factor(Mv3)$
+
+f1 : factor(D*(Vt1 - Bt1/a))$
+f2 : factor((E - D)*(Vt1 - Bt1/a) + p*Vt1)$
+f3 : factor(Mv1*(Vt1 - Bt1/a) + p)$
+f4 : factor(Mv2*(Vt1 - Bt1/a))$
+f5 : factor(Mv3*(Vt1 - Bt1/a))$
+
+g1 : factor(D*(Vt2 - Bt2/a))$
+g2 : factor((E - D)*(Vt2 - Bt2/a) + p*Vt2)$
+g3 : factor(Mv1*(Vt2 - Bt2/a))$
+g4 : factor(Mv2*(Vt2 - Bt2/a) + p)$
+g5 : factor(Mv3*(Vt2 - Bt2/a))$
+
+h1 : factor(D*(Vt3 - Bt3/a))$
+h2 : factor((E - D)*(Vt3 - Bt3/a) + p*Vt3)$
+h3 : factor(Mv1*(Vt3 - Bt3/a))$
+h4 : factor(Mv2*(Vt3 - Bt3/a))$
+h5 : factor(Mv3*(Vt3 - Bt3/a) + p)$
+
+s1 : 0$ 
+s2 : factor(S[1])$
+s3 : factor(SS[2])$
+s4 : factor(SS[3])$
+s5 : factor(SS[4])$
+
+kill(igeowedge_flag,inonmet_flag,iframe_bracket_form,tensorkill,diagmetric)$ 
+kill(ctrgsimp,cframe_flag,ctorsion_flag,cnonmet_flag,ctayswitch)$ 
+kill(ratchristof,rateinstein,ratriemann,ratweyl)$ 
+kill(N,cord,ct_coords,lg,metric)$ 
+kill(g_00,g_01,g_02,g_03)$ 
+kill(g_10,g_11,g_12,g_13)$
+kill(g_20,g_21,g_22,g_23)$
+kill(g_30,g_31,g_32,g_33)$
+kill(G,bestlength,trylength)$ 
+kill(Bv,ohm,W)$ 
+kill(Bt)$ 
+kill(a2,u1t,u2t,u3t,ut,uv,nn,T,TT,U)$ 
+kill(Eq,Eq1,Eq2,Eq3)$ 
+
+depends([W],[u,v,w])$ 
+depends([h],[p,n])$ 
+
+/*Computes the jacobian matrix of q(U) and its inverse*/
+q: jacobian([ev(q1),ev(q2),ev(q3),ev(q4),ev(q5)],[n,p,u,v,w])$
+iq: trigsimp(factor(q^^-1))$
+
+stringout("Values-Cart",values)$
+eq  : sqrt(x^2 + y^2) = R$ 
+eq2 : x^2 + y^2 = R^2$
+/*eq  : sqrt(x^2 + y^2 + z^2) = R$ */
+/*eq2 : x^2 + y^2 + z^2 = R^2$ */
+
+/*Output the file VECTOR_Q*/
+Q: matrix([ev(q1)],[ev(q2)],[ev(q3)],[ev(q4)],[ev(q5)])$
+Q: psubst(eq,Q)$
+Q: psubst(eq2,Q)$
+Q: factor(Q)$
+stringout("VECTOR_Q",ratsimp(Q[1,1]),ratsimp(Q[2,1]),ratsimp(Q[3,1]),
+ratsimp(Q[4,1]),ratsimp(Q[5,1]))$
+
+/*Output the file VECTOR_F*/
+F: matrix([ev(f1)],[ev(f2)],[ev(f3)],[ev(f4)],[ev(f5)])$
+F: psubst(eq,F)$
+F: psubst(eq2,F)$
+F: factor(F)$
+stringout("VECTOR_F",ratsimp(F[1,1]),ratsimp(F[2,1]),ratsimp(F[3,1]),
+ratsimp(F[4,1]),ratsimp(F[5,1]))$
+
+/*Output the file VECTOR_G*/
+G: matrix([ev(g1)],[ev(g2)],[ev(g3)],[ev(g4)],[ev(g5)])$
+G: psubst(eq,G)$
+G: psubst(eq2,G)$
+G: factor(G)$
+stringout("VECTOR_G",ratsimp(G[1,1]),ratsimp(G[2,1]),ratsimp(G[3,1]),
+ratsimp(G[4,1]),ratsimp(G[5,1]))$
+
+/*Output the file VECTOR_H*/
+H: matrix([ev(h1)],[ev(h2)],[ev(h3)],[ev(h4)],[ev(h5)])$
+H: psubst(eq,H)$
+H: psubst(eq2,H)$
+H: factor(H)$
+stringout("VECTOR_H",ratsimp(H[1,1]),ratsimp(H[2,1]),ratsimp(H[3,1]),
+ratsimp(H[4,1]),ratsimp(H[5,1]))$
+
+/*Output the file VECTOR_S*/
+S: matrix([ev(s1)],[ev(s2)],[ev(s3)],[ev(s4)],[ev(s5)])$
+S: psubst(eq,S)$
+S: psubst(eq2,S)$
+S: factor(S)$
+stringout("VECTOR_S",ratsimp(S[1,1]),ratsimp(S[2,1]),ratsimp(S[3,1]),
+ratsimp(S[4,1]),ratsimp(S[5,1]))$
+
+/*Output the file MATRIX_A, which is the inverse jacobian matriz of q(U)*/
+A: iq$
+A: psubst(eq,A)$
+A: psubst(eq2,A)$
+A: factor(A)$
+stringout("MATRIX_A",
+ratsimp(A[1,1]),ratsimp(A[1,2]),ratsimp(A[1,3]),ratsimp(A[1,4]),ratsimp(A[1,5]),
+ratsimp(A[2,1]),ratsimp(A[2,2]),ratsimp(A[2,3]),ratsimp(A[2,4]),ratsimp(A[2,5]),
+ratsimp(A[3,1]),ratsimp(A[3,2]),ratsimp(A[3,3]),ratsimp(A[3,4]),ratsimp(A[3,5]),
+ratsimp(A[4,1]),ratsimp(A[4,2]),ratsimp(A[4,3]),ratsimp(A[4,4]),ratsimp(A[4,5]),
+ratsimp(A[5,1]),ratsimp(A[5,2]),ratsimp(A[5,3]),ratsimp(A[5,4]),ratsimp(A[5,5]));
+
+'diff(VV,u,1)$
+dWu : (0.5 * W^3)*ev(%,diff)$
+dWu : psubst(eq,dWu)$
+dWu : psubst(eq2,dWu)$
+dWu : factor(dWu)$
+
+'diff(VV,v,1)$
+dWv : (0.5 * W^3)*ev(%,diff)$
+dWv : psubst(eq,dWv)$
+dWv : psubst(eq2,dWv)$
+dWv : factor(dWv)$
+
+'diff(VV,w,1)$
+dWw : (0.5 * W^3)*ev(%,diff)$
+dWw : psubst(eq,dWw)$
+dWw : psubst(eq2,dWw)$
+dWw : factor(dWw)$
+
+/*Lorentz Factor*/
+W : 1/(1 - VV)^(1/2)$ 
+
+/*Equation of State*/
+e : 1 + p/(n*(k-1))$ 
+
+/*Enthalpy per unit volume*/
+h : e + p/n$ 
+
+W : psubst(eq,W)$
+W : psubst(eq2,W)$
+W : factor(W)$
+
+VV : psubst(eq,VV)$
+VV : psubst(eq2,VV)$
+VV : factor(VV)$
+
+'diff(h,p,1)$
+dhp : ev(%,diff)$
+'diff(h,n,1)$
+dhn : ev(%,diff)$
+
+yt11 : psubst(eq,yt11)$
+yt11 : psubst(eq2,yt11)$
+yt11 : factor(yt11)$
+
+yt22 : psubst(eq,yt22)$
+yt22 : psubst(eq2,yt22)$
+yt22 : factor(yt22)$
+
+yt33 : psubst(eq,yt33)$
+yt33 : psubst(eq2,yt33)$
+yt33 : factor(yt33)$
+
+Bt1 : psubst(eq,Bt1)$
+Bt1 : psubst(eq2,Bt1)$
+Bt1 : factor(Bt1)$
+
+Bt2 : psubst(eq,Bt2)$
+Bt2 : psubst(eq2,Bt2)$
+Bt2 : factor(Bt2)$
+
+Bt3 : psubst(eq,Bt3)$
+Bt3 : psubst(eq2,Bt3)$
+Bt3 : factor(Bt3)$
+
+Vt1 : psubst(eq,Vt1)$
+Vt1 : psubst(eq2,Vt1)$
+Vt1 : factor(Vt1)$
+
+Vt2 : psubst(eq,Vt2)$
+Vt2 : psubst(eq2,Vt2)$
+Vt2 : factor(Vt2)$
+
+Vt3 : psubst(eq,Vt3)$
+Vt3 : psubst(eq2,Vt3)$
+Vt3 : factor(Vt3)$
+
+stringout("DIFF",
+ratsimp(dWu),
+ratsimp(dWv),
+ratsimp(dWw),
+ratsimp(dhn),
+ratsimp(dhp));
+
+R : sqrt(x^2 + y^2)$ 
+/*R : sqrt(x^2 + y^2 + z^2)$ */ 
+
+stringout("PARAM",
+ratsimp(R),
+ratsimp(W),
+ratsimp(VV),
+ratsimp(mvmt),
+ratsimp(h),
+ratsimp(sqrt(k*p/(n*h))),
+ratsimp(yt11),
+ratsimp(yt22),
+ratsimp(yt33),
+ratsimp(Bt1),
+ratsimp(Bt2),
+ratsimp(Bt3),
+ratsimp(Vt1),
+ratsimp(Vt2),
+ratsimp(Vt3),
+ratsimp(Vv1),
+ratsimp(Vv2),
+ratsimp(Vv3),
+ratsimp(a),
+ratsimp(dety),
+ratsimp(a*dety))$
+
+kill(h,W,VV,eq,eq2,yt11,yt22,yt33,R,Bt1,Bt2,Bt3,Vt1,Vt2,Vt3,cs)$
+
+m1 : (a/(1 - V*c^2))*(Vt1*(1 - c^2) + sqrt(c^2*(1 - V)*(yt11*(1 - V*c^2) - Vt1^2*(1 - c^2)))) - Bt1$
+m2 : (a/(1 - V*c^2))*(Vt1*(1 - c^2) - sqrt(c^2*(1 - V)*(yt11*(1 - V*c^2) - Vt1^2*(1 - c^2)))) - Bt1$
+m3 : a*Vt1 - Bt1$
+
+n1 : (a/(1 - V*c^2))*(Vt2*(1 - c^2) + sqrt(c^2*(1 - V)*(yt22*(1 - V*c^2) - Vt2^2*(1 - c^2)))) - Bt2$
+n2 : (a/(1 - V*c^2))*(Vt2*(1 - c^2) - sqrt(c^2*(1 - V)*(yt22*(1 - V*c^2) - Vt2^2*(1 - c^2)))) - Bt2$
+n3 : a*Vt2 - Bt2$
+
+o1 : (a/(1 - V*c^2))*(Vt3*(1 - c^2) + sqrt(c^2*(1 - V)*(yt33*(1 - V*c^2) - Vt3^2*(1 - c^2)))) - Bt3$
+o2 : (a/(1 - V*c^2))*(Vt3*(1 - c^2) - sqrt(c^2*(1 - V)*(yt33*(1 - V*c^2) - Vt3^2*(1 - c^2)))) - Bt3$
+o3 : a*Vt3 - Bt3$
+
+stringout("Values-Cart",values)$
+eq  : sqrt(r^2 + z^2) = R$ 
+eq2 : r^2 + z^2 = R^2$
+/*eq  : sqrt(x^2 + y^2) = R$ */
+/*eq2 : x^2 + y^2 = R^2$ */
+
+/*Computes the matrix D = diag[m1,m2,m3] and output the file MATRIX_Dm*/
+Dm: matrix([m1],[m2],[m3])$
+Dm: psubst(eq,Dm)$
+Dm: psubst(eq2,Dm)$
+Dm: factor(Dm)$
+stringout("MATRIX_Dm",ratsimp(Dm[1,1]),ratsimp(Dm[2,1]),ratsimp(Dm[3,1]))$
+
+/*Computes the matrix D = diag[n1,n2,n3] and output the file MATRIX_Dn*/
+Dn: matrix([n1],[n2],[n3])$
+Dn: psubst(eq,Dn)$
+Dn: psubst(eq2,Dn)$
+Dn: factor(Dn)$
+stringout("MATRIX_Dn",ratsimp(Dn[1,1]),ratsimp(Dn[2,1]),ratsimp(Dn[3,1]))$
+
+/*Computes the matrix D = diag[o1,o2,o3] and output the file MATRIX_Do*/
+Do: matrix([o1],[o2],[o3])$
+Do: psubst(eq,Do)$
+Do: psubst(eq2,Do)$
+Do: factor(Do)$
+stringout("MATRIX_Do",ratsimp(Do[1,1]),ratsimp(Do[2,1]),ratsimp(Do[3,1]))$
+
+EOF
+
