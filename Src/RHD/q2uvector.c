@@ -3,27 +3,68 @@
 int Cons2Prim(double *u, double *q)
 {
    int i, j, k;
-   double D, E, S1, S2, S3;
+   double D, tau, S_cov[3], S_con[3];
+   double h, derh, f, derf;
+   double Lorentz, SS;
+   double theta, theta_0;
+   grid_ local_grid;
    
 #if DIM == 1
 
    for(i = 0; i <= Nx1-0; i++)
    {
-      D  = q(0,i);
-      E  = q(1,i);
-      S1 = q(2,i);
-      S2 = 0;
-      S3 = 0;
- 
-      u(0,i) = D;
-      #if EOS == IDEAL
-      u(1,i) = ((2.0*K-2.0)*D*E+(1.0-K)*pow(S3,2.0)+(1.0-K)*pow(S2,2.0)+(1.0-K)*pow(S1,2.0))/(2.0*D);
-      #elif EOS == DUST
-      u(1,i) = 0.0;
+      local_grid.x[0] = grid.time;
+      local_grid.x[1] = grid.X1[i];
+      local_grid.x[2] = 0.0;
+      local_grid.x[3] = 0.0;
+      #if COORDINATES == SPHERICAL
+      local_grid.x[2] = M_PI_2;
       #endif
-      u(2,i) = S1/D;
-      u(3,i) = S2/D;
-      u(4,i) = S3/D;
+
+      Get_Metric_Components(&local_grid);
+
+      D        = q(0,i);
+      tau      = q(1,i);
+      S_cov[0] = q(2,i);
+      S_cov[1] = 0.0;
+      S_cov[2] = 0.0;
+
+      Raise_Index_Range1(S_con,S_cov,&local_grid);
+      Scalar_Contraction_Range1(&SS,S_cov,S_con);
+
+      theta_0 = 0.0;//U(1,i)/U(0,i);
+      f       = 1.0;
+
+      while(fabs(f) > 0.000001)
+      {
+      #if EOS == IDEAL
+         h    = 1.0 + (K / (K - 1.0))*theta_0;
+         derh = K / (K - 1.0);
+      #elif EOS == DUST
+         h    = 1.0;
+         derh = 0.0;
+      #endif
+
+         Lorentz = sqrt(1.0 + SS/(D*D*h*h));
+
+         f    = h*Lorentz - (theta_0/Lorentz) - (tau/D) - 1.0;
+         derf = (1.0/Lorentz)*(derh - 1.0 - theta_0*((Lorentz*Lorentz - 1.0)/(Lorentz*Lorentz))*(derh/h));
+
+         theta   = theta_0 - f/derf;
+         theta_0 = theta;
+      }
+
+      #if EOS == IDEAL
+      h    = 1.0 + (K / (K - 1.0))*theta_0;
+      #elif EOS == DUST
+      h    = 1.0;
+      #endif
+
+      Lorentz = sqrt(1.0 + SS/(D*D*h*h));
+
+      u(0,i) = D / Lorentz;
+      u(1,i) = D*h*Lorentz - tau - D;
+      u(2,i) = S_cov[0]/(D*h*Lorentz);
    }
 
 #elif DIM == 2

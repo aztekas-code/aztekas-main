@@ -8,6 +8,7 @@ void Prim2Cons_All(double *q, double *u)
    double P[eq+1];
    eos_ eos;
    grid_ local_grid;
+
 #if DIM == 1
 
    for(i = 0; i <= Nx1-0; i++)

@@ -46,6 +46,7 @@ int Mesh()
       #endif
    }
 
+/*
    #if PHYSICS == HD
    Surface_Volume();
    #elif PHYSICS == RHD
@@ -55,7 +56,9 @@ int Mesh()
       S1m(i) = dety(grid.X1m[i],M_PI_2,0)/dety(grid.X1[i],M_PI_2,0);
    }
    #endif
-   
+  */
+
+   Surface_Volume();
 #elif DIM == 2  || DIM == 4
    
    for(i = 0; i <= Nx1; i++)
