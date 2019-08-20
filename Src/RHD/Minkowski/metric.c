@@ -251,29 +251,36 @@ void Surface_Volume()
    {
       for(j = 0; j <= Nx2; j++)
       {
+         vol.x[1]    = grid.X1[i];
          surf_p.x[1] = grid.X1p[i];
          surf_m.x[1] = grid.X1m[i];
+         vol.x[2]    = grid.X2[j];
          surf_p.x[2] = grid.X2[j];
          surf_m.x[2] = grid.X2[j];
+         vol.x[3]    = 0.0;
          surf_p.x[3] = 0.0;
          surf_m.x[3] = 0.0;
  
-         Get_Metric_Components(surf_p);
-         Get_Metric_Components(surf_m);
+         Get_Metric_Components(&vol);
+         Get_Metric_Components(&surf_p);
+         Get_Metric_Components(&surf_m);
  
-         S1p(i,j) = surf_p.dety;
-         S1m(i,j) = surf_m.dety;
+         S1p(i,j) = surf_p.dety/vol.dety;
+         S1m(i,j) = surf_m.dety/vol.dety;
  
+         vol.x[1]    = grid.X1[i];
          surf_p.x[1] = grid.X1[i];
          surf_m.x[1] = grid.X1[i];
+         vol.x[2]    = grid.X2[j];
          surf_p.x[2] = grid.X2p[j];
          surf_m.x[2] = grid.X2m[j];
  
-         Get_Metric_Components(surf_p);
-         Get_Metric_Components(surf_m);
+         Get_Metric_Components(&vol);
+         Get_Metric_Components(&surf_p);
+         Get_Metric_Components(&surf_m);
  
-         S2p(i,j) = surf_p.dety;
-         S2m(i,j) = surf_m.dety;
+         S2p(i,j) = surf_p.dety/vol.dety;
+         S2m(i,j) = surf_m.dety/vol.dety;
       }
    }
 

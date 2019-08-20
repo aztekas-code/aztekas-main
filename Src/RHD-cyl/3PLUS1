@@ -1,7 +1,0 @@
-#!/bin/bash
-
-./Cyll >&/dev/null
-./Compute3+1 >&/dev/null
-perl Functions.pl
-rm DIFF PARAM Metric MATRIX* VECTOR* 
-
