@@ -63,10 +63,11 @@ void Prim2FluxF(double *f, double *v, double *u, gauge_ local_grid)
    V[0] = lapse*v_con[0] - beta;
 
    // Compute the covariant and contravariant components of the 3-momentum
+   S_con[0] = rho*eos.h*Lorentz*Lorentz*v_con[0];
+
    for(i = 0; i < 3; i++)
    {
       S_cov[i] = rho*eos.h*Lorentz*Lorentz*v_cov[i];
-      S_con[i] = rho*eos.h*Lorentz*Lorentz*v_con[i];
    }
 
    // Compute useful 2-tensor W^i_j (see BHAC article)
