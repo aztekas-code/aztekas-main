@@ -35,5 +35,5 @@ cou = 0.25
 density_0  = 1.0
 pressure_0 = 0.0
 r_dot_0    = -0.4472
-phi_dot_0  = 0.0
-%phi_dot_0  = 0.02
+%phi_dot_0  = 0.0
+phi_dot_0  = 0.02

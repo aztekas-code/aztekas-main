@@ -1,7 +1,9 @@
 #include"main.h"
     
-void Prim2FluxF(double *f, double *v, double *u, double *x)
+//void Prim2FluxF(double *f, double *v, double *u, double *x)
+void Prim2FluxF(double *f, double *v, double *u, grid_ local_grid)
 {
+
    double E;
    eos_ eos;
    double rho, p, vx1=0, vx2=0, vx3=0;
@@ -19,7 +21,7 @@ void Prim2FluxF(double *f, double *v, double *u, double *x)
    vx3 = u[4];
 #endif
 
-   EoS(&eos,u,x);
+   EoS(&eos,u,local_grid);
 
    E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
 
@@ -32,4 +34,5 @@ void Prim2FluxF(double *f, double *v, double *u, double *x)
    v[0] = vx1 - eos.cs;
    v[1] = vx1 + eos.cs;
    v[2] = vx1;
+
 }

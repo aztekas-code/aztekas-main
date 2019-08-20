@@ -21,37 +21,38 @@ void Sources(double *u, vec_ *v, int *I)
    int n;
    double x[4];
    double default_S[eq+1], user_S[eq+1];
+   grid_ local_grid;
 
-   x[0] = grid.time;
+   local_grid.x[0] = grid.time;
 
 #if DIM == 1
 
-   x[1] = grid.X1[I[0]];
-   x[2] = 0.0;
-   x[3] = 0.0;
+   local_grid.x[1] = grid.X1[I[0]];
+   local_grid.x[2] = 0.0;
+   local_grid.x[3] = 0.0;
    #if COORDINATES == SPHERICAL
-   x[2] = M_PI_2;
+   local_grid.x[2] = M_PI_2;
    #endif
 
 #elif DIM == 2 || DIM == 4
 
-   x[1] = grid.X1[I[0]];
-   x[2] = grid.X2[I[1]];
-   x[3] = 0.0;
+   local_grid.x[1] = grid.X1[I[0]];
+   local_grid.x[2] = grid.X2[I[1]];
+   local_grid.x[3] = 0.0;
    #if POLAR == TRUE
-   x[2] = M_PI_2;
+   local_grid.x[2] = M_PI_2;
    #endif
 
 #elif DIM == 3
 
-   x[1] = grid.X1[I[0]];
-   x[2] = grid.X2[I[1]];
-   x[3] = grid.X3[I[2]];
+   local_grid.x[1] = grid.X1[I[0]];
+   local_grid.x[2] = grid.X2[I[1]];
+   local_grid.x[3] = grid.X3[I[2]];
 
 #endif
 
-   Source_Terms(default_S,u,x);
-   User_Source_Terms(user_S,u,x);
+   Source_Terms(default_S,u,local_grid);
+   User_Source_Terms(user_S,u,local_grid);
 
    for(n = 0; n < eq; n++)
    {
@@ -72,25 +73,25 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
    double dm[3];
    double dup[eq + 1];
    double dum[eq + 1];
-   double x[4];
+   grid_ local_grid;
 
-   x[0] = grid.time;
+   local_grid.x[0] = grid.time;
 
 #if DIM == 1
 
-   x[1] = grid.X1[I[0]];
-   x[2] = M_PI_2;
+   local_grid.x[1] = grid.X1[I[0]];
+   local_grid.x[2] = M_PI_2;
 
 #elif DIM == 2
 
-   x[1] = grid.X1[I[0]];
-   x[2] = grid.X2[I[1]];
+   local_grid.x[1] = grid.X1[I[0]];
+   local_grid.x[2] = grid.X2[I[1]];
 
 #elif DIM == 3 
 
-   x[1] = grid.X1[I[0]];
-   x[2] = grid.X2[I[1]];
-   x[3] = grid.X3[I[2]];
+   local_grid.x[1] = grid.X1[I[0]];
+   local_grid.x[2] = grid.X2[I[1]];
+   local_grid.x[3] = grid.X3[I[2]];
    
 #endif
 
@@ -100,17 +101,17 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
       {
          case 'f':
             u = l->ux1p;
-            x[1] = grid.X1p[I[0]];
+            local_grid.x[1] = grid.X1p[I[0]];
          break;
 
          case 'g':
             u = l->ux2p;
-            x[2] = grid.X2p[I[1]];
+            local_grid.x[2] = grid.X2p[I[1]];
          break;
 
          case 'h':
             u = l->ux3p;
-            x[3] = grid.X3p[I[2]];
+            local_grid.x[3] = grid.X3p[I[2]];
          break;
       }
    }
@@ -120,20 +121,24 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
       {
          case 'f':
             u = l->ux1m;
-            x[1] = grid.X1m[I[0]];
+            local_grid.x[1] = grid.X1m[I[0]];
          break;
 
          case 'g':
             u = l->ux2m;
-            x[2] = grid.X2m[I[1]];
+            local_grid.x[2] = grid.X2m[I[1]];
          break;
 
          case 'h':
             u = l->ux3m;
-            x[3] = grid.X3m[I[2]];
+            local_grid.x[3] = grid.X3m[I[2]];
          break;
       }
    }
+
+#if PHYSICS == RHD
+   Get_Metric_Components(&local_grid);
+#endif
 
    for(n = 0; n < eq; n++)
    {
@@ -141,27 +146,27 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
       f->um[n] = u[0*eq + n];
    }
 
-   Prim2Cons(f->qp,f->up,x);
-   Prim2Cons(f->qm,f->um,x);
+   Prim2Cons(f->qp,f->up,local_grid);
+   Prim2Cons(f->qm,f->um,local_grid);
 
    switch(flux)
    {
       case 'f':
-         Prim2FluxF(f->fp,dp,f->up,x);
+         Prim2FluxF(f->fp,dp,f->up,local_grid);
 
-         Prim2FluxF(f->fm,dm,f->um,x);
+         Prim2FluxF(f->fm,dm,f->um,local_grid);
       break;
 
       case 'g':
-         Prim2FluxG(f->fp,dp,f->up,x);
+         Prim2FluxG(f->fp,dp,f->up,local_grid);
 
-         Prim2FluxG(f->fm,dm,f->um,x);
+         Prim2FluxG(f->fm,dm,f->um,local_grid);
       break;
 
       case 'h':
-         Prim2FluxH(f->fp,dp,f->up,x);
+         Prim2FluxH(f->fp,dp,f->up,local_grid);
 
-         Prim2FluxH(f->fm,dm,f->um,x);
+         Prim2FluxH(f->fm,dm,f->um,local_grid);
       break;
    }
 

@@ -2,9 +2,9 @@
 
 #if EOS == IDEAL
 
-void EoS(eos_ *eos, double *u, double *x)
+void EoS(eos_ *eos, double *u, grid_ local_grid)
 {
-   double rho, p, h;
+   double rho, p;
    rho = u[0];
    p   = u[1];
 
@@ -13,16 +13,16 @@ void EoS(eos_ *eos, double *u, double *x)
 #if PHYSICS == HD
    eos->cs = sqrt(K * p / rho);
 #elif PHYSICS == RHD
-   h       = 1.0 + eos->e + p/rho;
-   eos->cs = sqrt(K * p / (rho * h));
+   eos->h       = 1.0 + eos->e + p/rho;
+   eos->cs = sqrt(K * p / (rho * eos->h));
 #endif
 }
 
 #elif EOS == DUST
 
-void EoS(eos_ *eos, double *u, double *x)
+void EoS(eos_ *eos, double *u, grid_ local_grid)
 {
-   double rho, p, h;
+   double rho, p;
    rho = u[0];
    p   = 0.0;
 
@@ -31,8 +31,8 @@ void EoS(eos_ *eos, double *u, double *x)
 #if PHYSICS == HD
    eos->cs = sqrt(K * p / rho);
 #elif PHYSICS == RHD
-   h       = 1.0 + eos->e + p/rho;
-   eos->cs = sqrt(K * p / (rho * h));
+   eos->h       = 1.0 + eos->e + p/rho;
+   eos->cs = sqrt(K * p / (rho * eos->h));
 #endif
 }
 

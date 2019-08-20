@@ -7,18 +7,18 @@ void Prim2Cons_All(double *q, double *u)
    double rho, p, vx1, vx2, vx3;
    double P[eq+1];
    eos_ eos;
-   double x[4];
-   
+   grid_ local_grid;
+
 #if DIM == 1
 
    for(i = 0; i <= Nx1-0; i++)
    {
-      x[0] = grid.time;
-      x[1] = grid.X1[i];
-      x[2] = 0.0;
-      x[3] = 0.0;
+      local_grid.x[0] = grid.time;
+      local_grid.x[1] = grid.X1[i];
+      local_grid.x[2] = 0.0;
+      local_grid.x[3] = 0.0;
       #if COORDINATES == SPHERICAL
-      x[2] = M_PI_2;
+      local_grid.x[2] = M_PI_2;
       #endif
     
       rho = u(0,i);
@@ -30,7 +30,7 @@ void Prim2Cons_All(double *q, double *u)
       P[0] = rho;
       P[1] = p;
 
-      EoS(&eos,P,x);
+      EoS(&eos,P,local_grid);
 
       E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
 
@@ -47,12 +47,12 @@ void Prim2Cons_All(double *q, double *u)
    {
       for(j = 0; j <= Nx2-0; j++)
       {
-         x[0] = grid.time;
-         x[1] = grid.X1[i];
-         x[2] = grid.X2[j];
-         x[3] = 0.0;
+         local_grid.x[0] = grid.time;
+         local_grid.x[1] = grid.X1[i];
+         local_grid.x[2] = grid.X2[j];
+         local_grid.x[3] = 0.0;
          #if POLAR == TRUE
-         x[2] = M_PI_2;
+         local_grid.x[2] = M_PI_2;
          #endif
        
          rho = u(0,i,j);
@@ -64,7 +64,7 @@ void Prim2Cons_All(double *q, double *u)
          P[0] = rho;
          P[1] = p;
 
-         EoS(&eos,P,x);
+         EoS(&eos,P,local_grid);
 
          E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
  
@@ -82,10 +82,10 @@ void Prim2Cons_All(double *q, double *u)
    {
       for(j = 0; j <= Nx2-0; j++)
       {
-         x[0] = grid.time;
-         x[1] = grid.X1[i];
-         x[2] = grid.X2[j];
-         x[3] = 0.0;
+         local_grid.x[0] = grid.time;
+         local_grid.x[1] = grid.X1[i];
+         local_grid.x[2] = grid.X2[j];
+         local_grid.x[3] = 0.0;
        
          rho = u(0,i,j);
          p   = u(1,i,j);
@@ -96,7 +96,7 @@ void Prim2Cons_All(double *q, double *u)
          P[0] = rho;
          P[1] = p;
 
-         EoS(&eos,P,x);
+         EoS(&eos,P,local_grid);
 
          E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
  
@@ -116,10 +116,10 @@ void Prim2Cons_All(double *q, double *u)
       {
          for(k = 0; k <= Nx3; k++)
          {
-            x[0] = grid.time;
-            x[1] = grid.X1[i];
-            x[2] = grid.X2[j];
-            x[3] = grid.X3[k];
+            local_grid.x[0] = grid.time;
+            local_grid.x[1] = grid.X1[i];
+            local_grid.x[2] = grid.X2[j];
+            local_grid.x[3] = grid.X3[k];
         
             rho = u(0,i,j,k);
             p   = u(1,i,j,k);
@@ -130,7 +130,7 @@ void Prim2Cons_All(double *q, double *u)
             P[0] = rho;
             P[1] = p;
 
-            EoS(&eos,P,x);
+            EoS(&eos,P,local_grid);
 
             E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
           
