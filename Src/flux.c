@@ -82,10 +82,8 @@ int Hll(double *F, flx_ *f, int x)
    int n;
    double q;
    double sR, sL;
-   double QR[eq+1], QL[eq+1];
-   double FR[eq+1], FL[eq+1];
-   double qp[eq+1], qm[eq+1];
-   double fp[eq+1], fm[eq+1];
+   double QR, QL;
+   double FR, FL;
 
    sR = f->lp;
    sL = f->lm;
@@ -94,28 +92,26 @@ int Hll(double *F, flx_ *f, int x)
    {
       for(n = 0; n < eq; n++)
       {
-         FL[n] = f->fm[n];
-         F[n] = FL[n];
+         F[n] = f->fm[n];
       }
    }
    else if(sL <= 0 && sR >= 0)
    {
       for(n = 0; n < eq; n++)
       {
-         QR[n] = f->qp[n];
-         QL[n] = f->qm[n];
-         FR[n] = f->fp[n];
-         FL[n] = f->fm[n];
-         q = sR*sL*(QR[n] - QL[n]);
-         F[n] = (sR*FL[n] - sL*FR[n] + q)/(sR - sL);
+         QR = f->qp[n];
+         QL = f->qm[n];
+         FR = f->fp[n];
+         FL = f->fm[n];
+         q = sR*sL*(QR - QL);
+         F[n] = (sR*FL - sL*FR + q)/(sR - sL);
       }
    }
-   else if(f->lp <= 0)
+   else if(sR <= 0)
    {
       for(n = 0; n < eq; n++)
       {
-         FR[n] = f->fp[n];
-         F[n] = FR[n];
+         F[n] = f->fp[n];
       }
    }
 

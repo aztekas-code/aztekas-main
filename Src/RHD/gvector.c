@@ -84,7 +84,10 @@ void Prim2FluxG(double *f, double *v, double *u, gauge_ local_grid)
 
    // Computed characteristic velocities
    vel  = v_con[1];
-   v[0] = (cs/(1 - VV*cs*cs))*(vel*(1 - cs*cs) + sqrt(cs*cs*(1 - VV)*(gamma*(1 - VV*cs*cs) - vel*vel*(1 - cs*cs)))) - beta;
-   v[1] = (cs/(1 - VV*cs*cs))*(vel*(1 - cs*cs) - sqrt(cs*cs*(1 - VV)*(gamma*(1 - VV*cs*cs) - vel*vel*(1 - cs*cs)))) - beta;
+   double cs2  = cs*cs;
+   double vel2 = vel*vel;
+
+   v[0] = (lapse/(1.0 - VV*cs2))*(vel*(1.0 - cs2) + sqrt(cs2*(1.0 - VV)*(gamma*(1.0 - VV*cs2) - vel2*(1.0 - cs2)))) - beta;
+   v[1] = (lapse/(1.0 - VV*cs2))*(vel*(1.0 - cs2) - sqrt(cs2*(1.0 - VV)*(gamma*(1.0 - VV*cs2) - vel2*(1.0 - cs2)))) - beta;
    v[2] = lapse*vel - beta;
 }
