@@ -21,8 +21,8 @@ x2min = 0.0
 x3min = 0.0
 
 % Time parameters
-tmax = 0.4
-timefile = 0.01
+tmax = 0.35
+timefile = 0.35
 cou = 0.5
 
 % Polytorpic index
@@ -42,7 +42,7 @@ vx3l = 0.0
 
 % RIGHT STATE
 nr   = 1.0
-pr   = 0.000001
+pr   = 0.00000001
 vx1r = 0.0
 vx2r = 0.0
 vx3r = 0.0
