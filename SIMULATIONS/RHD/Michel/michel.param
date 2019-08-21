@@ -1,73 +1,47 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% OUTPUT FILE AND DIRECTORY %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-outputdirectory = DATA/
-outputfile      = data_
+% OUTPUT FILE AND DIRECTORY
+outputdirectory = ./prueba/
+outputfile      = michel_ 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% OUTPUT FORMAT (1 -> BINARY, 0 -> ASCII) %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-binary = 0
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% RESTART SIMULATION (1 -> TRUE, 0 -> FALSE) %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RESTART SIMULATION (1 -> true, 0 -> false)
 restart_simulation = 0
-restartfile        = DATA/data_0.dat
-restart_filecount  = 0
+restartfile = ./Shock/dx1_10.dat
+restart_filecount = 10
 
-%%%%%%%%%%%%%%%
-% DEFINE MESH %
-%%%%%%%%%%%%%%%
-Nx1 = 100
+% Define mesh
+Nx1 = 256
 Nx2 = 0
 Nx3 = 0
 
-%%%%%%%%%%%%%%%%%%%%%%%%
-% DEFINE DOMAIN LIMITS %
-%%%%%%%%%%%%%%%%%%%%%%%%
-
-X_norm = 1.0
-
+% Define domain limits
 x1max = 20.0
-x2max = 1.0
-x3max = 1.0
-x1min = 2.0
+x2max = 0.5
+x3max = 1.0 
+x1min = 2.5
 x2min = 0.0
 x3min = 0.0
 
-%%%%%%%%%%%%%%%%%%%
-% TIME PARAMETERS %
-%%%%%%%%%%%%%%%%%%%
-tmax     = 1.0
-timefile = 0.0000000000000000001
+% Time parameters
+tmax = 5000.0
+timefile = 10.0
+cou = 0.25
 
-%%%%%%%%%%%%%%%%%%
-% COURANT FACTOR %
-%%%%%%%%%%%%%%%%%%
-cou = 0.1
+% Polytorpic index
+%K = 1.00001
+%K = 1.3333333333333333333333333
+%K = 1.4
+%K = 1.5
+K = 1.6666666666666666666666666
 
-%%%%%%%%%%%%%%%%%%%%
-% POLYTROPIC INDEX %
-%%%%%%%%%%%%%%%%%%%%
-K = 1.6666666666666666666666666666666666666
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Initial conditions %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%%%%
-% BOUNDARY PARAMETERS %
-%%%%%%%%%%%%%%%%%%%%%%%
-r_out = 20.0
-r_in  = 2.5
-
-% 5/3 20
-density_0 = 3.542502e+03
-pressure_0 = 4.940072e+01
-velocity_0 = -9.719007e-02
-
-% 4/3 20
-%density_0 = 5.901940e+03
-%pressure_0 = 8.001744e+00
-%velocity_0 = -2.176401e-01
-
-%%%%%%%%%%%%%%%%%%%%%%
-% INITIAL PARAMETERS %
-%%%%%%%%%%%%%%%%%%%%%%
+% MICHEL ACCRETION (Gamma = 5/3, r0 = 20 M)
+density_0  =  3.542502e+03 
+pressure_0 =  4.940072e+01
+velocity_0 = -2.012243e-01
+ 
+% MICHEL ACCRETION (Gamma = 4/3, r0 = 20 M)
+%density_0  =  5.901940e+03
+%pressure_0 =  8.001744e+00
+%velocity_0 = -3.175561e-01

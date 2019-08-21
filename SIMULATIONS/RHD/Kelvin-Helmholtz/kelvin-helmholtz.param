@@ -21,12 +21,12 @@ x2min = -0.5
 x3min =  0.0
 
 % Time parameters
-tmax = 1.5
+tmax = 9.0
 timefile = 1.5
 cou = 0.5
 
 % Polytorpic index
-K = 1.4
+K = 1.6666666666666666666666666
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Initial conditions %%%%%%
