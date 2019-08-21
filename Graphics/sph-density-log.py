@@ -235,7 +235,7 @@ if orientation == 'c':
 # X1 and X2 ticks #
 #################
 x1labels = np.linspace(x1min,x1max, num=5, endpoint=True) # num of ticks in X1 axis
-x2labels = np.linspace(x2min,x2max, num=6, endpoint=True) # num of ticks in X2 axis
+x2labels = np.linspace(x2min,x2max, num=5, endpoint=True) # num of ticks in X2 axis
 
 if orientation == 'v':
     plt.xticks(x1labels)
