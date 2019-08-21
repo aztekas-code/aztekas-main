@@ -1,6 +1,6 @@
-#####################################
-#### Define dimension parameters ####
-#####################################
+######################################
+#### Define simulation parameters ####
+######################################
 #----------------------------------------------------------------------
 # From the list below, please activate/deactivate the options that     
 # apply to your run. If you modify any of these options, make sure     
@@ -19,21 +19,13 @@ PARAM += -Dgc=3
 # Physics (rhd,hd,mhd,rmhd)
 #####################################
 
-PHY    = rhd
-METRIC = Minkowski
+PHY = rhd
 ifeq ($(PHY),hd)
-        PARAM += -DPHYSICS=HD
+   PARAM += -DPHYSICS=1
 endif
 ifeq ($(PHY),rhd)
-        PARAM += -DPHYSICS=RHD
-endif
-
-eos = ideal
-ifeq ($(eos),ideal)
-        PARAM += -DEOS=IDEAL
-endif
-ifeq ($(eos),dust)
-        PARAM += -DEOS=DUST
+   PARAM += -DPHYSICS=2
+   metric = -EF
 endif
 
 #####################################
@@ -45,24 +37,24 @@ endif
 DIM = 1
 
 ifeq ($(DIM),1)
-	PARAM += -DDIM=1
-	PARAM += -Deq=3
-	PARAM += -Dgraf=1
+   PARAM += -Ddim=1
+   PARAM += -Deq=3
+   PARAM += -Dgraf=1
 endif
 ifeq ($(DIM),2)
-	PARAM += -DDIM=2
-	PARAM += -Deq=4
-	PARAM += -Dgraf=2
+   PARAM += -Ddim=2
+   PARAM += -Deq=4
+   PARAM += -Dgraf=2
 endif
 ifeq ($(DIM),4)
-	PARAM += -DDIM=4
-	PARAM += -Deq=5
-	PARAM += -Dgraf=2
+   PARAM += -Ddim=2
+   PARAM += -Deq=5
+   PARAM += -Dgraf=2
 endif
 ifeq ($(DIM),3)
-	PARAM += -DDIM=3
-	PARAM += -Deq=5
-	PARAM += -Dgraf=3
+   PARAM += -Ddim=3
+   PARAM += -Deq=5
+   PARAM += -Dgraf=3
 endif
 
 #####################################
@@ -71,16 +63,16 @@ endif
 # Coordinates (cart,cyl,sph)
 #####################################
 
-COORD = cart
+COORD = sph
 
 ifeq ($(COORD),cart)
-	PARAM += -DCOORDINATES=CARTESIAN
+   PARAM += -Dalfa=0
 endif
 ifeq ($(COORD),cyl)
-	PARAM += -DCOORDINATES=CYLINDRICAL
+   PARAM += -Dalfa=1
 endif
 ifeq ($(COORD),sph)
-	PARAM += -DCOORDINATES=SPHERICAL
+   PARAM += -Dalfa=2
 endif
 
 #####################################
@@ -88,23 +80,12 @@ endif
 #####################################
 # PATH TO AZTEKAS
 #####################################
-AZTPATH = ../../../
+AZTPATH = /home/aaguayoo/AZTEKAS/aztekas-main
 #####################################
 
 #####################################
 # Integration method
 #####################################
-
-INT = standard
-
-ifeq ($(INT),standard)
-	PARAM += -Dintegration=0
-	INT = 
-endif
-ifeq ($(INT),pvrs)
-	PARAM += -Dintegration=1
-	INT = -pvrs
-endif
 
 #####################################
 
@@ -115,62 +96,67 @@ endif
 ifeq ($(PHY),hd)
 SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/alloc.c \
+	  $(AZTPATH)/Src/array.c \
 	  $(AZTPATH)/Src/mesh.c \
 	  ./initial.c \
 	  $(AZTPATH)/Src/timestep.c \
 	  $(AZTPATH)/Src/input.c \
 	  $(AZTPATH)/Src/output.c \
-	  $(AZTPATH)/Src/integration$(INT).c \
+	  $(AZTPATH)/Src/integration.c \
 	  $(AZTPATH)/Src/flux.c \
-	  $(AZTPATH)/Src/runge-kutta.c \
+	  $(AZTPATH)/Src/rk-clas-$(COORD).c \
 	  $(AZTPATH)/Src/limiters.c \
 	  $(AZTPATH)/Src/vectors.c \
-	  $(AZTPATH)/Src/restart.c \
-	  $(AZTPATH)/Src/auxfunc.c \
+	  $(AZTPATH)/Src/restart.c\
+	  $(AZTPATH)/Src/auxfunc.c\
 	  ./boundaries.c \
 	  $(AZTPATH)/Src/bound_cond.c \
-	  $(AZTPATH)/Src/HD/q2uvector.c \
-	  $(AZTPATH)/Src/HD/u2qvector.c \
-	  $(AZTPATH)/Src/HD/qvector.c \
-	  $(AZTPATH)/Src/HD/fvector.c \
-	  $(AZTPATH)/Src/HD/gvector.c \
-	  $(AZTPATH)/Src/HD/hvector.c \
-	  $(AZTPATH)/Src/HD/svector.c \
-	  $(AZTPATH)/Src/HD/metric.c \
-	  $(AZTPATH)/Src/EOS/eos.c \
-	  ./user_sources.c \
-	  ./user_input.c
+	  $(AZTPATH)/Src/HD-$(COORD)/amatrix.c \
+	  $(AZTPATH)/Src/HD-$(COORD)/dmmatrix.c \
+	  $(AZTPATH)/Src/HD-$(COORD)/dnmatrix.c \
+	  $(AZTPATH)/Src/HD-$(COORD)/domatrix.c \
+	  $(AZTPATH)/Src/HD-$(COORD)/q2uvector.c \
+	  $(AZTPATH)/Src/HD-$(COORD)/u2qvector.c \
+	  $(AZTPATH)/Src/HD-$(COORD)/qvector.c \
+	  $(AZTPATH)/Src/HD-$(COORD)/fvector.c \
+	  $(AZTPATH)/Src/HD-$(COORD)/gvector.c \
+	  $(AZTPATH)/Src/HD-$(COORD)/hvector.c \
+	  $(AZTPATH)/Src/HD-$(COORD)$(grav)/svector.c \
+	  $(AZTPATH)/Src/HD-$(COORD)$(grav)/gauge.c \
+	  ./extforce.c
 endif 
 
 ifeq ($(PHY),rhd)
 SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/alloc.c \
+	  $(AZTPATH)/Src/array.c \
 	  $(AZTPATH)/Src/mesh.c \
 	  ./initial.c \
 	  $(AZTPATH)/Src/timestep.c \
 	  $(AZTPATH)/Src/input.c \
 	  $(AZTPATH)/Src/output.c \
-	  $(AZTPATH)/Src/integration$(INT).c \
+	  $(AZTPATH)/Src/integration.c \
 	  $(AZTPATH)/Src/flux.c \
-	  $(AZTPATH)/Src/runge-kutta.c \
+	  $(AZTPATH)/Src/rk-rel.c \
 	  $(AZTPATH)/Src/limiters.c \
 	  $(AZTPATH)/Src/vectors.c \
-	  $(AZTPATH)/Src/restart.c \
-	  $(AZTPATH)/Src/auxfunc.c \
+	  $(AZTPATH)/Src/restart.c\
+	  $(AZTPATH)/Src/auxfunc.c\
 	  ./boundaries.c \
 	  $(AZTPATH)/Src/bound_cond.c \
-	  $(AZTPATH)/Src/RHD/q2uvector.c \
-	  $(AZTPATH)/Src/RHD/u2qvector.c \
-	  $(AZTPATH)/Src/RHD/qvector.c \
-	  $(AZTPATH)/Src/RHD/fvector.c \
-	  $(AZTPATH)/Src/RHD/gvector.c \
-	  $(AZTPATH)/Src/RHD/hvector.c \
-	  $(AZTPATH)/Src/RHD/svector.c \
-	  $(AZTPATH)/Src/RHD/surface.c \
-	  $(AZTPATH)/Src/RHD/$(METRIC)/metric.c \
-	  $(AZTPATH)/Src/EOS/eos.c \
-	  ./user_sources.c \
-	  ./user_input.c
+	  $(AZTPATH)/Src/RHD-$(COORD)$(metric)/amatrix.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)$(metric)/dmmatrix.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)$(metric)/dnmatrix.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)$(metric)/domatrix.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)$(metric)/q2uvector.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)$(metric)/u2qvector.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)$(metric)/qvector.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)$(metric)/fvector.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)$(metric)/gvector.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)$(metric)/hvector.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)$(metric)/svector.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)$(metric)/gauge.c \
+	  ./extforce.c
 endif
 
 #OBJS = $(SOURCES:.c=.o)
@@ -190,7 +176,5 @@ $(EXEC): $(SOURCES)
 	$(COMPILER) $(PARAM) -fopenmp $(SOURCES) $(FLAGS) $(CFLAGS) -o $(EXEC)  
 	@echo "$(bla)"
 	@echo "aztekas compiled successfully"
-	
 clean:
 	rm -f $(EXEC)
-	

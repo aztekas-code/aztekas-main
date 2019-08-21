@@ -23,6 +23,8 @@ void User_Source_Terms(double *s, double *u, gauge_ local_grid)
    vx3 = u[4];
 #endif
 
+   r = local_grid.x[1];
+
    s[0] = 0.0;
    s[1] = -rho*vx1/(r*r);
    s[2] = -rho/(r*r);

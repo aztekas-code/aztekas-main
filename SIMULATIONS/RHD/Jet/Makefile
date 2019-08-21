@@ -42,7 +42,7 @@ endif
 # Dimension
 #####################################
 
-DIM = 1
+DIM = 2
 
 ifeq ($(DIM),1)
 	PARAM += -DDIM=1
@@ -71,7 +71,7 @@ endif
 # Coordinates (cart,cyl,sph)
 #####################################
 
-COORD = cart
+COORD = cyl
 
 ifeq ($(COORD),cart)
 	PARAM += -DCOORDINATES=CARTESIAN

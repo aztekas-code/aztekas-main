@@ -8,7 +8,7 @@ restartfile = ./Shock/dx1_10.dat
 restart_filecount = 10
 
 % Define mesh
-Nx1 = 400
+Nx1 = 512
 Nx2 = 0
 Nx3 = 0
 

@@ -27,7 +27,8 @@ int Boundaries(double *B)
    Outflow(B);
    
    // Linear extrapolation. Important for the diagonal shock tube
-/*
+ 
+   #if INTERFACE == DIAGONAL
    for(i = 0; i <= Nx1; i++)
    {
       for(j = 0; j <= Nx2; j++)
@@ -63,7 +64,7 @@ int Boundaries(double *B)
          }
       }
    }
-   */
+   #endif 
    
 #endif
 

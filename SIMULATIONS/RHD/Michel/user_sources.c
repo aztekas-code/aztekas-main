@@ -1,6 +1,6 @@
 /* 
  *  aztekas boundaries module
- *  Date of creation: 02-01-2019 12:50:45
+ *  Date of creation: 02-01-2019 12:13:33
  *  author: Alejandro Aguayo Ortiz 
  */
 #include"main.h"
@@ -8,6 +8,7 @@
 void User_Source_Terms(double *s, double *u, gauge_ local_grid)
 {
    double rho, p, vx1=0.0, vx2=0.0, vx3=0.0;
+   double r;
 
    rho = u[0];
    p   = u[1];
@@ -21,6 +22,8 @@ void User_Source_Terms(double *s, double *u, gauge_ local_grid)
    vx2 = u[3];
    vx3 = u[4];
 #endif
+
+   r = local_grid.x[1];
 
    s[0] = 0.0;
    s[1] = 0.0;

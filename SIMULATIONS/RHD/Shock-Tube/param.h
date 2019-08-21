@@ -18,7 +18,7 @@
 #define FLUX               HLL
 #define GRID               UNIFORM
 
-#define INTERFACE          VERTICAL
+#define INTERFACE          HORIZONTAL
 
 double nl, pl, vx1l, vx2l, vx3l;
 double nr, pr, vx1r, vx2r, vx3r;
