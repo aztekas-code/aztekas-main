@@ -20,7 +20,7 @@ PARAM += -Dgc=3
 #####################################
 
 PHY    = rhd
-METRIC = Schwarzschild
+METRIC = Schw
 ifeq ($(PHY),hd)
         PARAM += -DPHYSICS=HD
 endif

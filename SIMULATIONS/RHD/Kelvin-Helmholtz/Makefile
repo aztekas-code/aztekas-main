@@ -20,7 +20,7 @@ PARAM += -Dgc=3
 #####################################
 
 PHY    = rhd
-METRIC = Minkowski
+METRIC = Mink
 ifeq ($(PHY),hd)
         PARAM += -DPHYSICS=HD
 endif

@@ -20,7 +20,7 @@ PARAM += -Dgc=3
 #####################################
 
 PHY    = rhd
-METRIC = Mink
+METRIC = EF
 ifeq ($(PHY),hd)
         PARAM += -DPHYSICS=HD
 endif
@@ -71,7 +71,7 @@ endif
 # Coordinates (cart,cyl,sph)
 #####################################
 
-COORD = cart
+COORD = sph
 
 ifeq ($(COORD),cart)
 	PARAM += -DCOORDINATES=CARTESIAN
