@@ -7,12 +7,7 @@
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<math.h>
-#include<stdlib.h>
-#include<string.h>
 #include"main.h"
-#include"param.h"
 
 int MxV(double *M, double *V, double *L)
 {
@@ -33,7 +28,7 @@ int MxV(double *M, double *V, double *L)
    return 0;
 }
 
-void roundgen(double *num)
+void RoundGen(double *num)
 {
    double r;
    double bla;
@@ -48,3 +43,73 @@ void roundgen(double *num)
       *num = decnum*pow(10,(double)expnum);
    }
 }
+
+void Scalar_Contraction_Range1(double *scalar, double *cov, double *con)
+{
+   *scalar = cov[0]*con[0] + cov[1]*con[1] + cov[2]*con[2];
+}
+
+void Raise_Index_Range1(double *con, double *cov, gauge_ *local_grid)
+{
+   int i, j;
+
+   con[0] = local_grid->gamma_con[0][0]*cov[0] + local_grid->gamma_con[0][1]*cov[1] + local_grid->gamma_con[0][2]*cov[2];
+   con[1] = local_grid->gamma_con[1][0]*cov[0] + local_grid->gamma_con[1][1]*cov[1] + local_grid->gamma_con[1][2]*cov[2];
+   con[2] = local_grid->gamma_con[2][0]*cov[0] + local_grid->gamma_con[2][1]*cov[1] + local_grid->gamma_con[2][2]*cov[2];
+
+
+}
+
+void Low_Index_Range1(double *cov, double *con, gauge_ *local_grid)
+{
+   int i, j;
+
+}
+
+void Low_Index_Range2(double **diag, double **con, gauge_ *local_grid)
+{
+   int i, j, k;
+
+}
+
+void CheckSimParameters()
+{
+   printf("\n");
+   printf("aaaaa  zzzzz  ttttt  eeeee  k   k  aaaaa  sssss\n");
+   printf("    a     zz    t    e   e  k  k       a  ss   \n");
+   printf("aaaaa   zzz     t    eeeee  kkk    aaaaa  sssss\n");
+   printf("a   a  zz       t    e      k  k   a   a     ss\n");
+   printf("aaaaa  zzzzz    t    eeeee  k   k  aaaaa  sssss\n");
+   printf("\n");
+   printf("Running aztekas simulation...\n");
+   printf("\n");
+
+   // Print physics used
+   if(PHYSICS == HD)  printf("Performing a HD simulation.\n");
+   if(PHYSICS == RHD) printf("Performing a RHD simulation.\n");
+
+   // Coordinates
+   if(COORDINATES == CARTESIAN) printf("Cartesian coordinates.\n");
+   if(COORDINATES == CYLINDRICAL) printf("Cylindrical coordinates.\n");
+   if(COORDINATES == SPHERICAL) printf("Spherical coordinates.\n");
+
+   // Equation of state
+   if(EOS == IDEAL) printf("Ideal equation of state.\n");
+   if(EOS == DUST)  printf("Dust.\n");
+
+   // Print MoL-RK order
+   printf("Time integration using a second order MoL-Runge Kutta.\n");
+
+   // Print spatial numerical methods, algorithms and parameters.
+   // Primitive variable reconstruction.
+   if(RECONST == GODUNOV)  printf("Zero-order piecewise reconstruction.\n");
+   if(RECONST == MINMOD)   printf("MINMOD reconstruction.\n");
+   if(RECONST == MC)       printf("MC reconstruction.\n");
+   if(RECONST == SUPERBEE) printf("SUPERBEE reconstruction.\n");
+   if(RECONST == WENO5)    printf("WENO5 reconstruction.\n");
+
+   // Flux solver
+   if(FLUX == HLL)  printf("HLL Riemann solver.\n");
+   if(FLUX == HLLC) printf("HLLC Riemann solver.\n");
+}
+

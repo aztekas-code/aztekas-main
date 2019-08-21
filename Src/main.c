@@ -24,13 +24,7 @@
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<omp.h>
-#include<math.h>
-#include<stdlib.h>
-#include<string.h>
 #include"main.h"
-#include"param.h"
 
 int main(int argc, char* argv[])
 {
@@ -47,59 +41,64 @@ int main(int argc, char* argv[])
 
    strcpy(paramfile_name, argv[1]);
    
-   read_parameters_file(paramfile_name);   
+   Read_Parameters_File(paramfile_name);   
+   User_Parameters(paramfile_name);   
       
 	// create output directory
    char create_dir[] = "mkdir -p ";	
 	strcat(create_dir,outputdirectory);	
 	int sysret = system(create_dir);
 
-   // Include the ghost cells
-   new_SIZE();
+   // Print Simulation Parameters
+   CheckSimParameters();
+   if (check_param == TRUE) getchar();
 
-   allocateArray();
+   // Include the ghost cells
+   New_Size();
+
+   Allocate_Array();
 
    //We set the mesh func_planarMESH.c
-   MESH();
+   Mesh();
 
    //Time interval between data dumps
    dtprint = timefile;
 
    //We set the initial parameters func_planarINITIAL.c
-   if( restart_simulation == 1 )
+   if( restart_simulation == TRUE )
    {
-      if( binary == 1 )
+      if( binary == TRUE )
       {
-         RESTART_BIN();
+         Restart_Bin();
       }
       else
       {
-         RESTART();
+         Restart();
       }
 
-      tprint = time;
+      tprint = grid.time;
       itprint = restart_filecount;
    }
    else
    {
-      INITIAL();
+      Initial();
       tprint  = 0.0; //Initialize printing parameter
       itprint = 0;   //Initialize file numeration
    }
 
    start = omp_get_wtime();
-   while(time <= tmax)
+   while(grid.time <= tmax)
    {
       //In this part we compute the time step
-      dt = TIMESTEP();
+      dt = TimeStep();
 
       //We print the values: file (DATOS*) and to terminal func_planarOUTPUT.c
       PrintValues(&tprint,&dtprint,&itprint);
 
       //In here we set the integration method (Finite volume method)
-      INTEGRATION();
+      Integration();
 
-      printf("Time = %e, dt = %e\r",time,dt);
+      printf("Time = %e, dt = %e\r",grid.time,dt);
       fflush(stdout); 
    }
 
@@ -108,9 +107,9 @@ int main(int argc, char* argv[])
    delta = omp_get_wtime() - start;
    printf("Delta %.4g seconds with %d threads\n",delta,1);
 
-   free(X1);
-   free(X2);
-   free(X3);
+   free(grid.X1);
+   free(grid.X2);
+   free(grid.X3);
 
    return 0;
 }

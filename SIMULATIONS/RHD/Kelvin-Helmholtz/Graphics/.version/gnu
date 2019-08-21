@@ -1,0 +1,9 @@
+#!/bin/bash
+
+gnuplot << EOF
+
+set terminal png
+set output "figure$1-$2.png"
+plot "data_$1.dat" u 1:$2 w l
+
+EOF

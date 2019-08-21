@@ -14,82 +14,55 @@
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<math.h>
-#include<stdlib.h>
-#include<string.h>
 #include"main.h"
-#include"vector.h"
-#include"param.h"
 
-int AMATRIX1D(double *u, vec_ *v, int *I)
+void Sources(double *u, vec_ *v, int *I)
 {
-   int m, n;
-   int i;
-   double geoS[eq + 1], extS[eq + 1];
+   int n;
+   double x[4];
+   double default_S[eq+1], user_S[eq+1];
+   gauge_ local_grid;
 
-   x1 = X1[I[0]];
-#if alfa == 0 || alfa == 1
-   x2 = 0;
-#elif alfa == 2
-   x2 = M_PI_2;
+   local_grid.x[0] = grid.time;
+
+#if DIM == 1
+
+   local_grid.x[1] = grid.X1[I[0]];
+   local_grid.x[2] = 0.0;
+   local_grid.x[3] = 0.0;
+   #if COORDINATES == SPHERICAL
+   local_grid.x[2] = M_PI_2;
+   #endif
+
+#elif DIM == 2 || DIM == 4
+
+   local_grid.x[1] = grid.X1[I[0]];
+   local_grid.x[2] = grid.X2[I[1]];
+   local_grid.x[3] = 0.0;
+   #if POLAR == TRUE
+   local_grid.x[2] = M_PI_2;
+   #endif
+
+#elif DIM == 3
+
+   local_grid.x[1] = grid.X1[I[0]];
+   local_grid.x[2] = grid.X2[I[1]];
+   local_grid.x[3] = grid.X3[I[2]];
+
 #endif
-   x3 = 0;
 
-   funct_S(geoS,u);
-   EXTFORCE(extS,u);
-
-#if integration == 1
-   funct_A(v->A,u);
+#if PHYSICS == RHD
+   Get_Metric_Components(&local_grid);
 #endif
+
+   Source_Terms(default_S,u,local_grid);
+   User_Source_Terms(user_S,u,local_grid);
 
    for(n = 0; n < eq; n++)
    {
-      v->S[n] = geoS[n] + extS[n];
+      v->S[n] = default_S[n] + user_S[n];
    }
 
-   return 0;
-}
-
-int AMATRIX2D(double *u, vec_ *v, int *I)
-{
-   int m, n;
-   double geoS[eq + 1], extS[eq + 1];
-
-   x1  = X1[I[0]];
-   x2  = X2[I[1]];
-   x3  = 0;
-
-#if polar == 1
-   x2 = M_PI_2;
-#endif
-   
-   funct_S(geoS,u);
-   EXTFORCE(extS,u);
-
-#if integration == 1
-   funct_A(v->A,u);
-#endif
-
-   for(n = 0; n < eq; n++)
-   {
-      v->S[n] = geoS[n] + extS[n];
-   }
-
-   return 0;
-}
-
-int AMATRIX3D(double *u, vec_ *v, int *I)
-{
-   int m, n;
-
-   x1  = X1[I[0]];
-   x2  = X2[I[1]];
-   x3  = X3[I[2]];
-
-   funct_S(v->S,u);
-
-   return 0;
 }
 
 ///////////////////////////////////////////////////////////////////////////
@@ -102,22 +75,34 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
    double um[eq + 1];
    double dp[3];
    double dm[3];
-   double dup[eq + 1];
-   double dum[eq + 1];
-   x1 = 0.0;
-   x2 = 0.0;
-   x3 = 0.0;
+   gauge_ local_grid;
 
-#if dim == 1
-   x1 = X1[I[0]];
-   x2 = M_PI_2;
-#elif dim == 2
-   x1 = X1[I[0]];
-   x2 = X2[I[1]];
-#elif dim == 3 
-   x1 = X1[I[0]];
-   x2 = X2[I[1]];
-   x3 = X3[I[2]];
+   local_grid.x[0] = grid.time;
+
+#if DIM == 1
+
+   local_grid.x[1] = grid.X1[I[0]];
+   local_grid.x[2] = 0.0;
+   local_grid.x[3] = 0.0;
+   #if COORDINATES == SPHERICAL
+   local_grid.x[2] = M_PI_2;
+   #endif
+
+#elif DIM == 2 || DIM == 4
+
+   local_grid.x[1] = grid.X1[I[0]];
+   local_grid.x[2] = grid.X2[I[1]];
+   local_grid.x[3] = 0.0;
+   #if POLAR == TRUE
+   local_grid.x[2] = M_PI_2;
+   #endif
+
+#elif DIM == 3
+
+   local_grid.x[1] = grid.X1[I[0]];
+   local_grid.x[2] = grid.X2[I[1]];
+   local_grid.x[3] = grid.X3[I[2]];
+
 #endif
 
    if(pm == 1)
@@ -126,17 +111,17 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
       {
          case 'f':
             u = l->ux1p;
-            x1 = X1p[I[0]];
+            local_grid.x[1] = grid.X1p[I[0]];
          break;
 
          case 'g':
             u = l->ux2p;
-            x2 = X2p[I[1]];
+            local_grid.x[2] = grid.X2p[I[1]];
          break;
 
          case 'h':
             u = l->ux3p;
-            x3 = X3p[I[2]];
+            local_grid.x[3] = grid.X3p[I[2]];
          break;
       }
    }
@@ -146,20 +131,24 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
       {
          case 'f':
             u = l->ux1m;
-            x1 = X1m[I[0]];
+            local_grid.x[1] = grid.X1m[I[0]];
          break;
 
          case 'g':
             u = l->ux2m;
-            x2 = X2m[I[1]];
+            local_grid.x[2] = grid.X2m[I[1]];
          break;
 
          case 'h':
             u = l->ux3m;
-            x3 = X3m[I[2]];
+            local_grid.x[3] = grid.X3m[I[2]];
          break;
       }
    }
+
+#if PHYSICS == RHD
+   Get_Metric_Components(&local_grid);
+#endif
 
    for(n = 0; n < eq; n++)
    {
@@ -167,53 +156,47 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
       f->um[n] = u[0*eq + n];
    }
 
-   funct_Q(f->qp,f->up);
-   funct_Q(f->qm,f->um);
+   Prim2Cons(f->qp,f->up,local_grid);
+   Prim2Cons(f->qm,f->um,local_grid);
 
    switch(flux)
    {
       case 'f':
-         funct_F(f->fp,f->up);
-         funct_Dm(dp,f->up);
+         Prim2FluxF(f->fp,dp,f->up,local_grid);
 
-         funct_F(f->fm,f->um);
-         funct_Dm(dm,f->um);
+         Prim2FluxF(f->fm,dm,f->um,local_grid);
       break;
 
       case 'g':
-         funct_G(f->fp,f->up);
-         funct_Dn(dp,f->up);
+         Prim2FluxG(f->fp,dp,f->up,local_grid);
 
-         funct_G(f->fm,f->um);
-         funct_Dn(dm,f->um);
+         Prim2FluxG(f->fm,dm,f->um,local_grid);
       break;
 
       case 'h':
-         funct_H(f->fp,f->up);
-         funct_Do(dp,f->up);
+         Prim2FluxH(f->fp,dp,f->up,local_grid);
 
-         funct_H(f->fm,f->um);
-         funct_Do(dm,f->um);
+         Prim2FluxH(f->fm,dm,f->um,local_grid);
       break;
    }
 
-   lr = max(dp[0],dp[1]);
-   lr = max(lr,dp[2]);
-   lr = max(0.0,lr);
-   ll = max(dm[0],dm[1]);
-   ll = max(ll,dm[2]);
-   ll = max(0.0,ll);
+   lr = MAX(dp[0],dp[1]);
+   lr = MAX(lr,dp[2]);
+   lr = MAX(0.0,lr);
+   ll = MAX(dm[0],dm[1]);
+   ll = MAX(ll,dm[2]);
+   ll = MAX(0.0,ll);
 
-   f->lp = max(lr,ll);
+   f->lp = MAX(lr,ll);
 
-   lr = min(dp[0],dp[1]);
-   lr = min(lr,dp[2]);
-   lr = min(0.0,lr);
-   ll = min(dm[0],dm[1]);
-   ll = min(ll,dm[2]);
-   ll = min(0.0,ll);
+   lr = MIN(dp[0],dp[1]);
+   lr = MIN(lr,dp[2]);
+   lr = MIN(0.0,lr);
+   ll = MIN(dm[0],dm[1]);
+   ll = MIN(ll,dm[2]);
+   ll = MIN(0.0,ll);
 
-   f->lm = min(lr,ll);
+   f->lm = MIN(lr,ll);
 
    return 0;
 }

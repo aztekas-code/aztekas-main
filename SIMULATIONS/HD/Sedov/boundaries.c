@@ -14,20 +14,14 @@
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<math.h>
-#include<stdlib.h>
-#include<string.h>
 #include"main.h"
-#include"param.h"
 
-int BOUNDARIES(double *B)
+int Boundaries(double *B)
 {
    int i, j, k, n, cell;
 
-#if dim == 1
-   OUTFLOW(B);
-#endif
+   Outflow(B);
+   Reflection(B);
 
    return 0;
 }
