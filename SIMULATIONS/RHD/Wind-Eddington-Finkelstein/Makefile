@@ -20,7 +20,10 @@ PARAM += -Dgc=3
 #####################################
 
 PHY    = rhd
-METRIC = EF
+
+# Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Kerr-Schild)
+METRIC = Eddington-Finkelstein
+
 ifeq ($(PHY),hd)
         PARAM += -DPHYSICS=HD
 endif
