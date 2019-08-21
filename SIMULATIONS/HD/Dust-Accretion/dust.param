@@ -1,0 +1,39 @@
+% OUTPUT FILE AND DIRECTORY
+outputdirectory = ./prueba/
+outputfile      = dust_ 
+
+% BINARY
+binary = 0
+
+% RESTART SIMULATION (1 -> true, 0 -> false)
+restart_simulation = 0
+restartfile = ./prueba/prueba_19.dat
+restart_filecount = 19
+
+% Define mesh
+Nx1 = 100
+Nx2 = 100
+Nx3 = 0
+
+% Define domain limits
+x1max = 10.0
+x2max = 0.5
+x3max = 1.0 
+x1min = 0.5
+x2min = 0.0
+x3min = 0.0
+
+% Time parameters
+tmax = 500.0
+timefile = 1.0
+cou = 0.25
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Initial conditions %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+density_0  = 1.0
+pressure_0 = 0.0
+r_dot_0    = -0.4472
+%phi_dot_0  = 0.0
+phi_dot_0  = 0.02

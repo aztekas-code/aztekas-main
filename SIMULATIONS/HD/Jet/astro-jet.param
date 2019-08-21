@@ -1,0 +1,56 @@
+% OUTPUT FILE AND DIRECTORY
+outputdirectory = Clas-Jet-Astro-3/
+outputfile      = jet_
+
+% RESTART SIMULATION (1 -> true, 0 -> false)
+restart_simulation = 1
+restartfile = Clas-Jet-Astro-2/jet_15.dat
+restart_filecount = 15
+
+% Define mesh
+
+% Classic jet
+%Nx1 = 400
+%Nx2 = 2000
+Nx1 = 80
+Nx2 = 400
+
+% Define domain limits
+x1max = 50e+15 % 20 R_j
+x2max = 250e+15 % 100 R_j
+x3max = 1.0
+x1min = 0.0
+x2min = 0.0
+x3min = 0.0
+
+% Time parameters
+tmax = 9.54e+09 % 2t_0 , t_0 = 152 yr, 1 yr = 3.14e+07
+timefile = 9.54e+07
+cou = 0.25
+
+% Polytorpic index
+K = 1.6666666666666666666666666
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Initial conditions %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Classical jet
+
+% JET
+n_jet   = 1.66e-21 %% 1000 cm^-3 m_H = 1.66x10^-24 g
+p_jet   = 1.38e-10 %% dynas cm^-2
+vx1_jet = 0.0
+vx2_jet = 3.32e+07 %% cm/s
+vx3_jet = 0.0
+
+% ATMOSPHERE
+n_atm   = 1.66e-22 %% 100 cm^-3
+p_atm   = 1.38e-10 %% dynas cm^-2
+vx1_atm = 0.0
+vx2_atm = 0.0
+vx3_atm = 0.0
+
+% JET RADII
+r_jet = 2.5e+15
+z_jet = 2.5e+15

@@ -14,87 +14,85 @@
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<math.h>
-#include<string.h>
 #include"main.h"
-#include"param.h"
 
-int MESH()
+int Mesh()
 {
    int i, j, k;
 
-#if dim == 1
+#if DIM == 1
    dx1 = (x1max - x1min)/((double)Nx1-2*gc);
-#elif dim == 2 || dim == 4
+#elif DIM == 2 || DIM == 4
    dx1 = (x1max - x1min)/((double)Nx1-2*gc);
    dx2 = (x2max - x2min)/((double)Nx2-2*gc);
-#elif dim == 3
+#elif DIM == 3
    dx1 = (x1max - x1min)/((double)Nx1-2*gc);
    dx2 = (x2max - x2min)/((double)Nx2-2*gc);
    dx3 = (x3max - x3min)/((double)Nx3-2*gc);
 #endif
 
-#if dim == 1
+#if DIM == 1
    
    for(i = 0; i <= Nx1; i++)
    {
-      X1[i] = x1min + (i-gc)*(dx1);
-      X1p[i] = x1min + (i+0.5-gc)*(dx1);
-      X1m[i] = x1min + (i-0.5-gc)*(dx1);
+      grid.X1[i] = x1min + (i-gc)*(dx1);
+      grid.X1p[i] = x1min + (i+0.5-gc)*(dx1);
+      grid.X1m[i] = x1min + (i-0.5-gc)*(dx1);
 
-      if(logmesh == 1)
-      {
-         X1[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-gc)/(Nx1-2*gc)) - 1;
-         X1p[i] = x1min + exp(log((x1max - x1min + 1.0))*(i+0.5-gc)/(Nx1-2*gc)) - 1;
-         X1m[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-0.5-gc)/(Nx1-2*gc)) - 1;
-      }
+      #if GRID == LOGMESH
+      grid.X1[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-gc)/(Nx1-2*gc)) - 1;
+      grid.X1p[i] = x1min + exp(log((x1max - x1min + 1.0))*(i+0.5-gc)/(Nx1-2*gc)) - 1;
+      grid.X1m[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-0.5-gc)/(Nx1-2*gc)) - 1;
+      #endif
    }
-   
-#elif dim == 2  || dim == 4
+
+   Surface_Volume();
+
+#elif DIM == 2  || DIM == 4
    
    for(i = 0; i <= Nx1; i++)
    {
-      X1[i]  = x1min + (i-gc)*(dx1);
-      X1p[i] = x1min + (i+0.5-gc)*(dx1);
-      X1m[i] = x1min + (i-0.5-gc)*(dx1);
+      grid.X1[i]  = x1min + (i-gc)*(dx1);
+      grid.X1p[i] = x1min + (i+0.5-gc)*(dx1);
+      grid.X1m[i] = x1min + (i-0.5-gc)*(dx1);
 
-      if(logmesh == 1)
-      {
-         X1[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-gc)/(Nx1-2*gc)) - 1;
-         X1p[i] = x1min + exp(log((x1max - x1min + 1.0))*(i+0.5-gc)/(Nx1-2*gc)) - 1;
-         X1m[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-0.5-gc)/(Nx1-2*gc)) - 1;
-      }
+      #if GRID == LOGMESH
+      grid.X1[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-gc)/(Nx1-2*gc)) - 1;
+      grid.X1p[i] = x1min + exp(log((x1max - x1min + 1.0))*(i+0.5-gc)/(Nx1-2*gc)) - 1;
+      grid.X1m[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-0.5-gc)/(Nx1-2*gc)) - 1;
+      #endif
    }
 
    for(j = 0; j <= Nx2; j++)
    {
-      X2[j]  = x2min + (j-gc)*(dx2);
-      X2p[j] = x2min + (j+0.5-gc)*(dx2);
-      X2m[j] = x2min + (j-0.5-gc)*(dx2);
+      grid.X2[j]  = x2min + (j-gc)*(dx2);
+      grid.X2p[j] = x2min + (j+0.5-gc)*(dx2);
+      grid.X2m[j] = x2min + (j-0.5-gc)*(dx2);
    }
    
-#elif dim == 3 
+   Surface_Volume();
+
+#elif DIM == 3 
    
    for(i = 0; i <= Nx1; i++)
    {
-      X1[i]  = x1min + (i-gc)*(dx1);
-      X1p[i] = x1min + (i+0.5-gc)*(dx1);
-      X1m[i] = x1min + (i-0.5-gc)*(dx1);
+      grid.X1[i]  = x1min + (i-gc)*(dx1);
+      grid.X1p[i] = x1min + (i+0.5-gc)*(dx1);
+      grid.X1m[i] = x1min + (i-0.5-gc)*(dx1);
    }
 
    for(j = 0; j <= Nx2; j++)
    {
-      X2[j]  = x2min + (j-gc)*(dx2);
-      X2p[j] = x2min + (j+0.5-gc)*(dx2);
-      X2m[j] = x2min + (j-0.5-gc)*(dx2);
+      grid.X2[j]  = x2min + (j-gc)*(dx2);
+      grid.X2p[j] = x2min + (j+0.5-gc)*(dx2);
+      grid.X2m[j] = x2min + (j-0.5-gc)*(dx2);
    }
 
    for(k = 0; k <= Nx3; k++)
    {
-      X3[k]  = x3min + (k-gc)*(dx3);
-      X3p[k] = x3min + (k+0.5-gc)*(dx3);
-      X3m[k] = x3min + (k-0.5-gc)*(dx3);
+      grid.X3[k]  = x3min + (k-gc)*(dx3);
+      grid.X3p[k] = x3min + (k+0.5-gc)*(dx3);
+      grid.X3m[k] = x3min + (k-0.5-gc)*(dx3);
    }
 
 #endif

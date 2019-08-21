@@ -1,57 +1,58 @@
 /*
- *   This program is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
- *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details.
- *
- *   You should have received a copy of the GNU General Public License
- *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<math.h>
-#include<string.h>
 #include"main.h"
 
-void INITIAL(double *dtprint)
+void Initial()
 {
    int n, i, j, k, cell;
 
    //Initialize time
-   time = 0.0;
+   grid.time = 0.0;
 
    //Initialize dt
    dt = 0.0;
 
-#if dim == 1 
-
-   /////////////////////////////
-   //-------Riemann-1D--------//
-   /////////////////////////////
+#if DIM == 1 
 
    for(i = 0; i <= Nx1; i++)
    {
-//      if(fabs(X1[i]) < 3*dx1)
-      if(fabs(X1[i]) < x_0)
+      if(fabs(grid.X1[i]) < x_0*dx1)
       {
-         U[c1(0,i)] = nl;
-//         U[c1(1,i)] = 3*(K-1)*1.0/(4*M_PI*nl*pow(3*dx1,3.0));
-         U[c1(1,i)] = pl;
-         U[c1(2,i)] = vx1l;
+         U(0,i) = n_0;
+         U(1,i) = 3*(K-1)*E_0/(4*M_PI*n_0*pow((x_0)*dx1,3.0));
+         U(2,i) = 0.0;
       }
       else
       {
-         U[c1(0,i)] = nr;
-         U[c1(1,i)] = pr;
-         U[c1(2,i)] = vx1r;
+         U(0,i) = n_0;
+         U(1,i) = p_0;
+         U(2,i) = 0.0;
       }
    }
 
+#elif DIM == 2
+   
+   for(i = 0; i <= Nx1; i++)
+   {
+      for(j = 0; j <= Nx2; j++)
+      {
+         if(fabs(grid.X1[i]) < x_0*dx1)
+         {
+            U(0,i,j) = n_0;
+            U(1,i,j) = 3*(K-1)*E_0/(4*M_PI*n_0*pow(x_0*dx1,3.0));
+            U(2,i,j) = 0.0;
+            U(3,i,j) = 0.0;
+         }
+         else
+         {
+            U(0,i,j) = n_0;
+            U(1,i,j) = p_0;
+            U(2,i,j) = 0.0;
+            U(3,i,j) = 0.0;
+         }
+      }
+   }
 #endif
 }

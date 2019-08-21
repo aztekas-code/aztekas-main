@@ -1,5 +1,5 @@
 % OUTPUT FILE AND DIRECTORY
-outputdirectory = ./Rayleigh-Taylor-02/
+outputdirectory = ./prueba/
 outputfile      = rt_
 
 % RESTART SIMULATION (1 -> true, 0 -> false)
@@ -8,8 +8,8 @@ restartfile = ./Rayleigh-Taylor-01/rt_54.dat
 restart_filecount = 54
 
 % Define mesh
-Nx1 = 300
-Nx2 = 900
+Nx1 = 100
+Nx2 = 300
 Nx3 = 0
 
 % Define domain limits

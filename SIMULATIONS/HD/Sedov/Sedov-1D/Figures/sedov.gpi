@@ -1,0 +1,75 @@
+#!/usr/bin/gnuplot
+
+set terminal epslatex colour input "" 10
+set output "sedov.tex"
+set size ratio 0.333333333333
+
+set key top left at 0.0,3.8
+
+set multiplot layout 3,1
+
+set tmargin at screen 1.0
+set bmargin at screen 0.66666666666666666666666666666666
+set lmargin at screen 0.0
+set rmargin at screen 1.0
+
+set xrange[0:8]
+set yrange[0:4]
+
+unset xlabel
+set ylabel "$\\rho$" offset -2,0
+
+set format x ''
+unset format y
+
+set xtics ()
+set ytics 0.0,1.0,4.0
+
+plot \
+"sedov_100.dat" u 1:2 title "Numerical" pt 3 lt rgb "black", \
+"analytic.dat" u 2:3 title "Exact" w l dashtype 4 lw 2 lt rgb "red"
+
+set tmargin at screen 0.66666666666666666666666666666666
+set bmargin at screen 0.33333333333333333333333333333333
+set lmargin at screen 0.0
+set rmargin at screen 1.0
+
+set xrange[0:8]
+set yrange[0:300]
+
+unset xlabel
+set ylabel "$p$" offset 0,0
+
+set format x ''
+unset format y
+
+set xtics ()
+set ytics 0.0,100,200
+
+plot \
+"sedov_100.dat" u 1:3 notitle pt 3 lt rgb "black", \
+"analytic.dat" u 2:5 notitle w l dashtype 4 lw 2 lt rgb "red"
+
+set tmargin at screen 0.33333333333333333333333333333333333
+set bmargin at screen 0.0
+set lmargin at screen 0.0
+set rmargin at screen 1.0
+
+set xrange[0:8]
+set yrange[0:16]
+
+set xlabel "$r$"
+set ylabel "$v$" offset -1,0
+
+unset format x
+unset format y
+
+set xtics 0.0,1.0,8.0
+set ytics 0.0,4.0,12.0
+
+plot \
+"sedov_100.dat" u 1:4 notitle pt 3 lt rgb "black", \
+"analytic.dat" u 2:6 notitle w l dashtype 4 lw 2 lt rgb "red"
+
+unset multiplot
+set out

@@ -14,309 +14,355 @@
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<math.h>
-#include<stdlib.h>
-#include<string.h>
 #include"main.h"
 
-int RECONST1D(double *u, char r, lim_ *l, int *I)
+#if DIM == 1
+
+int Reconst1D(double *u, lim_ *l, int *I)
 {
    int n, i;
+   int reconst;
    double dup2, dup1, dum1, dum2;
 
    i = I[0];
-#if x1min_exc == 1
-   if (i <= 2*gc && limiter == 'W')
+   reconst = RECONST;
+#if x1min_exc == TRUE
+   if (i <= 2*gc && RECONST == WENO5)
    {
-      r = 'C';
+      reconst = MC;
    }
-   if (i <= 2*gc && limiter != 'W')
+   if (i <= 2*gc && RECONST != WENO5)
    {
-      r = 'G';
+      reconst = GODUNOV;
    }
 #endif
 
    for(n = 0; n < eq; n++)
    {
-      l->ux[n] = u[c1(n,i)];
+      l->ux[n] = u(n,i);
 
-      if(r == 'W')
+      if(reconst == WENO5)
       {
-         l->ux1m[0*eq + n] = WENO5(u[c1(n,i-3)],\
-                                   u[c1(n,i-2)],\
-                                   u[c1(n,i-1)],\
-                                   u[c1(n, i )],\
-                                   u[c1(n,i+1)]);
-         l->ux1m[1*eq + n] = WENO5(u[c1(n,i+2)],\
-                                   u[c1(n,i+1)],\
-                                   u[c1(n, i )],\
-                                   u[c1(n,i-1)],\
-                                   u[c1(n,i-2)]);
+         l->ux1m[0*eq + n] = Weno5(u(n,i-3),\
+                                   u(n,i-2),\
+                                   u(n,i-1),\
+                                   u(n, i ),\
+                                   u(n,i+1));
+         l->ux1m[1*eq + n] = Weno5(u(n,i+2),\
+                                   u(n,i+1),\
+                                   u(n, i ),\
+                                   u(n,i-1),\
+                                   u(n,i-2));
 
-         l->ux1p[0*eq + n] = WENO5(u[c1(n,i-2)],\
-                                   u[c1(n,i-1)],\
-                                   u[c1(n, i )],\
-                                   u[c1(n,i+1)],\
-                                   u[c1(n,i+2)]);
-         l->ux1p[1*eq + n] = WENO5(u[c1(n,i+3)],\
-                                   u[c1(n,i+2)],\
-                                   u[c1(n,i+1)],\
-                                   u[c1(n, i )],\
-                                   u[c1(n,i-1)]);
+         l->ux1p[0*eq + n] = Weno5(u(n,i-2),\
+                                   u(n,i-1),\
+                                   u(n, i ),\
+                                   u(n,i+1),\
+                                   u(n,i+2));
+         l->ux1p[1*eq + n] = Weno5(u(n,i+3),\
+                                   u(n,i+2),\
+                                   u(n,i+1),\
+                                   u(n, i ),\
+                                   u(n,i-1));
       }
       else
       {
-         dum2 = u[c1(n,i-1)] - u[c1(n,i-2)];
-         dum1 = u[c1(n, i )] - u[c1(n,i-1)];
-         dup1 = u[c1(n,i+1)] - u[c1(n, i )];
-         dup2 = u[c1(n,i+2)] - u[c1(n,i+1)];
+         dum2 = u(n,i-1) - u(n,i-2);
+         dum1 = u(n, i ) - u(n,i-1);
+         dup1 = u(n,i+1) - u(n, i );
+         dup2 = u(n,i+2) - u(n,i+1);
 
-         l->sx1[0*eq + n] = LIMITER(dum1,dum2,r);
-         l->sx1[1*eq + n] = LIMITER(dup1,dum1,r);
-         l->sx1[2*eq + n] = LIMITER(dup2,dup1,r);
+         l->sx1[0*eq + n] = Limiter(dum1,dum2,reconst);
+         l->sx1[1*eq + n] = Limiter(dup1,dum1,reconst);
+         l->sx1[2*eq + n] = Limiter(dup2,dup1,reconst);
 
-         l->ux1m[0*eq + n] = u[c1(n,i-1)] + 0.5*l->sx1[0*eq + n];
-         l->ux1m[1*eq + n] = u[c1(n, i )] - 0.5*l->sx1[1*eq + n];
+         l->ux1m[0*eq + n] = u(n,i-1) + 0.5*l->sx1[0*eq + n];
+         l->ux1m[1*eq + n] = u(n, i ) - 0.5*l->sx1[1*eq + n];
 
-         l->ux1p[0*eq + n] = u[c1(n, i )] + 0.5*l->sx1[1*eq + n];
-         l->ux1p[1*eq + n] = u[c1(n,i+1)] - 0.5*l->sx1[2*eq + n];
+         l->ux1p[0*eq + n] = u(n, i ) + 0.5*l->sx1[1*eq + n];
+         l->ux1p[1*eq + n] = u(n,i+1) - 0.5*l->sx1[2*eq + n];
       }
    }
 
    return 0;
 }
 
-int RECONST2D(double *u, char r, lim_ *l, int *I)
+#elif DIM == 2 || DIM == 4
+
+int Reconst2D(double *u, lim_ *l, int *I)
 {
    int n, i, j;
+   int reconst;
    double dup2, dup1, dum1, dum2;
 
    i = I[0];
    j = I[1];
+   reconst = RECONST;
 
-#if x1min_exc == 1
-   if (i <= 2*gc && limiter == 'W')
+#if x1min_exc == TRUE
+   if (i <= 2*gc && RECONST == WENO5)
    {
-      r = 'C';
+      reconst = MC;
    }
-   if (i <= 2*gc && limiter != 'W')
+   if (i <= 2*gc && RECONST != WENO5)
    {
-      r = 'G';
+      reconst = GODUNOV;
    }
 #endif
 
    for(n = 0; n < eq; n++)
    {
-      l->ux[n] = u[c2(n,i,j)];
+      l->ux[n] = u(n,i,j);
 
-      if(r == 'W')
+      if(reconst == WENO5)
       {
-         l->ux1m[0*eq + n] = WENO5(u[c2(n,i-3,j)],\
-                                   u[c2(n,i-2,j)],\
-                                   u[c2(n,i-1,j)],\
-                                   u[c2(n, i ,j)],\
-                                   u[c2(n,i+1,j)]);
-         l->ux1m[1*eq + n] = WENO5(u[c2(n,i+2,j)],\
-                                   u[c2(n,i+1,j)],\
-                                   u[c2(n, i ,j)],\
-                                   u[c2(n,i-1,j)],\
-                                   u[c2(n,i-2,j)]);
+         l->ux1m[0*eq + n] = Weno5(u(n,i-3,j),\
+                                   u(n,i-2,j),\
+                                   u(n,i-1,j),\
+                                   u(n, i ,j),\
+                                   u(n,i+1,j));
+         l->ux1m[1*eq + n] = Weno5(u(n,i+2,j),\
+                                   u(n,i+1,j),\
+                                   u(n, i ,j),\
+                                   u(n,i-1,j),\
+                                   u(n,i-2,j));
 
-         l->ux1p[0*eq + n] = WENO5(u[c2(n,i-2,j)],\
-                                   u[c2(n,i-1,j)],\
-                                   u[c2(n, i ,j)],\
-                                   u[c2(n,i+1,j)],\
-                                   u[c2(n,i+2,j)]);
-         l->ux1p[1*eq + n] = WENO5(u[c2(n,i+3,j)],\
-                                   u[c2(n,i+2,j)],\
-                                   u[c2(n,i+1,j)],\
-                                   u[c2(n, i ,j)],\
-                                   u[c2(n,i-1,j)]);
+         l->ux1p[0*eq + n] = Weno5(u(n,i-2,j),\
+                                   u(n,i-1,j),\
+                                   u(n, i ,j),\
+                                   u(n,i+1,j),\
+                                   u(n,i+2,j));
+         l->ux1p[1*eq + n] = Weno5(u(n,i+3,j),\
+                                   u(n,i+2,j),\
+                                   u(n,i+1,j),\
+                                   u(n, i ,j),\
+                                   u(n,i-1,j));
 
-         l->ux2m[0*eq + n] = WENO5(u[c2(n,i,j-3)],\
-                                   u[c2(n,i,j-2)],\
-                                   u[c2(n,i,j-1)],\
-                                   u[c2(n,i, j )],\
-                                   u[c2(n,i,j+1)]);
-         l->ux2m[1*eq + n] = WENO5(u[c2(n,i,j+2)],\
-                                   u[c2(n,i,j+1)],\
-                                   u[c2(n,i, j )],\
-                                   u[c2(n,i,j-1)],\
-                                   u[c2(n,i,j-2)]);
+         l->ux2m[0*eq + n] = Weno5(u(n,i,j-3),\
+                                   u(n,i,j-2),\
+                                   u(n,i,j-1),\
+                                   u(n,i, j ),\
+                                   u(n,i,j+1));
+         l->ux2m[1*eq + n] = Weno5(u(n,i,j+2),\
+                                   u(n,i,j+1),\
+                                   u(n,i, j ),\
+                                   u(n,i,j-1),\
+                                   u(n,i,j-2));
 
-         l->ux2p[0*eq + n] = WENO5(u[c2(n,i,j-2)],\
-                                   u[c2(n,i,j-1)],\
-                                   u[c2(n,i, j )],\
-                                   u[c2(n,i,j+1)],\
-                                   u[c2(n,i,j+2)]);
-         l->ux2p[1*eq + n] = WENO5(u[c2(n,i,j+3)],
-                                   u[c2(n,i,j+2)],\
-                                   u[c2(n,i,j+1)],\
-                                   u[c2(n,i, j )],\
-                                   u[c2(n,i,j-1)]);
+         l->ux2p[0*eq + n] = Weno5(u(n,i,j-2),\
+                                   u(n,i,j-1),\
+                                   u(n,i, j ),\
+                                   u(n,i,j+1),\
+                                   u(n,i,j+2));
+         l->ux2p[1*eq + n] = Weno5(u(n,i,j+3),
+                                   u(n,i,j+2),\
+                                   u(n,i,j+1),\
+                                   u(n,i, j ),\
+                                   u(n,i,j-1));
       }
       else
       {
-         dum2 = u[c2(n,i-1,j)] - u[c2(n,i-2,j)];
-         dum1 = u[c2(n, i ,j)] - u[c2(n,i-1,j)];
-         dup1 = u[c2(n,i+1,j)] - u[c2(n, i ,j)];
-         dup2 = u[c2(n,i+2,j)] - u[c2(n,i+1,j)];
+         dum2 = u(n,i-1,j) - u(n,i-2,j);
+         dum1 = u(n, i ,j) - u(n,i-1,j);
+         dup1 = u(n,i+1,j) - u(n, i ,j);
+         dup2 = u(n,i+2,j) - u(n,i+1,j);
 
-         l->sx1[0*eq + n] = LIMITER(dum1,dum2,r);
-         l->sx1[1*eq + n] = LIMITER(dup1,dum1,r);
-         l->sx1[2*eq + n] = LIMITER(dup2,dup1,r);
+         l->sx1[0*eq + n] = Limiter(dum1,dum2,reconst);
+         l->sx1[1*eq + n] = Limiter(dup1,dum1,reconst);
+         l->sx1[2*eq + n] = Limiter(dup2,dup1,reconst);
 
-         l->ux1m[0*eq + n] = u[c2(n,i-1,j)] + 0.5*l->sx1[0*eq + n];
-         l->ux1m[1*eq + n] = u[c2(n, i ,j)] - 0.5*l->sx1[1*eq + n];
+         l->ux1m[0*eq + n] = u(n,i-1,j) + 0.5*l->sx1[0*eq + n];
+         l->ux1m[1*eq + n] = u(n, i ,j) - 0.5*l->sx1[1*eq + n];
 
-         l->ux1p[0*eq + n] = u[c2(n, i ,j)] + 0.5*l->sx1[1*eq + n];
-         l->ux1p[1*eq + n] = u[c2(n,i+1,j)] - 0.5*l->sx1[2*eq + n];
+         l->ux1p[0*eq + n] = u(n, i ,j) + 0.5*l->sx1[1*eq + n];
+         l->ux1p[1*eq + n] = u(n,i+1,j) - 0.5*l->sx1[2*eq + n];
 
-         dum2 = u[c2(n,i,j-1)] - u[c2(n,i,j-2)];
-         dum1 = u[c2(n,i, j )] - u[c2(n,i,j-1)];
-         dup1 = u[c2(n,i,j+1)] - u[c2(n,i, j )];
-         dup2 = u[c2(n,i,j+2)] - u[c2(n,i,j+1)];
+         dum2 = u(n,i,j-1) - u(n,i,j-2);
+         dum1 = u(n,i, j ) - u(n,i,j-1);
+         dup1 = u(n,i,j+1) - u(n,i, j );
+         dup2 = u(n,i,j+2) - u(n,i,j+1);
 
-         l->sx2[0*eq + n] = LIMITER(dum1,dum2,r);
-         l->sx2[1*eq + n] = LIMITER(dup1,dum1,r);
-         l->sx2[2*eq + n] = LIMITER(dup2,dup1,r);
+         l->sx2[0*eq + n] = Limiter(dum1,dum2,reconst);
+         l->sx2[1*eq + n] = Limiter(dup1,dum1,reconst);
+         l->sx2[2*eq + n] = Limiter(dup2,dup1,reconst);
 
-         l->ux2m[0*eq + n] = u[c2(n,i,j-1)] + 0.5*l->sx2[0*eq + n];
-         l->ux2m[1*eq + n] = u[c2(n,i,j  )] - 0.5*l->sx2[1*eq + n];
+         l->ux2m[0*eq + n] = u(n,i,j-1) + 0.5*l->sx2[0*eq + n];
+         l->ux2m[1*eq + n] = u(n,i,j  ) - 0.5*l->sx2[1*eq + n];
 
-         l->ux2p[0*eq + n] = u[c2(n,i,j  )] + 0.5*l->sx2[1*eq + n];
-         l->ux2p[1*eq + n] = u[c2(n,i,j+1)] - 0.5*l->sx2[2*eq + n];
+         l->ux2p[0*eq + n] = u(n,i,j  ) + 0.5*l->sx2[1*eq + n];
+         l->ux2p[1*eq + n] = u(n,i,j+1) - 0.5*l->sx2[2*eq + n];
       }
    }
-   
+
    return 0;
 }
 
-int RECONST3D(double *u, char r, lim_ *l, int *I)
+#elif DIM == 3
+
+int Reconst3D(double *u, lim_ *l, int *I)
 {
    int n, i, j, k;
+   int reconst;
    double dup2, dup1, dum1, dum2;
 
    i = I[0];
    j = I[1];
    k = I[2];
+   reconst = RECONST;
 
    for(n = 0; n < eq; n++)
    {
-      l->ux[n] = u[c3(n,i,j,k)];
+      l->ux[n] = u(n,i,j,k);
 
-      if(r == 'W')
+      if(reconst == WENO5)
       {
-         l->ux1m[0*eq + n] = WENO5(u[c3(n,i-3,j,k)],u[c3(n,i-2,j,k)],\
-         u[c3(n,i-1,j,k)],u[c3(n,i  ,j,k)],u[c3(n,i+1,j,k)]);
-         l->ux1m[1*eq + n] = WENO5(u[c3(n,i+2,j,k)],u[c3(n,i+1,j,k)],\
-         u[c3(n,i  ,j,k)],u[c3(n,i-1,j,k)],u[c3(n,i-2,j,k)]);
+         l->ux1m[0*eq + n] = Weno5(u(n,i-3,j,k),\
+                                   u(n,i-2,j,k),\
+                                   u(n,i-1,j,k),\
+                                   u(n, i ,j,k),\
+                                   u(n,i+1,j,k));
+         l->ux1m[1*eq + n] = Weno5(u(n,i+2,j,k),\
+                                   u(n,i+1,j,k),\
+                                   u(n, i ,j,k),\
+                                   u(n,i-1,j,k),\
+                                   u(n,i-2,j,k));
 
-         l->ux1p[0*eq + n] = WENO5(u[c3(n,i-2,j,k)],u[c3(n,i-1,j,k)],\
-         u[c3(n,i  ,j,k)],u[c3(n,i+1,j,k)],u[c3(n,i+2,j,k)]);
-         l->ux1p[1*eq + n] = WENO5(u[c3(n,i+3,j,k)],u[c3(n,i+2,j,k)],\
-         u[c3(n,i+1,j,k)],u[c3(n,i  ,j,k)],u[c3(n,i-1,j,k)]);
+         l->ux1p[0*eq + n] = Weno5(u(n,i-2,j,k),\
+                                   u(n,i-1,j,k),\
+                                   u(n, i ,j,k),\
+                                   u(n,i+1,j,k),\
+                                   u(n,i+2,j,k));
+         l->ux1p[1*eq + n] = Weno5(u(n,i+3,j,k),\
+                                   u(n,i+2,j,k),\
+                                   u(n,i+1,j,k),\
+                                   u(n, i ,j,k),\
+                                   u(n,i-1,j,k));
 
-         l->ux2m[0*eq + n] = WENO5(u[c3(n,i,j-3,k)],u[c3(n,i,j-2,k)],\
-         u[c3(n,i,j-1,k)],u[c3(n,i,j  ,k)],u[c3(n,i,j+1,k)]);
-         l->ux2m[1*eq + n] = WENO5(u[c3(n,i,j+2,k)],u[c3(n,i,j+1,k)],\
-         u[c3(n,i,j  ,k)],u[c3(n,i,j-1,k)],u[c3(n,i,j-2,k)]);
+         l->ux2m[0*eq + n] = Weno5(u(n,i,j-3,k),\
+                                   u(n,i,j-2,k),\
+                                   u(n,i,j-1,k),\
+                                   u(n,i, j ,k),\
+                                   u(n,i,j+1,k));
+         l->ux2m[1*eq + n] = Weno5(u(n,i,j+2,k),\
+                                   u(n,i,j+1,k),\
+                                   u(n,i, j ,k),\
+                                   u(n,i,j-1,k),\
+                                   u(n,i,j-2,k));
 
-         l->ux2p[0*eq + n] = WENO5(u[c3(n,i,j-2,k)],u[c3(n,i,j-1,k)],\
-         u[c3(n,i,j  ,k)],u[c3(n,i,j+1,k)],u[c3(n,i,j+2,k)]);
-         l->ux2p[1*eq + n] = WENO5(u[c3(n,i,j+3,k)],u[c3(n,i,j+2,k)],\
-         u[c3(n,i,j+1,k)],u[c3(n,i,j  ,k)],u[c3(n,i,j-1,k)]);
+         l->ux2p[0*eq + n] = Weno5(u(n,i,j-2,k),\
+                                   u(n,i,j-1,k),\
+                                   u(n,i, j ,k),\
+                                   u(n,i,j+1,k),\
+                                   u(n,i,j+2,k));
+         l->ux2p[1*eq + n] = Weno5(u(n,i,j+3,k),\
+                                   u(n,i,j+2,k),\
+                                   u(n,i,j+1,k),\
+                                   u(n,i, j ,k),\
+                                   u(n,i,j-1,k));
 
-         l->ux3m[0*eq + n] = WENO5(u[c3(n,i,j,k-3)],u[c3(n,i,j,k-2)],\
-         u[c3(n,i,j,k-1)],u[c3(n,i,j,k  )],u[c3(n,i,j,k+1)]);
-         l->ux3m[1*eq + n] = WENO5(u[c3(n,i,j,k+2)],u[c3(n,i,j,k+1)],\
-         u[c3(n,i,j,k  )],u[c3(n,i,j,k-1)],u[c3(n,i,j,k-2)]);
+         l->ux3m[0*eq + n] = Weno5(u(n,i,j,k-3),\
+                                   u(n,i,j,k-2),\
+                                   u(n,i,j,k-1),\
+                                   u(n,i,j, k ),\
+                                   u(n,i,j,k+1));
+         l->ux3m[1*eq + n] = Weno5(u(n,i,j,k+2),\
+                                   u(n,i,j,k+1),\
+                                   u(n,i,j, k ),\
+                                   u(n,i,j,k-1),\
+                                   u(n,i,j,k-2));
 
-         l->ux3p[0*eq + n] = WENO5(u[c3(n,i,j,k-2)],u[c3(n,i,j,k-1)],\
-         u[c3(n,i,j,k  )],u[c3(n,i,j,k+1)],u[c3(n,i,j,k+2)]);
-         l->ux3p[1*eq + n] = WENO5(u[c3(n,i,j,k+3)],u[c3(n,i,j,k+2)],\
-         u[c3(n,i,j,k+1)],u[c3(n,i,j,k  )],u[c3(n,i,j,k-1)]);
+         l->ux3p[0*eq + n] = Weno5(u(n,i,j,k-2),\
+                                   u(n,i,j,k-1),\
+                                   u(n,i,j, k ),\
+                                   u(n,i,j,k+1),\
+                                   u(n,i,j,k+2));
+         l->ux3p[1*eq + n] = Weno5(u(n,i,j,k+3),\
+                                   u(n,i,j,k+2),\
+                                   u(n,i,j,k+1),\
+                                   u(n,i,j, k ),\
+                                   u(n,i,j,k-1));
       }
       else
       {
-         dum2 = u[c3(n,i-1,j,k)] - u[c3(n,i-2,j,k)];
-         dum1 = u[c3(n,i  ,j,k)] - u[c3(n,i-1,j,k)];
-         dup1 = u[c3(n,i+1,j,k)] - u[c3(n,i  ,j,k)];
-         dup2 = u[c3(n,i+2,j,k)] - u[c3(n,i+1,j,k)];
+         dum2 = u(n,i-1,j,k) - u(n,i-2,j,k);
+         dum1 = u(n,i  ,j,k) - u(n,i-1,j,k);
+         dup1 = u(n,i+1,j,k) - u(n,i  ,j,k);
+         dup2 = u(n,i+2,j,k) - u(n,i+1,j,k);
 
-         l->sx1[0*eq + n] = LIMITER(dum1,dum2,r);
-         l->sx1[1*eq + n] = LIMITER(dup1,dum1,r);
-         l->sx1[2*eq + n] = LIMITER(dup2,dup1,r);
+         l->sx1[0*eq + n] = Limiter(dum1,dum2,reconst);
+         l->sx1[1*eq + n] = Limiter(dup1,dum1,reconst);
+         l->sx1[2*eq + n] = Limiter(dup2,dup1,reconst);
 
-         l->ux1m[0*eq + n] = u[c3(n,i-1,j,k)] + 0.5*l->sx1[0*eq + n];
-         l->ux1m[1*eq + n] = u[c3(n,i  ,j,k)] - 0.5*l->sx1[1*eq + n];
+         l->ux1m[0*eq + n] = u(n,i-1,j,k) + 0.5*l->sx1[0*eq + n];
+         l->ux1m[1*eq + n] = u(n,i  ,j,k) - 0.5*l->sx1[1*eq + n];
 
-         l->ux1p[0*eq + n] = u[c3(n,i  ,j,k)] + 0.5*l->sx1[1*eq + n];
-         l->ux1p[1*eq + n] = u[c3(n,i+1,j,k)] - 0.5*l->sx1[2*eq + n];
+         l->ux1p[0*eq + n] = u(n,i  ,j,k) + 0.5*l->sx1[1*eq + n];
+         l->ux1p[1*eq + n] = u(n,i+1,j,k) - 0.5*l->sx1[2*eq + n];
 
-         dum2 = u[c3(n,i,j-1,k)] - u[c3(n,i,j-2,k)];
-         dum1 = u[c3(n,i,j  ,k)] - u[c3(n,i,j-1,k)];
-         dup1 = u[c3(n,i,j+1,k)] - u[c3(n,i,j  ,k)];
-         dup2 = u[c3(n,i,j+2,k)] - u[c3(n,i,j+1,k)];
+         dum2 = u(n,i,j-1,k) - u(n,i,j-2,k);
+         dum1 = u(n,i,j  ,k) - u(n,i,j-1,k);
+         dup1 = u(n,i,j+1,k) - u(n,i,j  ,k);
+         dup2 = u(n,i,j+2,k) - u(n,i,j+1,k);
 
-         l->sx2[0*eq + n] = LIMITER(dum1,dum2,r);
-         l->sx2[1*eq + n] = LIMITER(dup1,dum1,r);
-         l->sx2[2*eq + n] = LIMITER(dup2,dup1,r);
+         l->sx2[0*eq + n] = Limiter(dum1,dum2,reconst);
+         l->sx2[1*eq + n] = Limiter(dup1,dum1,reconst);
+         l->sx2[2*eq + n] = Limiter(dup2,dup1,reconst);
 
-         l->ux2m[0*eq + n] = u[c3(n,i,j-1,k)] + 0.5*l->sx2[0*eq + n];
-         l->ux2m[1*eq + n] = u[c3(n,i,j  ,k)] - 0.5*l->sx2[1*eq + n];
+         l->ux2m[0*eq + n] = u(n,i,j-1,k) + 0.5*l->sx2[0*eq + n];
+         l->ux2m[1*eq + n] = u(n,i,j  ,k) - 0.5*l->sx2[1*eq + n];
 
-         l->ux2p[0*eq + n] = u[c3(n,i,j  ,k)] + 0.5*l->sx2[1*eq + n];
-         l->ux2p[1*eq + n] = u[c3(n,i,j+1,k)] - 0.5*l->sx2[2*eq + n];
+         l->ux2p[0*eq + n] = u(n,i,j  ,k) + 0.5*l->sx2[1*eq + n];
+         l->ux2p[1*eq + n] = u(n,i,j+1,k) - 0.5*l->sx2[2*eq + n];
 
-         dum2 = u[c3(n,i,j,k-1)] - u[c3(n,i,j,k-2)];
-         dum1 = u[c3(n,i,j,k  )] - u[c3(n,i,j,k-1)];
-         dup1 = u[c3(n,i,j,k+1)] - u[c3(n,i,j,k  )];
-         dup2 = u[c3(n,i,j,k+2)] - u[c3(n,i,j,k+1)];
+         dum2 = u(n,i,j,k-1) - u(n,i,j,k-2);
+         dum1 = u(n,i,j,k  ) - u(n,i,j,k-1);
+         dup1 = u(n,i,j,k+1) - u(n,i,j,k  );
+         dup2 = u(n,i,j,k+2) - u(n,i,j,k+1);
 
-         l->sx3[0*eq + n] = LIMITER(dum1,dum2,r);
-         l->sx3[1*eq + n] = LIMITER(dup1,dum1,r);
-         l->sx3[2*eq + n] = LIMITER(dup2,dup1,r);
+         l->sx3[0*eq + n] = Limiter(dum1,dum2,reconst);
+         l->sx3[1*eq + n] = Limiter(dup1,dum1,reconst);
+         l->sx3[2*eq + n] = Limiter(dup2,dup1,reconst);
 
-         l->ux3m[0*eq + n] = u[c3(n,i,j,k-1)] + 0.5*l->sx3[0*eq + n];
-         l->ux3m[1*eq + n] = u[c3(n,i,j,k  )] - 0.5*l->sx3[1*eq + n];
+         l->ux3m[0*eq + n] = u(n,i,j,k-1) + 0.5*l->sx3[0*eq + n];
+         l->ux3m[1*eq + n] = u(n,i,j,k  ) - 0.5*l->sx3[1*eq + n];
 
-         l->ux3p[0*eq + n] = u[c3(n,i,j,k  )] + 0.5*l->sx3[1*eq + n];
-         l->ux3p[1*eq + n] = u[c3(n,i,j,k+1)] - 0.5*l->sx3[2*eq + n];
+         l->ux3p[0*eq + n] = u(n,i,j,k  ) + 0.5*l->sx3[1*eq + n];
+         l->ux3p[1*eq + n] = u(n,i,j,k+1) - 0.5*l->sx3[2*eq + n];
       }
    }
 
    return 0;
 }
 
-double LIMITER(double A, double B, char r)
+#endif
+
+double Limiter(double A, double B, int reconst)
 {
    double sig;
 
-   switch(r)
+   switch(reconst)
    {
-      case 'G':
-         sig = GODUNOV(A,B);
+      case GODUNOV:
+         sig = Godunov(A,B);
       break;
 
-      case 'M':
-         sig = MINMOD(A,B);
+      case MINMOD:
+         sig = Minmod(A,B);
       break;
 
-      case 'C':
-         sig = MC(A,B);
+      case MC:
+         sig = Mc(A,B);
       break;
 
-      case 'S':
-         sig = SUPERBEE(A,B);
+      case SUPERBEE:
+         sig = Superbee(A,B);
       break;
    }
 
    return sig;
 }
 
-double MAXMOD(double A, double B)
+double Maxmod(double A, double B)
 {
    double sig;
 
@@ -339,7 +385,7 @@ double MAXMOD(double A, double B)
    return sig;
 }
 
-double MINMOD(double A, double B)
+double Minmod(double A, double B)
 {
    double sig;
 
@@ -362,28 +408,28 @@ double MINMOD(double A, double B)
    return sig;
 }
 
-double MC(double A, double B)
+double Mc(double A, double B)
 {
    double sig;
    double C;
 
    C = (A + B) / 2.0e+00;
 
-   if(A*B < 0)
+   if(A*B <= 0)
    {
       sig = 0.0e+00;
    }
-   else if(A*B >= 0)
+   else if(A*B > 0)
    {
-      if(fabs(A) < fabs(B) && 2.0e+00*fabs(A) < fabs(C))
+      if(fabs(A) < fabs(B) && 2.0e+00*fabs(A) <= fabs(C))
       {
          sig = 2.0e+00*A;
       }
-      else if(fabs(A) > fabs(B) && 2.0e+00*fabs(B) < fabs(C))
+      else if(fabs(A) >= fabs(B) && 2.0e+00*fabs(B) <= fabs(C))
       {
          sig = 2.0e+00*B;
       }
-      else if(fabs(C) < 2.0e+00*fabs(A) && fabs(C) < 2.0e+00*fabs(B))
+      else if(fabs(C) <= 2.0e+00*fabs(A) && fabs(C) <= 2.0e+00*fabs(B))
       {
          sig= C;
       }
@@ -392,25 +438,25 @@ double MC(double A, double B)
    return sig;
 }
 
-double SUPERBEE(double A, double B)
+double Superbee(double A, double B)
 {
    double sig1;
    double sig2;
    double sig;
 
-   sig1 = MINMOD(2*A,B);
-   sig2 = MINMOD(A,2*B);
+   sig1 = Minmod(2*A,B);
+   sig2 = Minmod(A,2*B);
 
-   sig = MAXMOD(sig1,sig2);
+   sig = Maxmod(sig1,sig2);
    return sig;
 }
 
-double GODUNOV(double A, double B)
+double Godunov(double A, double B)
 {
    return 0.0;
 }
 
-double WENO5(double v1, double v2, double v3, double v4, double v5)
+double Weno5(double v1, double v2, double v3, double v4, double v5)
 {
    double c13d12 = 1.3e+01 / 1.2e+01;
    double c1d4   = 1.0e+00 / 4.0e+00;

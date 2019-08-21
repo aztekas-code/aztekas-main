@@ -8,55 +8,44 @@
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<math.h>
-#include<stdlib.h>
-#include<string.h>
 #include"main.h"
-#include"vector.h"
 
-int INTEGRATION()
+void Integration()
 {
-   int n, i, j, k;
-   double uu[eq+1];
-   double qq[eq+1];
-
    //Runge-Kutta 2th-Order and Piecewie Polynomial Reconstruction
-#if dim == 1 
+#if DIM == 1 
    
-   funct_U2Q(Q,U);
+   Prim2Cons_All(Q,U);
 
    RK1D(U,Q,Q1,Q2,1);
-   funct_Q2U(U,Q1);
-   BOUNDARIES(U);
+   Cons2Prim(U,Q1);
+   Boundaries(U);
 
    RK1D(U,Q,Q1,Q2,2);
-   funct_Q2U(U,Q2);
-   BOUNDARIES(U);
+   Cons2Prim(U,Q2);
+   Boundaries(U);
    
-#elif dim == 2 || dim == 4
+#elif DIM == 2 || DIM == 4
 
-   funct_U2Q(Q,U);
+   Prim2Cons_All(Q,U);
 
    RK2D(U,Q,Q1,Q2,1);
-   funct_Q2U(U,Q1);
-   BOUNDARIES(U);
+   Cons2Prim(U,Q1);
+   Boundaries(U);
 
    RK2D(U,Q,Q1,Q2,2);
-   funct_Q2U(U,Q2);
-   BOUNDARIES(U);
+   Cons2Prim(U,Q2);
+   Boundaries(U);
    
-#elif dim == 3 
+#elif DIM == 3 
    
-   funct_U2Q(Q,U);
+   Prim2Cons_All(Q,U);
    RK3D(U,Q,Q1,Q2,1);
-   funct_Q2U(U1,Q1);
-   BOUNDARIES(U1);
+   Cons2Prim(U1,Q1);
+   Boundaries(U1);
    RK3D(U1,Q,Q1,Q2,2);
-   funct_Q2U(U,Q2);
-   BOUNDARIES(U);
+   Cons2Prim(U,Q2);
+   Boundaries(U);
    
 #endif
-
-   return 0;
 }

@@ -1,11 +1,17 @@
 % OUTPUT FILE AND DIRECTORY
-outputdirectory = Clas-Jet-01/
+outputdirectory = ./prueba/
 outputfile      = jet_
 
 % RESTART SIMULATION (1 -> true, 0 -> false)
 restart_simulation = 0
 restartfile = DATA/jet/data_41.dat
 restart_filecount = 41
+
+% CHECK SIMULATION PARAMETERS (1 -> true, 0 -> false)
+check_param = 0
+
+% Binary Output (1 -> true, 0 -> false)
+binary = 0
 
 % Define mesh
 
@@ -33,13 +39,13 @@ K = 1.6666666666666666666666666
 %%%%% Initial conditions %%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Relativisti jet
+% Self-Collimating Jet
 
 % JET
 n_jet   = 1.0
-p_jet   = 0.1
+p_jet   = 0.0001
 vx1_jet = 0.0
-vx2_jet = 0.5
+vx2_jet = 1.0
 vx3_jet = 0.0
 
 % ATMOSPHERE
@@ -48,6 +54,38 @@ p_atm   = 0.1
 vx1_atm = 0.0
 vx2_atm = 0.0
 vx3_atm = 0.0
+
+% Astrophysical Jet
+
+% JET
+%n_jet   = 1.0
+%p_jet   = 0.0001
+%vx1_jet = 0.0
+%vx2_jet = 1.0
+%vx3_jet = 0.0
+
+% ATMOSPHERE
+%n_atm   = 1.0
+%p_atm   = 0.0001
+%vx1_atm = 0.0
+%vx2_atm = 0.0
+%vx3_atm = 0.0
+
+% Astrophysical Jet
+
+% JET
+%n_jet   = 0.5
+%p_jet   = 1.0
+%vx1_jet = 0.0
+%vx2_jet = 0.5
+%vx3_jet = 0.0
+
+% ATMOSPHERE
+%n_atm   = 1.0
+%p_atm   = 1.0
+%vx1_atm = 0.0
+%vx2_atm = 0.0
+%vx3_atm = 0.0
 
 % JET RADII
 r_jet = 1.0

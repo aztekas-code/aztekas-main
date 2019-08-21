@@ -1,0 +1,9 @@
+set terminal epslatex colour input "" 12
+set output ".tex"
+set xrange [:]
+set yrange [:]
+set title ""
+set xlabel ""
+set ylabel ""
+plot "" u : notitle with lines lt rgb ""
+set out

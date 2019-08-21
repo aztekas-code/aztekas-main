@@ -7,93 +7,83 @@
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<math.h>
-#include<stdlib.h>
-#include<string.h>
-#include"param.h"
 #include"main.h"
 
-int FLUX1D(vec_ *v, lim_ *l, int *I)
+int Flux1D(vec_ *v, lim_ *l, int *I)
 {
    flx_ f;
 
-   AMATRIX1D(l->ux,v,I);
-#if riemann == 1 //HLL
+#if FLUX == HLL
    VECTOR(1,'f',l,&f,I);
-   HLL(v->Fp,&f,1);
+   Hll(v->Fp,&f,1);
    VECTOR(0,'f',l,&f,I);
-   HLL(v->Fm,&f,1);
-#elif riemann == 2//HLLC
+   Hll(v->Fm,&f,1);
+#elif FLUX == HLLC
    VECTOR(1,'f',l,&f,I);
-   HLLC(v->Fp,&f,1);
+   Hllc(v->Fp,&f,1);
    VECTOR(0,'f',l,&f,I);
-   HLLC(v->Fm,&f,1);
+   Hllc(v->Fm,&f,1);
 #endif
 
    return 0;
 }
 
-int FLUX2D(vec_ *v, lim_ *l, int *I)
+int Flux2D(vec_ *v, lim_ *l, int *I)
 {
    flx_ f;
 
-   AMATRIX2D(l->ux,v,I);
-#if riemann == 1//HLL
+#if FLUX == HLL
    VECTOR(1,'f',l,&f,I);
-   HLL(v->Fp,&f,1);
+   Hll(v->Fp,&f,1);
    VECTOR(1,'g',l,&f,I);
-   HLL(v->Gp,&f,2);
+   Hll(v->Gp,&f,2);
    VECTOR(0,'f',l,&f,I);
-   HLL(v->Fm,&f,1);
+   Hll(v->Fm,&f,1);
    VECTOR(0,'g',l,&f,I);
-   HLL(v->Gm,&f,2);
-#elif riemann == 2//HLLC
+   Hll(v->Gm,&f,2);
+#elif FLUX == HLLC
    VECTOR(1,'f',l,&f,I);
-   HLLC(v->Fp,&f,1);
+   Hllc(v->Fp,&f,1);
    VECTOR(1,'g',l,&f,I);
-   HLLC(v->Gp,&f,2);
+   Hllc(v->Gp,&f,2);
    VECTOR(0,'f',l,&f,I);
-   HLLC(v->Fm,&f,1);
+   Hllc(v->Fm,&f,1);
    VECTOR(0,'g',l,&f,I);
-   HLLC(v->Gm,&f,2);
+   Hllc(v->Gm,&f,2);
 #endif
 
    return 0;
 }
 
-int FLUX3D(vec_ *v, lim_ *l, int *I)
+int Flux3D(vec_ *v, lim_ *l, int *I)
 {
    int n;
 
    flx_ f;
 
-   AMATRIX3D(l->ux,v,I);
    VECTOR(1,'f',l,&f,I);
-   HLL(v->Fp,&f,1);
+   Hll(v->Fp,&f,1);
    VECTOR(1,'g',l,&f,I);
-   HLL(v->Gp,&f,2);
+   Hll(v->Gp,&f,2);
    VECTOR(1,'h',l,&f,I);
-   HLL(v->Hp,&f,3);
+   Hll(v->Hp,&f,3);
    VECTOR(0,'f',l,&f,I);
-   HLL(v->Fm,&f,1);
+   Hll(v->Fm,&f,1);
    VECTOR(0,'g',l,&f,I);
-   HLL(v->Gm,&f,2);
+   Hll(v->Gm,&f,2);
    VECTOR(0,'h',l,&f,I);
-   HLL(v->Hm,&f,3);
+   Hll(v->Hm,&f,3);
 
    return 0;
 }
 
-int HLL(double *F, flx_ *f, int x)
+int Hll(double *F, flx_ *f, int x)
 {
    int n;
    double q;
    double sR, sL;
-   double QR[eq+1], QL[eq+1];
-   double FR[eq+1], FL[eq+1];
-   double qp[eq+1], qm[eq+1];
-   double fp[eq+1], fm[eq+1];
+   double QR, QL;
+   double FR, FL;
 
    sR = f->lp;
    sL = f->lm;
@@ -102,35 +92,33 @@ int HLL(double *F, flx_ *f, int x)
    {
       for(n = 0; n < eq; n++)
       {
-         FL[n] = f->fm[n];
-         F[n] = FL[n];
+         F[n] = f->fm[n];
       }
    }
    else if(sL <= 0 && sR >= 0)
    {
       for(n = 0; n < eq; n++)
       {
-         QR[n] = f->qp[n];
-         QL[n] = f->qm[n];
-         FR[n] = f->fp[n];
-         FL[n] = f->fm[n];
-         q = sR*sL*(QR[n] - QL[n]);
-         F[n] = (sR*FL[n] - sL*FR[n] + q)/(sR - sL);
+         QR = f->qp[n];
+         QL = f->qm[n];
+         FR = f->fp[n];
+         FL = f->fm[n];
+         q = sR*sL*(QR - QL);
+         F[n] = (sR*FL - sL*FR + q)/(sR - sL);
       }
    }
-   else if(f->lp <= 0)
+   else if(sR <= 0)
    {
       for(n = 0; n < eq; n++)
       {
-         FR[n] = f->fp[n];
-         F[n] = FR[n];
+         F[n] = f->fp[n];
       }
    }
 
    return 0;
 }
 
-int HLLC(double *F, flx_ *f, int x)
+int Hllc(double *F, flx_ *f, int x)
 {
    int n;
    double pstar, ustar, rhobar, abar;
@@ -149,21 +137,21 @@ int HLLC(double *F, flx_ *f, int x)
    rhoL = f->um[0];
    pR   = f->up[1];
    pL   = f->um[1];
-#if dim == 1
+#if DIM == 1
    uR   = f->up[2];
    uL   = f->um[2];
    vR   = 0.0;
    vL   = 0.0;
    wR   = 0.0;
    wL   = 0.0;
-#elif dim == 2
+#elif DIM == 2
    uR   = f->up[2];
    uL   = f->um[2];
    vR   = f->up[3];
    vL   = f->um[3];
    wR   = 0.0;
    wL   = 0.0;
-#elif dim == 3 || dim == 4
+#elif DIM == 3 || DIM == 4
    uR   = f->up[2];
    uL   = f->um[2];
    vR   = f->up[3];
