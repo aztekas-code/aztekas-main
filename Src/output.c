@@ -13,7 +13,7 @@ int PrintValues(double *tprint, double *dtprint, int *itprint)
 {
    int n, i, j, k;
 
-   if(grid.time >= *tprint)
+   if(grid.time >= *tprint || Check_nan == TRUE)
    {
       printf("Time = %e, dt = %e\n",grid.time,dt);
       if(graf == 1)

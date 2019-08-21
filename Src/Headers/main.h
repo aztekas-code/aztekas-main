@@ -15,8 +15,8 @@
 #include"param.h"
 
 
-// dummy
-double x1, x2, x3;
+// NAN
+int Check_nan;
 
 /* Define pointers */
 double *U, *U1, *U2, *U3;
