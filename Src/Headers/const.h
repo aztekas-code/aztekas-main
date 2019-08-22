@@ -12,6 +12,3 @@
 
 //Physical parameters
 #define yr_cgs    3.14e+07 // s Year
-
-
-#define MM     1.0
