@@ -11,7 +11,7 @@
 
 double TimeStep()
 {
-   int i, j, k;
+   int i, j, k, n;
    double dtmin;
    double c, dt, cmax;
 
@@ -23,6 +23,13 @@ double TimeStep()
    {
       c = sqrt(K*U(1,i) / (U(0,i)));
       dtmin = MIN(dx1/(fabs(U(2,i)) + fabs(c)),dtmin);
+
+      if(U(0,i) == fabs(sqrt(1.0)) || U(0,i) == fabs(1.0/0.0))
+      {
+         printf("                                          \n");
+         printf("NaN value found in calculation.\n");
+         exit(EXIT_FAILURE);
+      }
    }
 
 #elif DIM == 2
@@ -34,6 +41,16 @@ double TimeStep()
          c = sqrt(K*U(1,i,j) / (U(0,i,j)));
          dtmin = MIN(dx1/(fabs(U(2,i,j)) + fabs(c)),dtmin);
          dtmin = MIN(dx2/(fabs(U(3,i,j)) + fabs(c)),dtmin);
+
+         if(U(0,i,j) == fabs(sqrt(1.0)) || U(0,i,j) == fabs(1.0/0.0))
+         {
+            printf("                                          \n");
+            printf("NaN value found in calculation.\n");
+            CHECK_NAN = TRUE;
+            U = U0;
+            PrintValues(&grid.time,&c,&CHECK_NAN);
+            exit(EXIT_FAILURE);
+         }
       }
    }
 
@@ -48,6 +65,16 @@ double TimeStep()
          dtmin = MIN(dx1/(fabs(U(4,i,j)) + fabs(c)),dtmin);
          dtmin = MIN(dx2/(fabs(U(3,i,j)) + fabs(c)),dtmin);
          dtmin = MIN(dx2/(fabs(U(4,i,j)) + fabs(c)),dtmin);
+
+         if(U(0,i,j) == fabs(sqrt(1.0)) || U(0,i,j) == fabs(1.0/0.0))
+         {
+            printf("                                          \n");
+            printf("NaN value found in calculation.\n");
+            CHECK_NAN = TRUE;
+            U = U0;
+            PrintValues(&tprint,&dtprint,&itprint);
+            exit(EXIT_FAILURE);
+         }
       }
    }
 
@@ -63,6 +90,16 @@ double TimeStep()
             dtmin = MIN(dx1/(fabs(U(2,i,j,k)) + fabs(c)),dtmin);
             dtmin = MIN(dx2/(fabs(U(3,i,j,k)) + fabs(c)),dtmin);
             dtmin = MIN(dx3/(fabs(U(4,i,j,k)) + fabs(c)),dtmin);
+
+            if(U(0,i,j,k) == fabs(sqrt(1.0)) || U(0,i,j,k) == fabs(1.0/0.0))
+            {
+               printf("                                          \n");
+               printf("NaN value found in calculation.\n");
+               CHECK_NAN = TRUE;
+               U = U0;
+               PrintValues(&tprint,&dtprint,&itprint);
+               exit(EXIT_FAILURE);
+            }
          }
       }
    }

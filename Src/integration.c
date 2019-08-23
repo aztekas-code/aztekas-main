@@ -33,9 +33,13 @@ void Integration()
    Cons2Prim(U,Q1);
    Boundaries(U);
 
+   U0 = U;
+
    RK2D(U,Q,Q1,Q2,2);
    Cons2Prim(U,Q2);
    Boundaries(U);
+
+   U0 = U;
    
 #elif DIM == 3 
    

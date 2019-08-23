@@ -3,6 +3,41 @@
 echo 'Enter the physics of the problem (hd or rhd)'
 read phy
 
+if [[ $phy == rhd ]]
+then
+   echo 'Select the fixed background metric (1. Minkowski, 2. Schwarzschild, 3. Eddington-Finkelstein, 4. Kerr-Schild)'
+   read met
+fi
+
+if [[ $met == 1 ]]
+then
+   metric='Minkowski'
+fi
+if [[ $met == 2 ]]
+then
+   metric='Schwarzschild'
+fi
+if [[ $met == 3 ]]
+then
+   metric='Eddington-Finkelstein'
+fi
+if [[ $met == 4 ]]
+then
+   metric='Kerr-Schild'
+fi
+
+echo 'Select the kind of Equation of State (1. Ideal, 2. Dust)'
+read eqstate
+
+if [[ $eqstate == 1 ]]
+then
+   eos='ideal'
+fi
+if [[ $eqstate == 2 ]]
+then
+   eos='dust'
+fi
+
 echo 'Enter the number of dimensions (1, 2, or 3. Enter 4 for 2.5)'
 read dim
 
@@ -18,9 +53,9 @@ fi
 aztekas_path=$(cd  "$(dirname "$0" )" && pwd)
 
 cat << EOF > Makefile
-######################################
-#### Define simulation parameters ####
-######################################
+#####################################
+#### Define dimension parameters ####
+#####################################
 #----------------------------------------------------------------------
 # From the list below, please activate/deactivate the options that     
 # apply to your run. If you modify any of these options, make sure     
@@ -39,13 +74,24 @@ PARAM += -Dgc=3
 # Physics (rhd,hd,mhd,rmhd)
 #####################################
 
-PHY = $phy
+PHY    = $phy
+
+# Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Kerr-Schild)
+METRIC = $metric
+
 ifeq (\$(PHY),hd)
-   PARAM += -DPHYSICS=1
+        PARAM += -DPHYSICS=HD
 endif
 ifeq (\$(PHY),rhd)
-   PARAM += -DPHYSICS=2
-   metric = -EF
+        PARAM += -DPHYSICS=RHD
+endif
+
+eos = $eos
+ifeq (\$(eos),ideal)
+        PARAM += -DEOS=IDEAL
+endif
+ifeq (\$(eos),dust)
+        PARAM += -DEOS=DUST
 endif
 
 #####################################
@@ -57,24 +103,24 @@ endif
 DIM = $dim
 
 ifeq (\$(DIM),1)
-   PARAM += -Ddim=1
-   PARAM += -Deq=3
-   PARAM += -Dgraf=1
+	PARAM += -DDIM=1
+	PARAM += -Deq=3
+	PARAM += -Dgraf=1
 endif
 ifeq (\$(DIM),2)
-   PARAM += -Ddim=2
-   PARAM += -Deq=4
-   PARAM += -Dgraf=2
+	PARAM += -DDIM=2
+	PARAM += -Deq=4
+	PARAM += -Dgraf=2
 endif
 ifeq (\$(DIM),4)
-   PARAM += -Ddim=2
-   PARAM += -Deq=5
-   PARAM += -Dgraf=2
+	PARAM += -DDIM=4
+	PARAM += -Deq=5
+	PARAM += -Dgraf=2
 endif
 ifeq (\$(DIM),3)
-   PARAM += -Ddim=3
-   PARAM += -Deq=5
-   PARAM += -Dgraf=3
+	PARAM += -DDIM=3
+	PARAM += -Deq=5
+	PARAM += -Dgraf=3
 endif
 
 #####################################
@@ -86,13 +132,13 @@ endif
 COORD = $coord
 
 ifeq (\$(COORD),cart)
-   PARAM += -Dalfa=0
+	PARAM += -DCOORDINATES=CARTESIAN
 endif
 ifeq (\$(COORD),cyl)
-   PARAM += -Dalfa=1
+	PARAM += -DCOORDINATES=CYLINDRICAL
 endif
 ifeq (\$(COORD),sph)
-   PARAM += -Dalfa=2
+	PARAM += -DCOORDINATES=SPHERICAL
 endif
 
 #####################################
@@ -107,6 +153,17 @@ AZTPATH = $aztekas_path
 # Integration method
 #####################################
 
+INT = standard
+
+ifeq (\$(INT),standard)
+	PARAM += -Dintegration=0
+	INT = 
+endif
+ifeq (\$(INT),pvrs)
+	PARAM += -Dintegration=1
+	INT = -pvrs
+endif
+
 #####################################
 
 #####################################
@@ -116,67 +173,62 @@ AZTPATH = $aztekas_path
 ifeq (\$(PHY),hd)
 SOURCES = \$(AZTPATH)/Src/main.c \\
 	  \$(AZTPATH)/Src/alloc.c \\
-	  \$(AZTPATH)/Src/array.c \\
 	  \$(AZTPATH)/Src/mesh.c \\
 	  ./initial.c \\
 	  \$(AZTPATH)/Src/timestep.c \\
 	  \$(AZTPATH)/Src/input.c \\
 	  \$(AZTPATH)/Src/output.c \\
-	  \$(AZTPATH)/Src/integration.c \\
+	  \$(AZTPATH)/Src/integration\$(INT).c \\
 	  \$(AZTPATH)/Src/flux.c \\
-	  \$(AZTPATH)/Src/rk-clas-\$(COORD).c \\
+	  \$(AZTPATH)/Src/runge-kutta.c \\
 	  \$(AZTPATH)/Src/limiters.c \\
 	  \$(AZTPATH)/Src/vectors.c \\
-	  \$(AZTPATH)/Src/restart.c\\
-	  \$(AZTPATH)/Src/auxfunc.c\\
+	  \$(AZTPATH)/Src/restart.c \\
+	  \$(AZTPATH)/Src/auxfunc.c \\
 	  ./boundaries.c \\
 	  \$(AZTPATH)/Src/bound_cond.c \\
-	  \$(AZTPATH)/Src/HD-\$(COORD)/amatrix.c \\
-	  \$(AZTPATH)/Src/HD-\$(COORD)/dmmatrix.c \\
-	  \$(AZTPATH)/Src/HD-\$(COORD)/dnmatrix.c \\
-	  \$(AZTPATH)/Src/HD-\$(COORD)/domatrix.c \\
-	  \$(AZTPATH)/Src/HD-\$(COORD)/q2uvector.c \\
-	  \$(AZTPATH)/Src/HD-\$(COORD)/u2qvector.c \\
-	  \$(AZTPATH)/Src/HD-\$(COORD)/qvector.c \\
-	  \$(AZTPATH)/Src/HD-\$(COORD)/fvector.c \\
-	  \$(AZTPATH)/Src/HD-\$(COORD)/gvector.c \\
-	  \$(AZTPATH)/Src/HD-\$(COORD)/hvector.c \\
-	  \$(AZTPATH)/Src/HD-\$(COORD)\$(grav)/svector.c \\
-	  \$(AZTPATH)/Src/HD-\$(COORD)\$(grav)/gauge.c \\
-	  ./extforce.c
+	  \$(AZTPATH)/Src/HD/q2uvector.c \\
+	  \$(AZTPATH)/Src/HD/u2qvector.c \\
+	  \$(AZTPATH)/Src/HD/qvector.c \\
+	  \$(AZTPATH)/Src/HD/fvector.c \\
+	  \$(AZTPATH)/Src/HD/gvector.c \\
+	  \$(AZTPATH)/Src/HD/hvector.c \\
+	  \$(AZTPATH)/Src/HD/svector.c \\
+	  \$(AZTPATH)/Src/HD/metric.c \\
+	  \$(AZTPATH)/Src/EOS/eos.c \\
+	  ./user_sources.c \\
+	  ./user_input.c
 endif 
 
 ifeq (\$(PHY),rhd)
 SOURCES = \$(AZTPATH)/Src/main.c \\
 	  \$(AZTPATH)/Src/alloc.c \\
-	  \$(AZTPATH)/Src/array.c \\
 	  \$(AZTPATH)/Src/mesh.c \\
 	  ./initial.c \\
 	  \$(AZTPATH)/Src/timestep.c \\
 	  \$(AZTPATH)/Src/input.c \\
 	  \$(AZTPATH)/Src/output.c \\
-	  \$(AZTPATH)/Src/integration.c \\
+	  \$(AZTPATH)/Src/integration\$(INT).c \\
 	  \$(AZTPATH)/Src/flux.c \\
-	  \$(AZTPATH)/Src/rk-rel.c \\
+	  \$(AZTPATH)/Src/runge-kutta.c \\
 	  \$(AZTPATH)/Src/limiters.c \\
 	  \$(AZTPATH)/Src/vectors.c \\
-	  \$(AZTPATH)/Src/restart.c\\
-	  \$(AZTPATH)/Src/auxfunc.c\\
+	  \$(AZTPATH)/Src/restart.c \\
+	  \$(AZTPATH)/Src/auxfunc.c \\
 	  ./boundaries.c \\
 	  \$(AZTPATH)/Src/bound_cond.c \\
-	  \$(AZTPATH)/Src/RHD-\$(COORD)/amatrix.c \\
-	  \$(AZTPATH)/Src/RHD-\$(COORD)/dmmatrix.c \\
-	  \$(AZTPATH)/Src/RHD-\$(COORD)/dnmatrix.c \\
-	  \$(AZTPATH)/Src/RHD-\$(COORD)/domatrix.c \\
-	  \$(AZTPATH)/Src/RHD-\$(COORD)/q2uvector.c \\
-	  \$(AZTPATH)/Src/RHD-\$(COORD)/u2qvector.c \\
-	  \$(AZTPATH)/Src/RHD-\$(COORD)/qvector.c \\
-	  \$(AZTPATH)/Src/RHD-\$(COORD)/fvector.c \\
-	  \$(AZTPATH)/Src/RHD-\$(COORD)/gvector.c \\
-	  \$(AZTPATH)/Src/RHD-\$(COORD)/hvector.c \\
-	  \$(AZTPATH)/Src/RHD-\$(COORD)/svector.c \\
-	  \$(AZTPATH)/Src/RHD-\$(COORD)/gauge.c  
-	  ./extforce.c
+	  \$(AZTPATH)/Src/RHD/q2uvector.c \\
+	  \$(AZTPATH)/Src/RHD/u2qvector.c \\
+	  \$(AZTPATH)/Src/RHD/qvector.c \\
+	  \$(AZTPATH)/Src/RHD/fvector.c \\
+	  \$(AZTPATH)/Src/RHD/gvector.c \\
+	  \$(AZTPATH)/Src/RHD/hvector.c \\
+	  \$(AZTPATH)/Src/RHD/svector.c \\
+	  \$(AZTPATH)/Src/RHD/surface.c \\
+	  \$(AZTPATH)/Src/RHD/\$(METRIC)/metric.c \\
+	  \$(AZTPATH)/Src/EOS/eos.c \\
+	  ./user_sources.c \\
+	  ./user_input.c
 endif
 
 #OBJS = \$(SOURCES:.c=.o)
@@ -184,7 +236,7 @@ endif
 FLAGS = -Ofast -lm
 
 COMPILER = gcc
-AZT_HEAD = $aztekas_path/Src/Headers
+AZT_HEAD = \$(AZTPATH)/Src/Headers
 CFLAGS = -I\$(AZT_HEAD) -I.
 EXEC = aztekas
 
@@ -196,6 +248,7 @@ EXEC = aztekas
 	\$(COMPILER) \$(PARAM) -fopenmp \$(SOURCES) \$(FLAGS) \$(CFLAGS) -o \$(EXEC)  
 	@echo "\$(bla)"
 	@echo "aztekas compiled successfully"
+	
 clean:
 	rm -f \$(EXEC)
 EOF
@@ -206,11 +259,15 @@ then
    read bound_x1max
    if [[ $bound_x1max == "periodic" ]]
    then
-      bound_x1min="periodic"
+      bound_x1max="periodic_x1"
+      bound_x1min=""
    else
       echo 'Set boundary in X1min (outflow,reflective,inflow)'
       read bound_x1min
+      bound_x1max=$bound_x1max"_x1max"
+      bound_x1min=$bound_x1max"_x1min"
    fi
+
 fi
 
 if [ $dim -eq 2 ] || [ $dim -eq 4 ]
@@ -219,20 +276,26 @@ then
    read bound_x1max
    if [[ $bound_x1max == "periodic" ]]
    then
-      bound_x1min="periodic"
+      bound_x1max="periodic_x1"
+      bound_x1min=""
    else
       echo 'Set boundary in X1min (outflow,reflective,inflow)'
       read bound_x1min
+      bound_x1max=$bound_x1max"_x1max"
+      bound_x1min=$bound_x1max"_x1min"
    fi
 
    echo 'Set boundary in X2max (outflow,reflective,periodic,inflow)'
    read bound_x2max
    if [[ $bound_x2max == "periodic" ]]
    then
-      bound_x2min="periodic"
+      bound_x2max="periodic_x2"
+      bound_x2min=""
    else
       echo 'Set boundary in X2min (outflow,reflective,inflow)'
       read bound_x2min
+      bound_x2max=$bound_x2max"_x2max"
+      bound_x2min=$bound_x2max"_x2min"
    fi
 fi
 
@@ -242,82 +305,95 @@ then
    read bound_x1max
    if [[ $bound_x1max == "periodic" ]]
    then
-      bound_x1min="periodic"
+      bound_x1max="periodic_x1"
+      bound_x1min=""
    else
       echo 'Set boundary in X1min (outflow,reflective,inflow)'
       read bound_x1min
+      bound_x1max=$bound_x1max"_x1max"
+      bound_x1min=$bound_x1max"_x1min"
    fi
 
    echo 'Set boundary in X2max (outflow,reflective,periodic,inflow)'
    read bound_x2max
    if [[ $bound_x2max == "periodic" ]]
    then
-      bound_x2min="periodic"
+      bound_x2max="periodic_x2"
+      bound_x2min=""
    else
       echo 'Set boundary in X2min (outflow,reflective,inflow)'
       read bound_x2min
+      bound_x1max=$bound_x1max"_x1max"
+      bound_x1min=$bound_x1max"_x1min"
    fi
 
    echo 'Set boundary in X3max (outflow,reflective,periodic,inflow)'
    read bound_x3max
    if [[ $bound_x3max == "periodic" ]]
    then
-      bound_x3min="periodic"
+      bound_x3max="periodic_x3"
+      bound_x3min=""
    else
       echo 'Set boundary in X3min (outflow,reflective,inflow)'
       read bound_x3min
+      bound_x3max=$bound_x3max"_x3max"
+      bound_x3min=$bound_x3max"_x3min"
    fi
 fi
 
 if [ $dim -eq 1 ]
 then
 cat << EOF > param.h
-// Define boundaries TRUE = 1 , FALSE = 0
+#include<macros.h>
+
 // Set as cond_X whereas
 // cond : {outflow,reflective,periodic,inflow}
 // X : {x1max,x1min,x2max,x2min,x3max,x3min}
 
-#define ${bound_x1max}_x1max 1
-#define ${bound_x1min}_x1min 1
+#define ${bound_x1max}        TRUE
+#define ${bound_x1min}        TRUE
 EOF
 fi
 
 if [ $dim -eq 2 ] || [ $dim -eq 4 ]
 then
 cat << EOF > param.h
-// Define boundaries TRUE = 1 , FALSE = 0
+#include<macros.h>
+
 // Set as cond_X whereas
 // cond : {outflow,reflective,periodic,inflow}
 // X : {x1max,x1min,x2max,x2min,x3max,x3min}
 
-#define ${bound_x1max}_x1max 1
-#define ${bound_x1min}_x1min 1
-#define ${bound_x2max}_x2max 1
-#define ${bound_x2min}_x2min 1
+#define ${bound_x1max}        TRUE
+#define ${bound_x1min}        TRUE
+#define ${bound_x2max}        TRUE
+#define ${bound_x2min}        TRUE
 EOF
 fi
 
 if [ $dim -eq 3 ]
 then
 cat << EOF > param.h
-// Define boundaries TRUE = 1 , FALSE = 0
+#include<macros.h>
+
 // Set as cond_X whereas
 // cond : {outflow,reflective,periodic,inflow}
 // X : {x1max,x1min,x2max,x2min,x3max,x3min}
 
-#define ${bound_x1max}_x1max 1
-#define ${bound_x1min}_x1min 1
-#define ${bound_x2max}_x2max 1
-#define ${bound_x2min}_x2min 1
-#define ${bound_x3max}_x3max 1
-#define ${bound_x3min}_x3min 1
+#define ${bound_x1max}        TRUE
+#define ${bound_x1min}        TRUE
+#define ${bound_x2max}        TRUE
+#define ${bound_x2min}        TRUE
+#define ${bound_x3max}        TRUE
+#define ${bound_x3min}        TRUE
 EOF
 fi
 
 cat << EOF >> param.h
 
-#define limiter 'C'
-#define riemann 2
+#define RECONST               MC
+#define FLUX                  HLL
+#define GRID                  UNIFORM
 
 EOF
 
@@ -330,19 +406,14 @@ cat << EOF > initial.c
  *  Date of creation: $date
  *  author: $author 
  */
-#include<stdio.h>
-#include<math.h>
-#include<string.h>
-#include<stdlib.h>
 #include"main.h"
-#include"param.h"
 
-void INITIAL(double *dtprint)
+void Initial()
 {
    int n, i, j, k, cell;
 
    //Initialize time
-   time = 0.0;
+   grid.time = 0.0;
 
    //Initialize dt
    dt = 0.0;
@@ -355,13 +426,9 @@ cat << EOF > boundaries.c
  *  Date of creation: $date
  *  author: $author 
  */
-#include<stdio.h>
-#include<math.h>
-#include<string.h>
 #include"main.h"
-#include"param.h"
 
-int BOUNDARIES(double *B)
+int Boundaries(double *B)
 {
    int n, i, j, k, cell;
 
@@ -369,27 +436,27 @@ EOF
 
 if [ $dim -eq 1 ]
 then
-   if [[ $bound_x1max == "outflow" ]] || [[ $bound_x1min == "outflow" ]]
+   if [[ $bound_x1max == "outflow_x1max" ]] || [[ $bound_x1min == "outflow_x1min" ]]
    then
-      BOUND="OUTFLOW"
+      BOUND="Outflow"
 
 cat << EOF >> boundaries.c
    $BOUND(B);
 EOF
    fi
 
-   if [[ $bound_x1max == "periodic" ]] || [[ $bound_x1min == "periodic" ]]
+   if [[ $bound_x1max == "periodic_x1" ]] || [[ $bound_x1min == "periodic_x1" ]]
    then
-      BOUND="PERIODIC"
+      BOUND="Periodic"
 
 cat << EOF >> boundaries.c
    $BOUND(B);
 EOF
    fi
 
-   if [[ $bound_x1max == "reflective" ]] || [[ $bound_x1min == "reflective" ]]
+   if [[ $bound_x1max == "reflective_x1max" ]] || [[ $bound_x1min == "reflective_x1min" ]]
    then
-      BOUND="REFLECTIVE"
+      BOUND="Reflection"
 
 cat << EOF >> boundaries.c
    $BOUND(B);
@@ -399,30 +466,30 @@ fi
 
 if [ $dim -eq 2 ] || [ $dim -eq 4 ]
 then
-   if [[ $bound_x1max == "outflow" ]] || [[ $bound_x1min == "outflow" ]] || [[ $bound_x2max == "outflow" ]] || [[ $bound_x2min == "outflow" ]]
+   if [[ $bound_x1max == "outflow_x1max" ]] || [[ $bound_x1min == "outflow_x1min" ]] || [[ $bound_x2max == "outflow_x2max" ]] || [[ $bound_x2min == "outflow_x2min" ]]
 
 
    then
-      BOUND="OUTFLOW"
+      BOUND="Outflow"
 
 cat << EOF >> boundaries.c
    $BOUND(B);
 EOF
    fi
 
-   if [[ $bound_x1max == "periodic" ]] || [[ $bound_x1min == "periodic"  ]] || [[ $bound_x2max == "periodic" ]] || [[ $bound_x2min == "periodic"  ]]
+   if [[ $bound_x1max == "periodic_x2" ]] || [[ $bound_x1min == "periodic_x2"  ]] || [[ $bound_x2max == "periodic_x2" ]] || [[ $bound_x2min == "periodic_x2"  ]]
 
    then
-      BOUND="PERIODIC"
+      BOUND="Periodic"
 
 cat << EOF >> boundaries.c
    $BOUND(B);
 EOF
    fi
 
-   if [[ $bound_x1max == "reflective" ]] || [[ $bound_x1min == "reflective"  ]] || [[ $bound_x2max == "reflective" ]] || [[ $bound_x2min == "reflective"  ]]
+   if [[ $bound_x1max == "reflective_x1max" ]] || [[ $bound_x1min == "reflective_x1min"  ]] || [[ $bound_x2max == "reflective_x2max" ]] || [[ $bound_x2min == "reflective_x2min"  ]]
    then
-      BOUND="REFLECTIVE"
+      BOUND="Reflection"
 
 cat << EOF >> boundaries.c
    $BOUND(B);
@@ -435,33 +502,29 @@ cat << EOF >> boundaries.c
 }
 EOF
 
-cat << EOF > extforce.c
+cat << EOF > user_sources.c
 /* 
  *  aztekas boundaries module
  *  Date of creation: $date
  *  author: $author 
  */
-#include<stdio.h>
-#include<math.h>
-#include<string.h>
 #include"main.h"
-#include"param.h"
 
-void EXTFORCE(double *a, double *uu)
+void User_Source_Terms(double *s, double *u, gauge_ local_grid)
 {
-   int i;
-   double n, p, u=0, v=0, w=0;
-   n = uu[0];
-   p = uu[1];
-#if dim == 1
-   u = uu[2];
-#elif dim == 2
-   u = uu[2];
-   v = uu[3];
-#elif dim == 3 || dim == 4
-   u = uu[2];
-   v = uu[3];
-   w = uu[4];
+   double rho, p, vx1=0.0, vx2=0.0, vx3=0.0;
+
+   rho = u[0];
+   p   = u[1];
+#if DIM == 1
+   vx1 = u[2];
+#elif DIM == 2
+   vx1 = u[2];
+   vx2 = u[3];
+#elif DIM == 3 || dim == 4
+   vx1 = u[2];
+   vx2 = u[3];
+   vx3 = u[4];
 #endif
 
 EOF
@@ -469,12 +532,12 @@ EOF
 if [[ $grav == 'n' ]] || [[ $phy == 'rhd'  ]]
 then
 
-cat << EOF >> extforce.c
-   a[0] = 0;
-   a[1] = 0;
-   a[2] = 0;
-   a[3] = 0;
-   a[4] = 0;
+cat << EOF >> user_sources.c
+   s[0] = 0;
+   s[1] = 0;
+   s[2] = 0;
+   s[3] = 0;
+   s[4] = 0;
 }
 EOF
 fi
@@ -483,46 +546,171 @@ if [[ $grav == 'y' ]]
 then
 if [[ $coord == 'cart' ]]
 then
-cat << EOF >> extforce.c
-   double r = sqrt(x1*x1 + x2*x2 + x3*x3);
+cat << EOF >> user_sources.c
+   double x = local_grid.x[1];
+   double y = local_grid.x[2];
+   double z = local_grid.x[3];
+   double r = sqrt(x*x + y*y + z*z);
 
-   a[0] = 0;
-   a[1] = -(n*w*x3+n*v*x2+n*u*x1)/pow(r,3.0);
-   a[2] = -(n*x1)/pow(r,3.0);
-   a[3] = -(n*x2)/pow(r,3.0);
-   a[4] = -(n*x3)/pow(r,3.0);
+   s[0] = 0;
+   s[1] = -(rho*vx1*x + rho*vx2*y + rho*vx3*z)/pow(r,3.0);
+   s[2] = -(rho*x)/pow(r,3.0);
+   s[3] = -(rho*y)/pow(r,3.0);
+   s[4] = -(rho*z)/pow(r,3.0);
 }
 EOF
 fi
 if [[ $coord == 'cyl' ]]
 then
-cat << EOF >> extforce.c
-   double r = sqrt(x1*x1 + x2*x2);
+cat << EOF >> user_sources.c
+   double R = local_grid.x[1];
+   double z = local_grid.x[2];
+   double r = sqrt(R*R + z*z);
 
-   a[0] = 0;
-   a[1] = -(n*v*x2+n*u*x1)/pow(r,3.0);
-   a[2] = -(n*x1)/pow(r,3.0);
-   a[3] = -(n*x2)/pow(r,3.0);
-   a[4] = 0.0;
+   s[0] = 0;
+   s[1] = -(rho*vx1*R + rho*vx2*z)/pow(r,3.0);
+   s[2] = -(rho*R)/pow(r,3.0);
+   s[3] = -(rho*z)/pow(r,3.0);
+   s[4] = 0;
 }
 EOF
 fi
 if [[ $coord == 'sph' ]]
 then
-cat << EOF >> extforce.c
-   double r = x1;
+cat << EOF >> user_sources.c
+   double r = local_grid.x[1];
 
-   a[0] = 0;
-   a[1] = -(n*u)/pow(r,2.0);
-   a[2] = -(n)/pow(r,2.0);
-   a[3] = 0.0;
-   a[4] = 0.0;
+   s[0] = 0;
+   s[1] = -rho*vx1/(r*r);
+   s[2] = -rho/(r*r);
+   s[3] = 0.0;
+   s[4] = 0.0;
 }
 EOF
 fi
 fi
 
-echo 
+cat << EOF > user_input.c
+/**
+ * @file user_input.c
+ *
+ * @author Emilio Tejeda
+ *
+ * @brief Important input parameters for \a aztekas.
+ */
+
+//Do not erase any of these libraries//
+#include"main.h"
+
+FILE *paramfile;
+
+int User_Parameters(char const *paramfile_name)
+{
+   int   BUFFER_SIZE = 612;
+   char t_key[BUFFER_SIZE], t_value[BUFFER_SIZE], t_firstChar;
+   
+   //if input paramfile_name is null
+   if(!paramfile_name || *paramfile_name == '\0')
+   {
+      fprintf(stderr, "Invalid parameter file name\n");
+      exit(EXIT_FAILURE);
+   }
+      
+   //open file
+   paramfile = fopen (paramfile_name, "r");
+
+   if (paramfile == NULL)
+   {
+      fprintf(stderr, "Error opening parameter file: %s\n", paramfile_name);
+      exit(EXIT_FAILURE);
+   }
+      
+   //read individual settings lines
+   while(fscanf(paramfile, " %c", &t_firstChar) == 1 )
+   {
+
+      if(t_firstChar != '/' && t_firstChar != '%')
+      {
+         // Not a comment so read the key value pair
+         // Move back one space in the input stream with seek
+         fseek(paramfile, -1, SEEK_CUR);
+
+         if(fscanf (paramfile, "%s = %s", t_key, t_value) == 2)
+         {
+/*
+            if(strcmp(t_key,"nl")==0)
+            {
+               nl = atof(t_value);
+            }
+
+            if(strcmp(t_key,"pl")==0)
+            {
+               pl = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx1l")==0)
+            {
+               vx1l = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx2l")==0)
+            {
+               vx2l = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx3l")==0)
+            {
+               vx3l = atof(t_value);
+            }
+
+            if(strcmp(t_key,"nr")==0)
+            {
+               nr = atof(t_value);
+            }
+
+            if(strcmp(t_key,"pr")==0)
+            {
+               pr = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx1r")==0)
+            {
+               vx1r = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx2r")==0)
+            {
+               vx2r = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx3r")==0)
+            {
+               vx3r = atof(t_value);
+            }
+
+            if(strcmp(t_key,"x_0")==0)
+            {
+               x_0 = atof(t_value);
+            }
+*/
+         }
+      }
+            
+      // Ignore the rest of the line.
+      int fscanret = fscanf(paramfile, "%*[^\n]"); 
+   }
+      
+   fclose(paramfile);         
+
+   if(*outputfile == '\0')
+   {
+      printf("Check parameters file: Didn't find a name for output file\n");
+      exit(EXIT_FAILURE);
+   }
+
+   return 0;   
+}
+EOF
 
 echo 'Enter characteristic name for the simulation'
 read char_name
@@ -532,33 +720,35 @@ cat << EOF > $char_name.param
 % OUTPUT FILE AND DIRECTORY %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 outputdirectory = DATA/
-outputfile      = data_
+outputfile      = ${char_name}_
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHECK SIMULATION PARAMETERS (1 -> true, 0 -> false) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+check_param = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % OUTPUT FORMAT (1 -> BINARY, 0 -> ASCII) %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 binary = 0
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RESTART SIMULATION (1 -> TRUE, 0 -> FALSE) %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 restart_simulation = 0
-restartfile        = DATA/data_0.dat
+restartfile        = DATA/${char_name}_0.dat
 restart_filecount  = 0
 
 %%%%%%%%%%%%%%%
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
-Nx1 = 200
-Nx2 = 200
+Nx1 = 256
+Nx2 = 0
 Nx3 = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINE DOMAIN LIMITS %
 %%%%%%%%%%%%%%%%%%%%%%%%
-
-X_norm = 1.0
 
 x1max = 1.0
 x2max = 1.0
