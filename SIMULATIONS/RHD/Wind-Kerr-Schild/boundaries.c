@@ -22,7 +22,11 @@ int Boundaries(double *B)
    gauge_ local_grid;
 
    Outflow(B);
+#if POLAR == FALSE
    Reflection(B);
+#elif POLAR == TRUE
+   Periodic(B);
+#endif
 
 #if DIM == 2
 

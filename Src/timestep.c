@@ -24,7 +24,7 @@ double TimeStep()
       c = sqrt(K*U(1,i) / (U(0,i)));
       dtmin = MIN(dx1/(fabs(U(2,i)) + fabs(c)),dtmin);
 
-      if(c == fabs(sqrt(1.0)) || c == fabs(1.0/0.0))
+      if(U(0,i) == fabs(sqrt(1.0)) || U(0,i) == fabs(1.0/0.0))
       {
          printf("                                          \n");
          printf("NaN value found in calculation.\n");
@@ -42,7 +42,7 @@ double TimeStep()
          dtmin = MIN(dx1/(fabs(U(2,i,j)) + fabs(c)),dtmin);
          dtmin = MIN(dx2/(fabs(U(3,i,j)) + fabs(c)),dtmin);
 
-         if(c == fabs(sqrt(1.0)) || c == fabs(1.0/0.0))
+         if(U(0,i,j) == fabs(sqrt(1.0)) || U(0,i,j) == fabs(1.0/0.0))
          {
             printf("                                          \n");
             printf("NaN value found in calculation.\n");
@@ -66,7 +66,7 @@ double TimeStep()
          dtmin = MIN(dx2/(fabs(U(3,i,j)) + fabs(c)),dtmin);
          dtmin = MIN(dx2/(fabs(U(4,i,j)) + fabs(c)),dtmin);
 
-         if(c == fabs(sqrt(1.0)) || c == fabs(1.0/0.0))
+         if(U(0,i,j) == fabs(sqrt(1.0)) || U(0,i,j) == fabs(1.0/0.0))
          {
             printf("                                          \n");
             printf("NaN value found in calculation.\n");
@@ -91,7 +91,7 @@ double TimeStep()
             dtmin = MIN(dx2/(fabs(U(3,i,j,k)) + fabs(c)),dtmin);
             dtmin = MIN(dx3/(fabs(U(4,i,j,k)) + fabs(c)),dtmin);
 
-            if(c == fabs(sqrt(1.0)) || c == fabs(1.0/0.0))
+            if(U(0,i,j,k) == fabs(sqrt(1.0)) || U(0,i,j,k) == fabs(1.0/0.0))
             {
                printf("                                          \n");
                printf("NaN value found in calculation.\n");
