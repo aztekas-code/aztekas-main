@@ -16,9 +16,10 @@
 
 
 // NAN
-int Check_nan;
+int CHECK_NAN;
 
 /* Define pointers */
+double *U0;
 double *U, *U1, *U2, *U3;
 double *Q, *Q1, *Q2, *Q3;
 

@@ -84,6 +84,7 @@ int main(int argc, char* argv[])
       Initial();
       tprint  = 0.0; //Initialize printing parameter
       itprint = 0;   //Initialize file numeration
+      U0 = U;
    }
 
    start = omp_get_wtime();
