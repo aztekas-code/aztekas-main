@@ -3,6 +3,7 @@
 int Cons2Prim(double *u, double *q)
 {
    int i, j, k;
+   int count;
    double D, tau, S_cov[3], S_con[3];
    double h, derh, f, derf;
    double Lorentz, SS;
@@ -43,8 +44,9 @@ int Cons2Prim(double *u, double *q)
 
       theta_0 = U(1,i)/U(0,i);
       f       = 1.0;
+      coutn   = 0;
 
-      while(fabs(f) > 0.00000001)
+      while(fabs(f) > 0.00000001 || count <= 100000)
       {
       #if EOS == IDEAL
          h    = 1.0 + (K / (K - 1.0))*theta_0;
@@ -61,6 +63,7 @@ int Cons2Prim(double *u, double *q)
 
          theta   = theta_0 - f/derf;
          theta_0 = theta;
+         count++;
       }
 
       #if EOS == IDEAL
@@ -112,8 +115,9 @@ int Cons2Prim(double *u, double *q)
 
          theta_0 = U(1,i,j)/U(0,i,j);
          f       = 1.0;
+         count   = 0;
 
-         while(fabs(f) > 0.00000001)
+         while(fabs(f) > 0.00000001 || count <= 100000)
          {
          #if EOS == IDEAL
             h    = 1.0 + (K / (K - 1.0))*theta_0;
@@ -130,6 +134,7 @@ int Cons2Prim(double *u, double *q)
 
             theta   = theta_0 - f/derf;
             theta_0 = theta;
+            count++;
          }
 
          #if EOS == IDEAL
@@ -180,8 +185,9 @@ int Cons2Prim(double *u, double *q)
 
          theta_0 = U(1,i,j)/U(0,i,j);
          f       = 1.0;
+         count   = 0;
 
-         while(fabs(f) > 0.00000001)
+         while(fabs(f) > 0.00000001 || count <= 100000)
          {
          #if EOS == IDEAL
             h    = 1.0 + (K / (K - 1.0))*theta_0;
@@ -198,6 +204,7 @@ int Cons2Prim(double *u, double *q)
 
             theta   = theta_0 - f/derf;
             theta_0 = theta;
+            count++;
          }
 
          #if EOS == IDEAL
