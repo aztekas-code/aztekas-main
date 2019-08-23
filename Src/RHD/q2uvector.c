@@ -46,7 +46,7 @@ int Cons2Prim(double *u, double *q)
       f       = 1.0;
       coutn   = 0;
 
-      while(fabs(f) > 0.00000001 || count <= 100000)
+      while(fabs(f) > 0.00000001 && count <= 100000)
       {
       #if EOS == IDEAL
          h    = 1.0 + (K / (K - 1.0))*theta_0;
@@ -117,7 +117,7 @@ int Cons2Prim(double *u, double *q)
          f       = 1.0;
          count   = 0;
 
-         while(fabs(f) > 0.00000001 || count <= 100000)
+         while(fabs(f) > 0.00000001 && count <= 100000)
          {
          #if EOS == IDEAL
             h    = 1.0 + (K / (K - 1.0))*theta_0;
@@ -187,7 +187,7 @@ int Cons2Prim(double *u, double *q)
          f       = 1.0;
          count   = 0;
 
-         while(fabs(f) > 0.00000001 || count <= 100000)
+         while(fabs(f) > 0.00000001 && count <= 100000)
          {
          #if EOS == IDEAL
             h    = 1.0 + (K / (K - 1.0))*theta_0;
