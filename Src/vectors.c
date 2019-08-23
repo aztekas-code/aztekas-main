@@ -117,6 +117,9 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
          case 'g':
             u = l->ux2p;
             local_grid.x[2] = grid.X2p[I[1]];
+            #if POLAR == TRUE
+            local_grid.x[2] = M_PI_2;
+            #endif
          break;
 
          case 'h':
@@ -137,6 +140,9 @@ int VECTOR(int pm, char flux, lim_ *l, flx_ *f, int *I)
          case 'g':
             u = l->ux2m;
             local_grid.x[2] = grid.X2m[I[1]];
+            #if POLAR == TRUE
+            local_grid.x[2] = M_PI_2;
+            #endif
          break;
 
          case 'h':

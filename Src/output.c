@@ -13,7 +13,7 @@ int PrintValues(double *tprint, double *dtprint, int *itprint)
 {
    int n, i, j, k;
 
-   if(grid.time >= *tprint || Check_nan == TRUE)
+   if(grid.time >= *tprint || CHECK_NAN == TRUE)
    {
       printf("Time = %e, dt = %e\n",grid.time,dt);
       if(graf == 1)
@@ -76,6 +76,11 @@ int Output1(int *itprint)
    strcat(archivo,outputfile);
    strcat(archivo,dat);
    strcat(archivo,ext);
+   if(CHECK_NAN == TRUE)
+   {
+      strcpy(archivo,outputdirectory);
+      strcat(archivo,"last.dat");   
+   }
    file = fopen(archivo,"w");   
 
    fprintf(file,"###############PARAM###############\n");
@@ -115,6 +120,11 @@ int Output1_bin(int *itprint)
    strcat(archivo,outputfile);
    strcat(archivo,dat);
    strcat(archivo,ext);
+   if(CHECK_NAN == TRUE)
+   {
+      strcpy(archivo,outputdirectory);
+      strcat(archivo,"last.dat");   
+   }
    file = fopen(archivo,"wb");
 
    fwrite(&grid.time, sizeof grid.time, 1, file);
@@ -153,6 +163,11 @@ int Output2(int *itprint)
    strcat(archivo,outputfile);
    strcat(archivo,dat);
    strcat(archivo,ext);
+   if(CHECK_NAN == TRUE)
+   {
+      strcpy(archivo,outputdirectory);
+      strcat(archivo,"last.dat");   
+   }
    file = fopen(archivo,"w");
 
    fprintf(file,"###############PARAM###############\n");
@@ -211,6 +226,11 @@ int Output2_bin(int *itprint)
    strcat(archivo,outputfile);
    strcat(archivo,dat);
    strcat(archivo,ext);
+   if(CHECK_NAN == TRUE)
+   {
+      strcpy(archivo,outputdirectory);
+      strcat(archivo,"last.dat");   
+   }
    file = fopen(archivo,"wb");
 
    fwrite(&grid.time, sizeof grid.time, 1, file);
@@ -270,6 +290,11 @@ int Output3(int *itprint)
    strcat(archivo,outputfile);
    strcat(archivo,dat);
    strcat(archivo,ext);
+   if(CHECK_NAN == TRUE)
+   {
+      strcpy(archivo,outputdirectory);
+      strcat(archivo,"last.dat");   
+   }
    file = fopen(archivo,"w");
 
    fprintf(file,"###############PARAM###############\n");
@@ -321,6 +346,11 @@ int Output3_bin(int *itprint)
    strcat(archivo,outputfile);
    strcat(archivo,dat);
    strcat(archivo,ext);
+   if(CHECK_NAN == TRUE)
+   {
+      strcpy(archivo,outputdirectory);
+      strcat(archivo,"last.dat");   
+   }
    file = fopen(archivo,"wb");
 
    fwrite(&grid.time, sizeof grid.time, 1, file);
