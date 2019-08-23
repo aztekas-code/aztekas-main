@@ -39,6 +39,11 @@ void Surface_Volume()
          vol.x[2]    = grid.X2[j];
          surf_p.x[2] = grid.X2[j];
          surf_m.x[2] = grid.X2[j];
+         #if POLAR == TRUE
+         vol.x[2]    = M_PI_2;
+         surf_p.x[2] = M_PI_2;
+         surf_m.x[2] = M_PI_2;
+         #endif
          vol.x[3]    = 0.0;
          surf_p.x[3] = 0.0;
          surf_m.x[3] = 0.0;
@@ -56,6 +61,14 @@ void Surface_Volume()
          vol.x[2]    = grid.X2[j];
          surf_p.x[2] = grid.X2p[j];
          surf_m.x[2] = grid.X2m[j];
+         #if POLAR == TRUE
+         vol.x[2]    = M_PI_2;
+         surf_p.x[2] = M_PI_2;
+         surf_m.x[2] = M_PI_2;
+         #endif
+         vol.x[3]    = 0.0;
+         surf_p.x[3] = 0.0;
+         surf_m.x[3] = 0.0;
  
          Get_Metric_Components(&vol);
          Get_Metric_Components(&surf_p);

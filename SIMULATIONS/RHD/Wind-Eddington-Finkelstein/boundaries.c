@@ -22,7 +22,11 @@ int Boundaries(double *B)
    gauge_ local_grid;
 
    Outflow(B);
+#if POLAR == FALSE
    Reflection(B);
+#elif POLAR == TRUE
+   Periodic(B);
+#endif
 
 #if DIM == 2
 
@@ -34,8 +38,11 @@ int Boundaries(double *B)
          local_grid.x[2] = grid.X2[j];
 
          Get_Metric_Components(&local_grid);
-
+    #if POLAR == FALSE
          if(grid.X2[j] >= M_PI_2 && i >= Nx1-gc)
+    #elif POLAR == TRUE
+         if(grid.X2[j] >= M_PI_2 && grid.X2[j] <= 3.0*M_PI_2 && i >= Nx1-gc)
+    #endif
          {
             B(0,i,j) =  density_0;
             B(1,i,j) =  (K - 1.0)*B(0,i,j)*pow(velocity_0/Mach,2.0)/(K*(K - 1.0) - K*pow(velocity_0/Mach,2.0));
