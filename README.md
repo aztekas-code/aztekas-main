@@ -14,6 +14,8 @@ where ![equation](https://latex.codecogs.com/gif.latex?Q) is the vector of conse
 
 1. Open terminal in your computer.
 2. Clone github repository: `$ git clone https://github.com/aztekas-code/aztekas-main`
-
+3. Move to SIMULATIONS/HD/Shock-Tube: `$ cd SIMULATIONS/HD/Shock-Tube`
+4. Compile: `$ make clean` and `$ make`
+5. Run _aztekas_: `./aztekas shock.param`
 
 ## Setup a new simulation
