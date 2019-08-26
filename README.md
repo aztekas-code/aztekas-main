@@ -4,6 +4,7 @@ _aztekas_ is a program that solves hyperbolic partial differential equations in 
 
 ## Introduction
 
-_aztekas_ uses a conservative finite-volume approach to obtain the dicrete form of a hyperbolic partial differential system of equations (PDE):
+_aztekas_ uses a conservative finite-volume approach to obtain the dicrete form of a hyperbolic partial differential system of equations (PDE).
 
-![\Large x=\frac{\mathrm{d}}}{2a}](https://latex.codecogs.com/svg.latex?x%3D%5Cfrac%7B-b%5Cpm%5Csqrt%7Bb%5E2-4ac%7D%7D%7B2a%7D)
+<img src="http://www.sciweavers.org/tex2img.php?eq=%20%5Cfrac%7B%5Cpartial%20Q%7D%7B%5Cpartial%20t%7D%20%20%2B%20%5Cfrac%7B%5Cpartial%20F%5Ei%7D%7B%5Cpartial%20x%5Ei%7D%20%3D%20S&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0" align="center" border="0" alt=" \frac{\partial Q}{\partial t}  + \frac{\partial F^i}{\partial x^i} = S" width="110" height="46" />
+
