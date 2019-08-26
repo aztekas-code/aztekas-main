@@ -265,7 +265,7 @@ then
       echo 'Set boundary in X1min (outflow,reflective,inflow)'
       read bound_x1min
       bound_x1max=$bound_x1max"_x1max"
-      bound_x1min=$bound_x1max"_x1min"
+      bound_x1min=$bound_x1min"_x1min"
    fi
 
 fi
@@ -282,7 +282,7 @@ then
       echo 'Set boundary in X1min (outflow,reflective,inflow)'
       read bound_x1min
       bound_x1max=$bound_x1max"_x1max"
-      bound_x1min=$bound_x1max"_x1min"
+      bound_x1min=$bound_x1min"_x1min"
    fi
 
    echo 'Set boundary in X2max (outflow,reflective,periodic,inflow)'
@@ -295,7 +295,7 @@ then
       echo 'Set boundary in X2min (outflow,reflective,inflow)'
       read bound_x2min
       bound_x2max=$bound_x2max"_x2max"
-      bound_x2min=$bound_x2max"_x2min"
+      bound_x2min=$bound_x2min"_x2min"
    fi
 fi
 
@@ -311,7 +311,7 @@ then
       echo 'Set boundary in X1min (outflow,reflective,inflow)'
       read bound_x1min
       bound_x1max=$bound_x1max"_x1max"
-      bound_x1min=$bound_x1max"_x1min"
+      bound_x1min=$bound_x1min"_x1min"
    fi
 
    echo 'Set boundary in X2max (outflow,reflective,periodic,inflow)'
@@ -324,7 +324,7 @@ then
       echo 'Set boundary in X2min (outflow,reflective,inflow)'
       read bound_x2min
       bound_x1max=$bound_x1max"_x1max"
-      bound_x1min=$bound_x1max"_x1min"
+      bound_x1min=$bound_x1min"_x1min"
    fi
 
    echo 'Set boundary in X3max (outflow,reflective,periodic,inflow)'
@@ -337,7 +337,7 @@ then
       echo 'Set boundary in X3min (outflow,reflective,inflow)'
       read bound_x3min
       bound_x3max=$bound_x3max"_x3max"
-      bound_x3min=$bound_x3max"_x3min"
+      bound_x3min=$bound_x3min"_x3min"
    fi
 fi
 
