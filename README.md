@@ -13,4 +13,4 @@ where ![equation](https://latex.codecogs.com/gif.latex?Q) is the vector of conse
 ## How to install
 
 1. Open terminal in your computer.
-2. Type $ git clone https://github.com/aztekas-code/aztekas-main
+2. Type `$ git clone https://github.com/aztekas-code/aztekas-main`
