@@ -9,3 +9,8 @@ _aztekas_ uses a conservative finite-volume approach to obtain the dicrete form 
 ![equation](https://latex.codecogs.com/gif.latex?%5Cfrac%7B%5Cpartial%20Q%7D%7B%5Cpartial%20t%7D%20&plus;%20%5Cfrac%7B%5Cpartial%20F%5Ei%7D%7B%5Cpartial%20x%5Ei%7D%20%3D%20S)
 
 where ![equation](https://latex.codecogs.com/gif.latex?Q) is the vector of conservative variables (energy, density, momentum), ![equation](https://latex.codecogs.com/gif.latex?F%5Ei) are the vectors of fluxes along each dimensional direction and ![equation](https://latex.codecogs.com/gif.latex?S) is the vector of source terms.
+
+## How to install
+
+1. Open terminal in your computer.
+2. Type $ git clone https://github.com/aztekas-code/aztekas-main
