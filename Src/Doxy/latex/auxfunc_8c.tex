@@ -1,28 +1,38 @@
-\hypertarget{auxfunc_8c}{}\doxysection{auxfunc.\+c File Reference}
-\label{auxfunc_8c}\index{auxfunc.c@{auxfunc.c}}
+\hypertarget{auxfunc_8c}{}\section{auxfunc.\+c File Reference}
+\label{auxfunc_8c}\index{auxfunc.\+c@{auxfunc.\+c}}
 
 
 Helpful functions for {\itshape aztekas}.  
 
 
-{\ttfamily \#include $<$stdio.\+h$>$}\newline
-{\ttfamily \#include $<$math.\+h$>$}\newline
-{\ttfamily \#include $<$stdlib.\+h$>$}\newline
-{\ttfamily \#include $<$string.\+h$>$}\newline
 {\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
-{\ttfamily \#include \char`\"{}param.\+h\char`\"{}}\newline
-\doxysubsection*{Functions}
+\subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{auxfunc_8c_aa06479ffc4b9586bc45bde8506dcfb96}\label{auxfunc_8c_aa06479ffc4b9586bc45bde8506dcfb96}} 
 int {\bfseries MxV} (double $\ast$M, double $\ast$V, double $\ast$L)
 \item 
-\mbox{\Hypertarget{auxfunc_8c_a0c432463d6e747d6b41de0eaa378fc44}\label{auxfunc_8c_a0c432463d6e747d6b41de0eaa378fc44}} 
-void {\bfseries roundgen} (double $\ast$num)
+\mbox{\Hypertarget{auxfunc_8c_a64afb5fa2db6752c6e40a368f6aeb3e1}\label{auxfunc_8c_a64afb5fa2db6752c6e40a368f6aeb3e1}} 
+void {\bfseries Round\+Gen} (double $\ast$num)
+\item 
+\mbox{\Hypertarget{auxfunc_8c_ab48e98cff6b8d14e5211e3f470c1cbe4}\label{auxfunc_8c_ab48e98cff6b8d14e5211e3f470c1cbe4}} 
+void {\bfseries Scalar\+\_\+\+Contraction\+\_\+\+Range1} (double $\ast$scalar, double $\ast$cov, double $\ast$con)
+\item 
+\mbox{\Hypertarget{auxfunc_8c_ab0744adde00af3ef3862ccaf9ec25a4a}\label{auxfunc_8c_ab0744adde00af3ef3862ccaf9ec25a4a}} 
+void {\bfseries Raise\+\_\+\+Index\+\_\+\+Range1} (double $\ast$con, double $\ast$cov, gauge\+\_\+ $\ast$local\+\_\+grid)
+\item 
+\mbox{\Hypertarget{auxfunc_8c_a53e963cead4de67924763c24273f0f2a}\label{auxfunc_8c_a53e963cead4de67924763c24273f0f2a}} 
+void {\bfseries Low\+\_\+\+Index\+\_\+\+Range1} (double $\ast$cov, double $\ast$con, gauge\+\_\+ $\ast$local\+\_\+grid)
+\item 
+\mbox{\Hypertarget{auxfunc_8c_ab16afad2dd17c19f3a5a2e7bdf10dd4b}\label{auxfunc_8c_ab16afad2dd17c19f3a5a2e7bdf10dd4b}} 
+void {\bfseries Low\+\_\+\+Index\+\_\+\+Range2} (double $\ast$$\ast$diag, double $\ast$$\ast$con, gauge\+\_\+ $\ast$local\+\_\+grid)
+\item 
+\mbox{\Hypertarget{auxfunc_8c_a6dd3bfc286a4edf62790809eda6c52d0}\label{auxfunc_8c_a6dd3bfc286a4edf62790809eda6c52d0}} 
+void {\bfseries Check\+Sim\+Parameters} ()
 \end{DoxyCompactItemize}
 
 
-\doxysubsection{Detailed Description}
+\subsection{Detailed Description}
 Helpful functions for {\itshape aztekas}. 
 
 \begin{DoxyAuthor}{Author}
