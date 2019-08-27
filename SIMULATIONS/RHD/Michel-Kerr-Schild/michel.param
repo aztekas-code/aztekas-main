@@ -1,0 +1,47 @@
+% OUTPUT FILE AND DIRECTORY
+outputdirectory = ./prueba/
+outputfile      = michel_ 
+
+% RESTART SIMULATION (1 -> true, 0 -> false)
+restart_simulation = 0
+restartfile = ./Shock/dx1_10.dat
+restart_filecount = 10
+
+% Define mesh
+Nx1 = 128
+Nx2 = 64
+Nx3 = 0
+
+% Define domain limits
+x1max = 20.0
+x2max = 0.5
+x3max = 1.0 
+x1min = 1.5
+x2min = 0.0
+x3min = 0.0
+
+% Time parameters
+tmax = 5000.0
+timefile = 10.0
+cou = 0.25
+
+% Polytorpic index
+%K = 1.00001
+%K = 1.3333333333333333333333333
+%K = 1.4
+%K = 1.5
+K = 1.6666666666666666666666666
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Initial conditions %%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% MICHEL ACCRETION (Gamma = 5/3, r0 = 20 M)
+density_0  =  3.542502e+03 
+pressure_0 =  4.940072e+01
+velocity_0 = -9.719007e-02
+ 
+% MICHEL ACCRETION (Gamma = 4/3, r0 = 20 M)
+%density_0  =  5.901940e+03  
+%pressure_0 =  8.001744e+00
+%velocity_0 = -2.176401e-01
