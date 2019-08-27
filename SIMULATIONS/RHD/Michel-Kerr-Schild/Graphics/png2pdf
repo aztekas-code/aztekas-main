@@ -1,0 +1,3 @@
+#!/bin/bash
+
+convert $1.png -quality 100 -scale 100% $1.pdf
