@@ -126,25 +126,46 @@ void Prim2Cons_All(double *q, double *u)
          local_grid.x[1] = grid.X1[i];
          local_grid.x[2] = grid.X2[j];
          local_grid.x[3] = 0.0;
-       
-         rho = u(0,i,j);
-         p   = u(1,i,j);
-         vx1 = u(2,i,j);
-         vx2 = u(3,i,j);
-         vx3 = u(4,i,j);
+     
+         Get_Metric_Components(&local_grid);
+
+         rho      = u(0,i,j);
+         p        = u(1,i,j);
+         v_cov[0] = u(2,i,j);
+         v_cov[1] = u(3,i,j);
+         v_cov[2] = u(4,i,j);
 
          P[0] = rho;
          P[1] = p;
 
+         v_con[0] = local_grid.gamma_con[0][0]*v_cov[0] + \
+                    local_grid.gamma_con[0][1]*v_cov[1] + \
+                    local_grid.gamma_con[0][2]*v_cov[2];
+         v_con[1] = local_grid.gamma_con[1][0]*v_cov[0] + \
+                    local_grid.gamma_con[1][1]*v_cov[1] + \
+                    local_grid.gamma_con[1][2]*v_cov[2];
+         v_con[2] = local_grid.gamma_con[2][0]*v_cov[0] + \
+                    local_grid.gamma_con[2][1]*v_cov[1] + \
+                    local_grid.gamma_con[2][2]*v_cov[2];
+                    
+         VV = v_cov[0]*v_con[0] + v_cov[1]*v_con[1] + v_cov[2]*v_con[2];
+
+         Lorentz = 1.0/sqrt(1.0 - VV);
+
          EoS(&eos,P,local_grid);
 
-         E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
- 
-         q(0,i,j) = rho;
-         q(1,i,j) = E;
-         q(2,i,j) = rho*vx1;
-         q(3,i,j) = rho*vx2;
-         q(4,i,j) = rho*vx3;
+         D        = rho*Lorentz;
+         U        = rho*eos.h*Lorentz*Lorentz - p;
+         tau      = U - D;
+         S_cov[0] = rho*eos.h*Lorentz*Lorentz*v_cov[0];
+         S_cov[1] = rho*eos.h*Lorentz*Lorentz*v_cov[1];
+         S_cov[2] = rho*eos.h*Lorentz*Lorentz*v_cov[2];
+
+         q(0,i,j) = D;
+         q(1,i,j) = tau;
+         q(2,i,j) = S_cov[0];
+         q(3,i,j) = S_cov[1];
+         q(4,i,j) = S_cov[2];
       }
    }
 

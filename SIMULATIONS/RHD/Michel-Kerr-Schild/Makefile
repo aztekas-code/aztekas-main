@@ -22,7 +22,7 @@ PARAM += -Dgc=3
 PHY    = rhd
 
 # Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Kerr-Schild)
-METRIC = Eddington-Finkelstein
+METRIC = Kerr-Schild
 
 ifeq ($(PHY),hd)
         PARAM += -DPHYSICS=HD
@@ -37,6 +37,9 @@ ifeq ($(eos),ideal)
 endif
 ifeq ($(eos),dust)
         PARAM += -DEOS=DUST
+endif
+ifeq ($(eos),dust)
+        PARAM += -DEOS=STIFF
 endif
 
 #####################################
