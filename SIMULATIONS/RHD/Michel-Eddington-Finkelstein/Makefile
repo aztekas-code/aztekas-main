@@ -45,7 +45,7 @@ endif
 # Dimension
 #####################################
 
-DIM = 2
+DIM = 1
 
 ifeq ($(DIM),1)
 	PARAM += -DDIM=1
