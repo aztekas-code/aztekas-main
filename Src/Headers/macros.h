@@ -13,6 +13,7 @@
 /* EOS */
 #define IDEAL 0
 #define DUST  1
+#define STIFF 2
 
 /* COORDINATES */
 #define CARTESIAN   0

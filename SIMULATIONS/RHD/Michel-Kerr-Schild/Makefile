@@ -38,6 +38,9 @@ endif
 ifeq ($(eos),dust)
         PARAM += -DEOS=DUST
 endif
+ifeq ($(eos),dust)
+        PARAM += -DEOS=STIFF
+endif
 
 #####################################
 
@@ -45,7 +48,7 @@ endif
 # Dimension
 #####################################
 
-DIM = 4
+DIM = 2
 
 ifeq ($(DIM),1)
 	PARAM += -DDIM=1

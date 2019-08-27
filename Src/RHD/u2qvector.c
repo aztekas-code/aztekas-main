@@ -133,7 +133,7 @@ void Prim2Cons_All(double *q, double *u)
          p        = u(1,i,j);
          v_cov[0] = u(2,i,j);
          v_cov[1] = u(3,i,j);
-         v_cov[2] = 0.0;
+         v_cov[2] = u(4,i,j);
 
          P[0] = rho;
          P[1] = p;
