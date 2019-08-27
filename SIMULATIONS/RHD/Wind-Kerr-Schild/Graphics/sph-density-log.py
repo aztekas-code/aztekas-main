@@ -128,17 +128,12 @@ norm = BoundaryNorm(levels, ncolors=cmap.N) # Normalization
 ################
 if orientation == 'v':
     cn = ax.contourf(X1,X2,np.log10(n),cmap=cmap,levels=levels,norm=norm)
-    cn = ax.contourf(-X1,X2,np.log10(n),cmap=cmap,levels=levels,norm=norm)
 
 if orientation == 'h':
     cn = ax.contourf(X2,X1,np.log10(n),cmap=cmap,levels=levels,norm=norm)
-    cn = ax.contourf(X2,-X1,np.log10(n),cmap=cmap,levels=levels,norm=norm)
 
 if orientation == 'c':
     cn = ax.contourf(X1,X2,n,cmap=cmap,levels=levels,norm=norm)
-    cn = ax.contourf(-X1,X2,n,cmap=cmap,levels=levels,norm=norm)
-    cn = ax.contourf(X1,-X2,n,cmap=cmap,levels=levels,norm=norm)
-    cn = ax.contourf(-X1,-X2,n,cmap=cmap,levels=levels,norm=norm)
 
 ###############
 # Vector plot #
