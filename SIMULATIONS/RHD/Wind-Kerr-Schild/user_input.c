@@ -76,3 +76,6 @@ int User_Parameters(char const *paramfile_name)
    return 0;   
 }
 
+int Potencia()
+{
+}

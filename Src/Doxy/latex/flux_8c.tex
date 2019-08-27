@@ -1,37 +1,32 @@
-\hypertarget{flux_8c}{}\doxysection{flux.\+c File Reference}
-\label{flux_8c}\index{flux.c@{flux.c}}
+\hypertarget{flux_8c}{}\section{flux.\+c File Reference}
+\label{flux_8c}\index{flux.\+c@{flux.\+c}}
 
 
 Numerical flux computing and implementation.  
 
 
-{\ttfamily \#include $<$stdio.\+h$>$}\newline
-{\ttfamily \#include $<$math.\+h$>$}\newline
-{\ttfamily \#include $<$stdlib.\+h$>$}\newline
-{\ttfamily \#include $<$string.\+h$>$}\newline
-{\ttfamily \#include \char`\"{}param.\+h\char`\"{}}\newline
 {\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
-\doxysubsection*{Functions}
+\subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{flux_8c_a767f7312fd77c6edc1c472b98ff14a9a}\label{flux_8c_a767f7312fd77c6edc1c472b98ff14a9a}} 
-int {\bfseries F\+L\+U\+X1D} (vec\+\_\+ $\ast$v, lim\+\_\+ $\ast$l, int $\ast$I)
+\mbox{\Hypertarget{flux_8c_a8eb7926c8e9e2b294555910b4aff88a3}\label{flux_8c_a8eb7926c8e9e2b294555910b4aff88a3}} 
+int {\bfseries Flux1D} (vec\+\_\+ $\ast$v, lim\+\_\+ $\ast$l, int $\ast$I)
 \item 
-\mbox{\Hypertarget{flux_8c_a9f029f5e6c55e18553b73f875d2c1323}\label{flux_8c_a9f029f5e6c55e18553b73f875d2c1323}} 
-int {\bfseries F\+L\+U\+X2D} (vec\+\_\+ $\ast$v, lim\+\_\+ $\ast$l, int $\ast$I)
+\mbox{\Hypertarget{flux_8c_a709ab4f4d10df6c5c8c0522a569b3f15}\label{flux_8c_a709ab4f4d10df6c5c8c0522a569b3f15}} 
+int {\bfseries Flux2D} (vec\+\_\+ $\ast$v, lim\+\_\+ $\ast$l, int $\ast$I)
 \item 
-\mbox{\Hypertarget{flux_8c_ae4207c1f1f0631928cadf72d94a1ef96}\label{flux_8c_ae4207c1f1f0631928cadf72d94a1ef96}} 
-int {\bfseries F\+L\+U\+X3D} (vec\+\_\+ $\ast$v, lim\+\_\+ $\ast$l, int $\ast$I)
+\mbox{\Hypertarget{flux_8c_a14e7907f7b7c6053f59caffc77565625}\label{flux_8c_a14e7907f7b7c6053f59caffc77565625}} 
+int {\bfseries Flux3D} (vec\+\_\+ $\ast$v, lim\+\_\+ $\ast$l, int $\ast$I)
 \item 
-\mbox{\Hypertarget{flux_8c_a42704692f860c4b66daa89d71f6f3e0b}\label{flux_8c_a42704692f860c4b66daa89d71f6f3e0b}} 
-int {\bfseries H\+LL} (double $\ast$F, flx\+\_\+ $\ast$f, int x)
+\mbox{\Hypertarget{flux_8c_a44d66c1f5030fb2bdcb4908798fb3446}\label{flux_8c_a44d66c1f5030fb2bdcb4908798fb3446}} 
+int {\bfseries Hll} (double $\ast$F, flx\+\_\+ $\ast$f, int x)
 \item 
-\mbox{\Hypertarget{flux_8c_ad12c8754522bc00338e557ddb29d955f}\label{flux_8c_ad12c8754522bc00338e557ddb29d955f}} 
-int {\bfseries H\+L\+LC} (double $\ast$F, flx\+\_\+ $\ast$f, int x)
+\mbox{\Hypertarget{flux_8c_aa50749ad1caa29532a374b684d3802fe}\label{flux_8c_aa50749ad1caa29532a374b684d3802fe}} 
+int {\bfseries Hllc} (double $\ast$F, flx\+\_\+ $\ast$f, int x)
 \end{DoxyCompactItemize}
 
 
-\doxysubsection{Detailed Description}
+\subsection{Detailed Description}
 Numerical flux computing and implementation. 
 
 \begin{DoxyAuthor}{Author}

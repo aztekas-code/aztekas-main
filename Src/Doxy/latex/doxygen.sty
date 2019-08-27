@@ -11,15 +11,8 @@
 \RequirePackage[table]{xcolor}
 \RequirePackage{longtable}
 \RequirePackage{tabu}
-\RequirePackage{fancyvrb}
 \RequirePackage{tabularx}
 \RequirePackage{multirow}
-\RequirePackage{hanging}
-\RequirePackage{ifpdf}
-\RequirePackage{adjustbox}
-\RequirePackage{amssymb}
-\RequirePackage{stackengine}
-\RequirePackage[normalem]{ulem} % for strikeout, but don't modify emphasis
 
 %---------- Internal commands used in this style file ----------------
 
@@ -35,10 +28,6 @@
   \endgroup%
 }
 
-\newcommand{\DoxyHorRuler}{%
-  \setlength{\parskip}{0ex plus 0ex minus 0ex}%
-  \hrule%
-}
 \newcommand{\DoxyLabelFont}{}
 \newcommand{\entrylabel}[1]{%
   {%
@@ -53,7 +42,7 @@
   \ensurespace{4\baselineskip}%
   \begin{list}{}{%
     \settowidth{\labelwidth}{20pt}%
-    %\setlength{\parsep}{0pt}%
+    \setlength{\parsep}{0pt}%
     \setlength{\itemsep}{0pt}%
     \setlength{\leftmargin}{\labelwidth+\labelsep}%
     \renewcommand{\makelabel}{\entrylabel}%
@@ -88,53 +77,20 @@
   \end{alltt}%
   \normalsize%
 }
-% Necessary for redefining not defined charcaters, i.e. "Replacement Character" in tex output.
-\newlength{\CodeWidthChar}
-\newlength{\CodeHeightChar}
-\settowidth{\CodeWidthChar}{?}
-\settoheight{\CodeHeightChar}{?}
-% Necessary for hanging indent
-\newlength{\DoxyCodeWidth}
-
-\newcommand\DoxyCodeLine[1]{\hangpara{\DoxyCodeWidth}{1}{#1}\par}
-
-\newcommand\NiceSpace{%
-     \discretionary{}{\kern\fontdimen2\font}{\kern\fontdimen2\font}%
-}
 
 % Used by @code ... @endcode
-\newenvironment{DoxyCode}[1]{%
+\newenvironment{DoxyCode}{%
   \par%
   \scriptsize%
-  \normalfont\ttfamily%
-  \rightskip0pt plus 1fil%
-  \settowidth{\DoxyCodeWidth}{000000}%
-  \settowidth{\CodeWidthChar}{?}%
-  \settoheight{\CodeHeightChar}{?}%
-  \setlength{\parskip}{0ex plus 0ex minus 0ex}%
-  \ifthenelse{\equal{#1}{0}}
-  {
-    {\lccode`~32 \lowercase{\global\let~}\NiceSpace}\obeyspaces%
-  }
-  {
-    {\lccode`~32 \lowercase{\global\let~}}\obeyspaces%
-  }
-
+  \begin{alltt}%
 }{%
-  \normalfont%
+  \end{alltt}%
   \normalsize%
-  \settowidth{\CodeWidthChar}{?}%
-  \settoheight{\CodeHeightChar}{?}%
 }
 
-% Redefining not defined characters, i.e. "Replacement Character" in tex output.
-\def\ucr{\adjustbox{width=\CodeWidthChar,height=\CodeHeightChar}{\stackinset{c}{}{c}{-.2pt}{%
-   \textcolor{white}{\sffamily\bfseries\small ?}}{%
-   \rotatebox{45}{$\blacksquare$}}}}
-
 % Used by @example, @include, @includelineno and @dontinclude
-\newenvironment{DoxyCodeInclude}[1]{%
-	\DoxyCode{#1}%
+\newenvironment{DoxyCodeInclude}{%
+  \DoxyCode%
 }{%
   \endDoxyCode%
 }
@@ -192,12 +148,6 @@
   \begin{center}%
 }{%
   \end{center}%
-}
-
-% Used by @image
-% (only if inline is specified)
-\newenvironment{DoxyInlineImage}{%
-}{%
 }
 
 % Used by @attention
@@ -308,7 +258,7 @@
 \newenvironment{DoxyParagraph}[1]{%
   \begin{list}{}{%
     \settowidth{\labelwidth}{40pt}%
-    \setlength{\leftmargin}{\labelwidth+\labelsep}%
+    \setlength{\leftmargin}{\labelwidth}%
     \setlength{\parsep}{0pt}%
     \setlength{\itemsep}{-4pt}%
     \renewcommand{\makelabel}{\entrylabel}%
@@ -323,10 +273,10 @@
     \tabulinesep=1mm%
     \par%
     \ifthenelse{\equal{#1}{}}%
-      {\begin{longtabu*}spread 0pt [l]{|X[-1,l]|X[-1,l]|}}% name + description
+      {\begin{longtabu} spread 0pt [l]{|X[-1,l]|X[-1,l]|}}% name + description
     {\ifthenelse{\equal{#1}{1}}%
-      {\begin{longtabu*}spread 0pt [l]{|X[-1,l]|X[-1,l]|X[-1,l]|}}% in/out + name + desc
-      {\begin{longtabu*}spread 0pt [l]{|X[-1,l]|X[-1,l]|X[-1,l]|X[-1,l]|}}% in/out + type + name + desc
+      {\begin{longtabu} spread 0pt [l]{|X[-1,l]|X[-1,l]|X[-1,l]|}}% in/out + name + desc
+      {\begin{longtabu} spread 0pt [l]{|X[-1,l]|X[-1,l]|X[-1,l]|X[-1,l]|}}% in/out + type + name + desc
     }
     \multicolumn{2}{l}{\hspace{-6pt}\bfseries\fontseries{bc}\selectfont\color{darkgray} #2}\\[1ex]%
     \hline%
@@ -335,7 +285,7 @@
     \hline%
     \endhead%
 }{%
-    \end{longtabu*}%
+    \end{longtabu}%
     \vspace{6pt}%
 }
 
@@ -343,7 +293,7 @@
 \newenvironment{DoxyFields}[1]{%
     \tabulinesep=1mm%
     \par%
-    \begin{longtabu*}spread 0pt [l]{|X[-1,r]|X[-1,l]|X[-1,l]|}%
+    \begin{longtabu} spread 0pt [l]{|X[-1,r]|X[-1,l]|X[-1,l]|}%
     \multicolumn{3}{l}{\hspace{-6pt}\bfseries\fontseries{bc}\selectfont\color{darkgray} #1}\\[1ex]%
     \hline%
     \endfirsthead%
@@ -351,7 +301,7 @@
     \hline%
     \endhead%
 }{%
-    \end{longtabu*}%
+    \end{longtabu}%
     \vspace{6pt}%
 }
 
@@ -359,7 +309,7 @@
 \newenvironment{DoxyEnumFields}[1]{%
     \tabulinesep=1mm%
     \par%
-    \begin{longtabu*}spread 0pt [l]{|X[-1,r]|X[-1,l]|}%
+    \begin{longtabu} spread 0pt [l]{|X[-1,r]|X[-1,l]|}%
     \multicolumn{2}{l}{\hspace{-6pt}\bfseries\fontseries{bc}\selectfont\color{darkgray} #1}\\[1ex]%
     \hline%
     \endfirsthead%
@@ -367,7 +317,7 @@
     \hline%
     \endhead%
 }{%
-    \end{longtabu*}%
+    \end{longtabu}%
     \vspace{6pt}%
 }
 
@@ -381,7 +331,7 @@
 \newenvironment{DoxyRetVals}[1]{%
     \tabulinesep=1mm%
     \par%
-    \begin{longtabu*}spread 0pt [l]{|X[-1,r]|X[-1,l]|}%
+    \begin{longtabu} spread 0pt [l]{|X[-1,r]|X[-1,l]|}%
     \multicolumn{2}{l}{\hspace{-6pt}\bfseries\fontseries{bc}\selectfont\color{darkgray} #1}\\[1ex]%
     \hline%
     \endfirsthead%
@@ -389,7 +339,7 @@
     \hline%
     \endhead%
 }{%
-    \end{longtabu*}%
+    \end{longtabu}%
     \vspace{6pt}%
 }
 
@@ -397,7 +347,7 @@
 \newenvironment{DoxyExceptions}[1]{%
     \tabulinesep=1mm%
     \par%
-    \begin{longtabu*}spread 0pt [l]{|X[-1,r]|X[-1,l]|}%
+    \begin{longtabu} spread 0pt [l]{|X[-1,r]|X[-1,l]|}%
     \multicolumn{2}{l}{\hspace{-6pt}\bfseries\fontseries{bc}\selectfont\color{darkgray} #1}\\[1ex]%
     \hline%
     \endfirsthead%
@@ -405,7 +355,7 @@
     \hline%
     \endhead%
 }{%
-    \end{longtabu*}%
+    \end{longtabu}%
     \vspace{6pt}%
 }
 
@@ -413,7 +363,7 @@
 \newenvironment{DoxyTemplParams}[1]{%
     \tabulinesep=1mm%
     \par%
-    \begin{longtabu*}spread 0pt [l]{|X[-1,r]|X[-1,l]|}%
+    \begin{longtabu} spread 0pt [l]{|X[-1,r]|X[-1,l]|}%
     \multicolumn{2}{l}{\hspace{-6pt}\bfseries\fontseries{bc}\selectfont\color{darkgray} #1}\\[1ex]%
     \hline%
     \endfirsthead%
@@ -421,7 +371,7 @@
     \hline%
     \endhead%
 }{%
-    \end{longtabu*}%
+    \end{longtabu}%
     \vspace{6pt}%
 }
 
@@ -489,11 +439,11 @@
 \newcommand{\PBS}[1]{\let\temp=\\#1\let\\=\temp}%
 \newenvironment{TabularC}[1]%
 {\tabulinesep=1mm
-\begin{longtabu*}spread 0pt [c]{*#1{|X[-1]}|}}%
-{\end{longtabu*}\par}%
+\begin{longtabu} spread 0pt [c]{*#1{|X[-1]}|}}%
+{\end{longtabu}\par}%
 
 \newenvironment{TabularNC}[1]%
-{\begin{tabu}spread 0pt [l]{*#1{|X[-1]}|}}%
+{\begin{tabu} spread 0pt [l]{*#1{|X[-1]}|}}%
 {\end{tabu}\par}%
 
 % Used for member group headers
@@ -544,15 +494,6 @@
 
 % Version of hypertarget with correct landing location
 \newcommand{\Hypertarget}[1]{\Hy@raisedlink{\hypertarget{#1}{}}}
-
-% possibility to have sections etc. be within the margins
-\makeatletter
-\newcommand{\doxysection}[1]{\@ifstar{\begingroup\sloppy\raggedright\section*{#1}\endgroup}{\begingroup\sloppy\raggedright\section{#1}\endgroup}}
-\newcommand{\doxysubsection}[1]{\@ifstar{\begingroup\sloppy\raggedright\subsection*{#1}\endgroup}{\begingroup\sloppy\raggedright\subsection{#1}\endgroup}}
-\newcommand{\doxysubsubsection}[1]{\@ifstar{\begingroup\sloppy\raggedright\subsubsection*{#1}\endgroup}{\begingroup\sloppy\raggedright\subsubsection{#1}\endgroup}}
-\newcommand{\doxyparagraph}[1]{@ifstar{\begingroup\sloppy\raggedright\paragraph*{#1}\endgroup}{\begingroup\sloppy\raggedright\paragraph{#1}\endgroup}}
-\newcommand{\doxysubparagraph}[1]{@ifstar{\begingroup\sloppy\raggedright\subparagraph*{#1}\endgroup}{\begingroup\sloppy\raggedright\subparagraph{#1}\endgroup}}
-\makeatother
 
 % Define caption that is also suitable in a table
 \makeatletter

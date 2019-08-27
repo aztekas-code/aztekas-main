@@ -45,7 +45,7 @@ DIM = 1
 
 ifeq ($(DIM),1)
 	PARAM += -DDIM=1
-	PARAM += -Deq=4
+	PARAM += -Deq=3
 	PARAM += -Dgraf=1
 endif
 ifeq ($(DIM),2)
