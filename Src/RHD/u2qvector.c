@@ -126,9 +126,6 @@ void Prim2Cons_All(double *q, double *u)
          local_grid.x[1] = grid.X1[i];
          local_grid.x[2] = grid.X2[j];
          local_grid.x[3] = 0.0;
-         #if POLAR == TRUE
-         local_grid.x[2] = M_PI_2;
-         #endif
      
          Get_Metric_Components(&local_grid);
 
@@ -168,6 +165,7 @@ void Prim2Cons_All(double *q, double *u)
          q(1,i,j) = tau;
          q(2,i,j) = S_cov[0];
          q(3,i,j) = S_cov[1];
+         q(4,i,j) = S_cov[2];
       }
    }
 

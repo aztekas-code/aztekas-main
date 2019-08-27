@@ -63,7 +63,6 @@ int Boundaries(double *B)
             B(1,i,j) = pressure_0;
             B(2,i,j) = velocity_0;
             B(3,i,j) = 0.0;
-            B(4,i,j) = 0.0;
          }
       }
    }
