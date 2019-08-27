@@ -44,7 +44,7 @@ int Cons2Prim(double *u, double *q)
 
       theta_0 = U(1,i)/U(0,i);
       f       = 1.0;
-      coutn   = 0;
+      count  = 0;
 
       while(fabs(f) > 0.00000001 && count <= 100000)
       {
