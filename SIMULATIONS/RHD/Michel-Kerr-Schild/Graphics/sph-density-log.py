@@ -57,7 +57,7 @@ Nx1 = int(linecache.getline(fname,3))
 Nx2 = int(linecache.getline(fname,4))
  
 # Data reading
-x1, x2, n, p, u, v, w = np.loadtxt(fname,skiprows=5,unpack=True)
+x1, x2, n, p, u, v = np.loadtxt(fname,skiprows=5,unpack=True)
 
 # Data reshape into a Nx1XNx2 matrix
 n = n.reshape(Nx1,Nx2)

@@ -21,7 +21,7 @@
 #define GRID               UNIFORM
 
 #define Black_Hole_Mass    1.0
-#define Black_Hole_Spin    0.9
+#define Black_Hole_Spin    0.995
 #define Mach               5.0
 #define vinf               0.5
 

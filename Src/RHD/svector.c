@@ -131,13 +131,13 @@ void Source_Terms(double *s, double *u, gauge_ local_grid)
                    W[1][0]*der.dgam[0][1][0] + W[1][1]*der.dgam[0][1][1] + W[1][2]*der.dgam[0][1][2] + \
                    W[2][0]*der.dgam[0][2][0] + W[2][1]*der.dgam[0][2][1] + W[2][2]*der.dgam[0][2][2];
 
-   Wik_dgamik[1] = W[0][1]*der.dgam[1][0][0] + W[0][1]*der.dgam[1][0][1] + W[0][2]*der.dgam[1][0][2] + \
-                   W[1][1]*der.dgam[1][1][0] + W[1][1]*der.dgam[1][1][1] + W[1][2]*der.dgam[1][1][2] + \
-                   W[2][1]*der.dgam[1][2][0] + W[2][1]*der.dgam[1][2][1] + W[2][2]*der.dgam[1][2][2];
+   Wik_dgamik[1] = W[0][0]*der.dgam[1][0][0] + W[0][1]*der.dgam[1][0][1] + W[0][2]*der.dgam[1][0][2] + \
+                   W[1][0]*der.dgam[1][1][0] + W[1][1]*der.dgam[1][1][1] + W[1][2]*der.dgam[1][1][2] + \
+                   W[2][0]*der.dgam[1][2][0] + W[2][1]*der.dgam[1][2][1] + W[2][2]*der.dgam[1][2][2];
 
-   Wik_dgamik[2] = W[0][2]*der.dgam[2][0][0] + W[0][1]*der.dgam[2][0][1] + W[0][2]*der.dgam[2][0][2] + \
-                   W[1][2]*der.dgam[2][1][0] + W[1][1]*der.dgam[2][1][1] + W[1][2]*der.dgam[2][1][2] + \
-                   W[2][2]*der.dgam[2][2][0] + W[2][1]*der.dgam[2][2][1] + W[2][2]*der.dgam[2][2][2];
+   Wik_dgamik[2] = W[0][0]*der.dgam[2][0][0] + W[0][1]*der.dgam[2][0][1] + W[0][2]*der.dgam[2][0][2] + \
+                   W[1][0]*der.dgam[2][1][0] + W[1][1]*der.dgam[2][1][1] + W[1][2]*der.dgam[2][1][2] + \
+                   W[2][0]*der.dgam[2][2][0] + W[2][1]*der.dgam[2][2][1] + W[2][2]*der.dgam[2][2][2];
 
    Wik_betaj_dgamjik = Wik_dgamik[0]*beta[0] + Wik_dgamik[1]*beta[1] + Wik_dgamik[2]*beta[2];
 
