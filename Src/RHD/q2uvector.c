@@ -54,6 +54,9 @@ int Cons2Prim(double *u, double *q)
       #elif EOS == DUST
          h    = 1.0;
          derh = 0.0;
+      #elif EOS == STIFF
+         h    = (K / (K - 1.0))*theta_0;
+         derh = K / (K - 1.0);
       #endif
 
          Lorentz = sqrt(1.0 + SS/(D*D*h*h));
@@ -70,6 +73,8 @@ int Cons2Prim(double *u, double *q)
       h    = 1.0 + (K / (K - 1.0))*theta_0;
       #elif EOS == DUST
       h    = 1.0;
+      #elif EOS == STIFF
+      h    = (K / (K - 1.0))*theta_0;
       #endif
 
       Lorentz = sqrt(1.0 + SS/(D*D*h*h));
@@ -125,6 +130,9 @@ int Cons2Prim(double *u, double *q)
          #elif EOS == DUST
             h    = 1.0;
             derh = 0.0;
+         #elif EOS == STIFF
+            h    = (K / (K - 1.0))*theta_0;
+            derh = K / (K - 1.0);
          #endif
 
             Lorentz = sqrt(1.0 + SS/(D*D*h*h));
@@ -141,6 +149,8 @@ int Cons2Prim(double *u, double *q)
          h    = 1.0 + (K / (K - 1.0))*theta_0;
          #elif EOS == DUST
          h    = 1.0;
+         #elif EOS == STIFF
+         h    = (K / (K - 1.0))*theta_0;
          #endif
 
          Lorentz = sqrt(1.0 + SS/(D*D*h*h));
@@ -195,6 +205,9 @@ int Cons2Prim(double *u, double *q)
          #elif EOS == DUST
             h    = 1.0;
             derh = 0.0;
+         #elif EOS == STIFF
+            h    = (K / (K - 1.0))*theta_0;
+            derh = K / (K - 1.0);
          #endif
 
             Lorentz = sqrt(1.0 + SS/(D*D*h*h));
@@ -211,6 +224,8 @@ int Cons2Prim(double *u, double *q)
          h    = 1.0 + (K / (K - 1.0))*theta_0;
          #elif EOS == DUST
          h    = 1.0;
+         #elif EOS == STIFF
+         h    = (K / (K - 1.0))*theta_0;
          #endif
 
          Lorentz = sqrt(1.0 + SS/(D*D*h*h));

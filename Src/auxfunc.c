@@ -96,6 +96,7 @@ void CheckSimParameters()
    // Equation of state
    if(EOS == IDEAL) printf("Ideal equation of state.\n");
    if(EOS == DUST)  printf("Dust.\n");
+   if(EOS == STIFF)  printf("Stiff equation of state.\n");
 
    // Print MoL-RK order
    printf("Time integration using a second order MoL-Runge Kutta.\n");
