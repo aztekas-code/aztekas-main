@@ -21,8 +21,8 @@ PARAM += -Dgc=3
 
 PHY    = rhd
 
-# Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Kerr-Schild)
-METRIC = Eddington-Finkelstein
+# Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Kerr-Schild, Boyer-Lindquist)
+METRIC = Boyer-Lindquist
 
 ifeq ($(PHY),hd)
         PARAM += -DPHYSICS=HD
@@ -31,7 +31,7 @@ ifeq ($(PHY),rhd)
         PARAM += -DPHYSICS=RHD
 endif
 
-eos = stiff
+eos = ideal
 ifeq ($(eos),ideal)
         PARAM += -DEOS=IDEAL
 endif
@@ -41,6 +41,7 @@ endif
 ifeq ($(eos),stiff)
         PARAM += -DEOS=STIFF
 endif
+
 
 #####################################
 
