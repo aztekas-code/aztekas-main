@@ -5,7 +5,7 @@
 // cond : {outflow,reflective,periodic,inflow}
 // X : {x1max,x1min,x2max,x2min,x3max,x3min}
 
-#define POLAR              FALSE
+#define POLAR              TRUE
 
 #define outflow_x1max      TRUE
 #define outflow_x1min      TRUE

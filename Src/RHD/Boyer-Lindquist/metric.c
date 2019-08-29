@@ -295,15 +295,15 @@ void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid)
    der->dgam[0][2][1] = 0.0;
    der->dgam[0][2][2] = 2.0*r;
 
-   der->dgam[2][0][0] = 0.0;
-   der->dgam[2][0][1] = 0.0;
-   der->dgam[2][0][2] = 0.0;
-   der->dgam[2][1][0] = 0.0;
-   der->dgam[2][1][1] = 0.0;
-   der->dgam[2][1][2] = 0.0;
-   der->dgam[2][2][0] = 0.0;
-   der->dgam[2][2][1] = 0.0;
-   der->dgam[2][2][2] = 0.0;
+   der->dgam[1][0][0] = 0.0;
+   der->dgam[1][0][1] = 0.0;
+   der->dgam[1][0][2] = 0.0;
+   der->dgam[1][1][0] = 0.0;
+   der->dgam[1][1][1] = 0.0;
+   der->dgam[1][1][2] = 0.0;
+   der->dgam[1][2][0] = 0.0;
+   der->dgam[1][2][1] = 0.0;
+   der->dgam[1][2][2] = 0.0;
 
    der->dgam[2][0][0] = -a*a*sin(2.0*theta)/Delta;
    der->dgam[2][0][1] = 0.0;

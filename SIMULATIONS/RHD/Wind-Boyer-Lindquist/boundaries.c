@@ -35,7 +35,11 @@ int Boundaries(double *B)
       for(j = 0; j <= Nx2; j++)
       {
          local_grid.x[1] = grid.X1[i];
+         #if POLAR == FALSE
          local_grid.x[2] = grid.X2[j];
+         #elif POLAR == TRUE
+         local_grid.x[2] = M_PI_2;
+         #endif
 
          Get_Metric_Components(&local_grid);
 

@@ -38,6 +38,9 @@ endif
 ifeq ($(eos),dust)
         PARAM += -DEOS=DUST
 endif
+ifeq ($(eos),stiff)
+        PARAM += -DEOS=STIFF
+endif
 
 #####################################
 
