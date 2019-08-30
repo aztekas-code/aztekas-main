@@ -75,7 +75,7 @@ double TimeStep()
             printf("NaN value found in calculation.\n");
             CHECK_NAN = TRUE;
             U = U0;
-            PrintValues(&tprint,&dtprint,&itprint);
+            PrintValues(&grid.time,&c,&CHECK_NAN);
             exit(EXIT_FAILURE);
          }
       }

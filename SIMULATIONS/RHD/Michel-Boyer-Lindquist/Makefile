@@ -31,7 +31,7 @@ ifeq ($(PHY),rhd)
         PARAM += -DPHYSICS=RHD
 endif
 
-eos = ideal
+eos = stiff
 ifeq ($(eos),ideal)
         PARAM += -DEOS=IDEAL
 endif
@@ -49,7 +49,7 @@ endif
 # Dimension
 #####################################
 
-DIM = 1
+DIM = 2
 
 ifeq ($(DIM),1)
 	PARAM += -DDIM=1

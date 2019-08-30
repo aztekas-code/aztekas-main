@@ -52,7 +52,7 @@ void Initial()
          U(0,i,j) = density_0;
          U(1,i,j) = pressure_0;
          U(2,i,j) = velocity_0;
-         U(3,i,j) = 0.0;
+         U(3,i,j) = 0.01;
       }
    }
 
