@@ -5,10 +5,16 @@
 // cond : {outflow,reflective,periodic,inflow}
 // X : {x1max,x1min,x2max,x2min,x3max,x3min}
 
+#define POLAR              FALSE
+
 #define outflow_x1max      TRUE
 #define outflow_x1min      TRUE
-#define reflective_x2max   TRUE
-#define reflective_x2min   TRUE
+#if POLAR == FALSE
+   #define reflective_x2max   TRUE
+   #define reflective_x2min   TRUE
+#elif POLAR == TRUE
+   #define periodic_x2        TRUE
+#endif
 
 #define RECONST            MC
 #define FLUX               HLL

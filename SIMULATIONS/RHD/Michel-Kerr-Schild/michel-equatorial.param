@@ -14,7 +14,7 @@ Nx3 = 0
 
 % Define domain limits
 x1max = 20.0
-x2max = 0.5
+x2max = 2.0
 x3max = 1.0 
 x1min = 1.5
 x2min = 0.0
@@ -40,9 +40,12 @@ K = 1.6666666666666666666666666
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % MICHEL ACCRETION (Gamma = 5/3, r0 = 20 M)
-density_0  =  3.542502e+03 
-pressure_0 =  4.940072e+01
-velocity_0 = -9.719007e-02
+%density_0  =  3.542502e+03 
+%pressure_0 =  4.940072e+01
+%velocity_0 = -9.719007e-02
+density_0  = 1.8
+pressure_0 = 3.5
+velocity_0 = 0.1
  
 % MICHEL ACCRETION (Gamma = 4/3, r0 = 20 M)
 %density_0  =  5.901940e+03  
