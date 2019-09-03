@@ -21,6 +21,6 @@
 #define GRID               UNIFORM
 
 #define Black_Hole_Mass    1.0
-#define Black_Hole_Spin    0.5
+#define Black_Hole_Spin    0.05
 
 double density_0, pressure_0, velocity_0;

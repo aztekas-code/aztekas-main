@@ -49,8 +49,8 @@ int Boundaries(double *B)
          {
             B(0,i,j) = density_0;
             B(1,i,j) = pressure_0;
-//            B(2,i,j) = velocity_0;
-//            B(3,i,j) = 0.0;
+            B(2,i,j) = velocity_0;
+            B(3,i,j) = 0.0;
          }
       }
    }

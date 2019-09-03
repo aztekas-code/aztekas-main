@@ -46,7 +46,7 @@ int Cons2Prim(double *u, double *q)
       f       = 1.0;
       count  = 0;
 
-      while(fabs(f) > 0.00000001 && count <= 100000)
+      while(fabs(f) > 0.00000001)
       {
       #if EOS == IDEAL
          h    = 1.0 + (K / (K - 1.0))*theta_0;
@@ -67,6 +67,12 @@ int Cons2Prim(double *u, double *q)
          theta   = theta_0 - f/derf;
          theta_0 = theta;
          count++;
+
+         if(count == 100000)
+         {
+            printf("Spend too much time in Newton-Rhapson.\n");
+            exit(EXIT_FAILURE);
+         }
       }
 
       #if EOS == IDEAL
@@ -122,7 +128,7 @@ int Cons2Prim(double *u, double *q)
          f       = 1.0;
          count   = 0;
 
-         while(fabs(f) > 0.00001 && count <= 100)
+         while(fabs(f) > 0.00000001)
          {
          #if EOS == IDEAL
             h    = 1.0 + (K / (K - 1.0))*theta_0;
@@ -143,6 +149,12 @@ int Cons2Prim(double *u, double *q)
             theta   = theta_0 - f/derf;
             theta_0 = theta;
             count++;
+
+            if(count == 100000)
+            {
+               printf("Spend too much time in Newton-Rhapson.\n");
+               exit(EXIT_FAILURE);
+            }
          }
 
          #if EOS == IDEAL
@@ -197,7 +209,7 @@ int Cons2Prim(double *u, double *q)
          f       = 1.0;
          count   = 0;
 
-         while(fabs(f) > 0.00000001 && count <= 100000)
+         while(fabs(f) > 0.00000001)
          {
          #if EOS == IDEAL
             h    = 1.0 + (K / (K - 1.0))*theta_0;
@@ -218,6 +230,12 @@ int Cons2Prim(double *u, double *q)
             theta   = theta_0 - f/derf;
             theta_0 = theta;
             count++;
+
+            if(count == 100000)
+            {
+               printf("Spend too much time in Newton-Rhapson.\n");
+               exit(EXIT_FAILURE);
+            }
          }
 
          #if EOS == IDEAL

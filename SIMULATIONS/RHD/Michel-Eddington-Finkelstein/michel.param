@@ -8,13 +8,13 @@ restartfile = ./Shock/dx1_10.dat
 restart_filecount = 10
 
 % Define mesh
-Nx1 = 256
-Nx2 = 0
+Nx1 = 128
+Nx2 = 64
 Nx3 = 0
 
 % Define domain limits
 x1max = 20.0
-x2max = 0.5
+x2max = 1.0
 x3max = 1.0 
 x1min = 1.5
 x2min = 0.0
@@ -30,10 +30,10 @@ cou = 0.25
 %K = 1.3333333333333333333333333
 %K = 1.4
 %K = 1.5
-%K = 1.6666666666666666666666666
+K = 1.6666666666666666666666666
 
 % STIFF
-K = 2.0
+%K = 2.0
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Initial conditions %%%%%%

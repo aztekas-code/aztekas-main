@@ -59,7 +59,7 @@ void Get_Metric_Components(gauge_ *local_grid)
    double theta = local_grid->x[2]; 
    double M = Black_Hole_Mass;
 
-   local_grid->lapse = sqrt(r/(2*M + r));
+   local_grid->lapse = sqrt(r/(2.0*M + r));
 
    local_grid->beta_con[0] = 2.0*M/(2.0*M + r);
    local_grid->beta_con[1] = 0.0;
@@ -75,7 +75,7 @@ void Get_Metric_Components(gauge_ *local_grid)
    local_grid->gamma_con[2][1] = 0.0;
    local_grid->gamma_con[2][2] = 1.0/(r*r*sin(theta)*sin(theta));
 
-   local_grid->dety = pow(r,3.0/2.0)*fabs(sin(theta))*sqrt(2*M + r);
+   local_grid->dety = sqrt(r*r*r*sin(theta)*sin(theta)*(2.0*M + r));
 
 #endif
 }
