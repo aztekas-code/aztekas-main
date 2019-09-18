@@ -16,59 +16,63 @@
 //Do not erase any of these libraries//
 #include"main.h"
 
-int Boundaries(double *B)
+void Initial()
 {
-   int i, j, k, n, cell;
+   int n, i, j, k, cell;
 
-   Outflow(B);
-   Reflection(B);
+   //Initialize grid.time
+   grid.time = 0.0;
 
-#if DIM == 1
+   //Initialize dt
+   dt = 0.0;
+
+#if DIM == 1 
+
+   ///////////////////////////
+   //-------Bondi-1D--------//
+   ///////////////////////////
 
    for(i = 0; i <= Nx1; i++)
    {
-      if(i >= Nx1-gc)
-      {
-         B(0,i) = density_0;
-         B(1,i) = pressure_0;
-//         B(2,i) = velocity_0;
-      }
+      U(0,i) = density_0;
+      U(1,i) = pressure_0;
+      U(2,i) = velocity_0;
    }
 
 #elif DIM == 2
+
+   ///////////////////////////
+   //-------Bondi-2D--------//
+   ///////////////////////////
 
    for(i = 0; i <= Nx1; i++)
    {
       for(j = 0; j <= Nx2; j++)
       {
-         if(i >= Nx1-gc)
-         {
-            B(0,i,j) = density_0;
-            B(1,i,j) = pressure_0;
-//            B(2,i,j) = velocity_0;
-//            B(3,i,j) = 0.0;
-         }
+         U(0,i,j) = density_0;
+         U(1,i,j) = pressure_0;
+         U(2,i,j) = velocity_0;
+         U(3,i,j) = 0.0;
       }
    }
 
 #elif DIM == 4
 
+   ///////////////////////////
+   //-------Bondi-2D--------//
+   ///////////////////////////
+
    for(i = 0; i <= Nx1; i++)
    {
       for(j = 0; j <= Nx2; j++)
       {
-         if(i >= Nx1-gc)
-         {
-            B(0,i,j) = density_0;
-            B(1,i,j) = pressure_0;
-            B(2,i,j) = velocity_0;
-            B(3,i,j) = 0.0;
-            B(4,i,j) = 0.0;
-         }
+         U(0,i,j) = density_0;
+         U(1,i,j) = pressure_0;
+         U(2,i,j) = velocity_0;
+         U(3,i,j) = 0.0;
+         U(4,i,j) = 0.0;
       }
    }
 
 #endif
-
-   return 0;
 }

@@ -19,11 +19,7 @@ PARAM += -Dgc=3
 # Physics (rhd,hd,mhd,rmhd)
 #####################################
 
-PHY    = rhd
-
-# Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Kerr-Schild)
-METRIC = Eddington-Finkelstein
-
+PHY = hd
 ifeq ($(PHY),hd)
         PARAM += -DPHYSICS=HD
 endif
@@ -31,15 +27,12 @@ ifeq ($(PHY),rhd)
         PARAM += -DPHYSICS=RHD
 endif
 
-eos = stiff
+eos = ideal
 ifeq ($(eos),ideal)
         PARAM += -DEOS=IDEAL
 endif
 ifeq ($(eos),dust)
         PARAM += -DEOS=DUST
-endif
-ifeq ($(eos),stiff)
-        PARAM += -DEOS=STIFF
 endif
 
 #####################################
@@ -48,11 +41,11 @@ endif
 # Dimension
 #####################################
 
-DIM = 1
+DIM = 2
 
 ifeq ($(DIM),1)
 	PARAM += -DDIM=1
-	PARAM += -Deq=3
+	PARAM += -Deq=4
 	PARAM += -Dgraf=1
 endif
 ifeq ($(DIM),2)
@@ -142,7 +135,7 @@ SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/HD/gvector.c \
 	  $(AZTPATH)/Src/HD/hvector.c \
 	  $(AZTPATH)/Src/HD/svector.c \
-	  $(AZTPATH)/Src/HD/metric.c \
+	  $(AZTPATH)/Src/HD/surface.c \
 	  $(AZTPATH)/Src/EOS/eos.c \
 	  ./user_sources.c \
 	  ./user_input.c
@@ -158,25 +151,26 @@ SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/output.c \
 	  $(AZTPATH)/Src/integration$(INT).c \
 	  $(AZTPATH)/Src/flux.c \
-	  $(AZTPATH)/Src/runge-kutta.c \
+	  $(AZTPATH)/Src/rk-rel.c \
 	  $(AZTPATH)/Src/limiters.c \
 	  $(AZTPATH)/Src/vectors.c \
 	  $(AZTPATH)/Src/restart.c \
 	  $(AZTPATH)/Src/auxfunc.c \
 	  ./boundaries.c \
 	  $(AZTPATH)/Src/bound_cond.c \
-	  $(AZTPATH)/Src/RHD/q2uvector.c \
-	  $(AZTPATH)/Src/RHD/u2qvector.c \
-	  $(AZTPATH)/Src/RHD/qvector.c \
-	  $(AZTPATH)/Src/RHD/fvector.c \
-	  $(AZTPATH)/Src/RHD/gvector.c \
-	  $(AZTPATH)/Src/RHD/hvector.c \
-	  $(AZTPATH)/Src/RHD/svector.c \
-	  $(AZTPATH)/Src/RHD/surface.c \
-	  $(AZTPATH)/Src/RHD/$(METRIC)/metric.c \
-	  $(AZTPATH)/Src/EOS/eos.c \
-	  ./user_sources.c \
-	  ./user_input.c
+	  $(AZTPATH)/Src/RHD-$(COORD)/amatrix.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)/dmmatrix.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)/dnmatrix.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)/domatrix.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)/q2uvector.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)/u2qvector.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)/qvector.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)/fvector.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)/gvector.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)/hvector.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)/svector.c \
+	  $(AZTPATH)/Src/RHD-$(COORD)/gauge.c \
+	  ./extforce.c
 endif
 
 #OBJS = $(SOURCES:.c=.o)
