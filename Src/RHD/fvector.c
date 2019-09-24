@@ -59,7 +59,7 @@ void Prim2FluxF(double *f, double *v, double *u, gauge_ local_grid)
    U   = rho*h*Lorentz*Lorentz - p;
    tau = U - D;
 
-   // Velocity affected by the coordinates
+   // Transport Velocity by the coordinates
    V[0] = lapse*v_con[0] - beta;
 
    // Compute the covariant and contravariant components of the 3-momentum

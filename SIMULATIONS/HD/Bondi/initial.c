@@ -34,9 +34,9 @@ void Initial()
 
    for(i = 0; i <= Nx1; i++)
    {
-      U(0,i) = density_0;
-      U(1,i) = pressure_0;
-      U(2,i) = velocity_0;
+      U(RHO,i) = density_0;
+      U(PRE,i) = pressure_0;
+      U(VX1,i) = velocity_0;
    }
 
 #elif DIM == 2

@@ -31,7 +31,7 @@ ifeq ($(PHY),rhd)
         PARAM += -DPHYSICS=RHD
 endif
 
-eos = ideal
+eos = stiff
 ifeq ($(eos),ideal)
         PARAM += -DEOS=IDEAL
 endif

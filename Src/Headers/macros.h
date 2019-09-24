@@ -39,6 +39,13 @@
 #define SUPERBEE 3
 #define WENO5    4
 
+/* PRIMITIVE VARIABLES */
+#define RHO       0
+#define PRE       1
+#define VX1       2
+#define VX2       3
+#define VX3       4
+
 /* SIMPLE ARRAY */
 #if DIM == 1
    #define  S1p(x)  grid.S1p[(x)]
@@ -83,4 +90,3 @@
    #define q2(N,x,y,z) q2[(N)*(Nx1+1)*(Nx2+1)*(Nx3+1) + (x)*(Nx2+1)*(Nx3+1) + (y)*(Nx3+1) + (z)]
 
 #endif
-

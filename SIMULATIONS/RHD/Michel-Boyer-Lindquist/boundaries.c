@@ -19,6 +19,10 @@
 int Boundaries(double *B)
 {
    int i, j, k, n, cell;
+   double r, theta;
+   double Delta, Sigma, rho2;
+   double M, a;
+   double rplus, rminus;
 
    Outflow(B);
 #if POLAR == FALSE
@@ -47,10 +51,21 @@ int Boundaries(double *B)
       {
          if(i >= Nx1-gc)
          {
-            B(0,i,j) = density_0;
-            B(1,i,j) = pressure_0;
-            B(2,i,j) = velocity_0;
-            B(3,i,j) = 0.01;
+            r     = grid.X1[i];
+            theta = grid.X2[j];
+            M     = Black_Hole_Mass;
+            a     = Black_Hole_Spin;
+         
+            Delta  = r*r - 2.0*M*r + a*a;
+            Sigma  = pow(r*r + a*a,2.0) - Delta*a*a*pow(sin(theta),2.0);
+            rho2   = r*r + a*a*pow(cos(theta),2.0);
+            rplus  = M + sqrt(M*M - a*a);
+            rminus = M - sqrt(M*M - a*a);
+         
+            B(RHO,i,j) = sqrt(1 + ((2*M)/(rho2))*((r*(r + rplus) + 2*M*rplus)/(r-rminus)));
+            B(PRE,i,j) = pow(B(RHO,i,j),K);
+            B(VX1,i,j) = -(rplus*rplus + a*a)*sqrt(rho2/(Delta*Sigma));
+            B(VX2,i,j) = 0.0;
          }
       }
    }
