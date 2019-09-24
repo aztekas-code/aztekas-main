@@ -21,7 +21,11 @@ int Boundaries(double *B)
    int i, j, k, n, cell;
 
    Outflow(B);
+#if POLAR == FALSE
    Reflection(B);
+#elif POLAR == TRUE
+   Periodic(B);
+#endif
 
 #if DIM == 1
 

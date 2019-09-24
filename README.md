@@ -19,3 +19,5 @@ where ![equation](https://latex.codecogs.com/gif.latex?Q) is the vector of conse
 5. Run _aztekas_: `./aztekas shock.param`
 
 ## Setup a new simulation
+
+1.

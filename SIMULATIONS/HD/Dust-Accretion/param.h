@@ -7,7 +7,8 @@
 
 #define outflow_x1max      TRUE
 #define outflow_x1min      TRUE
-#define reflective_x2max   TRUE
+//#define reflective_x2max   TRUE
+#define outflow_x2max      TRUE
 #define reflective_x2min   TRUE
 
 #define RECONST            MC

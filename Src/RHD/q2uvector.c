@@ -46,7 +46,7 @@ int Cons2Prim(double *u, double *q)
       f       = 1.0;
       count  = 0;
 
-      while(fabs(f) > 0.00000001 && count <= 100000)
+      while(fabs(f) > 0.00000001)
       {
       #if EOS == IDEAL
          h    = 1.0 + (K / (K - 1.0))*theta_0;
@@ -54,6 +54,9 @@ int Cons2Prim(double *u, double *q)
       #elif EOS == DUST
          h    = 1.0;
          derh = 0.0;
+      #elif EOS == STIFF
+         h    = (K / (K - 1.0))*theta_0;
+         derh = K / (K - 1.0);
       #endif
 
          Lorentz = sqrt(1.0 + SS/(D*D*h*h));
@@ -64,12 +67,20 @@ int Cons2Prim(double *u, double *q)
          theta   = theta_0 - f/derf;
          theta_0 = theta;
          count++;
+
+         if(count == 100000)
+         {
+            printf("Spend too much time in Newton-Rhapson.\n");
+            exit(EXIT_FAILURE);
+         }
       }
 
       #if EOS == IDEAL
       h    = 1.0 + (K / (K - 1.0))*theta_0;
       #elif EOS == DUST
       h    = 1.0;
+      #elif EOS == STIFF
+      h    = (K / (K - 1.0))*theta_0;
       #endif
 
       Lorentz = sqrt(1.0 + SS/(D*D*h*h));
@@ -117,7 +128,7 @@ int Cons2Prim(double *u, double *q)
          f       = 1.0;
          count   = 0;
 
-         while(fabs(f) > 0.00000001 && count <= 100000)
+         while(fabs(f) > 0.00000001)
          {
          #if EOS == IDEAL
             h    = 1.0 + (K / (K - 1.0))*theta_0;
@@ -125,6 +136,9 @@ int Cons2Prim(double *u, double *q)
          #elif EOS == DUST
             h    = 1.0;
             derh = 0.0;
+         #elif EOS == STIFF
+            h    = (K / (K - 1.0))*theta_0;
+            derh = K / (K - 1.0);
          #endif
 
             Lorentz = sqrt(1.0 + SS/(D*D*h*h));
@@ -135,12 +149,20 @@ int Cons2Prim(double *u, double *q)
             theta   = theta_0 - f/derf;
             theta_0 = theta;
             count++;
+
+            if(count == 100000)
+            {
+               printf("Spend too much time in Newton-Rhapson.\n");
+               exit(EXIT_FAILURE);
+            }
          }
 
          #if EOS == IDEAL
          h    = 1.0 + (K / (K - 1.0))*theta_0;
          #elif EOS == DUST
          h    = 1.0;
+         #elif EOS == STIFF
+         h    = (K / (K - 1.0))*theta_0;
          #endif
 
          Lorentz = sqrt(1.0 + SS/(D*D*h*h));
@@ -187,7 +209,7 @@ int Cons2Prim(double *u, double *q)
          f       = 1.0;
          count   = 0;
 
-         while(fabs(f) > 0.00000001 && count <= 100000)
+         while(fabs(f) > 0.00000001)
          {
          #if EOS == IDEAL
             h    = 1.0 + (K / (K - 1.0))*theta_0;
@@ -195,6 +217,9 @@ int Cons2Prim(double *u, double *q)
          #elif EOS == DUST
             h    = 1.0;
             derh = 0.0;
+         #elif EOS == STIFF
+            h    = (K / (K - 1.0))*theta_0;
+            derh = K / (K - 1.0);
          #endif
 
             Lorentz = sqrt(1.0 + SS/(D*D*h*h));
@@ -205,12 +230,20 @@ int Cons2Prim(double *u, double *q)
             theta   = theta_0 - f/derf;
             theta_0 = theta;
             count++;
+
+            if(count == 100000)
+            {
+               printf("Spend too much time in Newton-Rhapson.\n");
+               exit(EXIT_FAILURE);
+            }
          }
 
          #if EOS == IDEAL
          h    = 1.0 + (K / (K - 1.0))*theta_0;
          #elif EOS == DUST
          h    = 1.0;
+         #elif EOS == STIFF
+         h    = (K / (K - 1.0))*theta_0;
          #endif
 
          Lorentz = sqrt(1.0 + SS/(D*D*h*h));
