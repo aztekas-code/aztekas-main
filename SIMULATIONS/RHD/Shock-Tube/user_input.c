@@ -44,9 +44,9 @@ int User_Parameters(char const *paramfile_name)
 
          if(fscanf (paramfile, "%s = %s", t_key, t_value) == 2)
          {
-            if(strcmp(t_key,"nl")==0)
+            if(strcmp(t_key,"rhol")==0)
             {
-               nl = atof(t_value);
+               rhol = atof(t_value);
             }
 
             if(strcmp(t_key,"pl")==0)
@@ -69,9 +69,9 @@ int User_Parameters(char const *paramfile_name)
                vx3l = atof(t_value);
             }
 
-            if(strcmp(t_key,"nr")==0)
+            if(strcmp(t_key,"rhor")==0)
             {
-               nr = atof(t_value);
+               rhor = atof(t_value);
             }
 
             if(strcmp(t_key,"pr")==0)
@@ -102,7 +102,7 @@ int User_Parameters(char const *paramfile_name)
       }
             
       // Ignore the rest of the line.
-      int fscanret = fscanf(paramfile, "%*[^\n]"); 
+      int fscarhoret = fscanf(paramfile, "%*[^\n]"); 
    }
       
    fclose(paramfile);         

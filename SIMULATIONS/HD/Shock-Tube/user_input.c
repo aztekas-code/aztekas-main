@@ -36,7 +36,7 @@ int User_Parameters(char const *paramfile_name)
    while(fscanf(paramfile, " %c", &t_firstChar) == 1 )
    {
 
-      if(t_firstChar != '/' && t_firstChar != '%')
+      if(t_firstChar != '%')
       {
          // Not a comment so read the key value pair
          // Move back one space in the input stream with seek
@@ -44,9 +44,9 @@ int User_Parameters(char const *paramfile_name)
 
          if(fscanf (paramfile, "%s = %s", t_key, t_value) == 2)
          {
-            if(strcmp(t_key,"nl")==0)
+            if(strcmp(t_key,"rhol")==0)
             {
-               nl = atof(t_value);
+               rhol = atof(t_value);
             }
 
             if(strcmp(t_key,"pl")==0)
@@ -69,9 +69,9 @@ int User_Parameters(char const *paramfile_name)
                vx3l = atof(t_value);
             }
 
-            if(strcmp(t_key,"nr")==0)
+            if(strcmp(t_key,"rhor")==0)
             {
-               nr = atof(t_value);
+               rhor = atof(t_value);
             }
 
             if(strcmp(t_key,"pr")==0)

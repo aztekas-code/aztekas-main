@@ -1,3 +1,11 @@
+/**
+ * @file main.h
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Main function, headers and variable declaration.
+ */
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -12,7 +20,7 @@
 #include"const.h"
 #include"macros.h"
 #include"io.h"
-#include"param.h"
+#include"user_param.h"
 
 
 // NAN

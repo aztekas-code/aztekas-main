@@ -1,14 +1,19 @@
-/**
+/*!
  * @file bound_cond.c
  *
  * @author Alejandro Aguayo-Ortiz
  *
- * @brief Standard boundary conditions.
+ * @brief Standard boundary conditions. Outflow, Periodic and Reflection.
  */
 
 //Do not erase any of these libraries//
 #include"main.h"
 
+/*!
+ * The function \b Outflow(), receives the vector solution
+ * as an parameter \b B. It fills the value of the ghost cells in the specified
+ * direction using the value of the last computed cell of the domain.
+ */
 void Outflow(double *B)
 {
    int i, j, k, n, cell;
@@ -102,6 +107,12 @@ void Outflow(double *B)
 #endif
 }
 
+/*!
+ * The function \b Reflection(), receives the vector solution
+ * as an parameter \b B. It fills the value of the ghost cells in the specified
+ * direction using the value of the mirrored cells, and for the velocity it
+ * changes sign.
+ */
 void Reflection(double *B)
 {
    int i, j, k, n, cell;
@@ -282,6 +293,11 @@ void Reflection(double *B)
 #endif
 }
 
+/*!
+ * The function \b Periodic(), receives the vector solution
+ * as an parameter \b B. It fills the value of the ghost cells with the values
+ * of the correspondent other side of the domain.
+ */
 void Periodic(double *B)
 {
    int i, j, k, n, cell;

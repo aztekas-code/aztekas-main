@@ -36,7 +36,7 @@ int User_Parameters(char const *paramfile_name)
    while(fscanf(paramfile, " %c", &t_firstChar) == 1 )
    {
 
-      if(t_firstChar != '/' && t_firstChar != '%')
+      if(t_firstChar != '%')
       {
          // Not a comment so read the key value pair
          // Move back one space in the input stream with seek
@@ -44,6 +44,60 @@ int User_Parameters(char const *paramfile_name)
 
          if(fscanf (paramfile, "%s = %s", t_key, t_value) == 2)
          {
+            if(strcmp(t_key,"rhod")==0)
+            {
+               rhod = atof(t_value);
+            }
+
+            if(strcmp(t_key,"pd")==0)
+            {
+               pd = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx1d")==0)
+            {
+               vx1d = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx2d")==0)
+            {
+               vx2d = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx3d")==0)
+            {
+               vx3d = atof(t_value);
+            }
+
+            if(strcmp(t_key,"rhou")==0)
+            {
+               rhou = atof(t_value);
+            }
+
+            if(strcmp(t_key,"pu")==0)
+            {
+               pu = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx1u")==0)
+            {
+               vx1u = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx2u")==0)
+            {
+               vx2u = atof(t_value);
+            }
+
+            if(strcmp(t_key,"vx3u")==0)
+            {
+               vx3u = atof(t_value);
+            }
+
+            if(strcmp(t_key,"x_0")==0)
+            {
+               x_0 = atof(t_value);
+            }
          }
       }
             

@@ -1,3 +1,10 @@
+/**
+ * @file /HD/fvector.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ */
+
 #include"main.h"
     
 void Prim2FluxF(double *f, double *v, double *u, gauge_ local_grid)

@@ -1,18 +1,36 @@
-% OUTPUT FILE AND DIRECTORY
-outputdirectory = ./prueba/
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OUTPUT FILE AND DIRECTORY %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+outputdirectory = ./TEST/
 outputfile      = shock_
 
-% RESTART SIMULATION (1 -> true, 0 -> false)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RESTART SIMULATION (1 -> true, 0 -> false) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 restart_simulation = 0
-restartfile = ./Shock/dx1_10.dat
-restart_filecount = 10
+restartfile = ./TEST/shock_0.dat
+restart_filecount = 0
 
-% Define mesh
-Nx1 = 512
-Nx2 = 0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHECK SIMULATION PARAMETERS (1 -> true, 0 -> false) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+check_param = 0
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OUTPUT FORMAT (0 -> ASCII, 1 -> BINARY) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+binary = 0
+
+%%%%%%%%%%%%%%%
+% DEFINE MESH %
+%%%%%%%%%%%%%%%
+Nx1 = 100
+Nx2 = 100
 Nx3 = 0
 
-% Define domain limits
+%%%%%%%%%%%%%%%%%%%%%%%%
+% DEFINE DOMAIN LIMITS %
+%%%%%%%%%%%%%%%%%%%%%%%%
 x1max = 1.0
 x2max = 1.0
 x3max = 1.0 
@@ -20,30 +38,41 @@ x1min = 0.0
 x2min = 0.0
 x3min = 0.0
 
-% Time parameters
-tmax = 0.3
-timefile = 0.3
-cou = 0.25
+%%%%%%%%%%%%%%%%%%%
+% TIME PARAMETERS %
+%%%%%%%%%%%%%%%%%%%
+tmax = 0.35
+timefile = 0.35
 
-% Polytorpic index
+%%%%%%%%%%%%%%%%%%
+% COURANT FACTOR %
+%%%%%%%%%%%%%%%%%%
+cou = 0.5
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% USER PARAMETERS %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%
+% POLYTROPIC INDEX %
+%%%%%%%%%%%%%%%%%%%%
+
 K = 1.6666666666666666666666666
-%K = 1.4
-%K = 1.0001
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% Initial conditions %%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% BOUNDARY AND INITIAL PARAMETERS %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % LEFT STATE
-nl   = 10.0
+rhol = 10.0
 pl   = 13.33
 vx1l = 0.0
 vx2l = 0.0
 vx3l = 0.0
 
 % RIGHT STATE
-nr   = 1.0
-pr   = 1.0e-08
+rhor = 1.0
+pr   = 0.00000001
 vx1r = 0.0
 vx2r = 0.0
 vx3r = 0.0

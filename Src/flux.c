@@ -4,6 +4,10 @@
  * @author Alejandro Aguayo-Ortiz
  *
  * @brief Numerical flux computing and implementation.
+ *
+ * The functions receives as an argument the structures \b vec_ and
+ * \b lim_ and the integer vector \b I. The structures carries the values of the
+ * Numerical Fluxes, e.g. \b Fp = \f$\mathcal{F}_{i + 1/2}\f$.
  */
 
 //Do not erase any of these libraries//

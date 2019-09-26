@@ -1,36 +1,97 @@
 \begin{theindex}
 
-  \item {alloc.c}, \hyperpage{5}
-  \item {array.c}, \hyperpage{6}
-  \item {auxfunc.c}, \hyperpage{6}
+  \item {alloc.\+c}, \hyperpage{11}
+    \subitem {Allocate\+\_\+\+Array}, \hyperpage{11}
+  \item {Allocate\+\_\+\+Array}
+    \subitem {alloc.\+c}, \hyperpage{11}
+    \subitem {main.\+h}, \hyperpage{21}
+  \item {auxfunc.\+c}, \hyperpage{12}
 
   \indexspace
 
-  \item {bound\_cond.c}, \hyperpage{7}
+  \item {bound\+\_\+cond.\+c}, \hyperpage{12}
+    \subitem {Outflow}, \hyperpage{13}
+    \subitem {Periodic}, \hyperpage{13}
+    \subitem {Reflection}, \hyperpage{13}
+  \item {boundaries.\+h}
+    \subitem {Outflow}, \hyperpage{16}
+    \subitem {Periodic}, \hyperpage{17}
+    \subitem {Reflection}, \hyperpage{17}
 
   \indexspace
 
-  \item {flux.c}, \hyperpage{7}
+  \item {der\+\_\+gauge\+\_\+}, \hyperpage{7}
 
   \indexspace
 
-  \item {input.c}, \hyperpage{8}
-  \item {integration.c}, \hyperpage{8}
+  \item {E\+O\+S/eos.\+c}, \hyperpage{13}
+  \item {eos\+\_\+}, \hyperpage{7}
 
   \indexspace
 
-  \item {main.c}, \hyperpage{9}
+  \item {flux.\+c}, \hyperpage{14}
+  \item {flx\+\_\+}, \hyperpage{7}
 
   \indexspace
 
-  \item {output.c}, \hyperpage{9}
+  \item {gauge\+\_\+}, \hyperpage{8}
+  \item {grid\+\_\+}, \hyperpage{8}
 
   \indexspace
 
-  \item {restart.c}, \hyperpage{10}
+  \item {H\+D/fvector.\+c}, \hyperpage{14}
+  \item {H\+D/gvector.\+c}, \hyperpage{14}
+  \item {H\+D/hvector.\+c}, \hyperpage{15}
+  \item {H\+D/qvector.\+c}, \hyperpage{16}
+  \item {Headers/boundaries.\+h}, \hyperpage{16}
+  \item {Headers/const.\+h}, \hyperpage{17}
+  \item {Headers/io.\+h}, \hyperpage{18}
+  \item {Headers/limiters.\+h}, \hyperpage{18}
+  \item {Headers/macros.\+h}, \hyperpage{19}
+  \item {Headers/main.\+h}, \hyperpage{20}
 
   \indexspace
 
-  \item {timestep.c}, \hyperpage{10}
+  \item {input.\+c}, \hyperpage{21}
+  \item {integration.\+c}, \hyperpage{22}
+
+  \indexspace
+
+  \item {lim\+\_\+}, \hyperpage{8}
+
+  \indexspace
+
+  \item {main.\+c}, \hyperpage{22}
+  \item {main.\+h}
+    \subitem {Allocate\+\_\+\+Array}, \hyperpage{21}
+
+  \indexspace
+
+  \item {Outflow}
+    \subitem {bound\+\_\+cond.\+c}, \hyperpage{13}
+    \subitem {boundaries.\+h}, \hyperpage{16}
+  \item {output.\+c}, \hyperpage{23}
+
+  \indexspace
+
+  \item {Periodic}
+    \subitem {bound\+\_\+cond.\+c}, \hyperpage{13}
+    \subitem {boundaries.\+h}, \hyperpage{17}
+
+  \indexspace
+
+  \item {R\+H\+D/q2uvector.\+c}, \hyperpage{15}
+  \item {Reflection}
+    \subitem {bound\+\_\+cond.\+c}, \hyperpage{13}
+    \subitem {boundaries.\+h}, \hyperpage{17}
+  \item {restart.\+c}, \hyperpage{23}
+
+  \indexspace
+
+  \item {timestep.\+c}, \hyperpage{23}
+
+  \indexspace
+
+  \item {vec\+\_\+}, \hyperpage{9}
 
 \end{theindex}

@@ -1,3 +1,12 @@
+/**
+ * @file /RHD/q2uvector.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Function that convert from Conservative to Primitives (RHD).
+ *
+ */
+
 #include"main.h"
     
 int Cons2Prim(double *u, double *q)
@@ -44,7 +53,7 @@ int Cons2Prim(double *u, double *q)
 
       theta_0 = U(1,i)/U(0,i);
       f       = 1.0;
-      count  = 0;
+      count   = 0;
 
       while(fabs(f) > 0.00000001)
       {

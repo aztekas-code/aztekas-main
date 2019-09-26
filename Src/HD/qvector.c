@@ -1,3 +1,12 @@
+/**
+ * @file /HD/qvector.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Function that converts Primitives to Conservative variables (HD).
+ *
+ */
+
 #include"main.h"
     
 void Prim2Cons(double *q, double *u, gauge_ local_grid)

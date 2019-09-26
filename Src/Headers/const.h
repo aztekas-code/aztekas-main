@@ -1,3 +1,12 @@
+/**
+ * @file const.h
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Physical and numerical constants.
+ *
+ */
+
 //Physical constants in cgs//
 #define G_cgs     6.67408e-08    // cm³ g⁻¹ s⁻² Gravitational constant
 #define M_sol_cgs 1.98855e-33    // g           Solar mass

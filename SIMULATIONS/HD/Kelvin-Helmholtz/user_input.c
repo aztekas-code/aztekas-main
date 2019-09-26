@@ -44,54 +44,54 @@ int User_Parameters(char const *paramfile_name)
 
          if(fscanf (paramfile, "%s = %s", t_key, t_value) == 2)
          {
-            if(strcmp(t_key,"nl")==0)
+            if(strcmp(t_key,"rhod")==0)
             {
-               nl = atof(t_value);
+               rhod = atof(t_value);
             }
 
-            if(strcmp(t_key,"pl")==0)
+            if(strcmp(t_key,"pd")==0)
             {
-               pl = atof(t_value);
+               pd = atof(t_value);
             }
 
-            if(strcmp(t_key,"vx1l")==0)
+            if(strcmp(t_key,"vx1d")==0)
             {
-               vx1l = atof(t_value);
+               vx1d = atof(t_value);
             }
 
-            if(strcmp(t_key,"vx2l")==0)
+            if(strcmp(t_key,"vx2d")==0)
             {
-               vx2l = atof(t_value);
+               vx2d = atof(t_value);
             }
 
-            if(strcmp(t_key,"vx3l")==0)
+            if(strcmp(t_key,"vx3d")==0)
             {
-               vx3l = atof(t_value);
+               vx3d = atof(t_value);
             }
 
-            if(strcmp(t_key,"nr")==0)
+            if(strcmp(t_key,"rhou")==0)
             {
-               nr = atof(t_value);
+               rhou = atof(t_value);
             }
 
-            if(strcmp(t_key,"pr")==0)
+            if(strcmp(t_key,"pu")==0)
             {
-               pr = atof(t_value);
+               pu = atof(t_value);
             }
 
-            if(strcmp(t_key,"vx1r")==0)
+            if(strcmp(t_key,"vx1u")==0)
             {
-               vx1r = atof(t_value);
+               vx1u = atof(t_value);
             }
 
-            if(strcmp(t_key,"vx2r")==0)
+            if(strcmp(t_key,"vx2u")==0)
             {
-               vx2r = atof(t_value);
+               vx2u = atof(t_value);
             }
 
-            if(strcmp(t_key,"vx3r")==0)
+            if(strcmp(t_key,"vx3u")==0)
             {
-               vx3r = atof(t_value);
+               vx3u = atof(t_value);
             }
 
             if(strcmp(t_key,"x_0")==0)

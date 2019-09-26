@@ -1,41 +1,72 @@
-\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble }{}
-\contentsline {chapter}{\numberline {1}A\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Z\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}T\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}K\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}AS\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}: a hydrodynamic G\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}PL code}{1}{chapter.1}
-\contentsline {chapter}{\numberline {2}File Index}{3}{chapter.2}
-\contentsline {section}{\numberline {2.1}File List}{3}{section.2.1}
-\contentsline {chapter}{\numberline {3}File Documentation}{5}{chapter.3}
-\contentsline {section}{\numberline {3.1}alloc.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{5}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}*}{5}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Detailed Description}{5}{subsection.3.1.2}
-\contentsline {section}{\numberline {3.2}array.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{6}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}*}{6}{subsection.3.2.1}
-\contentsline {subsection}{\numberline {3.2.2}Detailed Description}{6}{subsection.3.2.2}
-\contentsline {section}{\numberline {3.3}auxfunc.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{6}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}*}{6}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Detailed Description}{7}{subsection.3.3.2}
-\contentsline {section}{\numberline {3.4}bound\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}cond.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{7}{section.3.4}
-\contentsline {subsection}{\numberline {3.4.1}*}{7}{subsection.3.4.1}
-\contentsline {subsection}{\numberline {3.4.2}Detailed Description}{7}{subsection.3.4.2}
-\contentsline {section}{\numberline {3.5}flux.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{7}{section.3.5}
-\contentsline {subsection}{\numberline {3.5.1}*}{7}{subsection.3.5.1}
-\contentsline {subsection}{\numberline {3.5.2}Detailed Description}{8}{subsection.3.5.2}
-\contentsline {section}{\numberline {3.6}input.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{8}{section.3.6}
-\contentsline {subsection}{\numberline {3.6.1}*}{8}{subsection.3.6.1}
-\contentsline {subsection}{\numberline {3.6.2}*}{8}{subsection.3.6.2}
-\contentsline {subsection}{\numberline {3.6.3}Detailed Description}{8}{subsection.3.6.3}
-\contentsline {section}{\numberline {3.7}integration.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{8}{section.3.7}
-\contentsline {subsection}{\numberline {3.7.1}*}{8}{subsection.3.7.1}
-\contentsline {subsection}{\numberline {3.7.2}Detailed Description}{9}{subsection.3.7.2}
-\contentsline {section}{\numberline {3.8}main.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{9}{section.3.8}
-\contentsline {subsection}{\numberline {3.8.1}*}{9}{subsection.3.8.1}
-\contentsline {subsection}{\numberline {3.8.2}Detailed Description}{9}{subsection.3.8.2}
-\contentsline {section}{\numberline {3.9}output.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{9}{section.3.9}
-\contentsline {subsection}{\numberline {3.9.1}*}{9}{subsection.3.9.1}
-\contentsline {subsection}{\numberline {3.9.2}Detailed Description}{10}{subsection.3.9.2}
-\contentsline {section}{\numberline {3.10}restart.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{10}{section.3.10}
-\contentsline {subsection}{\numberline {3.10.1}*}{10}{subsection.3.10.1}
-\contentsline {subsection}{\numberline {3.10.2}Detailed Description}{10}{subsection.3.10.2}
-\contentsline {section}{\numberline {3.11}timestep.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{10}{section.3.11}
-\contentsline {subsection}{\numberline {3.11.1}*}{10}{subsection.3.11.1}
-\contentsline {subsection}{\numberline {3.11.2}*}{11}{subsection.3.11.2}
-\contentsline {subsection}{\numberline {3.11.3}Detailed Description}{11}{subsection.3.11.3}
-\contentsline {chapter}{Index}{13}{section*.1}
+\contentsline {chapter}{\numberline {1}A\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Z\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}T\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}K\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}AS\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}: a hydrodynamic G\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}PL code}{1}{chapter.1}% 
+\contentsline {chapter}{\numberline {2}Class Index}{3}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}Class List}{3}{section.2.1}% 
+\contentsline {chapter}{\numberline {3}File Index}{5}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}File List}{5}{section.3.1}% 
+\contentsline {chapter}{\numberline {4}Class Documentation}{7}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}der\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}gauge\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{} Struct Reference}{7}{section.4.1}% 
+\contentsline {section}{\numberline {4.2}eos\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{} Struct Reference}{7}{section.4.2}% 
+\contentsline {section}{\numberline {4.3}flx\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{} Struct Reference}{7}{section.4.3}% 
+\contentsline {section}{\numberline {4.4}gauge\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{} Struct Reference}{8}{section.4.4}% 
+\contentsline {section}{\numberline {4.5}grid\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{} Struct Reference}{8}{section.4.5}% 
+\contentsline {section}{\numberline {4.6}lim\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{} Struct Reference}{8}{section.4.6}% 
+\contentsline {subsection}{\numberline {4.6.1}Detailed Description}{9}{subsection.4.6.1}% 
+\contentsline {section}{\numberline {4.7}vec\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{} Struct Reference}{9}{section.4.7}% 
+\contentsline {chapter}{\numberline {5}File Documentation}{11}{chapter.5}% 
+\contentsline {section}{\numberline {5.1}alloc.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{11}{section.5.1}% 
+\contentsline {subsection}{\numberline {5.1.1}Detailed Description}{11}{subsection.5.1.1}% 
+\contentsline {subsection}{\numberline {5.1.2}Function Documentation}{11}{subsection.5.1.2}% 
+\contentsline {subsubsection}{\numberline {5.1.2.1}Allocate\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Array()}{11}{subsubsection.5.1.2.1}% 
+\contentsline {section}{\numberline {5.2}auxfunc.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{12}{section.5.2}% 
+\contentsline {subsection}{\numberline {5.2.1}Detailed Description}{12}{subsection.5.2.1}% 
+\contentsline {section}{\numberline {5.3}bound\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}cond.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{12}{section.5.3}% 
+\contentsline {subsection}{\numberline {5.3.1}Detailed Description}{12}{subsection.5.3.1}% 
+\contentsline {subsection}{\numberline {5.3.2}Function Documentation}{13}{subsection.5.3.2}% 
+\contentsline {subsubsection}{\numberline {5.3.2.1}Outflow()}{13}{subsubsection.5.3.2.1}% 
+\contentsline {subsubsection}{\numberline {5.3.2.2}Periodic()}{13}{subsubsection.5.3.2.2}% 
+\contentsline {subsubsection}{\numberline {5.3.2.3}Reflection()}{13}{subsubsection.5.3.2.3}% 
+\contentsline {section}{\numberline {5.4}E\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}O\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}S/eos.c File Reference}{13}{section.5.4}% 
+\contentsline {subsection}{\numberline {5.4.1}Detailed Description}{13}{subsection.5.4.1}% 
+\contentsline {section}{\numberline {5.5}flux.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{14}{section.5.5}% 
+\contentsline {subsection}{\numberline {5.5.1}Detailed Description}{14}{subsection.5.5.1}% 
+\contentsline {section}{\numberline {5.6}H\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D/fvector.c File Reference}{14}{section.5.6}% 
+\contentsline {subsection}{\numberline {5.6.1}Detailed Description}{14}{subsection.5.6.1}% 
+\contentsline {section}{\numberline {5.7}H\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D/gvector.c File Reference}{14}{section.5.7}% 
+\contentsline {subsection}{\numberline {5.7.1}Detailed Description}{15}{subsection.5.7.1}% 
+\contentsline {section}{\numberline {5.8}H\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D/hvector.c File Reference}{15}{section.5.8}% 
+\contentsline {subsection}{\numberline {5.8.1}Detailed Description}{15}{subsection.5.8.1}% 
+\contentsline {section}{\numberline {5.9}R\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}H\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D/q2uvector.c File Reference}{15}{section.5.9}% 
+\contentsline {subsection}{\numberline {5.9.1}Detailed Description}{15}{subsection.5.9.1}% 
+\contentsline {section}{\numberline {5.10}H\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}D/qvector.c File Reference}{16}{section.5.10}% 
+\contentsline {subsection}{\numberline {5.10.1}Detailed Description}{16}{subsection.5.10.1}% 
+\contentsline {section}{\numberline {5.11}Headers/boundaries.h File Reference}{16}{section.5.11}% 
+\contentsline {subsection}{\numberline {5.11.1}Detailed Description}{16}{subsection.5.11.1}% 
+\contentsline {subsection}{\numberline {5.11.2}Function Documentation}{16}{subsection.5.11.2}% 
+\contentsline {subsubsection}{\numberline {5.11.2.1}Outflow()}{17}{subsubsection.5.11.2.1}% 
+\contentsline {subsubsection}{\numberline {5.11.2.2}Periodic()}{17}{subsubsection.5.11.2.2}% 
+\contentsline {subsubsection}{\numberline {5.11.2.3}Reflection()}{17}{subsubsection.5.11.2.3}% 
+\contentsline {section}{\numberline {5.12}Headers/const.h File Reference}{17}{section.5.12}% 
+\contentsline {subsection}{\numberline {5.12.1}Detailed Description}{17}{subsection.5.12.1}% 
+\contentsline {section}{\numberline {5.13}Headers/io.h File Reference}{18}{section.5.13}% 
+\contentsline {subsection}{\numberline {5.13.1}Detailed Description}{18}{subsection.5.13.1}% 
+\contentsline {section}{\numberline {5.14}Headers/limiters.h File Reference}{18}{section.5.14}% 
+\contentsline {subsection}{\numberline {5.14.1}Detailed Description}{19}{subsection.5.14.1}% 
+\contentsline {section}{\numberline {5.15}Headers/macros.h File Reference}{19}{section.5.15}% 
+\contentsline {subsection}{\numberline {5.15.1}Detailed Description}{20}{subsection.5.15.1}% 
+\contentsline {section}{\numberline {5.16}Headers/main.h File Reference}{20}{section.5.16}% 
+\contentsline {subsection}{\numberline {5.16.1}Detailed Description}{21}{subsection.5.16.1}% 
+\contentsline {subsection}{\numberline {5.16.2}Function Documentation}{21}{subsection.5.16.2}% 
+\contentsline {subsubsection}{\numberline {5.16.2.1}Allocate\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\_\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}Array()}{21}{subsubsection.5.16.2.1}% 
+\contentsline {section}{\numberline {5.17}input.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{21}{section.5.17}% 
+\contentsline {subsection}{\numberline {5.17.1}Detailed Description}{22}{subsection.5.17.1}% 
+\contentsline {section}{\numberline {5.18}integration.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{22}{section.5.18}% 
+\contentsline {subsection}{\numberline {5.18.1}Detailed Description}{22}{subsection.5.18.1}% 
+\contentsline {section}{\numberline {5.19}main.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{22}{section.5.19}% 
+\contentsline {subsection}{\numberline {5.19.1}Detailed Description}{22}{subsection.5.19.1}% 
+\contentsline {section}{\numberline {5.20}output.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{23}{section.5.20}% 
+\contentsline {subsection}{\numberline {5.20.1}Detailed Description}{23}{subsection.5.20.1}% 
+\contentsline {section}{\numberline {5.21}restart.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{23}{section.5.21}% 
+\contentsline {subsection}{\numberline {5.21.1}Detailed Description}{23}{subsection.5.21.1}% 
+\contentsline {section}{\numberline {5.22}timestep.\discretionary {\unhbox \voidb@x \hbox {\relax \fontsize {7}{8}\selectfont $\leftarrow \joinrel \rhook $}}{}{}c File Reference}{23}{section.5.22}% 
+\contentsline {subsection}{\numberline {5.22.1}Detailed Description}{23}{subsection.5.22.1}% 
+\contentsline {chapter}{Index}{25}{section*.35}% 

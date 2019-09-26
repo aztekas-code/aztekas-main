@@ -46,7 +46,7 @@ int User_Parameters(char const *paramfile_name)
          {
             if(strcmp(t_key,"n_0")==0)
             {
-               n_0 = atof(t_value);
+               rho_0 = atof(t_value);
             }
 
             if(strcmp(t_key,"p_0")==0)

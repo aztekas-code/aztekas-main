@@ -8,8 +8,8 @@ restartfile = ./Shock/dx1_10.dat
 restart_filecount = 10
 
 % Define mesh
-Nx1 = 128
-Nx2 = 64
+Nx1 = 500
+Nx2 = 8
 Nx3 = 0
 
 % Define domain limits
@@ -30,19 +30,23 @@ cou = 0.25
 %K = 1.3333333333333333333333333
 %K = 1.4
 %K = 1.5
-K = 1.6666666666666666666666666
+%K = 1.6666666666666666666666666
 
 % Stiff
-%K = 2.0
+K = 2.0
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Initial conditions %%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+density_0  = 1.0
+pressure_0 = 1.0
+velocity_0 = 0.0
+
 % MICHEL ACCRETION (Gamma = 5/3, r0 = 20 M)
-density_0  =  3.542502e+03 
-pressure_0 =  4.940072e+01
-velocity_0 = -2.012243e-01
+%density_0  =  3.542502e+03 
+%pressure_0 =  4.940072e+01
+%velocity_0 = -2.012243e-01
  
 % MICHEL ACCRETION (Gamma = 4/3, r0 = 20 M)
 %density_0  =  5.901940e+03
