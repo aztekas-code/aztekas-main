@@ -1,6 +1,6 @@
 /*
- *  aztekas boundary module
- *  Date of creation: 02-01-2019 12:50:45
+ *  aztekas boundaries module
+ *  Date of creation/modification: 02-01-19 12:50:45
  *  author: Alejandro Aguayo Ortiz 
  */
 
