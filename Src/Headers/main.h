@@ -1,3 +1,11 @@
+/**
+ * @file main.h
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Main function, headers and variable declaration.
+ */
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>

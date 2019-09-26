@@ -1,9 +1,10 @@
-#include"macros.h"
+/*
+ * aztekas user parameters header file
+ * Date of creation/modification: 25-09-19 22:46:36
+ * author: Alejandro Aguayo-Ortiz
+ */
 
-// Define boundaries TRUE = 1 , FALSE = 0
-// Set as cond_X whereas
-// cond : {outflow,reflective,periodic,inflow}
-// X : {x1max,x1min,x2max,x2min,x3max,x3min}
+#include"macros.h"
 
 #define HORIZONTAL         0
 #define VERTICAL           1

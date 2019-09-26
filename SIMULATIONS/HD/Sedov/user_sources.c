@@ -10,22 +10,22 @@ void User_Source_Terms(double *s, double *u, gauge_ local_grid)
    int i;
    double rho, p, vx1=0.0, vx2=0.0, vx3=0.0;
 
-   rho = u[0];
-   p   = u[1];
+   rho = u[RHO];
+   p   = u[PRE];
 #if DIM == 1
-   vx1 = u[2];
+   vx1 = u[VX1];
 #elif DIM == 2
-   vx1 = u[2];
-   vx2 = u[3];
+   vx1 = u[VX1];
+   vx2 = u[VX2];
 #elif DIM == 3 || DIM == 4
-   vx1 = u[2];
-   vx2 = u[3];
-   vx3 = u[4];
+   vx1 = u[VX1];
+   vx2 = u[VX2];
+   vx3 = u[VX3];
 #endif
 
-   s[0] = 0.0;
-   s[1] = 0.0;
-   s[2] = 0.0;
-   s[3] = 0.0;
-   s[4] = 0.0;
+   s[RHO] = 0.0;
+   s[PRE] = 0.0;
+   s[VX1] = 0.0;
+   s[VX2] = 0.0;
+   s[VX3] = 0.0;
 }

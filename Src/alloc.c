@@ -6,6 +6,10 @@
 
 #include"main.h"
 
+/*!
+ * This function allocates the space in memory for all the vectors used in 
+ * \a aztekas.
+ */
 void Allocate_Array()
 {
 #if DIM == 1
@@ -56,31 +60,6 @@ void Allocate_Array()
    U2  = (double *)malloc((Nx1+1)*(Nx2+1)*(Nx3+1)*(eq+1)*sizeof(double));
 #endif
 }
-
-/*
-void Allocate_Metric()
-{
-   int i, j, k;
-#if DIM == 1
-   for(i = 0; i < DIM + 1; i++)
-   {
-      for(j = 0; j < DIM + 1; j++)
-      {
-         gmetric.g = (double *)malloc((Nx1+1)*sizeof(double));
-      }
-   }
-
-   for(i = 0; i < DIM; i++)
-   {
-      for(j = 0; j < DIM; j++)
-      {
-
-      }
-   }
-
-
-}
-*/
 
 void New_Size()
 {

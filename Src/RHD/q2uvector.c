@@ -1,3 +1,12 @@
+/**
+ * @file /RHD/q2uvector.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Function that convert from Conservative to Primitives (RHD).
+ *
+ */
+
 #include"main.h"
     
 int Cons2Prim(double *u, double *q)

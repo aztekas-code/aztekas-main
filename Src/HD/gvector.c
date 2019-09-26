@@ -1,3 +1,10 @@
+/**
+ * @file /HD/gvector.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ */
+
 #include"main.h"
     
 //void Prim2FluxG(double *f, double *v, double *u, double *x)

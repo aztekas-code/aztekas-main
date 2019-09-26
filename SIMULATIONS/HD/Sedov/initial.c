@@ -1,4 +1,7 @@
 /*
+ * aztekas initial module
+ * Date of creation: 26-09-2019 00:09:12
+ * author: Alejandro Aguayo-Ortiz
  */
 
 //Do not erase any of these libraries//
@@ -20,15 +23,15 @@ void Initial()
    {
       if(fabs(grid.X1[i]) < x_0*dx1)
       {
-         U(0,i) = n_0;
-         U(1,i) = 3*(K-1)*E_0/(4*M_PI*n_0*pow((x_0)*dx1,3.0));
-         U(2,i) = 0.0;
+         U(RHO,i) = rho_0;
+         U(PRE,i) = 3*(K-1)*E_0/(4*M_PI*rho_0*pow((x_0)*dx1,3.0));
+         U(VX1,i) = 0.0;
       }
       else
       {
-         U(0,i) = n_0;
-         U(1,i) = p_0;
-         U(2,i) = 0.0;
+         U(RHO,i) = rho_0;
+         U(PRE,i) = p_0;
+         U(VX1,i) = 0.0;
       }
    }
 
@@ -40,17 +43,17 @@ void Initial()
       {
          if(fabs(grid.X1[i]) < x_0*dx1)
          {
-            U(0,i,j) = n_0;
-            U(1,i,j) = 3*(K-1)*E_0/(4*M_PI*n_0*pow(x_0*dx1,3.0));
-            U(2,i,j) = 0.0;
-            U(3,i,j) = 0.0;
+            U(RHO,i,j) = rho_0;
+            U(PRE,i,j) = 3*(K-1)*E_0/(4*M_PI*rho_0*pow(x_0*dx1,3.0));
+            U(VX1,i,j) = 0.0;
+            U(VX2,i,j) = 0.0;
          }
          else
          {
-            U(0,i,j) = n_0;
-            U(1,i,j) = p_0;
-            U(2,i,j) = 0.0;
-            U(3,i,j) = 0.0;
+            U(RHO,i,j) = rho_0;
+            U(PRE,i,j) = p_0;
+            U(VX1,i,j) = 0.0;
+            U(VX2,i,j) = 0.0;
          }
       }
    }

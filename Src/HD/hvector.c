@@ -1,3 +1,9 @@
+/**
+ * @file /HD/hvector.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ */
+
 #include"main.h"
     
 //void Prim2FluxH(double *f, double *v, double *u, double *x)

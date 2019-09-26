@@ -1,3 +1,12 @@
+/**
+ * @file io.h
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Input and output function and variable definitions.
+ *
+ */
+
 //Paramfile
 int binary;
 int check_param;

@@ -71,11 +71,11 @@ vx2d = 0.1
 vx3d = 0.0
 
 % RIGHT STATE
-rhou =  2.0
-pu   =  2.5
-vx1u = -0.0
-vx2u =  0.1
-vx3u =  0.0
+rhou = 2.0
+pu   = 2.5
+vx1u = 0.0
+vx2u = 0.1
+vx3u = 0.0
 
 % INTERFACE
 x_0 = 0.0

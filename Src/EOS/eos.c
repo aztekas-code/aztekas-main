@@ -1,3 +1,12 @@
+/**
+ * @file eos.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Equation of state
+ *
+ */
+
 #include"main.h"
 
 #if EOS == IDEAL

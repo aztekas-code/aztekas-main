@@ -1,3 +1,16 @@
+/**
+ * @file limiters.h
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Reconstruction variables and functions definitions.
+ *
+ */
+
+/*!
+ * The structure \b lim_ contains vectors in which the reconstructed variables
+ * of \f$U\f$ in each cell are stored.
+ */
 typedef struct
 {
 	double ux1p[2*eq];
