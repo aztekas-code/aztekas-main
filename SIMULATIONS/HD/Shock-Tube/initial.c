@@ -1,16 +1,7 @@
 /*
- *   This program is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
- *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details.
- *
- *   You should have received a copy of the GNU General Public License
- *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * aztekas boundaries module
+ * Date of creation/modification: 25-09-2019 17:10:00
+ * author: Alejandro Aguayo-Ortiz
  */
 
 //Do not erase any of these libraries//
@@ -36,17 +27,19 @@ void Initial()
    {
       if(grid.X1[i] < x_0)
       {
-         U(0,i) = nl;
-         U(1,i) = pl;
-         U(2,i) = vx1l;
+         U(RHO,i) = rhol;
+         U(PRE,i) = pl;
+         U(VX1,i) = vx1l;
       }
       else
       {
-         U(0,i) = nr;
-         U(1,i) = pr;
-         U(2,i) = vx1r;
+         U(RHO,i) = rhor;
+         U(PRE,i) = pr;
+         U(VX1,i) = vx1r;
       }
    }
+
+   printf("%e\n",K);
 
 #elif DIM == 2
 
@@ -61,17 +54,17 @@ void Initial()
       {
          if(grid.X1[i] < x_0)
          {
-            U(0,i,j) = nl;
-            U(1,i,j) = pl;
-            U(2,i,j) = vx1l;
-            U(3,i,j) = vx2l;
+            U(RHO,i,j) = rhol;
+            U(PRE,i,j) = pl;
+            U(VX1,i,j) = vx1l;
+            U(VX2,i,j) = vx2l;
          }
          else 
          {
-            U(0,i,j) = nr;
-            U(1,i,j) = pr;
-            U(2,i,j) = vx1r;
-            U(3,i,j) = vx2r;
+            U(RHO,i,j) = rhor;
+            U(PRE,i,j) = pr;
+            U(VX1,i,j) = vx1r;
+            U(VX2,i,j) = vx2r;
          }
       }
    }
@@ -82,17 +75,17 @@ void Initial()
       {
          if(grid.X2[j] > x_0)
          {
-            U(0,i,j) = nl;
-            U(1,i,j) = pl;
-            U(2,i,j) = vx1l;
-            U(3,i,j) = vx2l;
+            U(RHO,i,j) = rhol;
+            U(PRE,i,j) = pl;
+            U(VX1,i,j) = vx1l;
+            U(VX2,i,j) = vx2l;
          }
          else 
          {
-            U(0,i,j) = nr;
-            U(1,i,j) = pr;
-            U(2,i,j) = vx1r;
-            U(3,i,j) = vx2r;
+            U(RHO,i,j) = rhor;
+            U(PRE,i,j) = pr;
+            U(VX1,i,j) = vx1r;
+            U(VX2,i,j) = vx2r;
          }
       }
    }
@@ -103,17 +96,17 @@ void Initial()
       {
          if(grid.X1[i] + grid.X2[j] - 1 < 0.0)
          {
-            U(0,i,j) = nl;
-            U(1,i,j) = pl;
-            U(2,i,j) = vx1l;
-            U(3,i,j) = vx2l;
+            U(RHO,i,j) = rhol;
+            U(PRE,i,j) = pl;
+            U(VX1,i,j) = vx1l;
+            U(VX2,i,j) = vx2l;
          }
          else 
          {
-            U(0,i,j) = nr;
-            U(1,i,j) = pr;
-            U(2,i,j) = vx1r;
-            U(3,i,j) = vx2r;
+            U(RHO,i,j) = rhor;
+            U(PRE,i,j) = pr;
+            U(VX1,i,j) = vx1r;
+            U(VX2,i,j) = vx2r;
          }
       }
    }

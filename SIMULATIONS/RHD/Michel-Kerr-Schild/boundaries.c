@@ -89,7 +89,7 @@ int Boundaries(double *B)
             Vr = - 2.0*M*rplus/(rho2 + 2.0*M*r*(r + rplus)/(r - rminus));
             Vp = 2.0*M*a/(rho2*(r - rminus) + 2.0*M*r*(r + rplus));
 
-            vr = Vr/alpha - betar/alpha;
+            vr = Vr/alpha + betar/alpha;
             vp = Vp/alpha;
 
             B(RHO,i,j) = sqrt(1 + ((2*M)/(rho2))*((r*(r + rplus) + 2*M*rplus)/(r-rminus)));

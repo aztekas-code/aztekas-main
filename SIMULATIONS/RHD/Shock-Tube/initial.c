@@ -36,15 +36,15 @@ void Initial()
    {
       if(grid.X1[i] < x_0)
       {
-         U(0,i) = nl;
-         U(1,i) = pl;
-         U(2,i) = vx1l;
+         U(RHO,i) = rhol;
+         U(PRE,i) = pl;
+         U(VX1,i) = vx1l;
       }
       else
       {
-         U(0,i) = nr;
-         U(1,i) = pr;
-         U(2,i) = vx1r;
+         U(RHO,i) = rhor;
+         U(PRE,i) = pr;
+         U(VX1,i) = vx1r;
       }
    }
 
@@ -61,17 +61,17 @@ void Initial()
       {
          if(grid.X1[i] < x_0)
          {
-            U(0,i,j) = nl;
-            U(1,i,j) = pl;
-            U(2,i,j) = vx1l;
-            U(3,i,j) = vx2l;
+            U(RHO,i,j) = rhol;
+            U(PRE,i,j) = pl;
+            U(VX1,i,j) = vx1l;
+            U(VX2,i,j) = vx2l;
          }
          else 
          {
-            U(0,i,j) = nr;
-            U(1,i,j) = pr;
-            U(2,i,j) = vx1r;
-            U(3,i,j) = vx2r;
+            U(RHO,i,j) = rhor;
+            U(PRE,i,j) = pr;
+            U(VX1,i,j) = vx1r;
+            U(VX2,i,j) = vx2r;
          }
       }
    }
@@ -82,17 +82,17 @@ void Initial()
       {
          if(grid.X2[j] > x_0)
          {
-            U(0,i,j) = nl;
-            U(1,i,j) = pl;
-            U(2,i,j) = vx1l;
-            U(3,i,j) = vx2l;
+            U(RHO,i,j) = rhol;
+            U(PRE,i,j) = pl;
+            U(VX1,i,j) = vx1l;
+            U(VX2,i,j) = vx2l;
          }
          else 
          {
-            U(0,i,j) = nr;
-            U(1,i,j) = pr;
-            U(2,i,j) = vx1r;
-            U(3,i,j) = vx2r;
+            U(RHO,i,j) = rhor;
+            U(PRE,i,j) = pr;
+            U(VX1,i,j) = vx1r;
+            U(VX2,i,j) = vx2r;
          }
       }
    }
@@ -103,17 +103,17 @@ void Initial()
       {
          if(grid.X1[i] + grid.X2[j] - 1 < 0.0)
          {
-            U(0,i,j) = nl;
-            U(1,i,j) = pl;
-            U(2,i,j) = vx1l;
-            U(3,i,j) = vx2l;
+            U(RHO,i,j) = rhol;
+            U(PRE,i,j) = pl;
+            U(VX1,i,j) = vx1l;
+            U(VX2,i,j) = vx2l;
          }
          else 
          {
-            U(0,i,j) = nr;
-            U(1,i,j) = pr;
-            U(2,i,j) = vx1r;
-            U(3,i,j) = vx2r;
+            U(RHO,i,j) = rhor;
+            U(PRE,i,j) = pr;
+            U(VX1,i,j) = vx1r;
+            U(VX2,i,j) = vx2r;
          }
       }
    }

@@ -12,7 +12,7 @@
 #include"const.h"
 #include"macros.h"
 #include"io.h"
-#include"param.h"
+#include"user_param.h"
 
 
 // NAN

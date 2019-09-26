@@ -1,18 +1,36 @@
-% OUTPUT FILE AND DIRECTORY
-outputdirectory = ./prueba/
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OUTPUT FILE AND DIRECTORY %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+outputdirectory = ./TEST/
 outputfile      = rt_
 
-% RESTART SIMULATION (1 -> true, 0 -> false)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RESTART SIMULATION (1 -> true, 0 -> false) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 restart_simulation = 0
-restartfile = ./Rayleigh-Taylor-01/rt_54.dat
-restart_filecount = 54
+restartfile = ./TEST/rt_0.dat
+restart_filecount = 0
 
-% Define mesh
-Nx1 = 100
-Nx2 = 300
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHECK SIMULATION PARAMETERS (1 -> true, 0 -> false) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+check_param = 0
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OUTPUT FORMAT (0 -> ASCII, 1 -> BINARY) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+binary = 0
+
+%%%%%%%%%%%%%%%
+% DEFINE MESH %
+%%%%%%%%%%%%%%%
+Nx1 = 50
+Nx2 = 150
 Nx3 = 0
 
-% Define domain limits
+%%%%%%%%%%%%%%%%%%%%%%%%
+% DEFINE DOMAIN LIMITS %
+%%%%%%%%%%%%%%%%%%%%%%%%
 x1max =  0.25
 x2max =  0.75
 x3max =  0.0
@@ -20,31 +38,44 @@ x1min = -0.25
 x2min = -0.75
 x3min =  0.0
 
-% Time parameters
+%%%%%%%%%%%%%%%%%%%
+% TIME PARAMETERS %
+%%%%%%%%%%%%%%%%%%%
 tmax = 10.0
 timefile = 0.1
+
+%%%%%%%%%%%%%%%%%%
+% COURANT FACTOR %
+%%%%%%%%%%%%%%%%%%
 cou = 0.5
 
-% Polytorpic index
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% USER PARAMETERS %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%
+% POLYTROPIC INDEX %
+%%%%%%%%%%%%%%%%%%%%
+
 K = 1.4
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% Initial conditions %%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% BOUNDARY AND INITIAL PARAMETERS %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% OUT STATE
-nl   = 1.0
-pl   = 2.5
-vx1l = 0.5
-vx2l = 0.0
-vx3l = 0.0
+% LEFT STATE
+rhod = 1.0
+pd   = 2.5
+vx1d = 0.0
+vx2d = 0.1
+vx3d = 0.0
 
-% IN STATE
-nr   =  2.0
-pr   =  2.5
-vx1r = -0.5
-vx2r =  0.0
-vx3r =  0.0
+% RIGHT STATE
+rhou =  2.0
+pu   =  2.5
+vx1u = -0.0
+vx2u =  0.1
+vx3u =  0.0
 
 % INTERFACE
-x_0 = 0.25
+x_0 = 0.0

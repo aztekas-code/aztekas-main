@@ -7,55 +7,22 @@
 # that you recompile the whole code by typing "make clean; make" 
 #----------------------------------------------------------------------
 
-###############################################
-# PATH TO AZTEKAS
-###############################################
-
-AZTPATH = ../../../
-
-###############################################
-# Physics (hd, mhd, rhd, rmhd)
-###############################################
-
-PHY = rhd
-
-########################################################################################
-# Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
-########################################################################################
-
-METRIC = Minkowski
-
-###############################################
-# Equation of State (ideal, dust, stiff)
-###############################################
-
-eos = ideal
-
-###############################################
-# Dimension (1, 2 or 3. Enter 4 for 2.5)
-###############################################
-
-DIM = 1
-
-###############################################
-# Coordinates (cartesian,cylindrical,spherical)
-###############################################
-
-COORD = cartesian
-
-###############################################
-# Integration method
-###############################################
-
-INT = standard
-
-###############################################
+#####################################
 # Ghost cells
-###############################################
+#####################################
 
 PARAM += -Dgc=3
 
-###############################################
+#####################################
+
+#####################################
+# Physics (rhd,hd,mhd,rmhd)
+#####################################
+
+PHY    = rhd
+
+# Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Kerr-Schild)
+METRIC = Minkowski
 
 ifeq ($(PHY),hd)
         PARAM += -DPHYSICS=HD
@@ -64,19 +31,21 @@ ifeq ($(PHY),rhd)
         PARAM += -DPHYSICS=RHD
 endif
 
-#####################################
-
+eos = ideal
 ifeq ($(eos),ideal)
         PARAM += -DEOS=IDEAL
 endif
 ifeq ($(eos),dust)
         PARAM += -DEOS=DUST
 endif
-ifeq ($(eos),stiff)
-        PARAM += -DEOS=STIFF	
-endif
 
 #####################################
+
+#####################################
+# Dimension
+#####################################
+
+DIM = 1
 
 ifeq ($(DIM),1)
 	PARAM += -DDIM=1
@@ -88,30 +57,48 @@ ifeq ($(DIM),2)
 	PARAM += -Deq=4
 	PARAM += -Dgraf=2
 endif
-ifeq ($(DIM),3)
-	PARAM += -DDIM=3
-	PARAM += -Deq=5
-	PARAM += -Dgraf=3
-endif
 ifeq ($(DIM),4)
 	PARAM += -DDIM=4
 	PARAM += -Deq=5
 	PARAM += -Dgraf=2
 endif
+ifeq ($(DIM),3)
+	PARAM += -DDIM=3
+	PARAM += -Deq=5
+	PARAM += -Dgraf=3
+endif
 
 #####################################
 
-ifeq ($(COORD),cartesian)
+#####################################
+# Coordinates (cart,cyl,sph)
+#####################################
+
+COORD = cart
+
+ifeq ($(COORD),cart)
 	PARAM += -DCOORDINATES=CARTESIAN
 endif
-ifeq ($(COORD),cylindrical)
+ifeq ($(COORD),cyl)
 	PARAM += -DCOORDINATES=CYLINDRICAL
 endif
-ifeq ($(COORD),spherical)
+ifeq ($(COORD),sph)
 	PARAM += -DCOORDINATES=SPHERICAL
 endif
 
 #####################################
+
+#####################################
+# PATH TO AZTEKAS
+#####################################
+AZTPATH = ../../../
+#####################################
+
+#####################################
+# Integration method
+#####################################
+
+INT = standard
 
 ifeq ($(INT),standard)
 	PARAM += -Dintegration=0
@@ -152,7 +139,7 @@ SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/HD/gvector.c \
 	  $(AZTPATH)/Src/HD/hvector.c \
 	  $(AZTPATH)/Src/HD/svector.c \
-	  $(AZTPATH)/Src/HD/surface.c \
+	  $(AZTPATH)/Src/HD/metric.c \
 	  $(AZTPATH)/Src/EOS/eos.c \
 	  ./user_sources.c \
 	  ./user_input.c
