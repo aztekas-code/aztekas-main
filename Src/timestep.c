@@ -101,7 +101,7 @@ double TimeStep()
          dtmin = MIN(Dx2,dtmin);
          #endif
 
-         if(U(0,i,j) == fabs(1.0/0.0))
+         if(U(RHO,i,j) == fabs(1.0/0.0) || U(RHO,i,j) == -1.0/0.0)
          {
             printf("                                          \n");
             printf("NaN value found in calculation.\n");

@@ -29,13 +29,13 @@ binary = 0
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
 Nx1 = 128
-Nx2 = 8
+Nx2 = 32
 Nx3 = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINE DOMAIN LIMITS %
 %%%%%%%%%%%%%%%%%%%%%%%%
-x1max = 20.0
+x1max = 100.0
 x2max = 0.5
 x3max = 1.0 
 x1min = 1.5

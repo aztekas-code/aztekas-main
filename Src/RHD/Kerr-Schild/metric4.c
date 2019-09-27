@@ -63,26 +63,26 @@ void Get_Metric_Components(gauge_ *local_grid)
    a     = Black_Hole_Spin;
    M     = Black_Hole_Mass;
    Delta = r*r - 2.0*M*r + a*a;
-   rho2  = r*r + a*a*pow(cos(theta),2.0);
+   rho2  = sqrt(r*r + a*a*pow(cos(theta),2.0));
    Sigma = por(r*r + a*a,2.0) - a*a*Delta*pow(sin(theta),2.0);
 
-   local_grid->lapse = 1.0/sqrt(1.0 + 2.0*M*r/rho2);
+   local_grid->lapse = pow(2*M*r/pow(rho, 2) + 1, -1.0/2.0);
 
-   local_grid->beta_con[0] = (2.0*M*r/rho2)/(1.0 + 2.0*M*r/rho2)
+   local_grid->beta_con[0] = 2*M*r/(pow(rho, 2)*(2*M*r/pow(rho, 2) + 1));
    local_grid->beta_con[1] = 0.0;
    local_grid->beta_con[2] = 0.0;
 
    #if POLAR == FALSE
 
-   local_grid->gamma_con[0][0] = (a*a*(rho2 + 2.0*M*r)*pow(sin(theta),2.0) + rho2*rho2)/(rho2*(rho2 + 2.0*M*r));
+   local_grid->gamma_con[0][0] = (pow(a, 2)*(2*M*r + pow(rho, 2))*pow(sin(theta), 2) + pow(rho, 4))/(pow(rho, 2)*(2*M*r + pow(rho, 2)));
    local_grid->gamma_con[0][1] = 0.0;
-   local_grid->gamma_con[0][2] = a/rho2;
+   local_grid->gamma_con[0][2] = a/pow(rho, 2);
    local_grid->gamma_con[1][0] = 0.0;
-   local_grid->gamma_con[1][1] = 1.0/rho2;
+   local_grid->gamma_con[1][1] = pow(rho, -2);
    local_grid->gamma_con[1][2] = 0.0;
-   local_grid->gamma_con[2][0] = a/rho2;
+   local_grid->gamma_con[2][0] = a/pow(rho, 2);
    local_grid->gamma_con[2][1] = 0.0;
-   local_grid->gamma_con[2][2] = 1.0/(rho2*pow(sin(theta),2.0));
+   local_grid->gamma_con[2][2] = 1/(pow(rho, 2)*pow(sin(theta), 2));
 
    #elif POLAR == TRUE
 
@@ -98,7 +98,7 @@ void Get_Metric_Components(gauge_ *local_grid)
 
    #endif
 
-   local_grid->dety = local_grid->lapse*sqrt(rho2*(2.0*M*r + rho2)*pow(sin(theta),2.0));
+   local_grid->dety = 
 
 #endif
 }

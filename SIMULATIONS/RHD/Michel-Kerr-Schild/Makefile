@@ -189,21 +189,21 @@ SOURCES = $(AZTPATH)/Src/main.c \
 	  ./user_input.c
 endif
 
-#OBJS = $(SOURCES:.c=.o)
-
+OBJS = $(SOURCES:.c=.o)
 FLAGS = -Ofast -lm
 
 COMPILER = gcc
 AZT_HEAD = $(AZTPATH)/Src/Headers
-CFLAGS = -I$(AZT_HEAD) -I.
+CFLAGS = -g -I$(AZT_HEAD) -I.
+DEPS = user_param.h
 EXEC = aztekas
 
 #####################################
 
-$(EXEC): $(SOURCES)
+all: $(SOURCES)
 	@echo ""
 	@echo "Compiling problem file ..."
-	$(COMPILER) $(PARAM) -fopenmp $(SOURCES) $(FLAGS) $(CFLAGS) -o $(EXEC)  
+	$(COMPILER) $(PARAM) -fopenmp $(SOURCES) $(FLAGS) $(CFLAGS) -o $(EXEC)
 	@echo "$(bla)"
 	@echo "aztekas compiled successfully"
 	

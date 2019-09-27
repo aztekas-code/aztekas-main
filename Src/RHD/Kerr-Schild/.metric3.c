@@ -58,6 +58,8 @@ void Get_Metric_Components(gauge_ *local_grid)
    double phi   = local_grid->x[3];
 
    double Sigma, Delta, rho2, a, M;
+   double term1, term2;
+
    a     = Black_Hole_Spin;
    M     = Black_Hole_Mass;
    Delta = r*r - 2.0*M*r + a*a;
@@ -96,7 +98,7 @@ void Get_Metric_Components(gauge_ *local_grid)
 
    #endif
 
-   local_grid->dety = sqrt(local_grid->lapse*rho2*(2.0*M*r + rho2)*pow(sin(theta),2.0));
+   local_grid->dety = local_grid->lapse*sqrt(rho2*(2.0*M*r + rho2)*pow(sin(theta),2.0));
 
 #endif
 }
@@ -235,7 +237,7 @@ void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid)
 
    #if POLAR == FALSE
 
-   der->dgam[0][0][0] = 2.0*M*(a*a*pow(cos(theta),2.0) - r*r)/pow(rho2,2.0);
+   der->dgam[0][0][0] = 2.0*M*(a*a*pow(cos(theta),2.0 - r*r))/pow(rho2,2.0);
    der->dgam[0][0][1] = 0.0;
    der->dgam[0][0][2] = 2.0*M*a*(r*r - a*a*pow(cos(theta),2.0))*pow(sin(theta),2.0)/pow(rho2,2.0);
    der->dgam[0][1][0] = 0.0;
