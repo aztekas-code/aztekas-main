@@ -1,9 +1,10 @@
-#include"macros.h"
+/*
+ * aztekas user parameters header file
+ * Date of creation/modification: 26-09-19 11:55:53
+ * autrho: Alejandro Aguayo-Ortiz
+ */
 
-// Define boundaries TRUE = 1 , FALSE = 0
-// Set as cond_X whereas
-// cond : {outflow,reflective,periodic,inflow}
-// X : {x1max,x1min,x2max,x2min,x3max,x3min}
+#include"macros.h"
 
 #define POLAR              FALSE
 
@@ -21,6 +22,6 @@
 #define GRID               UNIFORM
 
 #define Black_Hole_Mass    1.0
-#define Black_Hole_Spin    0.0
+#define Black_Hole_Spin    0.9
 
 double density_0, pressure_0, velocity_0;

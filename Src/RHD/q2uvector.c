@@ -79,7 +79,11 @@ int Cons2Prim(double *u, double *q)
 
          if(count == 100000)
          {
+            printf("                                          \n");
             printf("Spend too much time in Newton-Rhapson.\n");
+            CHECK_NAN = TRUE;
+            U = U0;
+            PrintValues(&grid.time,&theta,&CHECK_NAN);
             exit(EXIT_FAILURE);
          }
       }
@@ -161,7 +165,11 @@ int Cons2Prim(double *u, double *q)
 
             if(count == 100000)
             {
+               printf("                                          \n");
                printf("Spend too much time in Newton-Rhapson.\n");
+               CHECK_NAN = TRUE;
+               U = U0;
+               PrintValues(&grid.time,&theta,&CHECK_NAN);
                exit(EXIT_FAILURE);
             }
          }
@@ -240,9 +248,14 @@ int Cons2Prim(double *u, double *q)
             theta_0 = theta;
             count++;
 
-            if(count == 100000)
+            if(count == 10000000)
             {
+               printf("                                          \n");
                printf("Spend too much time in Newton-Rhapson.\n");
+               printf("%e %e %e %e %e %e\n",f,theta,SS,Lorentz,grid.X1[i],grid.X2[j]);
+               CHECK_NAN = TRUE;
+               U = U0;
+               PrintValues(&grid.time,&theta,&CHECK_NAN);
                exit(EXIT_FAILURE);
             }
          }

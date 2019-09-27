@@ -1,6 +1,6 @@
 /*
  * aztekas initial module
- * Date of creation: 26-09-2019 00:09:12
+ * Date of creation/modification: 26-09-19 00:09:12
  * author: Alejandro Aguayo-Ortiz
  */
 

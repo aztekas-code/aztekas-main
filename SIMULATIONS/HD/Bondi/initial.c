@@ -1,16 +1,7 @@
 /*
- *   This program is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
- *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details.
- *
- *   You should have received a copy of the GNU General Public License
- *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * aztekas initial module
+ * Date of creation/modification: 27-09-19 11:26:00
+ * author: Alejandro Aguayo-Ortiz
  */
 
 //Do not erase any of these libraries//
@@ -49,28 +40,28 @@ void Initial()
    {
       for(j = 0; j <= Nx2; j++)
       {
-         U(0,i,j) = density_0;
-         U(1,i,j) = pressure_0;
-         U(2,i,j) = velocity_0;
-         U(3,i,j) = 0.0;
+         U(RHO,i,j) = density_0;
+         U(PRE,i,j) = pressure_0;
+         U(VX1,i,j) = velocity_0;
+         U(VX2,i,j) = 0.0;
       }
    }
 
 #elif DIM == 4
 
    ///////////////////////////
-   //-------Bondi-2D--------//
+   //------Bondi-2.5D-------//
    ///////////////////////////
 
    for(i = 0; i <= Nx1; i++)
    {
       for(j = 0; j <= Nx2; j++)
       {
-         U(0,i,j) = density_0;
-         U(1,i,j) = pressure_0;
-         U(2,i,j) = velocity_0;
-         U(3,i,j) = 0.0;
-         U(4,i,j) = 0.0;
+         U(RHO,i,j) = density_0;
+         U(PRE,i,j) = pressure_0;
+         U(VX1,i,j) = velocity_0;
+         U(VX2,i,j) = 0.0;
+         U(VX3,i,j) = 0.0;
       }
    }
 

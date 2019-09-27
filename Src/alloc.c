@@ -24,6 +24,7 @@ void Allocate_Array()
    Q1  = (double *)malloc((Nx1+1)*(eq+1)*sizeof(double));
    Q2  = (double *)malloc((Nx1+1)*(eq+1)*sizeof(double));
    U   = (double *)malloc((Nx1+1)*(eq+1)*sizeof(double));
+   U0  = (double *)malloc((Nx1+1)*(eq+1)*sizeof(double));
    U1  = (double *)malloc((Nx1+1)*(eq+1)*sizeof(double));
    U2  = (double *)malloc((Nx1+1)*(eq+1)*sizeof(double));
 #elif DIM == 2 || DIM == 4
@@ -39,12 +40,13 @@ void Allocate_Array()
    grid.S2p = (double *)malloc((Nx1+1)*(Nx2+1)*sizeof(double));
    grid.S2m = (double *)malloc((Nx1+1)*(Nx2+1)*sizeof(double));
 
-   U   = (double *)malloc((Nx1+1)*(Nx2+1)*(eq+1)*sizeof(double));
-   U1  = (double *)malloc((Nx1+1)*(Nx2+1)*(eq+1)*sizeof(double));
-   U2  = (double *)malloc((Nx1+1)*(Nx2+1)*(eq+1)*sizeof(double));
    Q   = (double *)malloc((Nx1+1)*(Nx2+1)*(eq+1)*sizeof(double));
    Q1  = (double *)malloc((Nx1+1)*(Nx2+1)*(eq+1)*sizeof(double));
    Q2  = (double *)malloc((Nx1+1)*(Nx2+1)*(eq+1)*sizeof(double));
+   U   = (double *)malloc((Nx1+1)*(Nx2+1)*(eq+1)*sizeof(double));
+   U0  = (double *)malloc((Nx1+1)*(Nx2+1)*(eq+1)*sizeof(double));
+   U1  = (double *)malloc((Nx1+1)*(Nx2+1)*(eq+1)*sizeof(double));
+   U2  = (double *)malloc((Nx1+1)*(Nx2+1)*(eq+1)*sizeof(double));
 #elif DIM == 3
    grid.X1  = (double *)malloc((Nx1+1)*sizeof(double));
    grid.X1p = (double *)malloc((Nx1+1)*sizeof(double));
@@ -56,6 +58,7 @@ void Allocate_Array()
    grid.X3p = (double *)malloc((Nx3+1)*sizeof(double));
    grid.X3m = (double *)malloc((Nx3+1)*sizeof(double));
    U   = (double *)malloc((Nx1+1)*(Nx2+1)*(Nx3+1)*(eq+1)*sizeof(double));
+   U0  = (double *)malloc((Nx1+1)*(Nx2+1)*(Nx3+1)*(eq+1)*sizeof(double));
    U1  = (double *)malloc((Nx1+1)*(Nx2+1)*(Nx3+1)*(eq+1)*sizeof(double));
    U2  = (double *)malloc((Nx1+1)*(Nx2+1)*(Nx3+1)*(eq+1)*sizeof(double));
 #endif

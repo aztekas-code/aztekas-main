@@ -21,10 +21,16 @@ double TimeStep()
 
    for(i = gc; i <= Nx1-gc; i++)
    {
-      c = sqrt(K*U(1,i) / (U(0,i)));
-
       Dx1 = grid.X1p[i] - grid.X1m[i];
-      dtmin = MIN(Dx1/(fabs(U(2,i)) + fabs(c)),dtmin);
+
+      #if PHYSICS == HD
+      c = sqrt(K*U(PRE,i) / (U(RHO,i)));
+
+      dtmin = MIN(Dx1/(fabs(U(VX1,i)) + fabs(c)),dtmin);
+      #elif PHYSICS == RHD
+      dtmin = MIN(Dx1,dtmin);
+      #endif
+
 
       if(U(0,i) == fabs(1.0/0.0))
       {
@@ -43,16 +49,21 @@ double TimeStep()
    {
       for(j = gc; j <= Nx2-gc; j++)
       {
-         c = sqrt(K*U(1,i,j) / (U(0,i,j)));
-
          Dx1 = grid.X1p[i] - grid.X1m[i];
          Dx2 = grid.X2p[j] - grid.X2m[j];
          #if COORDINATES == SPHERICAL
          Dx2 = grid.X1[i]*Dx2;
          #endif
 
-         dtmin = MIN(Dx1/(fabs(U(2,i,j)) + fabs(c)),dtmin);
-         dtmin = MIN(Dx2/(fabs(U(3,i,j)) + fabs(c)),dtmin);
+         #if PHYSICS == HD
+         c = sqrt(K*U(PRE,i,j) / (U(RHO,i,j)));
+
+         dtmin = MIN(Dx1/(fabs(U(VX1,i,j)) + fabs(c)),dtmin);
+         dtmin = MIN(Dx2/(fabs(U(VX2,i,j)) + fabs(c)),dtmin);
+         #elif PHYSICS == RHD
+         dtmin = MIN(Dx1,dtmin);
+         dtmin = MIN(Dx2,dtmin);
+         #endif
 
          if(U(0,i,j) == fabs(1.0/0.0))
          {
@@ -72,16 +83,25 @@ double TimeStep()
    {
       for(j = gc; j <= Nx2-gc; j++)
       {
-         c = sqrt(K*U(1,i,j) / (U(0,i,j)));
-
          Dx1 = grid.X1p[i] - grid.X1m[i];
          Dx2 = grid.X2p[j] - grid.X2m[j];
-         dtmin = MIN(dx1/(fabs(U(2,i,j)) + fabs(c)),dtmin);
-         dtmin = MIN(dx1/(fabs(U(4,i,j)) + fabs(c)),dtmin);
-         dtmin = MIN(dx2/(fabs(U(3,i,j)) + fabs(c)),dtmin);
-         dtmin = MIN(dx2/(fabs(U(4,i,j)) + fabs(c)),dtmin);
+         #if COORDINATES == SPHERICAL
+         Dx2 = grid.X1[i]*Dx2;
+         #endif
 
-         if(U(0,i,j) == fabs(1.0/0.0))
+         #if PHYSICS == HD
+         c = sqrt(K*U(PRE,i,j) / (U(RHO,i,j)));
+
+         dtmin = MIN(Dx1/(fabs(U(VX1,i,j)) + fabs(c)),dtmin);
+         dtmin = MIN(Dx1/(fabs(U(VX3,i,j)) + fabs(c)),dtmin);
+         dtmin = MIN(Dx2/(fabs(U(VX2,i,j)) + fabs(c)),dtmin);
+         dtmin = MIN(Dx2/(fabs(U(VX3,i,j)) + fabs(c)),dtmin);
+         #elif PHYSICS == RHD
+         dtmin = MIN(Dx1,dtmin);
+         dtmin = MIN(Dx2,dtmin);
+         #endif
+
+         if(U(RHO,i,j) == fabs(1.0/0.0) || U(RHO,i,j) == -1.0/0.0)
          {
             printf("                                          \n");
             printf("NaN value found in calculation.\n");
@@ -126,15 +146,7 @@ double TimeStep()
 
 #endif
 
-#if PHYSICS == HD
    dt = cou*dtmin;
-#elif PHYSICS == RHD
-   #if DIM == 1
-   dt = cou*MIN(dx1,1000);
-   #elif DIM == 2 || DIM == 4
-   dt = cou*MIN(dx1,dx2);
-   #endif 
-#endif
 
    return dt;
 }

@@ -1,7 +1,16 @@
 /*
- * aztekas boundaries module
- * Date of creation/modification: 26-09-19 11:33:21
- * author: Alejandro Aguayo-Ortiz
+ *   This program is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 //Do not erase any of these libraries//
@@ -10,9 +19,19 @@
 int Boundaries(double *B)
 {
    int i, j, k, n, cell;
+   double r, theta;
+   double Delta, Sigma, rho2;
+   double M, a;
+   double rplus, rminus;
+   double alpha, betar, grr, grp, gpp;
+   double Vr, Vp, vr, vp;
 
    Outflow(B);
+#if POLAR == FALSE
    Reflection(B);
+#elif POLAR == TRUE
+   Periodic(B);
+#endif
 
 #if DIM == 1
 
@@ -50,6 +69,7 @@ int Boundaries(double *B)
       {
          if(i >= Nx1-gc)
          {
+
             B(RHO,i,j) = density_0;
             B(PRE,i,j) = pressure_0;
             B(VX1,i,j) = velocity_0;

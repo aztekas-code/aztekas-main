@@ -28,14 +28,14 @@ binary = 0
 %%%%%%%%%%%%%%%
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
-Nx1 = 128
-Nx2 = 32
+Nx1 = 256
+Nx2 = 8
 Nx3 = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINE DOMAIN LIMITS %
 %%%%%%%%%%%%%%%%%%%%%%%%
-x1max = 100.0
+x1max = 20.0
 x2max = 0.5
 x3max = 1.0 
 x1min = 1.5
@@ -61,12 +61,21 @@ cou = 0.25
 % POLYTROPIC INDEX %
 %%%%%%%%%%%%%%%%%%%%
 
-K = 2.0
+K = 1.6666666666666666
+%K = 1.3333333333333333
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% BOUNDARY AND INITIAL PARAMETERS %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-density_0  = 1.0
-pressure_0 = 1.0
-velocity_0 = 0.0
+% Michel Accretion (Gamma = 5/3, r0 = 20 M)
+
+density_0  =  3.542502e+03
+pressure_0 =  4.940072e+01
+velocity_0 = -9.719007e-02
+
+% Michel Accretion (Gamma = 4/3, r0 = 20 M)
+
+%density_0  =  5.901940e+03
+%pressure_0 =  8.001744e+00
+%velocity_0 = -2.176401e-01
