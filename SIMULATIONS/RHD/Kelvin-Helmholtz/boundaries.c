@@ -1,10 +1,11 @@
 /*
- *  aztekas boundary module
- *  Date of creation: 02-01-2019 12:50:45
- *  author: Alejandro Aguayo Ortiz 
+ * File Name : boundaries.c
+ * Description : aztekas boundaries module for Kelvin-Helmholtz
+ * Creation Date : 27-09-2019
+ * Last Modified : 28-09-2019 09:45:48
+ * Created By : Alejandro Aguayo-Ortiz
  */
 
-//Do not erase any of these libraries//
 #include"main.h"
 
 int Boundaries(double *B)

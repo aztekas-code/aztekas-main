@@ -1,10 +1,11 @@
 /*
- * aztekas initial module
- * Date of creation/modification: 26-09-19 11:47:23
- * author: Alejandro Aguayo-Ortiz
+ * File Name : initial.c
+ * Description : aztekas initial module for Shock-Tube
+ * Creation Date : 26-09-2019
+ * Last Modified : 28-09-2019 09:35:35
+ * Created By : Alejandro Aguayo-Ortiz
  */
 
-//Do not erase any of these libraries//
 #include"main.h"
 
 void Initial()
@@ -39,10 +40,12 @@ void Initial()
       }
    }
 
+   printf("%e\n",K);
+
 #elif DIM == 2
 
    /////////////////////////////
-   //-------Riemann-2D--------//
+   //-------Riemann-1D--------//
    /////////////////////////////
 
    #if INTERFACE == HORIZONTAL

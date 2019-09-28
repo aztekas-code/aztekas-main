@@ -1,10 +1,11 @@
 /*
- *  aztekas initial module
- *  Date of creation: 11-07-2019 12:50:45
- *  author: Alejandro Aguayo Ortiz 
+ * File Name : initial.c
+ * Description : aztekas initial module for Relativistic Kelvin-Helmholtz
+ * Creation Date : 27-09-2019
+ * Last Modified : 28-09-2019 09:56:15
+ * Created By : Alejandro Aguayo-Ortiz
  */
 
-//Do not erase any of these libraries//
 #include"main.h"
 
 void Initial()
@@ -26,17 +27,17 @@ void Initial()
       {
          if(fabs(grid.X2[j]) >= x_0)
          {
-            U(0,i,j) = nl;
-            U(1,i,j) = pl;
-            U(2,i,j) = vx1l*(1 + 0.01*cos(10*M_PI*grid.X1[i])*cos(10*M_PI*grid.X2[j])); 
-            U(3,i,j) = vx2l*(1 + 0.01*cos(10*M_PI*grid.X1[i])*cos(10*M_PI*grid.X2[j]));
+            U(RHO,i,j) = rhod;
+            U(PRE,i,j) = pd;
+            U(VX1,i,j) = vx1d*(1 + 0.01*cos(10*M_PI*grid.X1[i])*cos(10*M_PI*grid.X2[j])); 
+            U(VX2,i,j) = vx2d*(1 + 0.01*cos(10*M_PI*grid.X1[i])*cos(10*M_PI*grid.X2[j]));
          }
          else if(fabs(grid.X2[j]) < x_0) 
          {
-            U(0,i,j) = nr;
-            U(1,i,j) = pr;
-            U(2,i,j) = vx1r*(1 + 0.01*cos(10*M_PI*grid.X1[i])*cos(10*M_PI*grid.X2[j])); 
-            U(3,i,j) = vx2r*(1 + 0.01*cos(10*M_PI*grid.X1[i])*cos(10*M_PI*grid.X2[j]));
+            U(RHO,i,j) = rhou;
+            U(PRE,i,j) = pu;
+            U(VX1,i,j) = vx1u*(1 + 0.01*cos(10*M_PI*grid.X1[i])*cos(10*M_PI*grid.X2[j])); 
+            U(VX2,i,j) = vx2u*(1 + 0.01*cos(10*M_PI*grid.X1[i])*cos(10*M_PI*grid.X2[j]));
          }
       }
    }

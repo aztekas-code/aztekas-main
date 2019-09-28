@@ -1,12 +1,11 @@
-/**
- * @file user_input.c
- *
- * @author Emilio Tejeda
- *
- * @brief Important input parameters for \a aztekas.
+/*
+ * File Name : user_input.c
+ * Description : aztekas user input parameters for Relativistic Shock-Tube
+ * Creation Date : 28-09-2019
+ * Last Modified : 28-09-2019 09:31:38
+ * Created By : Alejandro Aguayo-Ortiz
  */
 
-//Do not erase any of these libraries//
 #include"main.h"
 
 FILE *paramfile;
@@ -115,4 +114,3 @@ int User_Parameters(char const *paramfile_name)
 
    return 0;   
 }
-
