@@ -1,12 +1,11 @@
-/**
- * @file user_input.c
- *
- * @author Emilio Tejeda
- *
- * @brief Important input parameters for \a aztekas.
+/*
+ * File Name : user_input.c
+ * Description : aztekas user input parameters for Jet
+ * Creation Date : 27-09-2019
+ * Last Modified : 27-09-2019 00:11:56
+ * Created By : Alejandro Aguayo-Ortiz
  */
 
-//Do not erase any of these libraries//
 #include"main.h"
 
 FILE *paramfile;
@@ -44,9 +43,9 @@ int User_Parameters(char const *paramfile_name)
 
          if(fscanf (paramfile, "%s = %s", t_key, t_value) == 2)
          {
-            if(strcmp(t_key,"n_jet")==0)
+            if(strcmp(t_key,"rho_jet")==0)
             {
-               n_jet = atof(t_value);
+               rho_jet = atof(t_value);
             }
 
             if(strcmp(t_key,"p_jet")==0)
@@ -69,9 +68,9 @@ int User_Parameters(char const *paramfile_name)
                vx3_jet = atof(t_value);
             }
 
-            if(strcmp(t_key,"n_atm")==0)
+            if(strcmp(t_key,"rho_atm")==0)
             {
-               n_atm = atof(t_value);
+               rho_atm = atof(t_value);
             }
 
             if(strcmp(t_key,"p_atm")==0)

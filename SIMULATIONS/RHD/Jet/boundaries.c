@@ -1,8 +1,11 @@
-/* 
- *  aztekas boundaries module
- *  Date of creation: 02-01-2019 18:32:00
- *  author: Alejandro Aguayo Ortiz 
+/*
+ * File Name : boundaries.c
+ * Description : aztekas boundaries module for Jet
+ * Creation Date : 27-09-2019
+ * Last Modified : 27-09-2019 00:10:45
+ * Created By : Alejandro Aguayo-Ortiz
  */
+
 #include"main.h"
 
 int Boundaries(double *B)
@@ -18,10 +21,10 @@ int Boundaries(double *B)
       {
          if(grid.X1[i] <= r_jet && grid.X2[j] <= z_jet)
          {
-            B(0,i,j) = n_jet;
-            B(1,i,j) = p_jet;
-            B(2,i,j) = vx1_jet;
-            B(3,i,j) = vx2_jet;
+            B(RHO,i,j) = rho_jet;
+            B(PRE,i,j) = p_jet;
+            B(VX1,i,j) = vx1_jet;
+            B(VX2,i,j) = vx2_jet;
          }
       }
    }

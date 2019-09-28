@@ -28,15 +28,15 @@ binary = 0
 %%%%%%%%%%%%%%%
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
-Nx1 = 160
-Nx2 = 400
+Nx1 = 150
+Nx2 = 500
 Nx3 = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINE DOMAIN LIMITS %
 %%%%%%%%%%%%%%%%%%%%%%%%
-x1max = 8.0
-x2max = 20.0
+x1max = 15.0
+x2max = 50.0
 x3max = 1.0 
 x1min = 0.0
 x2min = 0.0
@@ -45,13 +45,13 @@ x3min = 0.0
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
-tmax = 40.0
+tmax = 120.0
 timefile = 0.5
 
 %%%%%%%%%%%%%%%%%%
 % COURANT FACTOR %
 %%%%%%%%%%%%%%%%%%
-cou = 0.5
+cou = 0.25
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%% USER PARAMETERS %%%%%%%%%%%%%%%%%%%%%%
@@ -65,34 +65,18 @@ K = 1.6666666666666666666666666
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% BOUNDARY AND INITIAL PARAMETERS %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Self-Collimating Jet
+% Relativistic Jet
 
 % JET
-%rho_jet = 1.0
-%p_jet   = 0.0001
-%vx1_jet = 0.0
-%vx2_jet = 1.0
-%vx3_jet = 0.0
-
-% ATMOSPHERE
-%rho_atm = 0.5
-%p_atm   = 0.1
-%vx1_atm = 0.0
-%vx2_atm = 0.0
-%vx3_atm = 0.0
-
-% Bow Shock Jet
-
-% JET
-rho_jet = 1.0
-p_jet   = 0.0001
+rho_jet = 0.01
+p_jet   = 0.00017
 vx1_jet = 0.0
-vx2_jet = 1.0
+vx2_jet = 0.99
 vx3_jet = 0.0
 
 % ATMOSPHERE
 rho_atm = 1.0
-p_atm   = 0.0001
+p_atm   = 0.00017
 vx1_atm = 0.0
 vx2_atm = 0.0
 vx3_atm = 0.0
