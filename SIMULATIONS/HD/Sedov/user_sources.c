@@ -1,8 +1,11 @@
-/* 
- *  aztekas boundaries module
- *  Date of creation: 02-01-2019 12:50:45
- *  author: Alejandro Aguayo Ortiz 
+/*
+ * File Name : user_sources.c
+ * Description : aztekas user source terms for Sedov Blast-Wave
+ * Creation Date : 26-09-2019
+ * Last Modified : 26-09-2019 23:57:27
+ * Created By : Alejandro Aguayo-Ortiz
  */
+
 #include"main.h"
 
 void User_Source_Terms(double *s, double *u, gauge_ local_grid)

@@ -1,8 +1,11 @@
-/* 
- *  aztekas initial module
- *  Date of creation: 02-01-2019 18:32:00
- *  author: Alejandro Aguayo Ortiz 
+/*
+ * File Name : initial.c
+ * Description : aztekas initial module for Jet
+ * Creation Date : 27-09-2019
+ * Last Modified : 27-09-2019 00:10:10
+ * Created By : Alejandro Aguayo-Ortiz
  */
+
 #include"main.h"
 
 void Initial()

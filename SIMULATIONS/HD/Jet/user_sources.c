@@ -1,8 +1,11 @@
-/* 
- *  aztekas boundaries module
- *  Date of creation: 02-01-2019 12:50:45
- *  author: Alejandro Aguayo Ortiz 
+/*
+ * File Name : user_sources.c
+ * Description : aztekas user source terms for Jet
+ * Creation Date : 27-09-2019
+ * Last Modified : 27-09-2019 00:11:26
+ * Created By : Alejandro Aguayo-Ortiz
  */
+
 #include"main.h"
 
 void User_Source_Terms(double *s, double *u, gauge_ local_grid)

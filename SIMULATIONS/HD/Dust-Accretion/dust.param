@@ -1,21 +1,40 @@
-% OUTPUT FILE AND DIRECTORY
-outputdirectory = ./prueba/
-outputfile      = dust_ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% PARAMETERS FOR DUST SIMULATION %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% BINARY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OUTPUT FILE AND DIRECTORY %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+outputdirectory = ./TEST/
+outputfile      = dust_
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RESTART SIMULATION (1 -> true, 0 -> false) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+restart_simulation = 0
+restartfile = ./TEST/dust_0.dat
+restart_filecount = 0
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHECK SIMULATION PARAMETERS (1 -> true, 0 -> false) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+check_param = 0
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OUTPUT FORMAT (0 -> ASCII, 1 -> BINARY) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 binary = 0
 
-% RESTART SIMULATION (1 -> true, 0 -> false)
-restart_simulation = 0
-restartfile = ./prueba/prueba_19.dat
-restart_filecount = 19
-
-% Define mesh
+%%%%%%%%%%%%%%%
+% DEFINE MESH %
+%%%%%%%%%%%%%%%
 Nx1 = 100
 Nx2 = 100
 Nx3 = 0
 
-% Define domain limits
+%%%%%%%%%%%%%%%%%%%%%%%%
+% DEFINE DOMAIN LIMITS %
+%%%%%%%%%%%%%%%%%%%%%%%%
 x1max = 10.0
 x2max = 0.5
 x3max = 1.0 
@@ -23,17 +42,27 @@ x1min = 0.5
 x2min = 0.0
 x3min = 0.0
 
-% Time parameters
+%%%%%%%%%%%%%%%%%%%
+% TIME PARAMETERS %
+%%%%%%%%%%%%%%%%%%%
 tmax = 500.0
 timefile = 1.0
-cou = 0.25
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% Initial conditions %%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%
+% COURANT FACTOR %
+%%%%%%%%%%%%%%%%%%
+cou = 0.75
 
-density_0  = 1.0
-pressure_0 = 0.0
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% USER PARAMETERS %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% BOUNDARY AND INITIAL PARAMETERS %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+density_0  =  1.0
+pressure_0 =  0.0
 r_dot_0    = -0.4472
-%phi_dot_0  = 0.0
-phi_dot_0  = 0.02
+phi_dot_0  =  0.02
+

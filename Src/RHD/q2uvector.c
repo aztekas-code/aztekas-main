@@ -222,11 +222,11 @@ int Cons2Prim(double *u, double *q)
          
          SS = S_cov[0]*S_con[0] + S_cov[1]*S_con[1] + S_cov[2]*S_con[2];
 
-         theta_0 = U(1,i,j)/U(0,i,j);
+         theta_0 = U(PRE,i,j)/U(RHO,i,j);
          f       = 1.0;
          count   = 0;
 
-         while(fabs(f) > 0.00000001)
+         while(fabs(f) > 0.0000001)
          {
          #if EOS == IDEAL
             h    = 1.0 + (K / (K - 1.0))*theta_0;
@@ -252,7 +252,7 @@ int Cons2Prim(double *u, double *q)
             {
                printf("                                          \n");
                printf("Spend too much time in Newton-Rhapson.\n");
-               printf("%e %e %e %e %e %e\n",f,theta,SS,Lorentz,grid.X1[i],grid.X2[j]);
+               printf("%d %d %e %e %e %e\n",i,j,D,tau,SS,f);
                CHECK_NAN = TRUE;
                U = U0;
                PrintValues(&grid.time,&theta,&CHECK_NAN);

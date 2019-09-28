@@ -1,7 +1,9 @@
 /*
- * aztekas user parameters header file
- * Date of creation/modification: 25-09-19 23:58:32
- * author: Alejandro Aguayo-Ortiz
+ * File Name : user_param.h
+ * Description : aztekas user parameters header file for Shock-Tube
+ * Creation Date : 27-09-2019
+ * Last Modified : 27-09-2019 00:08:50
+ * Created By : Alejandro Aguayo-Ortiz
  */
 
 #include"macros.h"

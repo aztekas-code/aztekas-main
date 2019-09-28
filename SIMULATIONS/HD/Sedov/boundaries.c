@@ -1,10 +1,11 @@
 /*
- * aztekas boundaries module
- * Date of creation: 26-09-19 00:09:12
- * author: Alejandro Aguayo-Ortiz
+ * File Name : boundaries.c
+ * Description : aztekas boundaries module for Sedov Blast Wave
+ * Creation Date : 26-09-2019
+ * Last Modified : 26-09-2019 23:56:42
+ * Created By : Alejandro Aguayo-Ortiz
  */
 
-//Do not erase any of these libraries//
 #include"main.h"
 
 int Boundaries(double *B)

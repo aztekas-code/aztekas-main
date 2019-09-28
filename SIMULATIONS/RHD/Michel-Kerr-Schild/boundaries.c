@@ -15,6 +15,7 @@ int Boundaries(double *B)
    double M, a;
    double rplus, rminus;
    double alpha, betar, grr, grp, gpp;
+   double Ut, Ur, Up;
    double Vr, Vp, vr, vp;
 
    Outflow(B);
@@ -94,19 +95,23 @@ int Boundaries(double *B)
             rplus  = M + sqrt(M*M - a*a);
             rminus = M - sqrt(M*M - a*a);
 
-            alpha = 1.0/sqrt(1.0 + 2.0*M*r/rho2);
-            betar = (2.0*M*r/rho2)/(1 + 2.0*M*r/rho2);
+            alpha = pow(1.0 + 2.0*M*r/rho2,-0.5);
+            betar = (2.0*M*r/rho2)*pow(1.0 + 2.0*M*r/rho2,-1.0);
             grr   = 1.0 + 2.0*M*r/rho2;
             grp   = -a*(1.0 + 2.0*M*r/rho2)*pow(sin(theta),2.0);
             gpp   = pow(sin(theta),2.0)*(rho2 + a*a*(1.0 + 2.0*M*r/rho2)*pow(sin(theta),2.0));
 
-            Vr = - 2.0*M*rplus/(rho2 + 2.0*M*r*(r + rplus)/(r - rminus));
-            Vp = 2.0*M*a/(rho2*(r - rminus) + 2.0*M*r*(r + rplus));
+            Ut = 1.0 + 2.0*M*r*(r+rplus)/(rho2*(r-rminus));
+            Ur = -2.0*M*rplus/rho2;
+            Up = 2.0*M*a/(rho2*(r-rminus));
+
+            Vr = Ur/Ut;
+            Vp = Up/Ut;
 
             vr = Vr/alpha + betar/alpha;
             vp = Vp/alpha;
 
-            B(RHO,i,j) = sqrt(1 + ((2*M)/(rho2))*((r*(r + rplus) + 2*M*rplus)/(r-rminus)));
+            B(RHO,i,j) = sqrt(1.0 + ((2.0*M)/(rho2))*((r*(r + rplus) + 2.0*M*rplus)/(r-rminus)));
             B(PRE,i,j) = pow(B(RHO,i,j),K);
             B(VX1,i,j) = grr*vr + grp*vp;
             B(VX2,i,j) = 0.0;

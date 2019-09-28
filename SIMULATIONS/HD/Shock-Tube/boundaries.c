@@ -1,10 +1,11 @@
 /*
- * aztekas boundaries module
- * Date of creation/modification: 25-09-19 17:10:00
- * author: Alejandro Aguayo-Ortiz
+ * File Name : boundaries.c
+ * Description : aztekas boundaries module for Shock-Tube
+ * Creation Date : 26-09-2019
+ * Last Modified : 26-09-2019 23:57:13
+ * Created By :
  */
 
-//Do not erase any of these libraries//
 #include"main.h"
 
 int Boundaries(double *B)

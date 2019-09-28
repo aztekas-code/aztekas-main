@@ -42,7 +42,7 @@ void Source_Terms(double *s, double *u, gauge_ local_grid)
    VV = v_con[0]*v_cov[0] + v_con[1]*v_cov[1] + v_con[2]*v_cov[2];
 
    // Lorentz Factor
-   Lorentz = 1/sqrt(1 - VV);
+   Lorentz = 1.0/sqrt(1.0 - VV);
 
    // Equation of State
    EoS(&eos,u,local_grid);
@@ -126,6 +126,7 @@ void Source_Terms(double *s, double *u, gauge_ local_grid)
    Wd[2][0] = Sd[2]*v_con[0];
    Wd[2][1] = Sd[2]*v_con[1];
    Wd[2][2] = Sd[2]*v_con[2] + p;
+   
 
    Wik_dgamik[0] = W[0][0]*der.dgam[0][0][0] + W[0][1]*der.dgam[0][0][1] + W[0][2]*der.dgam[0][0][2] + \
                    W[1][0]*der.dgam[0][1][0] + W[1][1]*der.dgam[0][1][1] + W[1][2]*der.dgam[0][1][2] + \
@@ -145,9 +146,9 @@ void Source_Terms(double *s, double *u, gauge_ local_grid)
    lapse_Wik_dgam2ik = lapse*Wik_dgamik[1];
    lapse_Wik_dgam3ik = lapse*Wik_dgamik[2];
 
-   Wdij_dbetaji = Wd[0][0]*der.dbeta[0][0] + Wd[1][0]*der.dbeta[0][1] + Wd[2][0]*der.dbeta[0][2] + \
-                  Wd[0][1]*der.dbeta[1][0] + Wd[1][1]*der.dbeta[1][1] + Wd[2][1]*der.dbeta[1][2] + \
-                  Wd[0][2]*der.dbeta[2][0] + Wd[1][2]*der.dbeta[2][1] + Wd[2][2]*der.dbeta[2][2];
+   Wdij_dbetaji = Wd[0][0]*der.dbeta[0][0] + Wd[0][1]*der.dbeta[0][1] + Wd[0][2]*der.dbeta[0][2] + \
+                  Wd[1][0]*der.dbeta[1][0] + Wd[1][1]*der.dbeta[1][1] + Wd[1][2]*der.dbeta[1][2] + \
+                  Wd[2][0]*der.dbeta[2][0] + Wd[2][1]*der.dbeta[2][1] + Wd[2][2]*der.dbeta[2][2];
 
    Sdi_dbeta1i = Sd[0]*der.dbeta[0][0] + Sd[1]*der.dbeta[0][1] + Sd[2]*der.dbeta[0][2];
    Sdi_dbeta2i = Sd[0]*der.dbeta[1][0] + Sd[1]*der.dbeta[1][1] + Sd[2]*der.dbeta[1][2];

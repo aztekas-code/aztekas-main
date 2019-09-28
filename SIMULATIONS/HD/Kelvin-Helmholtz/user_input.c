@@ -1,12 +1,11 @@
-/**
- * @file user_input.c
- *
- * @author Emilio Tejeda
- *
- * @brief Important input parameters for \a aztekas.
+/*
+ * File Name : user_input.c
+ * Description : aztekas user input parameters for Kelvin-Helmholtz
+ * Creation Date : 27-09-2019
+ * Last Modified : 27-09-2019 00:07:33
+ * Created By : Alejandro Aguayo-Ortiz
  */
 
-//Do not erase any of these libraries//
 #include"main.h"
 
 FILE *paramfile;

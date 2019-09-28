@@ -1,10 +1,11 @@
 /*
- * aztekas boundaries module
- * Date of creation/modification: 25-09-19 17:10:00
- * author: Alejandro Aguayo-Ortiz
+ * File Name : initial.c
+ * Description : aztekas initial module for Shock-Tube
+ * Creation Date : 26-09-2019
+ * Last Modified : 26-09-2019 23:55:50
+ * Created By : Alejandro Aguayo-Ortiz
  */
 
-//Do not erase any of these libraries//
 #include"main.h"
 
 void Initial()

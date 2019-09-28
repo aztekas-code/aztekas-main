@@ -1,10 +1,11 @@
 /*
- * aztekas initial module
- * Date of creation/modification: 26-09-19 00:09:12
- * author: Alejandro Aguayo-Ortiz
+ * File Name : initial.c
+ * Description : aztekas initial module for Sedov Blast Wave
+ * Creation Date : 26-09-2019
+ * Last Modified : 26-09-2019 23:56:02
+ * Created By : Alejandro Aguayo-Ortiz
  */
 
-//Do not erase any of these libraries//
 #include"main.h"
 
 void Initial()

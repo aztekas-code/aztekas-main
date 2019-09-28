@@ -1,10 +1,11 @@
 /*
- *  aztekas initial module
- *  Date of creation: 11-07-2019 12:50:45
- *  author: Alejandro Aguayo Ortiz 
+ * File Name : initial.c
+ * Description : aztekas initial module for Kelvin-Helmholtz
+ * Creation Date : 27-09-2019
+ * Last Modified : 27-09-2019 00:09:53
+ * Created By : Alejandro Aguayo-Ortiz
  */
 
-//Do not erase any of these libraries//
 #include"main.h"
 
 void Initial()

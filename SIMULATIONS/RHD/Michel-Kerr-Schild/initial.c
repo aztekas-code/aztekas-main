@@ -10,6 +10,13 @@
 void Initial()
 {
    int n, i, j, k, cell;
+   double r, theta;
+   double Delta, Sigma, rho2;
+   double M, a;
+   double rplus, rminus;
+   double alpha, betar, grr, grp, gpp;
+   double Ut, Ur, Up;
+   double Vr, Vp, vr, vp;
 
    //Initialize grid.time
    grid.time = 0.0;

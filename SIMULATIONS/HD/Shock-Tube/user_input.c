@@ -1,12 +1,11 @@
-/**
- * @file user_input.c
- *
- * @author Emilio Tejeda
- *
- * @brief Important input parameters for \a aztekas.
+/*
+ * File Name : user_input.c
+ * Description : aztekas user input parameters for Shock-Tube
+ * Creation Date : 26-09-2019
+ * Last Modified : 27-09-2019 00:02:52
+ * Created By : Emilio Tejeda
  */
 
-//Do not erase any of these libraries//
 #include"main.h"
 
 FILE *paramfile;

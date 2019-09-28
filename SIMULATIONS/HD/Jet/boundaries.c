@@ -1,8 +1,11 @@
-/* 
- *  aztekas boundaries module
- *  Date of creation: 02-01-2019 18:32:00
- *  author: Alejandro Aguayo Ortiz 
+/*
+ * File Name : boundaries.c
+ * Description : aztekas boundaries module for Jet
+ * Creation Date : 27-09-2019
+ * Last Modified : 27-09-2019 00:10:45
+ * Created By : Alejandro Aguayo-Ortiz
  */
+
 #include"main.h"
 
 int Boundaries(double *B)

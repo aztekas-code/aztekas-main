@@ -1,5 +1,5 @@
 #####################################
-#### define dimension parameters ####
+#### Define dimension parameters ####
 #####################################
 #----------------------------------------------------------------------
 # From the list below, please activate/deactivate the options that     
@@ -7,19 +7,58 @@
 # that you recompile the whole code by typing "make clean; make" 
 #----------------------------------------------------------------------
 
-#####################################
+###############################################
+# PATH TO AZTEKAS
+###############################################
+
+AZTPATH = ../../../
+
+###############################################
+# Physics (hd, mhd, rhd, rmhd)
+###############################################
+
+PHY = hd
+
+########################################################################################
+# Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
+########################################################################################
+
+## ONLY IF PHY == rhd or rmhd
+
+METRIC = Minkowski
+
+###############################################
+# Equation of State (ideal, dust, stiff)
+###############################################
+
+eos = dust
+
+###############################################
+# Dimension (1, 2 or 3. Enter 4 for 2.5)
+###############################################
+
+DIM = 2
+
+###############################################
+# Coordinates (cartesian,cylindrical,spherical)
+###############################################
+
+COORD = spherical
+
+###############################################
+# Integration method
+###############################################
+
+INT = standard
+
+###############################################
 # Ghost cells
-#####################################
+###############################################
 
 PARAM += -Dgc=3
 
-#####################################
+###############################################
 
-#####################################
-# Physics (rhd,hd,mhd,rmhd)
-#####################################
-
-PHY = hd
 ifeq ($(PHY),hd)
         PARAM += -DPHYSICS=HD
 endif
@@ -27,25 +66,23 @@ ifeq ($(PHY),rhd)
         PARAM += -DPHYSICS=RHD
 endif
 
-eos = ideal
+#####################################
+
 ifeq ($(eos),ideal)
         PARAM += -DEOS=IDEAL
 endif
 ifeq ($(eos),dust)
         PARAM += -DEOS=DUST
 endif
+ifeq ($(eos),stiff)
+        PARAM += -DEOS=STIFF	
+endif
 
 #####################################
-
-#####################################
-# Dimension
-#####################################
-
-DIM = 2
 
 ifeq ($(DIM),1)
 	PARAM += -DDIM=1
-	PARAM += -Deq=4
+	PARAM += -Deq=3
 	PARAM += -Dgraf=1
 endif
 ifeq ($(DIM),2)
@@ -53,48 +90,30 @@ ifeq ($(DIM),2)
 	PARAM += -Deq=4
 	PARAM += -Dgraf=2
 endif
-ifeq ($(DIM),4)
-	PARAM += -DDIM=4
-	PARAM += -Deq=5
-	PARAM += -Dgraf=2
-endif
 ifeq ($(DIM),3)
 	PARAM += -DDIM=3
 	PARAM += -Deq=5
 	PARAM += -Dgraf=3
 endif
+ifeq ($(DIM),4)
+	PARAM += -DDIM=4
+	PARAM += -Deq=5
+	PARAM += -Dgraf=2
+endif
 
 #####################################
 
-#####################################
-# Coordinates (cart,cyl,sph)
-#####################################
-
-COORD = sph
-
-ifeq ($(COORD),cart)
+ifeq ($(COORD),cartesian)
 	PARAM += -DCOORDINATES=CARTESIAN
 endif
-ifeq ($(COORD),cyl)
+ifeq ($(COORD),cylindrical)
 	PARAM += -DCOORDINATES=CYLINDRICAL
 endif
-ifeq ($(COORD),sph)
+ifeq ($(COORD),spherical)
 	PARAM += -DCOORDINATES=SPHERICAL
 endif
 
 #####################################
-
-#####################################
-# PATH TO AZTEKAS
-#####################################
-AZTPATH = ../../../
-#####################################
-
-#####################################
-# Integration method
-#####################################
-
-INT = standard
 
 ifeq ($(INT),standard)
 	PARAM += -Dintegration=0
@@ -151,26 +170,25 @@ SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/output.c \
 	  $(AZTPATH)/Src/integration$(INT).c \
 	  $(AZTPATH)/Src/flux.c \
-	  $(AZTPATH)/Src/rk-rel.c \
+	  $(AZTPATH)/Src/runge-kutta.c \
 	  $(AZTPATH)/Src/limiters.c \
 	  $(AZTPATH)/Src/vectors.c \
 	  $(AZTPATH)/Src/restart.c \
 	  $(AZTPATH)/Src/auxfunc.c \
 	  ./boundaries.c \
 	  $(AZTPATH)/Src/bound_cond.c \
-	  $(AZTPATH)/Src/RHD-$(COORD)/amatrix.c \
-	  $(AZTPATH)/Src/RHD-$(COORD)/dmmatrix.c \
-	  $(AZTPATH)/Src/RHD-$(COORD)/dnmatrix.c \
-	  $(AZTPATH)/Src/RHD-$(COORD)/domatrix.c \
-	  $(AZTPATH)/Src/RHD-$(COORD)/q2uvector.c \
-	  $(AZTPATH)/Src/RHD-$(COORD)/u2qvector.c \
-	  $(AZTPATH)/Src/RHD-$(COORD)/qvector.c \
-	  $(AZTPATH)/Src/RHD-$(COORD)/fvector.c \
-	  $(AZTPATH)/Src/RHD-$(COORD)/gvector.c \
-	  $(AZTPATH)/Src/RHD-$(COORD)/hvector.c \
-	  $(AZTPATH)/Src/RHD-$(COORD)/svector.c \
-	  $(AZTPATH)/Src/RHD-$(COORD)/gauge.c \
-	  ./extforce.c
+	  $(AZTPATH)/Src/RHD/q2uvector.c \
+	  $(AZTPATH)/Src/RHD/u2qvector.c \
+	  $(AZTPATH)/Src/RHD/qvector.c \
+	  $(AZTPATH)/Src/RHD/fvector.c \
+	  $(AZTPATH)/Src/RHD/gvector.c \
+	  $(AZTPATH)/Src/RHD/hvector.c \
+	  $(AZTPATH)/Src/RHD/svector.c \
+	  $(AZTPATH)/Src/RHD/surface.c \
+	  $(AZTPATH)/Src/RHD/$(METRIC)/metric.c \
+	  $(AZTPATH)/Src/EOS/eos.c \
+	  ./user_sources.c \
+	  ./user_input.c
 endif
 
 #OBJS = $(SOURCES:.c=.o)

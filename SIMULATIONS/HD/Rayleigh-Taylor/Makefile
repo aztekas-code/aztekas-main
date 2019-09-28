@@ -202,7 +202,7 @@ EXEC = aztekas
 
 #####################################
 
-$(EXEC): $(SOURCES)
+all: $(SOURCES)
 	@echo ""
 	@echo "Compiling problem file ..."
 	$(COMPILER) $(PARAM) -fopenmp $(SOURCES) $(FLAGS) $(CFLAGS) -o $(EXEC)  
