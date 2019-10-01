@@ -45,7 +45,7 @@ endif
 # Dimension
 #####################################
 
-DIM = 4
+DIM = 2
 
 ifeq ($(DIM),1)
 	PARAM += -DDIM=1
@@ -187,7 +187,7 @@ EXEC = aztekas
 
 #####################################
 
-$(EXEC): $(SOURCES)
+all: $(SOURCES)
 	@echo ""
 	@echo "Compiling problem file ..."
 	$(COMPILER) $(PARAM) -fopenmp $(SOURCES) $(FLAGS) $(CFLAGS) -o $(EXEC)  

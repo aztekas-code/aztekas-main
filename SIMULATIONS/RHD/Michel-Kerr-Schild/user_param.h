@@ -22,6 +22,6 @@
 #define GRID               LOGMESH
 
 #define Black_Hole_Mass    1.0
-#define Black_Hole_Spin    0.999
+#define Black_Hole_Spin    0.9
 
 double density_0, pressure_0, velocity_0;

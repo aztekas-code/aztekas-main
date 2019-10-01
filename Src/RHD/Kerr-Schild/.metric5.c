@@ -93,7 +93,7 @@ void Get_Metric_Components(gauge_ *local_grid)
 
    #elif POLAR == TRUE
 
-   local_grid->gamma_con[0][0] = (a2*(1.0 + 2.0*M*r/rho2)*sin2 + rho2)/(rho2*(1.0 + 2.0*M*r/rho2));
+   local_grid->gamma_con[0][0] = (a2*(rho2 + 2.0*M*r)*sin2 + pow(rho2,2.0))/(rho2*(rho2 + 2.0*M*r));
    local_grid->gamma_con[0][1] = a/rho2;
    local_grid->gamma_con[0][2] = 0.0;
    local_grid->gamma_con[1][0] = a/rho2;
@@ -105,7 +105,6 @@ void Get_Metric_Components(gauge_ *local_grid)
 
    #endif
 
-   //local_grid->dety = rho2*sin(theta);
    local_grid->dety = sqrt(rho2*sin2*(2.0*M*r + rho2));
 
 #endif
@@ -284,6 +283,50 @@ void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid)
    der->dgam[2][2][2] = 0.0;
 
    #elif POLAR == TRUE
+
+   der->dlapse[0] = M*(r2 - a2*cos2)*sqrt(rho2)/(rho2*pow(2.0*M*r + rho2, 3.0/2.0));
+   der->dlapse[1] = 0.0;
+   der->dlapse[2] = -2.0*M*r*a2*sin(theta)*cos(theta)/(pow(rho2, 2.0)*pow(2.0*M*r/rho2 + 1.0, 3.0/2.0));
+
+   der->dbeta[0][0] = 2.0*M*(a2*cos2 - r2)/pow(2.0*M*r + rho2, 2.0);
+   der->dbeta[0][1] = 0.0;
+   der->dbeta[0][2] = 0.0;
+   der->dbeta[1][0] = 0.0;
+   der->dbeta[1][1] = 0.0;
+   der->dbeta[1][2] = 0.0;
+   der->dbeta[2][0] = 2.0*M*r*a2*sin(2.0*theta)/pow(2.0*M*r + rho2, 2.0);
+   der->dbeta[2][1] = 0.0;
+   der->dbeta[2][2] = 0.0;
+
+   der->dgam[0][0][0] = 2.0*M*(a2*cos2 - r2)/pow(rho2, 2.0);
+   der->dgam[0][0][1] = 2.0*M*a*(r2 - a2*cos2)*sin2/pow(rho2, 2.0);
+   der->dgam[0][0][2] = 0.0;
+   der->dgam[0][1][0] = 2.0*M*a*(-a2*cos2 + r2)*sin2/pow(rho2, 2.0);
+   der->dgam[0][1][1] = 2.0*(-M*a2*(-a2*cos2 + r2)*sin2 + r*pow(rho2, 2.0))*sin2/pow(rho2, 2.0);
+   der->dgam[0][1][2] = 0.0;
+   der->dgam[0][2][0] = 0.0;
+   der->dgam[0][2][1] = 0.0;
+   der->dgam[0][2][2] = 2.0*r;
+
+   der->dgam[1][0][0] = 0.0;
+   der->dgam[1][0][1] = 0.0;
+   der->dgam[1][0][2] = 0.0;
+   der->dgam[1][1][0] = 0.0;
+   der->dgam[1][1][1] = 0.0;
+   der->dgam[1][1][2] = 0.0;
+   der->dgam[1][2][0] = 0.0;
+   der->dgam[1][2][1] = 0.0;
+   der->dgam[1][2][2] = 0.0;
+
+   der->dgam[2][0][0] = 4*M*a2*r*sin(theta)*cos(theta)/pow(rho2, 2.0);
+   der->dgam[2][0][1] = -2.0*a*(2.0*M*r*a2*sin2 + rho2*(2.0*M*r + rho2))*sin(theta)*cos(theta)/pow(rho2, 2.0);
+   der->dgam[2][0][2] = 0.0;
+   der->dgam[2][1][0] = -2.0*a*(2.0*M*r*a2*sin2 + rho2*(2.0*M*r + rho2))*sin(theta)*cos(theta)/pow(rho2, 2.0);
+   der->dgam[2][1][1] = 2.0*(2.0*M*r*a2*(a2 + r2)*sin2 + rho2*(a2*(2.0*M*r + rho2)*sin2 + pow(rho2, 2.0)))*sin(theta)*cos(theta)/pow(rho2, 2.0);
+   der->dgam[2][1][2] = 0.0;
+   der->dgam[2][2][0] = 0.0;
+   der->dgam[2][2][1] = 0.0;
+   der->dgam[2][2][2] = -a2*sin(2.0*theta);
 
    #endif
 
