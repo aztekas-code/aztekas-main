@@ -112,5 +112,54 @@ void CheckSimParameters()
    // Flux solver
    if(FLUX == HLL)  printf("HLL Riemann solver.\n");
    if(FLUX == HLLC) printf("HLLC Riemann solver.\n");
+
+   FILE *file;
+
+   char dum[100];
+   strcat(dum,outputdirectory);
+   strcat(dum,"/INFO");
+   strcat(dum,"/info.sim");
+   file = fopen(dum,"w");
+
+   fprintf(file,"\n");
+   fprintf(file,"aaaaa  zzzzz  ttttt  eeeee  k   k  aaaaa  sssss\n");
+   fprintf(file,"    a     zz    t    e   e  k  k       a  ss   \n");
+   fprintf(file,"aaaaa   zzz     t    eeeee  kkk    aaaaa  sssss\n");
+   fprintf(file,"a   a  zz       t    e      k  k   a   a     ss\n");
+   fprintf(file,"aaaaa  zzzzz    t    eeeee  k   k  aaaaa  sssss\n");
+   fprintf(file,"\n");
+   fprintf(file,"Running aztekas simulation...\n");
+   fprintf(file,"\n");
+
+   // Print physics used
+   if(PHYSICS == HD)  fprintf(file,"Performing a HD simulation.\n");
+   if(PHYSICS == RHD) fprintf(file,"Performing a RHD simulation.\n");
+
+   // Coordinates
+   if(COORDINATES == CARTESIAN) fprintf(file,"Cartesian coordinates.\n");
+   if(COORDINATES == CYLINDRICAL) fprintf(file,"Cylindrical coordinates.\n");
+   if(COORDINATES == SPHERICAL) fprintf(file,"Spherical coordinates.\n");
+
+   // Equation of state
+   if(EOS == IDEAL) fprintf(file,"Ideal equation of state.\n");
+   if(EOS == DUST)  fprintf(file,"Dust.\n");
+   if(EOS == STIFF)  fprintf(file,"Stiff equation of state.\n");
+
+   // Print MoL-RK order
+   fprintf(file,"Time integration using a second order MoL-Runge Kutta.\n");
+
+   // Print spatial numerical methods, algorithms and parameters.
+   // Primitive variable reconstruction.
+   if(RECONST == GODUNOV)  fprintf(file,"Zero-order piecewise reconstruction.\n");
+   if(RECONST == MINMOD)   fprintf(file,"MINMOD reconstruction.\n");
+   if(RECONST == MC)       fprintf(file,"MC reconstruction.\n");
+   if(RECONST == SUPERBEE) fprintf(file,"SUPERBEE reconstruction.\n");
+   if(RECONST == WENO5)    fprintf(file,"WENO5 reconstruction.\n");
+
+   // Flux solver
+   if(FLUX == HLL)  fprintf(file,"HLL Riemann solver.\n");
+   if(FLUX == HLLC) fprintf(file,"HLLC Riemann solver.\n");
+
+   fclose(file);
 }
 

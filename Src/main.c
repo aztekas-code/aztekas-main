@@ -49,6 +49,40 @@ int main(int argc, char* argv[])
 	strcat(create_dir,outputdirectory);	
 	int sysret = system(create_dir);
 
+   char create_info[] = "mkdir -p ";
+   strcat(create_info,outputdirectory);
+   strcat(create_info,"/INFO/");
+   sysret = system(create_info);
+
+   // copy
+   char dum[50] = "cp ";
+   strcat(dum,paramfile_name);
+   strcat(dum," ");
+   strcat(dum,outputdirectory);
+   strcat(dum,"INFO/");
+   sysret = system(dum);
+   
+   strcpy(dum,"cp ");
+   strcat(dum,"Makefile");
+   strcat(dum," ");
+   strcat(dum,outputdirectory);
+   strcat(dum,"INFO/");
+   sysret = system(dum);
+
+   strcpy(dum,"cp ");
+   strcat(dum,"*.c");
+   strcat(dum," ");
+   strcat(dum,outputdirectory);
+   strcat(dum,"INFO/");
+   sysret = system(dum);
+
+   strcpy(dum,"cp ");
+   strcat(dum,"*.h");
+   strcat(dum," ");
+   strcat(dum,outputdirectory);
+   strcat(dum,"INFO/");
+   sysret = system(dum);
+
    // Print Simulation Parameters
    CheckSimParameters();
    if (check_param == TRUE) getchar();

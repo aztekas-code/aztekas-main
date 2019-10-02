@@ -40,8 +40,6 @@ void Initial()
       }
    }
 
-   printf("%e\n",K);
-
 #elif DIM == 2
 
    /////////////////////////////
