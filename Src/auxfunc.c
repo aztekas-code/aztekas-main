@@ -89,9 +89,9 @@ void CheckSimParameters()
    if(PHYSICS == RHD) printf("Performing a RHD simulation.\n");
 
    // Coordinates
-   if(COORDINATES == CARTESIAN) printf("Cartesian coordinates.\n");
-   if(COORDINATES == CYLINDRICAL) printf("Cylindrical coordinates.\n");
-   if(COORDINATES == SPHERICAL) printf("Spherical coordinates.\n");
+   if(COORDINATES == CARTESIAN) printf("Cartesian grid.\n");
+   if(COORDINATES == CYLINDRICAL) printf("Cylindrical grid.\n");
+   if(COORDINATES == SPHERICAL) printf("Spherical grid.\n");
 
    // Equation of state
    if(EOS == IDEAL) printf("Ideal equation of state.\n");
@@ -136,9 +136,9 @@ void CheckSimParameters()
    if(PHYSICS == RHD) fprintf(file,"Performing a RHD simulation.\n");
 
    // Coordinates
-   if(COORDINATES == CARTESIAN) fprintf(file,"Cartesian coordinates.\n");
-   if(COORDINATES == CYLINDRICAL) fprintf(file,"Cylindrical coordinates.\n");
-   if(COORDINATES == SPHERICAL) fprintf(file,"Spherical coordinates.\n");
+   if(COORDINATES == CARTESIAN) fprintf(file,"Cartesian grid.\n");
+   if(COORDINATES == CYLINDRICAL) fprintf(file,"Cylindrical grid.\n");
+   if(COORDINATES == SPHERICAL) fprintf(file,"Spherical grid.\n");
 
    // Equation of state
    if(EOS == IDEAL) fprintf(file,"Ideal equation of state.\n");
