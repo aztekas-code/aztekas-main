@@ -67,6 +67,6 @@ K = 1.00001
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bondi Accretion (Gamma = 1, r0 = 10 r_B)
 
-density_0  =  1.1051141
-pressure_0 =  1.1051141
+density_0  = 1.1051141
+pressure_0 = 1.1051141
 velocity_0 = -0.0101395

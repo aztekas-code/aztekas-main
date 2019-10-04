@@ -93,6 +93,8 @@ void CheckSimParameters()
    if(COORDINATES == CYLINDRICAL) printf("Cylindrical grid.\n");
    if(COORDINATES == SPHERICAL) printf("Spherical grid.\n");
 
+   printf("With resolution %dX%d\n",Nx1,Nx2);
+
    // Equation of state
    if(EOS == IDEAL) printf("Ideal equation of state.\n");
    if(EOS == DUST)  printf("Dust.\n");
@@ -139,6 +141,8 @@ void CheckSimParameters()
    if(COORDINATES == CARTESIAN) fprintf(file,"Cartesian grid.\n");
    if(COORDINATES == CYLINDRICAL) fprintf(file,"Cylindrical grid.\n");
    if(COORDINATES == SPHERICAL) fprintf(file,"Spherical grid.\n");
+
+   fprintf(file,"With resolution %dX%d\n",Nx1,Nx2);
 
    // Equation of state
    if(EOS == IDEAL) fprintf(file,"Ideal equation of state.\n");
