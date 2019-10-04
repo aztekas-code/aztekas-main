@@ -56,7 +56,7 @@
 #define VX3       4
 
 /* SIMPLE ARRAY */
-#define a(x,y)   a[(y)*(eq) + (x)]
+#define a(x,y)   a[(x)*(eq) + (y)]
 
 #if DIM == 1
    #define  S1p(x)  grid.S1p[(x)]

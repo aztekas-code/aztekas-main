@@ -11,19 +11,17 @@
 # PATH TO AZTEKAS
 ###############################################
 
-AZTPATH = $(AZTEKAS_PATH)
+AZTPATH = ../../../
 
 ###############################################
 # Physics (hd, mhd, rhd, rmhd)
 ###############################################
 
-PHY = hd
+PHY = rhd
 
 ########################################################################################
 # Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
 ########################################################################################
-
-## ONLY IF PHY == rhd or rmhd
 
 METRIC = Minkowski
 
@@ -49,7 +47,7 @@ COORD = cartesian
 # Integration method
 ###############################################
 
-INT = pvrs
+INT = standard
 
 ###############################################
 # Ghost cells

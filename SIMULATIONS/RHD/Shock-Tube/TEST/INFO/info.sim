@@ -1,0 +1,16 @@
+
+aaaaa  zzzzz  ttttt  eeeee  k   k  aaaaa  sssss
+    a     zz    t    e   e  k  k       a  ss   
+aaaaa   zzz     t    eeeee  kkk    aaaaa  sssss
+a   a  zz       t    e      k  k   a   a     ss
+aaaaa  zzzzz    t    eeeee  k   k  aaaaa  sssss
+
+Running aztekas simulation...
+
+Performing a RHD simulation.
+Cartesian grid.
+With resolution 128X0
+Ideal equation of state.
+Time integration using a second order MoL-Runge Kutta.
+MC reconstruction.
+HLL Riemann solver.
