@@ -47,7 +47,7 @@ COORD = cartesian
 # Integration method
 ###############################################
 
-INT = pvrs
+INT = standard
 
 ###############################################
 # Ghost cells
@@ -145,6 +145,7 @@ SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/auxfunc.c \
 	  ./boundaries.c \
 	  $(AZTPATH)/Src/bound_cond.c \
+	  $(AZTPATH)/Src/HD/amatrix.c \
 	  $(AZTPATH)/Src/HD/q2uvector.c \
 	  $(AZTPATH)/Src/HD/u2qvector.c \
 	  $(AZTPATH)/Src/HD/qvector.c \
