@@ -59,6 +59,10 @@ void EoS(eos_ *eos, double *u, gauge_ local_grid)
    eos->cs = sqrt(K * p / rho);
 #elif PHYSICS == RHD
    eos->h  = eos->e + p/rho;
+   #if INTEGRATION == PVRS
+   eos->dhdrho = - K*p/(rho*rho*(K - 1.0));
+   eos->dhdp   = K/(rho*(K - 1.0));
+   #endif
    eos->cs = sqrt(K * p / (rho * eos->h));
 #endif
 }

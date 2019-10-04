@@ -1,16 +1,6 @@
-/*
- *   This program is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
+/**
+ * \file vectors.c
  *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details.
- *
- *   You should have received a copy of the GNU General Public License
- *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 //Do not erase any of these libraries//
@@ -21,6 +11,9 @@ void Sources(double *u, vec_ *v, int *I)
    int n;
    double x[4];
    double default_S[eq+1], user_S[eq+1];
+#if INTEGRATION == PVRS
+   double matrix_A[(eq+1)*(eq+1)];
+#endif
    gauge_ local_grid;
 
    local_grid.x[0] = grid.time;
@@ -57,6 +50,9 @@ void Sources(double *u, vec_ *v, int *I)
 
    Source_Terms(default_S,u,local_grid);
    User_Source_Terms(user_S,u,local_grid);
+#if INTEGRATION == PVRS
+   Matrix_A(v->A,u,local_grid);
+#endif
 
    for(n = 0; n < eq; n++)
    {

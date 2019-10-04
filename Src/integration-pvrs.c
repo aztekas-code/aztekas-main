@@ -1,27 +1,16 @@
-/*
- *   This program is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
+/**
+ * @file integration-pvrs.c
  *
- *   This program is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details.
+ * @author Alejandro Aguayo-Ortiz
  *
- *   You should have received a copy of the GNU General Public License
- *   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * @brief Main function for the time integration in the primitive variables
+ * \f$ \mathbf{U} \f$.
  */
 
 //Do not erase any of these libraries//
-#include<stdio.h>
-#include<math.h>
-#include<stdlib.h>
-#include<string.h>
 #include"main.h"
-#include"vector.h"
 
-int INTEGRATION()
+void Integration()
 {
    int n, i, j, k;
 
@@ -29,19 +18,20 @@ int INTEGRATION()
 #if DIM == 1 
    
    RK1D(U,U,U1,U2,1);
-   BOUNDARIES(U1);
+   Boundaries(U1);
 
    RK1D(U1,U,U1,U2,2);
-   BOUNDARIES(U2);
-   U = U2;
+   Boundaries(U2);
+   U  = U2;
+   U0 = U;
    
 #elif DIM == 2 
 
    RK2D(U,U,U1,U2,1);
-   BOUNDARIES(U1);
+   Boundaries(U1);
 
    RK2D(U1,U,U1,U2,2);
-   BOUNDARIES(U2);
+   Boundaries(U2);
    U = U2;
    
 #elif DIM == 3 
@@ -49,12 +39,10 @@ int INTEGRATION()
    funct_U2Q(Q,U);
    RK3D(U,Q,Q1,Q2,1);
    funct_Q2U(U1,Q1);
-   BOUNDARIES(U1);
+   Boundaries(U1);
    RK3D(U1,Q,Q1,Q2,2);
    funct_Q2U(U,Q2);
-   BOUNDARIES(U);
+   Boundaries(U);
    
 #endif
-
-   return 0;
 }

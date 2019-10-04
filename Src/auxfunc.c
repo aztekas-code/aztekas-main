@@ -18,7 +18,7 @@ int MxV(double *M, double *V, double *L)
    {
       for(n = 0; n < eq; n++)
       {
-         res += M[m*(eq) + n]*V[n];
+         res += M[n*(eq) + m]*V[n];
       }
 
       L[m] = res;

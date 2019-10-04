@@ -47,7 +47,7 @@ COORD = cartesian
 # Integration method
 ###############################################
 
-INT = standard
+INT = pvrs
 
 ###############################################
 # Ghost cells
@@ -114,11 +114,11 @@ endif
 #####################################
 
 ifeq ($(INT),standard)
-	PARAM += -Dintegration=0
+	PARAM += -DINTEGRATION=STANDARD
 	INT = 
 endif
 ifeq ($(INT),pvrs)
-	PARAM += -Dintegration=1
+	PARAM += -DINTEGRATION=PVRS
 	INT = -pvrs
 endif
 
@@ -175,6 +175,7 @@ SOURCES = $(AZTPATH)/Src/main.c \
 	  $(AZTPATH)/Src/auxfunc.c \
 	  ./boundaries.c \
 	  $(AZTPATH)/Src/bound_cond.c \
+	  $(AZTPATH)/Src/RHD/amatrix.c \
 	  $(AZTPATH)/Src/RHD/q2uvector.c \
 	  $(AZTPATH)/Src/RHD/u2qvector.c \
 	  $(AZTPATH)/Src/RHD/qvector.c \

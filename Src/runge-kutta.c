@@ -47,7 +47,7 @@ int RK1D(double *u, double *q, double *q1, double *q2, int order)
          v.S[n];
       }
 
-#if integration == 1 //PVRS
+#if INTEGRATION == PVRS //PVRS
       for(n = 0; n < eq; n++)
       {
          L[n] = F[n];
@@ -114,7 +114,7 @@ int RK2D(double *u, double *q, double *q1, double *q2, int order)
                    v.S[n];
          }
 
-#if integration == 1 //PVRS
+#if INTEGRATION == PVRS //PVRS
          for(n = 0; n < eq; n++)
          {
             L[n] = F[n];
