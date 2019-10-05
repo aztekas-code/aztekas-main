@@ -93,7 +93,10 @@ void CheckSimParameters()
    if(COORDINATES == CYLINDRICAL) printf("Cylindrical grid.\n");
    if(COORDINATES == SPHERICAL) printf("Spherical grid.\n");
 
-   printf("With resolution %dX%d\n",Nx1,Nx2);
+   if(DIM == 1) printf("2D simulation With resolution %d\n",Nx1);
+   if(DIM == 2) printf("2D simulation With resolution %dX%d\n",Nx1,Nx2);
+   if(DIM == 4) printf("2.5D simulation With resolution %dX%d\n",Nx1,Nx2);
+   if(DIM == 3) printf("3D simulation With resolution %dX%dX%d\n",Nx1,Nx2,Nx3);
 
    // Equation of state
    if(EOS == IDEAL) printf("Ideal equation of state.\n");

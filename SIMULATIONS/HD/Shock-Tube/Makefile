@@ -49,7 +49,7 @@ COORD = cartesian
 # Integration method
 ###############################################
 
-INT = pvrs
+INT = standard
 
 ###############################################
 # Ghost cells

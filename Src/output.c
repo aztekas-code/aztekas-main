@@ -86,6 +86,7 @@ int Output1(int *itprint)
    fprintf(file,"###############PARAM###############\n");
    fprintf(file,"%e \n",grid.time);
    fprintf(file,"%d \n",Nx1-2*gc+1);
+   fprintf(file,"%d \n",COORDINATES);
    fprintf(file,"###################################\n");
 
    for(i = gc; i <= Nx1-gc; i++)
