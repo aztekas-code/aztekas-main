@@ -1,133 +1,95 @@
-#include<stdio.h>
-#include<math.h>
-#include"../Headers/matrix.h"
-#include"../Headers/main.h"
+#include"main.h"
     
-int funct_A(double *a, double *uu)
+void Matrix_A(double *a, double *u, gauge_ local_grid)
 {
-   int i, j;
-   double r;
-   double n, p, u=0, v=0, w=0;
-   n = uu[0];
-   p = uu[1];
+   double rho, p, vx1, vx2, vx3;
 
+   // Density and Pressure
+   rho = u[RHO];
+   p   = u[PRE];
+
+   // Covariant components of the 3-velocity
 #if DIM == 1
-   u = uu[2];
+   vx1 = u[VX1];
+   vx2 = 0.0;
+   vx3 = 0.0;
 #elif DIM == 2
-   u = uu[2];
-   v = uu[3];
+   vx1 = u[VX1];
+   vx2 = u[VX2];
+   vx3 = 0.0;
 #elif DIM == 3 || DIM == 4
-   u = uu[2];
-   v = uu[3];
-   w = uu[4];
+   vx1 = u[VX1];
+   vx2 = u[VX2];
+   vx3 = u[VX3];
 #endif
 
-   for(i = 0; i < eq; i++)
-   {
-      for(j = 0; j < eq; j++)
-      {
-         if(i == 0 && j == 0)
-         {
-            a[i*eq + j] = 1;
-         }
-         else if(i == 0 && j == 1)
-         {
-            a[i*eq + j] = 0;
-         }
-         else if(i == 0 && j == 2)
-         {
-            a[i*eq + j] = 0;
-         }
-         else if(i == 0 && j == 3)
-         {
-            a[i*eq + j] = 0;
-         }
-         else if(i == 0 && j == 4)
-         {
-            a[i*eq + j] = 0;
-         }
-         else if(i == 1 && j == 0)
-         {
-            a[i*eq + j] = ((K-1)*pow(w,2.0)+(K-1)*pow(v,2.0)+(K-1)*pow(u,2.0))/2;
-         }
-         else if(i == 1 && j == 1)
-         {
-            a[i*eq + j] = K-1;
-         }
-         else if(i == 1 && j == 2)
-         {
-            a[i*eq + j] = (1-K)*u;
-         }
-         else if(i == 1 && j == 3)
-         {
-            a[i*eq + j] = (1-K)*v;
-         }
-         else if(i == 1 && j == 4)
-         {
-            a[i*eq + j] = (1-K)*w;
-         }
-         else if(i == 2 && j == 0)
-         {
-            a[i*eq + j] = -u/n;
-         }
-         else if(i == 2 && j == 1)
-         {
-            a[i*eq + j] = 0;
-         }
-         else if(i == 2 && j == 2)
-         {
-            a[i*eq + j] = 1/n;
-         }
-         else if(i == 2 && j == 3)
-         {
-            a[i*eq + j] = 0;
-         }
-         else if(i == 2 && j == 4)
-         {
-            a[i*eq + j] = 0;
-         }
-         else if(i == 3 && j == 0)
-         {
-            a[i*eq + j] = -v/n;
-         }
-         else if(i == 3 && j == 1)
-         {
-            a[i*eq + j] = 0;
-         }
-         else if(i == 3 && j == 2)
-         {
-            a[i*eq + j] = 0;
-         }
-         else if(i == 3 && j == 3)
-         {
-            a[i*eq + j] = 1/n;
-         }
-         else if(i == 3 && j == 4)
-         {
-            a[i*eq + j] = 0;
-         }
-         else if(i == 4 && j == 0)
-         {
-            a[i*eq + j] = -w/n;
-         }
-         else if(i == 4 && j == 1)
-         {
-            a[i*eq + j] = 0;
-         }
-         else if(i == 4 && j == 2)
-         {
-            a[i*eq + j] = 0;
-         }
-         else if(i == 4 && j == 3)
-         {
-            a[i*eq + j] = 0;
-         }
-         else if(i == 4 && j == 4)
-         {
-            a[i*eq + j] = 1/n;
-         }
-      }
-   }
-     
-   return 0;
+#if DIM == 1
+
+   a(0,0) = 1.0;
+   a(0,1) = 0.0;
+   a(0,2) = 0.0;
+
+   a(1,0) = ((K-1)*pow(vx3,2.0)+(K-1)*pow(vx2,2.0)+(K-1)*pow(vx1,2.0))/2;
+   a(1,1) = K-1;
+   a(1,2) = (1-K)*vx1;
+
+   a(2,0) = -vx1/rho;
+   a(2,1) = 0;
+   a(2,2) = 1.0/rho;
+
+#elif DIM == 2 
+
+   a(0,0) = 1.0;
+   a(0,1) = 0.0;
+   a(0,2) = 0.0;
+   a(0,3) = 0.0;
+
+   a(1,0) = ((K-1)*pow(vx3,2.0)+(K-1)*pow(vx2,2.0)+(K-1)*pow(vx1,2.0))/2;
+   a(1,0) = K-1;
+   a(1,2) = (1-K)*vx1;
+   a(1,3) = (1-K)*vx2;
+
+   a(2,0) = -vx1/rho;
+   a(2,1) = 0;
+   a(2,2) = 1.0/rho;
+   a(2,3) = 0;
+
+   a(3,0) = -vx2/rho;
+   a(3,1) = 0;
+   a(3,2) = 0;
+   a(3,3) = 1.0/rho;
+
+#elif DIM == 3 || DIM == 4
+
+   a(0,0) = 1.0;
+   a(0,1) = 0.0;
+   a(0,2) = 0.0;
+   a(0,3) = 0.0;
+   a(0,4) = 0.0;
+
+   a(1,0) = ((K-1)*pow(vx3,2.0)+(K-1)*pow(vx2,2.0)+(K-1)*pow(vx1,2.0))/2;
+   a(1,0) = K-1;
+   a(1,2) = (1-K)*vx1;
+   a(1,3) = (1-K)*vx2;
+   a(1,4) = (1-K)*vx3;
+
+   a(2,0) = -vx1/rho;
+   a(2,1) = 0;
+   a(2,2) = 1.0/rho;
+   a(2,3) = 0;
+   a(2,4) = 0;
+
+   a(3,0) = -vx2/rho;
+   a(3,1) = 0;
+   a(3,2) = 0;
+   a(3,3) = 1.0/rho;
+   a(3,4) = 0;
+
+   a(4,0) = -vx3/rho;
+   a(4,1) = 0;
+   a(4,2) = 0;
+   a(4,3) = 0;
+   a(4,4) = 1.0/rho;
+
+#endif
 }

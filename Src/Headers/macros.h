@@ -56,6 +56,8 @@
 #define VX3       4
 
 /* SIMPLE ARRAY */
+#define a(x,y)   a[(x)*(eq) + (y)]
+
 #if DIM == 1
    #define  S1p(x)  grid.S1p[(x)]
    #define  S1m(x)  grid.S1m[(x)]
@@ -64,7 +66,6 @@
    #define  Q(N,x)  Q[(N)*(Nx1+1) + (x)]
    #define  B(N,x)  B[(N)*(Nx1+1) + (x)]
    #define  u(N,x)  u[(N)*(Nx1+1) + (x)]
-   #define  a(N,x)  a[(N)*(Nx1+1) + (x)]
    #define uu(N,x) uu[(N)*(Nx1+1) + (x)]
    #define  q(N,x)  q[(N)*(Nx1+1) + (x)]
    #define q1(N,x) q1[(N)*(Nx1+1) + (x)]

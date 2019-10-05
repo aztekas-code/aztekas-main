@@ -14,7 +14,7 @@ typedef struct
 
 typedef struct
 {
-	double A[(eq+1)*(eq+1)];
+	double A[eq*eq];
 	double S[eq+1];
 	double Fp[eq+1];
 	double Fm[eq+1];
@@ -29,6 +29,8 @@ typedef struct
    double e;
    double cs;
    double h;
+   double dhdrho;
+   double dhdp;
 }eos_;
 
 int funct_A(double *a, double *uu);
@@ -44,6 +46,8 @@ void Prim2FluxH(double *f, double *v, double *u, gauge_ local_grid);
 void Sources(double *u, vec_ *v, int *I);
 void Source_Terms(double *s, double *u, gauge_ local_grid);
 void User_Source_Terms(double *s, double *u, gauge_ local_grid);
+
+void Matrix_A(double *a, double *u, gauge_ local_grid);
 
 void EoS(eos_ *e, double *u, gauge_ local_grid);
 
