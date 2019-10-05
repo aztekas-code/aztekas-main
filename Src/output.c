@@ -175,6 +175,7 @@ int Output2(int *itprint)
    fprintf(file,"%e \n",grid.time);
    fprintf(file,"%d \n",Nx1-2*gc+1);
    fprintf(file,"%d \n",Nx2-2*gc+1);
+   fprintf(file,"%d \n",COORDINATES);
    fprintf(file,"###################################\n");
 
 #if DIM == 2
