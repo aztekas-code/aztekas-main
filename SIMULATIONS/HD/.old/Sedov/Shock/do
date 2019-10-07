@@ -1,4 +1,0 @@
-#!/bin/bash
-
-rm *0.dat
-for x in {1..6}; do mv dx"$x"_1.dat dx"$x".dat; done
