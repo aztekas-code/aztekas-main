@@ -37,7 +37,7 @@ eos = ideal
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
 ###############################################
 
-DIM = 1
+DIM = 2
 
 ###############################################
 # Coordinates (cartesian,cylindrical,spherical)
