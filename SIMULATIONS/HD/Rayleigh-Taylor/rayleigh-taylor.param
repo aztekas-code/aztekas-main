@@ -28,8 +28,8 @@ binary = 0
 %%%%%%%%%%%%%%%
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
-Nx1 = 50
-Nx2 = 150
+Nx1 = 150
+Nx2 = 450
 Nx3 = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -67,14 +67,14 @@ K = 1.4
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % LEFT STATE
 rhod = 1.0
-pd   = 2.5
+p_0  = 2.5
 vx1d = 0.0
 vx2d = 0.0
 vx3d = 0.0
 
 % RIGHT STATE
 rhou = 2.0
-pu   = 2.5
+p_0  = 2.5
 vx1u = 0.0
 vx2u = 0.0
 vx3u = 0.0
@@ -84,3 +84,6 @@ x_0 = 0.0
 
 % PERTURBATION
 eta = 0.1
+
+% GRAVITY ACCELERATION
+g = 1.0

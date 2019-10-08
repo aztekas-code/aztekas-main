@@ -16,7 +16,7 @@
 #define FLUX               HLL
 #define GRID               UNIFORM
 
-double rhod, pd, vx1d, vx2d, vx3d;
-double rhou, pu, vx1u, vx2u, vx3u;
-double x_0;
-double eta;
+double rhod, vx1d, vx2d, vx3d;
+double rhou, vx1u, vx2u, vx3u;
+double p_0, x_0;
+double eta, g;

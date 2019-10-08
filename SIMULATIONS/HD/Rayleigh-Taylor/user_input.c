@@ -2,7 +2,7 @@
  * File Name : user_input.c
  * Description : aztekas user input parameters for Rayleigh Taylor
  * Creation Date : 27-09-2019
- * Last Modified : 07-10-2019 21:34:38
+ * Last Modified : 07-10-2019 21:49:59
  * Created By : Emilio Tejeda
  */
 
@@ -48,11 +48,6 @@ int User_Parameters(char const *paramfile_name)
                rhod = atof(t_value);
             }
 
-            if(strcmp(t_key,"pd")==0)
-            {
-               pd = atof(t_value);
-            }
-
             if(strcmp(t_key,"vx1d")==0)
             {
                vx1d = atof(t_value);
@@ -73,11 +68,6 @@ int User_Parameters(char const *paramfile_name)
                rhou = atof(t_value);
             }
 
-            if(strcmp(t_key,"pu")==0)
-            {
-               pu = atof(t_value);
-            }
-
             if(strcmp(t_key,"vx1u")==0)
             {
                vx1u = atof(t_value);
@@ -93,6 +83,11 @@ int User_Parameters(char const *paramfile_name)
                vx3u = atof(t_value);
             }
 
+            if(strcmp(t_key,"p_0")==0)
+            {
+               p_0 = atof(t_value);
+            }
+
             if(strcmp(t_key,"x_0")==0)
             {
                x_0 = atof(t_value);
@@ -101,6 +96,11 @@ int User_Parameters(char const *paramfile_name)
             if(strcmp(t_key,"eta")==0)
             {
                eta = atof(t_value);
+            }
+
+            if(strcmp(t_key,"g")==0)
+            {
+               g = atof(t_value);
             }
          }
       }
