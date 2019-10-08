@@ -81,3 +81,6 @@ vx3u =  0.0
 
 % INTERFACE
 x_0 = 0.25
+
+% PERTURBATION
+eta = 0.01

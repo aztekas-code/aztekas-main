@@ -19,3 +19,4 @@
 double rhod, pd, vx1d, vx2d, vx3d;
 double rhou, pu, vx1u, vx2u, vx3u;
 double x_0;
+double eta;

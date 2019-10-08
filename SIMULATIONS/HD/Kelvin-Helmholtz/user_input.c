@@ -2,7 +2,7 @@
  * File Name : user_input.c
  * Description : aztekas user input parameters for Kelvin-Helmholtz
  * Creation Date : 27-09-2019
- * Last Modified : 27-09-2019 00:07:33
+ * Last Modified : 07-10-2019 21:11:26
  * Created By : Alejandro Aguayo-Ortiz
  */
 
@@ -96,6 +96,11 @@ int User_Parameters(char const *paramfile_name)
             if(strcmp(t_key,"x_0")==0)
             {
                x_0 = atof(t_value);
+            }
+
+            if(strcmp(t_key,"eta")==0)
+            {
+               eta = atof(t_value);
             }
          }
       }

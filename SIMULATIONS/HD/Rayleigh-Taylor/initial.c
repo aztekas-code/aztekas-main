@@ -2,7 +2,7 @@
  * File Name : initial.c
  * Description : aztekas initial module for Rayleigh-Taylor
  * Creation Date : 27-09-2019
- * Last Modified : 27-09-2019 00:00:44
+ * Last Modified : 07-10-2019 21:40:01
  * Created By : Alejandro Aguayo-Ortiz
  */
 
@@ -11,6 +11,10 @@
 void Initial()
 {
    int n, i, j, k, cell;
+   double Lx1, Lx2;
+
+   Lx1 = fabs(x1max - x1min);
+   Lx2 = fabs(x2max - x2min);
 
    //Initialize time
    grid.time = 0.0;
@@ -27,14 +31,14 @@ void Initial()
             U(RHO,i,j) =  rhod;
             U(PRE,i,j) =  pd - U(RHO,i,j)*grid.X2[j];
             U(VX1,i,j) =  vx1d;
-            U(VX2,i,j) = -vx2d*(1 + cos(2*M_PI*grid.X1[i]/0.5))*(1 + cos(2*M_PI*grid.X2[j]/1.5))/4;
+            U(VX2,i,j) = -eta*(1.0 + cos(2.0*M_PI*grid.X1[i]/Lx1))*(1 + cos(2.0*M_PI*grid.X2[j]/Lx2))/4.0;
          }
          if(grid.X2[j] > 0.0)
          {
             U(RHO,i,j) =  rhou;
-            U(PRE,i,j) =  pu - U(RHO,i,j)*grid.X2[j];
+            U(PRE,i,j) =  pd - U(RHO,i,j)*grid.X2[j];
             U(VX1,i,j) =  vx1u;
-            U(VX2,i,j) = -vx2u*(1 + cos(2*M_PI*grid.X1[i]/0.5))*(1 + cos(2*M_PI*grid.X2[j]/1.5))/4;
+            U(VX2,i,j) = -eta*(1.0 + cos(2.0*M_PI*grid.X1[i]/Lx1))*(1.0 + cos(2.0*M_PI*grid.X2[j]/Lx2))/4.0;
          }
       }
    }
