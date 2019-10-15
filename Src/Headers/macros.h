@@ -24,6 +24,10 @@
 #define DUST  1
 #define STIFF 2
 
+/* GRAVITY */
+#define NONE   0
+#define NEWTON 1
+
 /* COORDINATES */
 #define CARTESIAN   0
 #define CYLINDRICAL 1

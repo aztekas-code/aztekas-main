@@ -10,11 +10,14 @@ void Sources(double *u, vec_ *v, int *I)
 {
    int n;
    double x[4];
-   double default_S[eq+1], user_S[eq+1];
-#if INTEGRATION == PVRS
-   double matrix_A[(eq+1)*(eq+1)];
-#endif
+   double default_S[eq+1];
    gauge_ local_grid;
+#if GRAVITY != NONE
+   double grav_S[eq+1];
+#endif
+#if USER_SOURCE_TERMS == TRUE
+   double user_S[eq+1];
+#endif
 
    local_grid.x[0] = grid.time;
 
@@ -48,16 +51,34 @@ void Sources(double *u, vec_ *v, int *I)
    Get_Metric_Components(&local_grid);
 #endif
 
+   // Geometric source terms
    Source_Terms(default_S,u,local_grid);
+
+#if GRAVITY != NONE
+   Grav_Source_Terms(grav_S,u,local_grid);
+#endif
+
+#if USER_SOURCE_TERMS == TRUE
    User_Source_Terms(user_S,u,local_grid);
-#if INTEGRATION == PVRS
-   Matrix_A(v->A,u,local_grid);
 #endif
 
    for(n = 0; n < eq; n++)
    {
-      v->S[n] = default_S[n] + user_S[n];
+      v->S[n] = default_S[n];
+
+   #if GRAVITY != NONE
+      v->S[n] += grav_S[n];
+   #endif
+
+   #if USER_SOURCE_TERMS == TRUE
+      v->S[n] += user_S[n];
+   #endif
    }
+
+#if INTEGRATION == PVRS
+   double matrix_A[(eq+1)*(eq+1)];
+   Matrix_A(v->A,u,local_grid);
+#endif
 
 }
 
