@@ -1,7 +1,10 @@
 /*
- * aztekas user parameters header file
- * Date of creation/modification: 26-09-19 11:55:53
- * autrho: Alejandro Aguayo-Ortiz
+ * File Name : user_param.h
+ * Description : aztekas user parameters header file for Michel Accretion in
+ *               Kerr-Schild coordinates
+ * Creation Date : 28-09-2019
+ * Last Modified : 15-10-2019 21:51:34
+ * Created By : Alejandro Aguayo-Ortiz
  */
 
 #include"macros.h"

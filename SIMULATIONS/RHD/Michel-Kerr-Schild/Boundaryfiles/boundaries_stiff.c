@@ -1,5 +1,5 @@
 /*
- * aztekas boundaries module
+ * aztekas boundaries module for stiff gas accretion (~Petrich)
  * Date of creation/modification: 26-09-19 12:26:02
  * author: Alejandro Aguayo-Ortiz
  */

@@ -1,9 +1,12 @@
-#include"macros.h"
+/*
+ * File Name : user_param.h
+ * Description : aztekas user parameters header file for Relativistic Shock-Tube
+ * Creation Date : 28-09-2019
+ * Last Modified : 15-10-2019 21:12:59
+ * Created By : Alejandro Aguayo-Ortiz
+ */
 
-// Define boundaries TRUE = 1 , FALSE = 0
-// Set as cond_X whereas
-// cond : {outflow,reflective,periodic,inflow}
-// X : {x1max,x1min,x2max,x2min,x3max,x3min}
+#include"macros.h"
 
 #define POLAR              FALSE
 

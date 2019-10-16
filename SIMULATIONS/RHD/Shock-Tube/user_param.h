@@ -2,7 +2,7 @@
  * File Name : user_param.h
  * Description : aztekas user parameters header file for Relativistic Shock-Tube
  * Creation Date : 28-09-2019
- * Last Modified : 28-09-2019 09:34:17
+ * Last Modified : 15-10-2019 21:28:29
  * Created By : Alejandro Aguayo-Ortiz
  */
 
