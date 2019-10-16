@@ -54,10 +54,6 @@ void Sources(double *u, vec_ *v, int *I)
    // Geometric source terms
    Source_Terms(default_S,u,local_grid);
 
-#if GRAVITY != NONE
-   Grav_Source_Terms(grav_S,u,local_grid);
-#endif
-
 #if USER_SOURCE_TERMS == TRUE
    User_Source_Terms(user_S,u,local_grid);
 #endif
@@ -65,10 +61,6 @@ void Sources(double *u, vec_ *v, int *I)
    for(n = 0; n < eq; n++)
    {
       v->S[n] = default_S[n];
-
-   #if GRAVITY != NONE
-      v->S[n] += grav_S[n];
-   #endif
 
    #if USER_SOURCE_TERMS == TRUE
       v->S[n] += user_S[n];

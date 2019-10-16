@@ -17,7 +17,7 @@ AZTPATH = $(AZTEKAS_PATH)
 # Physics (hd, mhd, rhd, rmhd)
 ###############################################
 
-PHY = hd
+PHY = rhd
 
 ########################################################################################
 # Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
@@ -31,25 +31,19 @@ METRIC = Minkowski
 # Equation of State (ideal, dust, stiff)
 ###############################################
 
-EOS = dust
+EOS = ideal
 
 ###############################################
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
 ###############################################
 
-DIM = 2
+DIM = 1
 
 ###############################################
 # Coordinates (cartesian,cylindrical,spherical)
 ###############################################
 
-COORD = spherical
-
-###############################################
-# User Source Terms (true,false)
-###############################################
-
-USER_SOURCE = true
+COORD = cartesian
 
 ###############################################
 # Integration method
@@ -58,25 +52,27 @@ USER_SOURCE = true
 INT = standard
 
 ###############################################
+# Ghost cells
+###############################################
 
-USR = boundaries.c \
-		initial.c \
-		user_input.c 
+PARAM += -Dgc=3
+
+###############################################
+
+USR = initial.c boundaries.c user_input.c user_sources.c
 
 include $(AZTPATH)/Src/Makefile
 
-###############################################
-# Compilation
-###############################################
-
-FLAGS = -Ofast -lm 
+FLAGS = -Ofast -lm -fopenmp
 
 COMPILER = gcc
 AZT_HEAD = $(AZTPATH)/Src/Headers
 HEADERS = -I$(AZT_HEAD) -I.
 EXEC = aztekas
 
-all: 
+######################################
+
+aztekas: 
 	@echo ""
 	@echo "Compiling problem file ..."
 	$(COMPILER) $(PARAM) $(MAIN) $(USR) $(PHYSICS) $(HEADERS) $(FLAGS) -o $(EXEC)  
@@ -85,5 +81,3 @@ all:
 	
 clean:
 	rm -f $(EXEC)
-
-###############################################

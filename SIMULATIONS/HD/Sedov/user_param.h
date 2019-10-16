@@ -2,14 +2,11 @@
  * File Name : user_param.h
  * Description : aztekas user parameters header file for Sedov Blast Wave
  * Creation Date : 26-09-2019
- * Last Modified : 15-10-2019 17:22:08
+ * Last Modified : 15-10-2019 20:26:25
  * Created By : Alejandro Aguayo-Ortiz
  */
 
 #include"macros.h"
-
-#define GRAVITY            NONE
-#define USER_SOURCE_TERMS  FALSE
 
 #define outflow_x1max      TRUE
 #define outflow_x1min      TRUE

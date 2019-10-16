@@ -6,9 +6,6 @@
 
 #include"macros.h"
 
-#define GRAVITY            NEWTON
-#define USER_SOURCE_TERMS  FALSE
-
 #define outflow_x1max      TRUE
 #define outflow_x1min      TRUE
 #define reflective_x2max   TRUE

@@ -2,7 +2,7 @@
  * File Name : user_param.h
  * Description : aztekas user parameters header file for Relativistic Jet
  * Creation Date : 27-09-2019
- * Last Modified : 28-09-2019 09:58:48
+ * Last Modified : 15-10-2019 20:37:21
  * Created By : Alejandro Aguayo-Ortiz
  */
 

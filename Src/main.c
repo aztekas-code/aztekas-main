@@ -121,7 +121,6 @@ int main(int argc, char* argv[])
       U0 = U;
    }
 
-   start = omp_get_wtime();
    while(grid.time <= tmax)
    {
       //In this part we compute the time step
@@ -138,9 +137,6 @@ int main(int argc, char* argv[])
    }
 
    PrintValues(&tprint,&dtprint,&itprint);
-
-   delta = omp_get_wtime() - start;
-   printf("Delta %.4g seconds with %d threads\n",delta,1);
 
    free(grid.X1);
    free(grid.X2);

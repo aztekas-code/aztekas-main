@@ -8,15 +8,12 @@
 
 #include"macros.h"
 
-#define GRAVITY            NONE
-#define USER_SOURCE_TERMS  TRUE
-
 #define periodic_x1        TRUE
 #define reflective_x2max   TRUE
 #define reflective_x2min   TRUE
 
 #define RECONST            MC
-#define FLUX               HLL
+#define FLUX               HLLC
 #define GRID               UNIFORM
 
 double rhod, vx1d, vx2d, vx3d;

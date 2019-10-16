@@ -31,13 +31,13 @@ METRIC = Minkowski
 # Equation of State (ideal, dust, stiff)
 ###############################################
 
-eos = dust
+eos = ideal
 
 ###############################################
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
 ###############################################
 
-DIM = 4
+DIM = 1
 
 ###############################################
 # Coordinates (cartesian,cylindrical,spherical)

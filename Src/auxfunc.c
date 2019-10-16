@@ -93,13 +93,14 @@ void CheckSimParameters()
    if(COORDINATES == CYLINDRICAL) printf("Cylindrical grid.\n");
    if(COORDINATES == SPHERICAL) printf("Spherical grid.\n");
 
-   if(DIM == 1) printf("2D simulation With resolution %d\n",Nx1);
-   if(DIM == 2) printf("2D simulation With resolution %dX%d\n",Nx1,Nx2);
-   if(DIM == 4) printf("2.5D simulation With resolution %dX%d\n",Nx1,Nx2);
-   if(DIM == 3) printf("3D simulation With resolution %dX%dX%d\n",Nx1,Nx2,Nx3);
+   // Resolution
+   if(DIM == 1) printf("1D simulation with resolution %d\n",Nx1);
+   if(DIM == 2) printf("2D simulation with resolution %dX%d\n",Nx1,Nx2);
+   if(DIM == 4) printf("2.5D simulation with resolution %dX%d\n",Nx1,Nx2);
+   if(DIM == 3) printf("3D simulation with resolution %dX%dX%d\n",Nx1,Nx2,Nx3);
 
    // Equation of state
-   if(EOS == IDEAL) printf("Ideal equation of state.\n");
+   if(EOS == IDEAL) printf("Ideal equation of state with adiabatic index %f.\n",K);
    if(EOS == DUST)  printf("Dust.\n");
    if(EOS == STIFF)  printf("Stiff equation of state.\n");
 
@@ -145,12 +146,17 @@ void CheckSimParameters()
    if(COORDINATES == CYLINDRICAL) fprintf(file,"Cylindrical grid.\n");
    if(COORDINATES == SPHERICAL) fprintf(file,"Spherical grid.\n");
 
-   fprintf(file,"With resolution %dX%d\n",Nx1,Nx2);
+   // Resolution
+   if(DIM == 1) fprintf(file,"1D simulation with resolution %d\n",Nx1);
+   if(DIM == 2) fprintf(file,"2D simulation with resolution %dX%d\n",Nx1,Nx2);
+   if(DIM == 4) fprintf(file,"2.5D simulation with resolution %dX%d\n",Nx1,Nx2);
+   if(DIM == 3) fprintf(file,"3D simulation with resolution %dX%dX%d\n",Nx1,Nx2,Nx3);
+
 
    // Equation of state
-   if(EOS == IDEAL) fprintf(file,"Ideal equation of state.\n");
+   if(EOS == IDEAL) fprintf(file,"Ideal equation of state with adiabatic index %f.\n",K);
    if(EOS == DUST)  fprintf(file,"Dust.\n");
-   if(EOS == STIFF)  fprintf(file,"Stiff equation of state.\n");
+   if(EOS == STIFF) fprintf(file,"Stiff equation of state.\n");
 
    // Print MoL-RK order
    fprintf(file,"Time integration using a second order MoL-Runge Kutta.\n");
