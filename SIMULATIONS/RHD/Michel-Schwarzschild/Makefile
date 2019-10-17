@@ -25,7 +25,7 @@ PHY = rhd
 
 ## ONLY IF PHY == rhd or rmhd
 
-METRIC = Schwarzschild
+METRIC = Boyer-Lindquist
 
 ###############################################
 # Equation of State (ideal, dust, stiff)
@@ -37,7 +37,7 @@ EOS = ideal
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
 ###############################################
 
-DIM = 1
+DIM = 2
 
 ###############################################
 # Coordinates (cartesian,cylindrical,spherical)
