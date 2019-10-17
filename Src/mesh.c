@@ -19,6 +19,7 @@
 int Mesh()
 {
    int i, j, k;
+   double M, a, dr, Delta;
 
 #if DIM == 1
    dx1 = (x1max - x1min)/((double)Nx1-2*gc);

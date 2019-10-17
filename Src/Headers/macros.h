@@ -34,8 +34,9 @@
 #define SPHERICAL   2
 
 /* GRID */
-#define UNIFORM 0
-#define LOGMESH 1
+#define UNIFORM   0
+#define LOGMESH   1
+#define TORTOISE  2   
 
 /* FLUX RECONSTRUCTOR */
 #define HLL  0
