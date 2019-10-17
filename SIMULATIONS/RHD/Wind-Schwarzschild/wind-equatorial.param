@@ -16,7 +16,7 @@ Nx3 = 0
 x1max = 40.0
 x2max = 2.0
 x3max = 1.0 
-x1min = 3.0
+x1min = 2.5
 x2min = 0.0
 x3min = 0.0
 
