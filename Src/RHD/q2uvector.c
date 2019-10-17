@@ -105,9 +105,9 @@ int Cons2Prim(double *u, double *q)
 
 #elif DIM == 2
 
-   for(i = 0; i <= Nx1-0; i++)
+   for(i = gc; i <= Nx1-gc; i++)
    {
-      for(j = 0; j <= Nx2-0; j++)
+      for(j = gc; j <= Nx2-gc; j++)
       {
          local_grid.x[0] = grid.time;
          local_grid.x[1] = grid.X1[i];
@@ -116,6 +116,9 @@ int Cons2Prim(double *u, double *q)
          #if POLAR == TRUE
          local_grid.x[2] = M_PI_2;
          #endif
+
+         // Needs to be check. Fails in theta = Pi
+         if(x2max == M_PI && j == Nx2-gc){break;}
 
          Get_Metric_Components(&local_grid);
 
@@ -165,6 +168,7 @@ int Cons2Prim(double *u, double *q)
 
             if(count == 100000)
             {
+               printf("%e %e %e %e\n",Lorentz,h,derh,SS);
                printf("                                          \n");
                printf("Spend too much time in Newton-Rhapson.\n");
                CHECK_NAN = TRUE;

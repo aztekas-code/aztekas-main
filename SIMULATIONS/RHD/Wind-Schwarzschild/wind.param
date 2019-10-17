@@ -9,14 +9,14 @@ restart_filecount = 10
 
 % Define mesh
 Nx1 = 256
-Nx2 = 128
+Nx2 = 256
 Nx3 = 0
 
 % Define domain limits
 x1max = 40.0
 x2max = 1.0
 x3max = 1.0 
-x1min = 2.5
+x1min = 3.0
 x2min = 0.0
 x3min = 0.0
 
