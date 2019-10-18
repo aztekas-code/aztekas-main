@@ -57,7 +57,7 @@ void Get_Metric_Components(gauge_ *local_grid)
    double theta = local_grid->x[2]; 
    double phi   = local_grid->x[3];
 
-   double Sigma, rho2, Delta, a, M, A;
+   double Sigma, rho2, Delta, a, M;
 
    a     = Black_Hole_Spin;
    M     = Black_Hole_Mass;
@@ -83,6 +83,8 @@ void Get_Metric_Components(gauge_ *local_grid)
    local_grid->gamma_con[2][1] = 0.0;
    local_grid->gamma_con[2][2] = rho2/(Sigma*sin(theta)*sin(theta));
 
+   local_grid->dety = sqrt(Sigma*rho2*sin(theta)*sin(theta)/Delta);
+
    #elif POLAR == TRUE
 
    local_grid->beta_con[0] = 0.0;
@@ -99,9 +101,9 @@ void Get_Metric_Components(gauge_ *local_grid)
    local_grid->gamma_con[2][1] = 0.0;
    local_grid->gamma_con[2][2] = 1.0/rho2;
 
-   #endif
+   local_grid->dety = sqrt(Sigma*rho2/Delta);
 
-   local_grid->dety = sqrt(Sigma*rho2*sin(theta)*sin(theta)/Delta);
+   #endif
 
 #endif
 }
@@ -215,7 +217,10 @@ void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid)
    double theta = local_grid->x[2]; 
    double phi   = local_grid->x[3];
 
-   double Sigma, rho2, Delta, a, M, A;
+   double Sigma, rho2, Delta, a, M;
+   double drho2dr, drho2dt;
+   double dSigmadr, dSigmadt;
+   double dDeltadr;
 
    a     = Black_Hole_Spin;
    M     = Black_Hole_Mass;
@@ -223,41 +228,49 @@ void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid)
    rho2  = r*r + a*a*cos(theta)*cos(theta);
    Sigma = pow(r*r + a*a,2.0) - a*a*Delta*sin(theta)*sin(theta);
 
+   drho2dr = 2.0*r;
+   drho2dt = -a*a*sin(2.0*theta);
+
+   dDeltadr = 2.0*(r - M);
+
+   dSigmadr = 4.0*r*(r*r + a*a) - a*a*sin(theta)*sin(theta)*dDeltadr;
+   dSigmadt = -a*a*Delta*sin(2.0*theta);
+
    #if POLAR == FALSE
 
-   der->dlapse[0] = sqrt(Delta*rho2/Sigma)*(Delta*Sigma*r - Delta*rho2*(a*a*(M - r)*sin(theta) + 2.0*r*(a*a + r*r)) - Sigma*rho2*(M - r))/(Delta*Sigma*rho2);
-   der->dlapse[1] = (1.0/2.0)*a*a*sqrt(Delta*rho2/Sigma)*(Delta*rho2 - 2.0*Sigma*sin(theta))*cos(theta)/(Sigma*rho2);
+   der->dlapse[0] = sqrt(Delta*rho2/Sigma)*(Sigma*(Delta*drho2dr + rho2*dDeltadr) - Delta*rho2*dSigmadr)/(2.0*Delta*Sigma*rho2);
+   der->dlapse[1] = sqrt(Delta*rho2/Sigma)*(Sigma*drho2dt - rho2*dSigmadt)/(2.0*Sigma*rho2);
    der->dlapse[2] = 0.0;
 
    der->dbeta[0][0] = 0.0;
    der->dbeta[0][1] = 0.0;
-   der->dbeta[0][2] = 2.0*M*a*(a*a*a*a*sin(theta) - a*a*a*a - a*a*r*r*sin(theta) + 2.0*a*a*r*r + 3.0*r*r*r*r)/(Sigma*Sigma);
+   der->dbeta[0][2] = 2.0*M*a*(r*dSigmadr - Sigma)/(Sigma*Sigma);
    der->dbeta[1][0] = 0.0;
    der->dbeta[1][1] = 0.0;
-   der->dbeta[1][2] = -2.0*Delta*M*a*a*a*r*cos(theta)/(Sigma*Sigma);
+   der->dbeta[1][2] = 2.0*M*a*r*dSigmadt/(Sigma*Sigma);
    der->dbeta[2][0] = 0.0;
    der->dbeta[2][1] = 0.0;
    der->dbeta[2][2] = 0.0;
 
-   der->dgam[0][0][0] = 2.0*(Delta*r + rho2*(M - r))/(Delta*Delta);
+   der->dgam[0][0][0] = (Delta*drho2dr - rho2*dDeltadr)/(Delta*Delta);
    der->dgam[0][0][1] = 0.0;
    der->dgam[0][0][2] = 0.0;
    der->dgam[0][1][0] = 0.0;
-   der->dgam[0][1][1] = 2.0*r;
+   der->dgam[0][1][1] = drho2dr;
    der->dgam[0][1][2] = 0.0;
    der->dgam[0][2][0] = 0.0;
    der->dgam[0][2][1] = 0.0;
-   der->dgam[0][2][2] = 2.0*(-Sigma*r + rho2*(a*a*(M - r)*sin(theta) + 2.0*r*(a*a + r*r)))*pow(sin(theta), 2)/(rho2*rho2);
+   der->dgam[0][2][2] = (rho2*dSigmadr - Sigma*drho2dr)*sin(theta)*sin(theta)/(rho2*rho2);
 
-   der->dgam[1][0][0] = -a*a*sin(2.0*theta)/Delta;
+   der->dgam[1][0][0] = drho2dt/Delta;
    der->dgam[1][0][1] = 0.0;
    der->dgam[1][0][2] = 0.0;
    der->dgam[1][1][0] = 0.0;
-   der->dgam[1][1][1] = -a*a*sin(2.0*theta);
+   der->dgam[1][1][1] = drho2dt;
    der->dgam[1][1][2] = 0.0;
    der->dgam[1][2][0] = 0.0;
    der->dgam[1][2][1] = 0.0;
-   der->dgam[1][2][2] = (2.0*Sigma*a*a*pow(sin(theta), 2.0) - rho2*(3.0*Delta*a*a*sin(theta) - 2.0*pow(a*a + r*r, 2.0)))*sin(theta)*cos(theta)/(rho2*rho2);
+   der->dgam[1][2][2] = (2.0*Sigma*rho2*sin(2.0*theta) + Sigma*cos(2.0*theta)*drho2dt - Sigma*drho2dt - rho2*cos(2.0*theta)*dSigmadt + rho2*dSigmadt)/(2.0*rho2*rho2);
 
    der->dgam[2][0][0] = 0.0;
    der->dgam[2][0][1] = 0.0;
@@ -271,29 +284,39 @@ void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid)
 
    #elif POLAR == TRUE
 
-   der->dlapse[0] = sqrt(Delta*rho2/Sigma)*(Delta*Sigma*r - Delta*rho2*(a*a*(M - r)*sin(theta) + 2.0*r*(a*a + r*r)) - Sigma*rho2*(M - r))/(Delta*Sigma*rho2);
+   der->dlapse[0] = sqrt(Delta*rho2/Sigma)*(Sigma*(Delta*drho2dr + rho2*dDeltadr) - Delta*rho2*dSigmadr)/(2.0*Delta*Sigma*rho2);
+   der->dlapse[2] = sqrt(Delta*rho2/Sigma)*(Sigma*drho2dt - rho2*dSigmadt)/(2.0*Sigma*rho2);
    der->dlapse[1] = 0.0;
-   der->dlapse[2] = (1.0/2.0)*a*a*sqrt(Delta*rho2/Sigma)*(Delta*rho2 - 2.0*Sigma*sin(theta))*cos(theta)/(Sigma*rho2);
 
    der->dbeta[0][0] = 0.0;
-   der->dbeta[0][1] = 2.0*M*a*(a*a*a*a*sin(theta) - a*a*a*a - a*a*r*r*sin(theta) + 2.0*a*a*r*r + 3.0*r*r*r*r)/(Sigma*Sigma);
    der->dbeta[0][2] = 0.0;
-   der->dbeta[1][0] = 0.0;
-   der->dbeta[1][1] = -2.0*Delta*M*a*a*a*r*cos(theta)/(Sigma*Sigma);
-   der->dbeta[1][2] = 0.0;
+   der->dbeta[0][1] = 2.0*M*a*(r*dSigmadr - Sigma)/(Sigma*Sigma);
    der->dbeta[2][0] = 0.0;
-   der->dbeta[2][1] = 0.0;
    der->dbeta[2][2] = 0.0;
+   der->dbeta[2][1] = 2.0*M*a*r*dSigmadt/(Sigma*Sigma);
+   der->dbeta[1][0] = 0.0;
+   der->dbeta[1][2] = 0.0;
+   der->dbeta[1][1] = 0.0;
 
-   der->dgam[0][0][0] = 2.0*(Delta*r + rho2*(M - r))/(Delta*Delta);
-   der->dgam[0][0][1] = 0.0;
+   der->dgam[0][0][0] = (Delta*drho2dr - rho2*dDeltadr)/(Delta*Delta);
    der->dgam[0][0][2] = 0.0;
-   der->dgam[0][1][0] = 0.0;
-   der->dgam[0][1][1] = 2.0*(-Sigma*r + rho2*(a*a*(M - r)*sin(theta) + 2.0*r*(a*a + r*r)))*pow(sin(theta), 2)/(rho2*rho2);
-   der->dgam[0][1][2] = 0.0;
+   der->dgam[0][0][1] = 0.0;
    der->dgam[0][2][0] = 0.0;
+   der->dgam[0][2][2] = drho2dr;
    der->dgam[0][2][1] = 0.0;
-   der->dgam[0][2][2] = 2.0*r;
+   der->dgam[0][1][0] = 0.0;
+   der->dgam[0][1][2] = 0.0;
+   der->dgam[0][1][1] = (rho2*dSigmadr - Sigma*drho2dr)*sin(theta)*sin(theta)/(rho2*rho2);
+
+   der->dgam[2][0][0] = drho2dt/Delta;
+   der->dgam[2][0][2] = 0.0;
+   der->dgam[2][0][1] = 0.0;
+   der->dgam[2][2][0] = 0.0;
+   der->dgam[2][2][2] = drho2dt;
+   der->dgam[2][2][1] = 0.0;
+   der->dgam[2][1][0] = 0.0;
+   der->dgam[2][1][2] = 0.0;
+   der->dgam[2][1][1] = (2.0*Sigma*rho2*sin(2.0*theta) + Sigma*cos(2.0*theta)*drho2dt - Sigma*drho2dt - rho2*cos(2.0*theta)*dSigmadt + rho2*dSigmadt)/(2.0*rho2*rho2);
 
    der->dgam[1][0][0] = 0.0;
    der->dgam[1][0][1] = 0.0;
@@ -304,16 +327,6 @@ void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid)
    der->dgam[1][2][0] = 0.0;
    der->dgam[1][2][1] = 0.0;
    der->dgam[1][2][2] = 0.0;
-
-   der->dgam[2][0][0] = -a*a*sin(2.0*theta)/Delta;
-   der->dgam[2][0][1] = 0.0;
-   der->dgam[2][0][2] = 0.0;
-   der->dgam[2][1][0] = 0.0;
-   der->dgam[2][1][1] = (2.0*Sigma*a*a*pow(sin(theta), 2.0) - rho2*(3.0*Delta*a*a*sin(theta) - 2.0*pow(a*a + r*r, 2.0)))*sin(theta)*cos(theta)/(rho2*rho2);
-   der->dgam[2][1][2] = 0.0;
-   der->dgam[2][2][0] = 0.0;
-   der->dgam[2][2][1] = 0.0;
-   der->dgam[2][2][2] = -a*a*sin(2.0*theta);
 
    #endif
 #endif

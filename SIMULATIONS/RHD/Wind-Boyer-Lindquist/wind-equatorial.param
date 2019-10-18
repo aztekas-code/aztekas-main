@@ -13,17 +13,17 @@ Nx2 = 160
 Nx3 = 0
 
 % Define domain limits
-x1max = 35.0
+x1max = 40.0
 x2max = 2.0
 x3max = 1.0 
-x1min = 1.83
+x1min = 3.0
 x2min = 0.0
 x3min = 0.0
 
 % Time parameters
 tmax = 5000.0
 timefile = 1.0
-cou = 0.05
+cou = 0.25
 
 % Polytorpic index
 %K = 1.00001
