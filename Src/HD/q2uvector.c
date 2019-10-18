@@ -9,21 +9,19 @@ int Cons2Prim(double *u, double *q)
 
    for(i = 0; i <= Nx1-0; i++)
    {
-      D  = q(0,i);
-      E  = q(1,i);
-      S1 = q(2,i);
+      D  = q(RHO,i);
+      E  = q(PRE,i);
+      S1 = q(VX1,i);
       S2 = 0;
       S3 = 0;
  
-      u(0,i) = D;
+      u(RHO,i) = D;
       #if EOS == IDEAL
-      u(1,i) = ((2.0*K-2.0)*D*E+(1.0-K)*pow(S3,2.0)+(1.0-K)*pow(S2,2.0)+(1.0-K)*pow(S1,2.0))/(2.0*D);
+      u(PRE,i) = ((2.0*K-2.0)*D*E+(1.0-K)*pow(S3,2.0)+(1.0-K)*pow(S2,2.0)+(1.0-K)*pow(S1,2.0))/(2.0*D);
       #elif EOS == DUST
-      u(1,i) = 0.0;
+      u(PRE,i) = 0.0;
       #endif
-      u(2,i) = S1/D;
-      u(3,i) = S2/D;
-      u(4,i) = S3/D;
+      u(VX1,i) = S1/D;
    }
 
 #elif DIM == 2
@@ -32,21 +30,20 @@ int Cons2Prim(double *u, double *q)
    {
       for(j = 0; j <= Nx2-0; j++)
       {
-         D  = q(0,i,j);
-         E  = q(1,i,j);
-         S1 = q(2,i,j);
-         S2 = q(3,i,j);
+         D  = q(RHO,i,j);
+         E  = q(PRE,i,j);
+         S1 = q(VX1,i,j);
+         S2 = q(VX2,i,j);
          S3 = 0;
  
-         u(0,i,j) = D;
+         u(RHO,i,j) = D;
          #if EOS == IDEAL
-         u(1,i,j) = ((2.0*K-2.0)*D*E+(1.0-K)*pow(S3,2.0)+(1.0-K)*pow(S2,2.0)+(1.0-K)*pow(S1,2.0))/(2.0*D);
+         u(PRE,i,j) = ((2.0*K-2.0)*D*E+(1.0-K)*pow(S3,2.0)+(1.0-K)*pow(S2,2.0)+(1.0-K)*pow(S1,2.0))/(2.0*D);
          #elif EOS == DUST
-         u(1,i,j) = 0.0;
+         u(PRE,i,j) = 0.0;
          #endif
-         u(2,i,j) = S1/D;
-         u(3,i,j) = S2/D;
-         u(4,i,j) = S3/D;
+         u(VX1,i,j) = S1/D;
+         u(VX2,i,j) = S2/D;
       }
    }
 
@@ -56,21 +53,21 @@ int Cons2Prim(double *u, double *q)
    {
       for(j = 0; j <= Nx2-0; j++)
       {
-         D  = q(0,i,j);
-         E  = q(1,i,j);
-         S1 = q(2,i,j);
-         S2 = q(3,i,j);
-         S3 = q(4,i,j);
+         D  = q(RHO,i,j);
+         E  = q(PRE,i,j);
+         S1 = q(VX1,i,j);
+         S2 = q(VX2,i,j);
+         S3 = q(VX3,i,j);
  
-         u(0,i,j) = D;
+         u(RHO,i,j) = D;
          #if EOS == IDEAL
-         u(1,i,j) = ((2.0*K-2.0)*D*E+(1.0-K)*pow(S3,2.0)+(1.0-K)*pow(S2,2.0)+(1.0-K)*pow(S1,2.0))/(2.0*D);
+         u(PRE,i,j) = ((2.0*K-2.0)*D*E+(1.0-K)*pow(S3,2.0)+(1.0-K)*pow(S2,2.0)+(1.0-K)*pow(S1,2.0))/(2.0*D);
          #elif EOS == DUST
-         u(1,i,j) = 0.0;
+         u(PRE,i,j) = 0.0;
          #endif
-         u(2,i,j) = S1/D;
-         u(3,i,j) = S2/D;
-         u(4,i,j) = S3/D;
+         u(VX1,i,j) = S1/D;
+         u(VX2,i,j) = S2/D;
+         u(VX3,i,j) = S3/D;
       }
    }
 

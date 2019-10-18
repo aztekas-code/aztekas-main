@@ -33,9 +33,9 @@ int Cons2Prim(double *u, double *q)
 
       Get_Metric_Components(&local_grid);
 
-      D        = q(0,i);
-      tau      = q(1,i);
-      S_cov[0] = q(2,i);
+      D        = q(RHO,i);
+      tau      = q(PRE,i);
+      S_cov[0] = q(VX1,i);
       S_cov[1] = 0.0;
       S_cov[2] = 0.0;
 
@@ -98,9 +98,9 @@ int Cons2Prim(double *u, double *q)
 
       Lorentz = sqrt(1.0 + SS/(D*D*h*h));
 
-      u(0,i) = D / Lorentz;
-      u(1,i) = D*h*Lorentz - tau - D;
-      u(2,i) = S_cov[0]/(D*h*Lorentz);
+      u(RHO,i) = D / Lorentz;
+      u(PRE,i) = D*h*Lorentz - tau - D;
+      u(VX1,i) = S_cov[0]/(D*h*Lorentz);
    }
 
 #elif DIM == 2
@@ -122,10 +122,10 @@ int Cons2Prim(double *u, double *q)
 
          Get_Metric_Components(&local_grid);
 
-         D        = q(0,i,j);
-         tau      = q(1,i,j);
-         S_cov[0] = q(2,i,j);
-         S_cov[1] = q(3,i,j);
+         D        = q(RHO,i,j);
+         tau      = q(PRE,i,j);
+         S_cov[0] = q(VX1,i,j);
+         S_cov[1] = q(VX2,i,j);
          S_cov[2] = 0.0;
 
          S_con[0] = local_grid.gamma_con[0][0]*S_cov[0] + \
@@ -188,10 +188,10 @@ int Cons2Prim(double *u, double *q)
 
          Lorentz = sqrt(1.0 + SS/(D*D*h*h));
 
-         u(0,i,j) = D / Lorentz;
-         u(1,i,j) = D*h*Lorentz - tau - D;
-         u(2,i,j) = S_cov[0]/(D*h*Lorentz);
-         u(3,i,j) = S_cov[1]/(D*h*Lorentz);
+         u(RHO,i,j) = D / Lorentz;
+         u(PRE,i,j) = D*h*Lorentz - tau - D;
+         u(VX1,i,j) = S_cov[0]/(D*h*Lorentz);
+         u(VX2,i,j) = S_cov[1]/(D*h*Lorentz);
       }
    }
 
@@ -274,11 +274,11 @@ int Cons2Prim(double *u, double *q)
 
          Lorentz = sqrt(1.0 + SS/(D*D*h*h));
 
-         u(0,i,j) = D / Lorentz;
-         u(1,i,j) = D*h*Lorentz - tau - D;
-         u(2,i,j) = S_cov[0]/(D*h*Lorentz);
-         u(3,i,j) = S_cov[1]/(D*h*Lorentz);
-         u(4,i,j) = S_cov[2]/(D*h*Lorentz);
+         u(RHO,i,j) = D / Lorentz;
+         u(PRE,i,j) = D*h*Lorentz - tau - D;
+         u(VX1,i,j) = S_cov[0]/(D*h*Lorentz);
+         u(VX2,i,j) = S_cov[1]/(D*h*Lorentz);
+         u(VX3,i,j) = S_cov[2]/(D*h*Lorentz);
       }
    }
 

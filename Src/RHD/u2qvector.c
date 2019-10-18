@@ -24,9 +24,9 @@ void Prim2Cons_All(double *q, double *u)
   
       Get_Metric_Components(&local_grid);
 
-      rho      = u(0,i);
-      p        = u(1,i);
-      v_cov[0] = u(2,i);
+      rho      = u(RHO,i);
+      p        = u(PRE,i);
+      v_cov[0] = u(VX1,i);
       v_cov[1] = 0.0;
       v_cov[2] = 0.0;
 
@@ -56,9 +56,9 @@ void Prim2Cons_All(double *q, double *u)
       S_cov[1] = rho*eos.h*Lorentz*Lorentz*v_cov[1];
       S_cov[2] = rho*eos.h*Lorentz*Lorentz*v_cov[2];
 
-      q(0,i) = D;
-      q(1,i) = tau;
-      q(2,i) = S_cov[0];
+      q(RHO,i) = D;
+      q(PRE,i) = tau;
+      q(VX1,i) = S_cov[0];
    }
 
 #elif DIM == 2
@@ -77,10 +77,10 @@ void Prim2Cons_All(double *q, double *u)
      
          Get_Metric_Components(&local_grid);
 
-         rho      = u(0,i,j);
-         p        = u(1,i,j);
-         v_cov[0] = u(2,i,j);
-         v_cov[1] = u(3,i,j);
+         rho      = u(RHO,i,j);
+         p        = u(PRE,i,j);
+         v_cov[0] = u(VX1,i,j);
+         v_cov[1] = u(VX2,i,j);
          v_cov[2] = 0.0;
 
          P[0] = rho;
@@ -109,10 +109,10 @@ void Prim2Cons_All(double *q, double *u)
          S_cov[1] = rho*eos.h*Lorentz*Lorentz*v_cov[1];
          S_cov[2] = rho*eos.h*Lorentz*Lorentz*v_cov[2];
 
-         q(0,i,j) = D;
-         q(1,i,j) = tau;
-         q(2,i,j) = S_cov[0];
-         q(3,i,j) = S_cov[1];
+         q(RHO,i,j) = D;
+         q(PRE,i,j) = tau;
+         q(VX1,i,j) = S_cov[0];
+         q(VX2,i,j) = S_cov[1];
       }
    }
 
@@ -129,11 +129,11 @@ void Prim2Cons_All(double *q, double *u)
      
          Get_Metric_Components(&local_grid);
 
-         rho      = u(0,i,j);
-         p        = u(1,i,j);
-         v_cov[0] = u(2,i,j);
-         v_cov[1] = u(3,i,j);
-         v_cov[2] = u(4,i,j);
+         rho      = u(RHO,i,j);
+         p        = u(PRE,i,j);
+         v_cov[0] = u(VX1,i,j);
+         v_cov[1] = u(VX2,i,j);
+         v_cov[2] = u(VX3,i,j);
 
          P[0] = rho;
          P[1] = p;
@@ -161,11 +161,11 @@ void Prim2Cons_All(double *q, double *u)
          S_cov[1] = rho*eos.h*Lorentz*Lorentz*v_cov[1];
          S_cov[2] = rho*eos.h*Lorentz*Lorentz*v_cov[2];
 
-         q(0,i,j) = D;
-         q(1,i,j) = tau;
-         q(2,i,j) = S_cov[0];
-         q(3,i,j) = S_cov[1];
-         q(4,i,j) = S_cov[2];
+         q(RHO,i,j) = D;
+         q(PRE,i,j) = tau;
+         q(VX1,i,j) = S_cov[0];
+         q(VX2,i,j) = S_cov[1];
+         q(VX3,i,j) = S_cov[2];
       }
    }
 
