@@ -4,4 +4,7 @@
 - Include a module to print U0 when check-nan == true. (DONE)
 
 - Define rho = 0, pre = 1, vx1 = 2, vx2 = 3, vx3 = 4
-  in order to use them as labels for the U(n) vector.
+  in order to use them as labels for the U(n) vector.(DONE)
+
+- Clean. Rename functions. Etc.
+

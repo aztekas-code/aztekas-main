@@ -25,7 +25,7 @@ PHY = rhd
 
 ## ONLY IF PHY == rhd or rmhd
 
-METRIC = Boyer-Lindquist
+METRIC = Schwarzschild
 
 ###############################################
 # Equation of State (ideal, dust, stiff)
@@ -69,7 +69,8 @@ include $(AZTPATH)/Src/Makefile
 # Compilation
 ###############################################
 
-FLAGS = -Ofast -lm 
+FLAGS = -Ofast -lm -fopenmp
+PARAM += -DOMP_NUM=1
 
 COMPILER = gcc
 AZT_HEAD = $(AZTPATH)/Src/Headers

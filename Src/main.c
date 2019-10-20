@@ -26,7 +26,7 @@
 //Do not erase any of these libraries//
 #include"main.h"
 
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
    int itprint;
    double dtprint, tprint;
@@ -41,58 +41,28 @@ int main(int argc, char* argv[])
 
    strcpy(paramfile_name, argv[1]);
    
-   Read_Parameters_File(paramfile_name);   
-   User_Parameters(paramfile_name);   
-      
-	// create output directory
-   char create_dir[] = "mkdir -p ";	
-	strcat(create_dir,outputdirectory);	
-	int sysret = system(create_dir);
+   /*
+    * Read necessary and user defined parameters from file.param
+    * and print info in screen
+    */
+   aztekas_Parameters(paramfile_name);
+   User_Parameters(paramfile_name);
 
-   char create_info[] = "mkdir -p ";
-   strcat(create_info,outputdirectory);
-   strcat(create_info,"/INFO/");
-   sysret = system(create_info);
+   /**
+    * Check paramfile, print info of the simulation on screen
+    * and also inside a directory named INFO inside the simulation
+    * directory. Print INFO on the screen.
+    */
+   Manage_Simulation_Info(argc,argv);
 
-   // copy
-   char dum[50] = "cp ";
-   strcat(dum,paramfile_name);
-   strcat(dum," ");
-   strcat(dum,outputdirectory);
-   strcat(dum,"INFO/");
-   sysret = system(dum);
-   
-   strcpy(dum,"cp ");
-   strcat(dum,"Makefile");
-   strcat(dum," ");
-   strcat(dum,outputdirectory);
-   strcat(dum,"INFO/");
-   sysret = system(dum);
-
-   strcpy(dum,"cp ");
-   strcat(dum,"*.c");
-   strcat(dum," ");
-   strcat(dum,outputdirectory);
-   strcat(dum,"INFO/");
-   sysret = system(dum);
-
-   strcpy(dum,"cp ");
-   strcat(dum,"*.h");
-   strcat(dum," ");
-   strcat(dum,outputdirectory);
-   strcat(dum,"INFO/");
-   sysret = system(dum);
-
-   // Print Simulation Parameters
-   CheckSimParameters();
-   if (check_param == TRUE) getchar();
-
-   // Include the ghost cells
-   New_Size();
-
+   /**
+    * Allocate the space for all the arrays used by aztekas
+    */
    Allocate_Array();
 
-   //We set the mesh func_planarMESH.c
+   /*
+    * Create a Cartesian-like mesh grid
+    */
    Mesh();
 
    //Time interval between data dumps
@@ -110,17 +80,22 @@ int main(int argc, char* argv[])
          Restart();
       }
 
-      tprint = grid.time;
-      itprint = restart_filecount;
+      tprint = grid.time;           // Initialize time 
+      itprint = restart_filecount;  // Initialize number of files
+      U0 = U;
+      Boundaries(U);
    }
    else
    {
       Initial();
-      tprint  = 0.0; //Initialize printing parameter
-      itprint = 0;   //Initialize file numeration
+      tprint  = 0.0; //Initialize time
+      itprint = 0;   //Initialize number of files
       U0 = U;
+      Boundaries(U);
    }
 
+   start = omp_get_wtime();
+   omp_set_num_threads(OMP_NUM);
    while(grid.time <= tmax)
    {
       //In this part we compute the time step
@@ -137,6 +112,9 @@ int main(int argc, char* argv[])
    }
 
    PrintValues(&tprint,&dtprint,&itprint);
+
+   delta = omp_get_wtime() - start;
+   printf("Expend %.4f seconds with %d threads\n",delta,OMP_NUM);
 
    free(grid.X1);
    free(grid.X2);

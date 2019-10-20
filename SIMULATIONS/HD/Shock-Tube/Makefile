@@ -43,7 +43,7 @@ DIM = 1
 # Coordinates (cartesian,cylindrical,spherical)
 ###############################################
 
-COORD = cartesian
+COORD = spherical
 
 ###############################################
 # User Source Terms (true,false)
@@ -69,10 +69,11 @@ include $(AZTPATH)/Src/Makefile
 # Compilation
 ###############################################
 
-FLAGS = -Ofast -lm 
+FLAGS = -Ofast -lm -fopenmp
+PARAM += -DOMP_NUM=6
 
 COMPILER = gcc
-AZT_HEAD = $(AZTPATH)/Src/Headers
+AZT_HEAD = $(AZTPATH)/Src/include
 HEADERS = -I$(AZT_HEAD) -I.
 EXEC = aztekas
 

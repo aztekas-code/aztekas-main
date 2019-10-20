@@ -1,30 +1,5 @@
 #####################################
 
-ifeq ($(PHY),hd)
-      PARAM += -DPHYSICS=HD
-		include $(AZTPATH)/Src/HD/Makefile
-endif
-ifeq ($(PHY),rhd)
-      PARAM += -DPHYSICS=RHD
-		include $(AZTPATH)/Src/RHD/Makefile
-endif
-
-#####################################
-
-ifeq ($(EOS),ideal)
-        PARAM += -DEOS=IDEAL
-endif
-ifeq ($(EOS),dust)
-        PARAM += -DEOS=DUST
-endif
-ifeq ($(EOS),stiff)
-        PARAM += -DEOS=STIFF	
-endif
-
-include $(AZTPATH)/Src/EOS/Makefile
-
-#####################################
-
 ifeq ($(DIM),1)
 	PARAM += -DDIM=1
 	PARAM += -Deq=3
@@ -84,17 +59,10 @@ PARAM += -Dgc=3
 
 #####################################
 
-MAIN = $(AZTPATH)/Src/alloc.c \
-       $(AZTPATH)/Src/auxfunc.c \
-       $(AZTPATH)/Src/bound_cond.c \
-       $(AZTPATH)/Src/flux.c \
-       $(AZTPATH)/Src/input.c \
-       $(AZTPATH)/Src/integration$(INT).c \
-       $(AZTPATH)/Src/limiters.c \
-		 $(AZTPATH)/Src/main.c \
-		 $(AZTPATH)/Src/mesh.c \
-		 $(AZTPATH)/Src/output.c \
-		 $(AZTPATH)/Src/restart.c \
-		 $(AZTPATH)/Src/runge-kutta.c \
-		 $(AZTPATH)/Src/timestep.c \
-		 $(AZTPATH)/Src/vectors.c 
+MAIN = $(AZTPATH)/Src/main.c \
+
+include $(AZTPATH)/Src/common/Makefile
+include $(AZTPATH)/Src/fluxes/Makefile
+include $(AZTPATH)/Src/grid/Makefile
+include $(AZTPATH)/Src/integration/Makefile
+include $(AZTPATH)/Src/physics/Makefile

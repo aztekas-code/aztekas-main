@@ -1,0 +1,42 @@
+#!/bin/bash
+
+nombre=$1
+size=6
+
+x=out$RANDOM.tex
+
+cat << EOF > $x
+\documentclass[${size}pt]{article}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{upgreek}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathdots}
+\usepackage{graphicx}
+
+%\renewcommand\normalsize{\fontsize{${size}pt}{${size}pt}\selectfont}
+%\setlength{\textwidth}{6.5in}
+%\setlength{\textheight}{8in}
+\pagestyle{empty}
+\spanishdecimal{.}
+ \begin{document}
+  \input{${nombre}}
+ \end{document}
+EOF
+
+file=`echo $x | sed 's/\.tex//' `
+
+echo $x
+
+latex $file
+dvips -o $file"_out.ps" $file
+
+input=`echo ${nombre} | sed 's/\.tex//'`
+
+ps2eps -f $file"_out.ps"
+mv -f $file"_out.eps" $input"_out.eps"
+
+rm -f $file".aux" $file".dvi" $file".log" $file"_out.ps" $x texput.log

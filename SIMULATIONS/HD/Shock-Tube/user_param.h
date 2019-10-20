@@ -2,14 +2,11 @@
  * File Name : user_param.h
  * Description : aztekas user parameters header file for Shock-Tube 
  * Creation Date : 26-09-2019
- * Last Modified : 15-10-2019 17:21:18
+ * Last Modified : 18-10-2019 17:06:37
  * Created By : Alejandro Aguayo-Ortiz
  */
 
 #include"macros.h"
-
-#define GRAVITY            NONE
-#define USER_SOURCE_TERMS  FALSE
 
 #define HORIZONTAL         0
 #define VERTICAL           1
@@ -24,7 +21,7 @@
 #define FLUX               HLL
 #define GRID               UNIFORM
 
-#define INTERFACE          HORIZONTAL
+#define INTERFACE          VERTICAL
 
 double rhol, pl, vx1l, vx2l, vx3l;
 double rhor, pr, vx1r, vx2r, vx3r;

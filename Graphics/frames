@@ -1,0 +1,48 @@
+#!/bin/bash -e
+
+PLOT_FILE=$1
+DIR=$2
+FILE=$3;
+
+START=$4;
+END=$5;
+
+dat=$START
+
+if [ -z "$PLOT_FILE" ]
+then
+   echo " "
+   echo "Bash script for many aztekas plots"
+   echo ""
+   echo "Execute this file in your terminal as:"
+   echo "   ./frames PLOT_FILE DIR FILE START END"
+   echo "where"
+   echo "   PLOT_FILE: Python or gnuplot script with path"
+   echo "   DIR: Path of the directory with the *.dat files. If"
+   echo "        you are inside that directory write ."
+   echo "   FILE: Characteristic name of the aztekas files, e.g."
+   echo "         from sim_*.dat, FILE = sim_"
+   echo "   START: File number from with you want to start"
+   echo "   END: Last file number you want to plot"
+   echo " "
+else
+   while [ $dat -lt $END ];
+   do
+   num=$(echo "scale=5; ($dat)/$END" | bc)
+
+   if [ $dat -eq 0 ] 
+   then
+      num=.00000
+   fi
+
+   touch "$FILE""$num".png
+   change=`echo "$FILE""$num"".png" | sed 's/\.//'`
+   mv "$FILE""$num".png $change
+
+   echo "Printing file" $dat $change
+
+   "$PLOT_FILE" "$DIR"/"$FILE""$dat".dat $change
+
+   dat=$((dat+1))
+   done
+fi

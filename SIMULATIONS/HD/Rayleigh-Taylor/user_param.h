@@ -13,7 +13,7 @@
 #define reflective_x2min   TRUE
 
 #define RECONST            MC
-#define FLUX               HLLC
+#define FLUX               HLL
 #define GRID               UNIFORM
 
 double rhod, vx1d, vx2d, vx3d;

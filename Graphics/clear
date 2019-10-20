@@ -1,0 +1,37 @@
+#!/bin/bash -e
+
+file=$1
+
+if [ -z "$file" ]
+then
+   echo " "
+   echo "Bash script for cleaning directory"
+   echo ""
+   echo "Execute this file in your terminal as:"
+   echo "   ./clear file_extension"
+   echo "where"
+   echo "   file_extension: eps, pdf, png, tex or avi".
+   echo " "
+else
+   if [ $file == 'eps' ]
+   then
+      #rm *.eps *.pdf *.png *.tex *.avi
+      rm *.eps
+   fi
+   if [ $file == 'pdf' ]
+   then
+      rm *.pdf
+   fi
+   if [ $file == 'png' ]
+   then
+      rm *.png
+   fi
+   if [ $file == 'tex' ]
+   then
+      rm *.tex
+   fi
+   if [ $file == 'avi' ]
+   then
+      rm *.avi
+   fi
+fi

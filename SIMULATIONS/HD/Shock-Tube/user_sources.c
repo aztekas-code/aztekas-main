@@ -2,15 +2,15 @@
  * File Name : user_sources.c
  * Description : aztekas user source terms for Shock-Tube
  * Creation Date : 26-09-2019
- * Last Modified : 27-09-2019 00:06:54
+ * Last Modified : 18-10-2019 21:32:25
  * Created By : Alejandro Aguayo-Ortiz
  */
 
 #include"main.h"
 
-void User_Source_Terms(double *s, double *u, gauge_ local_grid)
+void User_Source_Terms(double *s, double *u, gauge_ *local_grid)
 {
-   int i;
+   
    double rho, p, vx1=0.0, vx2=0.0, vx3=0.0;
 
    rho = u[RHO];

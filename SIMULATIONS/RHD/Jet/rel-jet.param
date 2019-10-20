@@ -11,9 +11,9 @@ outputfile      = jet_
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RESTART SIMULATION (1 -> true, 0 -> false) %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-restart_simulation = 0
-restartfile = ./TEST/jet_0.dat
-restart_filecount = 0
+restart_simulation = 1
+restartfile = ./TEST/jet_143.dat
+restart_filecount = 143
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CHECK SIMULATION PARAMETERS (1 -> true, 0 -> false) %
@@ -45,7 +45,7 @@ x3min = 0.0
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
-tmax = 120.0
+tmax = 120
 timefile = 0.5
 
 %%%%%%%%%%%%%%%%%%

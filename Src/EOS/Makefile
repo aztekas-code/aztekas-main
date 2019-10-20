@@ -1,1 +1,0 @@
-PHYSICS += $(AZTPATH)/Src/EOS/$(EOS).c
