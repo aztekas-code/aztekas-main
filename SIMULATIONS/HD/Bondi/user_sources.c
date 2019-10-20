@@ -5,7 +5,7 @@
  */
 #include"main.h"
 
-void User_Source_Terms(double *s, double *u, gauge_ local_grid)
+void User_Source_Terms(double *s, double *u, gauge_ *local_grid)
 {
    double rho, p, vx1=0.0, vx2=0.0, vx3=0.0;
    double r;
@@ -23,7 +23,7 @@ void User_Source_Terms(double *s, double *u, gauge_ local_grid)
    vx3 = u[VX3];
 #endif
 
-   r = local_grid.x[PRE];
+   r = local_grid->x[1];
 
    s[RHO] = 0.0;
    s[PRE] = -rho*vx1/(r*r);

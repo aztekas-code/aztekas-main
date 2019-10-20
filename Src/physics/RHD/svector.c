@@ -126,7 +126,6 @@ void Source_Terms(double *s, double *u, gauge_ *local_grid)
    Wd[2][0] = Sd[2]*v_con[0];
    Wd[2][1] = Sd[2]*v_con[1];
    Wd[2][2] = Sd[2]*v_con[2] + p;
-   
 
    Wik_dgamik[0] = W[0][0]*der.dgam[0][0][0] + W[0][1]*der.dgam[0][0][1] + W[0][2]*der.dgam[0][0][2] + \
                    W[1][0]*der.dgam[0][1][0] + W[1][1]*der.dgam[0][1][1] + W[1][2]*der.dgam[0][1][2] + \

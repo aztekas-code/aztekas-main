@@ -154,7 +154,10 @@ void Numerical_Flux_G(double *F, int pm, int *I)
 
    if(pm == PLUS)
    {
-      local_grid.x[1] = grid.X2p[j];
+      local_grid.x[2] = grid.X2p[j];
+      #if POLAR == TRUE
+      local_grid.x[2] = M_PI_2;
+      #endif
 
       for(n = 0; n < eq; n++)
       {
@@ -169,7 +172,10 @@ void Numerical_Flux_G(double *F, int pm, int *I)
    }
    if(pm == MINUS)
    {
-      local_grid.x[1] = grid.X2m[j];
+      local_grid.x[2] = grid.X2m[j];
+      #if POLAR == TRUE
+      local_grid.x[2] = M_PI_2;
+      #endif
 
       for(n = 0; n < eq; n++)
       {

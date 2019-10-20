@@ -118,7 +118,7 @@ int Cons2Prim(double *u, double *q)
          #endif
 
          // Needs to be check. Fails in theta = Pi
-         if(x2max == M_PI && j == Nx2-gc){break;}
+//         if(x2max == M_PI && j == Nx2-gc){break;}
 
          Get_Metric_Components(&local_grid);
 

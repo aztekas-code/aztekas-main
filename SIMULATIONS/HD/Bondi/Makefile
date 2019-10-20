@@ -37,7 +37,7 @@ EOS = ideal
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
 ###############################################
 
-DIM = 1
+DIM = 2
 
 ###############################################
 # Coordinates (cartesian,cylindrical,spherical)
@@ -69,10 +69,11 @@ include $(AZTPATH)/Src/Makefile
 # Compilation
 ###############################################
 
-FLAGS = -Ofast -lm 
+FLAGS = -Ofast -lm -fopenmp
+PARAM += -DOMP_NUM=2
 
 COMPILER = gcc
-AZT_HEAD = $(AZTPATH)/Src/Headers
+AZT_HEAD = $(AZTPATH)/Src/include
 HEADERS = -I$(AZT_HEAD) -I.
 EXEC = aztekas
 

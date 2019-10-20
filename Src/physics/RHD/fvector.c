@@ -91,3 +91,4 @@ void Prim2FluxF(double *f, double *v, double *u, gauge_ *local_grid)
    v[1] = (lapse/(1.0 - VV*cs2))*(vel*(1.0 - cs2) - sqrt(cs2*(1.0 - VV)*(gamma*(1.0 - VV*cs2) - vel2*(1.0 - cs2)))) - beta;
    v[2] = lapse*vel - beta;
 }
+

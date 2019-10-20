@@ -76,10 +76,8 @@ void Prim2Sources(double *s, int *I)
    #endif
    }
 
-
    // Geometric source terms
    Source_Terms(default_S,u,&local_grid);
-
 
 #if USER_SOURCE_TERMS == TRUE
    User_Source_Terms(user_S,u,&local_grid);
