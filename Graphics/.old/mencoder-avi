@@ -1,5 +1,0 @@
-#!/bin/bash
-
-opt="vbitrate=21600000"
-
-mencoder "mf://*.png"  -oac copy -mf fps=$1 -o test_N_fps$1.avi -ovc lavc -lavcopts vcodec=mpeg4:$opt
