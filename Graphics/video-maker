@@ -1,0 +1,32 @@
+#!/bin/bash
+
+ref_file=$1
+output_file=$2
+frames_per_second=$3
+
+if [ -z "$frames_per_second" ]
+then
+   echo " "
+   echo "Simple movie MP4 of PNG files using MENCODER"
+   echo " "
+   echo "Execute this file in your terminal as:"
+   echo "   $ ./video-maker FILE OUTPUT FPS"
+   echo "where"
+   echo "   FILE: Characteristic name of the PNGs, e.g."
+   echo "         from image_*.png, FILE=image_"
+   echo "   OUPUT: The name of the output without extension"
+   echo "   FPS: Frames per second you want"
+   echo " "
+   echo "Run this script inside the directory with"
+   echo "all the PNG (not PDF) files you want to merge into a"
+   echo "simple AVI movie:"
+else
+
+   opt="vbitrate=21600000"
+
+   mencoder "mf://${ref_file}*.png"  -oac copy -mf fps=$frames_per_second -o $output_file.avi -ovc lavc -lavcopts vcodec=mpeg4:$opt
+
+
+   mencoder $output_file.avi -o $output_file.mp4 -oac copy -ovc lavc -lavcopts vcodec=mpeg1video -of mpeg
+   rm $output_file.avi
+fi

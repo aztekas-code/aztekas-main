@@ -26,22 +26,31 @@ then
    echo "   END: Last file number you want to plot"
    echo " "
 else
-   while [ $dat -lt $END ];
+   scale=$(echo "x = l($END)/l(10); scale = 0; (x / 1) + 1" | bc -l)
+   while [ $dat -lt $((END+1)) ];
    do
-   num=$(echo "scale=5; ($dat)/$END" | bc)
+   num=$(echo "scale = $scale; ($dat/(10^$scale))" | bc -l)
 
    if [ $dat -eq 0 ] 
    then
-      num=.00000
+      num=.0
+      append=1
+      while [ $append -lt $scale ]
+      do
+         num+=0
+         append=$((append+1))
+      done
    fi
 
    touch "$FILE""$num".png
    change=`echo "$FILE""$num"".png" | sed 's/\.//'`
    mv "$FILE""$num".png $change
 
-   echo "Printing file" $dat $change
+   echo "Printing file" $FILE$dat.dat $change
 
    "$PLOT_FILE" "$DIR"/"$FILE""$dat".dat $change
+
+   echo "Done!" $FILE$dat.dat $change
 
    dat=$((dat+1))
    done
