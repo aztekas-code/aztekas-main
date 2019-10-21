@@ -20,4 +20,4 @@ where ![equation](https://latex.codecogs.com/gif.latex?Q) is the vector of conse
 
 ## Setup a new simulation
 
-1.
+1. Run the command `$ chmod 755 setup`
