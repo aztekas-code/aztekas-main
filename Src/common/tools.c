@@ -58,7 +58,7 @@ void Check_Sim_Parameters()
    printf("aaaaa  zzzzz    t    eeeee  k   k  aaaaa  sssss\n");
    printf("\n");
    printf("Running aztekas simulation...\n");
-   printf("Operating with %d threads of %d available\n",OMP_NUM,MAX_NUM_THREADS);
+   printf("Operating with %d threads of %d available.\n",OMP_NUM,MAX_NUM_THREADS);
    printf("\n");
 
    // Print physics used
@@ -66,41 +66,53 @@ void Check_Sim_Parameters()
    if(PHYSICS == RHD) printf("Performing a RHD simulation.\n");
 
    // Coordinates
+#if PHYSICS == HD
 
-   #if PHYSICS == HD
-
-   if(COORDINATES == CARTESIAN) printf("Cartesian grid.\n");
-   if(COORDINATES == CYLINDRICAL) printf("Cylindrical grid.\n");
-   if(COORDINATES == SPHERICAL) printf("Spherical grid.\n");
-
-   #elif PHYSICS == RHD
-
-   // Coordinates in RHD
-   if(COORDINATES == CARTESIAN   && METRIC==USER) printf("Cartesian grid in a User defined space-time.\n");
-   if(COORDINATES == CYLINDRICAL && METRIC==USER) printf("Cylindrical grid in a User defined space-time.\n");
-   if(COORDINATES == SPHERICAL   && METRIC==USER) printf("Spherical grid in a User defined space-time.\n");
-
-   if(COORDINATES == CARTESIAN   && METRIC==MINK) printf("Cartesian grid in a Minkowski space-time.\n");
-   if(COORDINATES == CYLINDRICAL && METRIC==MINK) printf("Cylindrical grid in a Minkowski space-time.\n");
-   if(COORDINATES == SPHERICAL   && METRIC==MINK) printf("Spherical grid in a Minkowski space-time.\n");
-
-   if(COORDINATES == CARTESIAN   && METRIC==SCHW) printf("Cartesian grid in a Schwarzschild space-time.\n");
-   if(COORDINATES == CYLINDRICAL && METRIC==SCHW) printf("Cylindrical grid in a Schwarzschild space-time.\n");
-   if(COORDINATES == SPHERICAL   && METRIC==SCHW) printf("Spherical grid in a Schwarzschild space-time.\n");
-
-   if(COORDINATES == CARTESIAN   && METRIC==EF) printf("Cartesian grid in a Eddington-Finkelstein space-time.\n");
-   if(COORDINATES == CYLINDRICAL && METRIC==EF) printf("Cylindrical grid in a Eddington-Finkelstein space-time.\n");
-   if(COORDINATES == SPHERICAL   && METRIC==EF) printf("Spherical grid in a Eddington-Finkelstein space-time.\n");
-
-   if(COORDINATES == CARTESIAN   && METRIC==BL) printf("Cartesian grid in a Boyer-Lindquist space-time.\n");
-   if(COORDINATES == CYLINDRICAL && METRIC==BL) printf("Cylindrical grid in a Boyer-Lindquist space-time.\n");
-   if(COORDINATES == SPHERICAL   && METRIC==BL) printf("Spherical grid in a Boyer-Lindquist space-time.\n");
-
-   if(COORDINATES == CARTESIAN   && METRIC==KS) printf("Cartesian grid in a Kerr-Schild space-time.\n");
-   if(COORDINATES == CYLINDRICAL && METRIC==KS) printf("Cylindrical grid in a Kerr-Schild space-time.\n");
-   if(COORDINATES == SPHERICAL   && METRIC==KS) printf("Spherical grid in a Kerr-Schild space-time.\n");
-
+   if(COORDINATES == CARTESIAN) printf("Cartesian grid (x,y,z).\n");
+   if(COORDINATES == CYLINDRICAL) printf("Cylindrical grid (R,z,phi).\n");
+   #if POLAR == FALSE
+   if(COORDINATES == SPHERICA) printf("Spherical grid (r,theta,phi).\n");
+   #elif POLAR == TRUE
+   if(COORDINATES == SPHERICAL) printf("Polar grid (R,phi).\n");
    #endif
+
+#elif PHYSICS == RHD
+
+   #if COORDINATES == CARTESIAN
+
+   if(METRIC==USER) printf("Cartesian grid in a User defined space-time (x,y,z).\n");
+   if(METRIC==MINK) printf("Cartesian grid in a Minkowski space-time (x,y,z).\n");
+   if(METRIC==SCHW) printf("Cartesian grid in a Schwarzschild space-time (x,y,z).\n");
+   if(METRIC==EF) printf("Cartesian grid in a Eddington-Finkelstein space-time (x,y,z).\n");
+   if(METRIC==BL) printf("Cartesian grid in a Boyer-Lindquist space-time (x,y,z).\n");
+   if(METRIC==KS) printf("Cartesian grid in a Kerr-Schild space-time (x,y,z).\n");
+
+   #elif COORDINATES == CYLINDRICAL
+
+   if(METRIC==USER) printf("Cylindrical grid in a User defined space-time (R,z,phi).\n");
+   if(METRIC==MINK) printf("Cylindrical grid in a Minkowski space-time (R,z,phi).\n");
+   if(METRIC==SCHW) printf("Cylindrical grid in a Schwarzschild space-time (R,z,phi).\n");
+   if(METRIC==EF) printf("Cylindrical grid in a Eddington-Finkelstein space-time (R,z,phi).\n");
+   if(METRIC==BL) printf("Cylindrical grid in a Boyer-Lindquist space-time (R,z,phi).\n");
+   if(METRIC==KS) printf("Cylindrical grid in a Kerr-Schild space-time (R,z,phi).\n");
+
+   #elif COORDINATES == SPHERICAL && POLAR == FALSE
+   if(METRIC==USER) printf("Spherical grid in a User defined space-time (r,theta,phi).\n");
+   if(METRIC==MINK) printf("Spherical grid in a Minkowski space-time (r,theta,phi).\n");
+   if(METRIC==SCHW) printf("Spherical grid in a Schwarzschild space-time (r,theta,phi).\n");
+   if(METRIC==EF) printf("Spherical grid in a Eddington-Finkelstein space-time (r,theta,phi).\n");
+   if(METRIC==BL) printf("Spherical grid in a Boyer-Lindquist space-time (r,theta,phi).\n");
+   if(METRIC==KS) printf("Spherical grid in a Kerr-Schild space-time (r,theta,phi).\n");
+   #elif COORDINATES == SPHERICAL && POLAR == TRUE
+   if(METRIC==USER) printf("Polar grid in a User defined space-time (R,phi).\n");
+   if(METRIC==MINK) printf("Polar grid in a Minkowski space-time (R,phi).\n");
+   if(METRIC==SCHW) printf("Polar grid in a Schwarzschild space-time (R,phi).\n");
+   if(METRIC==EF) printf("Polar grid in a Eddington-Finkelstein space-time (R,phi).\n");
+   if(METRIC==BL) printf("Polar grid in a Boyer-Lindquist space-time (R,phi).\n");
+   if(METRIC==KS) printf("Polar grid in a Kerr-Schild space-time (R,phi).\n");
+   #endif
+
+#endif
 
    // Resolution
    if(DIM == 1) printf("1D simulation with resolution %d grid cells\n",Nx1);
@@ -118,15 +130,17 @@ void Check_Sim_Parameters()
 
    // Print spatial numerical methods, algorithms and parameters.
    // Primitive variable reconstruction.
-   if(RECONST == GODUNOV)  printf("Zero-order piecewise reconstruction.\n");
-   if(RECONST == MINMOD)   printf("MINMOD reconstruction.\n");
-   if(RECONST == MC)       printf("MC reconstruction.\n");
-   if(RECONST == SUPERBEE) printf("SUPERBEE reconstruction.\n");
-   if(RECONST == WENO5)    printf("WENO5 reconstruction.\n");
+   if(RECONST == GODUNOV)  printf("Using a zero-order piecewise reconstruction for the primitive variables.\n");
+   if(RECONST == MINMOD)   printf("Using a first-order piecewise MINMOD reconstruction for the primitive variables.\n");
+   if(RECONST == MC)       printf("Using a first-order piecewise MC reconstruction for the primitive variables.\n");
+   if(RECONST == SUPERBEE) printf("Using a first-order piecewise SUPERBEE reconstruction for the primitive variables.\n");
+   if(RECONST == WENO5)    printf("Using a fifth-order WENO5 reconstruction for the primitive variables.\n");
 
    // Flux solver
    if(FLUX == HLL)  printf("HLL Riemann solver.\n");
    if(FLUX == HLLC) printf("HLLC Riemann solver.\n");
+
+   printf("\n");
 
    FILE *file;
 
