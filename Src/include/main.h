@@ -8,6 +8,7 @@
 
 #ifdef _OPENMP
    #include<omp.h>
+   int MAX_NUM_THREADS;
 #endif
 #include<stdio.h>
 #include<stdlib.h>
@@ -45,8 +46,6 @@ int Nx1, Nx2, Nx3;
 /* Define domain */
 double x1max, x2max, x3max;
 double x1min, x2min, x3min;
-
-void Manage_Simulation_Info(int argc, char *argv[]);
 
 void Allocate_Array();
 

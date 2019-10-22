@@ -49,6 +49,7 @@ void RoundGen(double *num)
 
 void Check_Sim_Parameters()
 {
+   MAX_NUM_THREADS = omp_get_max_threads();
    printf("\n");
    printf("aaaaa  zzzzz  ttttt  eeeee  k   k  aaaaa  sssss\n");
    printf("    a     zz    t    e   e  k  k       a  ss   \n");
@@ -57,6 +58,7 @@ void Check_Sim_Parameters()
    printf("aaaaa  zzzzz    t    eeeee  k   k  aaaaa  sssss\n");
    printf("\n");
    printf("Running aztekas simulation...\n");
+   printf("Operating with %d threads of %d available\n",OMP_NUM,MAX_NUM_THREADS);
    printf("\n");
 
    // Print physics used
@@ -64,15 +66,47 @@ void Check_Sim_Parameters()
    if(PHYSICS == RHD) printf("Performing a RHD simulation.\n");
 
    // Coordinates
+
+   #if PHYSICS == HD
+
    if(COORDINATES == CARTESIAN) printf("Cartesian grid.\n");
    if(COORDINATES == CYLINDRICAL) printf("Cylindrical grid.\n");
    if(COORDINATES == SPHERICAL) printf("Spherical grid.\n");
 
+   #elif PHYSICS == RHD
+
+   // Coordinates in RHD
+   if(COORDINATES == CARTESIAN   && METRIC==USER) printf("Cartesian grid in a User defined space-time.\n");
+   if(COORDINATES == CYLINDRICAL && METRIC==USER) printf("Cylindrical grid in a User defined space-time.\n");
+   if(COORDINATES == SPHERICAL   && METRIC==USER) printf("Spherical grid in a User defined space-time.\n");
+
+   if(COORDINATES == CARTESIAN   && METRIC==MINK) printf("Cartesian grid in a Minkowski space-time.\n");
+   if(COORDINATES == CYLINDRICAL && METRIC==MINK) printf("Cylindrical grid in a Minkowski space-time.\n");
+   if(COORDINATES == SPHERICAL   && METRIC==MINK) printf("Spherical grid in a Minkowski space-time.\n");
+
+   if(COORDINATES == CARTESIAN   && METRIC==SCHW) printf("Cartesian grid in a Schwarzschild space-time.\n");
+   if(COORDINATES == CYLINDRICAL && METRIC==SCHW) printf("Cylindrical grid in a Schwarzschild space-time.\n");
+   if(COORDINATES == SPHERICAL   && METRIC==SCHW) printf("Spherical grid in a Schwarzschild space-time.\n");
+
+   if(COORDINATES == CARTESIAN   && METRIC==EF) printf("Cartesian grid in a Eddington-Finkelstein space-time.\n");
+   if(COORDINATES == CYLINDRICAL && METRIC==EF) printf("Cylindrical grid in a Eddington-Finkelstein space-time.\n");
+   if(COORDINATES == SPHERICAL   && METRIC==EF) printf("Spherical grid in a Eddington-Finkelstein space-time.\n");
+
+   if(COORDINATES == CARTESIAN   && METRIC==BL) printf("Cartesian grid in a Boyer-Lindquist space-time.\n");
+   if(COORDINATES == CYLINDRICAL && METRIC==BL) printf("Cylindrical grid in a Boyer-Lindquist space-time.\n");
+   if(COORDINATES == SPHERICAL   && METRIC==BL) printf("Spherical grid in a Boyer-Lindquist space-time.\n");
+
+   if(COORDINATES == CARTESIAN   && METRIC==KS) printf("Cartesian grid in a Kerr-Schild space-time.\n");
+   if(COORDINATES == CYLINDRICAL && METRIC==KS) printf("Cylindrical grid in a Kerr-Schild space-time.\n");
+   if(COORDINATES == SPHERICAL   && METRIC==KS) printf("Spherical grid in a Kerr-Schild space-time.\n");
+
+   #endif
+
    // Resolution
-   if(DIM == 1) printf("1D simulation with resolution %d\n",Nx1);
-   if(DIM == 2) printf("2D simulation with resolution %dX%d\n",Nx1,Nx2);
-   if(DIM == 4) printf("2.5D simulation with resolution %dX%d\n",Nx1,Nx2);
-   if(DIM == 3) printf("3D simulation with resolution %dX%dX%d\n",Nx1,Nx2,Nx3);
+   if(DIM == 1) printf("1D simulation with resolution %d grid cells\n",Nx1);
+   if(DIM == 2) printf("2D simulation with resolution %dX%d grid cells\n",Nx1,Nx2);
+   if(DIM == 4) printf("2.5D simulation with resolution %dX%d grid cells\n",Nx1,Nx2);
+   if(DIM == 3) printf("3D simulation with resolution %dX%dX%d grid cells\n",Nx1,Nx2,Nx3);
 
    // Equation of state
    if(EOS == IDEAL) printf("Ideal equation of state with adiabatic index %f.\n",K);

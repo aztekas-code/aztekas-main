@@ -39,6 +39,14 @@
 #define CYLINDRICAL 1
 #define SPHERICAL   2
 
+/* METRIC */
+#define USER   0
+#define MINK   1
+#define SCHW   2
+#define EF     3
+#define BL     4
+#define KS     5
+
 /* GRID */
 #define UNIFORM   0
 #define LOGMESH   1

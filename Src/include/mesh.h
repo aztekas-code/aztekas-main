@@ -42,7 +42,7 @@ typedef struct
 
 double dx1, dx2, dx3;
 double dt;
-double tmax, timefile, cou, numfile;
+double tmax, cou;
 
 int Mesh(); 
 void Surface_Volume();

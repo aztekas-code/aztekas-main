@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     * Read necessary and user defined parameters from file.param
     * and print info in screen
     */
-   aztekas_Parameters(paramfile_name);
+   Default_Parameters(paramfile_name);
    User_Parameters(paramfile_name);
 
    /**
@@ -60,39 +60,20 @@ int main(int argc, char *argv[])
     */
    Allocate_Array();
 
-   /*
+   /**
     * Create a Cartesian-like mesh grid
     */
    Mesh();
 
-   //Time interval between data dumps
-   dtprint = timefile;
+   /**
+    * Initialize solution vector U
+    */
+   Init_Simulation(&tprint,&itprint);
 
-   //We set the initial parameters func_planarINITIAL.c
-   if( restart_simulation == TRUE )
-   {
-      if( binary == TRUE )
-      {
-         Restart_Bin();
-      }
-      else
-      {
-         Restart();
-      }
-
-      tprint = grid.time;           // Initialize time 
-      itprint = restart_filecount;  // Initialize number of files
-      U0 = U;
-      Boundaries(U);
-   }
-   else
-   {
-      Initial();
-      tprint  = 0.0; //Initialize time
-      itprint = 0;   //Initialize number of files
-      U0 = U;
-      Boundaries(U);
-   }
+   /*
+    * Frequency of printing output
+    */
+   Frequency_Output(&dtprint);
 
    start = omp_get_wtime();
    omp_set_num_threads(OMP_NUM);
@@ -114,7 +95,7 @@ int main(int argc, char *argv[])
    PrintValues(&tprint,&dtprint,&itprint);
 
    delta = omp_get_wtime() - start;
-   printf("Expend %.4f seconds with %d threads\n",delta,OMP_NUM);
+   printf("Expend %.4f seconds with %d threads of %d available.\n",omp_get_wtime()-start,OMP_NUM,MAX_NUM_THREADS);
 
    free(grid.X1);
    free(grid.X2);

@@ -49,10 +49,17 @@ int PrintValues(double *tprint, double *dtprint, int *itprint)
          }
       }
 
+      /**
+       * Increase the time of printing by dtprint and increase
+       * the humber of the output file
+       */
       *tprint = *tprint + *dtprint;
       ++*itprint;
    }
 
+   /**
+    * Increase time by dt
+    */
    grid.time = grid.time + dt;
    return 0;
 }

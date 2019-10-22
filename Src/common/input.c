@@ -10,7 +10,7 @@
 
 FILE *paramfile;
 
-int aztekas_Parameters(char const *paramfile_name)
+void Default_Parameters(char const *paramfile_name)
 {
    int   BUFFER_SIZE = 612;
    char t_key[BUFFER_SIZE], t_value[BUFFER_SIZE], t_firstChar;
@@ -88,7 +88,7 @@ int aztekas_Parameters(char const *paramfile_name)
                timefile = atof(t_value);
             }
 
-            if(strcmp(t_key,"numfiles")==0)
+            if(strcmp(t_key,"numfile")==0)
             {
                numfile = atoi(t_value);
             }
@@ -173,7 +173,5 @@ int aztekas_Parameters(char const *paramfile_name)
       printf("Check parameters file: Didn't find a name for output file\n");
       exit(EXIT_FAILURE);
    }
-
-   return 0;   
 }
 
