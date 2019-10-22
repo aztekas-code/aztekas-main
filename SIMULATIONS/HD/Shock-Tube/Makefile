@@ -70,7 +70,7 @@ include $(AZTPATH)/Src/Makefile
 ###############################################
 
 FLAGS = -Ofast -lm -fopenmp
-PARAM += -DOMP_NUM=6
+PARAM += -DOMP_NUM=1
 
 COMPILER = gcc
 AZT_HEAD = $(AZTPATH)/Src/include

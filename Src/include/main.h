@@ -6,10 +6,12 @@
  * @brief Main function, headers and variable declaration.
  */
 
+#ifdef _OPENMP
+   #include<omp.h>
+#endif
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-#include<omp.h>
 #include<math.h>
 
 #include"physics.h"

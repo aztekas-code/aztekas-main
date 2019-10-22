@@ -23,7 +23,6 @@ void Runge_Kutta(int order)
    int cell[3];
    double Dx1 = dx1;
    double Dt  = dt;
-   double g[6], g1p[6], g1m[6];
    rhs_ vec;
 
    #pragma omp parallel default(none) shared(U,Q,Q0,Q1,Q2,grid,Nx1,Dt,order,U1p,U1m) if (OMP_NUM > 1)
