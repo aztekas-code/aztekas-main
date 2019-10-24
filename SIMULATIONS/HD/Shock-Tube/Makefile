@@ -16,13 +16,13 @@ AZTPATH = $(AZTEKAS_PATH)
 ###############################################
 # SET NUMBER OF THREADS USED BY OMP
 ###############################################
-PARAM += -DOMP_NUM=1
+PARAM += -DOMP_NUM=6
 
 ###############################################
 # Physics (hd, mhd, rhd, rmhd)
 ###############################################
 
-PHY = rhd
+PHY = hd
 
 ########################################################################################
 # Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
@@ -42,13 +42,13 @@ EOS = ideal
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
 ###############################################
 
-DIM = 1
+DIM = 2
 
 ###############################################
 # Coordinates (cartesian,cylindrical,spherical)
 ###############################################
 
-COORD = spherical
+COORD = cartesian
 
 ###############################################
 # User Source Terms (true,false)
