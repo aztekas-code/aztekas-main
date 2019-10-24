@@ -2,7 +2,7 @@
  * File Name : user_param.h
  * Description : aztekas user parameters header file for Shock-Tube
  * Creation Date : 27-09-2019
- * Last Modified : 15-10-2019 17:21:40
+ * Last Modified : 23-10-2019 15:50:59
  * Created By : Alejandro Aguayo-Ortiz
  */
 
@@ -13,7 +13,7 @@
 #define reflective_x2min   TRUE
 
 #define RECONST            MC
-#define FLUX               HLL
+#define FLUX               HLLC
 #define GRID               UNIFORM
 
 double rhod, vx1d, vx2d, vx3d;

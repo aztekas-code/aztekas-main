@@ -71,7 +71,7 @@ void Check_Sim_Parameters()
    if(COORDINATES == CARTESIAN) printf("Cartesian grid (x,y,z).\n");
    if(COORDINATES == CYLINDRICAL) printf("Cylindrical grid (R,z,phi).\n");
    #if POLAR == FALSE
-   if(COORDINATES == SPHERICA) printf("Spherical grid (r,theta,phi).\n");
+   if(COORDINATES == SPHERICAL) printf("Spherical grid (r,theta,phi).\n");
    #elif POLAR == TRUE
    if(COORDINATES == SPHERICAL) printf("Polar grid (R,phi).\n");
    #endif
