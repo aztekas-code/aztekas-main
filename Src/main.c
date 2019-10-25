@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
       dt = TimeStep();
 
       //We print the values: file (DATOS*) and to terminal func_planarOUTPUT.c
-      PrintValues(&tprint,&dtprint,&itprint);
+      Print_Values(&tprint,&dtprint,&itprint);
 
       //In here we set the integration method (Finite volume method)
       Integration();
@@ -92,7 +92,7 @@ int main(int argc, char *argv[])
       fflush(stdout); 
    }
 
-   PrintValues(&tprint,&dtprint,&itprint);
+   Print_Values(&tprint,&dtprint,&itprint);
 
    delta = omp_get_wtime() - start;
    printf("Expend %.4f seconds with %d threads of %d available.\n",omp_get_wtime()-start,OMP_NUM,MAX_NUM_THREADS);

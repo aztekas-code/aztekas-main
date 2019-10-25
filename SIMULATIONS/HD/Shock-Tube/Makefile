@@ -17,7 +17,7 @@ AZTPATH = $(AZTEKAS_PATH)
 # SET NUMBER OF THREADS USED BY OMP
 ###############################################
 
-PARAM += -DOMP_NUM=3
+PARAM += -DOMP_NUM=6
 
 ###############################################
 # Physics (hd, mhd, rhd, rmhd)

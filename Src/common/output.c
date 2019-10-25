@@ -1,5 +1,5 @@
 /**
- * @file output.c
+ * @file print_values.c
  *
  * @authors Alejandro Aguayo-Oritz and Emilio Tejeda
  *
@@ -8,65 +8,9 @@
 
 #include"main.h"
 
-int PrintValues(double *tprint, double *dtprint, int *itprint)
-{
-   int n, i, j, k;
-
-   if(grid.time >= *tprint || CHECK_NAN == TRUE)
-   {
-      printf("Time = %e, dt = %e\n",grid.time,dt);
-      if(graf == 1)
-      {
-         if(binary == 1)
-         {
-            Output1_bin(itprint);
-         }
-         else
-         {
-            Output1(itprint);
-         }
-      }
-      else if(graf == 2)
-      {
-         if(binary == 1)
-         {
-            Output2_bin(itprint);
-         }
-         else
-         {
-            Output2(itprint);
-         }
-      }
-      else if(graf == 3)
-      {
-         if(binary == 1)
-         {
-            Output3_bin(itprint);
-         }
-         else
-         {
-            Output3(itprint);
-         }
-      }
-
-      /**
-       * Increase the time of printing by dtprint and increase
-       * the humber of the output file
-       */
-      *tprint = *tprint + *dtprint;
-      ++*itprint;
-   }
-
-   /**
-    * Increase time by dt
-    */
-   grid.time = grid.time + dt;
-   return 0;
-}
-
 #if DIM == 1
 
-int Output1(int *itprint)
+void Output1(int *itprint)
 {
    FILE *file;
    int n, i, j, k;
@@ -113,11 +57,9 @@ int Output1(int *itprint)
 
    printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
-
-   return 0;
 }
 
-int Output1_bin(int *itprint)
+void Output1_bin(int *itprint)
 {
    FILE *file;
    int n, i, j, k, size_X1;
@@ -156,8 +98,6 @@ int Output1_bin(int *itprint)
 
    printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
-
-   return 0;
 }
 
 #elif DIM == 2 || DIM == 4
@@ -227,11 +167,9 @@ int Output2(int *itprint)
 
    printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
-
-   return 0;
 }
 
-int Output2_bin(int *itprint)
+void Output2_bin(int *itprint)
 {
    FILE *file;
    int n, i, j, k, size_X1, size_X2;
@@ -292,13 +230,11 @@ int Output2_bin(int *itprint)
 
    printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
-
-   return 0;
 }
 
 #elif DIM == 3
 
-int Output3(int *itprint)
+void Output3(int *itprint)
 {
    FILE *file;
    int n, i, j, k;
@@ -355,11 +291,9 @@ int Output3(int *itprint)
 
    printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
-
-   return 0;
 }
 
-int Output3_bin(int *itprint)
+void Output3_bin(int *itprint)
 {
    FILE *file;
    int n, i, j, k, size_X1, size_X2, size_X3;
@@ -414,8 +348,6 @@ int Output3_bin(int *itprint)
 
    printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
-
-   return 0;
 }
 
 #endif 

@@ -2,12 +2,15 @@
     
 int Cons2Prim(double *u, double *q)
 {
-   int i, j, k;
    double D, E, S1, S2, S3;
    
 #if DIM == 1
 
-   for(i = 0; i <= Nx1-0; i++)
+#ifdef _OPENMP
+   #pragma omp parallel if (OMP_NUM > 1) 
+   #pragma omp for private(D,E,S1,S2,S3)
+#endif
+   for(int i = 0; i <= Nx1-0; i++)
    {
       D  = q(0,i);
       E  = q(1,i);
@@ -26,9 +29,13 @@ int Cons2Prim(double *u, double *q)
 
 #elif DIM == 2
 
-   for(i = 0; i <= Nx1-0; i++)
+#ifdef _OPENMP
+   #pragma omp parallel if (OMP_NUM > 1) 
+   #pragma omp for private(D,E,S1,S2,S3) collapse(2)
+#endif   
+   for(int j = 0; j <= Nx2-0; j++)
    {
-      for(j = 0; j <= Nx2-0; j++)
+      for(int i = 0; i <= Nx1-0; i++)
       {
          D  = q(0,i,j);
          E  = q(1,i,j);
@@ -49,9 +56,13 @@ int Cons2Prim(double *u, double *q)
 
 #elif DIM == 4
 
-   for(i = 0; i <= Nx1-0; i++)
+#ifdef _OPENMP
+   #pragma omp parallel if (OMP_NUM > 1) 
+   #pragma omp for private(D,E,S1,S2,S3) collapse(2)
+#endif   
+   for(int j = 0; j <= Nx2-0; j++)
    {
-      for(j = 0; j <= Nx2-0; j++)
+      for(int i = 0; i <= Nx1-0; i++)
       {
          D  = q(0,i,j);
          E  = q(1,i,j);

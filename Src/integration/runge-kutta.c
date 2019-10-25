@@ -26,23 +26,90 @@ void Runge_Kutta(int order)
    rhs_ vec;
 
    #pragma omp parallel default(none) shared(U,Q,Q0,Q1,Q2,grid,Nx1,Dt,order,U1p,U1m) if (OMP_NUM > 1)
+   #pragma omp for private(cell,vec,Dx1) 
+   for(int i = gc; i <= Nx1-gc; i++)
    {
-      #pragma omp for private(cell,vec,Dx1) 
+      cell[0] = i;
+ 
+      Dx1 = grid.X1p[i] - grid.X1m[i];
+
+      Numerical_Flux_F(vec.Fp,PLUS,cell);
+      Numerical_Flux_F(vec.Fm,MINUS,cell);
+
+      Prim2Sources(vec.S,cell);
+
+      for(int n = 0; n < eq; n++)
+      {
+         vec.F[n] = (S1p(i)*vec.Fp[n] - S1m(i)*vec.Fm[n])/(Dx1) - \
+                    vec.S[n];
+      }
+ 
+#if INTEGRATION == PVRS //PVRS
+     for(int n = 0; n < eq; n++)
+     {
+        vec.L[n] = vec.F[n];
+     }
+
+     MxV(vec.A,vec.L,vec.F);
+#endif
+
+      switch(order)
+      {
+         case 1:
+            for(int n = 0; n < eq; n++)
+            {
+               Q1(n,i) = Q0(n,i) - (Dt)*(vec.F[n]);
+               Q(n,i)  = Q1(n,i);
+            }
+         break;
+
+         case 2:
+            for(int n = 0; n < eq; n++)
+            {
+               Q2(n,i) = 0.5*(Q1(n,i) + Q0(n,i) - (Dt)*(vec.F[n]));
+               Q(n,i)  = Q2(n,i);
+            }
+         break;
+      }
+   }
+}
+
+#elif DIM == 2 || DIM == 4
+
+void Runge_Kutta(int order)
+{
+   int cell[3];
+   double Dx1 = dx1;
+   double Dx2 = dx2;
+   double Dt  = dt;
+   rhs_ vec;
+
+   #pragma omp parallel default(none) shared(U,Q,Q0,Q1,Q2,grid,Nx1,Nx2,Dt,order,U1p,U1m) if (OMP_NUM > 1)
+   #pragma omp for private(cell,vec,Dx1,Dx2) collapse(2)
+   for(int j = gc; j <= Nx2-gc; j++)
+   {
       for(int i = gc; i <= Nx1-gc; i++)
       {
          cell[0] = i;
+         cell[1] = j;
     
          Dx1 = grid.X1p[i] - grid.X1m[i];
+         Dx2 = grid.X2p[j] - grid.X2m[j];
 
          Numerical_Flux_F(vec.Fp,PLUS,cell);
          Numerical_Flux_F(vec.Fm,MINUS,cell);
+
+         Numerical_Flux_G(vec.Gp,PLUS,cell);
+         Numerical_Flux_G(vec.Gm,MINUS,cell);
 
          Prim2Sources(vec.S,cell);
 
          for(int n = 0; n < eq; n++)
          {
-            vec.F[n] = (S1p(i)*vec.Fp[n] - S1m(i)*vec.Fm[n])/(Dx1) - \
+            vec.F[n] = (S1p(i,j)*vec.Fp[n] - S1m(i,j)*vec.Fm[n])/(Dx1) + \
+                       (S2p(i,j)*vec.Gp[n] - S2m(i,j)*vec.Gm[n])/(Dx2) - \
                        vec.S[n];
+
          }
     
 #if INTEGRATION == PVRS //PVRS
@@ -59,92 +126,21 @@ void Runge_Kutta(int order)
             case 1:
                for(int n = 0; n < eq; n++)
                {
-                  Q1(n,i) = Q0(n,i) - (Dt)*(vec.F[n]);
-                  Q(n,i)  = Q1(n,i);
+                  Q1(n,i,j) = Q0(n,i,j) - (Dt)*(vec.F[n]);
+                  Q(n,i,j)  = Q1(n,i,j);
                }
             break;
 
             case 2:
                for(int n = 0; n < eq; n++)
                {
-                  Q2(n,i) = 0.5*(Q1(n,i) + Q0(n,i) - (Dt)*(vec.F[n]));
-                  Q(n,i)  = Q2(n,i);
+                  Q2(n,i,j) = 0.5*(Q1(n,i,j) + Q0(n,i,j) - (Dt)*(vec.F[n]));
+                  Q(n,i,j)  = Q2(n,i,j);
                }
             break;
          }
       }
-   }
-}
-
-#elif DIM == 2 || DIM == 4
-
-void Runge_Kutta(int order)
-{
-   int cell[3];
-   double Dx1 = dx1;
-   double Dx2 = dx2;
-   double Dt  = dt;
-   rhs_ vec;
-
-   #pragma omp parallel default(none) shared(U,Q,Q0,Q1,Q2,grid,Nx1,Nx2,Dt,order,U1p,U1m) if (OMP_NUM > 1)
-   {
-      #pragma omp for private(cell,vec,Dx1,Dx2) collapse(2)
-      for(int j = gc; j <= Nx2-gc; j++)
-      {
-         for(int i = gc; i <= Nx1-gc; i++)
-         {
-            cell[0] = i;
-            cell[1] = j;
-       
-            Dx1 = grid.X1p[i] - grid.X1m[i];
-            Dx2 = grid.X2p[j] - grid.X2m[j];
-
-            Numerical_Flux_F(vec.Fp,PLUS,cell);
-            Numerical_Flux_F(vec.Fm,MINUS,cell);
-
-            Numerical_Flux_G(vec.Gp,PLUS,cell);
-            Numerical_Flux_G(vec.Gm,MINUS,cell);
-
-            Prim2Sources(vec.S,cell);
-
-            for(int n = 0; n < eq; n++)
-            {
-               vec.F[n] = (S1p(i,j)*vec.Fp[n] - S1m(i,j)*vec.Fm[n])/(Dx1) + \
-                          (S2p(i,j)*vec.Gp[n] - S2m(i,j)*vec.Gm[n])/(Dx2) - \
-                          vec.S[n];
-
-            }
-       
-#if INTEGRATION == PVRS //PVRS
-            for(int n = 0; n < eq; n++)
-            {
-               vec.L[n] = vec.F[n];
-            }
-
-            MxV(vec.A,vec.L,vec.F);
-#endif
-
-            switch(order)
-            {
-               case 1:
-                  for(int n = 0; n < eq; n++)
-                  {
-                     Q1(n,i,j) = Q0(n,i,j) - (Dt)*(vec.F[n]);
-                     Q(n,i,j)  = Q1(n,i,j);
-                  }
-               break;
-
-               case 2:
-                  for(int n = 0; n < eq; n++)
-                  {
-                     Q2(n,i,j) = 0.5*(Q1(n,i,j) + Q0(n,i,j) - (Dt)*(vec.F[n]));
-                     Q(n,i,j)  = Q2(n,i,j);
-                  }
-               break;
-            }
-         }
-      }
-   }
+   } 
 }
 
 #elif DIM == 3
