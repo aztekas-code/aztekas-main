@@ -26,8 +26,9 @@ void Runge_Kutta(int order)
    rhs_ vec;
 
 #ifdef _OPENMP
-   #pragma omp parallel default(none) shared(U,Q,Q0,Q1,Q2,grid,Nx1,Dt,order,U1p,U1m) if (OMP_NUM > 1)
-   #pragma omp for private(cell,vec,Dx1) 
+   #pragma omp parallel default(none) \
+               shared(U,Q,Q0,Q1,Q2,grid,Nx1,Dt,order,U1p,U1m)
+   #pragma omp for private(cell,vec,Dx1)
 #endif
    for(int i = gc; i <= Nx1-gc; i++)
    {
@@ -87,7 +88,8 @@ void Runge_Kutta(int order)
    rhs_ vec;
 
 #ifdef _OPENMP
-   #pragma omp parallel default(none) shared(U,Q,Q0,Q1,Q2,grid,Nx1,Nx2,Dt,order,U1p,U1m) if (OMP_NUM > 1)
+   #pragma omp parallel default(none) \
+               shared(U,Q,Q0,Q1,Q2,grid,Nx1,Nx2,Dt,order,U1p,U1m)
    #pragma omp for private(cell,vec,Dx1,Dx2) collapse(2)
 #endif
    for(int j = gc; j <= Nx2-gc; j++)

@@ -8,10 +8,10 @@ void Primitive_Reconstruction()
    double dup, dum, sx;
 
 #ifdef _OPENMP
-   #pragma omp parallel shared(U,U1p,U1m) if (OMP_NUM > 1)
+   #pragma omp parallel shared(U,U1p,U1m)
    #pragma omp for private(reconst,dup,dum,sx)
 #endif
-   for(int i = gc-2; i <= Nx1-gc+2; i++)
+   for(int i = 1; i <= Nx1-1; i++)
    {
       reconst = RECONST;
 #if x1min_exc == TRUE
@@ -62,12 +62,12 @@ void Primitive_Reconstruction()
    double dup, dum, sx;
 
 #ifdef _OPENMP
-   #pragma omp parallel shared(U,U1p,U1m,U2p,U2m) if (OMP_NUM > 1)
+   #pragma omp parallel shared(U,U1p,U1m,U2p,U2m)
    #pragma omp for private(reconst,dup,dum,sx) collapse(2)
 #endif
-   for(int i = 0; i <= Nx1-0; i++)
+   for(int i = 1; i <= Nx1-1; i++)
    {
-      for(int j = 0; j <= Nx2-0; j++)
+      for(int j = 1; j <= Nx2-1; j++)
       {
          reconst = RECONST;
 #if x1min_exc == TRUE

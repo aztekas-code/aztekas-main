@@ -11,7 +11,6 @@
     
 int Cons2Prim(double *u, double *q)
 {
-   int i, j, k;
    int count;
    double D, tau, S_cov[3], S_con[3];
    double h, derh, f, derf;
@@ -21,7 +20,12 @@ int Cons2Prim(double *u, double *q)
    
 #if DIM == 1
 
-   for(i = 0; i <= Nx1-0; i++)
+#ifdef _OPENMP
+   #pragma omp parallel
+   #pragma omp for private(D,tau,S_cov,S_con,h,derh,f,derf,\
+                           Lorentz,SS,theta,theta_0,count,local_grid)
+#endif
+   for(int i = 0; i <= Nx1-0; i++)
    {
       local_grid.x[0] = grid.time;
       local_grid.x[1] = grid.X1[i];
@@ -105,9 +109,15 @@ int Cons2Prim(double *u, double *q)
 
 #elif DIM == 2
 
-   for(i = gc; i <= Nx1-gc; i++)
+#ifdef _OPENMP
+   #pragma omp parallel
+   #pragma omp for private(D,tau,S_cov,S_con,h,derh,f,derf,\
+                           Lorentz,SS,theta,theta_0,count,local_grid) \
+                           collapse(2)
+#endif
+   for(int j = gc; j <= Nx2-gc; j++)
    {
-      for(j = gc; j <= Nx2-gc; j++)
+      for(int i = gc; i <= Nx1-gc; i++)
       {
          local_grid.x[0] = grid.time;
          local_grid.x[1] = grid.X1[i];
@@ -116,9 +126,6 @@ int Cons2Prim(double *u, double *q)
          #if POLAR == TRUE
          local_grid.x[2] = M_PI_2;
          #endif
-
-         // Needs to be check. Fails in theta = Pi
-//         if(x2max == M_PI && j == Nx2-gc){break;}
 
          Get_Metric_Components(&local_grid);
 
@@ -197,9 +204,15 @@ int Cons2Prim(double *u, double *q)
 
 #elif DIM == 4
 
-   for(i = 0; i <= Nx1-0; i++)
+#ifdef _OPENMP
+   #pragma omp parallel
+   #pragma omp for private(D,tau,S_cov,S_con,h,derh,f,derf,\
+                           Lorentz,SS,theta,theta_0,count,local_grid) \
+                           collapse(2)
+#endif
+   for(int j = gc; j <= Nx2-gc; j++)
    {
-      for(j = 0; j <= Nx2-0; j++)
+      for(int i = gc; i <= Nx1-gc; i++)
       {
          local_grid.x[0] = grid.time;
          local_grid.x[1] = grid.X1[i];

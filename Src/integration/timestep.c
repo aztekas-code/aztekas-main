@@ -19,7 +19,7 @@ double TimeStep()
 #if DIM == 1
 
 #ifdef _OPENMP
-   #pragma omp parallel shared(U,grid) if (OMP_NUM > 1)
+   #pragma omp parallel shared(U,grid)
    #pragma omp for private(c,Dx1) reduction(min : dtmin)
 #endif
    for(int i = gc; i <= Nx1-gc; i++)
@@ -49,7 +49,7 @@ double TimeStep()
 #elif DIM == 2
 
 #ifdef _OPENMP
-   #pragma omp parallel shared(U,grid) if (OMP_NUM > 1)
+   #pragma omp parallel shared(U,grid) 
    #pragma omp for private(c,Dx1,Dx2) reduction(min : dtmin) collapse(2)
 #endif
    for(int j = gc; j <= Nx2-gc; j++)
@@ -87,7 +87,7 @@ double TimeStep()
 #elif DIM == 4
 
 #ifdef _OPENMP
-   #pragma omp parallel shared(U,grid) if (OMP_NUM > 1)
+   #pragma omp parallel shared(U,grid)
    #pragma omp for private(c,Dx1,Dx2) reduction(min : dtmin) collapse(2)
 #endif
    for(int j = gc; j <= Nx2-gc; j++)

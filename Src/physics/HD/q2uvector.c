@@ -7,7 +7,7 @@ int Cons2Prim(double *u, double *q)
 #if DIM == 1
 
 #ifdef _OPENMP
-   #pragma omp parallel if (OMP_NUM > 1) 
+   #pragma omp parallel
    #pragma omp for private(D,E,S1,S2,S3)
 #endif
    for(int i = 0; i <= Nx1-0; i++)
@@ -30,7 +30,7 @@ int Cons2Prim(double *u, double *q)
 #elif DIM == 2
 
 #ifdef _OPENMP
-   #pragma omp parallel if (OMP_NUM > 1) 
+   #pragma omp parallel
    #pragma omp for private(D,E,S1,S2,S3) collapse(2)
 #endif   
    for(int j = 0; j <= Nx2-0; j++)
@@ -57,7 +57,7 @@ int Cons2Prim(double *u, double *q)
 #elif DIM == 4
 
 #ifdef _OPENMP
-   #pragma omp parallel if (OMP_NUM > 1) 
+   #pragma omp parallel
    #pragma omp for private(D,E,S1,S2,S3) collapse(2)
 #endif   
    for(int j = 0; j <= Nx2-0; j++)

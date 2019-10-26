@@ -23,7 +23,7 @@ OMP_NUM = 6
 # Physics (hd, mhd, rhd, rmhd)
 ###############################################
 
-PHY = hd
+PHY = rhd
 
 ########################################################################################
 # Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
