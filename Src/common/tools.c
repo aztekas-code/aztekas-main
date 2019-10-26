@@ -49,7 +49,10 @@ void RoundGen(double *num)
 
 void Check_Sim_Parameters()
 {
+#ifdef _OPENMP
    MAX_NUM_THREADS = omp_get_max_threads();
+#endif
+
    printf("\n");
    printf("aaaaa  zzzzz  ttttt  eeeee  k   k  aaaaa  sssss\n");
    printf("    a     zz    t    e   e  k  k       a  ss   \n");
@@ -58,7 +61,11 @@ void Check_Sim_Parameters()
    printf("aaaaa  zzzzz    t    eeeee  k   k  aaaaa  sssss\n");
    printf("\n");
    printf("Running aztekas simulation...\n");
-   printf("Operating with %d threads of %d available.\n",OMP_NUM,MAX_NUM_THREADS);
+#ifdef _OPENMP
+   printf("Parallel version operating with %d threads of %d available.\n",OMP_NUM,MAX_NUM_THREADS);
+#else
+   printf("Serial version.\n");
+#endif
    printf("\n");
 
    // Print physics used

@@ -61,8 +61,10 @@ void Primitive_Reconstruction()
    int reconst;
    double dup, dum, sx;
 
+#ifdef _OPENMP
    #pragma omp parallel shared(U,U1p,U1m,U2p,U2m) if (OMP_NUM > 1)
    #pragma omp for private(reconst,dup,dum,sx) collapse(2)
+#endif
    for(int i = 0; i <= Nx1-0; i++)
    {
       for(int j = 0; j <= Nx2-0; j++)

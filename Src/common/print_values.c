@@ -62,5 +62,3 @@ void Print_Values(double *tprint, double *dtprint, int *itprint)
     */
    grid.time = grid.time + dt;
 }
-
-

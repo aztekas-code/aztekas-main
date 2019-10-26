@@ -9,7 +9,12 @@
 #ifdef _OPENMP
    #include<omp.h>
    int MAX_NUM_THREADS;
+   double start;
+#else
+   #include<time.h>
+   clock_t start;
 #endif
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -37,7 +42,6 @@ double *Q, *Q0, *Q1, *Q2, *Q3;
 double *U1p, *U1m;
 double *U2p, *U2m;
 
-double start, delta;
 double K;
 
 /* Define number of grids */

@@ -102,7 +102,7 @@ void Output1_bin(int *itprint)
 
 #elif DIM == 2 || DIM == 4
 
-int Output2(int *itprint)
+void Output2(int *itprint)
 {
    FILE *file;
    int n, i, j, k;

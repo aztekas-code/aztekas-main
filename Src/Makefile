@@ -1,25 +1,27 @@
 #####################################
 
+PARAM += -DOMP_NUM=$(OMP_NUM)
+
+#####################################
+
 ifeq ($(DIM),1)
-	PARAM += -DDIM=1
 	PARAM += -Deq=3
 	PARAM += -Dgraf=1
 endif
 ifeq ($(DIM),2)
-	PARAM += -DDIM=2
 	PARAM += -Deq=4
 	PARAM += -Dgraf=2
 endif
 ifeq ($(DIM),3)
-	PARAM += -DDIM=3
 	PARAM += -Deq=5
 	PARAM += -Dgraf=3
 endif
 ifeq ($(DIM),4)
-	PARAM += -DDIM=4
 	PARAM += -Deq=5
 	PARAM += -Dgraf=2
 endif
+
+PARAM += -DDIM=$(DIM)
 
 #####################################
 
