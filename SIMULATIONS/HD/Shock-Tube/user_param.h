@@ -18,7 +18,7 @@
 #define outflow_x2min      TRUE
 
 #define RECONST            MC
-#define FLUX               HLL
+#define FLUX               HLLC
 #define GRID               UNIFORM
 
 #define INTERFACE          HORIZONTAL

@@ -1,21 +1,40 @@
-% OUTPUT FILE AND DIRECTORY
-outputdirectory = ./prueba/
-outputfile      = disk_ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% PARAMETERS FOR SHOCK TUBE SIMULATION %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% BINARY
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OUTPUT FILE AND DIRECTORY %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+outputdirectory = ./TEST/
+outputfile      = disk_
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RESTART SIMULATION (1 -> true, 0 -> false) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+restart_simulation = 0
+restartfile = ./TEST/disk_0.dat
+restart_filecount = 0
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHECK SIMULATION PARAMETERS (1 -> true, 0 -> false) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+check_param = 0
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OUTPUT FORMAT (0 -> ASCII, 1 -> BINARY) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 binary = 0
 
-% RESTART SIMULATION (1 -> true, 0 -> false)
-restart_simulation = 0
-restartfile = ./prueba/prueba_19.dat
-restart_filecount = 19
-
-% Define mesh
+%%%%%%%%%%%%%%%
+% DEFINE MESH %
+%%%%%%%%%%%%%%%
 Nx1 = 100
 Nx2 = 100
 Nx3 = 0
 
-% Define domain limits
+%%%%%%%%%%%%%%%%%%%%%%%%
+% DEFINE DOMAIN LIMITS %
+%%%%%%%%%%%%%%%%%%%%%%%%
 x1max = 5.0
 x2max = 2.0
 x3max = 1.0 
@@ -23,19 +42,31 @@ x1min = 0.5
 x2min = 0.0
 x3min = 0.0
 
-% Time parameters
-tmax = 100.0
+%%%%%%%%%%%%%%%%%%%
+% TIME PARAMETERS %
+%%%%%%%%%%%%%%%%%%%
+tmax     = 100.0
 timefile = 1.0
+numfile  = 0
+
+%%%%%%%%%%%%%%%%%%
+% COURANT FACTOR %
+%%%%%%%%%%%%%%%%%%
 cou = 0.75
 
-% Polytropic index
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% USER PARAMETERS %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%
+% POLYTROPIC INDEX %
+%%%%%%%%%%%%%%%%%%%%
 K = 1.0001
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% Initial conditions %%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-density_0  = 1.1051141194928027
-pressure_0 = 1.1051141194928027
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% BOUNDARY AND INITIAL PARAMETERS %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+density_0  =  1.1051141194928027
+pressure_0 =  1.1051141194928027
 r_dot_0    = -0.010138520971017357
-phi_dot_0  = 1.0
+phi_dot_0  =  1.0

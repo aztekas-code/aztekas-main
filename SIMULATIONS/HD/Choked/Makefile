@@ -1,6 +1,6 @@
-#####################################
-#### Define dimension parameters ####
-#####################################
+######################################
+######## MAKEFILE FOR AZTEKAS ########
+######################################
 #----------------------------------------------------------------------
 # From the list below, please activate/deactivate the options that     
 # apply to your run. If you modify any of these options, make sure     
@@ -15,15 +15,21 @@ AZTPATH = $(AZTEKAS_PATH)
 
 ###############################################
 # SET NUMBER OF THREADS USED BY OMP
+# You can find the number of threads using
+# $ lscpu
+# or
+# $ nproc
+# Be careful of using only the number of 
+# PHYSICAL cores
 ###############################################
 
-PARAM += -DOMP_NUM=6
+OMP_NUM = 1
 
 ###############################################
-# Physics (hd, mhd, rhd, rmhd)
+# Physics (HD, MHD, RHD, RMHD)
 ###############################################
 
-PHY = hd
+PHY = HD
 
 ########################################################################################
 # Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
@@ -65,31 +71,18 @@ INT = standard
 
 ###############################################
 
+###############################################
+# All user *.c are written here
+###############################################
+
 USR = boundaries.c \
 		initial.c \
 		user_input.c 
 
+###############################################
+# Include a global Makefile in the /Src/ 
+# directory, which include some definitions
+# of parameters, inclusions of other makefiles
+# and compilation orders
+###############################################
 include $(AZTPATH)/Src/Makefile
-
-###############################################
-# Compilation
-###############################################
-
-FLAGS = -Ofast -lm -fopenmp
-
-COMPILER = gcc
-AZT_HEAD = $(AZTPATH)/Src/Headers
-HEADERS = -I$(AZT_HEAD) -I.
-EXEC = aztekas
-
-all: 
-	@echo ""
-	@echo "Compiling problem file ..."
-	$(COMPILER) $(PARAM) $(MAIN) $(USR) $(PHYSICS) $(HEADERS) $(FLAGS) -o $(EXEC)  
-	@echo ""
-	@echo "aztekas compiled successfully"
-	
-clean:
-	rm -f $(EXEC)
-
-###############################################

@@ -17,7 +17,7 @@ AZTPATH = $(AZTEKAS_PATH)
 # SET NUMBER OF THREADS USED BY OMP
 ###############################################
 
-PARAM += -DOMP_NUM=6
+OMP_NUM = 6
 
 ###############################################
 # Physics (hd, mhd, rhd, rmhd)
@@ -75,7 +75,10 @@ include $(AZTPATH)/Src/Makefile
 # Compilation
 ###############################################
 
-FLAGS = -Ofast -lm -fopenmp
+FLAGS = -Ofast -lm
+ifneq ($(OMP_NUM),1)
+   FLAGS += -fopenmp
+endif
 
 COMPILER = gcc
 AZT_HEAD = $(AZTPATH)/Src/include

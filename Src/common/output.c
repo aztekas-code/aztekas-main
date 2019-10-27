@@ -41,9 +41,9 @@ void Output1(int *itprint)
 #elif COORDINATES == CYLINDRICAL
    fprintf(file,"CYLINDRICAL\n");
 #elif COORDINATES == SPHERICAL
-   fprintf(file,"SPHERICAL \n");
+   fprintf(file,"SPHERICAL\n");
 #elif POLAR == TRUE
-   fprintf(file,"POLAR \n");
+   fprintf(file,"POLAR\n");
 #endif
    fprintf(file,"###################################\n");
 
@@ -134,7 +134,7 @@ void Output2(int *itprint)
 #elif COORDINATES == CYLINDRICAL
    fprintf(file,"CYLINDRICAL\n");
 #elif COORDINATES == SPHERICAL
-   fprintf(file,"SPHERICAL \n");
+   fprintf(file,"SPHERICAL\n");
 #elif POLAR == TRUE
    fprintf(file,"POLAR \n");
 #endif

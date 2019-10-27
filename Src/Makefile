@@ -1,7 +1,15 @@
 #####################################
+# GLOBAL MAKEFILE OF AZTEKAS
+#####################################
+
+#####################################
+# OMP PARALELIZATION
+#####################################
 
 PARAM += -DOMP_NUM=$(OMP_NUM)
 
+#####################################
+# DIMENSIONS
 #####################################
 
 ifeq ($(DIM),1)
@@ -24,6 +32,8 @@ endif
 PARAM += -DDIM=$(DIM)
 
 #####################################
+# COORDINATES
+#####################################
 
 ifeq ($(COORD),cartesian)
 	PARAM += -DCOORDINATES=CARTESIAN
@@ -36,6 +46,8 @@ ifeq ($(COORD),spherical)
 endif
 
 #####################################
+# USER SOURCE TERMS 
+#####################################
 
 ifeq ($(USER_SOURCE),true)
    PARAM += -DUSER_SOURCE_TERMS=TRUE
@@ -44,6 +56,8 @@ else
    PARAM += -DUSER_SOURCE_TERMS=FALSE
 endif
 
+#####################################
+# INTEGRATION 
 #####################################
 
 ifeq ($(INT),standard)
@@ -61,10 +75,37 @@ PARAM += -Dgc=3
 
 #####################################
 
-MAIN = $(AZTPATH)/Src/main.c \
+MAIN = $(AZTPATH)/Src/main.c
+
 
 include $(AZTPATH)/Src/common/Makefile
 include $(AZTPATH)/Src/fluxes/Makefile
 include $(AZTPATH)/Src/grid/Makefile
 include $(AZTPATH)/Src/integration/Makefile
 include $(AZTPATH)/Src/physics/Makefile
+
+###############################################
+# Compilation
+###############################################
+
+FLAGS = -Ofast -lm 
+ifneq ($(OMP_NUM),1)
+   FLAGS += -fopenmp
+endif
+
+COMPILER = gcc
+AZT_HEAD = $(AZTPATH)/Src/include
+HEADERS = -I$(AZT_HEAD) -I.
+EXEC = aztekas
+
+all: 
+	@echo ""
+	@echo "Compiling problem file ..."
+	$(COMPILER) $(PARAM) $(MAIN) $(USR) $(PHYSICS) $(HEADERS) $(FLAGS) -o $(EXEC)  
+	@echo ""
+	@echo "aztekas compiled successfully"
+	
+clean:
+	rm -f $(EXEC)
+
+###############################################
