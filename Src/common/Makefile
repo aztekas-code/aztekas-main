@@ -1,4 +1,5 @@
-MAIN += $(AZTPATH)/Src/common/default_boundaries.c \
+MAIN += $(AZTPATH)/Src/common/boundaries.c \
+		  $(AZTPATH)/Src/common/default_boundaries.c \
         $(AZTPATH)/Src/common/freq_output.c \
         $(AZTPATH)/Src/common/initialize.c \
         $(AZTPATH)/Src/common/input.c \

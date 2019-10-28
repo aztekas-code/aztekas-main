@@ -57,8 +57,6 @@ void New_Size();
 
 void Initial();
 
-int Boundaries(double *B);
-
 void Integration();
 
 void Runge_Kutta(int order);

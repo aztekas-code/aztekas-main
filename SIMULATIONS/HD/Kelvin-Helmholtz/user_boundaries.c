@@ -1,18 +1,13 @@
 /*
- * File Name : boundaries.c
+ * File Name : user_boundaries.c
  * Description : aztekas boundaries module for Kelvin-Helmholtz
  * Creation Date : 27-09-2019
- * Last Modified : 27-09-2019 00:05:21
+ * Last Modified : 28-10-2019 17:40:31
  * Created By : Alejandro Aguayo-Ortiz
  */
 
 #include"main.h"
 
-int Boundaries(double *B)
+void User_Boundaries(double *B)
 {
-   int i, j, k, n, cell;
-
-   Periodic(B);
-
-   return 0;
 }

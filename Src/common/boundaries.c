@@ -2,7 +2,7 @@
  * File Name : boundaries.c
  * Description : aztekas boundaries module for Shock-Tube
  * Creation Date : 26-09-2019
- * Last Modified : 18-10-2019 18:21:45
+ * Last Modified : 28-10-2019 17:40:07
  * Created By :
  */
 
@@ -19,20 +19,26 @@ void Boundaries(double *B)
 
    Outflow(B);
 
-#elif reflective_x1max == TRUE \
-   || reflective_x1min == TRUE \
-   || reflective_x2max == TRUE \
-   || reflective_x2min == TRUE \
-   || reflective_x3max == TRUE \
-   || reflective_x3min == TRUE 
+#endif
+
+#if reflective_x1max == TRUE \
+ || reflective_x1min == TRUE \
+ || reflective_x2max == TRUE \
+ || reflective_x2min == TRUE \
+ || reflective_x3max == TRUE \
+ || reflective_x3min == TRUE 
 
    Reflection(B);
 
-#elif periodic_x1 == TRUE \
-   || periodic_x2 == TRUE \
-   || periodic_x3 == TRUE
+#endif
+
+#if periodic_x1 == TRUE \
+ || periodic_x2 == TRUE \
+ || periodic_x3 == TRUE
 
    Periodic(B);
 
 #endif
+
+   User_Boundaries(B);
 }

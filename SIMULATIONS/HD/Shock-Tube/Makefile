@@ -80,8 +80,8 @@ INT = standard
 # All user *.c are written here
 ###############################################
 
-USR = boundaries.c \
-		initial.c \
+USR = initial.c \
+      user_boundaries.c \
 		user_input.c 
 
 ###############################################
