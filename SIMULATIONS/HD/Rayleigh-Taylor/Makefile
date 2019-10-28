@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 #####################################
 #### Define dimension parameters ####
 #####################################
+=======
+######################################
+######## MAKEFILE FOR AZTEKAS ########
+######################################
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 #----------------------------------------------------------------------
 # From the list below, please activate/deactivate the options that     
 # apply to your run. If you modify any of these options, make sure     
@@ -10,6 +16,7 @@
 ###############################################
 # PATH TO AZTEKAS
 ###############################################
+<<<<<<< HEAD
 
 AZTPATH = $(AZTEKAS_PATH)
 
@@ -30,6 +37,33 @@ PHY = hd
 ########################################################################################
 
 ## ONLY IF PHY == rhd or rmhd
+=======
+
+AZTPATH = $(AZTEKAS_PATH)
+
+###############################################
+# SET NUMBER OF THREADS USED BY OMP
+# You can find the number of threads using
+# $ lscpu
+# or
+# $ nproc
+# Be careful of using only the number of 
+# PHYSICAL cores
+###############################################
+
+OMP_NUM = 1
+
+###############################################
+# Physics (HD, MHD, RHD, RMHD)
+###############################################
+
+PHY = HD
+
+########################################################################################
+# Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
+########################################################################################
+
+## ONLY IF PHY == rhd or rmhd
 
 METRIC = Minkowski
 
@@ -42,19 +76,43 @@ EOS = ideal
 ###############################################
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
 ###############################################
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
+
+METRIC = Minkowski
+
+###############################################
+<<<<<<< HEAD
+# Equation of State (ideal, dust, stiff)
+###############################################
+
+EOS = ideal
+
+###############################################
+# Dimension (1, 2 or 3. Enter 4 for 2.5)
+###############################################
 
 DIM = 2
 
 ###############################################
+=======
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 # Coordinates (cartesian,cylindrical,spherical)
 ###############################################
 
 COORD = cartesian
+<<<<<<< HEAD
 
 ###############################################
 # User Source Terms (true,false)
 ###############################################
 
+=======
+
+###############################################
+# User Source Terms (true,false)
+###############################################
+
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 USER_SOURCE = true
 
 ###############################################
@@ -65,10 +123,18 @@ INT = standard
 
 ###############################################
 
+<<<<<<< HEAD
+=======
+###############################################
+# All user *.c are written here
+###############################################
+
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 USR = boundaries.c \
 		initial.c \
 		user_input.c 
 
+<<<<<<< HEAD
 include $(AZTPATH)/Src/Makefile
 
 ###############################################
@@ -93,3 +159,12 @@ clean:
 	rm -f $(EXEC)
 
 ###############################################
+=======
+###############################################
+# Include a global Makefile in the /Src/ 
+# directory, which include some definitions
+# of parameters, inclusions of other makefiles
+# and compilation orders
+###############################################
+include $(AZTPATH)/Src/Makefile
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907

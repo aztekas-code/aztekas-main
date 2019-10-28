@@ -18,10 +18,17 @@
 #define outflow_x2min      TRUE
 
 #define RECONST            MC
+<<<<<<< HEAD
 #define FLUX               HLL
 #define GRID               UNIFORM
 
 #define INTERFACE          VERTICAL
+=======
+#define FLUX               HLLC
+#define GRID               UNIFORM
+
+#define INTERFACE          HORIZONTAL
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 
 double rhol, pl, vx1l, vx2l, vx3l;
 double rhor, pr, vx1r, vx2r, vx3r;

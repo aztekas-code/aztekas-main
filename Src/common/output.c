@@ -1,5 +1,9 @@
 /**
+<<<<<<< HEAD
  * @file output.c
+=======
+ * @file print_values.c
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
  *
  * @authors Alejandro Aguayo-Oritz and Emilio Tejeda
  *
@@ -8,6 +12,7 @@
 
 #include"main.h"
 
+<<<<<<< HEAD
 int PrintValues(double *tprint, double *dtprint, int *itprint)
 {
    int n, i, j, k;
@@ -67,6 +72,11 @@ int PrintValues(double *tprint, double *dtprint, int *itprint)
 #if DIM == 1
 
 int Output1(int *itprint)
+=======
+#if DIM == 1
+
+void Output1(int *itprint)
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 {
    FILE *file;
    int n, i, j, k;
@@ -97,9 +107,15 @@ int Output1(int *itprint)
 #elif COORDINATES == CYLINDRICAL
    fprintf(file,"CYLINDRICAL\n");
 #elif COORDINATES == SPHERICAL
+<<<<<<< HEAD
    fprintf(file,"SPHERICAL \n");
 #elif POLAR == TRUE
    fprintf(file,"POLAR \n");
+=======
+   fprintf(file,"SPHERICAL\n");
+#elif POLAR == TRUE
+   fprintf(file,"POLAR\n");
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 #endif
    fprintf(file,"###################################\n");
 
@@ -113,11 +129,17 @@ int Output1(int *itprint)
 
    printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
+<<<<<<< HEAD
 
    return 0;
 }
 
 int Output1_bin(int *itprint)
+=======
+}
+
+void Output1_bin(int *itprint)
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 {
    FILE *file;
    int n, i, j, k, size_X1;
@@ -156,13 +178,20 @@ int Output1_bin(int *itprint)
 
    printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
+<<<<<<< HEAD
 
    return 0;
+=======
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 }
 
 #elif DIM == 2 || DIM == 4
 
+<<<<<<< HEAD
 int Output2(int *itprint)
+=======
+void Output2(int *itprint)
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 {
    FILE *file;
    int n, i, j, k;
@@ -194,7 +223,11 @@ int Output2(int *itprint)
 #elif COORDINATES == CYLINDRICAL
    fprintf(file,"CYLINDRICAL\n");
 #elif COORDINATES == SPHERICAL
+<<<<<<< HEAD
    fprintf(file,"SPHERICAL \n");
+=======
+   fprintf(file,"SPHERICAL\n");
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 #elif POLAR == TRUE
    fprintf(file,"POLAR \n");
 #endif
@@ -227,11 +260,17 @@ int Output2(int *itprint)
 
    printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
+<<<<<<< HEAD
 
    return 0;
 }
 
 int Output2_bin(int *itprint)
+=======
+}
+
+void Output2_bin(int *itprint)
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 {
    FILE *file;
    int n, i, j, k, size_X1, size_X2;
@@ -292,13 +331,20 @@ int Output2_bin(int *itprint)
 
    printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
+<<<<<<< HEAD
 
    return 0;
+=======
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 }
 
 #elif DIM == 3
 
+<<<<<<< HEAD
 int Output3(int *itprint)
+=======
+void Output3(int *itprint)
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 {
    FILE *file;
    int n, i, j, k;
@@ -355,11 +401,17 @@ int Output3(int *itprint)
 
    printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
+<<<<<<< HEAD
 
    return 0;
 }
 
 int Output3_bin(int *itprint)
+=======
+}
+
+void Output3_bin(int *itprint)
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 {
    FILE *file;
    int n, i, j, k, size_X1, size_X2, size_X3;
@@ -414,8 +466,11 @@ int Output3_bin(int *itprint)
 
    printf("itprint : %d, output file : %s\n",*itprint,archivo);
    fclose(file);
+<<<<<<< HEAD
 
    return 0;
+=======
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 }
 
 #endif 

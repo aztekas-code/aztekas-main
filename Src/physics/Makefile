@@ -1,5 +1,6 @@
 #####################################
 
+<<<<<<< HEAD
 ifeq ($(PHY),hd)
       PARAM += -DPHYSICS=HD
       include $(AZTPATH)/Src/physics/HD/Makefile
@@ -8,6 +9,10 @@ ifeq ($(PHY),rhd)
       PARAM += -DPHYSICS=RHD
       include $(AZTPATH)/Src/physics/RHD/Makefile
 endif
+=======
+PARAM += -DPHYSICS=$(PHY)
+include $(AZTPATH)/Src/physics/$(PHY)/Makefile
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 
 #####################################
 

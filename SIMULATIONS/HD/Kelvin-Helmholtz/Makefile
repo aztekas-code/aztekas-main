@@ -1,6 +1,12 @@
+<<<<<<< HEAD
 #####################################
 #### Define dimension parameters ####
 #####################################
+=======
+######################################
+######## MAKEFILE FOR AZTEKAS ########
+######################################
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 #----------------------------------------------------------------------
 # From the list below, please activate/deactivate the options that     
 # apply to your run. If you modify any of these options, make sure     
@@ -10,6 +16,7 @@
 ###############################################
 # PATH TO AZTEKAS
 ###############################################
+<<<<<<< HEAD
 
 AZTPATH = $(AZTEKAS_PATH)
 
@@ -18,6 +25,28 @@ AZTPATH = $(AZTEKAS_PATH)
 ###############################################
 
 PHY = hd
+=======
+
+AZTPATH = $(AZTEKAS_PATH)
+
+###############################################
+# SET NUMBER OF THREADS USED BY OMP
+# You can find the number of threads using
+# $ lscpu
+# or
+# $ nproc
+# Be careful of using only the number of 
+# PHYSICAL cores
+###############################################
+
+OMP_NUM = 1
+
+###############################################
+# Physics (HD, MHD, RHD, RMHD)
+###############################################
+
+PHY = HD
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 
 ########################################################################################
 # Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
@@ -48,6 +77,7 @@ COORD = cartesian
 ###############################################
 # User Source Terms (true,false)
 ###############################################
+<<<<<<< HEAD
 
 USER_SOURCE = false
 
@@ -88,3 +118,31 @@ clean:
 	rm -f $(EXEC)
 
 ###############################################
+=======
+
+USER_SOURCE = false
+
+###############################################
+# Integration method
+###############################################
+
+INT = standard
+
+###############################################
+
+###############################################
+# All user *.c are written here
+###############################################
+
+USR = boundaries.c \
+		initial.c \
+		user_input.c 
+
+###############################################
+# Include a global Makefile in the /Src/ 
+# directory, which include some definitions
+# of parameters, inclusions of other makefiles
+# and compilation orders
+###############################################
+include $(AZTPATH)/Src/Makefile
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907

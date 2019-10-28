@@ -13,7 +13,11 @@ void Cons2Prim(double *u, double *q, gauge_ local_grid)
 #elif DIM == 2
    S1 = q[MX1];
    S2 = q[MX2];
+<<<<<<< HEAD
 #elif DIM == 2
+=======
+#elif DIM == 3 || DIM == 4
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
    S1 = q[MX1];
    S2 = q[MX2];
    S3 = q[MX3];

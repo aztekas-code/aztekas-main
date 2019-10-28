@@ -2,12 +2,23 @@
     
 int Cons2Prim(double *u, double *q)
 {
+<<<<<<< HEAD
    int i, j, k;
+=======
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
    double D, E, S1, S2, S3;
    
 #if DIM == 1
 
+<<<<<<< HEAD
    for(i = 0; i <= Nx1-0; i++)
+=======
+#ifdef _OPENMP
+   #pragma omp parallel
+   #pragma omp for private(D,E,S1,S2,S3)
+#endif
+   for(int i = 0; i <= Nx1-0; i++)
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
    {
       D  = q(0,i);
       E  = q(1,i);
@@ -26,9 +37,19 @@ int Cons2Prim(double *u, double *q)
 
 #elif DIM == 2
 
+<<<<<<< HEAD
    for(i = 0; i <= Nx1-0; i++)
    {
       for(j = 0; j <= Nx2-0; j++)
+=======
+#ifdef _OPENMP
+   #pragma omp parallel
+   #pragma omp for private(D,E,S1,S2,S3) collapse(2)
+#endif   
+   for(int j = 0; j <= Nx2-0; j++)
+   {
+      for(int i = 0; i <= Nx1-0; i++)
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
       {
          D  = q(0,i,j);
          E  = q(1,i,j);
@@ -49,9 +70,19 @@ int Cons2Prim(double *u, double *q)
 
 #elif DIM == 4
 
+<<<<<<< HEAD
    for(i = 0; i <= Nx1-0; i++)
    {
       for(j = 0; j <= Nx2-0; j++)
+=======
+#ifdef _OPENMP
+   #pragma omp parallel
+   #pragma omp for private(D,E,S1,S2,S3) collapse(2)
+#endif   
+   for(int j = 0; j <= Nx2-0; j++)
+   {
+      for(int i = 0; i <= Nx1-0; i++)
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
       {
          D  = q(0,i,j);
          E  = q(1,i,j);

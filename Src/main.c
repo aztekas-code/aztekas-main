@@ -75,15 +75,24 @@ int main(int argc, char *argv[])
     */
    Frequency_Output(&dtprint);
 
+<<<<<<< HEAD
    start = omp_get_wtime();
    omp_set_num_threads(OMP_NUM);
+=======
+#ifdef _OPENMP
+   start = omp_get_wtime();
+   omp_set_num_threads(OMP_NUM);
+#else
+   start = clock();
+#endif
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
    while(grid.time <= tmax)
    {
       //In this part we compute the time step
       dt = TimeStep();
 
       //We print the values: file (DATOS*) and to terminal func_planarOUTPUT.c
-      PrintValues(&tprint,&dtprint,&itprint);
+      Print_Values(&tprint,&dtprint,&itprint);
 
       //In here we set the integration method (Finite volume method)
       Integration();
@@ -92,11 +101,22 @@ int main(int argc, char *argv[])
       fflush(stdout); 
    }
 
-   PrintValues(&tprint,&dtprint,&itprint);
+   Print_Values(&tprint,&dtprint,&itprint);
 
+<<<<<<< HEAD
    delta = omp_get_wtime() - start;
    printf("Expend %.4f seconds with %d threads of %d available.\n",omp_get_wtime()-start,OMP_NUM,MAX_NUM_THREADS);
 
+=======
+   printf("\n");
+#ifdef _OPENMP
+   printf("Expend %.4f seconds parallelized using  %d threads of %d available.\n",omp_get_wtime()-start,OMP_NUM,MAX_NUM_THREADS);
+#else
+   printf("Expend %.4f seconds in serial version.\n",((double)(clock()-start))/CLOCKS_PER_SEC);
+#endif
+
+   free(U);
+>>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
    free(grid.X1);
    free(grid.X2);
    free(grid.X3);
