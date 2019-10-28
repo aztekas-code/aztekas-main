@@ -7,12 +7,6 @@ void Primitive_Reconstruction()
    int reconst;
    double dup, dum, sx;
 
-<<<<<<< HEAD
-   #pragma omp parallel shared(U,U1p,U1m) if (OMP_NUM > 1)
-   {
-      #pragma omp for private(reconst,dup,dum,sx)
-      for(int i = gc-2; i <= Nx1-gc+2; i++)
-=======
 #ifdef _OPENMP
    #pragma omp parallel shared(U,U1p,U1m)
    #pragma omp for private(reconst,dup,dum,sx)
@@ -74,7 +68,6 @@ void Primitive_Reconstruction()
    for(int i = 1; i <= Nx1-1; i++)
    {
       for(int j = 1; j <= Nx2-1; j++)
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
       {
          reconst = RECONST;
 #if x1min_exc == TRUE
@@ -92,104 +85,6 @@ void Primitive_Reconstruction()
          {
             if(reconst == WENO5)
             {
-<<<<<<< HEAD
-               U1m(n,i) = Weno5(U(n,i+2),\
-                                U(n,i+1),\
-                                U(n, i ),\
-                                U(n,i-1),\
-                                U(n,i-2));
-               U1p(n,i) = Weno5(U(n,i-2),\
-                                U(n,i-1),\
-                                U(n, i ),\
-                                U(n,i+1),\
-                                U(n,i+2));
-            }
-            else
-            {
-               dum = U(n, i ) - U(n,i-1);
-               dup = U(n,i+1) - U(n, i );
-
-               sx  = Limiter(dup,dum,reconst);
-
-               U1m(n,i) = U(n,i) - 0.5*sx;
-               U1p(n,i) = U(n,i) + 0.5*sx;
-            }
-         }
-      }
-   }
-}
-
-#elif DIM == 2 || DIM == 4
-
-void Primitive_Reconstruction()
-{
-   int reconst;
-   double dup, dum, sx;
-
-   #pragma omp parallel shared(U,U1p,U1m,U2p,U2m) if (OMP_NUM > 1)
-   {
-      #pragma omp for private(reconst,dup,dum,sx) collapse(2)
-      for(int i = 0; i <= Nx1-0; i++)
-      {
-         for(int j = 0; j <= Nx2-0; j++)
-         {
-            reconst = RECONST;
-#if x1min_exc == TRUE
-            if (i <= 2*gc && RECONST == WENO5)
-            {
-               reconst = MC;
-            }
-            if (i <= 2*gc && RECONST != WENO5)
-            {
-               reconst = GODUNOV;
-            }
-#endif
-
-            for(int n = 0; n < eq; n++)
-            {
-               if(reconst == WENO5)
-               {
-                  U1m(n,i,j) = Weno5(U(n,i+2,j),\
-                                     U(n,i+1,j),\
-                                     U(n, i ,j),\
-                                     U(n,i-1,j),\
-                                     U(n,i-2,j));
-                  U1p(n,i,j) = Weno5(U(n,i-2,j),\
-                                     U(n,i-1,j),\
-                                     U(n, i ,j),\
-                                     U(n,i+1,j),\
-                                     U(n,i+2,j));
-
-                  U2m(n,i,j) = Weno5(U(n,i,j+2),\
-                                     U(n,i,j+1),\
-                                     U(n,i, j ),\
-                                     U(n,i,j-1),\
-                                     U(n,i,j-2));
-                  U2p(n,i,j) = Weno5(U(n,i,j-2),\
-                                     U(n,i,j-1),\
-                                     U(n,i, j ),\
-                                     U(n,i,j+1),\
-                                     U(n,i,j+2));
-               }
-               else
-               {
-                  dum = U(n, i ,j) - U(n,i-1,j);
-                  dup = U(n,i+1,j) - U(n, i ,j);
-
-                  sx  = Limiter(dup,dum,reconst);
-
-                  U1m(n,i,j) = U(n,i,j) - 0.5*sx;
-                  U1p(n,i,j) = U(n,i,j) + 0.5*sx;
-
-                  dum = U(n,i, j ) - U(n,i,j-1);
-                  dup = U(n,i,j+1) - U(n,i, j );
-
-                  sx  = Limiter(dup,dum,reconst);
-
-                  U2m(n,i,j) = U(n,i,j) - 0.5*sx;
-                  U2p(n,i,j) = U(n,i,j) + 0.5*sx;
-               }
-=======
                U1m(n,i,j) = Weno5(U0(n,i+2,j),\
                                   U0(n,i+1,j),\
                                   U0(n, i ,j),\
@@ -229,7 +124,6 @@ void Primitive_Reconstruction()
 
                U2m(n,i,j) = U0(n,i,j) - 0.5*sx;
                U2p(n,i,j) = U0(n,i,j) + 0.5*sx;
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
             }
          }
       }

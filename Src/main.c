@@ -75,17 +75,12 @@ int main(int argc, char *argv[])
     */
    Frequency_Output(&dtprint);
 
-<<<<<<< HEAD
-   start = omp_get_wtime();
-   omp_set_num_threads(OMP_NUM);
-=======
 #ifdef _OPENMP
    start = omp_get_wtime();
    omp_set_num_threads(OMP_NUM);
 #else
    start = clock();
 #endif
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
    while(grid.time <= tmax)
    {
       //In this part we compute the time step
@@ -103,11 +98,6 @@ int main(int argc, char *argv[])
 
    Print_Values(&tprint,&dtprint,&itprint);
 
-<<<<<<< HEAD
-   delta = omp_get_wtime() - start;
-   printf("Expend %.4f seconds with %d threads of %d available.\n",omp_get_wtime()-start,OMP_NUM,MAX_NUM_THREADS);
-
-=======
    printf("\n");
 #ifdef _OPENMP
    printf("Expend %.4f seconds parallelized using  %d threads of %d available.\n",omp_get_wtime()-start,OMP_NUM,MAX_NUM_THREADS);
@@ -116,7 +106,6 @@ int main(int argc, char *argv[])
 #endif
 
    free(U);
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
    free(grid.X1);
    free(grid.X2);
    free(grid.X3);

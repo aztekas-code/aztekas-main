@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 #####################################
 #### Define dimension parameters ####
 #####################################
-=======
-######################################
-######## MAKEFILE FOR AZTEKAS ########
-######################################
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 #----------------------------------------------------------------------
 # From the list below, please activate/deactivate the options that     
 # apply to your run. If you modify any of these options, make sure     
@@ -20,29 +14,16 @@
 AZTPATH = $(AZTEKAS_PATH)
 
 ###############################################
-<<<<<<< HEAD
+# SET NUMBER OF THREADS USED BY OMP
+###############################################
+
+PARAM += -DOMP_NUM=6
+
+###############################################
 # Physics (hd, mhd, rhd, rmhd)
 ###############################################
 
 PHY = hd
-=======
-# SET NUMBER OF THREADS USED BY OMP
-# You can find the number of threads using
-# $ lscpu
-# or
-# $ nproc
-# Be careful of using only the number of 
-# PHYSICAL cores
-###############################################
-
-OMP_NUM = 1
-
-###############################################
-# Physics (HD, MHD, RHD, RMHD)
-###############################################
-
-PHY = HD
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 
 ########################################################################################
 # Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
@@ -84,28 +65,20 @@ INT = standard
 
 ###############################################
 
-<<<<<<< HEAD
-=======
-###############################################
-# All user *.c are written here
-###############################################
-
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 USR = boundaries.c \
 		initial.c \
 		user_input.c 
 
-<<<<<<< HEAD
 include $(AZTPATH)/Src/Makefile
 
 ###############################################
 # Compilation
 ###############################################
 
-FLAGS = -Ofast -lm 
+FLAGS = -Ofast -lm -fopenmp
 
 COMPILER = gcc
-AZT_HEAD = $(AZTPATH)/Src/Headers
+AZT_HEAD = $(AZTPATH)/Src/include
 HEADERS = -I$(AZT_HEAD) -I.
 EXEC = aztekas
 
@@ -120,12 +93,3 @@ clean:
 	rm -f $(EXEC)
 
 ###############################################
-=======
-###############################################
-# Include a global Makefile in the /Src/ 
-# directory, which include some definitions
-# of parameters, inclusions of other makefiles
-# and compilation orders
-###############################################
-include $(AZTPATH)/Src/Makefile
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907

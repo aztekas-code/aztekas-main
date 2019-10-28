@@ -11,10 +11,6 @@
     
 int Cons2Prim(double *u, double *q)
 {
-<<<<<<< HEAD
-   int i, j, k;
-=======
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
    int count;
    double D, tau, S_cov[3], S_con[3];
    double h, derh, f, derf;
@@ -24,16 +20,12 @@ int Cons2Prim(double *u, double *q)
    
 #if DIM == 1
 
-<<<<<<< HEAD
-   for(i = 0; i <= Nx1-0; i++)
-=======
 #ifdef _OPENMP
    #pragma omp parallel
    #pragma omp for private(D,tau,S_cov,S_con,h,derh,f,derf,\
                            Lorentz,SS,theta,theta_0,count,local_grid)
 #endif
    for(int i = 0; i <= Nx1-0; i++)
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
    {
       local_grid.x[0] = grid.time;
       local_grid.x[1] = grid.X1[i];
@@ -95,11 +87,7 @@ int Cons2Prim(double *u, double *q)
             printf("Spend too much time in Newton-Rhapson.\n");
             CHECK_NAN = TRUE;
             U = U0;
-<<<<<<< HEAD
-            PrintValues(&grid.time,&theta,&CHECK_NAN);
-=======
             Print_Values(&grid.time,&theta,&CHECK_NAN);
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
             exit(EXIT_FAILURE);
          }
       }
@@ -121,11 +109,6 @@ int Cons2Prim(double *u, double *q)
 
 #elif DIM == 2
 
-<<<<<<< HEAD
-   for(i = gc; i <= Nx1-gc; i++)
-   {
-      for(j = gc; j <= Nx2-gc; j++)
-=======
 #ifdef _OPENMP
    #pragma omp parallel
    #pragma omp for private(D,tau,S_cov,S_con,h,derh,f,derf,\
@@ -135,7 +118,6 @@ int Cons2Prim(double *u, double *q)
    for(int j = gc; j <= Nx2-gc; j++)
    {
       for(int i = gc; i <= Nx1-gc; i++)
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
       {
          local_grid.x[0] = grid.time;
          local_grid.x[1] = grid.X1[i];
@@ -145,12 +127,6 @@ int Cons2Prim(double *u, double *q)
          local_grid.x[2] = M_PI_2;
          #endif
 
-<<<<<<< HEAD
-         // Needs to be check. Fails in theta = Pi
-//         if(x2max == M_PI && j == Nx2-gc){break;}
-
-=======
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
          Get_Metric_Components(&local_grid);
 
          D        = q(0,i,j);
@@ -204,11 +180,7 @@ int Cons2Prim(double *u, double *q)
                printf("Spend too much time in Newton-Rhapson.\n");
                CHECK_NAN = TRUE;
                U = U0;
-<<<<<<< HEAD
-               PrintValues(&grid.time,&theta,&CHECK_NAN);
-=======
                Print_Values(&grid.time,&theta,&CHECK_NAN);
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
                exit(EXIT_FAILURE);
             }
          }
@@ -232,11 +204,6 @@ int Cons2Prim(double *u, double *q)
 
 #elif DIM == 4
 
-<<<<<<< HEAD
-   for(i = 0; i <= Nx1-0; i++)
-   {
-      for(j = 0; j <= Nx2-0; j++)
-=======
 #ifdef _OPENMP
    #pragma omp parallel
    #pragma omp for private(D,tau,S_cov,S_con,h,derh,f,derf,\
@@ -246,7 +213,6 @@ int Cons2Prim(double *u, double *q)
    for(int j = gc; j <= Nx2-gc; j++)
    {
       for(int i = gc; i <= Nx1-gc; i++)
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
       {
          local_grid.x[0] = grid.time;
          local_grid.x[1] = grid.X1[i];
@@ -306,11 +272,7 @@ int Cons2Prim(double *u, double *q)
                printf("%d %d %e %e %e %e\n",i,j,D,tau,SS,f);
                CHECK_NAN = TRUE;
                U = U0;
-<<<<<<< HEAD
-               PrintValues(&grid.time,&theta,&CHECK_NAN);
-=======
                Print_Values(&grid.time,&theta,&CHECK_NAN);
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
                exit(EXIT_FAILURE);
             }
          }

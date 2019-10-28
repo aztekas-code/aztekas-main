@@ -28,21 +28,6 @@ void Check_Sim_Parameters();
 
 void Init_Simulation(double *tprint, int *itprint);
 
-<<<<<<< HEAD
-int PrintValues(double *tprint, double *dtprint, int *itprint);
-
-int Output1(int *itprint);
-
-int Output2(int *itprint);
-
-int Output3(int *itprint);
-
-int Output1_bin(int *itprint);
-
-int Output2_bin(int *itprint);
-
-int Output3_bin(int *itprint);
-=======
 void Print_Values(double *tprint, double *dtprint, int *itprint);
 
 void Output1(int *itprint);
@@ -56,7 +41,6 @@ void Output1_bin(int *itprint);
 void Output2_bin(int *itprint);
 
 void Output3_bin(int *itprint);
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 
 void Restart();
 

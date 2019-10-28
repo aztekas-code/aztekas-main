@@ -21,11 +21,7 @@ void Allocate_Array()
    /**
     * Vectors for the X1 grid. X1p = X1(i+1/2) and X1m = X1(i-1/2)
     */
-<<<<<<< HEAD
-   grid.X1 = (double *)malloc((Nx1+1)*sizeof(double));
-=======
    grid.X1  = (double *)malloc((Nx1+1)*sizeof(double));
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
    grid.X1p = (double *)malloc((Nx1+1)*sizeof(double));
    grid.X1m = (double *)malloc((Nx1+1)*sizeof(double));
 

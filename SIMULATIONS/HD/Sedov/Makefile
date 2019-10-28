@@ -1,12 +1,6 @@
-<<<<<<< HEAD
-#####################################
-#### Define dimension parameters ####
-#####################################
-=======
 ######################################
 ######## MAKEFILE FOR AZTEKAS ########
 ######################################
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 #----------------------------------------------------------------------
 # From the list below, please activate/deactivate the options that     
 # apply to your run. If you modify any of these options, make sure     
@@ -16,29 +10,18 @@
 ###############################################
 # PATH TO AZTEKAS
 ###############################################
-<<<<<<< HEAD
-
-AZTPATH = $(AZTEKAS_PATH)
-
-###############################################
-# Physics (hd, mhd, rhd, rmhd)
-###############################################
-
-PHY = hd
-
-########################################################################################
-# Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
-########################################################################################
-
-## ONLY IF PHY == rhd or rmhd
-
-METRIC = Minkowski
-=======
 
 AZTPATH = $(AZTEKAS_PATH)
 
 ###############################################
 # SET NUMBER OF THREADS USED BY OMP
+###############################################
+
+OMP_NUM = 3
+
+###############################################
+# Physics (hd, mhd, rhd, rmhd)
+###############################################
 # You can find the number of threads using
 # $ lscpu
 # or
@@ -47,13 +30,17 @@ AZTPATH = $(AZTEKAS_PATH)
 # PHYSICAL cores
 ###############################################
 
-OMP_NUM = 1
-
 ###############################################
 # Physics (HD, MHD, RHD, RMHD)
 ###############################################
 
 PHY = HD
+
+###############################################
+# Dimension (1, 2 or 3. Enter 4 for 2.5)
+###############################################
+
+DIM = 1
 
 ########################################################################################
 # Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
@@ -70,31 +57,10 @@ METRIC = Minkowski
 EOS = ideal
 
 ###############################################
-# Dimension (1, 2 or 3. Enter 4 for 2.5)
-###############################################
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
-
-###############################################
-# Equation of State (ideal, dust, stiff)
-###############################################
-
-<<<<<<< HEAD
-EOS = ideal
-
-###############################################
-# Dimension (1, 2 or 3. Enter 4 for 2.5)
-###############################################
-
-DIM = 1
-
-=======
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
-###############################################
 # Coordinates (cartesian,cylindrical,spherical)
 ###############################################
 
 COORD = spherical
-<<<<<<< HEAD
 
 ###############################################
 # User Source Terms (true,false)
@@ -103,16 +69,6 @@ COORD = spherical
 USER_SOURCE = false
 
 ###############################################
-=======
-
-###############################################
-# User Source Terms (true,false)
-###############################################
-
-USER_SOURCE = false
-
-###############################################
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 # Integration method
 ###############################################
 
@@ -120,44 +76,14 @@ INT = standard
 
 ###############################################
 
-<<<<<<< HEAD
-=======
 ###############################################
 # All user *.c are written here
 ###############################################
 
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907
 USR = boundaries.c \
 		initial.c \
 		user_input.c 
 
-<<<<<<< HEAD
-include $(AZTPATH)/Src/Makefile
-
-###############################################
-# Compilation
-###############################################
-
-FLAGS = -Ofast -lm -fopenmp
-PARAM += -DOMP_NUM=6
-
-COMPILER = gcc
-AZT_HEAD = $(AZTPATH)/Src/Headers
-HEADERS = -I$(AZT_HEAD) -I.
-EXEC = aztekas
-
-all: 
-	@echo ""
-	@echo "Compiling problem file ..."
-	$(COMPILER) $(PARAM) $(MAIN) $(USR) $(PHYSICS) $(HEADERS) $(FLAGS) -o $(EXEC)  
-	@echo ""
-	@echo "aztekas compiled successfully"
-	
-clean:
-	rm -f $(EXEC)
-
-###############################################
-=======
 ###############################################
 # Include a global Makefile in the /Src/ 
 # directory, which include some definitions
@@ -165,4 +91,3 @@ clean:
 # and compilation orders
 ###############################################
 include $(AZTPATH)/Src/Makefile
->>>>>>> 12b3acd607466560c2bebb7b61677f23252c7907

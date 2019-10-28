@@ -10,23 +10,60 @@ void Prim2Cons_All(double *q, double *u)
 
 #if DIM == 1
 
-   #pragma omp parallel shared(grid) if (OMP_NUM > 1)
+#ifdef _OPENMP
+   #pragma omp parallel shared(grid)
+   #pragma omp for private(rho,p,vx1,vx2,vx3,E,local_grid,eos,P)
+#endif
+   for(int i = 0; i <= Nx1; i++)
    {
-      #pragma omp for private(rho,p,vx1,vx2,vx3,E,local_grid,eos,P)
-      for(int i = 0; i <= Nx1; i++)
+      local_grid.x[0] = grid.time;
+      local_grid.x[1] = grid.X1[i];
+      local_grid.x[2] = 0.0;
+      local_grid.x[3] = 0.0;
+      #if COORDINATES == SPHERICAL
+      local_grid.x[2] = M_PI_2;
+      #endif
+    
+      rho = u(0,i);
+      p   = u(1,i);
+      vx1 = u(2,i);
+      vx2 = 0.0;
+      vx3 = 0.0;
+
+      P[0] = rho;
+      P[1] = p;
+
+      EoS(&eos,P,&local_grid);
+
+      E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
+
+      q(RHO,i) = rho;
+      q(PRE,i) = E;
+      q(VX1,i) = rho*vx1;
+   }
+
+#elif DIM == 2
+
+#if _OPEN_MP
+   #pragma omp parallel shared (grid)
+   #pragma omp for private(rho,p,vx1,vx2,vx3,E,local_grid,eos,P) collapse(2)
+#endif
+   for(int j = 0; j <= Nx2-0; j++)
+   {
+      for(int i = 0; i <= Nx1-0; i++)
       {
          local_grid.x[0] = grid.time;
          local_grid.x[1] = grid.X1[i];
-         local_grid.x[2] = 0.0;
+         local_grid.x[2] = grid.X2[j];
          local_grid.x[3] = 0.0;
-         #if COORDINATES == SPHERICAL
+         #if POLAR == TRUE
          local_grid.x[2] = M_PI_2;
          #endif
        
-         rho = u(0,i);
-         p   = u(1,i);
-         vx1 = u(2,i);
-         vx2 = 0.0;
+         rho = u(0,i,j);
+         p   = u(1,i,j);
+         vx1 = u(2,i,j);
+         vx2 = u(3,i,j);
          vx3 = 0.0;
 
          P[0] = rho;
@@ -35,84 +72,47 @@ void Prim2Cons_All(double *q, double *u)
          EoS(&eos,P,&local_grid);
 
          E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
-
-         q(RHO,i) = rho;
-         q(PRE,i) = E;
-         q(VX1,i) = rho*vx1;
-      }
-   }
-
-#elif DIM == 2
-
-   #pragma omp parallel shared (grid) if (OMP_NUM > 1)
-   {
-      #pragma omp for private(rho,p,vx1,vx2,vx3,E,local_grid,eos,P) collapse(2)
-      for(int j = 0; j <= Nx2-0; j++)
-      {
-         for(int i = 0; i <= Nx1-0; i++)
-         {
-            local_grid.x[0] = grid.time;
-            local_grid.x[1] = grid.X1[i];
-            local_grid.x[2] = grid.X2[j];
-            local_grid.x[3] = 0.0;
-            #if POLAR == TRUE
-            local_grid.x[2] = M_PI_2;
-            #endif
-          
-            rho = u(0,i,j);
-            p   = u(1,i,j);
-            vx1 = u(2,i,j);
-            vx2 = u(3,i,j);
-            vx3 = 0.0;
-
-            P[0] = rho;
-            P[1] = p;
-
-            EoS(&eos,P,&local_grid);
-
-            E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
-    
-            q(RHO,i,j) = rho;
-            q(PRE,i,j) = E;
-            q(VX1,i,j) = rho*vx1;
-            q(VX2,i,j) = rho*vx2;
-         }
+   
+         q(RHO,i,j) = rho;
+         q(PRE,i,j) = E;
+         q(VX1,i,j) = rho*vx1;
+         q(VX2,i,j) = rho*vx2;
       }
    }
 
 #elif DIM == 4
 
-   #pragma omp parallel shared (grid) if (OMP_NUM > 1)
+#if _OPEN_MP
+   #pragma omp parallel shared (grid)
+   #pragma omp for private(rho,p,vx1,vx2,vx3,E,local_grid,eos,P) collapse(2)
+#endif
+   for(int i = 0; i <= Nx1-0; i++)
    {
-      #pragma omp for private(rho,p,vx1,vx2,vx3,E,local_grid,eos,P) collapse(2)
-      for(int i = 0; i <= Nx1-0; i++)
+      for(int j = 0; j <= Nx2-0; j++)
       {
-         for(int j = 0; j <= Nx2-0; j++)
-         {
-            local_grid.x[0] = grid.time;
-            local_grid.x[1] = grid.X1[i];
-            local_grid.x[2] = grid.X2[j];
-            local_grid.x[3] = 0.0;
-          
-            rho = u(0,i,j);
-            p   = u(1,i,j);
-            vx1 = u(2,i,j);
-            vx2 = u(3,i,j);
-            vx3 = u(4,i,j);
+         local_grid.x[0] = grid.time;
+         local_grid.x[1] = grid.X1[i];
+         local_grid.x[2] = grid.X2[j];
+         local_grid.x[3] = 0.0;
+       
+         rho = u(0,i,j);
+         p   = u(1,i,j);
+         vx1 = u(2,i,j);
+         vx2 = u(3,i,j);
+         vx3 = u(4,i,j);
 
-            P[0] = rho;
-            P[1] = p;
+         P[0] = rho;
+         P[1] = p;
 
-            EoS(&eos,P,&local_grid);
+         EoS(&eos,P,&local_grid);
 
-            E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
-    
-            q(0,i,j) = rho;
-            q(1,i,j) = E;
-            q(2,i,j) = rho*vx1;
-            q(3,i,j) = rho*vx2;
-            q(4,i,j) = rho*vx3;
-         }
+         E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
+   
+         q(0,i,j) = rho;
+         q(1,i,j) = E;
+         q(2,i,j) = rho*vx1;
+         q(3,i,j) = rho*vx2;
+         q(4,i,j) = rho*vx3;
       }
    }
 
