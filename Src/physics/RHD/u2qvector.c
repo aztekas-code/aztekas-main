@@ -2,17 +2,23 @@
     
 void Prim2Cons_All(double *q, double *u)
 {
-   int i, j, k;
    double rho, p, v_cov[3], v_con[3];
    double D, tau, S_cov[3], S_con[3];
-   double Lorentz, W[3][3], U, VV, V[3];
+   double Lorentz, U, VV;
    double P[eq+1];
    eos_ eos;
    gauge_ local_grid;
 
 #if DIM == 1
 
-   for(i = 0; i <= Nx1-0; i++)
+#ifdef _OPENMP
+   #pragma omp parallel shared(grid)
+   #pragma omp for private(rho,p,v_cov,v_con,\
+                           D,U,tau,S_cov,S_con,\
+                           Lorentz,VV,\
+                           P,eos,local_grid)
+#endif
+   for(int i = 0; i <= Nx1-0; i++)
    {
       local_grid.x[0] = grid.time;
       local_grid.x[1] = grid.X1[i];
@@ -24,14 +30,14 @@ void Prim2Cons_All(double *q, double *u)
   
       Get_Metric_Components(&local_grid);
 
-      rho      = u(0,i);
-      p        = u(1,i);
-      v_cov[0] = u(2,i);
+      rho      = u(RHO,i);
+      p        = u(PRE,i);
+      v_cov[0] = u(VX1,i);
       v_cov[1] = 0.0;
       v_cov[2] = 0.0;
 
-      P[0] = rho;
-      P[1] = p;
+      P[RHO] = rho;
+      P[PRE] = p;
 
       v_con[0] = local_grid.gamma_con[0][0]*v_cov[0] + \
                  local_grid.gamma_con[0][1]*v_cov[1] + \
@@ -56,16 +62,23 @@ void Prim2Cons_All(double *q, double *u)
       S_cov[1] = rho*eos.h*Lorentz*Lorentz*v_cov[1];
       S_cov[2] = rho*eos.h*Lorentz*Lorentz*v_cov[2];
 
-      q(0,i) = D;
-      q(1,i) = tau;
-      q(2,i) = S_cov[0];
+      q(DEN,i) = D;
+      q(ENE,i) = tau;
+      q(MX1,i) = S_cov[0];
    }
 
 #elif DIM == 2
 
-   for(i = 0; i <= Nx1-0; i++)
+#ifdef _OPENMP
+   #pragma omp parallel shared(grid)
+   #pragma omp for private(rho,p,v_cov,v_con,\
+                           D,U,tau,S_cov,S_con,\
+                           Lorentz,VV,\
+                           P,eos,local_grid)
+#endif
+   for(int j = 0; j <= Nx2-0; j++)
    {
-      for(j = 0; j <= Nx2-0; j++)
+      for(int i = 0; i <= Nx1-0; i++)
       {
          local_grid.x[0] = grid.time;
          local_grid.x[1] = grid.X1[i];
@@ -77,10 +90,10 @@ void Prim2Cons_All(double *q, double *u)
      
          Get_Metric_Components(&local_grid);
 
-         rho      = u(0,i,j);
-         p        = u(1,i,j);
-         v_cov[0] = u(2,i,j);
-         v_cov[1] = u(3,i,j);
+         rho      = u(RHO,i,j);
+         p        = u(PRE,i,j);
+         v_cov[0] = u(VX1,i,j);
+         v_cov[1] = u(VX2,i,j);
          v_cov[2] = 0.0;
 
          P[0] = rho;
@@ -109,18 +122,25 @@ void Prim2Cons_All(double *q, double *u)
          S_cov[1] = rho*eos.h*Lorentz*Lorentz*v_cov[1];
          S_cov[2] = rho*eos.h*Lorentz*Lorentz*v_cov[2];
 
-         q(0,i,j) = D;
-         q(1,i,j) = tau;
-         q(2,i,j) = S_cov[0];
-         q(3,i,j) = S_cov[1];
+         q(DEN,i,j) = D;
+         q(ENE,i,j) = tau;
+         q(MX1,i,j) = S_cov[0];
+         q(MX2,i,j) = S_cov[1];
       }
    }
 
 #elif DIM == 4
 
-   for(i = 0; i <= Nx1-0; i++)
+#ifdef _OPENMP
+   #pragma omp parallel shared(grid)
+   #pragma omp for private(rho,p,v_cov,v_con,\
+                           D,U,tau,S_cov,S_con,\
+                           Lorentz,VV,\
+                           P,eos,local_grid)
+#endif
+   for(int j = 0; j <= Nx2-0; j++)
    {
-      for(j = 0; j <= Nx2-0; j++)
+      for(int i = 0; i <= Nx1-0; i++)
       {
          local_grid.x[0] = grid.time;
          local_grid.x[1] = grid.X1[i];
@@ -129,14 +149,14 @@ void Prim2Cons_All(double *q, double *u)
      
          Get_Metric_Components(&local_grid);
 
-         rho      = u(0,i,j);
-         p        = u(1,i,j);
-         v_cov[0] = u(2,i,j);
-         v_cov[1] = u(3,i,j);
-         v_cov[2] = u(4,i,j);
+         rho      = u(RHO,i,j);
+         p        = u(PRE,i,j);
+         v_cov[0] = u(VX1,i,j);
+         v_cov[1] = u(VX2,i,j);
+         v_cov[2] = u(VX3,i,j);
 
-         P[0] = rho;
-         P[1] = p;
+         P[RHO] = rho;
+         P[PRE] = p;
 
          v_con[0] = local_grid.gamma_con[0][0]*v_cov[0] + \
                     local_grid.gamma_con[0][1]*v_cov[1] + \
@@ -161,11 +181,11 @@ void Prim2Cons_All(double *q, double *u)
          S_cov[1] = rho*eos.h*Lorentz*Lorentz*v_cov[1];
          S_cov[2] = rho*eos.h*Lorentz*Lorentz*v_cov[2];
 
-         q(0,i,j) = D;
-         q(1,i,j) = tau;
-         q(2,i,j) = S_cov[0];
-         q(3,i,j) = S_cov[1];
-         q(4,i,j) = S_cov[2];
+         q(DEN,i,j) = D;
+         q(ENE,i,j) = tau;
+         q(MX1,i,j) = S_cov[0];
+         q(MX2,i,j) = S_cov[1];
+         q(MX3,i,j) = S_cov[2];
       }
    }
 
