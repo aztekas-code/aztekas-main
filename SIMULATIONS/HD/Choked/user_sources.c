@@ -2,13 +2,13 @@
  * File Name : user_sources.c
  * Description : aztekas user source terms for Choked Accretion
  * Creation Date : 27-09-2019
- * Last Modified : 27-09-2019 10:01:11
+ * Last Modified : 28-10-2019 18:20:25
  * Created By :
  */
 
 #include"main.h"
 
-void User_Source_Terms(double *s, double *u, gauge_ local_grid)
+void User_Source_Terms(double *s, double *u, gauge_ *local_grid)
 {
    double rho, p, vx1=0.0, vx2=0.0, vx3=0.0;
    double r;
@@ -26,7 +26,7 @@ void User_Source_Terms(double *s, double *u, gauge_ local_grid)
    vx3 = u[VX3];
 #endif
 
-   r = local_grid.x[1];
+   r = local_grid->x[1];
 
    s[RHO] = 0.0;
    s[PRE] = -rho*vx1/(r*r);

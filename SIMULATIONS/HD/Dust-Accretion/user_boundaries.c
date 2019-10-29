@@ -1,23 +1,18 @@
 /*
- * File Name : boundaries.c
+ * File Name : user_boundaries.c
  * Description : aztekas boundaries module for Dust Accretion
  * Creation Date : 27-09-2019
- * Last Modified : 27-09-2019 00:26:36
+ * Last Modified : 28-10-2019 17:49:23
  * Created By : Alejandro Aguayo-Ortiz
  */
 
 #include"main.h"
 
-int Boundaries(double *B)
+void User_Boundaries(double *B)
 {
-   int i, j, k, n, cell;
-
-   Outflow(B);
-   Reflection(B);
-
 #if DIM == 1
 
-   for(i = 0; i <= Nx1; i++)
+   for(int i = 0; i <= Nx1; i++)
    {
       if(i >= Nx1-gc)
       {
@@ -29,9 +24,9 @@ int Boundaries(double *B)
 
 #elif DIM == 2
 
-   for(i = 0; i <= Nx1; i++)
+   for(int j = 0; j <= Nx2; j++)
    {
-      for(j = 0; j <= Nx2; j++)
+      for(int i = 0; i <= Nx1; i++)
       {
          if(i >= Nx1-gc)
          {
@@ -45,9 +40,9 @@ int Boundaries(double *B)
 
 #elif DIM == 4
 
-   for(i = 0; i <= Nx1; i++)
+   for(int j = 0; j <= Nx2; j++)
    {
-      for(j = 0; j <= Nx2; j++)
+      for(int i = 0; i <= Nx1; i++)
       {
          if(i >= Nx1-gc)
          {
@@ -61,6 +56,4 @@ int Boundaries(double *B)
    }
 
 #endif
-
-   return 0;
 }
