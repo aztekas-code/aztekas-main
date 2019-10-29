@@ -31,26 +31,18 @@ int MxV(double *M, double *V, double *L)
    return 0;
 }
 
-void RoundGen(double *num)
-{
-   double r;
-   double bla;
-   double decnum;
-   int expnum;
-   
-   if(*num != 0.0e+00)
-   {
-      expnum = (int)floor(log(fabs(*num))/log(10.0));
-      decnum = *num/pow(10,(double)expnum);
-      decnum = roundf(decnum*1.0e+15)/1.0e+15;
-      *num = decnum*pow(10,(double)expnum);
-   }
-}
-
 void Check_Sim_Parameters()
 {
 #ifdef _OPENMP
-   MAX_NUM_THREADS = omp_get_max_threads();
+   FILE *command;
+
+   /*
+    * Command for knowing the physical cores of the system
+    */
+   command = popen("grep '^core id' /proc/cpuinfo |sort -u|wc -l","r");
+   fscanf(command,"%d",&MAX_NUM_THREADS);
+
+   fclose(command);
 #endif
 
    printf("\n");
@@ -165,6 +157,11 @@ void Check_Sim_Parameters()
    fprintf(file,"aaaaa  zzzzz    t    eeeee  k   k  aaaaa  sssss\n");
    fprintf(file,"\n");
    fprintf(file,"Running aztekas simulation...\n");
+#ifdef _OPENMP
+   fprintf(file,"Parallel version operating with %d threads of %d available.\n",OMP_NUM,MAX_NUM_THREADS);
+#else
+   fprintf(file,"Serial version.\n");
+#endif
    fprintf(file,"\n");
 
    // Print physics used
@@ -172,32 +169,75 @@ void Check_Sim_Parameters()
    if(PHYSICS == RHD) fprintf(file,"Performing a RHD simulation.\n");
 
    // Coordinates
-   if(COORDINATES == CARTESIAN) fprintf(file,"Cartesian grid.\n");
-   if(COORDINATES == CYLINDRICAL) fprintf(file,"Cylindrical grid.\n");
-   if(COORDINATES == SPHERICAL) fprintf(file,"Spherical grid.\n");
+#if PHYSICS == HD
+
+   if(COORDINATES == CARTESIAN) fprintf(file,"Cartesian grid (x,y,z).\n");
+   if(COORDINATES == CYLINDRICAL) fprintf(file,"Cylindrical grid (R,z,phi).\n");
+   #if POLAR == FALSE
+   if(COORDINATES == SPHERICAL) fprintf(file,"Spherical grid (r,theta,phi).\n");
+   #elif POLAR == TRUE
+   if(COORDINATES == SPHERICAL) fprintf(file,"Polar grid (R,phi).\n");
+   #endif
+
+#elif PHYSICS == RHD
+
+   #if COORDINATES == CARTESIAN
+
+   if(METRIC==USER) fprintf(file,"Cartesian grid in a User defined space-time (x,y,z).\n");
+   if(METRIC==MINK) fprintf(file,"Cartesian grid in a Minkowski space-time (x,y,z).\n");
+   if(METRIC==SCHW) fprintf(file,"Cartesian grid in a Schwarzschild space-time (x,y,z).\n");
+   if(METRIC==EF) fprintf(file,"Cartesian grid in a Eddington-Finkelstein space-time (x,y,z).\n");
+   if(METRIC==BL) fprintf(file,"Cartesian grid in a Boyer-Lindquist space-time (x,y,z).\n");
+   if(METRIC==KS) fprintf(file,"Cartesian grid in a Kerr-Schild space-time (x,y,z).\n");
+
+   #elif COORDINATES == CYLINDRICAL
+
+   if(METRIC==USER) fprintf(file,"Cylindrical grid in a User defined space-time (R,z,phi).\n");
+   if(METRIC==MINK) fprintf(file,"Cylindrical grid in a Minkowski space-time (R,z,phi).\n");
+   if(METRIC==SCHW) fprintf(file,"Cylindrical grid in a Schwarzschild space-time (R,z,phi).\n");
+   if(METRIC==EF) fprintf(file,"Cylindrical grid in a Eddington-Finkelstein space-time (R,z,phi).\n");
+   if(METRIC==BL) fprintf(file,"Cylindrical grid in a Boyer-Lindquist space-time (R,z,phi).\n");
+   if(METRIC==KS) fprintf(file,"Cylindrical grid in a Kerr-Schild space-time (R,z,phi).\n");
+
+   #elif COORDINATES == SPHERICAL && POLAR == FALSE
+   if(METRIC==USER) fprintf(file,"Spherical grid in a User defined space-time (r,theta,phi).\n");
+   if(METRIC==MINK) fprintf(file,"Spherical grid in a Minkowski space-time (r,theta,phi).\n");
+   if(METRIC==SCHW) fprintf(file,"Spherical grid in a Schwarzschild space-time (r,theta,phi).\n");
+   if(METRIC==EF) fprintf(file,"Spherical grid in a Eddington-Finkelstein space-time (r,theta,phi).\n");
+   if(METRIC==BL) fprintf(file,"Spherical grid in a Boyer-Lindquist space-time (r,theta,phi).\n");
+   if(METRIC==KS) fprintf(file,"Spherical grid in a Kerr-Schild space-time (r,theta,phi).\n");
+   #elif COORDINATES == SPHERICAL && POLAR == TRUE
+   if(METRIC==USER) fprintf(file,"Polar grid in a User defined space-time (R,phi).\n");
+   if(METRIC==MINK) fprintf(file,"Polar grid in a Minkowski space-time (R,phi).\n");
+   if(METRIC==SCHW) fprintf(file,"Polar grid in a Schwarzschild space-time (R,phi).\n");
+   if(METRIC==EF) fprintf(file,"Polar grid in a Eddington-Finkelstein space-time (R,phi).\n");
+   if(METRIC==BL) fprintf(file,"Polar grid in a Boyer-Lindquist space-time (R,phi).\n");
+   if(METRIC==KS) fprintf(file,"Polar grid in a Kerr-Schild space-time (R,phi).\n");
+   #endif
+
+#endif
 
    // Resolution
-   if(DIM == 1) fprintf(file,"1D simulation with resolution %d\n",Nx1);
-   if(DIM == 2) fprintf(file,"2D simulation with resolution %dX%d\n",Nx1,Nx2);
-   if(DIM == 4) fprintf(file,"2.5D simulation with resolution %dX%d\n",Nx1,Nx2);
-   if(DIM == 3) fprintf(file,"3D simulation with resolution %dX%dX%d\n",Nx1,Nx2,Nx3);
-
+   if(DIM == 1) fprintf(file,"1D simulation with resolution %d grid cells\n",Nx1);
+   if(DIM == 2) fprintf(file,"2D simulation with resolution %dX%d grid cells\n",Nx1,Nx2);
+   if(DIM == 4) fprintf(file,"2.5D simulation with resolution %dX%d grid cells\n",Nx1,Nx2);
+   if(DIM == 3) fprintf(file,"3D simulation with resolution %dX%dX%d grid cells\n",Nx1,Nx2,Nx3);
 
    // Equation of state
    if(EOS == IDEAL) fprintf(file,"Ideal equation of state with adiabatic index %f.\n",K);
    if(EOS == DUST)  fprintf(file,"Dust.\n");
-   if(EOS == STIFF) fprintf(file,"Stiff equation of state.\n");
+   if(EOS == STIFF)  fprintf(file,"Stiff equation of state.\n");
 
    // Print MoL-RK order
    fprintf(file,"Time integration using a second order MoL-Runge Kutta.\n");
 
    // Print spatial numerical methods, algorithms and parameters.
    // Primitive variable reconstruction.
-   if(RECONST == GODUNOV)  fprintf(file,"Zero-order piecewise reconstruction.\n");
-   if(RECONST == MINMOD)   fprintf(file,"MINMOD reconstruction.\n");
-   if(RECONST == MC)       fprintf(file,"MC reconstruction.\n");
-   if(RECONST == SUPERBEE) fprintf(file,"SUPERBEE reconstruction.\n");
-   if(RECONST == WENO5)    fprintf(file,"WENO5 reconstruction.\n");
+   if(RECONST == GODUNOV)  fprintf(file,"Using a zero-order piecewise reconstruction for the primitive variables.\n");
+   if(RECONST == MINMOD)   fprintf(file,"Using a first-order piecewise MINMOD reconstruction for the primitive variables.\n");
+   if(RECONST == MC)       fprintf(file,"Using a first-order piecewise MC reconstruction for the primitive variables.\n");
+   if(RECONST == SUPERBEE) fprintf(file,"Using a first-order piecewise SUPERBEE reconstruction for the primitive variables.\n");
+   if(RECONST == WENO5)    fprintf(file,"Using a fifth-order WENO5 reconstruction for the primitive variables.\n");
 
    // Flux solver
    if(FLUX == HLL)  fprintf(file,"HLL Riemann solver.\n");
