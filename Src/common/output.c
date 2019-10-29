@@ -1,5 +1,5 @@
 /**
- * @file print_values.c
+ * @file output.c
  *
  * @authors Alejandro Aguayo-Oritz and Emilio Tejeda
  *

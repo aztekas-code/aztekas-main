@@ -1,5 +1,5 @@
-/**
- * @file auxfunc.c
+/*!
+ * @file tools.c
  * 
  * @author Alejandro Aguayo-Ortiz
  *

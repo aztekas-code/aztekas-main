@@ -1,5 +1,5 @@
 /*!
- * @file bound_cond.c
+ * @file default_boundaries.c
  *
  * @author Alejandro Aguayo-Ortiz
  *

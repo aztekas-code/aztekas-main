@@ -1,3 +1,12 @@
+/*!
+ * @file reconstruction.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Define the reconstruction vectors \f$ (Up, Um) \f$
+ * at the interfaces \f$ i \pm 1/2 \f$, respectively.
+ */
+
 #include"main.h"
 
 #if DIM == 1

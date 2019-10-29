@@ -1,9 +1,10 @@
-/*
- * File Name : initialize.c
- * Description :
- * Creation Date : 22-10-2019
- * Last Modified : 22-10-2019 15:21:50
- * Created By :
+/*!
+ * @file initialize.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Initialize \f$ U \f$ from Restart_File or from initial values
+ * defined at the User Directory file: initial.c
  */
 
 #include"main.h"

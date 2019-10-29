@@ -3,7 +3,7 @@
  *
  * @authors Alejandro Aguayo-Oritz and Emilio Tejeda
  *
- * @brief Output functions: ASCII and Binary.
+ * @brief Print values.
  */
 
 #include"main.h"

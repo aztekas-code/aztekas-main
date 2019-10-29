@@ -1,9 +1,9 @@
-/*
- * File Name : boundaries.c
- * Description : aztekas boundaries module for Shock-Tube
- * Creation Date : 26-09-2019
- * Last Modified : 28-10-2019 17:40:07
- * Created By :
+/*!
+ * @file boundaries.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Standard boundary conditions. Outflow, Periodic and Reflection.
  */
 
 #include"main.h"
