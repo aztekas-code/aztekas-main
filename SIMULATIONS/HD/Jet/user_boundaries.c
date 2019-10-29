@@ -10,6 +10,10 @@
 
 void User_Boundaries(double *B)
 {
+#ifdef _OPENMP
+   #pragma omp parallel
+   #pragma omp for
+#endif
    for(int j = 0; j <= Nx2; j++)
    {
       for(int i = 0; i <= Nx1; i++)

@@ -16,19 +16,12 @@ AZTPATH = $(AZTEKAS_PATH)
 ###############################################
 # SET NUMBER OF THREADS USED BY OMP
 ###############################################
+# You can find the number of physical cores 
+# using
+# $ grep '^core id' /proc/cpuinfo |sort -u|wc -l
+###############################################
 
-OMP_NUM = 2
-
-###############################################
-# Physics (hd, mhd, rhd, rmhd)
-###############################################
-# You can find the number of threads using
-# $ lscpu
-# or
-# $ nproc
-# Be careful of using only the number of 
-# PHYSICAL cores
-###############################################
+OMP_NUM = 1
 
 ###############################################
 # Physics (HD, MHD, RHD, RMHD)

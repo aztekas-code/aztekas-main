@@ -36,17 +36,17 @@ Nx3 = 0
 % DEFINE DOMAIN LIMITS %
 %%%%%%%%%%%%%%%%%%%%%%%%
 x1max = 20.0
-x2max = 0.3
+x2max = 0.5
 x3max = 1.0 
-x1min = 15.5
-x2min = 0.2
+x1min = 3.0
+x2min = 0.0
 x3min = 0.0
 
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
 tmax = 5000.0
-timefile = 0.0000000000000000000000000000000000000000000000001
+timefile = 1.0
 
 %%%%%%%%%%%%%%%%%%
 % COURANT FACTOR %

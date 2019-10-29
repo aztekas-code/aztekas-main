@@ -1,6 +1,6 @@
-#####################################
-#### Define dimension parameters ####
-#####################################
+######################################
+######## MAKEFILE FOR AZTEKAS ########
+######################################
 #----------------------------------------------------------------------
 # From the list below, please activate/deactivate the options that     
 # apply to your run. If you modify any of these options, make sure     
@@ -14,10 +14,26 @@
 AZTPATH = $(AZTEKAS_PATH)
 
 ###############################################
-# Physics (hd, mhd, rhd, rmhd)
+# SET NUMBER OF THREADS USED BY OMP
+###############################################
+# You can find the number of physical cores 
+# using
+# $ grep '^core id' /proc/cpuinfo |sort -u|wc -l
 ###############################################
 
-PHY = rhd
+OMP_NUM = 5
+
+###############################################
+# Physics (HD, MHD, RHD, RMHD)
+###############################################
+
+PHY = RHD
+
+###############################################
+# Dimension (1, 2 or 3. Enter 4 for 2.5)
+###############################################
+
+DIM = 1
 
 ########################################################################################
 # Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
@@ -32,12 +48,6 @@ METRIC = Schwarzschild
 ###############################################
 
 EOS = ideal
-
-###############################################
-# Dimension (1, 2 or 3. Enter 4 for 2.5)
-###############################################
-
-DIM = 2
 
 ###############################################
 # Coordinates (cartesian,cylindrical,spherical)
@@ -59,32 +69,18 @@ INT = standard
 
 ###############################################
 
-USR = boundaries.c \
-		initial.c \
+###############################################
+# All user *.c are written here
+###############################################
+
+USR = initial.c \
+		user_boundaries.c \
 		user_input.c 
 
+###############################################
+# Include a global Makefile in the /Src/ 
+# directory, which include some definitions
+# of parameters, inclusions of other makefiles
+# and compilation orders
+###############################################
 include $(AZTPATH)/Src/Makefile
-
-###############################################
-# Compilation
-###############################################
-
-FLAGS = -Ofast -lm -fopenmp
-PARAM += -DOMP_NUM=1
-
-COMPILER = gcc
-AZT_HEAD = $(AZTPATH)/Src/include
-HEADERS = -I$(AZT_HEAD) -I.
-EXEC = aztekas
-
-all: 
-	@echo ""
-	@echo "Compiling problem file ..."
-	$(COMPILER) $(PARAM) $(MAIN) $(USR) $(PHYSICS) $(HEADERS) $(FLAGS) -o $(EXEC)  
-	@echo ""
-	@echo "aztekas compiled successfully"
-	
-clean:
-	rm -f $(EXEC)
-
-###############################################

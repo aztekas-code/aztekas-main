@@ -1,5 +1,5 @@
 /*
- * File Name : boundaries.c
+ * File Name : user_boundaries.c
  * Description : aztekas boundaries module for Jet
  * Creation Date : 27-09-2019
  * Last Modified : 27-09-2019 00:10:45
@@ -8,16 +8,16 @@
 
 #include"main.h"
 
-int Boundaries(double *B)
+void User_Boundaries(double *B)
 {
-   int n, i, j, k, cell;
 
-   Outflow(B);
-   Reflection(B);
-
-   for(i = 0; i <= Nx1; i++)
+#ifdef _OPENMP
+   #pragma omp parallel
+   #pragma omp for 
+#endif
+   for(int j = 0; j <= Nx2; j++)
    {
-      for(j = 0; j <= Nx2; j++)
+      for(int i = 0; i <= Nx1; i++)
       {
          if(grid.X1[i] <= r_jet && grid.X2[j] <= z_jet)
          {
@@ -28,6 +28,4 @@ int Boundaries(double *B)
          }
       }
    }
-
-   return 0;
 }
