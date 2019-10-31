@@ -4,7 +4,6 @@
  * @author Alejandro Aguayo-Ortiz
  *
  * @brief Reconstruction variables and functions definitions.
- *
  */
 
 /*!

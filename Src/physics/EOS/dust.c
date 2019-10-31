@@ -1,9 +1,9 @@
 /**
- * @file eos.c
+ * @file dust.c
  *
  * @author Alejandro Aguayo-Ortiz
  *
- * @brief Equation of state
+ * @brief Equation of state for Dust
  *
  */
 

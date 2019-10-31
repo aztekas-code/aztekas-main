@@ -1,4 +1,4 @@
-/*!
+/**
  * @file default_boundaries.c
  *
  * @author Alejandro Aguayo-Ortiz

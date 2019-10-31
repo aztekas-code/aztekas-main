@@ -1,3 +1,12 @@
+/**
+ * @file /HD/cons2prim.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Computes the value of the conservative variables \f$ Q \f$
+ * from the primitive variables in HD.
+ */
+
 #include"main.h"
     
 int Cons2Prim(double *u, double *q)

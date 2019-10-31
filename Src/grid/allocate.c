@@ -1,6 +1,8 @@
 /**
- * @file alloc.c
+ * @file /grid/allocate.c
+ *
  * @author Alejandro Aguayo-Ortiz
+ *
  * @brief Essential allocation functions for \a aztekas.
  */
 

@@ -1,7 +1,10 @@
 /**
- * @file /HD/hvector.c
+ * @file /HD/flux_h.c
  *
  * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Function that compute Fluxes H along x3 axis 
+ * using the primitive variables in HD.
  */
 
 #include"main.h"

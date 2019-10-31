@@ -1,3 +1,12 @@
+/**
+ * @file physics.h
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Definition of functions, variables and
+ * parameters used for all physical calculations.
+ */
+
 #include<mesh.h>
 
 typedef struct

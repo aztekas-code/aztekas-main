@@ -1,4 +1,4 @@
-/*!
+/**
  * @file tools.c
  * 
  * @author Alejandro Aguayo-Ortiz

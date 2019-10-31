@@ -1,4 +1,4 @@
-/*!
+/**
  * @file initialize.c
  *
  * @author Alejandro Aguayo-Ortiz

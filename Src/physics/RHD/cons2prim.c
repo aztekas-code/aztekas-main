@@ -1,5 +1,5 @@
 /**
- * @file /RHD/q2uvector.c
+ * @file /RHD/cons2prim.c
  *
  * @author Alejandro Aguayo-Ortiz
  *

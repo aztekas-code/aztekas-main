@@ -1,6 +1,13 @@
+/**
+ * @file /RHD/flux_h.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ */
+
 #include"main.h"
     
-void Prim2FluxG(double *f, double *v, double *u, gauge_ *local_grid)
+void Prim2FluxH(double *f, double *v, double *u, gauge_ *local_grid)
 {
    int i;
    double rho, p, v_cov[3], v_con[3];
@@ -9,8 +16,8 @@ void Prim2FluxG(double *f, double *v, double *u, gauge_ *local_grid)
    double gamma, beta, lapse, vel;
    eos_ eos;
 
-   gamma = local_grid->gamma_con[1][1];
-   beta  = local_grid->beta_con[1];
+   gamma = local_grid->gamma_con[2][2];
+   beta  = local_grid->beta_con[2];
    lapse = local_grid->lapse;
 
    // Density and Pressure
@@ -60,10 +67,10 @@ void Prim2FluxG(double *f, double *v, double *u, gauge_ *local_grid)
    tau = U - D;
 
    // Velocity affected by the coordinates
-   V[1] = lapse*v_con[1] - beta;
+   V[2] = lapse*v_con[2] - beta;
 
    // Compute the covariant and contravariant components of the 3-momentum
-   S_con[1] = rho*eos.h*Lorentz*Lorentz*v_con[1];
+   S_con[2] = rho*eos.h*Lorentz*Lorentz*v_con[2];
 
    for(i = 0; i < 3; i++)
    {
@@ -71,19 +78,19 @@ void Prim2FluxG(double *f, double *v, double *u, gauge_ *local_grid)
    }
 
    // Compute useful 2-tensor W^i_j (see BHAC article)
-   W[1][0] = S_con[1]*v_cov[0];
-   W[1][1] = S_con[1]*v_cov[1] + p;
-   W[1][2] = S_con[1]*v_cov[2];
+   W[2][0] = S_con[2]*v_cov[0];
+   W[2][1] = S_con[2]*v_cov[1];
+   W[2][2] = S_con[2]*v_cov[2] + p;
 
    // Compute fluxes
-   f[0] = D*V[1];
-   f[1] = lapse*(S_con[1] - v_con[1]*D) - beta*tau;
-   f[2] = lapse*W[1][0] - beta*S_cov[0];
-   f[3] = lapse*W[1][1] - beta*S_cov[1];
-   f[4] = lapse*W[1][2] - beta*S_cov[2];
+   f[0] = D*V[2];
+   f[1] = lapse*(S_con[2] - v_con[2]*D) - beta*tau;
+   f[2] = lapse*W[2][0] - beta*S_cov[0];
+   f[3] = lapse*W[2][1] - beta*S_cov[1];
+   f[4] = lapse*W[2][2] - beta*S_cov[2];
 
    // Computed characteristic velocities
-   vel   = v_con[1];
+   vel   = v_con[2];
    double cs2  = cs*cs;
    double vel2 = vel*vel;
 

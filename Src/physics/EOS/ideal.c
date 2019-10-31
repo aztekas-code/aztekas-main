@@ -1,9 +1,9 @@
 /**
- * @file eos.c
+ * @file ideal.c
  *
  * @author Alejandro Aguayo-Ortiz
  *
- * @brief Equation of state
+ * @brief Equation of state an Ideal Gas
  *
  */
 

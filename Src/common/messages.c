@@ -1,4 +1,4 @@
-/*!
+/**
  * @file messages.c
  * 
  * @author Alejandro Aguayo-Ortiz

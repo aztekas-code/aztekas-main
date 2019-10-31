@@ -1,3 +1,11 @@
+/**
+ * @file /HD/sources.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Compute geometrical source terms.
+ */
+
 #include"main.h"
     
 void Source_Terms(double *s, double *u, gauge_ *local_grid)

@@ -1,4 +1,4 @@
-/*!
+/**
  * @file freq_output.c
  *
  * @author Alejandro Aguayo-Ortiz
@@ -8,6 +8,13 @@
  */
 
 #include"main.h"
+
+/**
+ * This function gives the kind of frequency output choose by the user. 
+ * Wheter it is by number of files or time interval.
+ *
+ * Output: double *dtprint
+ */
 
 void Frequency_Output(double *dtprint)
 {

@@ -1,4 +1,4 @@
-/*!
+/**
  * @file boundaries.c
  *
  * @author Alejandro Aguayo-Ortiz
@@ -8,6 +8,11 @@
 
 #include"main.h"
 
+/**
+ * Call the default boundary conditions.
+ *
+ * Input/Output: double *B
+ */
 void Boundaries(double *B)
 {
 #if outflow_x1max == TRUE \

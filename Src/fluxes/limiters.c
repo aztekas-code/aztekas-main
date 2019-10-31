@@ -1,5 +1,5 @@
-/*!
- * @file limiters.c
+/**
+ * @file /fluxes/limiters.c
  *
  * @author Alejandro Aguayo-Ortiz
  *

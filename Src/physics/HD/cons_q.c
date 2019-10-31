@@ -1,14 +1,14 @@
 /**
- * @file /HD/gvector.c
+ * @file /HD/cons_q.c
  *
  * @author Alejandro Aguayo-Ortiz
  *
+ * @brief Function that converts Primitives to Conservative variables in HD.
  */
 
 #include"main.h"
     
-//void Prim2FluxG(double *f, double *v, double *u, double *x)
-void Prim2FluxG(double *f, double *v, double *u, gauge_ *local_grid)
+void Prim2Cons(double *q, double *u, gauge_ *local_grid)
 {
    double E;
    eos_ eos;
@@ -31,13 +31,9 @@ void Prim2FluxG(double *f, double *v, double *u, gauge_ *local_grid)
 
    E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
 
-   f[0] = rho * vx2;
-   f[1] = vx2 * (E + p);
-   f[2] = rho * vx1 * vx2;
-   f[3] = rho * vx2 * vx2 + p;
-   f[4] = rho * vx3 * vx2;
-
-   v[0] = vx2 - eos.cs;
-   v[1] = vx2 + eos.cs;
-   v[2] = vx2;
+   q[0] = rho;
+   q[1] = E;
+   q[2] = rho*vx1;
+   q[3] = rho*vx2;
+   q[4] = rho*vx3;
 }

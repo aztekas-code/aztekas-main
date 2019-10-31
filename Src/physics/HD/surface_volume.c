@@ -1,3 +1,12 @@
+/**
+ * @file /HD/surface_volume.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Computes the value of the integration surfaces along
+ * all faces of the control volume.
+ */
+
 #include"main.h"
 
 void Surface_Volume()

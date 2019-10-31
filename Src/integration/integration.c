@@ -1,5 +1,5 @@
 /**
- * @file integration.c
+ * @file /integration/integration.c
  *
  * @author Alejandro Aguayo-Ortiz
  *
@@ -7,7 +7,6 @@
  * \f$ \mathbf{Q} \f$.
  */
 
-//Do not erase any of these libraries//
 #include"main.h"
 
 void Integration()

@@ -1,9 +1,9 @@
 /**
- * @file eos.c
+ * @file stiff.c
  *
  * @author Alejandro Aguayo-Ortiz
  *
- * @brief Equation of state
+ * @brief Ultra-relativistic stiff Equation of state
  *
  */
 

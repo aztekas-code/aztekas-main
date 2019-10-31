@@ -18,16 +18,17 @@ ifeq ($(METRIC),Kerr-Schild)
    PARAM += -DMETRIC=KS
 endif
 
+PHYSICS = $(AZTPATH)/Src/physics/RHD/cons_q.c \
+			 $(AZTPATH)/Src/physics/RHD/cons2prim.c \
+			 $(AZTPATH)/Src/physics/RHD/flux_f.c \
+			 $(AZTPATH)/Src/physics/RHD/flux_g.c \
+		 	 $(AZTPATH)/Src/physics/RHD/flux_h.c \
+			 $(AZTPATH)/Src/physics/RHD/prim2cons.c \
+			 $(AZTPATH)/Src/physics/RHD/sources.c \
+			 $(AZTPATH)/Src/physics/RHD/surface_volume.c
+
 ifneq ($(METRIC),User)
-   PHYSICS = $(AZTPATH)/Src/physics/RHD/fvector.c \
-	   		 $(AZTPATH)/Src/physics/RHD/gvector.c \
-		    	 $(AZTPATH)/Src/physics/RHD/hvector.c \
-			    $(AZTPATH)/Src/physics/RHD/svector.c \
-			    $(AZTPATH)/Src/physics/RHD/qvector.c \
-			    $(AZTPATH)/Src/physics/RHD/q2uvector.c \
-			    $(AZTPATH)/Src/physics/RHD/u2qvector.c \
-			    $(AZTPATH)/Src/physics/RHD/surface.c \
-		       $(AZTPATH)/Src/physics/RHD/$(METRIC)/metric.c
+   PHYSICS += $(AZTPATH)/Src/physics/RHD/$(METRIC)/metric.c
 endif
 
 ifeq ($(METRIC),User)
@@ -45,23 +46,16 @@ ifeq ($(METRIC),User)
    $(info in which you define the components of the metric in terms)
    $(info of the 3+1 formalism [lapse, shift and 3D-metric])
    $(info and their derivatives, respectively.)
+   $(info       )
 
-   PHYSICS = $(AZTPATH)/Src/physics/RHD/fvector.c \
-	   		 $(AZTPATH)/Src/physics/RHD/gvector.c \
-		    	 $(AZTPATH)/Src/physics/RHD/hvector.c \
-			    $(AZTPATH)/Src/physics/RHD/svector.c \
-			    $(AZTPATH)/Src/physics/RHD/qvector.c \
-			    $(AZTPATH)/Src/physics/RHD/q2uvector.c \
-			    $(AZTPATH)/Src/physics/RHD/u2qvector.c \
-			    $(AZTPATH)/Src/physics/RHD/surface.c \
-		       user_metric.c
+   PHYSICS += user_metric.c
 
    ifeq (,$(wildcard ./user_metric.c))
-      $(info       )
       $(info No user_metric.c file)
       exit:
-	      @echo "Exit failed compilation"
-endif
+	      @echo "Exit. Compilation failed."
+	      @echo " "
+   endif
 endif
 
 

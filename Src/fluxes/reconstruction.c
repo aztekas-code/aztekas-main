@@ -1,5 +1,5 @@
-/*!
- * @file reconstruction.c
+/**
+ * @file /fluxes/reconstruction.c
  *
  * @author Alejandro Aguayo-Ortiz
  *

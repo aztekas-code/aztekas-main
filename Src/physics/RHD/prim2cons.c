@@ -1,3 +1,10 @@
+/**
+ * @file /RHD/prim2cons.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ */
+
 #include"main.h"
     
 void Prim2Cons_All(double *q, double *u)

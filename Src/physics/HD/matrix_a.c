@@ -1,3 +1,12 @@
+/**
+ * @file /HD/matrix_a.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Computes the matrix \f$ A := (\partial {Q}/\partial
+ * {U}) \f$, needed for the PVRS method.
+ */
+
 #include"main.h"
     
 void Matrix_A(double *a, double *u, gauge_ local_grid)

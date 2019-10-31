@@ -1,3 +1,10 @@
+/**
+ * @file /RHD/sources.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ */
+
 #include"main.h"
     
 void Source_Terms(double *s, double *u, gauge_ *local_grid)

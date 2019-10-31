@@ -1,3 +1,10 @@
+/**
+ * @file /RHD/matrix_a.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ */
+
 #include"main.h"
     
 void Matrix_A(double *a, double *u, gauge_ local_grid)

@@ -4,7 +4,6 @@
  * @author Alejandro Aguayo-Ortiz
  *
  * @brief Physical and numerical constants.
- *
  */
 
 //Physical constants in cgs//

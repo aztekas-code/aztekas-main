@@ -1,3 +1,11 @@
+/**
+ * @file /RHD/cons_q.c
+ *
+ * @author Alejandro Aguayo-Ortiz
+ *
+ * @brief Compute the conservative variables.
+ */
+
 #include"main.h"
     
 void Prim2Cons(double *q, double *u, gauge_ *local_grid)

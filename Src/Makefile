@@ -58,15 +58,16 @@ ifeq ($(USER_SOURCE),true)
    $(info inside your current directory. Remember that the)
    $(info user_sources.c file must have one void function)
    $(info void User_Source_Terms(double *s, double *u, gauge_ *local_grid))
+   $(info       )
 
    PARAM += -DUSER_SOURCE_TERMS=TRUE
    USR += user_sources.c
 
    ifeq (,$(wildcard ./user_sources.c))
-      $(info       )
       $(info No user_sources.c file)
       exit:
-	   	@echo "Exit failed compilation"
+	   	@echo "Exit. Compilation failed."
+			@echo " "
 endif
 
 else
@@ -103,7 +104,6 @@ MAIN = $(AZTPATH)/Src/main.c
 include $(AZTPATH)/Src/common/Makefile
 include $(AZTPATH)/Src/fluxes/Makefile
 include $(AZTPATH)/Src/grid/Makefile
-include $(AZTPATH)/Src/include/Makefile
 include $(AZTPATH)/Src/integration/Makefile
 include $(AZTPATH)/Src/physics/Makefile
 
@@ -123,22 +123,25 @@ AZT_HEAD = $(AZTPATH)/Src/include
 HEADERS = -I$(AZT_HEAD) -I.
 EXEC = aztekas
 
-aztekas: 
+all: 
 	@echo ""
-	@echo "###############################################"
-	@echo "##### AZTEKAS code Makefile compilation #######"
-	@echo "###############################################"
+	@echo "###########################################################"
+	@echo "########### AZTEKAS code Makefile compilation #############"
+	@echo "###########################################################"
 	@echo ""
 	@echo "Compiling files..."
 	@echo ""
 	$(COMPILER) $(PARAM) $(MAIN) $(USR) $(PHYSICS) $(HEADERS) $(FLAGS) -o $(EXEC)  
 	@echo ""
-	@echo "# AZTEKAS will run with" $(OMP_NUM)" of "$(THREADS) "cores available to use with OMP."
-	@echo "# You can modify the OMP_NUM variable inside the Makefile."
+	@echo "###########################################################"
+	@echo "########### AZTEKAS code compiled successfully ############"
+	@echo "###########################################################"
+	@echo "###########################################################"
 	@echo ""
-	@echo "###############################################"
-	@echo "##### AZTEKAS code compiled successfully ######"
-	@echo "###############################################"
+	@echo "###########################################################"
+	@echo "# AZTEKAS will run with "$(OMP_NUM)" of "$(THREADS)" cores/threads available."
+	@echo "# You can modify the OMP_NUM variable inside the Makefile."
+	@echo "###########################################################"
 	@echo ""
 	
 clean:
