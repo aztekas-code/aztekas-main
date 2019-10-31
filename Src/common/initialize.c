@@ -13,6 +13,29 @@ void Init_Simulation(double *tprint, int *itprint)
 {
    if(restart_simulation == TRUE)
    {
+      if(access(restartfile,F_OK) != -1)
+      {
+         printf("Restarting from file ");
+         for (int c = 0; restartfile[c] != '\0'; c++)
+         {
+            printf("%c",restartfile[c]);
+         }
+         printf("\n");
+         printf("\n");
+      }
+      else
+      {
+         printf("Restarting file ");
+         for (int c = 0; restartfile[c] != '\0'; c++)
+         {
+            printf("%c",restartfile[c]);
+         }
+         printf(" does not exist.\n");
+         printf("\n");
+         exit(EXIT_FAILURE);
+      }
+
+
       if(binary == TRUE)
       {
          Restart_Bin();
