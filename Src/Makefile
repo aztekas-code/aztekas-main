@@ -103,6 +103,7 @@ MAIN = $(AZTPATH)/Src/main.c
 include $(AZTPATH)/Src/common/Makefile
 include $(AZTPATH)/Src/fluxes/Makefile
 include $(AZTPATH)/Src/grid/Makefile
+include $(AZTPATH)/Src/include/Makefile
 include $(AZTPATH)/Src/integration/Makefile
 include $(AZTPATH)/Src/physics/Makefile
 
@@ -112,17 +113,17 @@ include $(AZTPATH)/Src/physics/Makefile
 
 THREADS = $(shell grep '^core id' /proc/cpuinfo |sort -u|wc -l)
 
-FLAGS = -Ofast -lm 
+FLAGS = -Ofast -lm
 ifneq ($(OMP_NUM),1)
    FLAGS += -fopenmp
 endif
 
-COMPILER = gcc
+COMPILER = gcc 
 AZT_HEAD = $(AZTPATH)/Src/include
 HEADERS = -I$(AZT_HEAD) -I.
 EXEC = aztekas
 
-all: 
+aztekas: 
 	@echo ""
 	@echo "###############################################"
 	@echo "##### AZTEKAS code Makefile compilation #######"
