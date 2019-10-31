@@ -13,13 +13,13 @@
 
 AZTPATH = $(AZTEKAS_PATH)
 
-###############################################
+################################################
 # SET NUMBER OF THREADS USED BY OMP
-###############################################
+################################################
 # You can find the number of physical cores 
 # using
 # $ grep '^core id' /proc/cpuinfo |sort -u|wc -l
-###############################################
+################################################
 
 OMP_NUM = 1
 
@@ -35,11 +35,10 @@ PHY = HD
 
 DIM = 2
 
-########################################################################################
-# Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
-########################################################################################
-
-## ONLY IF PHY == rhd or rmhd
+##############################################################################################
+# Metric (User, Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
+# ONLY IF PHY == RHD or RMHD
+##############################################################################################
 
 METRIC = Minkowski
 

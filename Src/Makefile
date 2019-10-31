@@ -104,6 +104,8 @@ include $(AZTPATH)/Src/physics/Makefile
 # Compilation
 ###############################################
 
+THREADS = $(shell grep '^core id' /proc/cpuinfo |sort -u|wc -l)
+
 FLAGS = -Ofast -lm 
 ifneq ($(OMP_NUM),1)
    FLAGS += -fopenmp
@@ -116,10 +118,20 @@ EXEC = aztekas
 
 all: 
 	@echo ""
-	@echo "Compiling problem file ..."
+	@echo "###############################################"
+	@echo "##### AZTEKAS code Makefile compilation #######"
+	@echo "###############################################"
+	@echo ""
+	@echo "Compiling files..."
+	@echo ""
 	$(COMPILER) $(PARAM) $(MAIN) $(USR) $(PHYSICS) $(HEADERS) $(FLAGS) -o $(EXEC)  
 	@echo ""
-	@echo "aztekas compiled successfully"
+	@echo "# AZTEKAS will run with" $(OMP_NUM)" of "$(THREADS) "cores available to use with OMP."
+	@echo "# You can modify the OMP_NUM variable inside the Makefile."
+	@echo ""
+	@echo "#################################"
+	@echo "# AZTEKAS compiled successfully #"
+	@echo "#################################"
 	
 clean:
 	rm -f $(EXEC)
