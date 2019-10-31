@@ -50,9 +50,9 @@ endif
 #####################################
 
 ifeq ($(USER_SOURCE),true)
-   $(info #######################)
-   $(info # USER-DEFINED-SOURCES#)
-   $(info #######################)
+   $(info ########################)
+   $(info # USER-DEFINED-SOURCES #)
+   $(info ########################)
    $(info In order to use a User Defined Sources in aztekas,)
    $(info you will have to create the file user_sources.c)
    $(info inside your current directory. Remember that the)
