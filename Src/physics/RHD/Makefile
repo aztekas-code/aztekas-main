@@ -1,3 +1,4 @@
+
 ifeq ($(METRIC),User)
    PARAM += -DMETRIC=USER
 endif
@@ -17,15 +18,54 @@ ifeq ($(METRIC),Kerr-Schild)
    PARAM += -DMETRIC=KS
 endif
 
-PHYSICS = $(AZTPATH)/Src/physics/RHD/fvector.c \
-			 $(AZTPATH)/Src/physics/RHD/gvector.c \
-		 	 $(AZTPATH)/Src/physics/RHD/hvector.c \
-			 $(AZTPATH)/Src/physics/RHD/svector.c \
-			 $(AZTPATH)/Src/physics/RHD/qvector.c \
-			 $(AZTPATH)/Src/physics/RHD/q2uvector.c \
-			 $(AZTPATH)/Src/physics/RHD/u2qvector.c \
-			 $(AZTPATH)/Src/physics/RHD/surface.c \
-		    $(AZTPATH)/Src/physics/RHD/$(METRIC)/metric.c
+ifneq ($(METRIC),User)
+   PHYSICS = $(AZTPATH)/Src/physics/RHD/fvector.c \
+	   		 $(AZTPATH)/Src/physics/RHD/gvector.c \
+		    	 $(AZTPATH)/Src/physics/RHD/hvector.c \
+			    $(AZTPATH)/Src/physics/RHD/svector.c \
+			    $(AZTPATH)/Src/physics/RHD/qvector.c \
+			    $(AZTPATH)/Src/physics/RHD/q2uvector.c \
+			    $(AZTPATH)/Src/physics/RHD/u2qvector.c \
+			    $(AZTPATH)/Src/physics/RHD/surface.c \
+		       $(AZTPATH)/Src/physics/RHD/$(METRIC)/metric.c
+endif
+
+ifeq ($(METRIC),User)
+   $(info #######################)
+   $(info # USER-DEFINED-METRIC #)
+   $(info #######################)
+   $(info         )
+   $(info In order to use a User Defined Metric in aztekas,)
+   $(info you will have to create the file user_metric.c)
+   $(info inside your current directory. Remember that the)
+   $(info user_metric.c file must have two void functions)
+   $(info void Get_Metric_Components(gauge_ *local_grid))
+   $(info and)
+   $(info void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid))
+   $(info in which you define the components of the metric in terms)
+   $(info of the 3+1 formalism [lapse, shift and 3D-metric])
+   $(info and their derivatives, respectively.)
+
+   PHYSICS = $(AZTPATH)/Src/physics/RHD/fvector.c \
+	   		 $(AZTPATH)/Src/physics/RHD/gvector.c \
+		    	 $(AZTPATH)/Src/physics/RHD/hvector.c \
+			    $(AZTPATH)/Src/physics/RHD/svector.c \
+			    $(AZTPATH)/Src/physics/RHD/qvector.c \
+			    $(AZTPATH)/Src/physics/RHD/q2uvector.c \
+			    $(AZTPATH)/Src/physics/RHD/u2qvector.c \
+			    $(AZTPATH)/Src/physics/RHD/surface.c \
+		       user_metric.c
+
+   ifeq (,$(wildcard ./user_metric.c))
+      $(info       )
+      $(info No user_metric.c file)
+      exit:
+	      @echo "Exit failed compilation"
+endif
+endif
+
+
+
 
 ifeq ($(INT),pvrs)
    PHYSICS += $(AZTPATH)/Src/RHD/amatrix.c

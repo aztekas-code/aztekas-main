@@ -17,7 +17,7 @@ AZTPATH = $(AZTEKAS_PATH)
 # SET NUMBER OF THREADS USED BY OMP
 ###############################################
 
-OMP_NUM = 1
+OMP_NUM = 5
 
 ###############################################
 # Physics (hd, mhd, rhd, rmhd)
@@ -80,8 +80,8 @@ INT = standard
 # All user *.c are written here
 ###############################################
 
-USR = boundaries.c \
-		initial.c \
+USR = initial.c \
+		user_boundaries.c \
 		user_input.c 
 
 ###############################################

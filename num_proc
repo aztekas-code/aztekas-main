@@ -1,6 +1,6 @@
 #!/bin/bash
 
 echo ""
-echo "The number of physical cores/threads to use by OMP is:"
+echo "The number of physical cores/threads available to use by OMP is"
 cat /proc/cpuinfo | grep "cpu cores" | uniq
 echo ""

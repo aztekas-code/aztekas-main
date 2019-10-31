@@ -50,8 +50,25 @@ endif
 #####################################
 
 ifeq ($(USER_SOURCE),true)
+   $(info #######################)
+   $(info # USER-DEFINED-SOURCES#)
+   $(info #######################)
+   $(info In order to use a User Defined Sources in aztekas,)
+   $(info you will have to create the file user_sources.c)
+   $(info inside your current directory. Remember that the)
+   $(info user_sources.c file must have one void function)
+   $(info void User_Source_Terms(double *s, double *u, gauge_ *local_grid))
+
    PARAM += -DUSER_SOURCE_TERMS=TRUE
    USR += user_sources.c
+
+   ifeq (,$(wildcard ./user_sources.c))
+      $(info       )
+      $(info No user_sources.c file)
+      exit:
+	   	@echo "Exit failed compilation"
+endif
+
 else
    PARAM += -DUSER_SOURCE_TERMS=FALSE
 endif
@@ -61,12 +78,12 @@ endif
 #####################################
 
 ifeq ($(INT),standard)
-	PARAM += -DINTEGRATION=STANDARD
-	INT = 
+   PARAM += -DINTEGRATION=STANDARD
+   INT = 
 endif
 ifeq ($(INT),pvrs)
-	PARAM += -DINTEGRATION=PVRS
-	INT = -pvrs
+   PARAM += -DINTEGRATION=PVRS
+   INT = -pvrs
 endif
 
 #####################################
