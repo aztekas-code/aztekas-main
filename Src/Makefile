@@ -87,9 +87,15 @@ ifeq ($(INT),pvrs)
 endif
 
 #####################################
+# GHOST CELLS
+#####################################
 
 PARAM += -Dgc=3
 
+#####################################
+
+#####################################
+# Include recursive Makefiles
 #####################################
 
 MAIN = $(AZTPATH)/Src/main.c
@@ -129,9 +135,10 @@ all:
 	@echo "# AZTEKAS will run with" $(OMP_NUM)" of "$(THREADS) "cores available to use with OMP."
 	@echo "# You can modify the OMP_NUM variable inside the Makefile."
 	@echo ""
-	@echo "#################################"
-	@echo "# AZTEKAS compiled successfully #"
-	@echo "#################################"
+	@echo "###############################################"
+	@echo "##### AZTEKAS code compiled successfully ######"
+	@echo "###############################################"
+	@echo ""
 	
 clean:
 	rm -f $(EXEC)
