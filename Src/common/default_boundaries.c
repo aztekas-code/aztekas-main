@@ -220,7 +220,7 @@ void Reflection(double *B)
    //////////////////////
    // Reflective on X2 //
    //////////////////////
-   for(int i = 0; i <= Nx1; i++)
+   for(int i = gc; i <= Nx1-gc; i++)
    {
       for(int cell = 0; cell < gc; cell++)
       {

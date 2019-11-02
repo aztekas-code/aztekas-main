@@ -15,17 +15,6 @@
  */
 void Boundaries(double *B)
 {
-#if outflow_x1max == TRUE \
- || outflow_x1min == TRUE \
- || outflow_x2max == TRUE \
- || outflow_x2min == TRUE \
- || outflow_x3max == TRUE \
- || outflow_x3min == TRUE 
-
-   Outflow(B);
-
-#endif
-
 #if reflective_x1max == TRUE \
  || reflective_x1min == TRUE \
  || reflective_x2max == TRUE \
@@ -42,6 +31,17 @@ void Boundaries(double *B)
  || periodic_x3 == TRUE
 
    Periodic(B);
+
+#endif
+
+#if outflow_x1max == TRUE \
+ || outflow_x1min == TRUE \
+ || outflow_x2max == TRUE \
+ || outflow_x2min == TRUE \
+ || outflow_x3max == TRUE \
+ || outflow_x3min == TRUE 
+
+   Outflow(B);
 
 #endif
 
