@@ -133,7 +133,7 @@ void Reflection(double *B)
    //////////////////////
    // Reflection on X1 //
    //////////////////////
-   for(int cell == 0; cell < gc; cell++)
+   for(int cell = 0; cell < gc; cell++)
    {
    // Reflection on x1max //
    #if reflective_x1max == TRUE
