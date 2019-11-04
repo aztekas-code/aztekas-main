@@ -43,7 +43,7 @@ void Initial()
 #elif DIM == 2
 
    /////////////////////////////
-   //-------Riemann-1D--------//
+   //-------Riemann-2D--------//
    /////////////////////////////
 
    #if INTERFACE == HORIZONTAL
