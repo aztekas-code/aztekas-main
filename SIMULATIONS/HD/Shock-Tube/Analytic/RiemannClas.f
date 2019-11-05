@@ -70,26 +70,55 @@ C      OPEN(UNIT = 1,FILE = 'EulerClas.ini',STATUS = 'UNKNOWN')
 C     Initial data and parameters are read in
 *
 
-C      WRITE(*,*) ' ADIABATIC INDEX OF THE GAS: ' 
-C      READ (*,*)   GAMMA
-      GAMMA = 1.4
+      WRITE(*,*) ''
+      WRITE(*,*) ' THIS PROGRAM COMPUTES THE NON-RELATIVISTIC ANALYTIC '
+      WRITE(*,*) ' 1D SOLUTION OF THE RIEMANN PROBLEM (SHOCK-TUBE) '
+      WRITE(*,*) ''
 
-      TIMEOU = 0.2
+      WRITE(*,*) ' ADIABATIC INDEX OF THE GAS: ' 
+      READ (*,*)   GAMMA
+      WRITE(*,*) ''
+
+      WRITE(*,*) ' EVOLUTION TIME '
+      READ (*,*)   TIMEOU
+      WRITE(*,*) ''
       
-      PL = 1.0
-      DL = 5.0
-      UL = 0.5
+      WRITE(*,*) ' ### LEFT STATE ###'
 
-      PR = 1.0
-      DR = 1.0
-      UR = 0.0
+      WRITE(*,*) ' DENSITY '
+      READ (*,*)   DL
+
+      WRITE(*,*) ' PRESSURE '
+      READ (*,*)   PL
+
+      WRITE(*,*) ' VELOCITY '
+      READ (*,*)   UL
+      WRITE(*,*) ''
+
+      WRITE(*,*) ' ### RIGHT STATE ###'
+
+      WRITE(*,*) ' DENSITY '
+      READ (*,*)   DR
+
+      WRITE(*,*) ' PRESSURE '
+      READ (*,*)   PR
+
+      WRITE(*,*) ' VELOCITY '
+      READ (*,*)   UR
+      WRITE(*,*) ''
+
+      WRITE(*,*) ' NUMBER OF CELLS: ' 
+      READ (*,*) CELLS
+      WRITE(*,*) ''
 
       DOMLEN = 1.0
       DIAPH1 = 0.5
-      
-      WRITE(*,*) '      NUMBER OF CELLS: ' 
-      READ (*,*) CELLS
 
+      WRITE(*,*) 'The predefined domain lenght is',DOMLEN
+      WRITE(*,*) 'The predefined interface position is',DIAPH1
+      WRITE(*,*) ''
+
+      
       PSCALE = 1.0
 *
       CLOSE(1)
@@ -136,9 +165,9 @@ C     Complete solution at time TIMEOU is found
 *
       OPEN(UNIT = 1,FILE = 'sol-RiemannClas.dat',STATUS = 'UNKNOWN')
 *
-      DO 10 I = 1, CELLS
+      DO 10 I = 0, CELLS
 *
-         XPOS = (REAL(I) - 0.5)*DX
+         XPOS = (REAL(I))*DX
          S    = (XPOS - DIAPH1)/TIMEOU
 *
 C        Solution at point (X,T) = ( XPOS - DIAPH1,TIMEOU)
@@ -146,9 +175,9 @@ C        is found
 *
          CALL SAMPLE(PM, UM, S, DS, US, PS)
 *
-C        Exact solution profiles are written to e1rpex.out.
+C        Exact solution profiles are written to sol-RiemannClas.dat.
 *
-         WRITE(1, 20)XPOS, DS, PS/PSCALE, US, PS/DS/G8/PSCALE
+         WRITE(1, 20)XPOS, DS, PS/PSCALE, US
 *
  10   CONTINUE
 *
@@ -185,9 +214,9 @@ C     Guessed value PSTART is computed
       POLD  = PSTART
       UDIFF = UR - UL
 *
-      WRITE(6,*)'----------------------------------------'
-      WRITE(6,*)'   Iteration number      Change  '
-      WRITE(6,*)'----------------------------------------'
+C      WRITE(6,*)'----------------------------------------'
+C      WRITE(6,*)'   Iteration number      Change  '
+C      WRITE(6,*)'----------------------------------------'
 *
       DO 10 I = 1, NRITER
 *
@@ -195,7 +224,7 @@ C     Guessed value PSTART is computed
          CALL PREFUN(FR, FRD, POLD, DR, PR, CR)
          P      = POLD - (FL + FR + UDIFF)/(FLD + FRD)
          CHANGE = 2.0*ABS((P - POLD)/(P + POLD))
-         WRITE(6, 30)I, CHANGE
+C         WRITE(6, 30)I, CHANGE
          IF(CHANGE.LE.TOLPRE)GOTO 20
          IF(P.LT.0.0)P = TOLPRE
          POLD  = P
