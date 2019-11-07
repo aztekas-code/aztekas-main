@@ -29,7 +29,11 @@ binary = 0
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
 Nx1 = 200
+<<<<<<< HEAD
 Nx2 = 200
+=======
+Nx2 = 0
+>>>>>>> d3acd98a91dfe712fcbdf18a5ffa60fa430574af
 Nx3 = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -47,7 +51,7 @@ x3min = 0.0
 %%%%%%%%%%%%%%%%%%%
 tmax     = 0.2
 timefile = 0.01
-numfile  = 1
+numfile  = 0
 
 %%%%%%%%%%%%%%%%%%
 % COURANT FACTOR %
