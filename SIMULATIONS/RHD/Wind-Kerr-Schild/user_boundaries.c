@@ -5,13 +5,6 @@ void User_Boundaries(double *B)
    int i, j, k, n, cell;
    gauge_ local_grid;
 
-   Outflow(B);
-#if POLAR == FALSE
-   Reflection(B);
-#elif POLAR == TRUE
-   Periodic(B);
-#endif
-
    for(i = 0; i <= Nx1; i++)
    {
       for(j = 0; j <= Nx2; j++)
