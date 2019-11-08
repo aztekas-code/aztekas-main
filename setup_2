@@ -53,10 +53,10 @@ fi
 echo 'Enter the number of dimensions (1, 2, or 3. Enter 4 for 2.5)'
 read dim
 
-echo 'Enter the coordinate system (cart, cyl or sph)'
+echo 'Enter the coordinate system (cartesian, cylindrical or spherical)'
 read coord
 
-if [[ $phy == "hd"  ]]
+if [[ $phy == "HD" ]]
 then
    echo 'Do you want gravity as a external force? (y/n)'
    read grav
@@ -79,7 +79,7 @@ cat << EOF > Makefile
 # PATH TO AZTEKAS
 ##################################################
 
-AZTPATH = $(AZTEKAS_PATH)
+AZTPATH = \$(AZTEKAS_PATH)
 
 ##################################################
 # SET NUMBER OF THREADS USED BY OMP
@@ -95,13 +95,13 @@ OMP_NUM = 1
 # Physics (HD, MHD, RHD, RMHD)
 ##################################################
 
-PHY = HD
+PHY = $phy
 
 ##################################################
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
 ##################################################
 
-DIM = 1
+DIM = $dim
 
 ##################################################
 # Metric (User, Minkowski, Schwarzschild, 
@@ -110,19 +110,19 @@ DIM = 1
 # ONLY IF PHY == RHD or RMHD
 ##################################################
 
-METRIC = Minkowski
+METRIC = $metric
 
 ##################################################
 # Equation of State (ideal, dust, stiff)
 ##################################################
 
-EOS = ideal
+EOS = $eos
 
 ##################################################
 # Coordinates (cartesian,cylindrical,spherical)
 ##################################################
 
-COORD = cartesian
+COORD = $coord
 
 ##################################################
 # User Source Terms (true,false)
@@ -140,8 +140,8 @@ INT = standard
 # All user *.c are written here
 ##################################################
 
-USR = initial.c \
-      user_boundaries.c \
+USR = initial.c \\
+      user_boundaries.c \\
 		user_input.c 
 
 ##################################################
@@ -152,206 +152,7 @@ USR = initial.c \
 # and recursive Makefiles only if you know what
 # your doing.
 ##################################################
-include $(AZTPATH)/Src/Makefile
-
-#####################################
-#### Define dimension parameters ####
-#####################################
-#----------------------------------------------------------------------
-# From the list below, please activate/deactivate the options that     
-# apply to your run. If you modify any of these options, make sure     
-# that you recompile the whole code by typing "make clean; make" 
-#----------------------------------------------------------------------
-
-#####################################
-# Ghost cells
-#####################################
-
-PARAM += -Dgc=3
-
-#####################################
-
-#####################################
-# Physics (rhd,hd,mhd,rmhd)
-#####################################
-
-PHY    = $phy
-
-# Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Kerr-Schild)
-METRIC = $metric
-
-ifeq (\$(PHY),hd)
-        PARAM += -DPHYSICS=HD
-endif
-ifeq (\$(PHY),rhd)
-        PARAM += -DPHYSICS=RHD
-endif
-
-eos = $eos
-ifeq (\$(eos),ideal)
-        PARAM += -DEOS=IDEAL
-endif
-ifeq (\$(eos),dust)
-        PARAM += -DEOS=DUST
-endif
-
-#####################################
-
-#####################################
-# Dimension
-#####################################
-
-DIM = $dim
-
-ifeq (\$(DIM),1)
-	PARAM += -DDIM=1
-	PARAM += -Deq=3
-	PARAM += -Dgraf=1
-endif
-ifeq (\$(DIM),2)
-	PARAM += -DDIM=2
-	PARAM += -Deq=4
-	PARAM += -Dgraf=2
-endif
-ifeq (\$(DIM),4)
-	PARAM += -DDIM=4
-	PARAM += -Deq=5
-	PARAM += -Dgraf=2
-endif
-ifeq (\$(DIM),3)
-	PARAM += -DDIM=3
-	PARAM += -Deq=5
-	PARAM += -Dgraf=3
-endif
-
-#####################################
-
-#####################################
-# Coordinates (cart,cyl,sph)
-#####################################
-
-COORD = $coord
-
-ifeq (\$(COORD),cart)
-	PARAM += -DCOORDINATES=CARTESIAN
-endif
-ifeq (\$(COORD),cyl)
-	PARAM += -DCOORDINATES=CYLINDRICAL
-endif
-ifeq (\$(COORD),sph)
-	PARAM += -DCOORDINATES=SPHERICAL
-endif
-
-#####################################
-
-#####################################
-# PATH TO AZTEKAS
-#####################################
-AZTPATH = $aztekas_path
-#####################################
-
-#####################################
-# Integration method
-#####################################
-
-INT = standard
-
-ifeq (\$(INT),standard)
-	PARAM += -Dintegration=0
-	INT = 
-endif
-ifeq (\$(INT),pvrs)
-	PARAM += -Dintegration=1
-	INT = -pvrs
-endif
-
-#####################################
-
-#####################################
-# Compilation
-#####################################
-
-ifeq (\$(PHY),hd)
-SOURCES = \$(AZTPATH)/Src/main.c \\
-	  \$(AZTPATH)/Src/alloc.c \\
-	  \$(AZTPATH)/Src/mesh.c \\
-	  ./initial.c \\
-	  \$(AZTPATH)/Src/timestep.c \\
-	  \$(AZTPATH)/Src/input.c \\
-	  \$(AZTPATH)/Src/output.c \\
-	  \$(AZTPATH)/Src/integration\$(INT).c \\
-	  \$(AZTPATH)/Src/flux.c \\
-	  \$(AZTPATH)/Src/runge-kutta.c \\
-	  \$(AZTPATH)/Src/limiters.c \\
-	  \$(AZTPATH)/Src/vectors.c \\
-	  \$(AZTPATH)/Src/restart.c \\
-	  \$(AZTPATH)/Src/auxfunc.c \\
-	  ./boundaries.c \\
-	  \$(AZTPATH)/Src/bound_cond.c \\
-	  \$(AZTPATH)/Src/HD/q2uvector.c \\
-	  \$(AZTPATH)/Src/HD/u2qvector.c \\
-	  \$(AZTPATH)/Src/HD/qvector.c \\
-	  \$(AZTPATH)/Src/HD/fvector.c \\
-	  \$(AZTPATH)/Src/HD/gvector.c \\
-	  \$(AZTPATH)/Src/HD/hvector.c \\
-	  \$(AZTPATH)/Src/HD/svector.c \\
-	  \$(AZTPATH)/Src/HD/metric.c \\
-	  \$(AZTPATH)/Src/EOS/eos.c \\
-	  ./user_sources.c \\
-	  ./user_input.c
-endif 
-
-ifeq (\$(PHY),rhd)
-SOURCES = \$(AZTPATH)/Src/main.c \\
-	  \$(AZTPATH)/Src/alloc.c \\
-	  \$(AZTPATH)/Src/mesh.c \\
-	  ./initial.c \\
-	  \$(AZTPATH)/Src/timestep.c \\
-	  \$(AZTPATH)/Src/input.c \\
-	  \$(AZTPATH)/Src/output.c \\
-	  \$(AZTPATH)/Src/integration\$(INT).c \\
-	  \$(AZTPATH)/Src/flux.c \\
-	  \$(AZTPATH)/Src/runge-kutta.c \\
-	  \$(AZTPATH)/Src/limiters.c \\
-	  \$(AZTPATH)/Src/vectors.c \\
-	  \$(AZTPATH)/Src/restart.c \\
-	  \$(AZTPATH)/Src/auxfunc.c \\
-	  ./boundaries.c \\
-	  \$(AZTPATH)/Src/bound_cond.c \\
-	  \$(AZTPATH)/Src/RHD/q2uvector.c \\
-	  \$(AZTPATH)/Src/RHD/u2qvector.c \\
-	  \$(AZTPATH)/Src/RHD/qvector.c \\
-	  \$(AZTPATH)/Src/RHD/fvector.c \\
-	  \$(AZTPATH)/Src/RHD/gvector.c \\
-	  \$(AZTPATH)/Src/RHD/hvector.c \\
-	  \$(AZTPATH)/Src/RHD/svector.c \\
-	  \$(AZTPATH)/Src/RHD/surface.c \\
-	  \$(AZTPATH)/Src/RHD/\$(METRIC)/metric.c \\
-	  \$(AZTPATH)/Src/EOS/eos.c \\
-	  ./user_sources.c \\
-	  ./user_input.c
-endif
-
-#OBJS = \$(SOURCES:.c=.o)
-
-FLAGS = -Ofast -lm
-
-COMPILER = gcc
-AZT_HEAD = \$(AZTPATH)/Src/Headers
-CFLAGS = -I\$(AZT_HEAD) -I.
-EXEC = aztekas
-
-#####################################
-
-\$(EXEC): \$(SOURCES)
-	@echo ""
-	@echo "Compiling problem file ..."
-	\$(COMPILER) \$(PARAM) -fopenmp \$(SOURCES) \$(FLAGS) \$(CFLAGS) -o \$(EXEC)  
-	@echo "\$(bla)"
-	@echo "aztekas compiled successfully"
-	
-clean:
-	rm -f \$(EXEC)
+include \$(AZTPATH)/Src/Makefile
 EOF
 
 if [ $dim -eq 1 ]
@@ -444,12 +245,14 @@ fi
 
 if [ $dim -eq 1 ]
 then
-cat << EOF > param.h
-#include<macros.h>
+cat << EOF > user_param.h
+/* 
+ *  aztekas header paremeters module
+ *  Date of creation: $date
+ *  author: $author 
+ */
 
-// Set as cond_X whereas
-// cond : {outflow,reflective,periodic,inflow}
-// X : {x1max,x1min,x2max,x2min,x3max,x3min}
+#include<macros.h>
 
 #define ${bound_x1max}        TRUE
 #define ${bound_x1min}        TRUE
@@ -458,12 +261,14 @@ fi
 
 if [ $dim -eq 2 ] || [ $dim -eq 4 ]
 then
-cat << EOF > param.h
-#include<macros.h>
+cat << EOF > user_param.h
+/* 
+ *  aztekas header paremeters module
+ *  Date of creation: $date
+ *  author: $author 
+ */
 
-// Set as cond_X whereas
-// cond : {outflow,reflective,periodic,inflow}
-// X : {x1max,x1min,x2max,x2min,x3max,x3min}
+#include<macros.h>
 
 #define ${bound_x1max}        TRUE
 #define ${bound_x1min}        TRUE
@@ -474,12 +279,14 @@ fi
 
 if [ $dim -eq 3 ]
 then
-cat << EOF > param.h
-#include<macros.h>
+cat << EOF > user_param.h
+/* 
+ *  aztekas header paremeters module
+ *  Date of creation: $date
+ *  author: $author 
+ */
 
-// Set as cond_X whereas
-// cond : {outflow,reflective,periodic,inflow}
-// X : {x1max,x1min,x2max,x2min,x3max,x3min}
+#include<macros.h>
 
 #define ${bound_x1max}        TRUE
 #define ${bound_x1min}        TRUE
@@ -490,7 +297,7 @@ cat << EOF > param.h
 EOF
 fi
 
-cat << EOF >> param.h
+cat << EOF >> user_param.h
 
 #define RECONST               MC
 #define FLUX                  HLL
@@ -511,8 +318,6 @@ cat << EOF > initial.c
 
 void Initial()
 {
-   int n, i, j, k, cell;
-
    //Initialize time
    grid.time = 0.0;
 
@@ -521,94 +326,28 @@ void Initial()
 }
 EOF
 
-cat << EOF > boundaries.c
+cat << EOF > user_boundaries.c
 /* 
- *  aztekas boundaries module
+ *  aztekas user boundaries module
  *  Date of creation: $date
  *  author: $author 
  */
+
 #include"main.h"
 
-int Boundaries(double *B)
+void User_Boundaries(double *B)
 {
-   int n, i, j, k, cell;
-
-EOF
-
-if [ $dim -eq 1 ]
-then
-   if [[ $bound_x1max == "outflow_x1max" ]] || [[ $bound_x1min == "outflow_x1min" ]]
-   then
-      BOUND="Outflow"
-
-cat << EOF >> boundaries.c
-   $BOUND(B);
-EOF
-   fi
-
-   if [[ $bound_x1max == "periodic_x1" ]] || [[ $bound_x1min == "periodic_x1" ]]
-   then
-      BOUND="Periodic"
-
-cat << EOF >> boundaries.c
-   $BOUND(B);
-EOF
-   fi
-
-   if [[ $bound_x1max == "reflective_x1max" ]] || [[ $bound_x1min == "reflective_x1min" ]]
-   then
-      BOUND="Reflection"
-
-cat << EOF >> boundaries.c
-   $BOUND(B);
-EOF
-   fi
-fi
-
-if [ $dim -eq 2 ] || [ $dim -eq 4 ]
-then
-   if [[ $bound_x1max == "outflow_x1max" ]] || [[ $bound_x1min == "outflow_x1min" ]] || [[ $bound_x2max == "outflow_x2max" ]] || [[ $bound_x2min == "outflow_x2min" ]]
-
-
-   then
-      BOUND="Outflow"
-
-cat << EOF >> boundaries.c
-   $BOUND(B);
-EOF
-   fi
-
-   if [[ $bound_x1max == "periodic_x2" ]] || [[ $bound_x1min == "periodic_x2"  ]] || [[ $bound_x2max == "periodic_x2" ]] || [[ $bound_x2min == "periodic_x2"  ]]
-
-   then
-      BOUND="Periodic"
-
-cat << EOF >> boundaries.c
-   $BOUND(B);
-EOF
-   fi
-
-   if [[ $bound_x1max == "reflective_x1max" ]] || [[ $bound_x1min == "reflective_x1min"  ]] || [[ $bound_x2max == "reflective_x2max" ]] || [[ $bound_x2min == "reflective_x2min"  ]]
-   then
-      BOUND="Reflection"
-
-cat << EOF >> boundaries.c
-   $BOUND(B);
-EOF
-   fi
-fi
-cat << EOF >> boundaries.c
-
    return 0;
 }
 EOF
 
 cat << EOF > user_sources.c
 /* 
- *  aztekas boundaries module
+ *  aztekas user source terms module
  *  Date of creation: $date
  *  author: $author 
  */
+
 #include"main.h"
 
 void User_Source_Terms(double *s, double *u, gauge_ local_grid)
@@ -645,7 +384,7 @@ fi
 
 if [[ $grav == 'y' ]]
 then
-if [[ $coord == 'cart' ]]
+if [[ $coord == 'cartesian' ]]
 then
 cat << EOF >> user_sources.c
    double x = local_grid.x[1];
@@ -661,7 +400,7 @@ cat << EOF >> user_sources.c
 }
 EOF
 fi
-if [[ $coord == 'cyl' ]]
+if [[ $coord == 'cylindrical' ]]
 then
 cat << EOF >> user_sources.c
    double R = local_grid.x[1];
@@ -676,7 +415,7 @@ cat << EOF >> user_sources.c
 }
 EOF
 fi
-if [[ $coord == 'sph' ]]
+if [[ $coord == 'spherical' ]]
 then
 cat << EOF >> user_sources.c
    double r = local_grid.x[1];
@@ -817,10 +556,14 @@ echo 'Enter characteristic name for the simulation'
 read char_name
 
 cat << EOF > $char_name.param
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% PARAMETERS FOR SHOCK TUBE SIMULATION %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % OUTPUT FILE AND DIRECTORY %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-outputdirectory = DATA/
+outputdirectory = TEST/
 outputfile      = ${char_name}_
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -837,7 +580,7 @@ binary = 0
 % RESTART SIMULATION (1 -> TRUE, 0 -> FALSE) %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 restart_simulation = 0
-restartfile        = DATA/${char_name}_0.dat
+restartfile        = TEST/${char_name}_0.dat
 restart_filecount  = 0
 
 %%%%%%%%%%%%%%%
