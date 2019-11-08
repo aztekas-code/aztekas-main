@@ -1,18 +1,14 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%% PARAMETERS FOR SHOCK TUBE SIMULATION %%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % OUTPUT FILE AND DIRECTORY %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-outputdirectory = ./TEST/
-outputfile      = shock_
+outputdirectory = ./gamma7_5/
+outputfile      = bondi_
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RESTART SIMULATION (1 -> true, 0 -> false) %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 restart_simulation = 0
-restartfile = ./TEST/shock_0.dat
+restartfile = ./TEST/bondi_0.dat
 restart_filecount = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -28,30 +24,30 @@ binary = 0
 %%%%%%%%%%%%%%%
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
-Nx1 = 400
-Nx2 = 128
+Nx1 = 256
+Nx2 = 0
 Nx3 = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINE DOMAIN LIMITS %
 %%%%%%%%%%%%%%%%%%%%%%%%
-x1max = 1.0
-x2max = 1.0
+x1max = 10.0
+x2max = 0.5
 x3max = 1.0 
-x1min = 0.0
+x1min = 0.1
 x2min = 0.0
 x3min = 0.0
 
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
-tmax = 0.35
-timefile = 0.35
+tmax = 10000.0
+timefile = 10.0
 
 %%%%%%%%%%%%%%%%%%
 % COURANT FACTOR %
 %%%%%%%%%%%%%%%%%%
-cou = 0.5
+cou = 0.25
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%% USER PARAMETERS %%%%%%%%%%%%%%%%%%%%%%
@@ -60,26 +56,13 @@ cou = 0.5
 %%%%%%%%%%%%%%%%%%%%
 % POLYTROPIC INDEX %
 %%%%%%%%%%%%%%%%%%%%
-
-K = 1.6666666666666666666666666
+K = 1.4
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% BOUNDARY AND INITIAL PARAMETERS %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Bondi Accretion (Gamma = 7/5, r0 = 10 r_B)
 
-% LEFT STATE
-rhol = 10.0
-pl   = 13.33
-vx1l = 0.0
-vx2l = 0.0
-vx3l = 0.0
-
-% RIGHT STATE
-rhor = 1.0
-pr   = 0.00000001
-vx1r = 0.0
-vx2r = 0.0
-vx3r = 0.0
-
-% INTERFACE
-x_0 = 0.5
+density_0  =  1.103003
+pressure_0 =  0.819369
+velocity_0 = -0.005666

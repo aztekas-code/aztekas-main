@@ -74,9 +74,9 @@ void Primitive_Reconstruction()
    #pragma omp parallel shared(U,U1p,U1m,U2p,U2m)
    #pragma omp for private(reconst,dup,dum,sx) collapse(2)
 #endif
-   for(int i = 1; i <= Nx1-1; i++)
+   for(int j = 1; j <= Nx2-1; j++)
    {
-      for(int j = 1; j <= Nx2-1; j++)
+      for(int i = 1; i <= Nx1-1; i++)
       {
          reconst = RECONST;
 #if x1min_exc == TRUE

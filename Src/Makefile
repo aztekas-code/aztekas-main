@@ -68,6 +68,9 @@ ifeq ($(USER_SOURCE),true)
       exit:
 	   	@echo "Exit. Compilation failed."
 			@echo " "
+
+	$(info user_sources.c file does exists!)
+   $(info       )
 endif
 
 else
@@ -135,7 +138,6 @@ all:
 	@echo ""
 	@echo "###########################################################"
 	@echo "########### AZTEKAS code compiled successfully ############"
-	@echo "###########################################################"
 	@echo "###########################################################"
 	@echo ""
 	@echo "###########################################################"

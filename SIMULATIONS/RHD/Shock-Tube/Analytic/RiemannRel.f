@@ -68,35 +68,44 @@ C     -------
 C     INITIAL STATES 
 C     -------
 
-      WRITE(*,*) ' ADIABATIC INDEX OF THE GAS: ' 
-      READ (*,*)   GAMMA
+      WRITE(*,*) ''
+      WRITE(*,*) ' THIS PROGRAM COMPUTES THE RELATIVISTIC ANALYTIC '
+      WRITE(*,*) ' 1D SOLUTION OF THE RIEMANN PROBLEM (SHOCK-TUBE) '
+      WRITE(*,*) ''
 
-      WRITE(*,*) ' TIME FOR THE SOLUTION: ' 
+      WRITE(*,*) ' ADIABATIC INDEX OF THE GAS ' 
+      READ (*,*)   GAMMA
+      WRITE(*,*) ''
+
+      WRITE(*,*) ' EVOLUTION TIME ' 
       READ (*,*)   T
+      WRITE(*,*) ''
 
 C     -----
 C     LEFT STATE
 C     -----
 
-      WRITE(*,*) ' -- LEFT STATE -- ' 
-      WRITE(*,*) '      PRESSURE     : ' 
-      READ (*,*) PL 
-      WRITE(*,*) '      DENSITY      : ' 
+      WRITE(*,*) ' ### LEFT STATE ### ' 
+      WRITE(*,*) ' DENSITY ' 
       READ (*,*) RHOL 
-      WRITE(*,*) '      FLOW VELOCITY: ' 
+      WRITE(*,*) ' PRESSURE ' 
+      READ (*,*) PL 
+      WRITE(*,*) ' VELOCITY ' 
       READ (*,*) VELL
+      WRITE(*,*) ''
 
 C     ------ 
 C     RIGHT STATE 
 C     ------
 
-      WRITE(*,*) ' -- RIGHT STATE -- ' 
-      WRITE(*,*) '      PRESSURE     : ' 
-      READ (*,*) PR 
-      WRITE(*,*) '      DENSITY      : ' 
+      WRITE(*,*) ' ### RIGHT STATE ### ' 
+      WRITE(*,*) ' DENSITY ' 
       READ (*,*) RHOR 
-      WRITE(*,*) '      FLOW VELOCITY: ' 
+      WRITE(*,*) ' PRESSURE ' 
+      READ (*,*) PR 
+      WRITE(*,*) ' VELOCITY ' 
       READ (*,*) VELR
+      WRITE(*,*) ''
 
 C     ------------------------------ 
 C     SPECIFIC INTERNAL ENERGY, SPECIFIC ENTHALPY, SOUND SPEED AND  
@@ -119,7 +128,7 @@ C     --------
 C     NUMBER OF POINTS 
 C     --------
       
-      WRITE(*,*) 'NUMBER OF POINTS'
+      WRITE(*,*) ' NUMBER OF CELLS '
       READ (*,*) N
 
 C     ------------- 
@@ -129,7 +138,6 @@ C     -------------
       TOL = 0.D0
 
 C
-
       ILOOP = 0
 
       PMIN  = (PL + PR)/2.D0 
@@ -247,13 +255,13 @@ C     ----------
 
  120  CONTINUE
 
-      OPEN (3,FILE='sol-RiemannRel.dat',FORM='FORMATTED',STATUS='NEW')
+      OPEN(3,FILE='sol-RiemannRel.dat',STATUS='UNKNOWN')
 
-      WRITE(3,150) '#', N, T 
  150  FORMAT(A1,1X,I5,1X,F10.5)
 
+      WRITE(3,200) 0.0, RHOA(1), PA(1), VELA(1)
       DO 60 I=1,N 
-        WRITE(3,200) RAD(I),PA(I),RHOA(I),VELA(I),UA(I) 
+        WRITE(3,200) RAD(I),RHOA(I),PA(I),VELA(I)
  60   CONTINUE
 
  200  FORMAT(5(E15.8,1X))

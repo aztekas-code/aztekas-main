@@ -124,8 +124,6 @@ void Outflow(double *B)
  */
 void Reflection(double *B)
 {
-   int i, j, k, n, cell;
-
 #if DIM == 1
 
    ///////////////////////////////////////////////////////////
@@ -135,22 +133,22 @@ void Reflection(double *B)
    //////////////////////
    // Reflection on X1 //
    //////////////////////
-   for(cell == 0; cell < gc; cell++)
+   for(int cell = 0; cell < gc; cell++)
    {
    // Reflection on x1max //
    #if reflective_x1max == TRUE
-      for(n = 0; n < eq; n++)
+      for(int n = 0; n < eq; n++)
       {
          B(n,Nx1-cell) = B(n,Nx1-2*gc+cell+1);
       }
 
-      B(2,Nx1-cell) = -B(2,Nx1-2*gc+cell+1);
+      B(VX1,Nx1-cell) = -B(VX1,Nx1-2*gc+cell+1);
       
    #endif
 
    // Reflection on x1min //
    #if reflective_x1min == TRUE
-      for(n = 0; n < eq; n++)
+      for(int n = 0; n < eq; n++)
       {
       #if COORDINATES == CARTESIAN
          B(n,cell) = B(n,2*gc-cell-1);
@@ -161,10 +159,10 @@ void Reflection(double *B)
       }
 
       #if COORDINATES == CARTESIAN
-      B(2,cell) = -B(2,2*gc-cell-1);
+      B(VX1,cell) = -B(VX1,2*gc-cell-1);
       #elif COORDINATES != CARTESIAN
-      B(2,cell) = -B(2,2*gc-cell);
-      B(2,gc) = 0.0;
+      B(VX1,cell) = -B(VX1,2*gc-cell);
+      B(VX1,gc) = 0.0;
       #endif
 
    #endif
@@ -181,23 +179,23 @@ void Reflection(double *B)
    //////////////////////
    // Reflection on X1 //
    //////////////////////
-   for(j = 0; j <= Nx2; j++)
+   for(int j = 0; j <= Nx2; j++)
    {
-      for(cell = 0; cell < gc; cell++)
+      for(int cell = 0; cell < gc; cell++)
       {
       // Reflection on x1max //
       #if reflective_x1max == TRUE
-         for(n = 0; n < eq; n++)
+         for(int n = 0; n < eq; n++)
          {
             B(n,Nx1-cell,j) = B(n,Nx1-2*gc+cell+1,j);
          }
 
-         B(2,Nx1-cell,j) = -B(2,Nx1-2*gc+cell+1,j);
+         B(VX1,Nx1-cell,j) = -B(VX1,Nx1-2*gc+cell+1,j);
       #endif
 
       // Reflection on x1min //
       #if reflective_x1min == TRUE
-         for(n = 0; n < eq; n++)
+         for(int n = 0; n < eq; n++)
          {
          #if COORDINATES == CARTESIAN
             B(n,cell,j) = B(n,2*gc-cell-1,j);
@@ -208,10 +206,10 @@ void Reflection(double *B)
          }
 
          #if COORDINATES == CARTESIAN
-         B(2,cell,j) = -B(2,2*gc-cell-1,j);
+         B(VX1,cell,j) = -B(VX1,2*gc-cell-1,j);
          #elif COORDINATES != CARTESIAN
-         B(2,cell,j) = -B(2,2*gc-cell,j);
-         B(2,gc,j) = 0.0;
+         B(VX1,cell,j) = -B(VX1,2*gc-cell,j);
+         B(VX1,gc,j) = 0.0;
          #endif
 
       #endif
@@ -222,16 +220,16 @@ void Reflection(double *B)
    //////////////////////
    // Reflective on X2 //
    //////////////////////
-   for(i = 0; i <= Nx1; i++)
+   for(int i = gc; i <= Nx1-gc; i++)
    {
-      for(cell = 0; cell < gc; cell++)
+      for(int cell = 0; cell < gc; cell++)
       {
       // Reflection on x2max //
       #if reflective_x2max == TRUE
-         for(n = 0; n < eq; n++)
+         for(int n = 0; n < eq; n++)
          {
          #if COORDINATES != SPHERICAL
-            B(n,i,Nx2-cell) = B(n,i,Nx2-2*gc+cell+1);
+            B(int n,i,Nx2-cell) = B(n,i,Nx2-2*gc+cell+1);
          #elif COORDINATES == SPHERICAL
             if(fabs(x2max - M_PI) <= 1.0e-05 || fabs(x2max - M_PI_2) <= 1.0e-05)
             {
@@ -247,31 +245,31 @@ void Reflection(double *B)
          }
 
          #if COORDINATES != SPHERICAL
-         B(3,i,Nx2-cell) = -B(3,i,Nx2-2*gc+cell+1);
+         B(VX2,i,Nx2-cell) = -B(VX2,i,Nx2-2*gc+cell+1);
          #elif COORDINATES == SPHERICAL
          if(fabs(x2max - M_PI) <= 1.0e-05 || fabs(x2max - M_PI_2) <= 1.0e-05)
          {
-            B(3,i,Nx2-cell) = -B(3,i,Nx2-2*gc+cell);
-            B(3,i,Nx2-gc) = 0.0;
+            B(VX2,i,Nx2-cell) = -B(VX2,i,Nx2-2*gc+cell);
+            B(VX2,i,Nx2-gc)   =  0.0;
          }
          else
          {
-            B(3,i,Nx2-cell) = -B(3,i,Nx2-2*gc+cell+1);
+            B(VX2,i,Nx2-cell) = -B(VX2,i,Nx2-2*gc+cell+1);
          }
          #endif
       #endif
 
       // Reflection on x2min //
       #if reflective_x2min == TRUE
-         for(n = 0; n < eq; n++)
+         for(int n = 0; n < eq; n++)
          {
          #if COORDINATES != SPHERICAL
             B(n,i,cell) = B(n,i,2*gc-cell-1);
          #elif COORDINATES == SPHERICAL
             if(fabs(x2min) <= 1.0e-05)
             {
-               B(n,i,cell) = B(n,j,2*gc-cell);
-               B(n,i,gc) = B(n,i,gc+1);
+               B(n,i,cell) = B(n,i,2*gc-cell);
+               B(n,i,gc)   = B(n,i,gc+1);
             }
             else
             {
@@ -281,16 +279,16 @@ void Reflection(double *B)
          }
 
          #if COORDINATES != SPHERICAL
-         B(3,i,cell) = -B(3,i,2*gc-cell-1);
+         B(VX2,i,cell) = -B(VX2,i,2*gc-cell-1);
          #elif COORDINATES == SPHERICAL
          if(fabs(x2min) <= 1.0e-05)
          {
-            B(3,i,cell) = -B(3,i,2*gc-cell);
-            B(3,i,gc) = 0.0;
+            B(VX2,i,cell) = -B(VX2,i,2*gc-cell);
+            B(VX2,i,gc)   =  0.0;
          }
          else
          {
-            B(3,i,cell) = -B(3,i,2*gc-cell-1);
+            B(VX2,i,cell) = -B(VX2,i,2*gc-cell-1);
          }
          #endif
       #endif

@@ -1,6 +1,11 @@
 #include"macros.h"
 
-#define POLAR              TRUE
+// Define boundaries TRUE = 1 , FALSE = 0
+// Set as cond_X whereas
+// cond : {outflow,reflective,periodic,inflow}
+// X : {x1max,x1min,x2max,x2min,x3max,x3min}
+
+#define POLAR              FALSE
 
 #define outflow_x1max      TRUE
 #define outflow_x1min      TRUE
@@ -13,10 +18,9 @@
 
 #define RECONST            MC
 #define FLUX               HLL
-#define GRID               LOGMESH
+#define GRID               UNIFORM
 
 #define Black_Hole_Mass    1.0
-#define Black_Hole_Spin    0.0
 #define Mach               5.0
 #define vinf               0.5
 

@@ -37,9 +37,9 @@ int Cons2Prim(double *u, double *q)
 
       Get_Metric_Components(&local_grid);
 
-      D        = q(0,i);
-      tau      = q(1,i);
-      S_cov[0] = q(2,i);
+      D        = q(RHO,i);
+      tau      = q(PRE,i);
+      S_cov[0] = q(VX1,i);
       S_cov[1] = 0.0;
       S_cov[2] = 0.0;
 
@@ -102,9 +102,9 @@ int Cons2Prim(double *u, double *q)
 
       Lorentz = sqrt(1.0 + SS/(D*D*h*h));
 
-      u(0,i) = D / Lorentz;
-      u(1,i) = D*h*Lorentz - tau - D;
-      u(2,i) = S_cov[0]/(D*h*Lorentz);
+      u(RHO,i) = D / Lorentz;
+      u(PRE,i) = D*h*Lorentz - tau - D;
+      u(VX1,i) = S_cov[0]/(D*h*Lorentz);
    }
 
 #elif DIM == 2
@@ -115,9 +115,9 @@ int Cons2Prim(double *u, double *q)
                            Lorentz,SS,theta,theta_0,count,local_grid) \
                            collapse(2)
 #endif
-   for(int j = gc; j <= Nx2-gc; j++)
+   for(int i = gc; i <= Nx1-gc; i++)
    {
-      for(int i = gc; i <= Nx1-gc; i++)
+      for(int j = gc; j <= Nx2-gc; j++)
       {
          local_grid.x[0] = grid.time;
          local_grid.x[1] = grid.X1[i];
@@ -127,12 +127,16 @@ int Cons2Prim(double *u, double *q)
          local_grid.x[2] = M_PI_2;
          #endif
 
+         // Needs to be check. Fails in theta = Pi
+         f = 1.0;
+         if(x2max == M_PI && j == Nx2-gc){f = 0.0;}
+
          Get_Metric_Components(&local_grid);
 
-         D        = q(0,i,j);
-         tau      = q(1,i,j);
-         S_cov[0] = q(2,i,j);
-         S_cov[1] = q(3,i,j);
+         D        = q(RHO,i,j);
+         tau      = q(PRE,i,j);
+         S_cov[0] = q(VX1,i,j);
+         S_cov[1] = q(VX2,i,j);
          S_cov[2] = 0.0;
 
          S_con[0] = local_grid.gamma_con[0][0]*S_cov[0] + \
@@ -148,7 +152,6 @@ int Cons2Prim(double *u, double *q)
          SS = S_cov[0]*S_con[0] + S_cov[1]*S_con[1] + S_cov[2]*S_con[2];
 
          theta_0 = U(1,i,j)/U(0,i,j);
-         f       = 1.0;
          count   = 0;
 
          while(fabs(f) > 0.00000001)
@@ -195,10 +198,10 @@ int Cons2Prim(double *u, double *q)
 
          Lorentz = sqrt(1.0 + SS/(D*D*h*h));
 
-         u(0,i,j) = D / Lorentz;
-         u(1,i,j) = D*h*Lorentz - tau - D;
-         u(2,i,j) = S_cov[0]/(D*h*Lorentz);
-         u(3,i,j) = S_cov[1]/(D*h*Lorentz);
+         u(RHO,i,j) = D / Lorentz;
+         u(PRE,i,j) = D*h*Lorentz - tau - D;
+         u(VX1,i,j) = S_cov[0]/(D*h*Lorentz);
+         u(VX2,i,j) = S_cov[1]/(D*h*Lorentz);
       }
    }
 
@@ -210,9 +213,9 @@ int Cons2Prim(double *u, double *q)
                            Lorentz,SS,theta,theta_0,count,local_grid) \
                            collapse(2)
 #endif
-   for(int j = gc; j <= Nx2-gc; j++)
+   for(int i = 0; i <= Nx1-0; i++)
    {
-      for(int i = gc; i <= Nx1-gc; i++)
+      for(int j = 0; j <= Nx2-0; j++)
       {
          local_grid.x[0] = grid.time;
          local_grid.x[1] = grid.X1[i];
@@ -287,21 +290,21 @@ int Cons2Prim(double *u, double *q)
 
          Lorentz = sqrt(1.0 + SS/(D*D*h*h));
 
-         u(0,i,j) = D / Lorentz;
-         u(1,i,j) = D*h*Lorentz - tau - D;
-         u(2,i,j) = S_cov[0]/(D*h*Lorentz);
-         u(3,i,j) = S_cov[1]/(D*h*Lorentz);
-         u(4,i,j) = S_cov[2]/(D*h*Lorentz);
+         u(RHO,i,j) = D / Lorentz;
+         u(PRE,i,j) = D*h*Lorentz - tau - D;
+         u(VX1,i,j) = S_cov[0]/(D*h*Lorentz);
+         u(VX2,i,j) = S_cov[1]/(D*h*Lorentz);
+         u(VX3,i,j) = S_cov[2]/(D*h*Lorentz);
       }
    }
 
 #elif DIM == 3
 
-   for(i = 0; i <= Nx1; i++)
+   for(int i = 0; i <= Nx1; i++)
    {
-      for(j = 0; j <= Nx2; j++)
+      for(int j = 0; j <= Nx2; j++)
       {
-         for(k = 0; k <= Nx3; k++)
+         for(int k = 0; k <= Nx3; k++)
          {
             D  = q(0,i,j,k);
             E  = q(1,i,j,k);

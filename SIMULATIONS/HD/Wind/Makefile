@@ -29,7 +29,7 @@ OMP_NUM = 5
 # Physics (HD, MHD, RHD, RMHD)
 ##################################################
 
-PHY = RHD
+PHY = HD
 
 ##################################################
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
@@ -44,7 +44,7 @@ DIM = 2
 # ONLY IF PHY == RHD or RMHD
 ##################################################
 
-METRIC = Eddington-Finkelstein
+METRIC = Minkowski
 
 ##################################################
 # Equation of State (ideal, dust, stiff)
@@ -62,7 +62,7 @@ COORD = spherical
 # User Source Terms (true,false)
 ##################################################
 
-USER_SOURCE = false
+USER_SOURCE = true
 
 ##################################################
 # Integration method
