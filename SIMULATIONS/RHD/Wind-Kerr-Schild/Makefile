@@ -17,7 +17,7 @@ AZTPATH = $(AZTEKAS_PATH)
 # SET NUMBER OF THREADS USED BY OMP
 ###############################################
 
-OMP_NUM = 1
+OMP_NUM = 5
 
 ###############################################
 # Physics (hd, mhd, rhd, rmhd)
@@ -48,7 +48,7 @@ DIM = 2
 
 ## ONLY IF PHY == rhd or rmhd
 
-METRIC = Kerr-Schild
+METRIC = Eddington-Finkelstein
 
 ###############################################
 # Equation of State (ideal, dust, stiff)
