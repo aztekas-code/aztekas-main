@@ -23,7 +23,7 @@ AZTPATH = $(AZTEKAS_PATH)
 # $ grep '^core id' /proc/cpuinfo |sort -u|wc -l
 ##################################################
 
-OMP_NUM = 1
+OMP_NUM = 5
 
 ##################################################
 # Physics (HD, MHD, RHD, RMHD)
@@ -56,7 +56,7 @@ EOS = ideal
 # Coordinates (cartesian,cylindrical,spherical)
 ##################################################
 
-COORD = cartesian
+COORD = spherical
 
 ##################################################
 # User Source Terms (true,false)
