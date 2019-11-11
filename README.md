@@ -14,11 +14,14 @@ where ![equation](https://latex.codecogs.com/gif.latex?Q) is the vector of conse
 
 1. Open terminal in your computer.
 2. Clone github repository: `$ git clone https://github.com/aztekas-code/aztekas-main`
-3. Export the environment variable ATEKAS_PATH `$ echo 'export AZTEKAS_PATH=$HOME/aztekas-main' >> ~/.bashrc`
+3. Export the environment variable AZTEKAS_PATH `$ echo 'export AZTEKAS_PATH=$HOME/aztekas-main' >> ~/.bashrc`
+4. Remember to open a new terminal in order to the environment variable `AZTEKAS_PATH` to work.
 4. Move to SIMULATIONS/HD/Shock-Tube: `$ cd SIMULATIONS/HD/Shock-Tube`
 5. Compile: `$ make clean` and `$ make`
 6. Run _aztekas_: `./aztekas shock.param`
 
 ## Setup a new simulation
 
-1. Run the command `$ chmod 755 setup`
+1. Run the command `$ chmod 755 setup` inside the main directory.
+2. Create a new directory wherever you want.
+3. Run the `setup` script inside this new repository and setup the files for the new simulation: `$ $AZTEKAS_PATH/setup`
