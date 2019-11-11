@@ -302,7 +302,6 @@ cat << EOF >> user_param.h
 #define RECONST               MC
 #define FLUX                  HLL
 #define GRID                  UNIFORM
-
 EOF
 
 date="$(date "+%d-%m-%Y %H:%M:%S")"
@@ -337,7 +336,6 @@ cat << EOF > user_boundaries.c
 
 void User_Boundaries(double *B)
 {
-   return 0;
 }
 EOF
 

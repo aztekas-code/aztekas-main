@@ -229,7 +229,7 @@ void Reflection(double *B)
          for(int n = 0; n < eq; n++)
          {
          #if COORDINATES != SPHERICAL
-            B(int n,i,Nx2-cell) = B(n,i,Nx2-2*gc+cell+1);
+            B(n,i,Nx2-cell) = B(n,i,Nx2-2*gc+cell+1);
          #elif COORDINATES == SPHERICAL
             if(fabs(x2max - M_PI) <= 1.0e-05 || fabs(x2max - M_PI_2) <= 1.0e-05)
             {
