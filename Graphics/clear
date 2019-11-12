@@ -15,7 +15,6 @@ then
 else
    if [ $file == 'eps' ]
    then
-      #rm *.eps *.pdf *.png *.tex *.avi
       rm *.eps
    fi
    if [ $file == 'pdf' ]

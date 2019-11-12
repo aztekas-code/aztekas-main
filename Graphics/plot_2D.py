@@ -71,6 +71,9 @@ Nx1   = int(linecache.getline(file_name,3))
 Nx2   = int(linecache.getline(file_name,4))
 COORD = str(linecache.getline(file_name,5)).rstrip('\n')
 
+if COORD == '1':
+    COORD = 'CYLINDRICAL'
+
 # Data reading
 U = np.loadtxt(file_name,skiprows=6,unpack=True)
 

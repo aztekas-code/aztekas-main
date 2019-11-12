@@ -6,16 +6,18 @@ FILE=$3;
 
 START=$4;
 END=$5;
+SCALE=$6
 
 dat=$START
 
+echo " "
+echo "Bash script for many aztekas plots"
+echo ""
+
 if [ -z "$PLOT_FILE" ]
 then
-   echo " "
-   echo "Bash script for many aztekas plots"
-   echo ""
    echo "Execute this file in your terminal as:"
-   echo "   ./frames PLOT_FILE DIR FILE START END"
+   echo "   ./frames PLOT_FILE DIR FILE START END SCALE"
    echo "where"
    echo "   PLOT_FILE: Python or gnuplot script with path"
    echo "   DIR: Path of the directory with the *.dat files. If"
@@ -24,6 +26,7 @@ then
    echo "         from sim_*.dat, FILE = sim_"
    echo "   START: File number from with you want to start"
    echo "   END: Last file number you want to plot"
+   echo "   SCALE: 'lin' for linear and 'log' for logarithmic"
    echo " "
 else
    scale=$(echo "x = l($END)/l(10); scale = 0; (x / 1) + 1" | bc -l)
@@ -46,11 +49,12 @@ else
    change=`echo "$FILE""$num"".png" | sed 's/\.//'`
    mv "$FILE""$num".png $change
 
-   echo "Printing file" $FILE$dat.dat $change
+   echo "Plotting file" $FILE$dat.dat
 
-   "$PLOT_FILE" "$DIR"/"$FILE""$dat".dat $change
+   "$PLOT_FILE" "$DIR"/"$FILE""$dat".dat $change $SCALE
 
-   echo "Done!" $FILE$dat.dat $change
+   echo "Done! ->" $change
+   echo " "
 
    dat=$((dat+1))
    done
