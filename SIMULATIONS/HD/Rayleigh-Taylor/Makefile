@@ -23,7 +23,7 @@ AZTPATH = $(AZTEKAS_PATH)
 # $ grep '^core id' /proc/cpuinfo |sort -u|wc -l
 ##################################################
 
-OMP_NUM = 1
+OMP_NUM = 5
 
 ##################################################
 # Physics (HD, MHD, RHD, RMHD)
@@ -62,7 +62,7 @@ COORD = Cartesian
 # User Source Terms (true,false)
 ##################################################
 
-USER_SOURCE = false
+USER_SOURCE = true
 
 ##################################################
 # Integration method

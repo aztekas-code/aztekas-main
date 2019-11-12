@@ -83,7 +83,7 @@ vx3u = 0.0
 x_0 = 0.0
 
 % PERTURBATION
-eta = 0.1
+eta = 0.01
 
 % GRAVITY ACCELERATION
 g = 1.0
