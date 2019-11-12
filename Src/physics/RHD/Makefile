@@ -48,7 +48,7 @@ ifeq ($(METRIC),User)
    $(info and their derivatives, respectively.)
    $(info       )
 
-   PHYSICS += user_metric.c
+   USR += user_metric.c
 
    ifeq (,$(wildcard ./user_metric.c))
       $(info No user_metric.c file)

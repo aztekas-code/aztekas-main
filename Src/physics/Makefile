@@ -20,13 +20,13 @@ include $(AZTPATH)/Src/physics/$(PHY)/Makefile
 # Equation of state
 ###############################################
 
-ifeq ($(EOS),ideal)
+ifeq ($(EOS),Ideal)
         PARAM += -DEOS=IDEAL
 endif
-ifeq ($(EOS),dust)
+ifeq ($(EOS),Dust)
         PARAM += -DEOS=DUST
 endif
-ifeq ($(EOS),stiff)
+ifeq ($(EOS),Stiff)
         PARAM += -DEOS=STIFF	
 endif
 

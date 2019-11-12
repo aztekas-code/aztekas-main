@@ -23,7 +23,7 @@ AZTPATH = $(AZTEKAS_PATH)
 # $ grep '^core id' /proc/cpuinfo |sort -u|wc -l
 ##################################################
 
-OMP_NUM = 1
+OMP_NUM = 5
 
 ##################################################
 # Physics (HD, MHD, RHD, RMHD)
@@ -47,16 +47,16 @@ DIM = 2
 METRIC = Minkowski
 
 ##################################################
-# Equation of State (ideal, dust, stiff)
+# Equation of State (User, Ideal, Dust, Stiff)
 ##################################################
 
-EOS = ideal
+EOS = Ideal
 
 ##################################################
-# Coordinates (cartesian,cylindrical,spherical)
+# Coordinates (Cartesian,Cylindrical,Spherical)
 ##################################################
 
-COORD = cylindrical
+COORD = Cylindrical
 
 ##################################################
 # User Source Terms (true,false)

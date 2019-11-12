@@ -1,7 +1,7 @@
 #!/bin/bash
 
-spaces="\t\t\t\t"
 title=`echo "\033[32m"`
+selected=`echo "\033[35m"`
 summary=`echo "\033[34m"`
 normal=`echo "\033[m"`
 menu=`echo "\033[36m"` #Blue
@@ -28,11 +28,25 @@ show_menu(){
     printf "${menu}**${number} 1)${menu} Non-Relativistic Hydrodynamics (HD) ${normal}\n"
     printf "${menu}**${number} 2)${menu} Relativistic Hydrodynacmis (RHD) ${normal}\n"
     printf "${menu}**********************************************************${normal}\n"
-    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
     read phy
 }
 clear
 show_menu
+
+TITLE="\
+${title}##########################################################\n\
+${title}#### aaaaa  zzzzz  ttttt  eeeee  k   k  aaaaa  sssss #####\n\
+${title}####     a     zz    t    e   e  k  k       a  ss    #####\n\
+${title}#### aaaaa   zzz     t    eeeee  kkk    aaaaa  sssss #####\n\
+${title}#### a   a  zz       t    e      k  k   a   a     ss #####\n\
+${title}#### aaaaa  zzzzz    t    eeeee  k   k  aaaaa  sssss #####\n\
+${title}##########################################################\n\
+${title}#################### SIMULATION SETUP ####################\n\
+${title}##########################################################\n\
+\n${summary}**********************************************************${normal}\n\
+${summary}************************ SUMMARY *************************${normal}\n\
+${summary}**********************************************************${normal}\n"
 
 if [[ $phy == 1 ]]
 then
@@ -53,11 +67,8 @@ fi
 show_menu(){
     printf "\n"
     printf "${TITLE}"
-    printf "\n${menu}**********************************************************${normal}\n"
-    printf "${summary}** Summary ${normal}\n"
-    printf "${menu}**********************************************************${normal}\n"
-    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${selected}${PHYSICS} ${normal}\n"
+    printf "${summary}**********************************************************${normal}\n"
     printf "\n${menu}**********************************************************${normal}\n"
     printf "${menu}** Select the number of spatial dimensions of the problem\n"
     printf "${menu}**********************************************************${normal}\n"
@@ -66,7 +77,7 @@ show_menu(){
     printf "${menu}**${number} 3)${menu} 3D ${normal}\n"
     printf "${menu}**${number} 4)${menu} 2.5D ${normal}\n"
     printf "${menu}**********************************************************${normal}\n"
-    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
     read dim
 }
 clear
@@ -95,12 +106,9 @@ fi
 show_menu(){
     printf "\n"
     printf "${TITLE}"
-    printf "\n${menu}**********************************************************${normal}\n"
-    printf "${summary}** Summary ${normal}\n"
-    printf "${menu}**********************************************************${normal}\n"
-    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${selected}${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${selected}${DIMENSIONS} ${normal}\n"
+    printf "${summary}**********************************************************${normal}\n"
     printf "\n${menu}**********************************************************${normal}\n"
     printf "${menu}** Select the type of mesh grid\n"
     printf "${menu}**********************************************************${normal}\n"
@@ -108,7 +116,7 @@ show_menu(){
     printf "${menu}**${number} 2)${menu} Cylindrical ${normal}\n"
     printf "${menu}**${number} 3)${menu} Spherical ${normal}\n"
     printf "${menu}**********************************************************${normal}\n"
-    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
     read coord
 }
 clear
@@ -139,13 +147,10 @@ then
 show_menu(){
     printf "\n"
     printf "${TITLE}"
-    printf "\n${menu}**********************************************************${normal}\n"
-    printf "${summary}** Summary ${normal}\n"
-    printf "${menu}**********************************************************${normal}\n"
-    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-    printf "${summary}** Coordinates: ${COORDINATES} ${normal}\n"
-    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${selected}${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${selected}${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${selected}${COORDINATES} ${normal}\n"
+    printf "${summary}**********************************************************${normal}\n"
     printf "\n${menu}**********************************************************${normal}\n"
     printf "${menu}** Select the fixed background metric\n"
     printf "${menu}**********************************************************${normal}\n"
@@ -156,7 +161,7 @@ show_menu(){
     printf "${menu}**${number} 4)${menu} Boyer-Lindquist ${normal}\n"
     printf "${menu}**${number} 5)${menu} Kerr-Schild ${normal}\n"
     printf "${menu}**********************************************************${normal}\n"
-    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
     read met
 }
 clear
@@ -198,37 +203,39 @@ fi
 show_menu(){
     printf "\n"
     printf "${TITLE}"
-    printf "\n${menu}**********************************************************${normal}\n"
-    printf "${summary}** Summary ${normal}\n"
-    printf "${menu}**********************************************************${normal}\n"
-    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${selected}${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${selected}${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${selected}${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}**********************************************************${normal}\n"
     printf "\n${menu}**********************************************************${normal}\n"
     printf "${menu}** Select the kind of Equation of State (EoS)\n"
     printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 0)${menu} User ${normal}\n"
     printf "${menu}**${number} 1)${menu} Ideal ${normal}\n"
     printf "${menu}**${number} 2)${menu} Dust ${normal}\n"
     printf "${menu}**${number} 3)${menu} Stiff ${normal}\n"
     printf "${menu}**********************************************************${normal}\n"
-    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
     read eqstate
 }
 clear
 show_menu
 
-if [[ $eqstate == 1 ]]
+if [[ $eqstate == 0 ]]
 then
-   eos='ideal'
+   eos='User'
+   EQUATION='Ideal'
+elif [[ $eqstate == 1 ]]
+then
+   eos='Ideal'
    EQUATION='Ideal'
 elif [[ $eqstate == 2 ]]
 then
-   eos='dust'
+   eos='Dust'
    EQUATION='Dust'
 elif [[ $eqstate == 3 ]]
 then
-   eos='stiff'
+   eos='Stiff'
    EQUATION='Stiff'
 elif [[ $eqstate == x ]]
 then
@@ -241,21 +248,18 @@ fi
 show_menu(){
     printf "\n"
     printf "${TITLE}"
-    printf "\n${menu}**********************************************************${normal}\n"
-    printf "${summary}** Summary ${normal}\n"
-    printf "${menu}**********************************************************${normal}\n"
-    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${selected}${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${selected}${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${selected}${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${selected}${EQUATION} ${normal}\n"
+    printf "${summary}**********************************************************${normal}\n"
     printf "\n${menu}**********************************************************${normal}\n"
     printf "${menu}** Do you want to add source terms to the equations?\n"
     printf "${menu}**********************************************************${normal}\n"
     printf "${menu}**${number} 1)${menu} Yes ${normal}\n"
     printf "${menu}**${number} 2)${menu} No ${normal}\n"
     printf "${menu}**********************************************************${normal}\n"
-    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
     read user_sources
 }
 clear
@@ -277,27 +281,26 @@ else
    exit;
 fi
 
+GRAV="-"
+
 if [[ $phy == "HD" ]] && [[ $user_sources == "true" ]]
 then
 show_menu(){
     printf "\n"
     printf "${TITLE}"
-    printf "\n${menu}**********************************************************${normal}\n"
-    printf "${summary}** Summary ${normal}\n"
-    printf "${menu}**********************************************************${normal}\n"
-    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${selected}${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${selected}${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${selected}${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${selected}${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${selected}${USER_SOURCES} ${normal}\n"
+    printf "${summary}**********************************************************${normal}\n"
     printf "\n${menu}**********************************************************${normal}\n"
     printf "${menu}** Do you want gravity as a external force?\n"
     printf "${menu}**********************************************************${normal}\n"
     printf "${menu}**${number} 1)${menu} Yes ${normal}\n"
     printf "${menu}**${number} 2)${menu} No ${normal}\n"
     printf "${menu}**********************************************************${normal}\n"
-    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
     read grav
 }
 clear
@@ -322,16 +325,13 @@ fi
 show_menu(){
     printf "\n"
     printf "${TITLE}"
-    printf "\n${menu}**********************************************************${normal}\n"
-    printf "${summary}** Summary ${normal}\n"
-    printf "${menu}**********************************************************${normal}\n"
-    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-    printf "${summary}** Gravity: ${GRAV} ${normal}\n"
-    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${selected}${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${selected}${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${selected}${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${selected}${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${selected}${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${selected}${GRAV} ${normal}\n"
+    printf "${summary}**********************************************************${normal}\n"
     printf "\n${menu}**********************************************************${normal}\n"
     printf "${menu}** What kind of gravity?\n"
     printf "${menu}**********************************************************${normal}\n"
@@ -339,7 +339,7 @@ show_menu(){
     printf "${menu}**${number} 1)${menu} Vertical constant acceleration g ${normal}\n"
     printf "${menu}**${number} 2)${menu} Newtonian (GM/r) ${normal}\n"
     printf "${menu}**********************************************************${normal}\n"
-    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
     read gravity
 }
 clear
@@ -363,6 +363,26 @@ else
 fi
 
 fi
+
+TITLE="\
+${title}##########################################################\n\
+${title}#### aaaaa  zzzzz  ttttt  eeeee  k   k  aaaaa  sssss #####\n\
+${title}####     a     zz    t    e   e  k  k       a  ss    #####\n\
+${title}#### aaaaa   zzz     t    eeeee  kkk    aaaaa  sssss #####\n\
+${title}#### a   a  zz       t    e      k  k   a   a     ss #####\n\
+${title}#### aaaaa  zzzzz    t    eeeee  k   k  aaaaa  sssss #####\n\
+${title}##########################################################\n\
+${title}#################### SIMULATION SETUP ####################\n\
+${title}##########################################################\n\
+\n${summary}**********************************************************${normal}\n\
+${summary}************************ SUMMARY *************************${normal}\n\
+${summary}**********************************************************${normal}\n\
+${summary}** Physics: ${selected}${PHYSICS} ${normal}\n\
+${summary}** Dimensions: ${selected}${DIMENSIONS} ${normal}\n\
+${summary}** Coordinates: ${selected}${COORDINATES} ${METRIC} ${normal}\n\
+${summary}** Equation of State: ${selected}${EQUATION} ${normal}\n\
+${summary}** External source terms: ${selected}${USER_SOURCES} ${normal}\n\
+${summary}** Gravity: ${selected}${GRAV} ${GRAVITY_TYPE} ${normal}\n"
 
 cat << EOF > Makefile
 ##################################################
@@ -463,16 +483,7 @@ then
    show_menu(){
       printf "\n"
       printf "${TITLE}"
-      printf "\n${menu}**********************************************************${normal}\n"
-      printf "${summary}** Summary ${normal}\n"
-      printf "${menu}**********************************************************${normal}\n"
-      printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-      printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-      printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-      printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-      printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-      printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
-      printf "${menu}**********************************************************${normal}\n"
+      printf "${summary}**********************************************************${normal}\n"
       printf "\n${menu}**********************************************************${normal}\n"
       printf "${menu}** Set boundary in X1-max\n"
       printf "${menu}**********************************************************${normal}\n"
@@ -480,7 +491,7 @@ then
       printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
       printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
       printf "${menu}**********************************************************${normal}\n"
-      printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+      printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
       read bound_x1max
    }
    clear
@@ -513,25 +524,16 @@ then
       show_menu(){
          printf "\n"
          printf "${TITLE}"
-         printf "\n${menu}**********************************************************${normal}\n"
-         printf "${summary}** Summary ${normal}\n"
-         printf "${menu}**********************************************************${normal}\n"
-         printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-         printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-         printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-         printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-         printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-         printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
          printf "${summary}** Boundaries: ${normal}\n"
-         printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
-         printf "${menu}**********************************************************${normal}\n"
+         printf "${summary}**    - X1-max: ${selected}${BX1MAX} ${normal}\n"
+         printf "${summary}**********************************************************${normal}\n"
          printf "\n${menu}**********************************************************${normal}\n"
          printf "${menu}** Set boundary in X1-min\n"
          printf "${menu}**********************************************************${normal}\n"
          printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
          printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
          printf "${menu}**********************************************************${normal}\n"
-         printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+         printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
          read bound_x1min
       }
       clear
@@ -557,22 +559,13 @@ then
    show_menu(){
       printf "\n"
       printf "${TITLE}"
-      printf "\n${menu}**********************************************************${normal}\n"
-      printf "${summary}** Summary ${normal}\n"
-      printf "${menu}**********************************************************${normal}\n"
-      printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-      printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-      printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-      printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-      printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-      printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
       printf "${summary}** Boundaries: ${normal}\n"
-      printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
-      printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
-      printf "${menu}**********************************************************${normal}\n"
-      printf "${menu}Please enter the author of this simulation.${normal}\n"
+      printf "${summary}**    - X1-max: ${selected}${BX1MAX} ${normal}\n"
+      printf "${summary}**    - X1-min: ${selected}${BX1MIN} ${normal}\n"
+      printf "${summary}**********************************************************${normal}\n"
+      printf "\n${menu}Please enter the author of this simulation.${number}\n"
       read author
-      printf "${menu}Please enter the characteristic name of this simulation.${normal}\n"
+      printf "\n${menu}Please enter the characteristic name of this simulation.${number}\n"
       read char_name
    }
    clear
@@ -586,16 +579,7 @@ then
    show_menu(){
       printf "\n"
       printf "${TITLE}"
-      printf "\n${menu}**********************************************************${normal}\n"
-      printf "${summary}** Summary ${normal}\n"
-      printf "${menu}**********************************************************${normal}\n"
-      printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-      printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-      printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-      printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-      printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-      printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
-      printf "${menu}**********************************************************${normal}\n"
+      printf "${summary}**********************************************************${normal}\n"
       printf "\n${menu}**********************************************************${normal}\n"
       printf "${menu}** Set boundary in X1-max\n"
       printf "${menu}**********************************************************${normal}\n"
@@ -603,7 +587,7 @@ then
       printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
       printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
       printf "${menu}**********************************************************${normal}\n"
-      printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+      printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
       read bound_x1max
    }
    clear
@@ -636,25 +620,16 @@ then
       show_menu(){
          printf "\n"
          printf "${TITLE}"
-         printf "\n${menu}**********************************************************${normal}\n"
-         printf "${summary}** Summary ${normal}\n"
-         printf "${menu}**********************************************************${normal}\n"
-         printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-         printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-         printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-         printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-         printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-         printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
          printf "${summary}** Boundaries: ${normal}\n"
-         printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
-         printf "${menu}**********************************************************${normal}\n"
+         printf "${summary}**    - X1-max: ${selected}${BX1MAX} ${normal}\n"
+         printf "${summary}**********************************************************${normal}\n"
          printf "\n${menu}**********************************************************${normal}\n"
          printf "${menu}** Set boundary in X1-min\n"
          printf "${menu}**********************************************************${normal}\n"
          printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
          printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
          printf "${menu}**********************************************************${normal}\n"
-         printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+         printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
          read bound_x1min
       }
       clear
@@ -680,19 +655,10 @@ then
    show_menu(){
        printf "\n"
        printf "${TITLE}"
-       printf "\n${menu}**********************************************************${normal}\n"
-       printf "${summary}** Summary ${normal}\n"
-       printf "${menu}**********************************************************${normal}\n"
-       printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-       printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-       printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-       printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-       printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-       printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
        printf "${summary}** Boundaries: ${normal}\n"
        printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
        printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
-       printf "${menu}**********************************************************${normal}\n"
+       printf "${summary}**********************************************************${normal}\n"
        printf "\n${menu}**********************************************************${normal}\n"
        printf "${menu}** Set boundary in X2-max\n"
        printf "${menu}**********************************************************${normal}\n"
@@ -700,7 +666,7 @@ then
        printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
        printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
        printf "${menu}**********************************************************${normal}\n"
-       printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+       printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
        read bound_x2max
    }
    clear
@@ -733,27 +699,18 @@ then
       show_menu(){
           printf "\n"
           printf "${TITLE}"
-          printf "\n${menu}**********************************************************${normal}\n"
-          printf "${summary}** Summary ${normal}\n"
-          printf "${menu}**********************************************************${normal}\n"
-          printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-          printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-          printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-          printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-          printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-          printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
           printf "${summary}** Boundaries: ${normal}\n"
           printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
           printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
           printf "${summary}**    - X2-max: ${BX2MAX} ${normal}\n"
-          printf "${menu}**********************************************************${normal}\n"
+          printf "${summary}**********************************************************${normal}\n"
           printf "\n${menu}**********************************************************${normal}\n"
           printf "${menu}** Set boundary in X2-min\n"
           printf "${menu}**********************************************************${normal}\n"
           printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
           printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
           printf "${menu}**********************************************************${normal}\n"
-          printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+          printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
           read bound_x2min
    }
    clear
@@ -779,24 +736,15 @@ then
 show_menu(){
     printf "\n"
     printf "${TITLE}"
-    printf "\n${menu}**********************************************************${normal}\n"
-    printf "${summary}** Summary ${normal}\n"
-    printf "${menu}**********************************************************${normal}\n"
-    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-    printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
     printf "${summary}** Boundaries: ${normal}\n"
     printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
     printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
     printf "${summary}**    - X2-max: ${BX2MAX} ${normal}\n"
     printf "${summary}**    - X2-min: ${BX2MIN} ${normal}\n"
-    printf "${menu}**********************************************************${normal}\n"
-    printf "${menu}Please enter the author of this simulation.${normal}\n"
+    printf "${summary}**********************************************************${normal}\n"
+    printf "\n${menu}Please enter the author of this simulation.${number}\n"
     read author
-    printf "${menu}Please enter the characteristic name of this simulation.${normal}\n"
+    printf "\n${menu}Please enter the characteristic name of this simulation.${number}\n"
     read char_name
 }
 clear
@@ -810,16 +758,7 @@ then
    show_menu(){
       printf "\n"
       printf "${TITLE}"
-      printf "\n${menu}**********************************************************${normal}\n"
-      printf "${summary}** Summary ${normal}\n"
-      printf "${menu}**********************************************************${normal}\n"
-      printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-      printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-      printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-      printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-      printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-      printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
-      printf "${menu}**********************************************************${normal}\n"
+      printf "${summary}**********************************************************${normal}\n"
       printf "\n${menu}**********************************************************${normal}\n"
       printf "${menu}** Set boundary in X1-max\n"
       printf "${menu}**********************************************************${normal}\n"
@@ -827,7 +766,7 @@ then
       printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
       printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
       printf "${menu}**********************************************************${normal}\n"
-      printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+      printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
       read bound_x1max
    }
    clear
@@ -860,25 +799,16 @@ then
       show_menu(){
          printf "\n"
          printf "${TITLE}"
-         printf "\n${menu}**********************************************************${normal}\n"
-         printf "${summary}** Summary ${normal}\n"
-         printf "${menu}**********************************************************${normal}\n"
-         printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-         printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-         printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-         printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-         printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-         printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
          printf "${summary}** Boundaries: ${normal}\n"
          printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
-         printf "${menu}**********************************************************${normal}\n"
+         printf "${summary}**********************************************************${normal}\n"
          printf "\n${menu}**********************************************************${normal}\n"
          printf "${menu}** Set boundary in X1-min\n"
          printf "${menu}**********************************************************${normal}\n"
          printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
          printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
          printf "${menu}**********************************************************${normal}\n"
-         printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+         printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
          read bound_x1min
    }
    clear
@@ -886,7 +816,7 @@ then
 
       if [[ $bound_x1min == 1 ]]
       then
-         bound_x1min="outflow_x1min"
+         bound_x1min="outflow_x1min   "
          BX1MIN="Outflow"
       elif [[ $bound_x1min == 2 ]]
       then
@@ -904,19 +834,10 @@ then
    show_menu(){
       printf "\n"
       printf "${TITLE}"
-      printf "\n${menu}**********************************************************${normal}\n"
-      printf "${summary}** Summary ${normal}\n"
-      printf "${menu}**********************************************************${normal}\n"
-      printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-      printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-      printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-      printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-      printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-      printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
       printf "${summary}** Boundaries: ${normal}\n"
       printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
       printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
-      printf "${menu}**********************************************************${normal}\n"
+      printf "${summary}**********************************************************${normal}\n"
       printf "\n${menu}**********************************************************${normal}\n"
       printf "${menu}** Set boundary in X2-max\n"
       printf "${menu}**********************************************************${normal}\n"
@@ -924,7 +845,7 @@ then
       printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
       printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
       printf "${menu}**********************************************************${normal}\n"
-      printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+      printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
       read bound_x2max
    }
    clear
@@ -957,27 +878,18 @@ then
       show_menu(){
          printf "\n"
          printf "${TITLE}"
-         printf "\n${menu}**********************************************************${normal}\n"
-         printf "${summary}** Summary ${normal}\n"
-         printf "${menu}**********************************************************${normal}\n"
-         printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-         printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-         printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-         printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-         printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-         printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
          printf "${summary}** Boundaries: ${normal}\n"
          printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
          printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
          printf "${summary}**    - X2-max: ${BX2MAX} ${normal}\n"
-         printf "${menu}**********************************************************${normal}\n"
+         printf "${summary}**********************************************************${normal}\n"
          printf "\n${menu}**********************************************************${normal}\n"
          printf "${menu}** Set boundary in X2-min\n"
          printf "${menu}**********************************************************${normal}\n"
          printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
          printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
          printf "${menu}**********************************************************${normal}\n"
-         printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+         printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
          read bound_x2min
       }
       clear
@@ -1003,21 +915,12 @@ then
    show_menu(){
       printf "\n"
       printf "${TITLE}"
-      printf "\n${menu}**********************************************************${normal}\n"
-      printf "${summary}** Summary ${normal}\n"
-      printf "${menu}**********************************************************${normal}\n"
-      printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-      printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-      printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-      printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-      printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-      printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
       printf "${summary}** Boundaries: ${normal}\n"
       printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
       printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
       printf "${summary}**    - X2-max: ${BX2MAX} ${normal}\n"
       printf "${summary}**    - X2-min: ${BX2MIN} ${normal}\n"
-      printf "${menu}**********************************************************${normal}\n"
+      printf "${summary}**********************************************************${normal}\n"
       printf "\n${menu}**********************************************************${normal}\n"
       printf "${menu}** Set boundary in X3-max\n"
       printf "${menu}**********************************************************${normal}\n"
@@ -1025,7 +928,7 @@ then
       printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
       printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
       printf "${menu}**********************************************************${normal}\n"
-      printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+      printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
       read bound_x3max
    }
    clear
@@ -1058,29 +961,20 @@ then
       show_menu(){
          printf "\n"
          printf "${TITLE}"
-         printf "\n${menu}**********************************************************${normal}\n"
-         printf "${summary}** Summary ${normal}\n"
-         printf "${menu}**********************************************************${normal}\n"
-         printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-         printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-         printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-         printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-         printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-         printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
          printf "${summary}** Boundaries: ${normal}\n"
          printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
          printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
          printf "${summary}**    - X2-max: ${BX2MAX} ${normal}\n"
          printf "${summary}**    - X2-min: ${BX2MIN} ${normal}\n"
          printf "${summary}**    - X3-max: ${BX3MAX} ${normal}\n"
-         printf "${menu}**********************************************************${normal}\n"
+         printf "${summary}**********************************************************${normal}\n"
          printf "\n${menu}**********************************************************${normal}\n"
          printf "${menu}** Set boundary in X3-min\n"
          printf "${menu}**********************************************************${normal}\n"
          printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
          printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
          printf "${menu}**********************************************************${normal}\n"
-         printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+         printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
          read bound_x3min
       }
       clear
@@ -1106,15 +1000,6 @@ then
    show_menu(){
       printf "\n"
       printf "${TITLE}"
-      printf "\n${menu}**********************************************************${normal}\n"
-      printf "${summary}** Summary ${normal}\n"
-      printf "${menu}**********************************************************${normal}\n"
-      printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
-      printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
-      printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
-      printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
-      printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
-      printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
       printf "${summary}** Boundaries: ${normal}\n"
       printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
       printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
@@ -1122,10 +1007,10 @@ then
       printf "${summary}**    - X2-min: ${BX2MIN} ${normal}\n"
       printf "${summary}**    - X3-max: ${BX3MAX} ${normal}\n"
       printf "${summary}**    - X3-min: ${BX3MIN} ${normal}\n"
-      printf "${menu}**********************************************************${normal}\n"
-      printf "${menu}Please enter the author of this simulation.${normal}\n"
+      printf "${summary}**********************************************************${normal}\n"
+      printf "\n${menu}Please enter the author of this simulation.${number}\n"
       read author
-      printf "${menu}Please enter the characteristic name of this simulation.${normal}\n"
+      printf "\n${menu}Please enter the characteristic name of this simulation.${number}\n"
       read char_name
    }
    clear
@@ -1404,6 +1289,112 @@ void User_Boundaries(double *B)
 }
 EOF
 
+if [[ $metric == 'User' ]]
+then 
+cat << EOF > user_metric.c
+/* 
+ *  aztekas user metric module
+ *  Date of creation: $date
+ *  author: $author 
+ */
+
+#include"main.h"
+
+void Get_Metric_Components(gauge_ *local_grid)
+{
+   /* Default metric --> Minkowski in Cartesian grid */
+
+   /**
+    * Lapse function \\alpha
+    */
+   local_grid->lapse = 1.0;                                                     
+      
+   /**
+    * Shift vector \\beta^i
+    */
+   local_grid->beta_con[0] = 0.0;                                               
+   local_grid->beta_con[1] = 0.0;                                               
+   local_grid->beta_con[2] = 0.0;                                               
+      
+   /**
+    * 3D-metric \\gamma^{ij}
+    */
+   local_grid->gamma_con[0][0] = 1.0;                                           
+   local_grid->gamma_con[0][1] = 0.0;                                           
+   local_grid->gamma_con[0][2] = 0.0;                                           
+   local_grid->gamma_con[1][0] = 0.0;                                           
+   local_grid->gamma_con[1][1] = 1.0;                                           
+   local_grid->gamma_con[1][2] = 0.0;                                           
+   local_grid->gamma_con[2][0] = 0.0;                                           
+   local_grid->gamma_con[2][1] = 0.0;                                           
+   local_grid->gamma_con[2][2] = 1.0;                                           
+                                                                                
+   /**
+    * Sqrt root of the determinant of the
+    * 3D-metric \gamma^{ij}
+    */
+   local_grid->dety = 1.0;                                                      
+}
+
+void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid)
+{
+   /**
+    * Spatial derivatives of the lapse function \\alpha
+    */
+   der->dlapse[0] = 0.0;
+   der->dlapse[1] = 0.0;
+   der->dlapse[2] = 0.0;
+
+   /**
+    * Spatial derivatives of the shift vector \\beta^i
+    */
+   der->dbeta[0][0] = 0.0;
+   der->dbeta[0][1] = 0.0;
+   der->dbeta[0][2] = 0.0;
+   der->dbeta[1][0] = 0.0;
+   der->dbeta[1][1] = 0.0;
+   der->dbeta[1][2] = 0.0;
+   der->dbeta[2][0] = 0.0;
+   der->dbeta[2][1] = 0.0;
+   der->dbeta[2][2] = 0.0;
+
+   /**
+    * Spatial derivatives of the shift vector \\gamma_{ij}
+    */
+   der->dgam[0][0][0] = 0.0;
+   der->dgam[0][0][1] = 0.0;
+   der->dgam[0][0][2] = 0.0;
+   der->dgam[0][1][0] = 0.0;
+   der->dgam[0][1][1] = 0.0;
+   der->dgam[0][1][2] = 0.0;
+   der->dgam[0][2][0] = 0.0;
+   der->dgam[0][2][1] = 0.0;
+   der->dgam[0][2][2] = 0.0;
+
+   der->dgam[1][0][0] = 0.0;
+   der->dgam[1][0][1] = 0.0;
+   der->dgam[1][0][2] = 0.0;
+   der->dgam[1][1][0] = 0.0;
+   der->dgam[1][1][1] = 0.0;
+   der->dgam[1][1][2] = 0.0;
+   der->dgam[1][2][0] = 0.0;
+   der->dgam[1][2][1] = 0.0;
+   der->dgam[1][2][2] = 0.0;
+
+   der->dgam[2][0][0] = 0.0;
+   der->dgam[2][0][1] = 0.0;
+   der->dgam[2][0][2] = 0.0;
+   der->dgam[2][1][0] = 0.0;
+   der->dgam[2][1][1] = 0.0;
+   der->dgam[2][1][2] = 0.0;
+   der->dgam[2][2][0] = 0.0;
+   der->dgam[2][2][1] = 0.0;
+   der->dgam[2][2][2] = 0.0;
+}
+
+EOF
+fi
+
 if [[ $user_sources == true ]]
 then 
 cat << EOF > user_sources.c
@@ -1415,7 +1406,7 @@ cat << EOF > user_sources.c
 
 #include"main.h"
 
-void User_Source_Terms(double *s, double *u, gauge_ local_grid)
+void User_Source_Terms(double *s, double *u, gauge_ *local_grid)
 {
    double rho, p, vx1=0.0, vx2=0.0, vx3=0.0;
 
@@ -1434,7 +1425,7 @@ void User_Source_Terms(double *s, double *u, gauge_ local_grid)
 
 EOF
 
-if [[ $grav == 'n' ]] || [[ $phy == 'rhd'  ]] || [[ $gravity == 0 ]]
+if [[ $grav == 'n' ]] || [[ $phy == 'RHD'  ]] || [[ $gravity == 0 ]]
 then
 
 cat << EOF >> user_sources.c

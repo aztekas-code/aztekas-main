@@ -28,10 +28,10 @@ PHY = rhd
 METRIC = Kerr-Schild
 
 ###############################################
-# Equation of State (ideal, dust, stiff)
+# Equation of State (User, Ideal, Dust, Stiff)
 ###############################################
 
-EOS = stiff
+EOS = Stiff
 
 ###############################################
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
@@ -40,10 +40,10 @@ EOS = stiff
 DIM = 4
 
 ###############################################
-# Coordinates (cartesian,cylindrical,spherical)
+# Coordinates (Cartesian,Cylindrical,Spherical)
 ###############################################
 
-COORD = spherical
+COORD = Spherical
 
 ###############################################
 # User Source Terms (true,false)

@@ -47,16 +47,16 @@ DIM = 1
 METRIC = Minkowski
 
 ##################################################
-# Equation of State (ideal, dust, stiff)
+# Equation of State (User, Ideal, Dust, Stiff)
 ##################################################
 
-EOS = ideal
+EOS = Ideal
 
 ##################################################
-# Coordinates (cartesian,cylindrical,spherical)
+# Coordinates (Cartesian,Cylindrical,Spherical)
 ##################################################
 
-COORD = cartesian
+COORD = Cartesian
 
 ##################################################
 # User Source Terms (true,false)

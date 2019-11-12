@@ -31,14 +31,14 @@ ifeq ($(PHY),rhd)
         PARAM += -DPHYSICS=RHD
 endif
 
-eos = ideal
-ifeq ($(eos),ideal)
+eos = Ideal
+ifeq ($(eos),Ideal)
         PARAM += -DEOS=IDEAL
 endif
-ifeq ($(eos),dust)
+ifeq ($(eos),Dust)
         PARAM += -DEOS=DUST
 endif
-ifeq ($(eos),stiff)
+ifeq ($(eos),Stiff)
         PARAM += -DEOS=STIFF
 endif
 

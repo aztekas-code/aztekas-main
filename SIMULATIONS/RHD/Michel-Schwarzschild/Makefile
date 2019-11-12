@@ -44,16 +44,16 @@ DIM = 1
 METRIC = Schwarzschild
 
 ###############################################
-# Equation of State (ideal, dust, stiff)
+# Equation of State (User, Ideal, Dust, Stiff)
 ###############################################
 
-EOS = ideal
+EOS = Ideal
 
 ###############################################
-# Coordinates (cartesian,cylindrical,spherical)
+# Coordinates (Cartesian,Cylindrical,Spherical)
 ###############################################
 
-COORD = spherical
+COORD = Spherical
 
 ###############################################
 # User Source Terms (true,false)

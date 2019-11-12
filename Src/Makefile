@@ -35,13 +35,13 @@ PARAM += -DDIM=$(DIM)
 # COORDINATES
 #####################################
 
-ifeq ($(COORD),cartesian)
+ifeq ($(COORD),Cartesian)
 	PARAM += -DCOORDINATES=CARTESIAN
 endif
-ifeq ($(COORD),cylindrical)
+ifeq ($(COORD),Cylindrical)
 	PARAM += -DCOORDINATES=CYLINDRICAL
 endif
-ifeq ($(COORD),spherical)
+ifeq ($(COORD),Spherical)
 	PARAM += -DCOORDINATES=SPHERICAL
 endif
 
