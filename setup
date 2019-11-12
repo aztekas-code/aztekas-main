@@ -34,8 +34,8 @@ show_menu(){
     printf "${menu}**${number} 1)${menu} Non-Relativistic Hydrodynamics (HD) ${normal}\n"
     printf "${menu}**${number} 2)${menu} Relativistic Hydrodynacmis (RHD) ${normal}\n"
     printf "${menu}**********************************************************${normal}\n"
-    printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-    read phy
+    printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+    read -n1 -s phy
 }
 clear
 show_menu
@@ -86,8 +86,8 @@ show_menu(){
     printf "${menu}**${number} 3)${menu} 3D ${normal}\n"
     printf "${menu}**${number} 4)${menu} 2.5D ${normal}\n"
     printf "${menu}**********************************************************${normal}\n"
-    printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-    read dim
+    printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+    read -n1 -s dim
 }
 clear
 show_menu
@@ -125,8 +125,8 @@ show_menu(){
     printf "${menu}**${number} 2)${menu} Cylindrical ${normal}\n"
     printf "${menu}**${number} 3)${menu} Spherical ${normal}\n"
     printf "${menu}**********************************************************${normal}\n"
-    printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-    read coord
+    printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+    read -n1 -s coord
 }
 clear
 show_menu
@@ -170,8 +170,8 @@ show_menu(){
     printf "${menu}**${number} 4)${menu} Boyer-Lindquist ${normal}\n"
     printf "${menu}**${number} 5)${menu} Kerr-Schild ${normal}\n"
     printf "${menu}**********************************************************${normal}\n"
-    printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-    read met
+    printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+    read -n1 -s met
 }
 clear
 show_menu
@@ -224,8 +224,8 @@ show_menu(){
     printf "${menu}**${number} 2)${menu} Dust ${normal}\n"
     printf "${menu}**${number} 3)${menu} Stiff ${normal}\n"
     printf "${menu}**********************************************************${normal}\n"
-    printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-    read eqstate
+    printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+    read -n1 -s eqstate
 }
 clear
 show_menu
@@ -268,8 +268,8 @@ show_menu(){
     printf "${menu}**${number} 1)${menu} Yes ${normal}\n"
     printf "${menu}**${number} 2)${menu} No ${normal}\n"
     printf "${menu}**********************************************************${normal}\n"
-    printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-    read user_sources
+    printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+    read -n1 -s user_sources
 }
 clear
 show_menu
@@ -309,8 +309,8 @@ show_menu(){
     printf "${menu}**${number} 1)${menu} Yes ${normal}\n"
     printf "${menu}**${number} 2)${menu} No ${normal}\n"
     printf "${menu}**********************************************************${normal}\n"
-    printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-    read grav
+    printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+    read -n1 -s grav
 }
 clear
 show_menu
@@ -348,8 +348,8 @@ show_menu(){
     printf "${menu}**${number} 1)${menu} Vertical constant acceleration g ${normal}\n"
     printf "${menu}**${number} 2)${menu} Newtonian (GM/r) ${normal}\n"
     printf "${menu}**********************************************************${normal}\n"
-    printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-    read gravity
+    printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+    read -n1 -s gravity
 }
 clear
 show_menu
@@ -503,8 +503,8 @@ then
       printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
       printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
       printf "${menu}**********************************************************${normal}\n"
-      printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-      read bound_x1max
+      printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+      read -n1 -s bound_x1max
    }
    clear
    show_menu
@@ -545,8 +545,8 @@ then
          printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
          printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
          printf "${menu}**********************************************************${normal}\n"
-         printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-         read bound_x1min
+         printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+         read -n1 -s bound_x1min
       }
       clear
       show_menu
@@ -599,8 +599,8 @@ then
       printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
       printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
       printf "${menu}**********************************************************${normal}\n"
-      printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-      read bound_x1max
+      printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+      read -n1 -s bound_x1max
    }
    clear
    show_menu
@@ -641,8 +641,8 @@ then
          printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
          printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
          printf "${menu}**********************************************************${normal}\n"
-         printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-         read bound_x1min
+         printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+         read -n1 -s bound_x1min
       }
       clear
       show_menu
@@ -678,8 +678,8 @@ then
        printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
        printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
        printf "${menu}**********************************************************${normal}\n"
-       printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-       read bound_x2max
+       printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+       read -n1 -s bound_x2max
    }
    clear
    show_menu
@@ -722,8 +722,8 @@ then
           printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
           printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
           printf "${menu}**********************************************************${normal}\n"
-          printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-          read bound_x2min
+          printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+          read -n1 -s bound_x2min
    }
    clear
    show_menu
@@ -778,8 +778,8 @@ then
       printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
       printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
       printf "${menu}**********************************************************${normal}\n"
-      printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-      read bound_x1max
+      printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+      read -n1 -s bound_x1max
    }
    clear
    show_menu
@@ -820,8 +820,8 @@ then
          printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
          printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
          printf "${menu}**********************************************************${normal}\n"
-         printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-         read bound_x1min
+         printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+         read -n1 -s bound_x1min
    }
    clear
    show_menu
@@ -857,8 +857,8 @@ then
       printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
       printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
       printf "${menu}**********************************************************${normal}\n"
-      printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-      read bound_x2max
+      printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+      read -n1 -s bound_x2max
    }
    clear
    show_menu
@@ -901,8 +901,8 @@ then
          printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
          printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
          printf "${menu}**********************************************************${normal}\n"
-         printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-         read bound_x2min
+         printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+         read -n1 -s bound_x2min
       }
       clear
       show_menu
@@ -940,8 +940,8 @@ then
       printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
       printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
       printf "${menu}**********************************************************${normal}\n"
-      printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-      read bound_x3max
+      printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+      read -n1 -s bound_x3max
    }
    clear
    show_menu
@@ -986,8 +986,8 @@ then
          printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
          printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
          printf "${menu}**********************************************************${normal}\n"
-         printf "Please enter a menu option and enter or ${fgred}x ${normal}to exit."
-         read bound_x3min
+         printf "Select a number or type ${fgred}x ${normal}to exit.\n"
+         read -n1 -s bound_x3min
       }
       clear
       show_menu
