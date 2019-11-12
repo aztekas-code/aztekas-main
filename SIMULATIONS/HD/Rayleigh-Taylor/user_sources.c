@@ -28,8 +28,8 @@ void User_Source_Terms(double *s, double *u, gauge_ *local_grid)
 #endif
 
    s[RHO] = 0.0;
-   s[PRE] = -rho*vx2;
+   s[PRE] = -rho*g*vx2;
    s[VX1] = 0.0;
-   s[VX2] = -rho;
+   s[VX2] = -rho*g;
    s[VX3] = 0.0;
 }

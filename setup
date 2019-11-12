@@ -1,67 +1,367 @@
 #!/bin/bash
 
-echo 'Enter the physics of the problem (HD or RHD)'
-read phy
+title=`echo "\033[32m"`
+summary=`echo "\033[34m"`
+normal=`echo "\033[m"`
+menu=`echo "\033[36m"` #Blue
+number=`echo "\033[33m"` #yellow
+bgred=`echo "\033[41m"`
+fgred=`echo "\033[31m"`
+TITLE="\
+${title}##########################################################\n\
+${title}#### aaaaa  zzzzz  ttttt  eeeee  k   k  aaaaa  sssss #####\n\
+${title}####     a     zz    t    e   e  k  k       a  ss    #####\n\
+${title}#### aaaaa   zzz     t    eeeee  kkk    aaaaa  sssss #####\n\
+${title}#### a   a  zz       t    e      k  k   a   a     ss #####\n\
+${title}#### aaaaa  zzzzz    t    eeeee  k   k  aaaaa  sssss #####\n\
+${title}##########################################################\n\
+${title}#################### SIMULATION SETUP ####################\n\
+${title}##########################################################\n"
+
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Select the physics of the problem\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Non-Relativistic Hydrodynamics (HD) ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Relativistic Hydrodynacmis (RHD) ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read phy
+}
+clear
+show_menu
+
+if [[ $phy == 1 ]]
+then
+   phy=HD
+   PHYSICS='Non-Relativistic Hydrodynamics'
+elif [[ $phy == 2 ]]
+then
+   phy=RHD
+   PHYSICS='Relativistic Hydrodynamics'
+elif [[ $phy == x ]]
+then 
+   exit;
+else
+   printf "${fgred} Wrong selection\n"
+   exit;
+fi
+
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Select the number of spatial dimensions of the problem\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} 1D ${normal}\n"
+    printf "${menu}**${number} 2)${menu} 2D ${normal}\n"
+    printf "${menu}**${number} 3)${menu} 3D ${normal}\n"
+    printf "${menu}**${number} 4)${menu} 2.5D ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read dim
+}
+clear
+show_menu
+
+if [[ $dim == 1 ]]
+then
+   DIMENSIONS='1D'
+elif [[ $dim == 2 ]]
+then
+   DIMENSIONS='2D'
+elif [[ $dim == 3 ]]
+then
+   DIMENSIONS='3D'
+elif [[ $dim == 4 ]]
+then
+   DIMENSIONS='2.5D'
+elif [[ $dim == x ]]
+then
+   exit;
+else
+   printf "${fgred} Wrong selection\n"
+   exit;
+fi
+
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Select the type of mesh grid\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Cartesian ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Cylindrical ${normal}\n"
+    printf "${menu}**${number} 3)${menu} Spherical ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read coord
+}
+clear
+show_menu
+
+if [[ $coord == 1 ]]
+then
+   coord=cartesian
+   COORDINATES=Cartesian
+elif [[ $coord == 2 ]]
+then
+   coord=cylindrical
+   COORDINATES=Cylindrical
+elif [[ $coord == 3 ]]
+then
+   coord=spherical
+   COORDINATES=Spherical
+elif [[ $coord == x ]]
+then 
+   exit;
+else
+   printf "${fgred} Wrong selection\n"
+   exit;
+fi
 
 if [[ $phy == RHD ]]
 then
-   echo 'Select the fixed background metric (0. User, 1. Minkowski, 2. Schwarzschild, 3. Eddington-Finkelstein, 4. Boyer-Lindquist, 5. Kerr-Schild)'
-   read met
-fi
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Select the fixed background metric\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 0)${menu} User ${normal}\n"
+    printf "${menu}**${number} 1)${menu} Minkowski ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Schwarzschild ${normal}\n"
+    printf "${menu}**${number} 3)${menu} Eddington-Finkelstein ${normal}\n"
+    printf "${menu}**${number} 4)${menu} Boyer-Lindquist ${normal}\n"
+    printf "${menu}**${number} 5)${menu} Kerr-Schild ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read met
+}
+clear
+show_menu
 
 if [[ $met == 0 ]]
 then
    metric='User'
-fi
-if [[ $met == 1 ]]
+   METRIC='- User defined space-time'
+elif [[ $met == 1 ]]
 then
    metric='Minkowski'
-fi
-if [[ $met == 2 ]]
+   METRIC='- Minkowski space-time'
+elif [[ $met == 2 ]]
 then
    metric='Schwarzschild'
-fi
-if [[ $met == 3 ]]
+   METRIC='- Schwarzschild space-time'
+elif [[ $met == 3 ]]
 then
    metric='Eddington-Finkelstein'
-fi
-if [[ $met == 4 ]]
+   METRIC='- Eddington-Finkelstein space-time'
+elif [[ $met == 4 ]]
 then
    metric='Boyer-Lindquist'
-fi
-if [[ $met == 5 ]]
+   METRIC='- Boyer-Lindquist space-time'
+elif [[ $met == 5 ]]
 then
    metric='Kerr-Schild'
+   METRIC='- Kerr-Schild space-time'
+elif [[ $met == x ]]
+then
+   exit;
+else
+   printf "${fgred} Wrong selection\n"
+   exit;
+fi
 fi
 
-echo 'Select the kind of Equation of State (1. Ideal, 2. Dust, 3. Stiff)'
-read eqstate
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Select the kind of Equation of State (EoS)\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Ideal ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Dust ${normal}\n"
+    printf "${menu}**${number} 3)${menu} Stiff ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read eqstate
+}
+clear
+show_menu
 
 if [[ $eqstate == 1 ]]
 then
    eos='ideal'
-fi
-if [[ $eqstate == 2 ]]
+   EQUATION='Ideal'
+elif [[ $eqstate == 2 ]]
 then
    eos='dust'
-fi
-if [[ $eqstate == 3 ]]
+   EQUATION='Dust'
+elif [[ $eqstate == 3 ]]
 then
    eos='stiff'
-fi
-
-echo 'Enter the number of dimensions (1, 2, or 3. Enter 4 for 2.5)'
-read dim
-
-echo 'Enter the coordinate system (cartesian, cylindrical or spherical)'
-read coord
-
-if [[ $phy == "HD" ]]
+   EQUATION='Stiff'
+elif [[ $eqstate == x ]]
 then
-   echo 'Do you want gravity as a external force? (y/n)'
-   read grav
+   exit;
+else
+   printf "${fgred} Wrong selection\n"
+   exit;
 fi
 
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Do you want to add source terms to the equations?\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Yes ${normal}\n"
+    printf "${menu}**${number} 2)${menu} No ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read user_sources
+}
+clear
+show_menu
+
+if [[ $user_sources == 1 ]]
+then
+   user_sources=true
+   USER_SOURCES='Yes'
+elif [[ $user_sources == 2 ]]
+then
+   user_sources=false
+   USER_SOURCES='No'
+elif [[ $user_sources == x ]]
+then
+   exit;
+else
+   printf "${fgred} Wrong selection\n"
+   exit;
+fi
+
+if [[ $phy == "HD" ]] && [[ $user_sources == "true" ]]
+then
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Do you want gravity as a external force?\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Yes ${normal}\n"
+    printf "${menu}**${number} 2)${menu} No ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read grav
+}
+clear
+show_menu
+
+if [[ $grav == 1 ]]
+then
+   grav=y
+   GRAV=Yes
+elif [[ $grav == 2 ]]
+then
+   grav=n
+   GRAV=No
+elif [[ $grav == x ]]
+then
+   exit;
+else
+   printf "${fgred} Wrong selection\n"
+   exit;
+fi
+
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${GRAV} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** What kind of gravity?\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 0)${menu} User defined ${normal}\n"
+    printf "${menu}**${number} 1)${menu} Vertical constant acceleration g ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Newtonian (GM/r) ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read gravity
+}
+clear
+show_menu
+
+if [[ $gravity == 0 ]]
+then
+   GRAVITY_TYPE='- User defined'
+elif [[ $gravity == 1 ]]
+then
+   GRAVITY_TYPE='- Vertical constant acceleration g'
+elif [[ $gravity == 2 ]]
+then
+   GRAVITY_TYPE='- Newtonian (GM/r²)'
+elif [[ $gravity == x ]]
+then
+   exit;
+else
+   printf "${fgred} Wrong selection\n"
+   exit;
+fi
+
+fi
 
 cat << EOF > Makefile
 ##################################################
@@ -128,7 +428,7 @@ COORD = $coord
 # User Source Terms (true,false)
 ##################################################
 
-USER_SOURCE = false
+USER_SOURCE = $user_sources
 
 ##################################################
 # Integration method
@@ -157,93 +457,634 @@ EOF
 
 if [ $dim -eq 1 ]
 then
-   echo 'Set boundary in X1max (outflow,reflective,periodic,inflow)'
-   read bound_x1max
-   if [[ $bound_x1max == "periodic" ]]
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Set boundary in X1-max\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
+    printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read bound_x1max
+}
+clear
+show_menu
+
+   if [[ $bound_x1max == 1 ]]
+   then
+      bound_x1max="outflow"
+      BX1MAX="Outflow"
+   elif [[ $bound_x1max == 2 ]]
+   then
+      bound_x1max="reflective"
+      BX1MAX="Reflective"
+   elif [[ $bound_x1max == 3 ]]
    then
       bound_x1max="periodic_x1"
+      BX1MAX="Periodic"
       bound_x1min=""
+      BX1MIN="Periodic"
+   elif [[ $bound_x1max == x ]]
+   then
+      exit;
    else
-      echo 'Set boundary in X1min (outflow,reflective,inflow)'
-      read bound_x1min
+      printf "${fgred} Wrong selection\n"
+      exit;
+   fi
+
+   if [[ $bound_x1max != "periodic_x1" ]]
+   then
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
+    printf "${summary}** Boundaries: ${normal}\n"
+    printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Set boundary in X1-min\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read bound_x1min
+}
+clear
+show_menu
+
+      if [[ $bound_x1min == 1 ]]
+      then
+         bound_x1min="outflow"
+         BX1MIN="Outflow"
+      elif [[ $bound_x1min == 2 ]]
+      then
+         bound_x1min="reflective"
+         BX1MIN="Reflective"
+      elif [[ $bound_x1min == x ]]
+      then
+         exit;
+      else
+         printf "${fgred} Wrong selection\n"
+         exit;
+      fi
+
       bound_x1max=$bound_x1max"_x1max"
       bound_x1min=$bound_x1min"_x1min"
    fi
+
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
+    printf "${summary}** Boundaries: ${normal}\n"
+    printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
+    printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}Please enter the author of this simulation.${normal}\n"
+    read author
+    printf "${menu}Please enter the characteristic name of this simulation.${normal}\n"
+    read char_name
+}
+clear
+show_menu
 
 fi
 
 if [ $dim -eq 2 ] || [ $dim -eq 4 ]
 then
-   echo 'Set boundary in X1max (outflow,reflective,periodic,inflow)'
-   read bound_x1max
-   if [[ $bound_x1max == "periodic" ]]
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Set boundary in X1-max\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
+    printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read bound_x1max
+}
+clear
+show_menu
+
+   if [[ $bound_x1max == 1 ]]
+   then
+      bound_x1max="outflow"
+      BX1MAX="Outflow"
+   elif [[ $bound_x1max == 2 ]]
+   then
+      bound_x1max="reflective"
+      BX1MAX="Reflective"
+   fi
+
+   if [[ $bound_x1max == 3 ]]
    then
       bound_x1max="periodic_x1"
+      BX1MAX="Periodic"
       bound_x1min=""
+      BX1MIN="Periodic"
    else
-      echo 'Set boundary in X1min (outflow,reflective,inflow)'
-      read bound_x1min
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
+    printf "${summary}** Boundaries: ${normal}\n"
+    printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Set boundary in X1-min\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read bound_x1min
+}
+clear
+show_menu
+
+      if [[ $bound_x1min == 1 ]]
+      then
+         bound_x1min="outflow"
+         BX1MIN="Outflow"
+      elif [[ $bound_x1min == 2 ]]
+      then
+         bound_x1min="reflective"
+         BX1MIN="Reflective"
+      fi
+
       bound_x1max=$bound_x1max"_x1max"
       bound_x1min=$bound_x1min"_x1min"
    fi
 
-   echo 'Set boundary in X2max (outflow,reflective,periodic,inflow)'
-   read bound_x2max
-   if [[ $bound_x2max == "periodic" ]]
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
+    printf "${summary}** Boundaries: ${normal}\n"
+    printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
+    printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Set boundary in X2-max\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
+    printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read bound_x2max
+}
+clear
+show_menu
+
+   if [[ $bound_x2max == 1 ]]
+   then
+      bound_x2max="outflow"
+      BX2MAX="Outflow"
+   elif [[ $bound_x2max == 2 ]]
+   then
+      bound_x2max="reflective"
+      BX2MAX="Reflective"
+   fi
+
+   if [[ $bound_x2max == 3 ]]
    then
       bound_x2max="periodic_x2"
+      BX2MAX="Periodic"
       bound_x2min=""
+      BX2MIN="Periodic"
    else
-      echo 'Set boundary in X2min (outflow,reflective,inflow)'
-      read bound_x2min
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
+    printf "${summary}** Boundaries: ${normal}\n"
+    printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
+    printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
+    printf "${summary}**    - X2-max: ${BX2MAX} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Set boundary in X2-min\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read bound_x2min
+}
+clear
+show_menu
+
+      if [[ $bound_x2min == 1 ]]
+      then
+         bound_x2min="outflow"
+         BX2MIN="Outflow"
+      elif [[ $bound_x2min == 2 ]]
+      then
+         bound_x2min="reflective"
+         BX2MIN="Reflective"
+      fi
+
       bound_x2max=$bound_x2max"_x2max"
       bound_x2min=$bound_x2min"_x2min"
    fi
+
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
+    printf "${summary}** Boundaries: ${normal}\n"
+    printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
+    printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
+    printf "${summary}**    - X2-max: ${BX2MAX} ${normal}\n"
+    printf "${summary}**    - X2-min: ${BX2MIN} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}Please enter the author of this simulation.${normal}\n"
+    read author
+    printf "${menu}Please enter the characteristic name of this simulation.${normal}\n"
+    read char_name
+}
+clear
+show_menu
+
 fi
+
+
 
 if [ $dim -eq 3 ]
 then
-   echo 'Set boundary in X1max (outflow,reflective,periodic,inflow)'
-   read bound_x1max
-   if [[ $bound_x1max == "periodic" ]]
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Set boundary in X1-max\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
+    printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read bound_x1max
+}
+clear
+show_menu
+
+   if [[ $bound_x1max == 1 ]]
+   then
+      bound_x1max="outflow"
+      BX1MAX="Outflow"
+   elif [[ $bound_x1max == 2 ]]
+   then
+      bound_x1max="reflective"
+      BX1MAX="Reflective"
+   fi
+
+   if [[ $bound_x1max == 3 ]]
    then
       bound_x1max="periodic_x1"
+      BX1MAX="Periodic"
       bound_x1min=""
+      BX1MIN="Periodic"
    else
-      echo 'Set boundary in X1min (outflow,reflective,inflow)'
-      read bound_x1min
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
+    printf "${summary}** Boundaries: ${normal}\n"
+    printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Set boundary in X1-min\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read bound_x1min
+}
+clear
+show_menu
+
+      if [[ $bound_x1min == 1 ]]
+      then
+         bound_x1min="outflow"
+         BX1MIN="Outflow"
+      elif [[ $bound_x1min == 2 ]]
+      then
+         bound_x1min="reflective"
+         BX1MIN="Reflective"
+      fi
+
       bound_x1max=$bound_x1max"_x1max"
       bound_x1min=$bound_x1min"_x1min"
    fi
 
-   echo 'Set boundary in X2max (outflow,reflective,periodic,inflow)'
-   read bound_x2max
-   if [[ $bound_x2max == "periodic" ]]
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
+    printf "${summary}** Boundaries: ${normal}\n"
+    printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
+    printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Set boundary in X2-max\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
+    printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read bound_x2max
+}
+clear
+show_menu
+
+   if [[ $bound_x2max == 1 ]]
+   then
+      bound_x2max="outflow"
+      BX2MAX="Outflow"
+   elif [[ $bound_x2max == 2 ]]
+   then
+      bound_x2max="reflective"
+      BX2MAX="Reflective"
+   fi
+
+   if [[ $bound_x2max == 3 ]]
    then
       bound_x2max="periodic_x2"
+      BX2MAX="Periodic"
       bound_x2min=""
+      BX2MIN="Periodic"
    else
-      echo 'Set boundary in X2min (outflow,reflective,inflow)'
-      read bound_x2min
-      bound_x1max=$bound_x1max"_x1max"
-      bound_x1min=$bound_x1min"_x1min"
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
+    printf "${summary}** Boundaries: ${normal}\n"
+    printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
+    printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
+    printf "${summary}**    - X2-max: ${BX2MAX} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Set boundary in X2-min\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read bound_x2min
+}
+clear
+show_menu
+
+      if [[ $bound_x2min == 1 ]]
+      then
+         bound_x2min="outflow"
+         BX2MIN="Outflow"
+      elif [[ $bound_x2min == 2 ]]
+      then
+         bound_x2min="reflective"
+         BX2MIN="Reflective"
+      fi
+
+      bound_x2max=$bound_x2max"_x2max"
+      bound_x2min=$bound_x2min"_x2min"
    fi
 
-   echo 'Set boundary in X3max (outflow,reflective,periodic,inflow)'
-   read bound_x3max
-   if [[ $bound_x3max == "periodic" ]]
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
+    printf "${summary}** Boundaries: ${normal}\n"
+    printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
+    printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
+    printf "${summary}**    - X2-max: ${BX2MAX} ${normal}\n"
+    printf "${summary}**    - X2-min: ${BX2MIN} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Set boundary in X3-max\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
+    printf "${menu}**${number} 3)${menu} Periodic ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read bound_x3max
+}
+clear
+show_menu
+
+   if [[ $bound_x3max == 1 ]]
+   then
+      bound_x3max="outflow"
+      BX3MAX="Outflow"
+   elif [[ $bound_x3max == 2 ]]
+   then
+      bound_x3max="reflective"
+      BX3MAX="Reflective"
+   fi
+
+   if [[ $bound_x3max == 3 ]]
    then
       bound_x3max="periodic_x3"
+      BX3MAX="Periodic"
       bound_x3min=""
+      BX3MIN="Periodic"
    else
-      echo 'Set boundary in X3min (outflow,reflective,inflow)'
-      read bound_x3min
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
+    printf "${summary}** Boundaries: ${normal}\n"
+    printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
+    printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
+    printf "${summary}**    - X2-max: ${BX2MAX} ${normal}\n"
+    printf "${summary}**    - X2-min: ${BX2MIN} ${normal}\n"
+    printf "${summary}**    - X3-max: ${BX3MAX} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${menu}** Set boundary in X3-min\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}**${number} 1)${menu} Outflow ${normal}\n"
+    printf "${menu}**${number} 2)${menu} Reflective ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "Please enter a menu option and enter or ${fgred}x to exit. ${normal}"
+    read bound_x3min
+}
+clear
+show_menu
+
+      if [[ $bound_x3min == 1 ]]
+      then
+         bound_x3min="outflow"
+         BX3MIN="Outflow"
+      elif [[ $bound_x3min == 2 ]]
+      then
+         bound_x3min="reflective"
+         BX3MIN="Reflective"
+      fi
+
       bound_x3max=$bound_x3max"_x3max"
       bound_x3min=$bound_x3min"_x3min"
    fi
+show_menu(){
+    printf "\n"
+    printf "${TITLE}"
+    printf "\n${menu}**********************************************************${normal}\n"
+    printf "${summary}** Summary ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${summary}** Physics: ${PHYSICS} ${normal}\n"
+    printf "${summary}** Dimensions: ${DIMENSIONS} ${normal}\n"
+    printf "${summary}** Coordinates: ${COORDINATES} ${METRIC} ${normal}\n"
+    printf "${summary}** Equation of State: ${EQUATION} ${normal}\n"
+    printf "${summary}** External source terms: ${USER_SOURCES} ${normal}\n"
+    printf "${summary}** Gravity: ${GRAV} ${GRAVITY_TYPE} ${normal}\n"
+    printf "${summary}** Boundaries: ${normal}\n"
+    printf "${summary}**    - X1-max: ${BX1MAX} ${normal}\n"
+    printf "${summary}**    - X1-min: ${BX1MIN} ${normal}\n"
+    printf "${summary}**    - X2-max: ${BX2MAX} ${normal}\n"
+    printf "${summary}**    - X2-min: ${BX2MIN} ${normal}\n"
+    printf "${summary}**    - X3-max: ${BX3MAX} ${normal}\n"
+    printf "${summary}**    - X3-min: ${BX3MIN} ${normal}\n"
+    printf "${menu}**********************************************************${normal}\n"
+    printf "${menu}Please enter the author of this simulation.${normal}\n"
+    read author
+    printf "${menu}Please enter the characteristic name of this simulation.${normal}\n"
+    read char_name
+}
+clear
+show_menu
+
 fi
 
-if [ $dim -eq 1 ]
+date="$(date "+%d-%m-%Y %H:%M:%S")"
+
+if [ $dim -eq 1 ] && [[ $bound_x1max != "periodic_x1" ]]
 then
 cat << EOF > user_param.h
 /* 
@@ -259,7 +1100,22 @@ cat << EOF > user_param.h
 EOF
 fi
 
-if [ $dim -eq 2 ] || [ $dim -eq 4 ]
+if [ $dim -eq 1 ] && [[ $bound_x1max == "periodic_x1" ]]
+then
+cat << EOF > user_param.h
+/* 
+ *  aztekas header paremeters module
+ *  Date of creation: $date
+ *  author: $author 
+ */
+
+#include<macros.h>
+
+#define ${bound_x1max}        TRUE
+EOF
+fi
+
+if [ $dim -eq 2 ] || [ $dim -eq 4 ] && [[ $bound_x1max != "periodic_x1" ]] && [[ $bound_x2max != "periodic_x2" ]]
 then
 cat << EOF > user_param.h
 /* 
@@ -277,7 +1133,57 @@ cat << EOF > user_param.h
 EOF
 fi
 
-if [ $dim -eq 3 ]
+if [ $dim -eq 2 ] || [ $dim -eq 4 ] && [[ $bound_x2max != "periodic_x1" ]] && [[ $bound_x2max == "periodic_x2" ]]
+then
+cat << EOF > user_param.h
+/* 
+ *  aztekas header paremeters module
+ *  Date of creation: $date
+ *  author: $author 
+ */
+
+#include<macros.h>
+
+#define ${bound_x1max}        TRUE
+#define ${bound_x1min}        TRUE
+#define ${bound_x2max}        TRUE
+EOF
+fi
+
+if [ $dim -eq 2 ] || [ $dim -eq 4 ] && [[ $bound_x1max == "periodic_x1" ]] && [[ $bound_x2max != "periodic_x2" ]]
+then
+cat << EOF > user_param.h
+/* 
+ *  aztekas header paremeters module
+ *  Date of creation: $date
+ *  author: $author 
+ */
+
+#include<macros.h>
+
+#define ${bound_x1max}        TRUE
+#define ${bound_x2max}        TRUE
+#define ${bound_x2min}        TRUE
+EOF
+fi
+
+if [ $dim -eq 2 ] || [ $dim -eq 4 ] && [[ $bound_x1max == "periodic_x1" ]] && [[ $bound_x2max == "periodic_x2" ]]
+then
+cat << EOF > user_param.h
+/* 
+ *  aztekas header paremeters module
+ *  Date of creation: $date
+ *  author: $author 
+ */
+
+#include<macros.h>
+
+#define ${bound_x1max}        TRUE
+#define ${bound_x2max}        TRUE
+EOF
+fi
+
+if [ $dim -eq 3 ] && [[ $bound_x1max != "periodic_x1" ]] && [[ $bound_x2max != "periodic_x2" ]] && [[ $bound_x3max != "periodic_x3" ]]
 then
 cat << EOF > user_param.h
 /* 
@@ -297,6 +1203,117 @@ cat << EOF > user_param.h
 EOF
 fi
 
+if [ $dim -eq 3 ] && [[ $bound_x1max == "periodic_x1" ]] && [[ $bound_x2max != "periodic_x2" ]] && [[ $bound_x3max != "periodic_x3" ]]
+then
+cat << EOF > user_param.h
+/* 
+ *  aztekas header paremeters module
+ *  Date of creation: $date
+ *  author: $author 
+ */
+
+#include<macros.h>
+
+#define ${bound_x1max}        TRUE
+#define ${bound_x2max}        TRUE
+#define ${bound_x2min}        TRUE
+#define ${bound_x3max}        TRUE
+#define ${bound_x3min}        TRUE
+EOF
+fi
+
+if [ $dim -eq 3 ] && [[ $bound_x1max != "periodic_x1" ]] && [[ $bound_x2max == "periodic_x2" ]] && [[ $bound_x3max != "periodic_x3" ]]
+then
+cat << EOF > user_param.h
+/* 
+ *  aztekas header paremeters module
+ *  Date of creation: $date
+ *  author: $author 
+ */
+
+#include<macros.h>
+
+#define ${bound_x1max}        TRUE
+#define ${bound_x1min}        TRUE
+#define ${bound_x2max}        TRUE
+#define ${bound_x3max}        TRUE
+#define ${bound_x3min}        TRUE
+EOF
+fi
+
+if [ $dim -eq 3 ] && [[ $bound_x1max != "periodic_x1" ]] && [[ $bound_x2max != "periodic_x2" ]] && [[ $bound_x3max == "periodic_x3" ]]
+then
+cat << EOF > user_param.h
+/* 
+ *  aztekas header paremeters module
+ *  Date of creation: $date
+ *  author: $author 
+ */
+
+#include<macros.h>
+
+#define ${bound_x1max}        TRUE
+#define ${bound_x1min}        TRUE
+#define ${bound_x2max}        TRUE
+#define ${bound_x2min}        TRUE
+#define ${bound_x3max}        TRUE
+EOF
+fi
+
+if [ $dim -eq 3 ] && [[ $bound_x1max == "periodic_x1" ]] && [[ $bound_x2max == "periodic_x2" ]] && [[ $bound_x3max != "periodic_x3" ]]
+then
+cat << EOF > user_param.h
+/* 
+ *  aztekas header paremeters module
+ *  Date of creation: $date
+ *  author: $author 
+ */
+
+#include<macros.h>
+
+#define ${bound_x1max}        TRUE
+#define ${bound_x2max}        TRUE
+#define ${bound_x3max}        TRUE
+#define ${bound_x3min}        TRUE
+EOF
+fi
+
+if [ $dim -eq 3 ] && [[ $bound_x1max == "periodic_x1" ]] && [[ $bound_x2max != "periodic_x2" ]] && [[ $bound_x3max == "periodic_x3" ]]
+then
+cat << EOF > user_param.h
+/* 
+ *  aztekas header paremeters module
+ *  Date of creation: $date
+ *  author: $author 
+ */
+
+#include<macros.h>
+
+#define ${bound_x1max}        TRUE
+#define ${bound_x2max}        TRUE
+#define ${bound_x2min}        TRUE
+#define ${bound_x3max}        TRUE
+EOF
+fi
+
+if [ $dim -eq 3 ] && [[ $bound_x1max != "periodic_x1" ]] && [[ $bound_x2max == "periodic_x2" ]] && [[ $bound_x3max == "periodic_x3" ]]
+then
+cat << EOF > user_param.h
+/* 
+ *  aztekas header paremeters module
+ *  Date of creation: $date
+ *  author: $author 
+ */
+
+#include<macros.h>
+
+#define ${bound_x1max}        TRUE
+#define ${bound_x1min}        TRUE
+#define ${bound_x2max}        TRUE
+#define ${bound_x3max}        TRUE
+EOF
+fi
+
 cat << EOF >> user_param.h
 
 #define RECONST               MC
@@ -304,9 +1321,6 @@ cat << EOF >> user_param.h
 #define GRID                  UNIFORM
 EOF
 
-date="$(date "+%d-%m-%Y %H:%M:%S")"
-echo "Author"
-read author
 cat << EOF > initial.c
 /* 
  *  aztekas initial module
@@ -339,6 +1353,8 @@ void User_Boundaries(double *B)
 }
 EOF
 
+if [[ $user_sources == true ]]
+then 
 cat << EOF > user_sources.c
 /* 
  *  aztekas user source terms module
@@ -352,79 +1368,111 @@ void User_Source_Terms(double *s, double *u, gauge_ local_grid)
 {
    double rho, p, vx1=0.0, vx2=0.0, vx3=0.0;
 
-   rho = u[0];
-   p   = u[1];
+   rho = u[RHO];
+   p   = u[PRE];
 #if DIM == 1
-   vx1 = u[2];
+   vx1 = u[VX1];
 #elif DIM == 2
-   vx1 = u[2];
-   vx2 = u[3];
+   vx1 = u[VX1];
+   vx2 = u[VX2];
 #elif DIM == 3 || dim == 4
-   vx1 = u[2];
-   vx2 = u[3];
-   vx3 = u[4];
+   vx1 = u[VX1];
+   vx2 = u[VX2];
+   vx3 = u[VX3];
 #endif
 
 EOF
 
-if [[ $grav == 'n' ]] || [[ $phy == 'rhd'  ]]
+if [[ $grav == 'n' ]] || [[ $phy == 'rhd'  ]] || [[ $gravity == 0 ]]
 then
 
 cat << EOF >> user_sources.c
-   s[0] = 0;
-   s[1] = 0;
-   s[2] = 0;
-   s[3] = 0;
-   s[4] = 0;
+   s[RHO] = 0.0;
+   s[PRE] = 0.0;
+   s[VX1] = 0.0;
+   s[VX2] = 0.0;
+   s[VX3] = 0.0;
 }
 EOF
 fi
 
 if [[ $grav == 'y' ]]
 then
-if [[ $coord == 'cartesian' ]]
+if [[ $coord == 'cartesian' ]] && [[ $gravity == 1 ]]
 then
 cat << EOF >> user_sources.c
-   double x = local_grid.x[1];
-   double y = local_grid.x[2];
-   double z = local_grid.x[3];
+   double x = local_grid->x[1];
+   double y = local_grid->x[2];
+   double z = local_grid->x[3];
    double r = sqrt(x*x + y*y + z*z);
 
-   s[0] = 0;
-   s[1] = -(rho*vx1*x + rho*vx2*y + rho*vx3*z)/pow(r,3.0);
-   s[2] = -(rho*x)/pow(r,3.0);
-   s[3] = -(rho*y)/pow(r,3.0);
-   s[4] = -(rho*z)/pow(r,3.0);
+   s[RHO] = 0.0;
+   s[PRE] = -rho*g*vx2;
+   s[VX1] = 0.0;
+   s[VX2] = -rho*g;
+   s[VX3] = 0.0;
 }
 EOF
 fi
-if [[ $coord == 'cylindrical' ]]
+if [[ $coord == 'cylindrical' ]] && [[ $gravity == 1 ]]
 then
 cat << EOF >> user_sources.c
-   double R = local_grid.x[1];
-   double z = local_grid.x[2];
+   double R = local_grid->x[1];
+   double z = local_grid->x[2];
    double r = sqrt(R*R + z*z);
 
-   s[0] = 0;
-   s[1] = -(rho*vx1*R + rho*vx2*z)/pow(r,3.0);
-   s[2] = -(rho*R)/pow(r,3.0);
-   s[3] = -(rho*z)/pow(r,3.0);
-   s[4] = 0;
+   s[RHO] = 0.0;
+   s[PRE] = -rho*g*vx2;
+   s[VX1] = 0.0;
+   s[VX2] = -rho*g;
+   s[VX3] = 0.0;
 }
 EOF
 fi
-if [[ $coord == 'spherical' ]]
+if [[ $coord == 'cartesian' ]] && [[ $gravity == 2 ]]
 then
 cat << EOF >> user_sources.c
-   double r = local_grid.x[1];
+   double x = local_grid->x[1];
+   double y = local_grid->x[2];
+   double z = local_grid->x[3];
+   double r = sqrt(x*x + y*y + z*z);
 
-   s[0] = 0;
-   s[1] = -rho*vx1/(r*r);
-   s[2] = -rho/(r*r);
-   s[3] = 0.0;
-   s[4] = 0.0;
+   s[RHO] = 0.0;
+   s[PRE] = -(rho*vx1*x + rho*vx2*y + rho*vx3*z)/pow(r,3.0);
+   s[VX1] = -(rho*x)/pow(r,3.0);
+   s[VX2] = -(rho*y)/pow(r,3.0);
+   s[VX3] = -(rho*z)/pow(r,3.0);
 }
 EOF
+fi
+if [[ $coord == 'cylindrical' ]] && [[ $gravity == 2 ]]
+then
+cat << EOF >> user_sources.c
+   double R = local_grid->x[1];
+   double z = local_grid->x[2];
+   double r = sqrt(R*R + z*z);
+
+   s[RHO] = 0.0;
+   s[PRE] = -(rho*vx1*R + rho*vx2*z)/pow(r,3.0);
+   s[VX1] = -(rho*R)/pow(r,3.0);
+   s[VX2] = -(rho*z)/pow(r,3.0);
+   s[VX3] = 0.0;
+}
+EOF
+fi
+if [[ $coord == 'spherical' ]] && [[ $gravity == 2 ]]
+then
+cat << EOF >> user_sources.c
+   double r = local_grid->x[1];
+
+   s[RHO] = 0.0;
+   s[PRE] = -rho*vx1/(r*r);
+   s[VX1] = -rho/(r*r);
+   s[VX2] = 0.0;
+   s[VX3] = 0.0;
+}
+EOF
+fi
 fi
 fi
 
@@ -549,9 +1597,6 @@ int User_Parameters(char const *paramfile_name)
    return 0;   
 }
 EOF
-
-echo 'Enter characteristic name for the simulation'
-read char_name
 
 cat << EOF > $char_name.param
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
