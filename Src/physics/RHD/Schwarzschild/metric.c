@@ -159,7 +159,7 @@ void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid)
    der->dgam[0][0][1] = -2.0*M*z*(R*R*r - 2.0*R*R*(2.0*M - r) + r*r*(2.0*M - r))/(pow(r,4.0)*pow(2.0*M - r,2.0));
    der->dgam[0][0][2] = 0.0;
    der->dgam[0][1][0] = -2.0*M*z*(R*R*r - 2.0*R*R*(2.0*M - r) + r*r*(2.0*M - r))/(pow(r,4.0)*pow(2.0*M - r,2.0));
-   der->dgam[0][1][1] = -2.0*M*R(4.0*M*R*R - 4.0*M*r*r - 3.0*R*R*r + 3.0*r*r*r)/(pow(r,4.0)*pow(2.0*M - r,2.0));
+   der->dgam[0][1][1] = -2.0*M*R*(4.0*M*R*R - 4.0*M*r*r - 3.0*R*R*r + 3.0*r*r*r)/(pow(r,4.0)*pow(2.0*M - r,2.0));
    der->dgam[0][1][2] = 0.0;
    der->dgam[0][2][0] = 0.0;
    der->dgam[0][2][1] = 0.0;

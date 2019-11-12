@@ -53,7 +53,7 @@ METRIC = Minkowski
 EOS = Ideal
 
 ##################################################
-# Coordinates (Cartesian,Cylindrical,Spherical)
+# Coordinates (Cartesian, Cylindrical, Spherical)
 ##################################################
 
 COORD = Cylindrical

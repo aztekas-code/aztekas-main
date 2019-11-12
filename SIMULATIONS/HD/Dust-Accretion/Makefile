@@ -53,7 +53,7 @@ METRIC = Minkowski
 EOS = Dust
 
 ##################################################
-# Coordinates (Cartesian,Cylindrical,Spherical)
+# Coordinates (Cartesian, Cylindrical, Spherical)
 ##################################################
 
 COORD = Spherical

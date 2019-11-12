@@ -50,7 +50,7 @@ METRIC = Eddington-Finkelstein
 EOS = Ideal
 
 ###############################################
-# Coordinates (Cartesian,Cylindrical,Spherical)
+# Coordinates (Cartesian, Cylindrical, Spherical)
 ###############################################
 
 COORD = Spherical

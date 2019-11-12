@@ -40,7 +40,7 @@ EOS = Ideal
 DIM = 4
 
 ###############################################
-# Coordinates (Cartesian,Cylindrical,Spherical)
+# Coordinates (Cartesian, Cylindrical, Spherical)
 ###############################################
 
 COORD = Spherical
