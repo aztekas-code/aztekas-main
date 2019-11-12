@@ -224,7 +224,7 @@ show_menu
 if [[ $eqstate == 0 ]]
 then
    eos='User'
-   EQUATION='Ideal'
+   EQUATION='User'
 elif [[ $eqstate == 1 ]]
 then
    eos='Ideal'
@@ -1288,6 +1288,51 @@ void User_Boundaries(double *B)
 {
 }
 EOF
+
+if [[ $eos == 'User' ]]
+then 
+cat << EOF > user_eos.c
+/* 
+ *  aztekas user equation of state module
+ *  Date of creation: $date
+ *  author: $author 
+ */
+
+#include"main.h"
+
+/* Default equation of state --> Ideal gas */
+
+void EoS(eos_ *eos, double *u, gauge_ *local_grid)
+{
+   double rho, p;
+   rho = u[RHO];
+   p   = u[PRE];
+
+   /**
+    * The neccesary variable to define in the EoS module
+    * are:
+    *    - eos->e  (HD and RHD): specific internal energy
+    *    - eos->cs (HD and RHD): speed of sound
+    *    - eos->h  (RHD): specific enthalpy
+    *    - eos->dhdrho (PVRS integration): derivative dh/drho
+    *    - eos->dhdp (PVRS integration): derivative dh/dp
+    */
+
+   eos->e = p / (rho * (K - 1.0));
+
+#if PHYSICS == HD
+   eos->cs = sqrt(K * p / rho);
+#elif PHYSICS == RHD
+   eos->h  = 1.0 + eos->e + p/rho;
+   #if INTEGRATION == PVRS
+   eos->dhdrho = - K*p/(rho*rho*(K - 1.0));
+   eos->dhdp   = K/(rho*(K - 1.0));
+   #endif
+   eos->cs = sqrt(K * p / (rho * eos->h));
+#endif
+}
+EOF
+fi
 
 if [[ $metric == 'User' ]]
 then 

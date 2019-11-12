@@ -7,8 +7,21 @@
 # specified. But, you can add them here.
 #---------------------------------------------
 
+ifeq ($(EOS),User)
+        PARAM += -DEOS=IDEAL
+endif
+ifeq ($(EOS),Ideal)
+        PARAM += -DEOS=IDEAL
+endif
+ifeq ($(EOS),Dust)
+        PARAM += -DEOS=DUST
+endif
+ifeq ($(EOS),Stiff)
+        PARAM += -DEOS=STIFF	
+endif
+
 ifneq ($(EOS),User)
-   PHYSICS += $(AZTPATH)/Src/physics/EOS/$(EOS)/eos.c
+   include $(AZTPATH)/Src/physics/EOS/$(EOS)/Makefile
 endif
 
 ifeq ($(EOS),User)

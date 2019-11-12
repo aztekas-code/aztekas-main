@@ -106,7 +106,7 @@ plot file_name u 1:2 notitle
 set out
 
 if ( ext eq 'pdf' ){
-   system("./gtex2pdf ".out_name)
+   system("$AZTEKAS_PATH/Graphics/gtex2pdf ".out_name)
 }
 
 }

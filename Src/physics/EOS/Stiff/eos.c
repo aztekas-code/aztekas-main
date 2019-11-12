@@ -1,5 +1,5 @@
 /**
- * @file stiff.c
+ * @file eos.c
  *
  * @author Alejandro Aguayo-Ortiz
  *
@@ -12,8 +12,8 @@
 void EoS(eos_ *eos, double *u, gauge_ local_grid)
 {
    double rho, p;
-   rho = u[0];
-   p   = u[1];
+   rho = u[EOS];
+   p   = u[PRE];
 
    eos->e = p / (rho * (K - 1.0));
 
