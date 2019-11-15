@@ -452,10 +452,10 @@ METRIC = $metric
 EOS = $eos
 
 ##################################################
-# Coordinates (cartesian,cylindrical,spherical)
+# Coordinates (Cartesian, Cylindrical, Spherical)
 ##################################################
 
-COORD = $coord
+COORD = $COORDINATES
 
 ##################################################
 # User Source Terms (true,false)
