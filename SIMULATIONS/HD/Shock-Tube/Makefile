@@ -23,7 +23,7 @@ AZTPATH = $(AZTEKAS_PATH)
 # $ grep '^core id' /proc/cpuinfo |sort -u|wc -l
 ##################################################
 
-OMP_NUM = 2
+OMP_NUM = 1
 
 ##################################################
 # Physics (HD, MHD, RHD, RMHD)
