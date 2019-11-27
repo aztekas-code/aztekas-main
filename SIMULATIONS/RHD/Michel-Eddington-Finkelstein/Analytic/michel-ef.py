@@ -43,10 +43,10 @@ import datetime
 
 poly = 3
 ainf = 0.01
-rmin = 0.5
-rmax = 20.0
+rmin = 2.0
+rmax = 100.0
 npoint = 400
-gamma = 4.0/3.0
+gamma = 5.0/3.0
 
 if ainf > np.sqrt(gamma - 1.) : 
     print "ainf should be less than amax =", np.sqrt(gamma - 1.)

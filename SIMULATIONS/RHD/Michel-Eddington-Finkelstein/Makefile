@@ -21,7 +21,7 @@ AZTPATH = $(AZTEKAS_PATH)
 # $ grep '^core id' /proc/cpuinfo |sort -u|wc -l
 ###############################################
 
-OMP_NUM = 1
+OMP_NUM = 5
 
 ###############################################
 # Physics (HD, MHD, RHD, RMHD)
@@ -33,7 +33,7 @@ PHY = RHD
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
 ###############################################
 
-DIM = 1
+DIM = 2
 
 ########################################################################################
 # Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
