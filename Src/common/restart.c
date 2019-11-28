@@ -62,6 +62,9 @@ void Restart()
    // Skip line   
    idum = fscanf(file,"%s\n",line) ;
 
+   // Skip line   
+   idum = fscanf(file,"%s\n",line) ;
+
    for(i = gc; i <= Nx1-gc; i++)
    {
       for(j = gc; j <= Nx2-gc; j++)
