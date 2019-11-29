@@ -9,28 +9,29 @@
     
 void Source_Terms(double *s, double *u, gauge_ *local_grid)
 {
+   int i;
    double rho, p, v_cov[3], v_con[3];
    double D, U, tau, Lorentz, h, cs, VV;
    double S_cov[3], S_con[3], V[3];
    eos_ eos;
 
    // Density and Pressure
-   rho = u[RHO];
-   p   = u[PRE];
+   rho = u[0];
+   p   = u[1];
 
    // Covariant components of the 3-velocity
 #if DIM == 1
-   v_cov[0] = u[VX1];
+   v_cov[0] = u[2];
    v_cov[1] = 0.0;
    v_cov[2] = 0.0;
 #elif DIM == 2
-   v_cov[0] = u[VX1];
-   v_cov[1] = u[VX2];
+   v_cov[0] = u[2];
+   v_cov[1] = u[3];
    v_cov[2] = 0.0;
 #elif DIM == 3 || DIM == 4
-   v_cov[0] = u[VX1];
-   v_cov[1] = u[VX2];
-   v_cov[2] = u[VX3];
+   v_cov[0] = u[2];
+   v_cov[1] = u[3];
+   v_cov[2] = u[4];
 #endif
 
    // Contravariant components of the 3-velocity
@@ -61,7 +62,7 @@ void Source_Terms(double *s, double *u, gauge_ *local_grid)
    tau = U - D;
 
    // Compute the covariant and contravariant components of the 3-momentum
-   for(int i = 0; i < 3; i++)
+   for(i = 0; i < 3; i++)
    {
       S_cov[i] = rho*eos.h*Lorentz*Lorentz*v_cov[i];
       S_con[i] = rho*eos.h*Lorentz*Lorentz*v_con[i];
@@ -165,9 +166,9 @@ void Source_Terms(double *s, double *u, gauge_ *local_grid)
    U_dlapse2 = U*der.dlapse[1];
    U_dlapse3 = U*der.dlapse[2];
 
-   s[DEN] = 0.0;
-   s[ENE] = Wik_betaj_dgamjik/2.0 + Wdij_dbetaji - Suj_dlapsej;
-   s[MX1] = lapse_Wik_dgam1ik/2.0 + Sdi_dbeta1i - U_dlapse1;
-   s[MX2] = lapse_Wik_dgam2ik/2.0 + Sdi_dbeta2i - U_dlapse2;
-   s[MX3] = lapse_Wik_dgam3ik/2.0 + Sdi_dbeta3i - U_dlapse3;
+   s[0] = 0.0;
+   s[1] = Wik_betaj_dgamjik/2.0 + Wdij_dbetaji - Suj_dlapsej;
+   s[2] = lapse_Wik_dgam1ik/2.0 + Sdi_dbeta1i - U_dlapse1;
+   s[3] = lapse_Wik_dgam2ik/2.0 + Sdi_dbeta2i - U_dlapse2;
+   s[4] = lapse_Wik_dgam3ik/2.0 + Sdi_dbeta3i - U_dlapse3;
 }

@@ -37,9 +37,9 @@ int Cons2Prim(double *u, double *q)
 
       Get_Metric_Components(&local_grid);
 
-      D        = q(DEN,i);
-      tau      = q(ENE,i);
-      S_cov[0] = q(MX1,i);
+      D        = q(RHO,i);
+      tau      = q(PRE,i);
+      S_cov[0] = q(VX1,i);
       S_cov[1] = 0.0;
       S_cov[2] = 0.0;
 
@@ -133,10 +133,10 @@ int Cons2Prim(double *u, double *q)
 
          Get_Metric_Components(&local_grid);
 
-         D        = q(DEN,i,j);
-         tau      = q(ENE,i,j);
-         S_cov[0] = q(MX1,i,j);
-         S_cov[1] = q(MX2,i,j);
+         D        = q(RHO,i,j);
+         tau      = q(PRE,i,j);
+         S_cov[0] = q(VX1,i,j);
+         S_cov[1] = q(VX2,i,j);
          S_cov[2] = 0.0;
 
          S_con[0] = local_grid.gamma_con[0][0]*S_cov[0] + \
@@ -213,9 +213,9 @@ int Cons2Prim(double *u, double *q)
                            Lorentz,SS,theta,theta_0,count,local_grid) \
                            collapse(2)
 #endif
-   for(int j = 0; j <= Nx2-0; j++)
+   for(int i = 0; i <= Nx1-0; i++)
    {
-      for(int i = 0; i <= Nx1-0; i++)
+      for(int j = 0; j <= Nx2-0; j++)
       {
          local_grid.x[0] = grid.time;
          local_grid.x[1] = grid.X1[i];
@@ -224,11 +224,11 @@ int Cons2Prim(double *u, double *q)
 
          Get_Metric_Components(&local_grid);
 
-         D        = q(DEN,i,j);
-         tau      = q(ENE,i,j);
-         S_cov[0] = q(MX1,i,j);
-         S_cov[1] = q(MX2,i,j);
-         S_cov[2] = q(MX3,i,j);
+         D        = q(0,i,j);
+         tau      = q(1,i,j);
+         S_cov[0] = q(2,i,j);
+         S_cov[1] = q(3,i,j);
+         S_cov[2] = q(4,i,j);
 
          S_con[0] = local_grid.gamma_con[0][0]*S_cov[0] + \
                     local_grid.gamma_con[0][1]*S_cov[1] + \

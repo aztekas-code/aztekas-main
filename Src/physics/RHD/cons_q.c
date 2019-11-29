@@ -56,9 +56,9 @@ void Prim2Cons(double *q, double *u, gauge_ *local_grid)
    S_cov[1] = rho*eos.h*Lorentz*Lorentz*v_cov[1];
    S_cov[2] = rho*eos.h*Lorentz*Lorentz*v_cov[2];
 
-   q[DEN] = D;
-   q[ENE] = tau;
-   q[MX1] = S_cov[0];
-   q[MX2] = S_cov[1];
-   q[MX3] = S_cov[2];
+   q[0] = D;
+   q[1] = tau;
+   q[2] = S_cov[0];
+   q[3] = S_cov[1];
+   q[4] = S_cov[2];
 }

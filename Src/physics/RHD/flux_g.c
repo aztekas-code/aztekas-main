@@ -9,13 +9,13 @@
     
 void Prim2FluxG(double *f, double *v, double *u, gauge_ *local_grid)
 {
+   int i;
    double rho, p, v_cov[3], v_con[3];
    double D, U, tau, Lorentz, h, cs, VV;
    double W[3][3], S_cov[3], S_con[3], V[3];
    double gamma, beta, lapse, vel;
    eos_ eos;
 
-   vel   = v_con[1];
    gamma = local_grid->gamma_con[1][1];
    beta  = local_grid->beta_con[1];
    lapse = local_grid->lapse;
@@ -54,7 +54,7 @@ void Prim2FluxG(double *f, double *v, double *u, gauge_ *local_grid)
    VV = v_con[0]*v_cov[0] + v_con[1]*v_cov[1] + v_con[2]*v_cov[2];
 
    // Lorentz Factor
-   Lorentz = 1.0/sqrt(1.0 - VV);
+   Lorentz = 1/sqrt(1 - VV);
 
    // Equation of State
    EoS(&eos,u,local_grid);
@@ -72,7 +72,7 @@ void Prim2FluxG(double *f, double *v, double *u, gauge_ *local_grid)
    // Compute the covariant and contravariant components of the 3-momentum
    S_con[1] = rho*eos.h*Lorentz*Lorentz*v_con[1];
 
-   for(int i = 0; i < 3; i++)
+   for(i = 0; i < 3; i++)
    {
       S_cov[i] = rho*eos.h*Lorentz*Lorentz*v_cov[i];
    }
@@ -90,6 +90,7 @@ void Prim2FluxG(double *f, double *v, double *u, gauge_ *local_grid)
    f[MX3] = lapse*W[1][2] - beta*S_cov[2];
 
    // Computed characteristic velocities
+   vel   = v_con[1];
    double cs2  = cs*cs;
    double vel2 = vel*vel;
 

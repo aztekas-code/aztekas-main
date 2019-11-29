@@ -9,6 +9,7 @@
     
 void Prim2FluxH(double *f, double *v, double *u, gauge_ *local_grid)
 {
+   int i;
    double rho, p, v_cov[3], v_con[3];
    double D, U, tau, Lorentz, h, cs, VV;
    double W[3][3], S_cov[3], S_con[3], V[3];
@@ -53,7 +54,7 @@ void Prim2FluxH(double *f, double *v, double *u, gauge_ *local_grid)
    VV = v_con[0]*v_cov[0] + v_con[1]*v_cov[1] + v_con[2]*v_cov[2];
 
    // Lorentz Factor
-   Lorentz = 1.0/sqrt(1.0 - VV);
+   Lorentz = 1/sqrt(1 - VV);
 
    // Equation of State
    EoS(&eos,u,local_grid);
@@ -71,7 +72,7 @@ void Prim2FluxH(double *f, double *v, double *u, gauge_ *local_grid)
    // Compute the covariant and contravariant components of the 3-momentum
    S_con[2] = rho*eos.h*Lorentz*Lorentz*v_con[2];
 
-   for(int i = 0; i < 3; i++)
+   for(i = 0; i < 3; i++)
    {
       S_cov[i] = rho*eos.h*Lorentz*Lorentz*v_cov[i];
    }
