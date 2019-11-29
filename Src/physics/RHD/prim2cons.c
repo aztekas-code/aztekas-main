@@ -179,7 +179,7 @@ void Prim2Cons_All(double *q, double *u)
 
          Lorentz = 1.0/sqrt(1.0 - VV);
 
-         EoS(&eos,P,local_grid);
+         EoS(&eos,P,&local_grid);
 
          D        = rho*Lorentz;
          U        = rho*eos.h*Lorentz*Lorentz - p;
