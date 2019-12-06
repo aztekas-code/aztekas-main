@@ -45,8 +45,9 @@ x3min = 0.0
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
-tmax = 10000.0
+tmax     = 10000.0
 timefile = 1.0
+numfile  = 0
 
 %%%%%%%%%%%%%%%%%%
 % COURANT FACTOR %
@@ -63,9 +64,9 @@ rho_atm = 0.999
 %%%%%%%%%%%%%%%%%%%%
 K = 1.00001
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% BOUNDARY AND INITIAL PARAMETERS %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BOUNDARY AND INITIAL PARAMETERS %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Bondi Accretion (Gamma = 1, r0 = 10 r_B)
 
 density_0  =  1.1051141
