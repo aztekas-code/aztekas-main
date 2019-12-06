@@ -16,21 +16,21 @@ void Prim2Cons(double *q, double *u, gauge_ *local_grid)
    double Lorentz, W[3][3], U, VV, V[3];
    eos_ eos;
 
-   rho = u[0];
-   p   = u[1];
+   rho = u[RHO];
+   p   = u[PRE];
 
 #if DIM == 1
-   v_cov[0] = u[2];
+   v_cov[0] = u[VX1];
    v_cov[1] = 0.0;
    v_cov[2] = 0.0;
 #elif DIM == 2
-   v_cov[0] = u[2];
-   v_cov[1] = u[3];
+   v_cov[0] = u[VX1];
+   v_cov[1] = u[VX2];
    v_cov[2] = 0.0;
 #elif DIM == 3 || DIM == 4
-   v_cov[0] = u[2];
-   v_cov[1] = u[3];
-   v_cov[2] = u[4];
+   v_cov[0] = u[VX1];
+   v_cov[1] = u[VX2];
+   v_cov[2] = u[VX3];
 #endif
 
    v_con[0] = local_grid->gamma_con[0][0]*v_cov[0] + \
