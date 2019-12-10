@@ -3,7 +3,7 @@
  * Description : aztekas user parameters header file for Michel Accretion in
  *               Kerr-Schild coordinates
  * Creation Date : 28-09-2019
- * Last Modified : 15-10-2019 21:51:34
+ * Last Modified : 10-12-2019 13:34:16
  * Created By : Alejandro Aguayo-Ortiz
  */
 
@@ -22,9 +22,9 @@
 
 #define RECONST            MC
 #define FLUX               HLL
-#define GRID               LOGMESH
+#define GRID               UNIFORM
 
 #define Black_Hole_Mass    1.0
-#define Black_Hole_Spin    0.9
+#define Black_Hole_Spin    0.0
 
 double density_0, pressure_0, velocity_0;
