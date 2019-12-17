@@ -1,199 +1,89 @@
-#####################################
-#### Define dimension parameters ####
-#####################################
-#----------------------------------------------------------------------
-# From the list below, please activate/deactivate the options that     
-# apply to your run. If you modify any of these options, make sure     
-# that you recompile the whole code by typing "make clean; make" 
-#----------------------------------------------------------------------
+##################################################
+#####          MAKEFILE FOR AZTEKAS          #####
+##################################################
+#-------------------------------------------------
+# From the list below, please activate/deactivate 
+# the options that apply to your run. If you 
+# modify any of these options, make sure that you 
+# recompile the whole code by typing 
+# $ make clean && make 
+#-------------------------------------------------
 
-#####################################
-# Ghost cells
-#####################################
+##################################################
+# PATH TO AZTEKAS
+##################################################
 
-PARAM += -Dgc=3
+AZTPATH = $(AZTEKAS_PATH)
 
-#####################################
+##################################################
+# SET NUMBER OF THREADS USED BY OMP
+##################################################
+# You can find the number of physical cores 
+# using
+# $ grep '^core id' /proc/cpuinfo |sort -u|wc -l
+##################################################
 
-#####################################
-# Physics (rhd,hd,mhd,rmhd)
-#####################################
+OMP_NUM = 1
 
-PHY    = rhd
+##################################################
+# Physics (HD, MHD, RHD, RMHD)
+##################################################
 
-# Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Kerr-Schild)
-METRIC = Schwarzschild
+PHY = RHD
 
-ifeq ($(PHY),hd)
-        PARAM += -DPHYSICS=HD
-endif
-ifeq ($(PHY),rhd)
-        PARAM += -DPHYSICS=RHD
-endif
-
-eos = Ideal
-ifeq ($(eos),Ideal)
-        PARAM += -DEOS=IDEAL
-endif
-ifeq ($(eos),Dust)
-        PARAM += -DEOS=DUST
-endif
-
-#####################################
-
-#####################################
-# Dimension
-#####################################
+##################################################
+# Dimension (1, 2 or 3. Enter 4 for 2.5)
+##################################################
 
 DIM = 2
 
-ifeq ($(DIM),1)
-	PARAM += -DDIM=1
-	PARAM += -Deq=3
-	PARAM += -Dgraf=1
-endif
-ifeq ($(DIM),2)
-	PARAM += -DDIM=2
-	PARAM += -Deq=4
-	PARAM += -Dgraf=2
-endif
-ifeq ($(DIM),4)
-	PARAM += -DDIM=4
-	PARAM += -Deq=5
-	PARAM += -Dgraf=2
-endif
-ifeq ($(DIM),3)
-	PARAM += -DDIM=3
-	PARAM += -Deq=5
-	PARAM += -Dgraf=3
-endif
+##################################################
+# Metric (User, Minkowski, Schwarzschild, 
+# Eddington-Finkelstein, Boyer-Lindquist or
+# Kerr-Schild)
+# ONLY IF PHY == RHD or RMHD
+##################################################
 
-#####################################
+METRIC = Schwarzschild
 
-#####################################
-# Coordinates (cart,cyl,sph)
-#####################################
+##################################################
+# Equation of State (User, Ideal, Dust, Stiff)
+##################################################
 
-COORD = sph
+EOS = Ideal
 
-ifeq ($(COORD),cart)
-	PARAM += -DCOORDINATES=CARTESIAN
-endif
-ifeq ($(COORD),cyl)
-	PARAM += -DCOORDINATES=CYLINDRICAL
-endif
-ifeq ($(COORD),sph)
-	PARAM += -DCOORDINATES=SPHERICAL
-endif
+##################################################
+# Coordinates (Cartesian, Cylindrical, Spherical)
+##################################################
 
-#####################################
+COORD = Spherical
 
-#####################################
-# PATH TO AZTEKAS
-#####################################
-AZTPATH = ../../../
-#####################################
+##################################################
+# User Source Terms (true,false)
+##################################################
 
-#####################################
+USER_SOURCE = false
+
+##################################################
 # Integration method
-#####################################
+##################################################
 
 INT = standard
 
-ifeq ($(INT),standard)
-	PARAM += -Dintegration=0
-	INT = 
-endif
-ifeq ($(INT),pvrs)
-	PARAM += -Dintegration=1
-	INT = -pvrs
-endif
+##################################################
+# All user *.c are written here
+##################################################
 
-#####################################
+USR = initial.c \
+      user_boundaries.c \
+		user_input.c 
 
-#####################################
-# Compilation
-#####################################
-
-ifeq ($(PHY),hd)
-SOURCES = $(AZTPATH)/Src/main.c \
-	  $(AZTPATH)/Src/alloc.c \
-	  $(AZTPATH)/Src/mesh.c \
-	  ./initial.c \
-	  $(AZTPATH)/Src/timestep.c \
-	  $(AZTPATH)/Src/input.c \
-	  $(AZTPATH)/Src/output.c \
-	  $(AZTPATH)/Src/integration$(INT).c \
-	  $(AZTPATH)/Src/flux.c \
-	  $(AZTPATH)/Src/runge-kutta.c \
-	  $(AZTPATH)/Src/limiters.c \
-	  $(AZTPATH)/Src/vectors.c \
-	  $(AZTPATH)/Src/restart.c \
-	  $(AZTPATH)/Src/auxfunc.c \
-	  ./boundaries.c \
-	  $(AZTPATH)/Src/bound_cond.c \
-	  $(AZTPATH)/Src/HD/q2uvector.c \
-	  $(AZTPATH)/Src/HD/u2qvector.c \
-	  $(AZTPATH)/Src/HD/qvector.c \
-	  $(AZTPATH)/Src/HD/fvector.c \
-	  $(AZTPATH)/Src/HD/gvector.c \
-	  $(AZTPATH)/Src/HD/hvector.c \
-	  $(AZTPATH)/Src/HD/svector.c \
-	  $(AZTPATH)/Src/HD/metric.c \
-	  $(AZTPATH)/Src/EOS/eos.c \
-	  ./user_sources.c \
-	  ./user_input.c
-endif 
-
-ifeq ($(PHY),rhd)
-SOURCES = $(AZTPATH)/Src/main.c \
-	  $(AZTPATH)/Src/alloc.c \
-	  $(AZTPATH)/Src/mesh.c \
-	  ./initial.c \
-	  $(AZTPATH)/Src/timestep.c \
-	  $(AZTPATH)/Src/input.c \
-	  $(AZTPATH)/Src/output.c \
-	  $(AZTPATH)/Src/integration$(INT).c \
-	  $(AZTPATH)/Src/flux.c \
-	  $(AZTPATH)/Src/runge-kutta.c \
-	  $(AZTPATH)/Src/limiters.c \
-	  $(AZTPATH)/Src/vectors.c \
-	  $(AZTPATH)/Src/restart.c \
-	  $(AZTPATH)/Src/auxfunc.c \
-	  ./boundaries.c \
-	  $(AZTPATH)/Src/bound_cond.c \
-	  $(AZTPATH)/Src/RHD/q2uvector.c \
-	  $(AZTPATH)/Src/RHD/u2qvector.c \
-	  $(AZTPATH)/Src/RHD/qvector.c \
-	  $(AZTPATH)/Src/RHD/fvector.c \
-	  $(AZTPATH)/Src/RHD/gvector.c \
-	  $(AZTPATH)/Src/RHD/hvector.c \
-	  $(AZTPATH)/Src/RHD/svector.c \
-	  $(AZTPATH)/Src/RHD/surface.c \
-	  $(AZTPATH)/Src/RHD/$(METRIC)/metric.c \
-	  $(AZTPATH)/Src/EOS/eos.c \
-	  ./user_sources.c \
-	  ./user_input.c
-endif
-
-#OBJS = $(SOURCES:.c=.o)
-
-FLAGS = -Ofast -lm
-
-COMPILER = gcc
-AZT_HEAD = $(AZTPATH)/Src/Headers
-CFLAGS = -I$(AZT_HEAD) -I.
-EXEC = aztekas
-
-#####################################
-
-$(EXEC): $(SOURCES)
-	@echo ""
-	@echo "Compiling problem file ..."
-	$(COMPILER) $(PARAM) -fopenmp $(SOURCES) $(FLAGS) $(CFLAGS) -o $(EXEC)  
-	@echo "$(bla)"
-	@echo "aztekas compiled successfully"
-	
-clean:
-	rm -f $(EXEC)
-	
+##################################################
+# Include a global Makefile in the /Src/ 
+# directory, which has some definitions
+# of parameters, inclusions of other makefiles
+# and compilation orders. Change this Makefile,
+# and recursive Makefiles only if you know what
+# your doing.
+##################################################
+include $(AZTPATH)/Src/Makefile
