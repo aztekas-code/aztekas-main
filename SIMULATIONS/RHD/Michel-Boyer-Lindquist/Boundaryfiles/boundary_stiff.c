@@ -1,14 +1,11 @@
-<<<<<<< HEAD
 /*
  * File Name : user_boundaries.c
  * Description : aztekas boundaries module for Michel Stiff EoS problem
  * Creation Date : 05-12-2019
- * Last Modified : 05-12-2019 13:08:56
+ * Last Modified : 17-12-2019 13:14:35
  * Created By : Alejandro Aguayo-Ortiz
  */
 
-=======
->>>>>>> master
 #include"main.h"
 
 void User_Boundaries(double *B)
