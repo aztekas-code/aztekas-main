@@ -7,9 +7,8 @@
 //Do not erase any of these libraries//
 #include"main.h"
 
-int Boundaries(double *B)
+void User_Boundaries(double *B)
 {
-   int i, j, k, n, cell;
    double r, theta;
    double Delta, Sigma, rho2;
    double M, a;
@@ -17,16 +16,9 @@ int Boundaries(double *B)
    double alpha, betar, grr, grp, gpp;
    double Vr, Vp, vr, vp;
 
-   Outflow(B);
-#if POLAR == FALSE
-   Reflection(B);
-#elif POLAR == TRUE
-   Periodic(B);
-#endif
-
 #if DIM == 1
 
-   for(i = 0; i <= Nx1; i++)
+   for(int i = 0; i <= Nx1; i++)
    {
       if(i >= Nx1-gc)
       {
@@ -38,9 +30,9 @@ int Boundaries(double *B)
 
 #elif DIM == 2
 
-   for(i = 0; i <= Nx1; i++)
+   for(int j = 0; j <= Nx2; j++)
    {
-      for(j = 0; j <= Nx2; j++)
+      for(int i = 0; i <= Nx1; i++)
       {
          if(i >= Nx1-gc)
          {
@@ -54,9 +46,9 @@ int Boundaries(double *B)
 
 #elif DIM == 4
 
-   for(i = 0; i <= Nx1; i++)
+   for(int j = 0; j <= Nx2; j++)
    {
-      for(j = 0; j <= Nx2; j++)
+      for(int i = 0; i <= Nx1; i++)
       {
          if(i >= Nx1-gc)
          {
@@ -93,6 +85,4 @@ int Boundaries(double *B)
    }
 
 #endif
-
-   return 0;
 }

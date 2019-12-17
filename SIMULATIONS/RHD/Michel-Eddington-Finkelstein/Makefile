@@ -35,7 +35,7 @@ PHY = RHD
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
 ##################################################
 
-DIM = 2
+DIM = 1
 
 ##################################################
 # Metric (User, Minkowski, Schwarzschild, 
