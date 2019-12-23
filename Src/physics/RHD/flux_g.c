@@ -54,7 +54,7 @@ void Prim2FluxG(double *f, double *v, double *u, gauge_ *local_grid)
    VV = v_con[0]*v_cov[0] + v_con[1]*v_cov[1] + v_con[2]*v_cov[2];
 
    // Lorentz Factor
-   Lorentz = 1/sqrt(1 - VV);
+   Lorentz = 1.0/sqrt(1.0 - VV);
 
    // Equation of State
    EoS(&eos,u,local_grid);
