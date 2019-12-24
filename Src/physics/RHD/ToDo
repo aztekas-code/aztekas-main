@@ -1,0 +1,1 @@
+- Fix bug in Theta=M_PI. See EF/metric.c
