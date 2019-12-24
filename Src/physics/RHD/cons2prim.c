@@ -213,9 +213,9 @@ int Cons2Prim(double *u, double *q)
                            Lorentz,SS,theta,theta_0,count,local_grid) \
                            collapse(2)
 #endif
-   for(int j = 0; j <= Nx2-0; j++)
+   for(int j = gc; j <= Nx2-gc; j++)
    {
-      for(int i = 0; i <= Nx1-0; i++)
+      for(int i = gc; i <= Nx1-gc; i++)
       {
          local_grid.x[0] = grid.time;
          local_grid.x[1] = grid.X1[i];
