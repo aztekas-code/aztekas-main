@@ -67,7 +67,7 @@ void Restart()
       for(j = gc; j <= Nx2-gc; j++)
       {
          idum = fscanf(file,"%lf %lf %lf %lf %lf %lf\n",&dum,&dum,\
-         &U(0,i,j),&U(1,i,j),&U(2,i,j),&U(3,i,j));
+         &U(RHO,i,j),&U(PRE,i,j),&U(VX1,i,j),&U(VX2,i,j));
       }
    }
 

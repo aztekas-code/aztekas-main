@@ -1,18 +1,40 @@
-% OUTPUT FILE AND DIRECTORY
-outputdirectory = ./prueba/
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% PARAMETERS FOR BONDI SIMULATION %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OUTPUT FILE AND DIRECTORY %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+outputdirectory = ./TEST/
 outputfile      = michel_ 
 
-% RESTART SIMULATION (1 -> true, 0 -> false)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RESTART SIMULATION (1 -> true, 0 -> false) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 restart_simulation = 0
-restartfile = ./Shock/dx1_10.dat
-restart_filecount = 10
+restartfile = ./TEST/michel_0.dat
+restart_filecount = 0
 
-% Define mesh
-Nx1 = 100
-Nx2 = 100
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CHECK SIMULATION PARAMETERS (1 -> true, 0 -> false) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+check_param = 0
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OUTPUT FORMAT (0 -> ASCII, 1 -> BINARY) %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+binary = 0
+
+%%%%%%%%%%%%%%%
+% DEFINE MESH %
+%%%%%%%%%%%%%%%
+Nx1 = 256
+Nx2 = 256
 Nx3 = 0
 
-% Define domain limits
+%%%%%%%%%%%%%%%%%%%%%%%%
+% DEFINE DOMAIN LIMITS %
+%%%%%%%%%%%%%%%%%%%%%%%%
 x1max = 20.0
 x2max = 2.0
 x3max = 1.0 
@@ -20,31 +42,32 @@ x1min = 2.5
 x2min = 0.0
 x3min = 0.0
 
-% Time parameters
-tmax = 5000.0
+%%%%%%%%%%%%%%%%%%%
+% TIME PARAMETERS %
+%%%%%%%%%%%%%%%%%%%
+tmax     = 5000.0
 timefile = 10.0
+numfile  = 0
+
+%%%%%%%%%%%%%%%%%%
+% COURANT FACTOR %
+%%%%%%%%%%%%%%%%%%
 cou = 0.5
 
-% Polytorpic index
-%K = 1.00001
-%K = 1.3333333333333333333333333
-%K = 1.4
-%K = 1.5
-%K = 1.6666666666666666666666666
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%% USER PARAMETERS %%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Stiff
-K = 2.0
+%%%%%%%%%%%%%%%%%%%%
+% POLYTROPIC INDEX %
+%%%%%%%%%%%%%%%%%%%%
+K = 1.6666666666666666
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% Initial conditions %%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BOUNDARY AND INITIAL PARAMETERS %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Michel Accretion (Gamma = 5/3, r0 = 20 M)
 
-% MICHEL ACCRETION (Gamma = 5/3, r0 = 20 M)
-density_0  =  3.542502e+03 
+density_0  =  3.542502e+03
 pressure_0 =  4.940072e+01
-velocity_0 = 0.0%-2.012243e-01
- 
-% MICHEL ACCRETION (Gamma = 4/3, r0 = 20 M)
-%density_0  =  5.901940e+03
-%pressure_0 =  8.001744e+00
-%velocity_0 = -3.175561e-01
+velocity_0 = -2.012243e-01

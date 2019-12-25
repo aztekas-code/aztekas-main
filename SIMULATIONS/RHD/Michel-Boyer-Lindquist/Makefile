@@ -1,89 +1,89 @@
-#####################################
-#### Define dimension parameters ####
-#####################################
-#----------------------------------------------------------------------
-# From the list below, please activate/deactivate the options that     
-# apply to your run. If you modify any of these options, make sure     
-# that you recompile the whole code by typing "make clean; make" 
-#----------------------------------------------------------------------
+##################################################
+#####          MAKEFILE FOR AZTEKAS          #####
+##################################################
+#-------------------------------------------------
+# From the list below, please activate/deactivate 
+# the options that apply to your run. If you 
+# modify any of these options, make sure that you 
+# recompile the whole code by typing 
+# $ make clean && make 
+#-------------------------------------------------
 
-###############################################
+##################################################
 # PATH TO AZTEKAS
-###############################################
+##################################################
 
 AZTPATH = $(AZTEKAS_PATH)
 
-###############################################
-# Physics (hd, mhd, rhd, rmhd)
-###############################################
+##################################################
+# SET NUMBER OF THREADS USED BY OMP
+##################################################
+# You can find the number of physical cores 
+# using
+# $ grep '^core id' /proc/cpuinfo |sort -u|wc -l
+##################################################
 
-PHY = rhd
+OMP_NUM = 1
 
-########################################################################################
-# Metric (Minkowski, Schwarzschild, Eddington-Finkelstein, Boyer-Lindquist, Kerr-Schild)
-########################################################################################
+##################################################
+# Physics (HD, MHD, RHD, RMHD)
+##################################################
 
-## ONLY IF PHY == rhd or rmhd
+PHY = RHD
+
+##################################################
+# Dimension (1, 2 or 3. Enter 4 for 2.5)
+##################################################
+
+DIM = 1
+
+##################################################
+# Metric (User, Minkowski, Schwarzschild, 
+# Eddington-Finkelstein, Boyer-Lindquist or
+# Kerr-Schild)
+# ONLY IF PHY == RHD or RMHD
+##################################################
 
 METRIC = Boyer-Lindquist
 
-###############################################
+##################################################
 # Equation of State (User, Ideal, Dust, Stiff)
-###############################################
+##################################################
 
 EOS = Ideal
 
-###############################################
-# Dimension (1, 2 or 3. Enter 4 for 2.5)
-###############################################
-
-DIM = 4
-
-###############################################
+##################################################
 # Coordinates (Cartesian, Cylindrical, Spherical)
-###############################################
+##################################################
 
 COORD = Spherical
 
-###############################################
+##################################################
 # User Source Terms (true,false)
-###############################################
+##################################################
 
 USER_SOURCE = false
 
-###############################################
+##################################################
 # Integration method
-###############################################
+##################################################
 
 INT = standard
 
-###############################################
+##################################################
+# All user *.c are written here
+##################################################
 
-USR = boundaries.c \
-		initial.c \
+USR = initial.c \
+      user_boundaries.c \
 		user_input.c 
 
+##################################################
+# Include a global Makefile in the /Src/ 
+# directory, which has some definitions
+# of parameters, inclusions of other makefiles
+# and compilation orders. Change this Makefile,
+# and recursive Makefiles only if you know what
+# your doing.
+##################################################
 include $(AZTPATH)/Src/Makefile
-
-###############################################
-# Compilation
-###############################################
-
-FLAGS = -Ofast -lm 
-
-COMPILER = gcc
-AZT_HEAD = $(AZTPATH)/Src/Headers
-HEADERS = -I$(AZT_HEAD) -I.
-EXEC = aztekas
-
-all: 
-	@echo ""
-	@echo "Compiling problem file ..."
-	$(COMPILER) $(PARAM) $(MAIN) $(USR) $(PHYSICS) $(HEADERS) $(FLAGS) -o $(EXEC)  
-	@echo ""
-	@echo "aztekas compiled successfully"
-	
-clean:
-	rm -f $(EXEC)
-
-###############################################

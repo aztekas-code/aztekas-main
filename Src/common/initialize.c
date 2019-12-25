@@ -57,5 +57,5 @@ void Init_Simulation(double *tprint, int *itprint)
    }
 
    U0 = U;        // Save U(t_n), initial or previous step vector
-   //Boundaries(U); // Fill with correct boundary conditions.
+   Boundaries(U); // Fill with correct boundary conditions.
 }

@@ -71,9 +71,6 @@ Nx1   = int(linecache.getline(file_name,3))
 Nx2   = int(linecache.getline(file_name,4))
 COORD = str(linecache.getline(file_name,5)).rstrip('\n')
 
-if COORD == '1':
-    COORD = 'CYLINDRICAL'
-
 # Data reading
 U = np.loadtxt(file_name,skiprows=6,unpack=True)
 
@@ -88,17 +85,17 @@ rho = U[2].reshape(Nx1,Nx2)
 rho = rho.T
  
 pre = U[3].reshape(Nx1,Nx2)
-pre = rho.T
+pre = pre.T
  
 vx1 = U[4].reshape(Nx1,Nx2)
-vx1 = rho.T
+vx1 = vx1.T
  
 vx2 = U[5].reshape(Nx1,Nx2)
-vx2 = rho.T
+vx2 = vx2.T
  
 if len(U) == 7:
     vx3 = U[6].reshape(Nx1,Nx2)
-    vx3 = rho.T
+    vx3 = vx3.T
  
 # Mesh grid  
 nx1 = x1[::Nx2,:]
@@ -250,16 +247,24 @@ if orientation == 'v':
     ax.set_xticklabels(['{:.1f}'.format(x) for x in x1labels],fontsize=fontsize)
     plt.yticks(x2labels)
     ax.set_yticklabels(['{:.1f}'.format(x) for x in x2labels],fontsize=fontsize)
-    plt.xlabel(r'$x$',fontsize=fontsize)
-    plt.ylabel(r'$y$',fontsize=fontsize)
+    if COORD == 'CARTESIAN':
+        plt.xlabel(r'$x$',fontsize=fontsize)
+        plt.ylabel(r'$y$',fontsize=fontsize)
+    if (COORD == 'CYLINDRICAL') or (COORD == 'SPHERICAL'):
+        plt.xlabel(r'$R$',fontsize=fontsize)
+        plt.ylabel(r'$z$',fontsize=fontsize)
 
 if orientation == 'h':
     plt.xticks(x2labels)
     ax.set_xticklabels(['{:.1f}'.format(x) for x in x2labels],fontsize=fontsize)
     plt.yticks(x1labels)
     ax.set_yticklabels(['{:.1f}'.format(x) for x in x1labels],fontsize=fontsize)
-    plt.xlabel(r'$x$',fontsize=fontsize)
-    plt.ylabel(r'$y$',fontsize=fontsize)
+    if COORD == 'CARTESIAN':
+        plt.xlabel(r'$x$',fontsize=fontsize)
+        plt.ylabel(r'$y$',fontsize=fontsize)
+    if (COORD == 'CYLINDRICAL') or (COORD == 'SPHERICAL'):
+        plt.xlabel(r'$z$',fontsize=fontsize)
+        plt.ylabel(r'$R$',fontsize=fontsize)
 
 ############################################
 # Colorbar positon (right,left,top,bottom) #

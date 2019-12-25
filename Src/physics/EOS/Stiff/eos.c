@@ -9,7 +9,7 @@
 
 #include"main.h"
 
-void EoS(eos_ *eos, double *u, gauge_ local_grid)
+void EoS(eos_ *eos, double *u, gauge_ *local_grid)
 {
    double rho, p;
    rho = u[EOS];

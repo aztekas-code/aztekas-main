@@ -21,22 +21,22 @@ void Prim2FluxF(double *f, double *v, double *u, gauge_ *local_grid)
    lapse = local_grid->lapse;
 
    // Density and Pressure
-   rho = u[0];
-   p   = u[1];
+   rho = u[RHO];
+   p   = u[PRE];
 
    // Covariant components of the 3-velocity
 #if DIM == 1
-   v_cov[0] = u[2];
+   v_cov[0] = u[VX1];
    v_cov[1] = 0.0;
    v_cov[2] = 0.0;
 #elif DIM == 2
-   v_cov[0] = u[2];
-   v_cov[1] = u[3];
+   v_cov[0] = u[VX1];
+   v_cov[1] = u[VX2];
    v_cov[2] = 0.0;
 #elif DIM == 3 || DIM == 4
-   v_cov[0] = u[2];
-   v_cov[1] = u[3];
-   v_cov[2] = u[4];
+   v_cov[0] = u[VX1];
+   v_cov[1] = u[VX2];
+   v_cov[2] = u[VX3];
 #endif
 
    // Contravariant components of the 3-velocity
@@ -54,7 +54,7 @@ void Prim2FluxF(double *f, double *v, double *u, gauge_ *local_grid)
    VV = v_con[0]*v_cov[0] + v_con[1]*v_cov[1] + v_con[2]*v_cov[2];
 
    // Lorentz Factor
-   Lorentz = 1/sqrt(1 - VV);
+   Lorentz = 1.0/sqrt(1.0 - VV);
 
    // Equation of State
    EoS(&eos,u,local_grid);
@@ -83,11 +83,11 @@ void Prim2FluxF(double *f, double *v, double *u, gauge_ *local_grid)
    W[0][2] = S_con[0]*v_cov[2];
 
    // Compute fluxes
-   f[0] = D*V[0];
-   f[1] = lapse*(S_con[0] - v_con[0]*D) - beta*tau;
-   f[2] = lapse*W[0][0] - beta*S_cov[0];
-   f[3] = lapse*W[0][1] - beta*S_cov[1];
-   f[4] = lapse*W[0][2] - beta*S_cov[2];
+   f[DEN] = D*V[0];
+   f[ENE] = lapse*(S_con[0] - v_con[0]*D) - beta*tau;
+   f[MX1] = lapse*W[0][0] - beta*S_cov[0];
+   f[MX2] = lapse*W[0][1] - beta*S_cov[1];
+   f[MX3] = lapse*W[0][2] - beta*S_cov[2];
 
    // Computed characteristic velocities
    vel   = v_con[0];

@@ -2,7 +2,7 @@
  * File Name : user_param.h
  * Description : aztekas user parameters header file for Relativistic Shock-Tube
  * Creation Date : 28-09-2019
- * Last Modified : 17-10-2019 18:54:09
+ * Last Modified : 17-12-2019 13:10:55
  * Created By : Alejandro Aguayo-Ortiz
  */
 
@@ -24,6 +24,6 @@
 #define GRID               UNIFORM
 
 #define Black_Hole_Mass    1.0
-#define Black_Hole_Spin    0.99
+#define Black_Hole_Spin    0.0
 
 double density_0, pressure_0, velocity_0;

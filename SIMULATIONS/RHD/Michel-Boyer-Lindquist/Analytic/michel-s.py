@@ -43,10 +43,10 @@ import datetime
 
 poly = 3
 ainf = 0.01
-rmin = 2.0
-rmax = 100.0
+rmin = 2.5
+rmax = 20.0
 npoint = 400
-gamma = 5.0/3.0
+gamma = 4.0/3.0
 
 if ainf > np.sqrt(gamma - 1.) : 
     print "ainf should be less than amax =", np.sqrt(gamma - 1.)
@@ -166,28 +166,28 @@ for i in range(npoint):
   press = Kpoly*den**gamma
   vel = acc/(den*r**2) # U^r
 
-  lapse = np.sqrt(1/(1 + 2/r)) # Lapse function alpha
-  br = (2/r)*(1/(1 + 2/r)) # Shift vector beta^r
+  lapse = np.sqrt(1 - 2/r) # Lapse function alpha
+  br = 0.0 # Shift vector beta^r
   gtt = - (1 - 2/r) # g_tt
-  gTT = - 1 - 2/r # g^tt
-  gtr = 2/r # g_tr
-  gTR = 2/r # g^tr
-  grr = 1 + 2/r # g_rr
+  gTT = - 1/(1 - 2/r) # g^tt
+  gtr = 0.0 # g_tr
+  gTR = 0.0 # g^tr
+  grr = 1/(1 - 2/r) # g_rr
   gRR = 1 - 2/r # g^rr
 
-  Uur = -vel # U^r
-  Udt = -np.sqrt(Uur*Uur - gtt) # U_t
-  Udr = (gtr*gTT*Udt + grr*Uur)/(1 - gtr*gTR) # U_r
-  Uut = gTT*Udt + gTR*Udr # U_t
+  Uur = vel # U^r
+  Udt = np.sqrt(Uur*Uur - gtt) # U_t
+  Udr = grr*Uur # U_r
+  Uut = gTT*Udt # U_t
  
   W = lapse*Uut # Lorentz factor
 
   vdr = (Udr / W) # v_r
-  vur = (1/(1 + 2/r))*vdr # v^r
+  vur = vdr/grr # v^r
 
   vr = np.sqrt(vur*vdr) # sqrt(v_r * v^r)
 
-  print ("%.6e %.6e %.6e %.6e %.6e %.6e %.6e %.6e %.6e" % ( r, den, press, vel, a, vdr, vur, vr, W))
+  print ("%.6e %.6e %.6e %.6e %.6e %.6e %.6e %.6e" % ( r, den, press, vel, a, vdr, vur, vr))
 
 #plt.plot(rad,sound,'bo')
 #plt.show()

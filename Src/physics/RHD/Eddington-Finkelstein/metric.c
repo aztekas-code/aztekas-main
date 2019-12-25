@@ -57,7 +57,15 @@ void Get_Metric_Components(gauge_ *local_grid)
 
    double r     = local_grid->x[1];
    double theta = local_grid->x[2]; 
+   double sin_theta = sin(theta);
+   double cos_theta = cos(theta);
    double M = Black_Hole_Mass;
+
+   if(theta == M_PI)
+   {
+      sin_theta =  0.0;
+      cos_theta = -1.0;
+   }
 
    local_grid->lapse = sqrt(r/(2.0*M + r));
 
@@ -73,9 +81,9 @@ void Get_Metric_Components(gauge_ *local_grid)
    local_grid->gamma_con[1][2] = 0.0;
    local_grid->gamma_con[2][0] = 0.0;
    local_grid->gamma_con[2][1] = 0.0;
-   local_grid->gamma_con[2][2] = 1.0/(r*r*sin(theta)*sin(theta));
+   local_grid->gamma_con[2][2] = 1.0/(r*r*sin_theta*sin_theta);
 
-   local_grid->dety = sqrt(r*r*r*sin(theta)*sin(theta)*(2.0*M + r));
+   local_grid->dety = sqrt(r*r*r*sin_theta*sin_theta*(2.0*M + r));
 
 #endif
 }
@@ -189,7 +197,15 @@ void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid)
 
    double r     = local_grid->x[1];
    double theta = local_grid->x[2]; 
+   double sin_theta = sin(theta);
+   double cos_theta = cos(theta);
    double M = Black_Hole_Mass;
+
+   if(theta == M_PI)
+   {
+      sin_theta =  0.0;
+      cos_theta = -1.0;
+   }
 
    der->dlapse[0] = M/(sqrt(r*pow(2.0*M + r,3.0)));
    der->dlapse[1] = 0.0;
@@ -213,7 +229,7 @@ void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid)
    der->dgam[0][1][2] = 0.0;
    der->dgam[0][2][0] = 0.0;
    der->dgam[0][2][1] = 0.0;
-   der->dgam[0][2][2] = 2.0*r*sin(theta)*sin(theta);
+   der->dgam[0][2][2] = 2.0*r*sin_theta*sin_theta;
 
    der->dgam[1][0][0] = 0.0;
    der->dgam[1][0][1] = 0.0;
@@ -223,7 +239,7 @@ void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid)
    der->dgam[1][1][2] = 0.0;
    der->dgam[1][2][0] = 0.0;
    der->dgam[1][2][1] = 0.0;
-   der->dgam[1][2][2] = 2.0*r*r*cos(theta)*sin(theta);
+   der->dgam[1][2][2] = 2.0*r*r*cos_theta*sin_theta;
 
    der->dgam[2][0][0] = 0.0;
    der->dgam[2][0][1] = 0.0;
