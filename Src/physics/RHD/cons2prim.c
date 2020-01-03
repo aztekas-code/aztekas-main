@@ -272,7 +272,7 @@ int Cons2Prim(double *u, double *q)
             {
                printf("                                          \n");
                printf("Spend too much time in Newton-Rhapson.\n");
-               printf("%d %d %e %e %e %e\n",i,j,D,tau,SS,f);
+               printf("%f %f %e %e %e %e\n",grid.X1[i],grid.X2[j],D,tau,SS,f);
                CHECK_NAN = TRUE;
                U = U0;
                Print_Values(&grid.time,&theta,&CHECK_NAN);
