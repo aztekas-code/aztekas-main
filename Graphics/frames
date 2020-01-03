@@ -14,7 +14,9 @@ echo " "
 echo "Bash script for many aztekas plots"
 echo ""
 
-if [ -z "$PLOT_FILE" ]
+plot_file=$FILE$dat".dat"
+
+if [ -z "$PLOT_FILE" ] || [ -z $DIR ] || [ -z $FILE ] || [ -z $START ] || [ -z $END ] || [ -z $SCALE ]
 then
    echo "Execute this file in your terminal as:"
    echo "   ./frames PLOT_FILE DIR FILE START END SCALE"
@@ -45,17 +47,21 @@ else
       done
    fi
 
-   touch "$FILE""$num".png
-   change=`echo "$FILE""$num"".png" | sed 's/\.//'`
-   mv "$FILE""$num".png $change
+   echo "Plotting file" $plot_file
+   if [ -f $plot_file ]
+   then
+      touch "$FILE""$num".png
+      change=`echo "$FILE""$num"".png" | sed 's/\.//'`
+      mv "$FILE""$num".png $change
 
-   echo "Plotting file" $FILE$dat.dat
-
-   "$PLOT_FILE" "$DIR"/"$FILE""$dat".dat $change $SCALE
-
-   echo "Done! ->" $change
-   echo " "
+      "$PLOT_FILE" "$DIR"/"$FILE""$dat".dat $change $SCALE
+      echo "Done! ->" $change
+      echo " "
+   else
+      echo "Error: File "$plot_file "does not exist"
+   fi
 
    dat=$((dat+1))
+   plot_file=$FILE$dat".dat"
    done
 fi
