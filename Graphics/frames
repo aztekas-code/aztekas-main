@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash 
 
 PLOT_FILE=$1
 DIR=$2
