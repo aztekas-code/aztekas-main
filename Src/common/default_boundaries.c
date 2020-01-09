@@ -285,6 +285,7 @@ void Reflection(double *B)
          {
             B(VX2,i,cell) = -B(VX2,i,2*gc-cell);
             B(VX2,i,gc)   =  0.0;
+            B(VX3,i,gc)   =  0.0;
          }
          else
          {
