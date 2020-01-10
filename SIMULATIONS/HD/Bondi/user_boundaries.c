@@ -16,7 +16,7 @@ void User_Boundaries(double *B)
       {
          B(RHO,i) = density_0;
          B(PRE,i) = pressure_0;
-         B(VX1,i) = velocity_0;
+         //B(VX1,i) = velocity_0;
       }
    }
 

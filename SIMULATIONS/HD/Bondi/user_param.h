@@ -12,7 +12,7 @@
 #define reflective_x2min   TRUE
 
 #define RECONST            MC
-#define FLUX               HLL
+#define FLUX               HLLC
 #define GRID               LOGMESH
 
 double density_0, pressure_0, velocity_0;
