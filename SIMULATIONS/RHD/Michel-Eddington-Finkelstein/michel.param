@@ -28,14 +28,14 @@ binary = 0
 %%%%%%%%%%%%%%%
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
-Nx1 = 128
+Nx1 = 256
 Nx2 = 128
 Nx3 = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINE DOMAIN LIMITS %
 %%%%%%%%%%%%%%%%%%%%%%%%
-x1max = 20.0
+x1max = 30.0
 x2max = 0.5
 x3max = 1.0 
 x1min = 1.5
@@ -47,7 +47,7 @@ x3min = 0.0
 %%%%%%%%%%%%%%%%%%%
 tmax     = 5000.0
 timefile = 10.0
-numfile  = 0
+numfile  = 10
 
 %%%%%%%%%%%%%%%%%%
 % COURANT FACTOR %
@@ -66,8 +66,8 @@ K = 1.6666666666666666
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % BOUNDARY AND INITIAL PARAMETERS %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Michel Accretion (Gamma = 5/3, r0 = 20 M)
+% Michel Accretion (Gamma = 5/3, r0 = 30 M)
 
-density_0  =  3.542502e+03
-pressure_0 =  4.940072e+01
-velocity_0 = -9.719007e-02
+density_0  =  5.518877e+00
+pressure_0 =  1.049864e-01
+velocity_0 = -1.304282e-02

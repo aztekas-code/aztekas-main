@@ -25,7 +25,7 @@ int Cons2Prim(double *u, double *q)
    #pragma omp for private(D,tau,S_cov,S_con,h,derh,f,derf,\
                            Lorentz,SS,theta,theta_0,count,local_grid)
 #endif
-   for(int i = 0; i <= Nx1-0; i++)
+   for(int i = gc; i <= Nx1-gc; i++)
    {
       local_grid.x[0] = grid.time;
       local_grid.x[1] = grid.X1[i];
@@ -37,9 +37,9 @@ int Cons2Prim(double *u, double *q)
 
       Get_Metric_Components(&local_grid);
 
-      D        = q(RHO,i);
-      tau      = q(PRE,i);
-      S_cov[0] = q(VX1,i);
+      D        = q(DEN,i);
+      tau      = q(ENE,i);
+      S_cov[0] = q(MX1,i);
       S_cov[1] = 0.0;
       S_cov[2] = 0.0;
 
