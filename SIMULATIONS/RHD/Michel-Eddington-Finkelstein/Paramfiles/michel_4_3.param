@@ -38,15 +38,15 @@ Nx3 = 0
 x1max = 500.0
 x2max = 0.5
 x3max = 1.0 
-x1min = 5.0
+x1min = 1.5
 x2min = 0.0
 x3min = 0.0
 
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
-tmax     = 50000.0
-timefile = 10.0
+tmax     = 20000.0
+timefile = 1000.0
 numfile  = 10
 
 %%%%%%%%%%%%%%%%%%
@@ -66,8 +66,8 @@ K = 1.3333333333333333
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % BOUNDARY AND INITIAL PARAMETERS %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Michel Accretion (Gamma = 4/3, r0 = 500 M)
+% Michel Accretion (Gamma = 4/3, r0 = 500 M, c_infty = 0.05)
 
-density_0  =  1.993414e+00 
+density_0  =  1.993414e+00
 pressure_0 =  4.739517e-03
 velocity_0 = -7.579149e-03
