@@ -28,8 +28,8 @@ binary = 0
 %%%%%%%%%%%%%%%
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
-Nx1 = 512
-Nx2 = 128
+Nx1 = 128
+Nx2 = 0
 Nx3 = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%
@@ -45,9 +45,9 @@ x3min = 0.0
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
-tmax     = 0.70
+tmax     = 0.35
 timefile = 0.35
-numfile  = 70
+numfile  = 1
 
 %%%%%%%%%%%%%%%%%%
 % COURANT FACTOR %

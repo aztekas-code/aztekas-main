@@ -47,7 +47,7 @@ x3min = 0.0
 %%%%%%%%%%%%%%%%%%%
 tmax     = 0.2
 timefile = 0.01
-numfile  = 0
+numfile  = 1
 
 %%%%%%%%%%%%%%%%%%
 % COURANT FACTOR %
