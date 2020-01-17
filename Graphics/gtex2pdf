@@ -38,6 +38,8 @@ input=`echo ${nombre} | sed 's/\.tex//'`
 
 ps2eps -f $file"_out.ps"
 mv -f $file"_out.eps" $input"_out.eps"
-cp -f $input"_out.eps" $input".pdf"
+epspdf $input"_out.eps"
+cp -f $input"_out.pdf" $input".pdf"
+cp -f $input"_out.eps" $input".eps"
 
-rm -f $file".aux" $file".dvi" $file".log" $file"_out.ps" $x texput.log 
+rm -f $file".aux" $file".dvi" $file".log" $file"_out.ps"  $file"_out.pdf" $file"_out.eps" texput.log *out*
