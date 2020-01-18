@@ -47,7 +47,7 @@ void Prim2Cons(double *q, double *u, gauge_ *local_grid)
 
    if(VV > 1.0)
    {
-      VV = 0.999;
+      VV = 0.99;
    }
 
    Lorentz = 1.0/sqrt(1.0 - VV);

@@ -55,7 +55,7 @@ void Prim2FluxG(double *f, double *v, double *u, gauge_ *local_grid)
    
    if(VV > 1.0)
    {
-      VV = 0.999;
+      VV = 0.99;
    }
 
    // Lorentz Factor
