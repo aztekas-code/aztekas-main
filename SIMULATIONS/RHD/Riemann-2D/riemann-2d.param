@@ -45,7 +45,7 @@ x3min = 0.0
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
-tmax     = 0.37
+tmax     = 0.4
 timefile = 0.1
 numfile  = 1
 
@@ -74,7 +74,7 @@ vx2tl = 0.0
 
 % TOP-RIGHT
 rhotr = 0.1
-ptr   = 0.01
+ptr   = 0.001
 vx1tr = 0.0
 vx2tr = 0.0
 
