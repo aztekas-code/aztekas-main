@@ -126,6 +126,7 @@ void Primitive_Reconstruction()
                U1m(n,i,j) = U0(n,i,j) - 0.5*sx;
                U1p(n,i,j) = U0(n,i,j) + 0.5*sx;
 
+
                dum = U0(n,i, j ) - U0(n,i,j-1);
                dup = U0(n,i,j+1) - U0(n,i, j );
 
@@ -133,6 +134,7 @@ void Primitive_Reconstruction()
 
                U2m(n,i,j) = U0(n,i,j) - 0.5*sx;
                U2p(n,i,j) = U0(n,i,j) + 0.5*sx;
+
             }
          }
       }

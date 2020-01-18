@@ -90,7 +90,7 @@ void Runge_Kutta(int order)
       {
          cell[0] = i;
          cell[1] = j;
-    
+
          Dx1 = grid.X1p[i] - grid.X1m[i];
          Dx2 = grid.X2p[j] - grid.X2m[j];
 
@@ -107,9 +107,8 @@ void Runge_Kutta(int order)
             vec.F[n] = (S1p(i,j)*vec.Fp[n] - S1m(i,j)*vec.Fm[n])/(Dx1) + \
                        (S2p(i,j)*vec.Gp[n] - S2m(i,j)*vec.Gm[n])/(Dx2) - \
                        vec.S[n];
-
          }
-    
+
 #if INTEGRATION == PVRS //PVRS
          for(int n = 0; n < eq; n++)
          {

@@ -133,10 +133,10 @@ int Cons2Prim(double *u, double *q)
 
          Get_Metric_Components(&local_grid);
 
-         D        = q(RHO,i,j);
-         tau      = q(PRE,i,j);
-         S_cov[0] = q(VX1,i,j);
-         S_cov[1] = q(VX2,i,j);
+         D        = q(DEN,i,j);
+         tau      = q(ENE,i,j);
+         S_cov[0] = q(MX1,i,j);
+         S_cov[1] = q(MX2,i,j);
          S_cov[2] = 0.0;
 
          S_con[0] = local_grid.gamma_con[0][0]*S_cov[0] + \
@@ -151,7 +151,7 @@ int Cons2Prim(double *u, double *q)
          
          SS = S_cov[0]*S_con[0] + S_cov[1]*S_con[1] + S_cov[2]*S_con[2];
 
-         theta_0 = U(1,i,j)/U(0,i,j);
+         theta_0 = U(PRE,i,j)/U(RHO,i,j);
          count   = 0;
 
          while(fabs(f) > 0.00000001)
@@ -178,7 +178,7 @@ int Cons2Prim(double *u, double *q)
 
             if(count == 100000)
             {
-               printf("%e %e %e %e\n",Lorentz,h,derh,SS);
+               printf("X1,X2,W,h,dh,S: %e %e %e %e %e %e\n",local_grid.x[1],local_grid.x[2],Lorentz,h,derh,SS);
                printf("                                          \n");
                printf("Spend too much time in Newton-Rhapson.\n");
                CHECK_NAN = TRUE;

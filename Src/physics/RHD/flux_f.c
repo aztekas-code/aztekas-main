@@ -53,6 +53,11 @@ void Prim2FluxF(double *f, double *v, double *u, gauge_ *local_grid)
    // Contraction v_i v^i
    VV = v_con[0]*v_cov[0] + v_con[1]*v_cov[1] + v_con[2]*v_cov[2];
 
+   if(VV > 1.0)
+   {
+      VV = 0.999;
+   }
+
    // Lorentz Factor
    Lorentz = 1.0/sqrt(1.0 - VV);
 

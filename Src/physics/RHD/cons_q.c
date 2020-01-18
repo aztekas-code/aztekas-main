@@ -45,6 +45,11 @@ void Prim2Cons(double *q, double *u, gauge_ *local_grid)
               
    VV = v_cov[0]*v_con[0] + v_cov[1]*v_con[1] + v_cov[2]*v_con[2];
 
+   if(VV > 1.0)
+   {
+      VV = 0.999;
+   }
+
    Lorentz = 1.0/sqrt(1.0 - VV);
 
    EoS(&eos,u,local_grid);
