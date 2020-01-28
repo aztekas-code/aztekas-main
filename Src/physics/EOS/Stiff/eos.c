@@ -12,7 +12,7 @@
 void EoS(eos_ *eos, double *u, gauge_ *local_grid)
 {
    double rho, p;
-   rho = u[EOS];
+   rho = u[RHO];
    p   = u[PRE];
 
    eos->e = p / (rho * (K - 1.0));
