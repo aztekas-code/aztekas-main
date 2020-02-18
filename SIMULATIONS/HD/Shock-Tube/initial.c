@@ -2,7 +2,7 @@
  * File Name : initial.c
  * Description : aztekas initial module for Shock-Tube
  * Creation Date : 26-09-2019
- * Last Modified : 18-02-2020 09:41:29
+ * Last Modified : 18-02-2020 09:43:01
  * Created By : Alejandro Aguayo-Ortiz
  */
 
@@ -10,8 +10,6 @@
 
 void Initial()
 {
-   int n, i, j, k, cell;
-
    //Initialize grid.time
    grid.time = 0.0;
 
@@ -24,7 +22,7 @@ void Initial()
    //-------Riemann-1D--------//
    /////////////////////////////
 
-   for(i = 0; i <= Nx1; i++)
+   for(int i = 0; i <= Nx1; i++)
    {
       if(grid.X1[i] < x_0)
       {
@@ -47,9 +45,9 @@ void Initial()
    /////////////////////////////
 
    #if INTERFACE == HORIZONTAL
-   for(i = 0; i <= Nx1; i++)
+   for(int j = 0; j <= Nx2; j++)
    {
-      for(j = 0; j <= Nx2; j++)
+      for(int i = 0; i <= Nx1; i++)
       {
          if(grid.X1[i] < x_0)
          {
@@ -68,9 +66,9 @@ void Initial()
       }
    }
    #elif INTERFACE == VERTICAL
-   for(i = 0; i <= Nx1; i++)
+   for(int j = 0; j <= Nx2; j++)
    {
-      for(j = 0; j <= Nx2; j++)
+      for(int i = 0; i <= Nx1; i++)
       {
          if(grid.X2[j] > x_0)
          {
@@ -89,9 +87,9 @@ void Initial()
       }
    }
    #elif INTERFACE == DIAGONAL
-   for(i = 0; i <= Nx1; i++)
+   for(int j = 0; j <= Nx2; j++)
    {
-      for(j = 0; j <= Nx2; j++)
+      for(int i = 0; i <= Nx1; i++)
       {
          if(grid.X1[i] + grid.X2[j] - 1 < 0.0)
          {
