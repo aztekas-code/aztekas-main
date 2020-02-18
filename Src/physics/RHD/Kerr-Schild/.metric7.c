@@ -280,13 +280,13 @@ void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid)
 
    der->dgam[1][0][0] = 2*M*pow(a, 2)*r*sin(2*theta)/pow(rho2, 2);
    der->dgam[1][0][1] = 0.0;
-   der->dgam[1][0][2] = -2*a*(2*M*pow(a, 2)*r*pow(sin(theta), 2) + rho2*(2*M*r + rho2))*sin(theta)*cos(theta)/pow(rho2, 2);
+   der->dgam[1][0][2] = -2*a*(2*M*pow(a, 2)*r*pow(sin(theta), 2) - rho2*(2*M*r + rho2))*sin(theta)*cos(theta)/pow(rho2, 2);
    der->dgam[1][1][0] = 0.0;
-   der->dgam[1][1][1] = -a2*sin(2.0*theta);
+   der->dgam[1][1][1] = -pow(a, 2)*sin(2*theta);
    der->dgam[1][1][2] = 0.0;
-   der->dgam[1][2][0] = -2*a*(2*M*pow(a, 2)*r*pow(sin(theta), 2) + rho2*(2*M*r + rho2))*sin(theta)*cos(theta)/pow(rho2, 2);
+   der->dgam[1][2][0] = -2*a*(2*M*pow(a, 2)*r*pow(sin(theta), 2) - rho2*(2*M*r + rho2))*sin(theta)*cos(theta)/pow(rho2, 2);
    der->dgam[1][2][1] = 0.0;
-   der->dgam[1][2][2] = 2*(2*M*pow(a, 4)*r*pow(sin(theta), 4) + 4*M*pow(a, 2)*r*rho2*pow(sin(theta), 2) + pow(rho2, 2)*(pow(a, 2)*pow(sin(theta), 2) + rho2))*sin(theta)*cos(theta)/pow(rho2, 2);
+   der->dgam[1][2][2] = -2*(-2*M*pow(a, 4)*r*pow(sin(theta), 4) + 4*M*pow(a, 2)*r*rho2*pow(sin(theta), 2) + pow(rho2, 2)*(3*pow(a, 2)*pow(sin(theta), 2) + rho2))*sin(theta)*cos(theta)/pow(rho2, 2);
 
    der->dgam[2][0][0] = 0.0;
    der->dgam[2][0][1] = 0.0;
