@@ -53,7 +53,7 @@ void Print_Values(double *tprint, double *dtprint, int *itprint)
        * Increase the time of printing by dtprint and increase
        * the humber of the output file
        */
-      *tprint = *tprint + *dtprint;
+      *tprint = floor(*tprint + *dtprint);
       ++*itprint;
    }
 

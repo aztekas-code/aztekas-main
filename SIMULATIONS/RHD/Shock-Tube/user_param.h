@@ -2,7 +2,7 @@
  * File Name : user_param.h
  * Description : aztekas user parameters header file for Relativistic Shock-Tube
  * Creation Date : 28-09-2019
- * Last Modified : 15-10-2019 21:28:29
+ * Last Modified : 19-02-2020 13:20:54
  * Created By : Alejandro Aguayo-Ortiz
  */
 
@@ -21,7 +21,7 @@
 #define FLUX               HLL
 #define GRID               UNIFORM
 
-#define INTERFACE          HORIZONTAL
+#define INTERFACE          DIAGONAL
 
 double rhol, pl, vx1l, vx2l, vx3l;
 double rhor, pr, vx1r, vx2r, vx3r;
