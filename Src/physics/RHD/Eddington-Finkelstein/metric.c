@@ -35,23 +35,23 @@ void Get_Metric_Components(gauge_ *local_grid)
    double r = sqrt(R*R + z*z);
    double M = Black_Hole_Mass;
 
-   local_grid->lapse = sqrt(1.0 - 2.0*M/r);
+   local_grid->lapse = sqrt(r/(2.0*M + r));
 
-   local_grid->beta_con[0] = 0.0;
-   local_grid->beta_con[1] = 0.0;
+   local_grid->beta_con[0] = 2.0*M*R/(r*(2.0*M + r));
+   local_grid->beta_con[1] = 2.0*M*z/(r*(2.0*M + r));
    local_grid->beta_con[2] = 0.0;
 
-   local_grid->gamma_con[0][0] = 1 - 2.0*M*R*R/(r*r*r);
-   local_grid->gamma_con[0][1] = -2.0*M*R*z/(r*r*r);
+   local_grid->gamma_con[0][0] = (r*r*r + 2.0*M*z*z)/(r*r*(2.0*M + r));
+   local_grid->gamma_con[0][1] = -2.0*M*R*z/(r*r*(2.0*M + r));
    local_grid->gamma_con[0][2] = 0.0;
-   local_grid->gamma_con[1][0] = -2.0*M*R*z/(r*r*r);
-   local_grid->gamma_con[1][1] = 1.0 - 2.0*M*z*z/(r*r*r);
+   local_grid->gamma_con[1][0] = -2.0*M*R*z/(r*r*(2.0*M + r));
+   local_grid->gamma_con[1][1] = (r*r*r + 2.0*M*R*R)/(r*r*(2.0*M + r));
    local_grid->gamma_con[1][2] = 0.0;
    local_grid->gamma_con[2][0] = 0.0;
    local_grid->gamma_con[2][1] = 0.0;
    local_grid->gamma_con[2][2] = 1.0/(R*R);
 
-   local_grid->dety = sqrt(R*R*r/(r - 2.0*M));
+   local_grid->dety = sqrt(R*R*(1.0 + 2.0*M/r));
 
 #elif COORDINATES == SPHERICAL
 
@@ -148,36 +148,38 @@ void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid)
    double z = local_grid->x[2];
    double r = sqrt(R*R + z*z);
    double M = Black_Hole_Mass;
+   double drdR = R/r;
+   double drdz = z/r;
 
-   der->dlapse[0] = M*R/(pow(r,5.0/2.0)*sqrt(r - 2.0*M));
-   der->dlapse[1] = M*z/(pow(r,5.0/2.0)*sqrt(r - 2.0*M));
+   der->dlapse[0] = M*R/pow(r*(2.0*M + r),3.0/2.0);
+   der->dlapse[1] = M*z/pow(r*(2.0*M + r),3.0/2.0);
    der->dlapse[2] = 0.0;
 
-   der->dbeta[0][0] = 0.0;
-   der->dbeta[0][1] = 0.0;
+   der->dbeta[0][0] = (-2.0*M/(r*r*r*pow(2.0*M + r,2.0)))*(R*R*r - z*z*(2.0*M + r));
+   der->dbeta[0][1] = -4.0*M*R*z*(M + r)/(r*r*r*pow(2.0*M + r,2.0));
    der->dbeta[0][2] = 0.0;
-   der->dbeta[1][0] = 0.0;
-   der->dbeta[1][1] = 0.0;
+   der->dbeta[1][0] = -4.0*M*R*z*(M + r)/(r*r*r*pow(2.0*M + r,2.0));
+   der->dbeta[1][1] = (-2.0*M/(r*r*r*pow(2.0*M + r,2.0)))*(z*z*r - R*R*(2.0*M + r));
    der->dbeta[1][2] = 0.0;
    der->dbeta[2][0] = 0.0;
    der->dbeta[2][1] = 0.0;
    der->dbeta[2][2] = 0.0;
 
-   der->dgam[0][0][0] = 2.0*M*R*(3.0*r*z*z - 4.0*M*z*z - r*r*r)/(pow(r,4.0)*pow(2.0*M - r,2.0));
-   der->dgam[0][0][1] = -2.0*M*z*(R*R*r - 2.0*R*R*(2.0*M - r) + r*r*(2.0*M - r))/(pow(r,4.0)*pow(2.0*M - r,2.0));
+   der->dgam[0][0][0] = (2.0*M*R/pow(r,5.0))*(2.0*z*z - R*R);
+   der->dgam[0][0][1] = (2.0*M*z/pow(r,5.0))*(z*z - 2.0*R*R);
    der->dgam[0][0][2] = 0.0;
-   der->dgam[0][1][0] = -2.0*M*z*(R*R*r - 2.0*R*R*(2.0*M - r) + r*r*(2.0*M - r))/(pow(r,4.0)*pow(2.0*M - r,2.0));
-   der->dgam[0][1][1] = -2.0*M*R(4.0*M*R*R - 4.0*M*r*r - 3.0*R*R*r + 3.0*r*r*r)/(pow(r,4.0)*pow(2.0*M - r,2.0));
+   der->dgam[0][1][0] = (2.0*M*z/pow(r,5.0))*(z*z - 2.0*R*R);
+   der->dgam[0][1][1] = -6.0*M*R*z*z/pow(r,5.0);
    der->dgam[0][1][2] = 0.0;
    der->dgam[0][2][0] = 0.0;
    der->dgam[0][2][1] = 0.0;
    der->dgam[0][2][2] = 2.0*R;
 
-   der->dgam[1][0][0] = 2.0*M*z*(4.0*M*r*r - 4.0*M*z*z - 3.0*r*r*r + 3.0*r*z*z)/(pow(r,4.0)*pow(2.0*M - r,2.0));
-   der->dgam[1][0][1] = -2.0*M*R*(r*r*(2.0*M - r) + r*z*z - 2.0*z*z*(2.0*M - r))/(pow(r,4.0)*pow(2.0*M - r,2.0));
+   der->dgam[1][0][0] = -6.0*M*R*R*z/pow(r,5.0);
+   der->dgam[1][0][1] = (2.0*M*R/pow(r,5.0))*(R*R - 2.0*z*z);
    der->dgam[1][0][2] = 0.0;
-   der->dgam[1][1][0] = -2.0*M*R*(r*r*(2.0*M - r) + r*z*z - 2.0*z*z*(2.0*M - r))/(pow(r,4.0)*pow(2.0*M - r,2.0));
-   der->dgam[1][1][1] = 2.0*M*z*(3.0*r*R*R - 4.0*M*R*R - r*r*r)/(pow(r,4.0)*pow(2.0*M - r,2.0));
+   der->dgam[1][1][0] = (2.0*M*R/pow(r,5.0))*(R*R - 2.0*z*z);
+   der->dgam[1][1][1] = (2.0*M*z/pow(r,5.0))*(2.0*R*R - z*z);
    der->dgam[1][1][2] = 0.0;
    der->dgam[1][2][0] = 0.0;
    der->dgam[1][2][1] = 0.0;

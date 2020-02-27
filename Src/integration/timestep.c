@@ -75,7 +75,7 @@ double TimeStep()
          if(U(0,i,j) == fabs(1.0/0.0))
          {
             printf("                                          \n");
-            printf("NaN value found in calculation at (%d,%d).\n",i,j);
+            printf("NaN value found in calculation at (%d,%d) = (%.2f,%.2f).\n",i,j,grid.X1[i],grid.X2[j]);
             CHECK_NAN = TRUE;
             U = U0;
             Print_Values(&grid.time,&c,&CHECK_NAN);

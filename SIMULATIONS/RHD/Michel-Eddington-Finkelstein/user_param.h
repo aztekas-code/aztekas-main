@@ -12,7 +12,7 @@
 
 #define RECONST            MC
 #define FLUX               HLL
-#define GRID               LOGMESH
+#define GRID               UNIFORM
 
 #define Black_Hole_Mass    1.0
 
