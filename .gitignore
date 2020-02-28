@@ -1,0 +1,11 @@
+*.pdf
+*.tex
+*.png
+*.eps
+*.ps
+*.html
+*.js
+*.dat
+*.txt
+SIMULATIONS/**/**/aztekas
+SIMULATIONS/**/**/TEST

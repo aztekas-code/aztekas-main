@@ -8,8 +8,11 @@
 
 #include"main.h"
 
-/**
- * Call the default boundary conditions.
+/*!
+ * Call the default boundary conditions implemented in \a aztekas:
+ * - Reflection.
+ * - Periodic.
+ * - Outflow.
  *
  * Input/Output: double *B
  */
