@@ -1,14 +1,20 @@
 /**
  * @file boundaries.c
  *
+ * @brief Standard boundary conditions. Outflow, Periodic and Reflection.
+ *
  * @author Alejandro Aguayo-Ortiz
  *
- * @brief Standard boundary conditions. Outflow, Periodic and Reflection.
+ * @date 02-03-2020 23:21:29
+ *
+ * E-mail: aaguayoo92@ciencias.unam.mx
+ *
+ * Created on: 20-10-19
  */
 
 #include"main.h"
 
-/*!
+/**
  * Call the default boundary conditions implemented in \a aztekas:
  * - Reflection.
  * - Periodic.
