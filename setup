@@ -1270,11 +1270,16 @@ cat << EOF >> user_param.h
 EOF
 
 cat << EOF > initial.c
-/* 
- *  aztekas initial module
- *  Date of creation: $date
- *  author: $author 
+/**
+ * @file initial.c
+ * 
+ * @brief aztekas initial module
+ * 
+ * @author $author 
+ *
+ * @date $date
  */
+
 #include"main.h"
 
 void Initial()
@@ -1288,10 +1293,14 @@ void Initial()
 EOF
 
 cat << EOF > user_boundaries.c
-/* 
- *  aztekas user boundaries module
- *  Date of creation: $date
- *  author: $author 
+/**
+ * @file user_boundaries.c
+ * 
+ * @brief aztekas user boundaries module
+ * 
+ * @author $author 
+ *
+ * @date $date
  */
 
 #include"main.h"
@@ -1304,10 +1313,14 @@ EOF
 if [[ $eos == 'User' ]]
 then 
 cat << EOF > user_eos.c
-/* 
- *  aztekas user equation of state module
- *  Date of creation: $date
- *  author: $author 
+/**
+ * @file user_eos.c
+ * 
+ * @brief aztekas user equation of state module
+ * 
+ * @author $author 
+ *
+ * @date $date
  */
 
 #include"main.h"
@@ -1349,10 +1362,14 @@ fi
 if [[ $metric == 'User' ]]
 then 
 cat << EOF > user_metric.c
-/* 
- *  aztekas user metric module
- *  Date of creation: $date
- *  author: $author 
+/**
+ * @file user_metric.c
+ * 
+ * @brief aztekas user metric module
+ * 
+ * @author $author 
+ *
+ * @date $date
  */
 
 #include"main.h"
@@ -1455,10 +1472,14 @@ fi
 if [[ $user_sources == true ]]
 then 
 cat << EOF > user_sources.c
-/* 
- *  aztekas user source terms module
- *  Date of creation: $date
- *  author: $author 
+/**
+ * @file user_sources.c
+ * 
+ * @brief aztekas user source terms module
+ * 
+ * @author $author 
+ *
+ * @date $date
  */
 
 #include"main.h"
@@ -1578,13 +1599,14 @@ fi
 cat << EOF > user_input.c
 /**
  * @file user_input.c
- *
+ * 
+ * @brief aztekas user input parameters module
+ * 
  * @author Emilio Tejeda
  *
- * @brief Important input parameters for \a aztekas.
+ * @date $date
  */
 
-//Do not erase any of these libraries//
 #include"main.h"
 
 FILE *paramfile;
@@ -1699,7 +1721,7 @@ EOF
 
 cat << EOF > $char_name.param
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%% PARAMETERS FOR SHOCK TUBE SIMULATION %%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% PARAMETERS FOR SIMULATION %%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
