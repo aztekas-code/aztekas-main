@@ -43,7 +43,7 @@ int User_Parameters(char const *paramfile_name)
 
          if(fscanf (paramfile, "%s = %s", t_key, t_value) == 2)
          {
-            if(strcmp(t_key,"n_0")==0)
+            if(strcmp(t_key,"rho_0")==0)
             {
                rho_0 = atof(t_value);
             }

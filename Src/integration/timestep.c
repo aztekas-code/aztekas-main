@@ -59,7 +59,14 @@ double TimeStep()
          Dx1 = grid.X1p[i] - grid.X1m[i];
          Dx2 = grid.X2p[j] - grid.X2m[j];
          #if COORDINATES == SPHERICAL
-         Dx2 = grid.X1[i]*Dx2;
+         if(grid.X1[i] != 0.0)
+         {
+            Dx2 = grid.X1[i]*Dx2;
+         }
+         else
+         {
+            Dx2 = Dx2;
+         }
          #endif
 
          #if PHYSICS == HD
@@ -71,7 +78,7 @@ double TimeStep()
          dtmin = MIN(Dx1,dtmin);
          dtmin = MIN(Dx2,dtmin);
          #endif
-
+         
          if(U(0,i,j) == fabs(1.0/0.0))
          {
             printf("                                          \n");
