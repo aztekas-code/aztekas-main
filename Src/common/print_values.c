@@ -60,6 +60,21 @@ void Print_Values(double *tprint, double *dtprint, int *itprint)
        */
       *tprint = *tprint + *dtprint;
       ++*itprint;
+
+      #if MDOT == TRUE
+      if(MDOT_END == TRUE)
+      {                                                                            
+         printf("\n");                                                             
+         printf("AZTEKAS termination\n");                                          
+         printf("The mean value of Mdot remain constant in %e\n",MDOT_ERR);        
+         #ifdef _OPENMP                                                                  
+         printf("Expend %.4f seconds parallelized using  %d threads of %d available.\n",omp_get_wtime()-start,OMP_NUM,MAX_NUM_THREADS);
+         #else                                                                     
+         printf("Expend %.4f seconds in serial version.\n",((double)(clock()-start))/CLOCKS_PER_SEC);
+         #endif                                                                    
+         exit(EXIT_FAILURE);                                                       
+      }    
+      #endif
    }
 
    /**
