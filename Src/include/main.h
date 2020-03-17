@@ -45,6 +45,13 @@ double *U2p, *U2m;
 
 double K;
 
+/* Define number file */
+int itprint;
+
+/* Define freq. output dt and time */
+double dtprint, tprint;
+
+
 /* Define number of grids */
 int Nx1, Nx2, Nx3;
 

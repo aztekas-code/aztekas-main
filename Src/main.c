@@ -28,9 +28,6 @@
 
 int main(int argc, char *argv[])
 {
-   int itprint;
-   double dtprint, tprint;
-
    if(argc != 2) 
    {
       printf("%s\n","Wrong number of arguments") ;
@@ -86,7 +83,7 @@ int main(int argc, char *argv[])
       //In this part we compute the time step
       dt = TimeStep();
 
-      //We print the values: file (DATOS*) and to terminal func_planarOUTPUT.c
+      //We print the values
       Print_Values(&tprint,&dtprint,&itprint);
 
       //In here we set the integration method (Finite volume method)
@@ -99,6 +96,7 @@ int main(int argc, char *argv[])
    Print_Values(&tprint,&dtprint,&itprint);
 
    printf("\n");
+   printf("AZTEKAS termination\n");
 #ifdef _OPENMP
    printf("Expend %.4f seconds parallelized using  %d threads of %d available.\n",omp_get_wtime()-start,OMP_NUM,MAX_NUM_THREADS);
 #else

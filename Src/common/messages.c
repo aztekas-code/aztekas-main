@@ -235,6 +235,13 @@ void Manage_Simulation_Info(int argc, char *argv[])
    strcat(create_info,"/INFO/");
    sysret = system(create_info);
 
+   #if MDOT == TRUE
+   char create_mdot[] = "mkdir -p ";
+   strcat(create_mdot,outputdirectory);
+   strcat(create_mdot,"/Mdot/");
+   sysret = system(create_mdot);
+   #endif
+
    // copy
    char dum[50] = "cp ";
    strcat(dum,paramfile_name);

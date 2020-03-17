@@ -10,7 +10,12 @@
 
 void Print_Values(double *tprint, double *dtprint, int *itprint)
 {
-   int n, i, j, k;
+   /**
+    * Print the Mass Accretion Rate \f[ \dot{M} \f]
+    */
+   #if MDOT == TRUE
+   Mass_Accretion_Rate(U);
+   #endif
 
    if(grid.time >= *tprint || CHECK_NAN == TRUE)
    {
