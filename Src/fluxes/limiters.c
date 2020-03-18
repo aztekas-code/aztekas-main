@@ -86,23 +86,23 @@ double Mc(double A, double B)
    double sig;
    double C;
 
-   C = (A + B) / 2.0e+00;
+   C = (A + B) / 2.0;
 
    if(A*B <= 0)
    {
-      sig = 0.0e+00;
+      sig = 0.0;
    }
    else if(A*B > 0)
    {
-      if(fabs(A) < fabs(B) && 2.0e+00*fabs(A) <= fabs(C))
+      if(fabs(A) < fabs(B) && 2.0*fabs(A) < fabs(C))
       {
-         sig = 2.0e+00*A;
+         sig = 2.0*A;
       }
-      else if(fabs(A) >= fabs(B) && 2.0e+00*fabs(B) <= fabs(C))
+      else if(fabs(A) >= fabs(B) && 2.0*fabs(B) < fabs(C))
       {
-         sig = 2.0e+00*B;
+         sig = 2.0*B;
       }
-      else if(fabs(C) <= 2.0e+00*fabs(A) && fabs(C) <= 2.0e+00*fabs(B))
+      else if(fabs(C) <= 2.0*fabs(A) && fabs(C) <= 2.0*fabs(B))
       {
          sig= C;
       }
@@ -143,7 +143,7 @@ double Weno5(double v1, double v2, double v3, double v4, double v5)
    double fs1, fs2, fs3;
    double bs1, bs2, bs3;
 
-   double ep = 1.0e-06;
+   double ep = 1.0e-40;
 
    double P1, P2, P3;
    double s1, s2, s3;
