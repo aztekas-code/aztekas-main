@@ -6,7 +6,7 @@ size=6
 x=out$RANDOM.tex
 
 cat << EOF > $x
-\documentclass[${size}pt]{article}
+\documentclass{article}
 \usepackage[spanish]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{upgreek}

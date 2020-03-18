@@ -14,9 +14,9 @@ int main(int argc, char *argv[])
    double M         = 1.0;
    double Gamma     = 5.0/3.0;
    double rho_infty = 1.0;
-   double c_infty   = 0.1;
+   double c_infty   = 0.5;
    double xmin = 1.5;
-   double xmax = 40;
+   double xmax = 10;
 
    // Compute the polytropic constant K
    double K;

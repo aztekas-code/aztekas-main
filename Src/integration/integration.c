@@ -12,6 +12,15 @@
 void Integration()
 {
    int rk_order = 2;
+
+   /**
+    * Increase time by dt
+    */
+   grid.time = grid.time + dt;
+
+   /**
+    * Convert all primitive vector U to conservative Q0
+    */
    Prim2Cons_All(Q0,U);
    
    for(int order = 1; order <= rk_order; order++)

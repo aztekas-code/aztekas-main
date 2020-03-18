@@ -49,10 +49,10 @@ void Initial()
    {
       for(j = 0; j <= Nx2; j++)
       {
-         U(0,i,j) = density_0;
-         U(1,i,j) = pressure_0;
-         U(2,i,j) = velocity_0;
-         U(3,i,j) = 0.0;
+         U(RHO,i,j) = density_0;
+         U(PRE,i,j) = pressure_0;
+         U(VX1,i,j) = velocity_0;
+         U(VX2,i,j) = 0.0;
       }
    }
 

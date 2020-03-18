@@ -30,10 +30,10 @@ void User_Boundaries(double *B)
       {
          if(i >= Nx1-gc)
          {
-            B(0,i,j) = density_0;
-            B(1,i,j) = pressure_0;
-            B(2,i,j) = velocity_0;
-            B(3,i,j) = 0.0;
+            B(RHO,i,j) = density_0;
+            B(PRE,i,j) = pressure_0;
+            B(VX1,i,j) = velocity_0;
+            B(VX2,i,j) = 0.0;
          }
       }
    }
@@ -50,11 +50,11 @@ void User_Boundaries(double *B)
       {
          if(i >= Nx1-gc)
          {
-            B(0,i,j) = density_0;
-            B(1,i,j) = pressure_0;
-            B(2,i,j) = velocity_0;
-            B(3,i,j) = 0.0;
-            B(4,i,j) = 0.0;
+            B(RHO,i,j) = density_0;
+            B(PRE,i,j) = pressure_0;
+            B(VX1,i,j) = velocity_0;
+            B(VX2,i,j) = 0.0;
+            B(VX3,i,j) = 0.0;
          }
       }
    }

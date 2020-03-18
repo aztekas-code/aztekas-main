@@ -1,5 +1,5 @@
 /**
- * @file print_values.c
+ * @file /common/print_values.c
  *
  * @authors Alejandro Aguayo-Oritz and Emilio Tejeda
  *
@@ -76,9 +76,4 @@ void Print_Values(double *tprint, double *dtprint, int *itprint)
       }    
       #endif
    }
-
-   /**
-    * Increase time by dt
-    */
-   grid.time = grid.time + dt;
 }
