@@ -62,7 +62,7 @@ void Print_Values(double *tprint, double *dtprint, int *itprint)
       ++*itprint;
 
       #if MDOT == TRUE
-      if(MDOT_END == TRUE)
+      if(Mdot_end == TRUE)
       {                                                                            
          printf("\n");                                                             
          printf("AZTEKAS termination\n");                                          
