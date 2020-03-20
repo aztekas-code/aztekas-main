@@ -16,7 +16,7 @@ double Limiter(double A, double B, int reconst)
    switch(reconst)
    {
       case GODUNOV:
-         sig = Godunov(A,B);
+         sig = 0.0;
       break;
 
       case MINMOD:
@@ -122,11 +122,6 @@ double Superbee(double A, double B)
 
    sig = Maxmod(sig1,sig2);
    return sig;
-}
-
-double Godunov(double A, double B)
-{
-   return 0.0;
 }
 
 double Weno5(double v1, double v2, double v3, double v4, double v5)
