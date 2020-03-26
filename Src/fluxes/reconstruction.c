@@ -80,16 +80,25 @@ void Primitive_Reconstruction()
       {
          reconst = RECONST;
 #if x1min_exc == TRUE
-         if (i <= 2*gc && RECONST == WENO5)
+         if (i <= gc+1 && RECONST == WENO5)
          {
             reconst = MC;
          }
-         if (i <= 2*gc && RECONST != WENO5)
+         if (i <= gc+1 && RECONST != WENO5)
          {
             reconst = GODUNOV;
          }
 #endif
-
+#if x1max_exc == TRUE
+         if (i >= Nx1-gc-1 && RECONST == WENO5)
+         {
+            reconst = MC;
+         }
+         if (i >= Nx1-gc-1 && RECONST != WENO5)
+         {
+            reconst = GODUNOV;
+         }
+#endif
          for(int n = 0; n < eq; n++)
          {
             if(reconst == WENO5)
