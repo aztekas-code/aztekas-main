@@ -68,9 +68,17 @@ void Print_Values(double *tprint, double *dtprint, int *itprint)
          printf("AZTEKAS termination\n");                                          
          printf("The mean value of Mdot remain constant in %e\n",MDOT_ERR);        
          #ifdef _OPENMP                                                                  
-         printf("Expend %.4f seconds parallelized using  %d threads of %d available.\n",omp_get_wtime()-start,OMP_NUM,MAX_NUM_THREADS);
+         int time_sec = (int)(omp_get_wtime()-start);
+         int hr  = time_sec/3600;
+         int min = (time_sec%3600)/60;
+         int sec = (time_sec%60)%60;
+         printf("Expend %d hr : %d min : %d sec in the parallelized version using %d threads of %d available.\n",hr,min,sec,OMP_NUM,MAX_NUM_THREADS);
          #else                                                                     
-         printf("Expend %.4f seconds in serial version.\n",((double)(clock()-start))/CLOCKS_PER_SEC);
+         int time_sec = (int)((double)(clock()-start)/CLOCKS_PER_SEC);
+         int hr  = time_sec/3600;
+         int min = (time_sec%3600)/60;
+         int sec = (time_sec%60)%60;
+         printf("Expend %d hr : %d min : %d sec in serial version.\n",hr,min,sec);
          #endif                                                                    
          exit(EXIT_FAILURE);                                                       
       }    
