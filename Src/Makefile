@@ -9,12 +9,31 @@
 PARAM += -DOMP_NUM=$(OMP_NUM)
 
 #####################################
+# TYPE OF EQUATIONS 
+#####################################
+
+ifeq ($(PHY),HD)
+   PARAM += -DHYPERBOLIC=TRUE
+endif
+ifeq ($(PHY),RHD)
+   PARAM += -DHYPERBOLIC=TRUE
+endif
+ifeq ($(PHY),TOV)
+   PARAM += -DODE=TRUE
+endif
+
+#####################################
 # DIMENSIONS
 #####################################
 
 ifeq ($(DIM),1)
-	PARAM += -Deq=3
-	PARAM += -Dgraf=1
+   PARAM += -Deq=3
+   PARAM += -Dgraf=1
+
+   ifeq ($(PHY),TOV)
+      PARAM += -Deq=2
+      PARAM += -Dgraf=1
+   endif
 endif
 ifeq ($(DIM),2)
 	PARAM += -Deq=4
