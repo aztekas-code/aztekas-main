@@ -117,7 +117,12 @@ void Restart()
 
 #endif
 
-    fclose(file);
+   fclose(file);
+
+   if(restart_filecount == 0)
+   {
+      grid.time = 0.0;
+   }
 }                                        
 
 void Restart_Bin()
