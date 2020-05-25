@@ -21,7 +21,7 @@ void Method_of_Lines(int order)
 #ifdef _OPENMP
    #pragma omp parallel default(none) \
                shared(U,Q,Q0,Q1,Q2,grid,Nx1,Dt,order,U1p,U1m)
-   #pragma omp for private(cell,rhs,Dx1)
+   #pragma omp for private(cell,rk,rhs,Dx1)
 #endif
    for(int i = gc; i <= Nx1-gc; i++)
    {

@@ -28,14 +28,14 @@ binary = 0
 %%%%%%%%%%%%%%%
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
-Nx1 = 128
+Nx1 = 512
 Nx2 = 128
 Nx3 = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINE DOMAIN LIMITS %
 %%%%%%%%%%%%%%%%%%%%%%%%
-x1max = 10.0
+x1max = 100.0
 x2max = 0.5
 x3max = 1.0 
 x1min = 1.5
@@ -74,6 +74,12 @@ K = 1.6666666666666666
 
 % Michel Accretion (Gamma = 5/3, r0 = 10 M, c_infty = 0.5)
 
-density_0  =  1.489686e+00
-pressure_0 =  4.663398e-01
-velocity_0 =  1.298374e-01
+%density_0  =  1.489686e+00
+%pressure_0 =  4.663398e-01
+%velocity_0 =  1.298374e-01
+
+% Michel Accretion (Gamma = 5/3, r0 = 100 M, c_infty = 0.02236)
+
+density_0  =  4.303629e+01
+pressure_0 =  1.586641e-01 
+velocity_0 = -3.828501e-02

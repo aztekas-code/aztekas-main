@@ -7,16 +7,16 @@
 
 int main(int argc, char *argv[])
 {
-   int N = 128;
+   int N = 512;
    int gc = 3;
    // Define polytropic index Gamma, rho_infty, c_infty and M.
    // xmax and xmin
    double M         = 1.0;
    double Gamma     = 5.0/3.0;
    double rho_infty = 1.0;
-   double c_infty   = 0.5;
+   double c_infty   = 0.02236;
    double xmin = 1.5;
-   double xmax = 10;
+   double xmax = 100;
 
    // Compute the polytropic constant K
    double K;
