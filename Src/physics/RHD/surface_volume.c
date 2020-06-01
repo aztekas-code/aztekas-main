@@ -59,8 +59,8 @@ void Surface_Volume()
          Get_Metric_Components(&surf_p);
          Get_Metric_Components(&surf_m);
  
-         S1p(i,j) = surf_p.dety/vol.dety;
-         S1m(i,j) = surf_m.dety/vol.dety;
+         S1p(i,j) = surf_p.dety/((surf_p.dety + 4.0*vol.dety + surf_m.dety)/6.0);
+         S1m(i,j) = surf_m.dety/((surf_p.dety + 4.0*vol.dety + surf_m.dety)/6.0);
  
          vol.x[1]    = grid.X1[i];
          surf_p.x[1] = grid.X1[i];
@@ -81,8 +81,8 @@ void Surface_Volume()
          Get_Metric_Components(&surf_p);
          Get_Metric_Components(&surf_m);
  
-         S2p(i,j) = surf_p.dety/vol.dety;
-         S2m(i,j) = surf_m.dety/vol.dety;
+         S2p(i,j) = surf_p.dety/((surf_p.dety + 4.0*vol.dety + surf_m.dety)/6.0);
+         S2m(i,j) = surf_m.dety/((surf_p.dety + 4.0*vol.dety + surf_m.dety)/6.0);
       }
    }
 
