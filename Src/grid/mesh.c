@@ -50,9 +50,9 @@ int Mesh()
       grid.X1m[i] = x1min + (i-0.5-gc)*(dx1);
 
       #if GRID == LOGMESH
-      grid.X1[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-gc)/(Nx1-2*gc)) - 1;
-      grid.X1p[i] = x1min + exp(log((x1max - x1min + 1.0))*(i+0.5-gc)/(Nx1-2*gc)) - 1;
-      grid.X1m[i] = x1min + exp(log((x1max - x1min + 1.0))*(i-0.5-gc)/(Nx1-2*gc)) - 1;
+      grid.X1[i]  = x1min + lfac*exp(log((x1max - x1min + lfac)/lfac)*(i-gc)/(Nx1-2*gc))     - lfac;
+      grid.X1p[i] = x1min + lfac*exp(log((x1max - x1min + lfac)/lfac)*(i+0.5-gc)/(Nx1-2*gc)) - lfac;
+      grid.X1m[i] = x1min + lfac*exp(log((x1max - x1min + lfac)/lfac)*(i-0.5-gc)/(Nx1-2*gc)) - lfac;
       #endif
    }
 

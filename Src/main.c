@@ -28,16 +28,11 @@
 
 int main(int argc, char *argv[])
 {
-   if(argc != 2) 
-   {
-      printf("%s\n","Wrong number of arguments") ;
-      printf("%s\n","Execute as:") ;    
-      printf("%s\n","./aztekas paramfile") ;  
-      exit(EXIT_FAILURE);
-   }
+   /**
+    * Check if AZTEKAS is run properly
+    */
+   Check_Paramfile(paramfile_name,argc,argv);
 
-   strcpy(paramfile_name, argv[1]);
-   
    /*
     * Read necessary and user defined parameters from file.param
     * and print info in screen
@@ -72,49 +67,25 @@ int main(int argc, char *argv[])
     */
    Frequency_Output(&dtprint);
 
-#ifdef _OPENMP
-   start = omp_get_wtime();
-   omp_set_num_threads(OMP_NUM);
-#else
-   start = clock();
-#endif
-   while(grid.time <= tmax)
-   {
-      //In this part we compute the time step
-      dt = TimeStep();
+   /**
+    * Starts computational spending time
+    */
+   Computing_Time_Start();
 
-      //We print the values
-      Print_Values(&tprint,&dtprint,&itprint);
+   /**
+    * Solves the set of equations
+    */
+   Equation_System_Solver();
 
-      //In here we set the integration method (Finite volume method)
-      Integration();
-
-      printf("Time = %e, dt = %e\r",grid.time,dt);
-      fflush(stdout); 
-   }
-
-   Print_Values(&tprint,&dtprint,&itprint);
-
-   printf("\n");
-   printf("AZTEKAS termination\n");
-#ifdef _OPENMP
-   int time_sec = (int)(omp_get_wtime()-start);
-   int hr  = time_sec/3600;
-   int min = (time_sec%3600)/60;
-   int sec = (time_sec%60)%60;
-   printf("Expend %d hr : %d min : %d sec in the parallelized version using %d threads of %d available.\n",hr,min,sec,OMP_NUM,MAX_NUM_THREADS);
-#else
-   int time_sec = (int)((double)(clock()-start)/CLOCKS_PER_SEC);
-   int hr  = time_sec/3600;
-   int min = (time_sec%3600)/60;
-   int sec = (time_sec%60)%60;
-   printf("Expend %d hr : %d min : %d sec in serial version.\n",hr,min,sec);
-#endif
-
-   free(U);
-   free(grid.X1);
-   free(grid.X2);
-   free(grid.X3);
+   /**
+    * Print final message with computing time
+    */
+   Ending_Message();
+                                                                                
+   free(U);                                                                     
+   free(grid.X1);                                                               
+   free(grid.X2);                                                               
+   free(grid.X3); 
 
    return 0;
 }

@@ -276,3 +276,64 @@ void Manage_Simulation_Info(int argc, char *argv[])
    Check_Sim_Parameters();
    if(check_param == TRUE) getchar();
 }
+
+void Check_Paramfile(char *param, int argc, char *argv[])
+{
+   if(argc != 2)
+   {
+      printf("%s\n","Wrong number of arguments") ;
+      printf("%s\n","Execute as:") ;
+      printf("%s\n","./aztekas paramfile") ;
+      exit(EXIT_FAILURE);
+   }
+
+   strcpy(param, argv[1]);
+}
+
+void Computing_Time_Start()
+{
+#ifdef _OPENMP
+   start = omp_get_wtime();
+   omp_set_num_threads(OMP_NUM);
+#else
+   start = clock();
+#endif
+}
+
+void Ending_Message()
+{
+   printf("\n");                                                                
+   printf("AZTEKAS termination\n");                                             
+
+#ifdef _OPENMP                                                                  
+   if(omp_get_wtime() - start > 61)
+   {
+      int time_sec = (int)(omp_get_wtime()-start);                                 
+      int hr  = time_sec/3600;                                                     
+      int min = (time_sec%3600)/60;                                                
+      int sec = (time_sec%60)%60;                                                  
+      printf("Expend %d hr : %d min : %d sec in the parallelized version using %d threads of %d available.\n",hr,min,sec,OMP_NUM,MAX_NUM_THREADS);
+      printf("\n");                                                                
+   }
+   else
+   {
+      printf("Expend %f sec in the parallelized version using %d threads of %d available.\n",omp_get_wtime()-start,OMP_NUM,MAX_NUM_THREADS);
+      printf("\n");                                                                
+   }
+#else                                                                           
+   if((double)(clock()-start)/CLOCKS_PER_SEC > 61.0)
+   {
+      int time_sec = (int)((double)(clock()-start)/CLOCKS_PER_SEC);                
+      int hr  = time_sec/3600;                                                     
+      int min = (time_sec%3600)/60;                                                
+      int sec = (time_sec%60)%60;                                                  
+      printf("Expend %d hr : %d min : %d sec in the serial version.\n",hr,min,sec);    
+      printf("\n");                                                                
+   }
+   else
+   {
+      printf("Expend %f sec in the serial version.\n",(double)(clock()-start)/CLOCKS_PER_SEC);
+      printf("\n");                                                                
+   }
+#endif                                                                          
+}

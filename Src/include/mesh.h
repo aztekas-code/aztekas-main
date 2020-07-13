@@ -7,6 +7,13 @@
  * mesh grid at the center and at the interfaces
  */
 
+/* Define number of grids */
+int Nx1, Nx2, Nx3;
+
+/* Define domain */
+double x1max, x2max, x3max;
+double x1min, x2min, x3min;
+
 typedef struct
 {
    double time;
