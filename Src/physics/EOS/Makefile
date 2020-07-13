@@ -19,6 +19,9 @@ endif
 ifeq ($(EOS),Stiff)
         PARAM += -DEOS=STIFF	
 endif
+ifeq ($(EOS),Ryu)
+        PARAM += -DEOS=RYU
+endif
 
 ifneq ($(EOS),User)
    include $(AZTPATH)/Src/physics/EOS/$(EOS)/Makefile

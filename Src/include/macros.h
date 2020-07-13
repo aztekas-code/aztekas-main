@@ -29,6 +29,7 @@
 #define IDEAL 0
 #define DUST  1
 #define STIFF 2
+#define RYU   3
 
 /* GRAVITY */
 #define NONE   0

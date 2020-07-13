@@ -100,6 +100,7 @@ void Check_Sim_Parameters()
    if(EOS == IDEAL) printf("Ideal equation of state with adiabatic index %f.\n",K);
    if(EOS == DUST)  printf("Dust.\n");
    if(EOS == STIFF)  printf("Stiff equation of state.\n");
+   if(EOS == RYU)  printf("Ryu real relativistic equation of state.\n");
 
    // Print MoL-RK order
    printf("Time integration using a second order MoL-Runge Kutta.\n");
@@ -204,6 +205,7 @@ void Check_Sim_Parameters()
    if(EOS == IDEAL) fprintf(file,"Ideal equation of state with adiabatic index %f.\n",K);
    if(EOS == DUST)  fprintf(file,"Dust.\n");
    if(EOS == STIFF)  fprintf(file,"Stiff equation of state.\n");
+   if(EOS == RYU)  fprintf(file,"Ryu real relativistic equation of state.\n");
 
    // Print MoL-RK order
    fprintf(file,"Time integration using a second order MoL-Runge Kutta.\n");

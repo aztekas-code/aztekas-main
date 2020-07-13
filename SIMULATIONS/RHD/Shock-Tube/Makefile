@@ -47,7 +47,7 @@ DIM = 1
 METRIC = Minkowski
 
 ##################################################
-# Equation of State (User, Ideal, Dust, Stiff)
+# Equation of State (User, Ideal, Dust, Stiff...)
 ##################################################
 
 EOS = Ideal
