@@ -267,6 +267,9 @@ int Cons2Prim(double *u, double *q)
          #elif EOS == STIFF
             h    = (K / (K - 1.0))*theta_0;
             derh = K / (K - 1.0);
+         #elif EOS == RYU //https://arxiv.org/pdf/astro-ph/0605550.pdf
+            h    = 2.0*((6.0*theta_0*theta_0 + 4.0*theta_0 + 1.0)/(3.0*theta_0 + 2.0));
+            derh = 2.0*((18.0*theta_0*theta_0 + 24.0*theta_0 + 5.0)/pow(3.0*theta_0 + 2.0,2.0));
          #endif
 
             Lorentz = sqrt(1.0 + SS/(D*D*h*h));
@@ -296,6 +299,8 @@ int Cons2Prim(double *u, double *q)
          h    = 1.0;
          #elif EOS == STIFF
          h    = (K / (K - 1.0))*theta_0;
+         #elif EOS == RYU
+         h    = 2.0*((6.0*theta_0*theta_0 + 4.0*theta_0 + 1.0)/(3.0*theta_0 + 2.0));
          #endif
 
          Lorentz = sqrt(1.0 + SS/(D*D*h*h));
