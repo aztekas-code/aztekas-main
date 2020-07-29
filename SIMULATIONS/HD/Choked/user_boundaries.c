@@ -31,6 +31,8 @@ void User_Boundaries(double *B)
          {
             B(RHO,i,j) = density_0*gtheta(grid.X2[j]);
             B(PRE,i,j) = pow(B(RHO,i,j),K)/K;
+            B(VX1,i,j) = 0.0;
+            B(VX2,i,j) = 0.0;
          }
       }
    }
@@ -50,11 +52,4 @@ void User_Boundaries(double *B)
    }
 
 #endif
-}
-
-double gtheta(double th)
-{
-   double dum = (1.0 - rho_atm)*pow(sin(th),2.0) + rho_atm;
-   
-   return dum;
 }

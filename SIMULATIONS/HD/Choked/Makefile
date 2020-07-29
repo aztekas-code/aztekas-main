@@ -23,7 +23,7 @@ AZTPATH = $(AZTEKAS_PATH)
 # $ grep '^core id' /proc/cpuinfo |sort -u|wc -l
 ##################################################
 
-OMP_NUM = 1
+OMP_NUM = 4
 
 ##################################################
 # Physics (HD, MHD, RHD, RMHD)
@@ -74,7 +74,8 @@ INT = standard
 # All user *.c are written here
 ##################################################
 
-USR = initial.c \
+USR = functions.c \
+		initial.c \
       user_boundaries.c \
 		user_input.c 
 
