@@ -166,6 +166,17 @@ void Output2(int *itprint)
 #endif 
 
    printf("itprint : %d, output file : %s\n",*itprint,archivo);
+    
+   /**
+    * System notification
+    */
+   #if FILE_NOTIFICATION == TRUE
+      char *a = "notification ";
+      char script[100];
+      strcpy(script,a);
+      strcat(script,archivo);
+      system(script);
+   #endif
    fclose(file);
 }
 

@@ -53,6 +53,9 @@ int Mesh()
       grid.X1[i]  = x1min + lfac*exp(log((x1max - x1min + lfac)/lfac)*(i-gc)/(Nx1-2*gc))     - lfac;
       grid.X1p[i] = x1min + lfac*exp(log((x1max - x1min + lfac)/lfac)*(i+0.5-gc)/(Nx1-2*gc)) - lfac;
       grid.X1m[i] = x1min + lfac*exp(log((x1max - x1min + lfac)/lfac)*(i-0.5-gc)/(Nx1-2*gc)) - lfac;
+//      grid.X1[i]  = x1min + lfac*exp(log((5*rs(K,cs) - x1min + lfac)/lfac)*(i-gc)/(100))     - lfac;
+//      grid.X1p[i] = x1min + lfac*exp(log((5*rs(K,cs) - x1min + lfac)/lfac)*(i+0.5-gc)/(100)) - lfac;
+//      grid.X1m[i] = x1min + lfac*exp(log((5*rs(K,cs) - x1min + lfac)/lfac)*(i-0.5-gc)/(100)) - lfac;
       #endif
    }
 
