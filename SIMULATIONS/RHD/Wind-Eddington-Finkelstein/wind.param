@@ -68,3 +68,4 @@ K = 1.6666666666666666666666666
 density_inf  =  1.0e-10
 pressure_inf =  1.0
 velocity_inf =  0.5
+Mach         =  5.0

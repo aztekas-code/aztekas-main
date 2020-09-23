@@ -21,6 +21,22 @@
 #define GRID               UNIFORM
 
 #define Black_Hole_Mass    1.0
-#define Mach               5.0
+#define Black_Hole_Spin    0.0
 
-double density_inf, pressure_inf, velocity_inf;
+#define MDOT               TRUE
+#define MDOT_END           FALSE
+#define MDOT_ERR           1.0e-4 // only if MDOT_END TRUE
+#define MDOT_TIME          1.0
+int Mdot_end;
+double Mdot_0;
+double Mdot_tprint;
+double Mdot_Mean;
+double Mdot_Max;
+double Mdot_Min;
+char last[50];
+int count, plus, minus;
+int restart_file;
+
+void Mass_Accretion_Rate(double *B);
+
+double density_inf, pressure_inf, velocity_inf, Mach;

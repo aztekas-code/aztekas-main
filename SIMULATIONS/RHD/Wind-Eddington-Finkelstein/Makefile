@@ -74,7 +74,8 @@ INT = standard
 # All user *.c are written here
 ##################################################
 
-USR = initial.c \
+USR = functions.c \
+		initial.c \
       user_boundaries.c \
 		user_input.c 
 

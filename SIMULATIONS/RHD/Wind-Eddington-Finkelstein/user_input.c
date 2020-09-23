@@ -58,6 +58,11 @@ int User_Parameters(char const *paramfile_name)
             {
                velocity_inf = atof(t_value);
             }
+
+            if(strcmp(t_key,"Mach")==0)
+            {
+               Mach = atof(t_value);
+            }
          }
       }
             
