@@ -27,7 +27,6 @@ void Initial()
    dt = 0.0;
 
    gauge_ local_grid;
-   velocity_0 = vinf;
 
 #if DIM == 2
 
@@ -44,10 +43,10 @@ void Initial()
 
          Get_Metric_Components(&local_grid);
 
-         U(0,i,j) =  density_0;
-         U(1,i,j) =  (K - 1.0)*U(0,i,j)*pow(velocity_0/Mach,2.0)/(K*(K - 1.0) - K*pow(velocity_0/Mach,2.0));
-         U(2,i,j) =  velocity_0*cos(grid.X2[j])/sqrt(local_grid.gamma_con[0][0]);
-         U(3,i,j) = -velocity_0*sin(grid.X2[j])/sqrt(local_grid.gamma_con[1][1]);
+         U(0,i,j) =  density_inf;
+         U(1,i,j) =  (K - 1.0)*U(0,i,j)*pow(velocity_inf/Mach,2.0)/(K*(K - 1.0) - K*pow(velocity_inf/Mach,2.0));
+         U(2,i,j) =  velocity_inf*cos(grid.X2[j])/sqrt(local_grid.gamma_con[0][0]);
+         U(3,i,j) = -velocity_inf*sin(grid.X2[j])/sqrt(local_grid.gamma_con[1][1]);
       }
    }
 
@@ -66,10 +65,10 @@ void Initial()
 
          Get_Metric_Components(&local_grid);
 
-         U(0,i,j) =  density_0;
-         U(1,i,j) =  (K - 1.0)*U(0,i,j)*pow(velocity_0/Mach,2.0)/(K*(K - 1.0) - K*pow(velocity_0/Mach,2.0));
-         U(2,i,j) =  velocity_0*cos(grid.X2[j])/sqrt(local_grid.gamma_con[0][0]);
-         U(3,i,j) = -velocity_0*sin(grid.X2[j])/sqrt(local_grid.gamma_con[1][1]);
+         U(0,i,j) =  density_inf;
+         U(1,i,j) =  (K - 1.0)*U(0,i,j)*pow(velocity_inf/Mach,2.0)/(K*(K - 1.0) - K*pow(velocity_inf/Mach,2.0));
+         U(2,i,j) =  velocity_inf*cos(grid.X2[j])/sqrt(local_grid.gamma_con[0][0]);
+         U(3,i,j) = -velocity_inf*sin(grid.X2[j])/sqrt(local_grid.gamma_con[1][1]);
          U(4,i,j) = 0.0;
       }
    }
