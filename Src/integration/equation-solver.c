@@ -5,7 +5,7 @@
  *
  * @author Alejandro Aguayo-Ortiz
  *
- * @date 23-04-2020 - 16:16:40
+ * @date 22-09-2020 - 20:52:29
  *
  * E-mail: aaguayoo92@ciencias.unam.mx
  *
@@ -27,7 +27,6 @@ void Equation_System_Solver()
       /**
        * Real-Time computations using U
        */
-
       //We print the values
       Print_Values(&tprint,&dtprint,&itprint);
 
