@@ -5,7 +5,7 @@
  *
  * @author Alejandro Aguayo-Ortiz
  *
- * @date 22-09-2020 - 21:01:13
+ * @date 22-09-2020 - 21:19:07
  *
  * E-mail: aaguayoo92@ciencias.unam.mx
  *
@@ -64,7 +64,7 @@ void Mass_Accretion_Rate(double *B)
 
    for(int i = gc; i <= Nx1-gc; i++)
    {
-      for(int j = gc+1; j <= Nx2-gc-0; j++)
+      for(int j = gc+1; j <= Nx2-gc-1; j++)
       {
       #if DIM == 1                                                                    
                                                                                       
@@ -131,22 +131,12 @@ void Mass_Accretion_Rate(double *B)
 
          if(j == gc+1 || j == Nx2-gc-1)
          {
-            Mdot = Mdot - 4.0*M_PI*rho*Ur*lapse*dety*(grid.X2p[j] - grid.X2m[j])/((1.0/density_0)*M_PI/pow(cs,3.0))/2.0;
-//            Mdot = Mdot - 4.0*M_PI*rho*Ur*lapse*dety*(grid.X2p[j] - grid.X2m[j])/((1.0)*M_PI/pow(cs,3.0))/2.0;
+            Mdot = Mdot - 4.0*M_PI*rho*Ur*lapse*dety*(grid.X2p[j] - grid.X2m[j])/(4.0*M_PI*density_inf);
          }
          else
          {
-            Mdot = Mdot - 4.0*M_PI*rho*Ur*lapse*dety*(grid.X2p[j] - grid.X2m[j])/((1.0/density_0)*M_PI/pow(cs,3.0));
-//            Mdot = Mdot - 4.0*M_PI*rho*Ur*lapse*dety*(grid.X2p[j] - grid.X2m[j])/((1.0)*M_PI/pow(cs,3.0));
+            Mdot = Mdot - 4.0*M_PI*rho*Ur*lapse*dety*(grid.X2p[j] - grid.X2m[j])/(4.0*M_PI*density_inf);
          }
-//         if(i == Nx1-gc-1 && Ur <= 0.0)
-//         {
-//            Min = Min - 4.0*M_PI*rho*Ur*lapse*dety*((x2max-x2min)/(Nx2-2*gc+1))/(8.0*M_PI*density_0);
-//         }
-//         else if(i == Nx1-gc-1 && Ur > 0.0)
-//         {
-//            Mej = Mej + 4.0*M_PI*rho*Ur*lapse*dety*((x2max-x2min)/(Nx2-2*gc+1))/(8.0*M_PI*density_0);
-//         }
       }
       Mean[i] = Mdot;
       Mdot    = 0.0;
@@ -210,7 +200,7 @@ void Mass_Accretion_Rate(double *B)
    }
 
    // Computes the difference between Mdot_mean(n) and Mdot_mean(n-1)
-   Vol   = Nx1-2*gc-3;
+   Vol   = Nx1-2*gc-4;
    Delta = Mdot/Vol - Mdot_0;
 
    if(Delta > 0 && plus == FALSE)

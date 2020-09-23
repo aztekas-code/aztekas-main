@@ -38,5 +38,4 @@ int count, plus, minus;
 int restart_file;
 
 void Mass_Accretion_Rate(double *B);
-
 double density_inf, pressure_inf, velocity_inf, Mach;
