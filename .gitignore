@@ -15,6 +15,7 @@
 *.ps
 *.js
 *.swp
+*.bak
 
 SIMULATIONS/**/aztekas
 SIMULATIONS/**/TEST/
