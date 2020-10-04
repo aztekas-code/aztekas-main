@@ -13,6 +13,8 @@ double Limiter(double A, double B, int reconst)
 {
    double sig;
 
+   sig = 0.0;
+
    switch(reconst)
    {
       case GODUNOV:

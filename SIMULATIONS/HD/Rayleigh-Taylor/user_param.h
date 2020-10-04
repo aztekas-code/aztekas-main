@@ -5,9 +5,6 @@
  * Last Modified : 23-10-2019 15:50:59
  * Created By : Alejandro Aguayo-Ortiz
  */
-
-#include"macros.h"
-
 #define periodic_x1        TRUE
 #define reflective_x2max   TRUE
 #define reflective_x2min   TRUE

@@ -6,7 +6,7 @@
  * Created By : Alejandro Aguayo-Ortiz
  */
 
-#include"macros.h"
+//#include"macros.h"
 
 #define HORIZONTAL         0
 #define VERTICAL           1

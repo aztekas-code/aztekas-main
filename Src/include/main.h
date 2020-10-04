@@ -21,6 +21,7 @@
 #include<string.h>
 #include<math.h>
 
+#include"mesh.h"
 #include"physics.h"
 
 #include"initial.h"

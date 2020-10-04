@@ -7,8 +7,6 @@
  * parameters used for all physical calculations.
  */
 
-#include<mesh.h>
-
 typedef struct
 {
 	double U[eq+1];
@@ -33,6 +31,9 @@ typedef struct
    double dhdrho;
    double dhdp;
 }eos_;
+
+// Adiabatic index
+double K;
 
 int funct_A(double *a, double *uu);
 int Cons2Prim(double *q, double *u);

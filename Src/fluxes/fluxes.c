@@ -128,7 +128,7 @@ void Numerical_Flux_G(double *F, int pm, int *I)
 
    local_grid.x[0] = grid.time;
 
-#if DIM == 2 || DIM == 4
+//#if DIM == 2 || DIM == 4
 
    i = I[0];
    j = I[1];
@@ -140,14 +140,14 @@ void Numerical_Flux_G(double *F, int pm, int *I)
    local_grid.x[2] = M_PI_2;
    #endif
 
-#elif DIM == 3
-
-   i = I[0];
-   j = I[1];
+//#elif DIM == 3
+#if DIM == 3
+//   i = I[0];
+//   j = I[1];
    k = I[2];
 
-   local_grid.x[1] = grid.X1[i];
-   local_grid.x[2] = grid.X2[j];
+//   local_grid.x[1] = grid.X1[i];
+//   local_grid.x[2] = grid.X2[j];
    local_grid.x[3] = grid.X3[k];
 
 #endif
