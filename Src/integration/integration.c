@@ -14,11 +14,6 @@ void Hyperbolic_Integration()
    int rk_order = 2;
 
    /**
-    * Increase time by dt
-    */
-   grid.time = grid.time + dt;
-
-   /**
     * Convert all primitive vector U to conservative Q0
     */
    Prim2Cons_All(Q0,U);
@@ -31,6 +26,11 @@ void Hyperbolic_Integration()
       Boundaries(U);
       U0 = U;
    }
+
+   /**
+    * Increase time by dt
+    */
+   grid.time = grid.time + dt;
 }
 
 /**

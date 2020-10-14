@@ -5,7 +5,7 @@
  *
  * @author Alejandro Aguayo-Ortiz
  *
- * @date 22-09-2020 - 20:52:29
+ * @date 11-10-2020 - 03:29:00
  *
  * E-mail: aaguayoo92@ciencias.unam.mx
  *
@@ -15,6 +15,9 @@
 
 void Equation_System_Solver()
 {
+   int time_sec;
+   int hr, min, sec;
+
 #if HYPERBOLIC == TRUE
    while(grid.time <= tmax)
    {
@@ -32,9 +35,27 @@ void Equation_System_Solver()
 
       //In here we set the integration method (MoL-RK and HRSC)
       Hyperbolic_Integration();
+   
+   #ifdef _OPENMP
+      time_sec = (int)(omp_get_wtime() - start);
+      hr       = time_sec/3600;
+      min      = (time_sec%3600)/60;
+      sec      = (time_sec%60)%60;
 
-      printf("Time = %e, dt = %e\r",grid.time,dt);
+      printf("Time = %e, dt = %e, Running time = %d hr : %d min : %d sec\r",\
+            grid.time,dt,hr,min,sec);
       fflush(stdout);
+   #else
+
+      time_sec = (int)((double)(clock()-start)/CLOCKS_PER_SEC);
+      hr       = time_sec/3600;
+      min      = (time_sec%3600)/60;
+      sec      = (time_sec%60)%60;
+
+      printf("Time = %e, dt = %e, Running time = %d hr : %d min : %d sec\r",\
+            grid.time,dt,hr,min,sec);
+      fflush(stdout);
+   #endif
    }
 
    Print_Values(&tprint,&dtprint,&itprint);
