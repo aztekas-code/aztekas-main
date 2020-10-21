@@ -44,7 +44,7 @@ DIM = 2
 # ONLY IF PHY == RHD or RMHD
 ##################################################
 
-METRIC = Eddington-Finkelstein
+METRIC = Kerr-Schild
 
 ##################################################
 # Equation of State (User, Ideal, Dust, Stiff)

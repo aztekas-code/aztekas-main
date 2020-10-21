@@ -232,6 +232,9 @@ int Cons2Prim(double *u, double *q)
          local_grid.x[2] = grid.X2[j];
          local_grid.x[3] = 0.0;
 
+         if(j == Nx2-gc)
+            j = gc;
+
          Get_Metric_Components(&local_grid);
 
          D        = q(DEN,i,j);
