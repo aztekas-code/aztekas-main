@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % OUTPUT FILE AND DIRECTORY %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-outputdirectory = ./gamma4_3/
+outputdirectory = ./TEST/
 outputfile      = bondi_
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

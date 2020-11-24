@@ -13,6 +13,6 @@
 
 #define RECONST            MC
 #define FLUX               HLLC
-#define GRID               LOGMESH
+#define GRID               UNIFORM
 
 double density_0, pressure_0, velocity_0;
