@@ -36,14 +36,14 @@ K = 1.6666666666666666666666666
 % Relativisti jet
 
 % JET
-n_jet   = 1.0
+rho_jet   = 1.0
 p_jet   = 0.1
 vx1_jet = 0.0
 vx2_jet = 0.5
 vx3_jet = 0.0
 
 % ATMOSPHERE
-n_atm   = 0.5
+rho_atm   = 0.5
 p_atm   = 0.1
 vx1_atm = 0.0
 vx2_atm = 0.0
