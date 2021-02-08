@@ -20,6 +20,7 @@
 #define RECONST            MC
 #define FLUX               HLL
 #define GRID               UNIFORM
+#define PRINT_EVOLV        TRUE
 
 #define INTERFACE          HORIZONTAL
 

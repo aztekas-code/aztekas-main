@@ -28,15 +28,15 @@ binary = 0
 %%%%%%%%%%%%%%%
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
-Nx1 = 576 
-Nx2 = 1920
+Nx1 = 192
+Nx2 = 1152
 Nx3 = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINE DOMAIN LIMITS %
 %%%%%%%%%%%%%%%%%%%%%%%%
-x1max = 15.0
-x2max = 50.0
+x1max = 5.0
+x2max = 30.0
 x3max = 1.0 
 x1min = 0.0
 x2min = 0.0
@@ -45,9 +45,9 @@ x3min = 0.0
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
-tmax = 120
-timefile = 120
-numfile = 0
+tmax = 109
+timefile = 0.75
+numfile = 200
 
 %%%%%%%%%%%%%%%%%%
 % COURANT FACTOR %

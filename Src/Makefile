@@ -135,7 +135,8 @@ include $(AZTPATH)/Src/physics/Makefile
 
 THREADS = $(shell grep '^core id' /proc/cpuinfo |sort -u|wc -l)
 
-FLAGS = -Ofast -lm -fcommon
+#FLAGS = -Ofast -lm -fcommon
+FLAGS = -lm -fcommon -std=gnu99
 ifneq ($(OMP_NUM),1)
    FLAGS += -fopenmp
 endif

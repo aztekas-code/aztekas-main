@@ -5,7 +5,7 @@
  *
  * @author Alejandro Aguayo-Ortiz
  *
- * @date 11-10-2020 - 03:29:00
+ * @date 08-02-2021 - 11:28:18
  *
  * E-mail: aaguayoo92@ciencias.unam.mx
  *
@@ -41,17 +41,13 @@ void Equation_System_Solver()
       hr       = time_sec/3600;
       min      = (time_sec%3600)/60;
       sec      = (time_sec%60)%60;
-
-      printf("Time = %e, dt = %e, Running time = %d hr : %d min : %d sec\r",\
-            grid.time,dt,hr,min,sec);
-      fflush(stdout);
    #else
-
       time_sec = (int)((double)(clock()-start)/CLOCKS_PER_SEC);
       hr       = time_sec/3600;
       min      = (time_sec%3600)/60;
       sec      = (time_sec%60)%60;
-
+   #endif
+   #if PRINT_EVOLV == TRUE
       printf("Time = %e, dt = %e, Running time = %d hr : %d min : %d sec\r",\
             grid.time,dt,hr,min,sec);
       fflush(stdout);
