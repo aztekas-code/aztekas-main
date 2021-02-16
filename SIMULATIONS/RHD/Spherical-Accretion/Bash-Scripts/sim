@@ -1,0 +1,253 @@
+#!/bin/bash
+
+if [ -z $1 ]
+then
+   echo ""
+   echo "This script is run as:"
+   echo ""
+   echo "      $./sim gamma"
+   echo ""
+   echo "where gamma is the polytropic index."
+   echo "If you want a TEST run as:"
+   echo ""
+   echo "      $./sim gamma test"
+   echo ""
+   echo "If you want to use Ryu-realistic relativistic EoS:"
+   echo ""
+   echo "      $./sim Ryu"
+   echo "      $./sim Ryu test"
+   echo ""
+   echo "If you want to use ultra-relativistic EoS:"
+   echo ""
+   echo "      $./sim Stiff"
+   echo "      $./sim Stiff test"
+   echo ""
+   exit
+fi
+
+# Read the value of Gamma (<polytropic index>,Ryu,Stiff)
+Gamma=$1
+# Create the variable recomp in case we need to recompile,
+# by reading the EOS written in the Makefile
+recomp=$(awk '/EOS/{{print $3}}' Makefile)
+
+# Perform a number of commands in order to set the Makefile 
+# and sph.param file to the desired values
+if [ $Gamma = 'Ryu' ]
+then
+   awk '/K =/{$3=sprintf("%.8e",'0.0')};{print}' sph.param > temp.param && mv temp.param sph.param
+
+   if [ $recomp = 'Ryu' ]
+   then
+      test
+   else
+      recomp='Ryu'
+      awk '/EOS =/{$3="'${recomp}'"};{print}' Makefile > tempMakefile && mv tempMakefile Makefile
+      make
+   fi
+
+   awk '/EoS =/{$3="'${recomp}'"};{print}' sph.param > temp.param && mv temp.param sph.param
+elif [ $Gamma = 'Stiff' ]
+then
+   awk '/K =/{$3=sprintf("%.8e",'1.3333333333')};{print}' sph.param > temp.param && mv temp.param sph.param
+
+   if [ $recomp = 'Stiff' ]
+   then
+      test
+   else
+      recomp='Stiff'
+      awk '/EOS =/{$3="'${recomp}'"};{print}' Makefile > tempMakefile && mv tempMakefile Makefile
+      make
+   fi
+
+   awk '/EoS =/{$3="'${recomp}'"};{print}' sph.param > temp.param && mv temp.param sph.param
+else
+   awk '/K =/{$3=sprintf("%.8e",'${Gamma}')};{print}' sph.param > temp.param && mv temp.param sph.param
+
+   if [ $recomp = 'Ideal' ]
+   then
+      test
+   else
+      recomp='Ideal'
+      awk '/EOS =/{gsub($3,"'${recomp}'")};{print}' Makefile > tempMakefile && mv tempMakefile Makefile
+      make
+   fi
+
+   awk '/EoS =/{$3="'${recomp}'"};{print}' sph.param > temp.param && mv temp.param sph.param
+fi
+
+######################
+if [ -z $2 ]
+then
+
+   #T_list='1.00000000e+02 5.42036908e+01 2.93804011e+01 1.59252623e+01 8.63208343e+00 4.67892758e+00 2.53625308e+00 1.37517697e+00 7.46759462e-01 4.07541251e-01 2.24348503e-01 1.24372292e-01 6.90135614e-02 3.81409779e-02 2.09596177e-02 1.14606630e-02'
+   T_list='6.24453766e-03 3.39486345e-03 1.84320344e-03 1.00000000e-03'
+   a_list='0.0 0.99'
+
+   #count=19
+   count=3
+
+elif [ $2 = 'test' ]
+then
+   #T_list='1.00000000e+01'
+   T_list='1.000000e+02'
+   #a_list='0.0 0.99'
+   #a_list='0.0 0.99'
+   a_list='0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 0.99'
+   count='test'
+fi
+
+######################
+
+echo '##########################################'
+echo '#### GAMMA' $Gamma
+echo '##########################################'
+echo ''
+
+if [ $Gamma = 'Ryu' ]
+then
+   Gamma_Dir=Ryu
+elif [ $Gamma = 'Stiff' ]
+then
+   Gamma_Dir=Stiff
+else
+   Gamma_Dir=Gamma-${Gamma%.*}p${Gamma##*.}
+fi
+
+if [ -e $Gamma_Dir ]
+then
+   test
+else
+   echo 'Creating repository' $Gamma_Dir
+   mkdir $Gamma_Dir
+fi
+
+for a in $a_list
+do
+   a_end=${a##*.}
+   path_a='a0p'$a_end'/'
+   touch $Gamma_Dir/results_a0p$a_end.dat
+   echo 'racc         T            cs           a            Mdot_Acc     Mdot' >> $Gamma_Dir/results_a0p$a_end.dat
+done
+
+touch $Gamma_Dir/results.dat
+echo 'racc         T            cs           a            Mdot_Acc     Mdot' >> $Gamma_Dir/results.dat
+
+for T in $T_list
+do
+   awk '/Temp =/{$3=sprintf("%.8e",'$T')};{print}' sph.param > temp.param && mv temp.param sph.param
+   pathT='./'$Gamma_Dir'/T-'$count'/'
+   if [ -e $pathT ]
+   then
+      echo '#########################################'
+      echo ''
+      echo 'Gamma =' $Gamma 'and T =' $T
+      echo ''
+      echo '#########################################'
+      echo ''
+      test
+   else
+      mkdir $pathT
+      echo 'racc         T            cs           a            R            Mdot' >> $pathT/results_a.dat
+   fi
+
+   for a in $a_list
+   do
+      a_end=${a##*.}
+      awk '/Black_Hole_Spin =/{$3="'$a'"};{print}' sph.param > temp.param && mv temp.param sph.param
+      path_a='a0p'$a_end'/'
+      path=$pathT$path_a
+      awk '/outputdirectory =/{$3="'$path'"};{print}' sph.param > temp.param && mv temp.param sph.param
+      awk '/restart_simulation =/{$3="'0'"};{print}' sph.param > temp.param && mv temp.param sph.param
+
+      michel=$(./Michel/michel log sph.param)
+      mv analytic.dat ./Michel
+      dens=$(echo $michel | awk '{print $8}')
+      vel=$(echo $michel | awk '{print $10}')
+      awk '/density_0 =/{$3=sprintf("%.8e",'$dens')};{print}' sph.param > temp.param && mv temp.param sph.param
+      awk '/velocity_0 =/{$3=sprintf("%.8e",'$vel')};{print}' sph.param > temp.param && mv temp.param sph.param
+
+      final_file=$path'sph_1.dat'
+      if [ -e $final_file ]
+      then 
+         echo 'There already exists' $final_file
+         echo ''
+      else
+         echo '#########################################################'
+         echo "Running simulation with"
+         echo "   Polytropic index ->       Gamma =" $Gamma 
+         echo "   Spin parameter   ->           a =" $a
+         echo "   Temperature      ->           T =" $T
+         echo ""
+         echo $michel | awk '{print $1,$2,$3,$4,$5,$6}'
+         echo $michel | awk '{print $7,$8}'
+         echo $michel | awk '{print $9,$10}'
+         echo '#########################################################'
+         echo ""
+         
+         if [ -e $path ]
+         then
+            test
+         else
+            mkdir $path
+            mkdir $path"INFO"
+            touch $path/INFO/log
+         fi
+         aztekas-notify sph.param | tee $path/INFO/log
+
+         if [ $a = "0.0" ]
+         then
+            touch $path/parameters.dat
+            echo $michel | awk '{print $1,$2,$3,$4,$5,$6}' > $path/parameters.dat 
+            echo $michel | awk '{print $7,$8}' >> $path/parameters.dat
+            echo $michel | awk '{print $9,$10}' >> $path/parameters.dat
+            grep "radius" $path/INFO/log >> $path/parameters.dat
+            grep "Temperature" $path/INFO/log >> $path/parameters.dat
+            grep "sound" $path/INFO/log >> $path/parameters.dat
+            grep "index" $path/INFO/log >> $path/parameters.dat
+            grep "Rmax" $path/INFO/log >> $path/parameters.dat
+            grep "Rmin" $path/INFO/log >> $path/parameters.dat
+            grep "Max time" $path/INFO/log >> $path/parameters.dat
+            cp -r ./Michel/ $path/INFO
+            cp sim $path/INFO
+         fi
+         
+         if [ "$(grep "Newton" $path/INFO/log)" ]
+         then
+            echo ""
+            echo "Find an error while doing the primitive variable recovery"
+            echo "Try reducing the value of the Courant factor in sph.param"
+            echo ""
+            rm $path/INFO/log
+            exit 1
+         elif [ "$(grep "NaN" $path/INFO/log)" ]
+         then
+            echo ""
+            echo "Find a NaN value during calculation"
+            echo "Try reducing the value of the Courant factor in sph.param"
+            echo ""
+            rm $path/INFO/log
+            exit 1
+         fi
+
+         tail -n 1 $Gamma_Dir/results.dat >> $Gamma_Dir/results_a0p$a_end.dat
+
+         rm $path/INFO/log
+      fi
+   done
+
+   cp $pathT/results_a.dat $Gamma_Dir/results_T-$count.dat
+
+   if [ -z $2 ]
+   then
+      count=$((count-1))
+   elif [ $2 = 'test' ]
+   then
+      exit 1
+   fi
+
+done
+
+# We will only need the decimals in order to name the repositories, so
+# we obtain that by doing ${list:2}, this removes from the list the 
+# first two characters of each number '0.'

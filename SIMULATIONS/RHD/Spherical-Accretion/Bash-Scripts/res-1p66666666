@@ -1,0 +1,69 @@
+#!/bin/bash
+
+for count in {1,2,3,4}
+do
+   if [ $count = 1 ]
+   then
+      Nx1=50
+      Nx2=25
+      awk '/Nx1 =/{gsub($3,'$Nx1')};{print}' sph.param > temp.param && mv temp.param sph.param
+      awk '/Nx2 =/{gsub($3,'$Nx2')};{print}' sph.param > temp.param && mv temp.param sph.param
+      ./sim 1.66666666 test
+
+      if [ -d Convergence/Gamma-1p66666666/$1res1 ]
+      then
+         test
+      else
+         mkdir Convergence/Gamma-1p66666666/$1res1
+      fi
+      mv Gamma-1p66666666/* Convergence/Gamma-1p66666666/$1res1/
+   fi
+   if [ $count = 2 ]
+   then
+      Nx1=100
+      Nx2=50
+      awk '/Nx1 =/{gsub($3,'$Nx1')};{print}' sph.param > temp.param && mv temp.param sph.param
+      awk '/Nx2 =/{gsub($3,'$Nx2')};{print}' sph.param > temp.param && mv temp.param sph.param
+      ./sim 1.66666666 test
+
+      if [ -d Convergence/Gamma-1p66666666/$1res2 ]
+      then
+         test
+      else
+         mkdir Convergence/Gamma-1p66666666/$1res2
+      fi
+      mv Gamma-1p66666666/* Convergence/Gamma-1p66666666/$1res2/
+   fi
+   if [ $count = 3 ]
+   then
+      Nx1=200
+      Nx2=100
+      awk '/Nx1 =/{gsub($3,'$Nx1')};{print}' sph.param > temp.param && mv temp.param sph.param
+      awk '/Nx2 =/{gsub($3,'$Nx2')};{print}' sph.param > temp.param && mv temp.param sph.param
+      ./sim 1.66666666 test
+
+      if [ -d Convergence/Gamma-1p66666666/$1res3 ]
+      then
+         test
+      else
+         mkdir Convergence/Gamma-1p66666666/$1res3
+      fi
+      mv Gamma-1p66666666/* Convergence/Gamma-1p66666666/$1res3/
+   fi
+   if [ $count = 4 ]
+   then
+      Nx1=400
+      Nx2=200
+      awk '/Nx1 =/{gsub($3,'$Nx1')};{print}' sph.param > temp.param && mv temp.param sph.param
+      awk '/Nx2 =/{gsub($3,'$Nx2')};{print}' sph.param > temp.param && mv temp.param sph.param
+      ./sim 1.66666666 test
+
+      if [ -d Convergence/Gamma-1p66666666/$1res4 ]
+      then
+         test
+      else
+         mkdir Convergence/Gamma-1p66666666/$1res4
+      fi
+      mv Gamma-1p66666666/* Convergence/Gamma-1p66666666/$1res4/
+   fi
+done
