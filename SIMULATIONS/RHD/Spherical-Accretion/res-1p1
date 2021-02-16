@@ -1,0 +1,45 @@
+#!/bin/bash
+
+for count in {3,5}
+do
+   if [ $count = 1 ]
+   then
+      Nx1=50
+      Nx2=25
+      awk '/Nx1 =/{gsub($3,'$Nx1')};{print}' sph.param > temp.param && mv temp.param sph.param
+      awk '/Nx2 =/{gsub($3,'$Nx2')};{print}' sph.param > temp.param && mv temp.param sph.param
+      ./simulations_2 1.1 test
+
+      mv Gamma-1p1/* Convergence/Gamma-1p1/$1res1/
+   fi
+   if [ $count = 2 ]
+   then
+      Nx1=100
+      Nx2=50
+      awk '/Nx1 =/{gsub($3,'$Nx1')};{print}' sph.param > temp.param && mv temp.param sph.param
+      awk '/Nx2 =/{gsub($3,'$Nx2')};{print}' sph.param > temp.param && mv temp.param sph.param
+      ./simulations_2 1.1 test
+
+      mv Gamma-1p1/* Convergence/Gamma-1p1/$1res2/
+   fi
+   if [ $count = 3 ]
+   then
+      Nx1=200
+      Nx2=100
+      awk '/Nx1 =/{gsub($3,'$Nx1')};{print}' sph.param > temp.param && mv temp.param sph.param
+      awk '/Nx2 =/{gsub($3,'$Nx2')};{print}' sph.param > temp.param && mv temp.param sph.param
+      ./simulations_2 1.1 test
+
+      mv Gamma-1p1/* Convergence/Gamma-1p1/$1res3/
+   fi
+   if [ $count = 4 ]
+   then
+      Nx1=400
+      Nx2=200
+      awk '/Nx1 =/{gsub($3,'$Nx1')};{print}' sph.param > temp.param && mv temp.param sph.param
+      awk '/Nx2 =/{gsub($3,'$Nx2')};{print}' sph.param > temp.param && mv temp.param sph.param
+      ./simulations_2 1.1 test
+
+      mv Gamma-1p1/* Convergence/Gamma-1p1/$1res4/
+   fi
+done
