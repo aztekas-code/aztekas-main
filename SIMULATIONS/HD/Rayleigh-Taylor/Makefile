@@ -26,10 +26,18 @@ AZTPATH = $(AZTEKAS_PATH)
 OMP_NUM = 1
 
 ##################################################
-# Physics (HD, MHD, RHD, RMHD)
+# Physics (HD)
+#    - Hydro (Euler time-dependent equations)
+#    - Lane-Endem?
+# Physics (RHD)
+#    - Hydro (Euler time-dependent equations)
+#    - TOV (Tolman-Openheimer-Volkov, RHD only)
 ##################################################
 
 PHY = HD
+
+HYDRO = True
+TOV   = False
 
 ##################################################
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
@@ -59,10 +67,10 @@ EOS = Ideal
 COORD = Cartesian
 
 ##################################################
-# User Source Terms (true,false)
+# User Source Terms (True,False)
 ##################################################
 
-USER_SOURCE = true
+USER_SOURCE = True
 
 ##################################################
 # Integration method

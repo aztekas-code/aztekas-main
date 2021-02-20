@@ -13,7 +13,7 @@ ifeq ($(PHY),RHD)
 		     $(AZTPATH)/Src/integration/timestep.c
 endif
 ifeq ($(PHY),TOV)
-   MAIN += $(AZTPATH)/Src/integration/equaton-solver.c \
+   MAIN += $(AZTPATH)/Src/integration/equation-solver.c \
 			  $(AZTPATH)/Src/integration/integration.c \
 		     $(AZTPATH)/Src/integration/runge-kutta.c
 endif

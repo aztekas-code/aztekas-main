@@ -41,6 +41,14 @@ void Check_Sim_Parameters()
    if(PHYSICS == HD)  printf("Performing a HD simulation.\n");
    if(PHYSICS == RHD) printf("Performing a RHD simulation.\n");
 
+   // Equations solved
+   printf("Solving the following systems of equations:\n");
+#if HYDRO == TRUE
+   printf("   Euler inviscid equations (Hyperbolic).\n");
+#elif TOV == TRUE
+   printf("   Tolman-Oppenheimer-Volkoff (ODE)\n");
+#endif
+
    // Coordinates
 #if PHYSICS == HD
 
@@ -103,19 +111,25 @@ void Check_Sim_Parameters()
    if(EOS == RYU)  printf("Ryu real relativistic equation of state.\n");
 
    // Print MoL-RK order
+#if HYPERBOLIC == TRUE
    printf("Time integration using a second order MoL-Runge Kutta.\n");
+#endif
 
    // Print spatial numerical methods, algorithms and parameters.
    // Primitive variable reconstruction.
+#if HYPERBOLIC == TRUE
    if(RECONST == GODUNOV)  printf("Using a zero-order piecewise reconstruction for the primitive variables.\n");
-   if(RECONST == MINMOD)   printf("Using a first-order piecewise MINMOD reconstruction for the primitive variables.\n");
-   if(RECONST == MC)       printf("Using a first-order piecewise MC reconstruction for the primitive variables.\n");
-   if(RECONST == SUPERBEE) printf("Using a first-order piecewise SUPERBEE reconstruction for the primitive variables.\n");
+   if(RECONST == MINMOD)   printf("Using a second-order piecewise MINMOD reconstruction for the primitive variables.\n");
+   if(RECONST == MC)       printf("Using a second-order piecewise MC reconstruction for the primitive variables.\n");
+   if(RECONST == SUPERBEE) printf("Using a second-order piecewise SUPERBEE reconstruction for the primitive variables.\n");
    if(RECONST == WENO5)    printf("Using a fifth-order WENO5 reconstruction for the primitive variables.\n");
+#endif
 
    // Flux solver
+#if HYPERBOLIC == TRUE
    if(FLUX == HLL)  printf("HLL Riemann solver.\n");
    if(FLUX == HLLC) printf("HLLC Riemann solver.\n");
+#endif
 
    printf("\n");
 
@@ -213,9 +227,9 @@ void Check_Sim_Parameters()
    // Print spatial numerical methods, algorithms and parameters.
    // Primitive variable reconstruction.
    if(RECONST == GODUNOV)  fprintf(file,"Using a zero-order piecewise reconstruction for the primitive variables.\n");
-   if(RECONST == MINMOD)   fprintf(file,"Using a first-order piecewise MINMOD reconstruction for the primitive variables.\n");
-   if(RECONST == MC)       fprintf(file,"Using a first-order piecewise MC reconstruction for the primitive variables.\n");
-   if(RECONST == SUPERBEE) fprintf(file,"Using a first-order piecewise SUPERBEE reconstruction for the primitive variables.\n");
+   if(RECONST == MINMOD)   fprintf(file,"Using a second-order piecewise MINMOD reconstruction for the primitive variables.\n");
+   if(RECONST == MC)       fprintf(file,"Using a second-order piecewise MC reconstruction for the primitive variables.\n");
+   if(RECONST == SUPERBEE) fprintf(file,"Using a second-order piecewise SUPERBEE reconstruction for the primitive variables.\n");
    if(RECONST == WENO5)    fprintf(file,"Using a fifth-order WENO5 reconstruction for the primitive variables.\n");
 
    // Flux solver

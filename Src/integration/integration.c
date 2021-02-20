@@ -9,6 +9,8 @@
 
 #include"main.h"
 
+#if HYPERBOLIC==TRUE
+
 void Hyperbolic_Integration()
 {
    int rk_order = 2;
@@ -32,6 +34,8 @@ void Hyperbolic_Integration()
     */
    grid.time = grid.time + dt;
 }
+
+#endif
 
 /**
  * En esta función puedes realizar todas las pruebas necesarias para la
@@ -91,6 +95,12 @@ void Hyperbolic_Integration()
  *    Para orden 3, que es lo que hay implementado seguir la siguiente página.
  *    http://metodos-numericos-para-ecuaciones.blogspot.com/p/metodo-de-runge-kutta-de-tercer-orden.html
  */
+
+#if ODE == TRUE
+
 void ODE_Integration()
 {
+   hello_world_tov();
 }
+
+#endif

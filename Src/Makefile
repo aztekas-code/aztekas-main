@@ -12,13 +12,12 @@ PARAM += -DOMP_NUM=$(OMP_NUM)
 # TYPE OF EQUATIONS 
 #####################################
 
-ifeq ($(PHY),HD)
+ifeq ($(HYDRO),True)
+	PARAM += -DHYDRO=TRUE
    PARAM += -DHYPERBOLIC=TRUE
 endif
-ifeq ($(PHY),RHD)
-   PARAM += -DHYPERBOLIC=TRUE
-endif
-ifeq ($(PHY),TOV)
+ifeq ($(TOV),True)
+	PARAM += -DTOV=TRUE
    PARAM += -DODE=TRUE
 endif
 
@@ -27,11 +26,12 @@ endif
 #####################################
 
 ifeq ($(DIM),1)
-   PARAM += -Deq=3
-   PARAM += -Dgraf=1
-
-   ifeq ($(PHY),TOV)
-      PARAM += -Deq=2
+   ifeq ($(PHY),HD)
+      PARAM += -Deq=3
+      PARAM += -Dgraf=1
+   endif
+   ifeq ($(PHY),RHD)
+      PARAM += -Deq=3
       PARAM += -Dgraf=1
    endif
 endif
@@ -100,11 +100,11 @@ endif
 # INTEGRATION 
 #####################################
 
-ifeq ($(INT),standard)
+ifeq ($(INT),Standard)
    PARAM += -DINTEGRATION=STANDARD
    INT = 
 endif
-ifeq ($(INT),pvrs)
+ifeq ($(INT),PVRS)
    PARAM += -DINTEGRATION=PVRS
    INT = -pvrs
 endif

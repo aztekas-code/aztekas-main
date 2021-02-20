@@ -23,7 +23,7 @@ AZTPATH = $(AZTEKAS_PATH)
 # $ grep '^core id' /proc/cpuinfo |sort -u|wc -l
 ##################################################
 
-OMP_NUM = 4
+OMP_NUM = 1
 
 ##################################################
 # Physics (HD)
@@ -34,16 +34,16 @@ OMP_NUM = 4
 #    - TOV (Tolman-Openheimer-Volkov, RHD only)
 ##################################################
 
-PHY = HD
+PHY = RHD
 
-HYDRO = True
-TOV   = False
+HYDRO = False
+TOV   = True
 
 ##################################################
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
 ##################################################
 
-DIM = 2
+DIM = 1
 
 ##################################################
 # Metric (User, Minkowski, Schwarzschild, 
@@ -55,7 +55,7 @@ DIM = 2
 METRIC = Minkowski
 
 ##################################################
-# Equation of State (User, Ideal, Dust, Stiff)
+# Equation of State (User, Ideal, Dust, Stiff...)
 ##################################################
 
 EOS = Ideal
@@ -64,7 +64,7 @@ EOS = Ideal
 # Coordinates (Cartesian, Cylindrical, Spherical)
 ##################################################
 
-COORD = Cylindrical
+COORD = Cartesian
 
 ##################################################
 # User Source Terms (True,False)
@@ -73,10 +73,10 @@ COORD = Cylindrical
 USER_SOURCE = False
 
 ##################################################
-# Integration method
+# Integration method (Standard, PVRS)
 ##################################################
 
-INT = standard
+INT = Standard
 
 ##################################################
 # All user *.c are written here
@@ -84,7 +84,8 @@ INT = standard
 
 USR = initial.c \
       user_boundaries.c \
-		user_input.c 
+		user_input.c \
+		hello.c
 
 ##################################################
 # Include a global Makefile in the /Src/ 

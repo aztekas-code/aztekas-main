@@ -1,5 +1,7 @@
-MAIN += $(AZTPATH)/Src/fluxes/fluxes.c \
-		  $(AZTPATH)/Src/fluxes/limiters.c \
-		  $(AZTPATH)/Src/fluxes/reconstruction.c \
-		  $(AZTPATH)/Src/fluxes/riemann.c \
-		  $(AZTPATH)/Src/fluxes/sources.c
+ifeq ($(PHY),$(filter $(PHY),HD RHD))
+   MAIN += $(AZTPATH)/Src/fluxes/fluxes.c \
+		     $(AZTPATH)/Src/fluxes/limiters.c \
+		     $(AZTPATH)/Src/fluxes/reconstruction.c \
+		     $(AZTPATH)/Src/fluxes/riemann.c \
+		     $(AZTPATH)/Src/fluxes/sources.c
+endif

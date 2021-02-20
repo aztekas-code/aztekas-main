@@ -5,7 +5,7 @@
  *
  * @author Alejandro Aguayo-Ortiz
  *
- * @date 08-02-2021 - 11:28:18
+ * @date 19-02-2021 - 19:53:49
  *
  * E-mail: aaguayoo92@ciencias.unam.mx
  *
@@ -17,6 +17,12 @@ void Equation_System_Solver()
 {
    int time_sec;
    int hr, min, sec;
+
+#if ODE == TRUE
+
+   ODE_Integration();
+
+#endif
 
 #if HYPERBOLIC == TRUE
    while(grid.time <= tmax)
@@ -55,11 +61,5 @@ void Equation_System_Solver()
    }
 
    Print_Values(&tprint,&dtprint,&itprint);
-#endif
-
-#if ODE == TRUE
-
-   ODE_Integration();
-
 #endif
 }

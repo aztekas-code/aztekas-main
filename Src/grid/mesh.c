@@ -39,7 +39,9 @@ int Mesh()
       #endif
    }
 
+#if PHYSICS == HD || PHYSICS == RHD
    Surface_Volume();
+#endif
 
 #elif DIM == 2  || DIM == 4
    
@@ -69,7 +71,9 @@ int Mesh()
       grid.X2m[j] = x2min + (j-0.5-gc)*(dx2);
    }
    
+#if PHYSICS == HD || PHYSICS == RHD
    Surface_Volume();
+#endif
 
 #elif DIM == 3 
    
