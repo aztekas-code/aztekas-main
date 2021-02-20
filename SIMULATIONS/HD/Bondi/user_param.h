@@ -11,8 +11,10 @@
 #define reflective_x2max   TRUE
 #define reflective_x2min   TRUE
 
-#define RECONST            MC
-#define FLUX               HLLC
-#define GRID               UNIFORM
+#define RECONST            MINMOD
+#define FLUX               HLL
+#define GRID               LOGMESH
+#define PRINT_EVOLV        TRUE
+#define lfac               1.0
 
 double density_0, pressure_0, velocity_0;

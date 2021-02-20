@@ -76,7 +76,7 @@ USER_SOURCE = True
 # Integration method
 ##################################################
 
-INT = standard
+INT = Standard
 
 ##################################################
 # All user *.c are written here

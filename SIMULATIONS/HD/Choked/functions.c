@@ -5,7 +5,7 @@
  *
  * @author Alejandro Aguayo-Ortiz
  *
- * @date 28-07-2020 - 20:43:20
+ * @date 20-02-2021 - 13:33:10
  *
  * E-mail: aaguayoo92@ciencias.unam.mx
  *
@@ -50,12 +50,12 @@ void Mass_Accretion_Rate(double *B)
    snprintf(dat,8,"%d",num);
 
    strcpy(name_time,outputdirectory);
-   strcat(name_time,"Mdot/");
+   strcat(name_time,"Analysis/");
    strcat(name_time,"Mdot_Mean_Time");
    strcat(name_time,ext);
 
    strcpy(name_domain,outputdirectory);
-   strcat(name_domain,"Mdot/");
+   strcat(name_domain,"Analysis/");
    strcat(name_domain,"Mdot_Mean_Domain_");
    strcat(name_domain,dat);
    strcat(name_domain,ext);

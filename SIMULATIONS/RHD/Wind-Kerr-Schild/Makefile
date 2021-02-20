@@ -59,16 +59,16 @@ EOS = Ideal
 COORD = Spherical
 
 ##################################################
-# User Source Terms (true,false)
+# User Source Terms (True,False)
 ##################################################
 
-USER_SOURCE = false
+USER_SOURCE = False
 
 ##################################################
 # Integration method
 ##################################################
 
-INT = standard
+INT = Standard
 
 ##################################################
 # All user *.c are written here

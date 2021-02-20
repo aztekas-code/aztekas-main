@@ -68,7 +68,7 @@ endif
 # USER SOURCE TERMS 
 #####################################
 
-ifeq ($(USER_SOURCE),true)
+ifeq ($(USER_SOURCE),True)
    $(info ########################)
    $(info # USER-DEFINED-SOURCES #)
    $(info ########################)

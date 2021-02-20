@@ -13,6 +13,8 @@
 
 #define RECONST            MC
 #define FLUX               HLL
-#define GRID               UNIFORM
+#define GRID               LOGMESH
+#define PRINT_EVOLV        TRUE
+#define lfac               1.0
 
 double density_0, pressure_0, velocity_0;
