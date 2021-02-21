@@ -26,10 +26,17 @@ AZTPATH = $(AZTEKAS_PATH)
 OMP_NUM = 4
 
 ##################################################
-# Physics (HD, MHD, RHD, RMHD)
+# Physics (HD)
+#    - HYDRO (Euler inviscid equations)
+#    - Lane-Endem?
+# Physics (RHD)
+#    - HYDRO (Euler inviscid equations)
+#    - TOV (Tolman-Oppenheimer-Volkoff, RHD only)
 ##################################################
 
 PHY = RHD
+
+HYDRO = True
 
 ##################################################
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
@@ -59,16 +66,16 @@ EOS = Ideal
 COORD = Spherical
 
 ##################################################
-# User Source Terms (true,false)
+# User Source Terms (True,False)
 ##################################################
 
-USER_SOURCE = false
+USER_SOURCE = False
 
 ##################################################
 # Integration method
 ##################################################
 
-INT = standard
+INT = Standard
 
 ##################################################
 # All user *.c are written here

@@ -13,6 +13,7 @@
 #define RECONST            MC
 #define FLUX               HLL
 #define GRID               UNIFORM
+#define PRINT_EVOLV        TRUE
 
 #define Black_Hole_Mass    1.0
 

@@ -16,6 +16,7 @@
 #define RECONST            MINMOD
 #define FLUX               HLL
 #define GRID               UNIFORM
+#define PRINT_EVOLV        TRUE
 
 double rhotl, ptl, vx1tl, vx2tl;
 double rhotr, ptr, vx1tr, vx2tr;

@@ -27,11 +27,11 @@ OMP_NUM = 5
 
 ##################################################
 # Physics (HD)
-#    - Hydro (Euler time-dependent equations)
+#    - HYDRO (Euler inviscid equations)
 #    - Lane-Endem?
 # Physics (RHD)
-#    - Hydro (Euler time-dependent equations)
-#    - TOV (Tolman-Openheimer-Volkov, RHD only)
+#    - HYDRO (Euler inviscid equations)
+#    - TOV (Tolman-Oppenheimer-Volkoff, RHD only)
 ##################################################
 
 PHY = RHD

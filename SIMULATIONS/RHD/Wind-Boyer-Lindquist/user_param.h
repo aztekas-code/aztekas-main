@@ -21,6 +21,8 @@
 #define RECONST            MC
 #define FLUX               HLL
 #define GRID               LOGMESH
+#define lfac               1.0
+#define PRINT_EVOLV        TRUE
 
 #define Black_Hole_Mass    1.0
 #define Black_Hole_Spin    0.99

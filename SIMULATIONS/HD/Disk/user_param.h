@@ -17,5 +17,6 @@
 #define RECONST            MC
 #define FLUX               HLLC
 #define GRID               UNIFORM
+#define PRINT_EVOLV        TRUE
 
 double density_0, pressure_0, r_dot_0, phi_dot_0;

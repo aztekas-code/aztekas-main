@@ -16,6 +16,7 @@
 #define RECONST            MC
 #define FLUX               HLL
 #define GRID               UNIFORM
+#define PRINT_EVOLV        TRUE
 
 double rho_jet, p_jet, vx1_jet, vx2_jet, vx3_jet;
 double rho_atm, p_atm, vx1_atm, vx2_atm, vx3_atm;

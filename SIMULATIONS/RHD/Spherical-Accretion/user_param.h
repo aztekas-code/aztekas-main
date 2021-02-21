@@ -12,8 +12,8 @@
 #define RECONST                 MC
 #define FLUX                    HLL
 #define GRID                    LOGMESH
-#define PRINT_EVOLV             TRUE
 #define lfac                    1.0
+#define PRINT_EVOLV             TRUE
 
 //#define x1min_exc               TRUE
 //#define x1max_exc               TRUE

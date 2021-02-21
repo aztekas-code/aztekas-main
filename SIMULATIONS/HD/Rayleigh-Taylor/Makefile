@@ -27,17 +27,16 @@ OMP_NUM = 1
 
 ##################################################
 # Physics (HD)
-#    - Hydro (Euler time-dependent equations)
+#    - HYDRO (Euler inviscid equations)
 #    - Lane-Endem?
 # Physics (RHD)
-#    - Hydro (Euler time-dependent equations)
-#    - TOV (Tolman-Openheimer-Volkov, RHD only)
+#    - HYDRO (Euler inviscid equations)
+#    - TOV (Tolman-Oppenheimer-Volkoff, RHD only)
 ##################################################
 
 PHY = HD
 
 HYDRO = True
-TOV   = False
 
 ##################################################
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
@@ -52,7 +51,7 @@ DIM = 2
 # ONLY IF PHY == RHD or RMHD
 ##################################################
 
-METRIC = Minkowski
+METRIC = User
 
 ##################################################
 # Equation of State (User, Ideal, Dust, Stiff)
@@ -76,7 +75,7 @@ USER_SOURCE = True
 # Integration method
 ##################################################
 
-INT = standard
+INT = Standard
 
 ##################################################
 # All user *.c are written here

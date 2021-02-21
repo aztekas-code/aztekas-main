@@ -9,16 +9,47 @@
 PARAM += -DOMP_NUM=$(OMP_NUM)
 
 #####################################
-# TYPE OF EQUATIONS 
+# PHYSICS
+#####################################
+
+ifeq ($(PHY),HD)
+   METRIC=-
+endif
+
+#####################################
+# IMPLEMENTED SYSTEMS OF EQUATIONS 
 #####################################
 
 ifeq ($(HYDRO),True)
-	PARAM += -DHYDRO=TRUE
+   PARAM += -DHYDRO=TRUE
    PARAM += -DHYPERBOLIC=TRUE
+else
+   HYDRO=False
+   PARAM += -DHYDRO=FALSE
+   PARAM += -DHYPERBOLIC=FALSE
 endif
 ifeq ($(TOV),True)
-	PARAM += -DTOV=TRUE
+   PARAM += -DTOV=TRUE
    PARAM += -DODE=TRUE
+else
+   TOV=False
+   PARAM += -DTOV=FALSE
+   PARAM += -DODE=FALSE
+endif
+
+ifeq ($(HYDRO),False)
+   ifeq ($(TOV),False)
+      $(info #####################)
+      $(info # COMPILATION ERROR #)
+      $(info #####################)
+      $(info )
+      $(info Not system of equations to solve specified)
+      $(info Include in your local Makefile at least one of the possible implemented problems:)
+      $(info - Euler inviscid equations    -> HYDRO=True)
+      $(info - Tolman-Oppenheimer-Volkoff  -> TOV=True)
+      $(info )
+      $(error Failed compilation)
+   endif
 endif
 
 #####################################
@@ -26,26 +57,24 @@ endif
 #####################################
 
 ifeq ($(DIM),1)
-   ifeq ($(PHY),HD)
-      PARAM += -Deq=3
-      PARAM += -Dgraf=1
-   endif
-   ifeq ($(PHY),RHD)
-      PARAM += -Deq=3
-      PARAM += -Dgraf=1
-   endif
+   PARAM += -Deq=3
+   PARAM += -Dgraf=1
+   DIMENSION=1
 endif
 ifeq ($(DIM),2)
-	PARAM += -Deq=4
-	PARAM += -Dgraf=2
+   PARAM += -Deq=4
+   PARAM += -Dgraf=2
+   DIMENSION=2
 endif
 ifeq ($(DIM),3)
-	PARAM += -Deq=5
-	PARAM += -Dgraf=3
+   PARAM += -Deq=5
+   PARAM += -Dgraf=3
+   DIMENSION=3
 endif
 ifeq ($(DIM),4)
-	PARAM += -Deq=5
-	PARAM += -Dgraf=2
+   PARAM += -Deq=5
+   PARAM += -Dgraf=2
+   DIMENSION="2.5"
 endif
 
 PARAM += -DDIM=$(DIM)
@@ -100,13 +129,25 @@ endif
 # INTEGRATION 
 #####################################
 
+ifneq ($(INT),$(filter $(INT),Standard PVRS))
+   exit:
+	   @echo "Wrong integration parameter."
+		@echo "Possible options:"
+		@echo "   - Standard"
+		@echo "   - PVRS"
+	   @echo "Exit. Compilation failed."
+	   @echo " "
+endif
+
 ifeq ($(INT),Standard)
    PARAM += -DINTEGRATION=STANDARD
    INT = 
+   INTEGRATION="Standard FVM"
 endif
 ifeq ($(INT),PVRS)
    PARAM += -DINTEGRATION=PVRS
    INT = -pvrs
+   INTEGRATION=PVRS
 endif
 
 #####################################
@@ -159,12 +200,23 @@ all:
 	@echo "###########################################################"
 	@echo "########### AZTEKAS code compiled successfully ############"
 	@echo "###########################################################"
+	@echo "" 
+	@echo " AZTEKAS code path = "$(AZTPATH)
+	@echo " Number of OMP cores = "$(OMP_NUM)
+	@echo " Physics = "$(PHY)
+	@echo " Equation of State (EoS) = "$(EOS)
+	@echo " Systems of equations"
+	@echo "    - Euler inviscid = "$(HYDRO)
+	@echo "    - Tolman-Oppenheimer-Volkoff = "$(TOV)
+	@echo " Integration method = "$(INTEGRATION)
+	@echo " Metric = "$(METRIC)
+	@echo " Dimensions = "$(DIMENSION)
+	@echo " Coordinate system = "$(COORD)
+	@echo " User sources = " $(USER_SOURCE)
+	@echo " User files = "$(USR) 
 	@echo ""
 	@echo "###########################################################"
-	@echo "# AZTEKAS will run with "$(OMP_NUM)" of "$(THREADS)" cores/threads available."
-	@echo "# You can modify the OMP_NUM variable inside the Makefile."
-	@echo "###########################################################"
-	@echo ""
+	@echo "" 
 	
 clean:
 	rm -f $(EXEC)

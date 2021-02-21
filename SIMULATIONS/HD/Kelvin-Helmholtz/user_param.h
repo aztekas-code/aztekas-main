@@ -14,6 +14,7 @@
 #define RECONST            MC
 #define FLUX               HLL
 #define GRID               UNIFORM
+#define PRINT_EVOLV        TRUE
 
 double rhod, pd, vx1d, vx2d, vx3d;
 double rhou, pu, vx1u, vx2u, vx3u;

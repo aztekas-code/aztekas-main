@@ -13,6 +13,8 @@
 #define RECONST            MC
 #define FLUX               HLL
 #define GRID               LOGMESH
+#define lfac               1.0
+#define PRINT_EVOLV        TRUE
 
 #define Black_Hole_Mass    1.0
 /**
@@ -22,7 +24,7 @@
  * Model 3:    l_0 = 10.204, c_infty = 0.02236
  * Model 4:    l_0 = 14.286, c_infty = 0.01257
  */
-#define l_0                10.204
+#define l_0                6.657
 
 double rho(double x);
 double pre(double x);

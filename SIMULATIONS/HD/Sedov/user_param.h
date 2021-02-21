@@ -16,6 +16,7 @@
 #define RECONST            MC
 #define FLUX               HLLC
 #define GRID               UNIFORM
+#define PRINT_EVOLV        TRUE
 
 double rho_0, p_0, E_0;
 double x_0;

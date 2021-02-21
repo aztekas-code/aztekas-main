@@ -17,6 +17,7 @@
 #define FLUX               HLL
 #define GRID               LOGMESH
 #define lfac               1.0
+#define PRINT_EVOLV        TRUE
 
 #define MDOT               TRUE
 #define MDOT_END           FALSE

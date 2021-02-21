@@ -26,10 +26,17 @@ AZTPATH = $(AZTEKAS_PATH)
 OMP_NUM = 1
 
 ##################################################
-# Physics (HD, MHD, RHD, RMHD)
+# Physics (HD)
+#    - HYDRO (Euler inviscid equations)
+#    - Lane-Endem?
+# Physics (RHD)
+#    - HYDRO (Euler inviscid equations)
+#    - TOV (Tolman-Oppenheimer-Volkoff, RHD only)
 ##################################################
 
 PHY = RHD
+
+HYDRO = True
 
 ##################################################
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
