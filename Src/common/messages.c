@@ -242,24 +242,24 @@ void Check_Sim_Parameters()
 void Manage_Simulation_Info(int argc, char *argv[])
 {
 	// create output directory
-   char create_dir[] = "mkdir -p ";	
-	strcat(create_dir,outputdirectory);	
-	int sysret = system(create_dir);
+   char create_dir[100] = "mkdir -p ";	
+   strcat(create_dir,outputdirectory);	
+   int sysret = system(create_dir);
 
-   char create_info[] = "mkdir -p ";
+   char create_info[100] = "mkdir -p ";
    strcat(create_info,outputdirectory);
    strcat(create_info,"/INFO/");
    sysret = system(create_info);
 
    #if MDOT == TRUE
-   char create_analysis[] = "mkdir -p ";
+   char create_analysis[100] = "mkdir -p ";
    strcat(create_analysis,outputdirectory);
    strcat(create_analysis,"/Analysis/");
    sysret = system(create_analysis);
    #endif
 
    // copy
-   char dum[50] = "cp ";
+   char dum[100] = "cp ";
    strcat(dum,paramfile_name);
    strcat(dum," ");
    strcat(dum,outputdirectory);
