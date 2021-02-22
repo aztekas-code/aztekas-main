@@ -26,18 +26,12 @@ AZTPATH = $(AZTEKAS_PATH)
 OMP_NUM = 4
 
 ##################################################
-# Physics (HD)
-#    - HYDRO (Euler inviscid equations)
-#    - Lane-Endem?
-# Physics (RHD)
-#    - HYDRO (Euler inviscid equations)
-#    - TOV (Tolman-Oppenheimer-Volkoff, RHD only)
+# Physics (HD, MHD, RHD, RMHD)
 ##################################################
 
 PHY = RHD
 
 HYDRO = True
-TOV   = False
 
 ##################################################
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
@@ -52,7 +46,7 @@ DIM = 4
 # ONLY IF PHY == RHD or RMHD
 ##################################################
 
-METRIC = Eddington-Finkelstein
+METRIC = Kerr-Schild
 
 ##################################################
 # Equation of State (User, Ideal, Dust, Stiff)
@@ -82,8 +76,8 @@ INT = Standard
 # All user *.c are written here
 ##################################################
 
-USR = functions.c \
-      initial.c \
+USR = initial.c \
+		functions.c \
       user_boundaries.c \
 		user_input.c 
 

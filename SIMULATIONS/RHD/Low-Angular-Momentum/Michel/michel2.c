@@ -131,11 +131,9 @@ int User_Parameters(char const *paramfile_name)
       x1min = x1min*rs(Gamma,c_infty);
    }
 
-   x1max = 300.0;
-
-   if(x1min < 1.5)
+   if(x1min < 1.1)
    {
-      x1min = 1.5;
+      x1min = 1.1;
    }
       
    fclose(paramfile);         
@@ -363,7 +361,6 @@ int main(int argc, char *argv[])
       double W     = lapse*Uut;
 
       V[i] = (Udr / W);
-      U[i] = Uur + W*br/lapse;
    }
     
    END:
@@ -371,14 +368,16 @@ int main(int argc, char *argv[])
    file = fopen("analytic.dat","w");
 
    for(int i = 0; i <= N+2*gc; i++)
-      fprintf(file,"%e %e %e %e\n",X[i],RHO[i]/RHO[N+gc],PRE[i]/RHO[N+gc],V[i]);
+      fprintf(file,"%e %e %e %e %e\n",X[i],RHO[i]/RHO[N+gc],PRE[i]/RHO[N+gc],V[i],U[i]);
+   //for(int i = gc; i <= N+gc; i++)
+   //   fprintf(file,"%e %e %e %e\n",X[i],RHO[i],PRE[i],V[i]);
 
    fclose(file);
 
+   //printf("Michel Mass Accretion Rate = %e\n",4*M_PI*rho_star*U_star*r_star*r_star);
    printf("Michel Mass Accretion Rate = %e\n",4*M_PI*rho_star*U_star*r_star*r_star/(rho_infty*M_PI));
    printf("Density %e\n",RHO[N+gc]);
    printf("Velocity %e\n",V[N+gc]);
-   printf("Sonic %e\n",r_star);
 
    return 0;
 }

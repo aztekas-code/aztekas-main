@@ -1,3 +1,8 @@
+/* 
+ *  aztekas initial module
+ *  Date of creation: 27-11-2019 10:44:40
+ *  author: Alejandro Aguayo-Ortiz 
+ */
 #include"main.h"
 
 void Initial()
@@ -8,83 +13,134 @@ void Initial()
    char line[100];
    double r;
    double t;
-   double vr;
-   double alpha, beta;
-   double M = Black_Hole_Mass;
+   double R, z, vr;
+   double c = 3e+10;
 
-   //Initialize grid.time
+   //Initialize time
    grid.time = 0.0;
 
    //Initialize dt
    dt = 0.0;
 
-#if DIM == 1 
+#if DIM == 1
 
-   ////////////////////////////
-   //-------Michel-1D--------//
-   ////////////////////////////
-
+   file = fopen("./Michel/analytic.dat","r");
    for(int i = 0; i <= Nx1; i++)
    {
-      r = grid.X1[i];
+      r     = grid.X1[i];
+      t     = M_PI_2;
 
-      U(0,i) = density_0;//rho(r);
-      U(1,i) = pressure_0;//pre(r);
-      U(2,i) = 0.0;//velocity_0;
+      double a     = Black_Hole_Spin;
+      double M     = Black_Hole_Mass;
+      double rho2  = r*r + a*a*cos(t)*cos(t);
+      double grr   = 1.0 + 2.0*M*r/rho2;
+      double beta  = 2.0*M*r/rho2/(grr);
+      double alpha = sqrt(r/(r + 2.0*M));
+
+      idum = fscanf(file,"%lf %lf %lf %lf\n",&dum,&U(RHO,i,j),&U(PRE,i,j),&U(VX1,i,j));
    }
+   fclose(file);
 
-#elif DIM == 2
-
-   ////////////////////////////
-   //-------Michel-2D--------//
-   ////////////////////////////
-
+#elif DIM == 2 || DIM == 4 
+   
    for(int j = 0; j <= Nx2; j++)
    {
+      file = fopen("./Michel/analytic.dat","r");
       for(int i = 0; i <= Nx1; i++)
       {
-         r = grid.X1[i];
-
-         U(0,i,j) = rho(r);
-         U(1,i,j) = pre(r);
-         U(2,i,j) = velocity_0;
-         U(3,i,j) = 0.0;
-      }
-   }
-
-#elif DIM == 4
-
-   //////////////////////////////
-   //-------Michel-2.5D--------//
-   //////////////////////////////
-
-
-   for(int j = 0; j <= Nx2; j++)
-   {
-      file = fopen("./Michel/analytic","r");
-      for(int i = 0; i <= Nx1; i++)
-      {
-
          r     = grid.X1[i];
          t     = grid.X2[j];
-         alpha = sqrt(r/(r + 2.0*M));
-         beta  = 2.0*M/r;
+
+         double a     = Black_Hole_Spin;
+         double M     = Black_Hole_Mass;
+         double rho2  = r*r + a*a*cos(t)*cos(t);
+         double grr   = 1.0 + 2.0*M*r/rho2;
+         double beta  = 2.0*M/r;
+         double alpha = sqrt(r/(r + 2.0*M));
 
          idum = fscanf(file,"%lf %lf %lf %lf\n",&dum,&U(RHO,i,j),&U(PRE,i,j),&U(VX1,i,j));
-         vr    = (r/(r + 2.0*M))*U(VX1,i,j);
+         vr   = (r/(r + 2.0*M))*U(VX1,i,j);
 
          U(VX2,i,j) = 0.0;
-         if(r > 11.86)
-         {
-            U(VX3,i,j) = l_0*ftheta(t)*(alpha - beta*vr);
-         }
-         else
-         {
-            U(VX3,i,j) = 0.0;
-         }
+         if(r > r_star)                                                     
+         {                                                                      
+            U(VX3,i,j) = l_0*ftheta(t)*(alpha - beta*vr);                       
+         }                                                                      
+         else                                                                   
+         {                                                                      
+            U(VX3,i,j) = 0.0;                                                   
+         }      
+
       }
       fclose(file);
    }
-
+   
 #endif
 }
+
+//   for(int j = 0; j <= Nx2; j++)
+//   {
+//      for(int i = 0; i <= Nx1; i++)
+//      {
+//         r     = grid.X1[i];
+//         t     = grid.X2[j];
+//
+//         double a    = Black_Hole_Spin;
+//         double M    = Black_Hole_Mass;
+//         double rho2 = r*r + a*a*cos(t)*cos(t);
+//         double gtt  = -(1.0 - 2.0*M*r/rho2);
+//         double gtr  = 2.0*M*r/rho2;
+//         double gtp  = -2.0*M*a*r*sin(t)*sin(t)/rho2;
+//         double grr  = 1.0 + 2.0*M*r/rho2;
+//         double grp  = -a*grr*sin(t)*sin(t);
+//         double gpp  = sin(t)*sin(t)*(rho2 + a*a*grr*sin(t)*sin(t));
+//         double gTT  = -grr;
+//         double gTR  = gtr;
+//
+//         double den  = 1.0 - gTR*gtr;
+//         double t1   = gTT/den;
+//         double t2   = gTR*grr/den;
+//         double t3   = gTR*grp/den;
+//         double r1   = gtr*gTT/den;
+//         double r2   = grr/den;
+//         double r3   = grp/den;
+//         double p1   = gtp*gTT;
+//         double p2   = grp + gtp*gTR*grr/den;
+//         double p3   = gpp + gtp*gTR*grp/den;
+//
+//         double UR;
+//         double UP;
+//         idum = fscanf(file,"%lf %lf %lf %lf\n",&dum,&U(RHO,i,j),&U(PRE,i,j),&UR);
+//         U(VX2,i,j) = 0.0;
+//         UP = 0.0;
+//
+//         UP = UP + UR*a/(r*r - 2.0*M*r + a*a);
+//
+//         double a1 = t1;
+//         double b1 = (t2 + r1)*UR + (t3 + p1)*UP;
+//         double c1 = 1.0 + r2*UR*UR + (p2 + r3)*UR*UP + p3*UP*UP;
+//
+//         double Ut;
+//         if(r < M + sqrt(M*M - a*a))
+//         {
+//            Ut = (-b1 + sqrt(b1*b1 - 4*a1*c1))/(2.0*a1);
+//         }
+//         else
+//         {
+//            Ut = (-b1 + sqrt(b1*b1 - 4*a1*c1))/(2.0*a1);
+//         }
+//
+//         double Ur = r1*Ut + r2*UR + r3*UP;
+//         double Up = p1*Ut + p2*UR + p3*UP;
+//         double UT = t1*Ut + t2*UR + t3*UP;
+//
+//         double alpha = 1.0/sqrt(1.0 + 2.0*M*r/rho2);
+//         double W     = alpha*UT;
+//
+//         U(VX1,i,j) = UR;///W;
+//         U(VX3,i,j) = 0.0;
+//      }
+//      fclose(file);
+//   }
+
+//   density_0 = U(RHO,Nx1-gc,Nx2-gc);

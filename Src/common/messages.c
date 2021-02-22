@@ -118,11 +118,11 @@ void Check_Sim_Parameters()
    // Print spatial numerical methods, algorithms and parameters.
    // Primitive variable reconstruction.
 #if HYPERBOLIC == TRUE
-   if(RECONST == GODUNOV)  printf("Using a zero-order piecewise reconstruction for the primitive variables.\n");
-   if(RECONST == MINMOD)   printf("Using a second-order piecewise MINMOD reconstruction for the primitive variables.\n");
-   if(RECONST == MC)       printf("Using a second-order piecewise MC reconstruction for the primitive variables.\n");
-   if(RECONST == SUPERBEE) printf("Using a second-order piecewise SUPERBEE reconstruction for the primitive variables.\n");
-   if(RECONST == WENO5)    printf("Using a fifth-order WENO5 reconstruction for the primitive variables.\n");
+   if(RECONST == GODUNOV)  printf("Zero-order piecewise reconstruction for the primitive variables.\n");
+   if(RECONST == MINMOD)   printf("Second-order piecewise MINMOD reconstruction for the primitive variables.\n");
+   if(RECONST == MC)       printf("Second-order piecewise MC reconstruction for the primitive variables.\n");
+   if(RECONST == SUPERBEE) printf("Second-order piecewise SUPERBEE reconstruction for the primitive variables.\n");
+   if(RECONST == WENO5)    printf("Fifth-order WENO5 reconstruction for the primitive variables.\n");
 #endif
 
    // Flux solver
