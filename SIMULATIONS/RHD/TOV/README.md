@@ -89,3 +89,6 @@ You will have to specify all the variables in rk structure. May be once (like
 rk.h) but, mostly, at each step i.
 
 In AZTEKAS, you can find the implemented Runge-Kutta orders at /aztekas-main/Src/integration/runge-kutta.c (up to 3rd order).
+
+All the files and functions created in here, could be eventually migrated to the
+/aztekas-main/Src/physics/RHD/TOV/ repository.
