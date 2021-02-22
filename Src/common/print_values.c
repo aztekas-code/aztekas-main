@@ -8,7 +8,7 @@
 
 #include"main.h"
 
-void Print_Values0()
+void Print_Values_0()
 {
    char id[50];
    strcpy(id,"out");
@@ -53,7 +53,7 @@ void Print_Values0()
    Alternative_Termination();
 }
 
-void Print_Values1(char *file_id)
+void Print_Values_1(char *file_id)
 {
    char id[50];
    if (strcmp(file_id,"") == 0)

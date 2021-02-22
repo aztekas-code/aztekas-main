@@ -14,6 +14,10 @@ typedef struct
    double u2;
    double u3;
    double u4;
+   double k1;
+   double k2;
+   double k3;
+   double k4;
    double h;
    double f;
 }rk_;

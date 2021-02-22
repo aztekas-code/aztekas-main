@@ -15,7 +15,7 @@
 #define CONC(A, B) CONC_(A, B)
 #define CONC_(A, B) A##B
 
-#define Print_Values(...) CONC(Print_Values, NARGS(__VA_ARGS__))(__VA_ARGS__)
+#define Print_Values(...) CONC(Print_Values_, NARGS(__VA_ARGS__))(__VA_ARGS__)
 
 #define Output1(x) _Generic((x), int: Output1_int, char *: Output1_char)(x);
 #define Output2(x) _Generic((x), int: Output2_int, char *: Output2_char)(x);
@@ -71,8 +71,8 @@ void Output3_bin_char(char *itprint);
 
 void Print_Time_Values(double *tprint, double *dtprint, int itprint);
 
-void Print_Values0();
-void Print_Values1(char *file_id);
+void Print_Values_0();
+void Print_Values_1(char *file_id);
 
 void Restart();
 
