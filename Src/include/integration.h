@@ -18,6 +18,8 @@ typedef struct
    double f;
 }rk_;
 
+int rk_order;
+
 /* Define pointers */                                                           
 double *U, *U0, *U1, *U2, *U3;                                                  
 double *Q, *Q0, *Q1, *Q2, *Q3;                                                  
@@ -34,11 +36,11 @@ double dtprint, tprint;
 void Equation_System_Solver();
  
 void Hyperbolic_Integration();
+
+void ODE_Integration();
  
 void Runge_Kutta(rk_ *rk, int order);
  
 void Method_of_Lines(int order);
  
 int MxV(double *M, double *V, double *L);
-
-void ODE_Integration();

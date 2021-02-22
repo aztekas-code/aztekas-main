@@ -11,7 +11,7 @@
 
 void Hyperbolic_Integration()
 {
-   int rk_order = 2;
+   rk_order = 2;
 
    /**
     * Convert all primitive vector U to conservative Q0
