@@ -2,10 +2,13 @@
  * @file equation-solver.c
  *
  * @brief Define the type of system of equations to be solved.
+ * Currently implemented:
+ *    - HYDRO: Euler inviscid system of equations.
+ *    - TOV: Tolman-Oppenheimer-Volkoff
  *
  * @author Alejandro Aguayo-Ortiz
  *
- * @date 19-02-2021 - 19:53:49
+ * @date 21-02-2021 - 21:24:44
  *
  * E-mail: aaguayoo92@ciencias.unam.mx
  *
@@ -18,13 +21,13 @@ void Equation_System_Solver()
    int time_sec;
    int hr, min, sec;
 
-#if ODE == TRUE
+#if TOV == TRUE
 
    ODE_Integration();
 
 #endif
 
-#if HYPERBOLIC == TRUE
+#if HYDRO == TRUE
    while(grid.time <= tmax)
    {
       /**
@@ -37,7 +40,7 @@ void Equation_System_Solver()
        * Real-Time computations using U
        */
       //We print the values
-      Print_Values(&tprint,&dtprint,&itprint);
+      Print_Time_Values(&tprint,&dtprint,itprint);
 
       //In here we set the integration method (MoL-RK and HRSC)
       Hyperbolic_Integration();
@@ -60,6 +63,6 @@ void Equation_System_Solver()
    #endif
    }
 
-   Print_Values(&tprint,&dtprint,&itprint);
+   Print_Time_Values(&tprint,&dtprint,itprint);
 #endif
 }

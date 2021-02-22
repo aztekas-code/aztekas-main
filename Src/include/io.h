@@ -30,23 +30,25 @@ void Ending_Message();
 
 void Frequency_Output(double *dtprint);
 
-void Init_Simulation(double *tprint, int *itprint);
+void Init_Simulation(double *tprint, int itprint);
 
 void Manage_Simulation_Info(int argc, char *argv[]);
 
-void Output1(int *itprint);
+void Output1(int itprint);
 
-void Output2(int *itprint);
+void Output2(int itprint);
 
-void Output3(int *itprint);
+void Output3(int itprint);
 
-void Output1_bin(int *itprint);
+void Output1_bin(int itprint);
 
-void Output2_bin(int *itprint);
+void Output2_bin(int itprint);
 
-void Output3_bin(int *itprint);
+void Output3_bin(int itprint);
 
-void Print_Values(double *tprint, double *dtprint, int *itprint);
+void Print_Time_Values(double *tprint, double *dtprint, int itprint);
+
+void Print_Values();
 
 void Restart();
 

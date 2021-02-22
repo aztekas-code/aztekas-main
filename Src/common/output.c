@@ -10,7 +10,7 @@
 
 #if DIM == 1
 
-void Output1(int *itprint)
+void Output1(int itprint)
 {
    FILE *file;
    int n, i, j, k;
@@ -19,7 +19,7 @@ void Output1(int *itprint)
    char archivo[50];
    int num;
 
-   num = *itprint;
+   num = itprint;
    strcpy(ext,".dat");
    snprintf(dat,8,"%d",num);
    strcpy(archivo,outputdirectory);
@@ -55,11 +55,11 @@ void Output1(int *itprint)
       U(2,i));
    }
 
-   printf("itprint : %d, output file : %s\n",*itprint,archivo);
+   printf("itprint : %d, output file : %s\n",itprint,archivo);
    fclose(file);
 }
 
-void Output1_bin(int *itprint)
+void Output1_bin(int itprint)
 {
    FILE *file;
    int n, i, j, k, size_X1;
@@ -70,7 +70,7 @@ void Output1_bin(int *itprint)
    
    size_X1 = Nx1-2*gc+1;
    
-   num = *itprint;
+   num = itprint;
    strcpy(ext,".bin");
    snprintf(dat,8,"%d",num);
    strcpy(archivo,outputdirectory);
@@ -96,13 +96,13 @@ void Output1_bin(int *itprint)
       fwrite(&U(2,i), sizeof U(2,i), 1, file);
    }
 
-   printf("itprint : %d, output file : %s\n",*itprint,archivo);
+   printf("itprint : %d, output file : %s\n",itprint,archivo);
    fclose(file);
 }
 
 #elif DIM == 2 || DIM == 4
 
-void Output2(int *itprint)
+void Output2(int itprint)
 {
    FILE *file;
    int n, i, j, k;
@@ -111,7 +111,7 @@ void Output2(int *itprint)
    char archivo[50];
    int num;
 
-   num = *itprint;
+   num = itprint;
    strcpy(ext,".dat");
    snprintf(dat,8,"%d",num);
    strcpy(archivo,outputdirectory);
@@ -165,7 +165,7 @@ void Output2(int *itprint)
    }
 #endif 
 
-   printf("itprint : %d, output file : %s\n",*itprint,archivo);
+   printf("itprint : %d, output file : %s\n",itprint,archivo);
     
    /**
     * System notification
@@ -180,7 +180,7 @@ void Output2(int *itprint)
    fclose(file);
 }
 
-void Output2_bin(int *itprint)
+void Output2_bin(int itprint)
 {
    FILE *file;
    int n, i, j, k, size_X1, size_X2;
@@ -192,7 +192,7 @@ void Output2_bin(int *itprint)
    size_X1 = Nx1-2*gc+1;
    size_X2 = Nx2-2*gc+1;
    
-   num = *itprint;
+   num = itprint;
    strcpy(ext,".bin");
    snprintf(dat,8,"%d",num);
    strcpy(archivo,outputdirectory);
@@ -239,13 +239,13 @@ void Output2_bin(int *itprint)
    }
 #endif
 
-   printf("itprint : %d, output file : %s\n",*itprint,archivo);
+   printf("itprint : %d, output file : %s\n",itprint,archivo);
    fclose(file);
 }
 
 #elif DIM == 3
 
-void Output3(int *itprint)
+void Output3(int itprint)
 {
    FILE *file;
    int n, i, j, k;
@@ -254,7 +254,7 @@ void Output3(int *itprint)
    char archivo[50];
    int num;
 
-   num = *itprint;
+   num = itprint;
    strcpy(ext,".dat");
    snprintf(dat,8,"%d",num);
    strcpy(archivo,outputdirectory);
@@ -300,11 +300,11 @@ void Output3(int *itprint)
       }
    }
 
-   printf("itprint : %d, output file : %s\n",*itprint,archivo);
+   printf("itprint : %d, output file : %s\n",itprint,archivo);
    fclose(file);
 }
 
-void Output3_bin(int *itprint)
+void Output3_bin(int itprint)
 {
    FILE *file;
    int n, i, j, k, size_X1, size_X2, size_X3;
@@ -317,7 +317,7 @@ void Output3_bin(int *itprint)
    size_X2 = Nx2-2*gc+1;
    size_X3 = Nx3-2*gc+1;
    
-   num = *itprint;
+   num = itprint;
    strcpy(ext,".bin");
    snprintf(dat,8,"%d",num);
    strcpy(archivo,outputdirectory);
@@ -357,7 +357,7 @@ void Output3_bin(int *itprint)
       }
    }
 
-   printf("itprint : %d, output file : %s\n",*itprint,archivo);
+   printf("itprint : %d, output file : %s\n",itprint,archivo);
    fclose(file);
 }
 

@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
    /**
     * Initialize solution vector U
     */
-   Init_Simulation(&tprint,&itprint);
+   Init_Simulation(&tprint,itprint);
 
    /*
     * Frequency of printing output

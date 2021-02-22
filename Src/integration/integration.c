@@ -100,7 +100,8 @@ void Hyperbolic_Integration()
 
 void ODE_Integration()
 {
-   hello_world_tov();
+   // Function for testing the ODE module.
+   test_module();
 }
 
 #endif

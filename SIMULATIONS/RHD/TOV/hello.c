@@ -1,10 +1,10 @@
 /**
- * @file bla.c
+ * @file test.c
  *
  * @brief This is a Hellow world! test for TOV implementation in AZTEKAS.
  *
  * The user must define function:
- *    int hello_world_tov()
+ *    int test_module()
  *    {
  *    }
  *
@@ -25,8 +25,9 @@
 
 #include"main.h"
 
-int hello_world_tov()
+int test_module()
 {
+   printf("\n");
    printf("This is a Hello world! test for TOV implementation in AZTEKAS.\n");
    printf("\n");
 

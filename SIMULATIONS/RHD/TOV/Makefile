@@ -36,7 +36,7 @@ OMP_NUM = 1
 
 PHY = RHD
 
-HYDRO = False
+HYDRO = True
 TOV   = True
 
 ##################################################
