@@ -187,6 +187,7 @@ AZT_HEAD = $(AZTPATH)/Src/include
 HEADERS = -I$(AZT_HEAD) -I.
 EXEC = aztekas
 
+
 all: 
 	@echo ""
 	@echo "###########################################################"
@@ -195,10 +196,10 @@ all:
 	@echo ""
 	@echo "Compiling files..."
 	@echo ""
-	$(COMPILER) $(PARAM) $(MAIN) $(USR) $(PHYSICS) $(HEADERS) $(FLAGS) -o $(EXEC)  
+	$(COMPILER) $(PARAM) $(MAIN) $(USR) $(PHYSICS) $(HEADERS) $(FLAGS) -o $(EXEC) && echo "\033[0;32m=== Compilation for $(EXEC) SUCCEED ===\033[0m" || echo "\033[1;31m=== Compilation $(EXEC) FAILED ===\033[0m";
 	@echo ""
 	@echo "###########################################################"
-	@echo "########### AZTEKAS code compiled successfully ############"
+	@echo "############ AZTEKAS code Makefile parameters #############"
 	@echo "###########################################################"
 	@echo "" 
 	@echo " AZTEKAS code path = "$(AZTPATH)
