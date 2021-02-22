@@ -39,7 +39,7 @@ int Mesh()
       #endif
    }
 
-#if PHYSICS == HD || PHYSICS == RHD
+#if HYDRO == TRUE
    Surface_Volume();
 #endif
 
@@ -71,7 +71,7 @@ int Mesh()
       grid.X2m[j] = x2min + (j-0.5-gc)*(dx2);
    }
    
-#if PHYSICS == HD || PHYSICS == RHD
+#if HYDRO == TRUE
    Surface_Volume();
 #endif
 

@@ -1,19 +1,9 @@
-ifeq ($(PHY),HD) 
-   MAIN += $(AZTPATH)/Src/integration/equation-solver.c \
-	   	  $(AZTPATH)/Src/integration/integration$(INT).c \
-		     $(AZTPATH)/Src/integration/method-of-lines.c \
-		     $(AZTPATH)/Src/integration/runge-kutta.c \
-		     $(AZTPATH)/Src/integration/timestep.c
+MAIN += $(AZTPATH)/Src/integration/equation-solver.c \
+	     $(AZTPATH)/Src/integration/runge-kutta.c
+
+ifeq ($(HYDRO),True)
+   include  $(AZTPATH)/Src/integration/HYPERBOLIC/Makefile
 endif
-ifeq ($(PHY),RHD) 
-   MAIN += $(AZTPATH)/Src/integration/equation-solver.c \
-	   	  $(AZTPATH)/Src/integration/integration$(INT).c \
-		     $(AZTPATH)/Src/integration/method-of-lines.c \
-		     $(AZTPATH)/Src/integration/runge-kutta.c \
-		     $(AZTPATH)/Src/integration/timestep.c
-endif
-ifeq ($(PHY),TOV)
-   MAIN += $(AZTPATH)/Src/integration/equation-solver.c \
-			  $(AZTPATH)/Src/integration/integration.c \
-		     $(AZTPATH)/Src/integration/runge-kutta.c
+ifeq ($(TOV),True)
+   include  $(AZTPATH)/Src/integration/ODE/Makefile
 endif

@@ -37,6 +37,7 @@ OMP_NUM = 1
 PHY = HD
 
 HYDRO = True
+TOV = True
 
 ##################################################
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
@@ -83,7 +84,7 @@ INT = Standard
 
 USR = initial.c \
       user_boundaries.c \
-		user_input.c 
+		user_input.c
 
 ##################################################
 # Include a global Makefile in the /Src/ 

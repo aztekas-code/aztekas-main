@@ -1,3 +1,6 @@
+######################################################
+###### Makefile for Relativistic Hydrodynamics #######
+######################################################
 
 ifeq ($(METRIC),User)
    PARAM += -DMETRIC=USER
@@ -17,15 +20,6 @@ endif
 ifeq ($(METRIC),Kerr-Schild)
    PARAM += -DMETRIC=KS
 endif
-
-PHYSICS = $(AZTPATH)/Src/physics/RHD/cons_q.c \
-			 $(AZTPATH)/Src/physics/RHD/cons2prim.c \
-			 $(AZTPATH)/Src/physics/RHD/flux_f.c \
-			 $(AZTPATH)/Src/physics/RHD/flux_g.c \
-		 	 $(AZTPATH)/Src/physics/RHD/flux_h.c \
-			 $(AZTPATH)/Src/physics/RHD/prim2cons.c \
-			 $(AZTPATH)/Src/physics/RHD/sources.c \
-			 $(AZTPATH)/Src/physics/RHD/surface_volume.c
 
 ifneq ($(METRIC),User)
    PHYSICS += $(AZTPATH)/Src/physics/RHD/$(METRIC)/metric.c
@@ -58,6 +52,12 @@ ifeq ($(METRIC),User)
    endif
 endif
 
-ifeq ($(INT),pvrs)
-   PHYSICS += $(AZTPATH)/Src/RHD/amatrix.c
+# Systems of equations
+
+ifeq ($(HYDRO),True)
+	include $(AZTPATH)/Src/physics/RHD/HYDRO/Makefile
+endif
+
+ifeq ($(TOV),True)
+	include $(AZTPATH)/Src/physics/RHD/TOV/Makefile
 endif

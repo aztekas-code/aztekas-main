@@ -1,4 +1,4 @@
-ifeq ($(PHY),$(filter $(PHY),HD RHD))
+ifeq ($(HYDRO),True)
    MAIN += $(AZTPATH)/Src/fluxes/fluxes.c \
 		     $(AZTPATH)/Src/fluxes/limiters.c \
 		     $(AZTPATH)/Src/fluxes/reconstruction.c \

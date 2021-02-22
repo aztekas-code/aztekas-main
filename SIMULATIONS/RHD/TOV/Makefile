@@ -64,7 +64,7 @@ EOS = Ideal
 # Coordinates (Cartesian, Cylindrical, Spherical)
 ##################################################
 
-COORD = Cartesian
+COORD = Spherical
 
 ##################################################
 # User Source Terms (True,False)
@@ -84,7 +84,8 @@ INT = Standard
 
 USR = initial.c \
       user_boundaries.c \
-		user_input.c
+		user_input.c \
+		test.c
 
 ##################################################
 # Include a global Makefile in the /Src/ 

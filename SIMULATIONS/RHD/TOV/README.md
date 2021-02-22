@@ -10,7 +10,7 @@ in the local Makefile.
 This variable will set to "TRUE" the Ordinary Differential Equation (ODE)
 system solver inside AZTEKAS, by enabling the ODE_Integration() function
 (/aztekas-main/Src/integration/equation-solver.c). This function is defined
-in the /aztekas-main/Src/integration/integration.c file, where it is already
+in the /aztekas-main/Src/integration/ODE/integration.c file, where it is already
 coded the "test_module()" function.
 
 In order to test that the TOV module works correctly, the user must create a C
@@ -26,7 +26,7 @@ NOTE: Remember to define the function in the user_param.h
 
 Inside that function you can either print the stored values of vector U:
    -> Print_Values()
-   -> Print_Values("file_id")
+   -> Print_Values("file_id") or Print_Values()
 which will be stored in the corresponding "outputdirectory" or print a
 "Hello world!" to the terminal.
 

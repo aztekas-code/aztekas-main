@@ -1,5 +1,5 @@
 /**
- * @file /integration/integration.c
+ * @file /integration/HYPERBOLIC/integration.c
  *
  * @author Alejandro Aguayo-Ortiz
  *
@@ -8,8 +8,6 @@
  */
 
 #include"main.h"
-
-#if HYPERBOLIC==TRUE
 
 void Hyperbolic_Integration()
 {
@@ -34,15 +32,3 @@ void Hyperbolic_Integration()
     */
    grid.time = grid.time + dt;
 }
-
-#endif
-
-#if ODE == TRUE
-
-void ODE_Integration()
-{
-   // Function for testing the ODE module.
-   test_module();
-}
-
-#endif
