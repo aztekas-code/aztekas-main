@@ -84,7 +84,7 @@ INT = Standard
 
 USR = initial.c \
       user_boundaries.c \
-		user_input.c \
+		user_input.c
 
 ##################################################
 # Include a global Makefile in the /Src/ 
