@@ -9,7 +9,7 @@
 // Macros that allow you to define Print_Values0, ..., Print_Values5 for 
 // 0, ..., 5 allowed parameters, respectively, and still be called as 
 // Print_Values.
-#define NARGS(...) NARGS_(__VA_ARGS__, 5, 4, 3, 2, 1, 0)
+#define NARGS(...) NARGS_(0, ## __VA_ARGS__, 5, 4, 3, 2, 1, 0)
 #define NARGS_(_5, _4, _3, _2, _1, _0, N, ...) N
 
 #define CONC(A, B) CONC_(A, B)
