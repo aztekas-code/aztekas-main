@@ -72,6 +72,9 @@ The steps to follow:
       In order to use this structure, you will have to declare at the beginning
       of your function as:
          -> rk_ rk;
+      You will also have to define (because is already declared) the Runge-Kutta
+      order variable at the beginning of your file:
+         rk_order = 2 (or 3)
 
 Here is a pseudocode structure on how to implemente a 2nd Order Runge-Kutta:
 http://metodos-numericos-para-ecuaciones.blogspot.com/p/metodo-de-runge-kutta-de-segundo-orden.html
