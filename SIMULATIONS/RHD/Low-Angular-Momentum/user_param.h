@@ -19,7 +19,7 @@
 #define l_0                     6.657
 
 #define MDOT                    TRUE
-#define MDOT_END                FALSE
+#define MDOT_END                TRUE
 #define MDOT_DATA               1.0e+04
 
 int Mdot_end;

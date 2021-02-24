@@ -71,6 +71,11 @@ void Initial()
             U(VX3,i,j) = 0.0;                                                   
          }      
 
+//         U(RHO,i,j) = 1.0;
+//         U(PRE,i,j) = Temp*U(RHO,i,j)*pow(density_0,K-1.0);
+//         U(VX1,i,j) = 0.0;
+//         U(VX2,i,j) = 0.0;
+//         U(VX3,i,j) = 0.0;
       }
       fclose(file);
    }

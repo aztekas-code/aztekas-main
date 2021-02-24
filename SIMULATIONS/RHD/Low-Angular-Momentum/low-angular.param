@@ -40,7 +40,7 @@ Temp = 3.02261200e-03
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % OUTPUT FILE AND DIRECTORY %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-outputdirectory = ./Gamma-1p66666666/T-/a0p0/
+outputdirectory = ./Gamma-1p66666666/T-1/a0p0/
 outputfile      = sph_
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

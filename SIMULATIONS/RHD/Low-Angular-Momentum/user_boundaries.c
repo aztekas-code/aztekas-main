@@ -68,7 +68,9 @@ void User_Boundaries(double *B)
           {
             B(RHO,i,j) = 1.0;
             B(PRE,i,j) = Temp*B(RHO,i,j)*pow(density_0,K-1.0);
+            //B(VX1,i,j) = velocity_0;
             B(VX2,i,j) = 0.0;
+            vr = (r/(r + 2.0*M))*B(VX1,i,j);
             B(VX3,i,j) = l_0*ftheta(t)*(alpha - beta*vr);
          }
       }
