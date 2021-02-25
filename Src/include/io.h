@@ -23,6 +23,8 @@
 #define Output1_bin(x) _Generic((x), int: Output1_bin_int, char *: Output1_bin_char)(x);
 #define Output2_bin(x) _Generic((x), int: Output2_bin_int, char *: Output2_bin_char)(x);
 #define Output3_bin(x) _Generic((x), int: Output3_bin_int, char *: Output3_bin_char)(x);
+#define Output_ascii(x) _Generic((x), int: Output_ascii_int, char *: Output_ascii_char)(x);
+#define Output_bin(x) _Generic((x), int: Output_bin_int, char *: Output_bin_char)(x);
 
 //Paramfile
 int binary;
@@ -50,6 +52,14 @@ void Frequency_Output(double *dtprint);
 void Init_Simulation(double *tprint, int itprint);
 
 void Manage_Simulation_Info(int argc, char *argv[]);
+
+void Output_ascii_int(int itprint);
+
+void Output_ascii_char(char *itprint);
+
+void Output_bin_int(int itprint);
+
+void Output_bin_char(char *itprint);
 
 void Output1_int(int itprint);
 void Output1_char(char *itprint);

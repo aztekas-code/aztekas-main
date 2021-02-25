@@ -58,22 +58,18 @@ endif
 
 ifeq ($(DIM),1)
    PARAM += -Deq=3
-   PARAM += -Dgraf=1
    DIMENSION=1
 endif
 ifeq ($(DIM),2)
    PARAM += -Deq=4
-   PARAM += -Dgraf=2
    DIMENSION=2
 endif
 ifeq ($(DIM),3)
    PARAM += -Deq=5
-   PARAM += -Dgraf=3
    DIMENSION=3
 endif
 ifeq ($(DIM),4)
    PARAM += -Deq=5
-   PARAM += -Dgraf=2
    DIMENSION="2.5"
 endif
 
