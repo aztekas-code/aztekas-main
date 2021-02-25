@@ -17,12 +17,6 @@
 
 #define Print_Values(...) CONC(Print_Values_, NARGS(__VA_ARGS__))(__VA_ARGS__)
 
-#define Output1(x) _Generic((x), int: Output1_int, char *: Output1_char)(x);
-#define Output2(x) _Generic((x), int: Output2_int, char *: Output2_char)(x);
-#define Output3(x) _Generic((x), int: Output3_int, char *: Output3_char)(x);
-#define Output1_bin(x) _Generic((x), int: Output1_bin_int, char *: Output1_bin_char)(x);
-#define Output2_bin(x) _Generic((x), int: Output2_bin_int, char *: Output2_bin_char)(x);
-#define Output3_bin(x) _Generic((x), int: Output3_bin_int, char *: Output3_bin_char)(x);
 #define Output_ascii(x) _Generic((x), int: Output_ascii_int, char *: Output_ascii_char)(x);
 #define Output_bin(x) _Generic((x), int: Output_bin_int, char *: Output_bin_char)(x);
 
@@ -61,27 +55,10 @@ void Output_bin_int(int itprint);
 
 void Output_bin_char(char *itprint);
 
-void Output1_int(int itprint);
-void Output1_char(char *itprint);
-
-void Output2_int(int itprint);
-void Output2_char(char *itprint);
-
-void Output3_int(int itprint);
-void Output3_char(char *itprint);
-
-void Output1_bin_int(int itprint);
-void Output1_bin_char(char *itprint);
-
-void Output2_bin_int(int itprint);
-void Output2_bin_char(char *itprint);
-
-void Output3_bin_int(int itprint);
-void Output3_bin_char(char *itprint);
-
 void Print_Time_Values(double *tprint, double *dtprint, int itprint);
 
 void Print_Values_0();
+
 void Print_Values_1(char *file_id);
 
 void Restart();

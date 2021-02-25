@@ -13,38 +13,13 @@ void Print_Values_0()
    char id[50];
    strcpy(id,"out");
 
-   if(graf == 1)
+   if(binary == TRUE)
    {
-      if(binary == TRUE)
-      {
-         Output1_bin(id);
-      }
-      else
-      {
-         Output1(id);
-      }
+      Output_bin(id);
    }
-   else if(graf == 2)
+   else
    {
-      if(binary == TRUE)
-      {
-         Output2_bin(id);
-      }
-      else
-      {
-         Output2(id);
-      }
-   }
-   else if(graf == 3)
-   {
-      if(binary == TRUE)
-      {
-         Output3_bin(id);
-      }
-      else
-      {
-         Output3(id);
-      }
+      Output_ascii(id);
    }
 
    /**
@@ -65,38 +40,13 @@ void Print_Values_1(char *file_id)
       strcpy(id,file_id);
    }
 
-   if(graf == 1)
+   if(binary == TRUE)
    {
-      if(binary == TRUE)
-      {
-         Output1_bin(id);
-      }
-      else
-      {
-         Output1(id);
-      }
+      Output_bin(id);
    }
-   else if(graf == 2)
+   else
    {
-      if(binary == TRUE)
-      {
-         Output2_bin(id);
-      }
-      else
-      {
-         Output2(id);
-      }
-   }
-   else if(graf == 3)
-   {
-      if(binary == TRUE)
-      {
-         Output3_bin(id);
-      }
-      else
-      {
-         Output3(id);
-      }
+      Output_ascii(id);
    }
 
    /**

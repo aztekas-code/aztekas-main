@@ -20,39 +20,14 @@ void Print_Time_Values(double *tprint, double *dtprint, int it)
    if(grid.time >= *tprint || CHECK_NAN == TRUE)
    {
       printf("Time = %e, dt = %e\n",grid.time,dt);
-//      if(graf == 1)
-//      {
-         if(binary == TRUE)
-         {
-            Output_bin(it);
-         }
-         else
-         {
-            Output_ascii(it);
-         }
-//      }
-//      else if(graf == 2)
-//      {
-//         if(binary == TRUE)
-//         {
-//            Output2_bin(it);
-//         }
-//         else
-//         {
-//            Output2(it);
-//         }
-//      }
-//      else if(graf == 3)
-//      {
-//         if(binary == TRUE)
-//         {
-//            Output3_bin(it);
-//         }
-//         else
-//         {
-//            Output3(it);
-//         }
-//      }
+      if(binary == TRUE)
+      {
+         Output_bin(it);
+      }
+      else
+      {
+         Output_ascii(it);
+      }
 
       /**
        * Increase the time of printing by dtprint and increase
