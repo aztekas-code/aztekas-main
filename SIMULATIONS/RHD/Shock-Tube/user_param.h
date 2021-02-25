@@ -20,6 +20,7 @@
 #define RECONST            MINMOD
 #define FLUX               HLL
 #define GRID               UNIFORM
+#define PRINT_EVOLV        TRUE
 
 #define INTERFACE          DIAGONAL
 
