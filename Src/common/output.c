@@ -117,7 +117,7 @@ void Output_ascii_int(int *itprint)
    }
 #endif
 
-   printf("id : %d, output file : %s\n",itprint,archivo);
+   printf("id : %d, output file : %s\n",*itprint,archivo);
    #if FILE_NOTIFICATION == TRUE
       char *a = "notification ";
       char script[100];
@@ -189,7 +189,7 @@ void Output_bin_int(int *itprint)
    }
 #endif
 
-   printf("id : %d, output file : %s\n",itprint,archivo);
+   printf("id : %d, output file : %s\n",*itprint,archivo);
    #if FILE_NOTIFICATION == TRUE
       char *a = "notification ";
       char script[100];

@@ -34,7 +34,7 @@ double TimeStep()
       dtmin = MIN(Dx1,dtmin);
       #endif
 
-      if(U(0,i) == fabs(1.0/0.0))
+      if(U(0,i) != U(0,i) || U(1,i) != U(1,i))
       {
          printf("                                          \n");
          printf("NaN value found in calculation at (%d).\n",i);
@@ -79,7 +79,7 @@ double TimeStep()
          dtmin = MIN(Dx2,dtmin);
          #endif
          
-         if(U(0,i) != U(0,i) || U(1,i) != U(1,i))
+         if(U(0,i,j) != U(0,i,j) || U(1,i,j) != U(1,i,j))
          {
             printf("                                          \n");
             printf("NaN value found in calculation at (%d,%d) = (%.2f,%.2f).\n",i,j,grid.X1[i],grid.X2[j]);
