@@ -43,7 +43,7 @@ void Ending_Message();
 
 void Frequency_Output(double *dtprint);
 
-void Init_Simulation(double *tprint, int itprint);
+void Init_Simulation(double *tprint, int *itprint);
 
 void Manage_Simulation_Info(int argc, char *argv[]);
 

@@ -9,7 +9,7 @@
 
 #include"main.h"
 
-void Init_Simulation(double *tprint, int itprint)
+void Init_Simulation(double *tprint, int *itprint)
 {
    if(restart_simulation == TRUE)
    {
@@ -46,14 +46,14 @@ void Init_Simulation(double *tprint, int itprint)
       }
 
       *tprint  = grid.time;          // Initialize time
-      itprint = restart_filecount;  // Initialize number of files
+      *itprint = restart_filecount;  // Initialize number of files
       
    }
    else
    {
       Initial();
       *tprint  = 0.0;  // Initialize time
-      itprint = 0;    // Initialize number of files
+      *itprint = 0;    // Initialize number of files
    }
 
    U0 = U;        // Save U(t_n), initial or previous step vector
