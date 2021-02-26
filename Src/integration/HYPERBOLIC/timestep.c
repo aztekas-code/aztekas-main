@@ -40,7 +40,7 @@ double TimeStep()
          printf("NaN value found in calculation at (%d).\n",i);
          CHECK_NAN = TRUE;
          U = U0;
-         Print_Time_Values(&grid.time,&c,CHECK_NAN);
+         Print_Time_Values(&grid.time,&c,&CHECK_NAN);
          exit(EXIT_FAILURE);
       }
    }
@@ -79,13 +79,13 @@ double TimeStep()
          dtmin = MIN(Dx2,dtmin);
          #endif
          
-         if(U(0,i,j) == fabs(1.0/0.0))
+         if(U(0,i) != U(0,i) || U(1,i) != U(1,i))
          {
             printf("                                          \n");
             printf("NaN value found in calculation at (%d,%d) = (%.2f,%.2f).\n",i,j,grid.X1[i],grid.X2[j]);
             CHECK_NAN = TRUE;
             U = U0;
-            Print_Time_Values(&grid.time,&c,CHECK_NAN);
+            Print_Time_Values(&grid.time,&c,&CHECK_NAN);
             exit(EXIT_FAILURE);
          }
       }
@@ -119,13 +119,13 @@ double TimeStep()
          dtmin = MIN(Dx2,dtmin);
          #endif
 
-         if(U(RHO,i,j) == fabs(1.0/0.0))
+         if(U(0,i,j) != U(0,i,j) || U(1,i,j) != U(1,i,j))
          {
             printf("                                          \n");
             printf("NaN value found in calculation at (%d,%d).\n",i,j);
             CHECK_NAN = TRUE;
             U = U0;
-            Print_Time_Values(&grid.time,&c,CHECK_NAN);
+            Print_Time_Values(&grid.time,&c,&CHECK_NAN);
             exit(EXIT_FAILURE);
          }
       }

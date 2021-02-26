@@ -8,7 +8,7 @@
 
 #include"main.h"
 
-void Output_ascii_int(int itprint)
+void Output_ascii_int(int *itprint)
 {
    FILE *file;
    int n, i, j, k;
@@ -17,7 +17,7 @@ void Output_ascii_int(int itprint)
    char archivo[50];
    int num;
 
-   num = itprint;
+   num = *itprint;
    strcpy(ext,".dat");
    snprintf(dat,8,"%d",num);
    strcpy(archivo,outputdirectory);
@@ -129,7 +129,7 @@ void Output_ascii_int(int itprint)
    fclose(file);
 }
 
-void Output_bin_int(int itprint)
+void Output_bin_int(int *itprint)
 {
    FILE *file;
    int n, i, j, k, size_X1, size_X2, size_X3;
@@ -145,7 +145,7 @@ void Output_bin_int(int itprint)
    size_X2 = Nx2-2*gc+1;
 #endif
    
-   num = itprint;
+   num = *itprint;
    strcpy(ext,".bin");
    snprintf(dat,8,"%d",num);
    strcpy(archivo,outputdirectory);

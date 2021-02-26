@@ -90,7 +90,7 @@ int Cons2Prim(double *u, double *q)
             printf("Spend too much time in Newton-Rhapson.\n");
             CHECK_NAN = TRUE;
             U = U0;
-            Print_Time_Values(&grid.time,&theta,CHECK_NAN);
+            Print_Time_Values(&grid.time,&theta,&CHECK_NAN);
             exit(EXIT_FAILURE);
          }
       }
@@ -191,7 +191,7 @@ int Cons2Prim(double *u, double *q)
                printf("Spend too much time in Newton-Rhapson.\n");
                CHECK_NAN = TRUE;
                U = U0;
-               Print_Time_Values(&grid.time,&theta,CHECK_NAN);
+               Print_Time_Values(&grid.time,&theta,&CHECK_NAN);
                exit(EXIT_FAILURE);
             }
          }
@@ -291,7 +291,7 @@ int Cons2Prim(double *u, double *q)
                printf("%f %f %e %e %e %e\n",grid.X1[i],grid.X2[j],D,tau,SS,f);
                CHECK_NAN = TRUE;
                U = U0;
-               Print_Time_Values(&grid.time,&theta,CHECK_NAN);
+               Print_Time_Values(&grid.time,&theta,&CHECK_NAN);
                exit(EXIT_FAILURE);
             }
          }

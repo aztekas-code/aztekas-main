@@ -8,7 +8,7 @@
 
 #include"main.h"
 
-void Print_Time_Values(double *tprint, double *dtprint, int it)
+void Print_Time_Values(double *tprint, double *dtprint, int *itprint)
 {
    /**
     * Print the Mass Accretion Rate \f[ \dot{M} \f]
@@ -22,11 +22,11 @@ void Print_Time_Values(double *tprint, double *dtprint, int it)
       printf("Time = %e, dt = %e\n",grid.time,dt);
       if(binary == TRUE)
       {
-         Output_bin(it);
+         Output_bin(itprint);
       }
       else
       {
-         Output_ascii(it);
+         Output_ascii(itprint);
       }
 
       /**
@@ -34,7 +34,7 @@ void Print_Time_Values(double *tprint, double *dtprint, int it)
        * the humber of the output file
        */
       *tprint = *tprint + *dtprint;
-      itprint = it + 1;
+      ++*itprint;
 
       /**
        * Forcing termination

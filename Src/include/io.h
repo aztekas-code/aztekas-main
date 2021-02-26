@@ -17,8 +17,8 @@
 
 #define Print_Values(...) CONC(Print_Values_, NARGS(__VA_ARGS__))(__VA_ARGS__)
 
-#define Output_ascii(x) _Generic((x), int: Output_ascii_int, char *: Output_ascii_char)(x);
-#define Output_bin(x) _Generic((x), int: Output_bin_int, char *: Output_bin_char)(x);
+#define Output_ascii(x) _Generic((x), int *: Output_ascii_int, char *: Output_ascii_char)(x);
+#define Output_bin(x) _Generic((x), int *: Output_bin_int, char *: Output_bin_char)(x);
 
 //Paramfile
 int binary;
@@ -47,15 +47,15 @@ void Init_Simulation(double *tprint, int *itprint);
 
 void Manage_Simulation_Info(int argc, char *argv[]);
 
-void Output_ascii_int(int itprint);
+void Output_ascii_int(int *itprint);
 
 void Output_ascii_char(char *itprint);
 
-void Output_bin_int(int itprint);
+void Output_bin_int(int *itprint);
 
 void Output_bin_char(char *itprint);
 
-void Print_Time_Values(double *tprint, double *dtprint, int itprint);
+void Print_Time_Values(double *tprint, double *dtprint, int *itprint);
 
 void Print_Values_0();
 

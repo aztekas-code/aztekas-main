@@ -8,7 +8,7 @@
  *
  * @author Alejandro Aguayo-Ortiz
  *
- * @date 22-02-2021 - 01:00:57
+ * @date 26-02-2021 - 01:20:23
  *
  * E-mail: aaguayoo92@ciencias.unam.mx
  *
@@ -40,7 +40,7 @@ void Equation_System_Solver()
        * Real-Time computations using U
        */
       //We print the values
-      Print_Time_Values(&tprint,&dtprint,itprint);
+      Print_Time_Values(&tprint,&dtprint,&itprint);
 
       //In here we set the integration method (MoL-RK and HRSC)
       Hyperbolic_Integration();
@@ -63,6 +63,6 @@ void Equation_System_Solver()
    #endif
    }
 
-   Print_Time_Values(&tprint,&dtprint,itprint);
+   Print_Time_Values(&tprint,&dtprint,&itprint);
 #endif
 }
