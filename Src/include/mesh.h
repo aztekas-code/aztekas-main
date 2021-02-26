@@ -36,7 +36,11 @@ typedef struct
    double x[4];
    double lapse;
    double beta_con[3];
+   double beta_cov[3];
    double gamma_con[3][3];
+   double gamma_cov[3][3];
+   double g_con[4][4];
+   double g_cov[4][4];
    double dety;
 }gauge_;
 

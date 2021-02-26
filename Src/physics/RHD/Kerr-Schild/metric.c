@@ -87,6 +87,14 @@ void Get_Metric_Components(gauge_ *local_grid)
    local_grid->beta_con[1] = 0.0;
    local_grid->beta_con[2] = 0.0;
 
+   local_grid->beta_cov[0] = (2.0*M*r/rho2)*(1.0/(1.0 + 2.0*M*r/rho2));
+   local_grid->beta_cov[1] = 0.0;
+   local_grid->beta_cov[2] = 0.0;
+
+   local_grid->beta_cov[0] = (2.0*M*r/rho2);
+   local_grid->beta_cov[1] = 0.0;
+   local_grid->beta_cov[2] = -2.0*a*M*r*sin2/rho2;
+
    #if POLAR == FALSE
 
    local_grid->gamma_con[0][0] = (a2*(rho2 + 2.0*M*r)*sin2 + pow(rho2,2.0))/(rho2*(rho2 + 2.0*M*r));
@@ -98,6 +106,16 @@ void Get_Metric_Components(gauge_ *local_grid)
    local_grid->gamma_con[2][0] = a/rho2;
    local_grid->gamma_con[2][1] = 0.0;
    local_grid->gamma_con[2][2] = 1.0/(rho2*sin2);
+
+   local_grid->gamma_cov[0][0] = 1.0 + 2.0*M*r/rho2;
+   local_grid->gamma_cov[0][1] = 0.0;
+   local_grid->gamma_cov[0][2] = -a*(1.0 + 2*M*r/rho2)*sin2;
+   local_grid->gamma_cov[1][0] = 0.0;
+   local_grid->gamma_cov[1][1] = rho2;
+   local_grid->gamma_cov[1][2] = 0.0;
+   local_grid->gamma_cov[2][0] = -a*(1.0 + 2*M*r/rho2)*sin2;
+   local_grid->gamma_cov[2][1] = 0.0;
+   local_grid->gamma_cov[2][2] = Sigma*sin2/rho2;
 
    #elif POLAR == TRUE
 
