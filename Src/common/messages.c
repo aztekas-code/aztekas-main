@@ -242,7 +242,7 @@ void Check_Sim_Parameters()
 void Manage_Simulation_Info(int argc, char *argv[])
 {
 	// create output directory
-   char create_dir[] = "mkdir -p ";	
+   char create_dir[50] = "mkdir -p ";	
    strcat(create_dir,outputdirectory);	
    int sysret = system(create_dir);
 
@@ -252,7 +252,7 @@ void Manage_Simulation_Info(int argc, char *argv[])
    sysret = system(create_info);
 
    #if MDOT == TRUE
-   char create_analysis[50] = "mkdir -p ";
+   char create_analysis[100] = "mkdir -p ";
    strcat(create_analysis,outputdirectory);
    strcat(create_analysis,"/Analysis/");
    sysret = system(create_analysis);

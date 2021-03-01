@@ -191,7 +191,7 @@ all:
 	@echo ""
 	@echo "Compiling files..."
 	@echo ""
-	$(COMPILER) $(PARAM) $(MAIN) $(USR) $(PHYSICS) $(HEADERS) $(FLAGS) -o $(EXEC) && echo "\033[0;32m=== Compilation for $(EXEC) SUCCEED ===\033[0m" || echo "\033[1;31m=== Compilation $(EXEC) FAILED ===\033[0m";
+	@-$(COMPILER) $(PARAM) $(MAIN) $(USR) $(PHYSICS) $(HEADERS) $(FLAGS) -o $(EXEC) && echo "\033[0;32m=== Compilation for $(EXEC) SUCCEED ===\033[0m" || echo "\033[1;31m=== Compilation $(EXEC) FAILED ===\033[0m";
 	@echo ""
 	@echo "###########################################################"
 	@echo "############ AZTEKAS code Makefile parameters #############"
