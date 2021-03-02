@@ -266,33 +266,35 @@ void Manage_Simulation_Info(int argc, char *argv[])
    #endif
 
    // copy
-   char dum[10] = "cp ";
-   strcat(dum,paramfile_name);
-   strcat(dum," ");
-   strcat(dum,outputdirectory);
-   strcat(dum,"INFO/");
-   sysret = system(dum);
+   char *files = malloc(50*sizeof(char));
+   strcpy(files,"cp ");
+   strcat(files,paramfile_name);
+   strcat(files," ");
+   strcat(files,outputdirectory);
+   strcat(files,"INFO/");
+   sysret = system(files);
    
-   strcpy(dum,"cp ");
-   strcat(dum,"Makefile");
-   strcat(dum," ");
-   strcat(dum,outputdirectory);
-   strcat(dum,"INFO/");
-   sysret = system(dum);
+   strcpy(files,"cp ");
+   strcat(files,"Makefile");
+   strcat(files," ");
+   strcat(files,outputdirectory);
+   strcat(files,"INFO/");
+   sysret = system(files);
 
-   strcpy(dum,"cp ");
-   strcat(dum,"*.c");
-   strcat(dum," ");
-   strcat(dum,outputdirectory);
-   strcat(dum,"INFO/");
-   sysret = system(dum);
+   strcpy(files,"cp ");
+   strcat(files,"*.c");
+   strcat(files," ");
+   strcat(files,outputdirectory);
+   strcat(files,"INFO/");
+   sysret = system(files);
 
-   strcpy(dum,"cp ");
-   strcat(dum,"*.h");
-   strcat(dum," ");
-   strcat(dum,outputdirectory);
-   strcat(dum,"INFO/");
-   sysret = system(dum);
+   strcpy(files,"cp ");
+   strcat(files,"*.h");
+   strcat(files," ");
+   strcat(files,outputdirectory);
+   strcat(files,"INFO/");
+   sysret = system(files);
+   free(files);
 
    Check_Sim_Parameters();
    if(check_param == TRUE) getchar();
