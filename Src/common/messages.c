@@ -247,17 +247,22 @@ void Manage_Simulation_Info(int argc, char *argv[])
    strcpy(create_dir,"mkdir -p ");
    strcat(create_dir,outputdirectory);	
    int sysret = system(create_dir);
+   free(create_dir);
 
-   char create_info[10] = "mkdir -p ";
+   char *create_info = malloc(50*sizeof(char));
+   strcpy(create_info,"mkdir -p ");
    strcat(create_info,outputdirectory);
-   strcat(create_info,"/INFO/");
+   strcat(create_info,"INFO/");
    sysret = system(create_info);
+   free(create_info);
 
    #if MDOT == TRUE
-   char create_analysis[10] = "mkdir -p ";
+   char *create_analysis = malloc(50*sizeof(char));
+   strcpy(create_analysis,"mkdir -p ");
    strcat(create_analysis,outputdirectory);
    strcat(create_analysis,"/Analysis/");
    sysret = system(create_analysis);
+   free(create_analysis);
    #endif
 
    // copy
@@ -291,8 +296,6 @@ void Manage_Simulation_Info(int argc, char *argv[])
 
    Check_Sim_Parameters();
    if(check_param == TRUE) getchar();
-
-//   free(create_dir);
 }
 
 void Check_Paramfile(char *param, int argc, char *argv[])
