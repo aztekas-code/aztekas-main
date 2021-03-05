@@ -29,7 +29,7 @@ void Restart()
    idum = fscanf(file,"%lf\n",&grid.time) ;
 
    // Read Nx1
-   idum = fscanf(file,"%d\n",&dum) ;
+   idum = fscanf(file,"%d\n",&size) ;
 
    // Skip line   
    idum = fscanf(file,"%s\n",line) ;
@@ -51,10 +51,10 @@ void Restart()
    idum = fscanf(file,"%lf\n",&grid.time) ;
 
    // Read Nx1
-   idum = fscanf(file,"%d\n",&dum) ;
+   idum = fscanf(file,"%d\n",&size) ;
 
    // Read Nx2
-   idum = fscanf(file,"%d\n",&dum) ;
+   idum = fscanf(file,"%d\n",&size) ;
 
    // Skip line   
    idum = fscanf(file,"%s\n",line) ;
@@ -79,10 +79,10 @@ void Restart()
    idum = fscanf(file,"%lf\n",&grid.time) ;
 
    // Read Nx1
-   idum = fscanf(file,"%d\n",&dum) ;
+   idum = fscanf(file,"%d\n",&size) ;
 
    // Read Nx2
-   idum = fscanf(file,"%d\n",&dum) ;
+   idum = fscanf(file,"%d\n",&size) ;
 
    // Skip line   
    idum = fscanf(file,"%s\n",line) ;
