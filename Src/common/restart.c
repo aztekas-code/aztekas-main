@@ -11,7 +11,7 @@
 void Restart()
 {
    FILE *file;
-   int i, j, k, idum;
+   int i, j, k, idum, size;
    double dum;
    char line[100];
 
