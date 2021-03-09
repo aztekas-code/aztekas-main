@@ -7,13 +7,13 @@
 //Do not erase any of these libraries//
 #include"main.h"
 
-mass = (double *)malloc((Nx1+1)*sizeof(double));
-
 void Initial()
 {
    int n, i, j, k, cell;
    
    double r;
+   
+   mass = (double *)malloc((Nx1+1)*sizeof(double));
    
    //Initialize grid.time
    grid.time = 0.0;
@@ -31,6 +31,7 @@ void Initial()
    
    double test, mass_aux;
    double density_atm, pressure_atm;
+   double r1,r2,rho1,rho2,m1,m2;
    
    int iRad;
    
@@ -74,6 +75,7 @@ void Initial()
         m2 = 4.*M_PI*r2*r2*rho2 ;
         mass[i] = mass_aux + 0.5*(m1+m2);  
         mass_aux = mass[i];
+        printf( "%d %d /n", r1, mass[i] );
    }
    //initial gas cloud's mass
    mass_tot = mass[Nx1-gc-1];

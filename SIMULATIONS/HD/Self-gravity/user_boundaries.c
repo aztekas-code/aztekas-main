@@ -12,7 +12,7 @@ void User_Boundaries(double *B)
 
    double r, r1,r2,rho1,rho2,m1, m2, mass_aux;
 
-   polyK = (K-1.)/K*(1.- r_0/Rad)/r_0 ;
+   polyK = (K-1.)/K*(1.- r_acc/Rad)/r_acc ;
    
    pressure_0 = polyK*pow(density_0,K);
    

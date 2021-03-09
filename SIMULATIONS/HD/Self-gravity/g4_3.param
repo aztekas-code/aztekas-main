@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % OUTPUT FILE AND DIRECTORY %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-outputdirectory = ./DATA/
+outputdirectory = ./TEST/
 outputfile      = data_
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -35,8 +35,8 @@ x1min = 1.0
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
-tmax     = 1500.0
-timefile = 50.0
+tmax     = 2.0
+timefile = 1.0
 numfile  = 0
 
 %%%%%%%%%%%%%%%%%%

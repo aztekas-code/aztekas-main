@@ -16,10 +16,12 @@
 #define GRID               LOGMESH
 #define lfac               1.0
 #define PRINT_EVOLV        TRUE
-#define selfgravity        TRUE
+#define selfgravity        FALSE
 
 
 double density_0, pressure_0, velocity_0, Rad, polyK, r_acc;
+
+double density_atm, pressure_atm;
 
 // mass that has been accreted (r<r_acc)
 double mass_acc = 0.0;
