@@ -24,7 +24,7 @@ double density_0, pressure_0, velocity_0, Rad, polyK, r_acc;
 double density_atm, pressure_atm;
 
 // mass that has been accreted (r<r_acc)
-double mass_acc = 0.0;
+double mass_acc;
 // Total gas cloud's mass
 double mass_tot;
 double *mass;
