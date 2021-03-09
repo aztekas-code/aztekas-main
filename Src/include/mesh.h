@@ -33,6 +33,7 @@ grid_ grid;
 
 typedef struct
 {
+   int    I[3];
    double x[4];
    double lapse;
    double beta_con[3];

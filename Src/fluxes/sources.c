@@ -30,6 +30,7 @@ void Prim2Sources(double *s, int *I)
 
    i = I[0];
 
+   local_grid.I[0] = i;
    local_grid.x[1] = grid.X1[i];
    local_grid.x[2] = 0.0;
    local_grid.x[3] = 0.0;
@@ -42,6 +43,8 @@ void Prim2Sources(double *s, int *I)
    i = I[0];
    j = I[1];
 
+   local_grid.I[0] = i;
+   local_grid.I[1] = j;
    local_grid.x[1] = grid.X1[i];
    local_grid.x[2] = grid.X2[j];
    local_grid.x[3] = 0.0;
@@ -55,6 +58,9 @@ void Prim2Sources(double *s, int *I)
    j = I[1];
    k = I[2];
 
+   local_grid.I[0] = i;
+   local_grid.I[1] = j;
+   local_grid.I[2] = k;
    local_grid.x[1] = grid.X1[i];
    local_grid.x[2] = grid.X2[j];
    local_grid.x[3] = grid.X3[k];
