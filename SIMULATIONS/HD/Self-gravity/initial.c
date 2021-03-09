@@ -75,7 +75,7 @@ void Initial()
         m2 = 4.*M_PI*r2*r2*rho2 ;
         mass[i] = mass_aux + 0.5*(m1+m2);  
         mass_aux = mass[i];
-        printf( "%d %d /n", r1, mass[i] );
+        printf( "%e %e \n", r1, mass[i] );
    }
    //initial gas cloud's mass
    mass_tot = mass[Nx1-gc-1];
