@@ -30,7 +30,6 @@ void Initial()
    ///////////////////////////
    
    double test, mass_aux;
-   double density_atm, pressure_atm;
    double r1,r2,rho1,rho2,m1,m2;
    
    int iRad;
