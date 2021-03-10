@@ -16,6 +16,8 @@
 *.js
 *.swp
 *.bak
+*.o
+fort.*
 
 SIMULATIONS/**/aztekas
 SIMULATIONS/**/TEST/
