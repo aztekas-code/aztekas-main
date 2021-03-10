@@ -51,7 +51,7 @@ void User_Boundaries(double *B)
     	  B(PRE,i) = polyK*pow(B(RHO,i),K);
     	  B(VX1,i) = 0.0;
 	  }
-*/	  
+	  
 
       if(i <= gc)
       {
@@ -64,7 +64,7 @@ void User_Boundaries(double *B)
     	    B(VX1,i) = 0.0;
     	  }
 	  }
-
+*/
 
       if(i >= Nx1-gc)
       {

@@ -35,8 +35,8 @@ x1min = 1.0
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
-tmax     = 2.0
-timefile = 1.0
+tmax     = 10.0
+timefile = 0.1
 numfile  = 0
 
 %%%%%%%%%%%%%%%%%%
