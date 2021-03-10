@@ -13,8 +13,9 @@ void Prim2FluxF(double *f, double *v, double *u, gauge_ *local_grid)
 {
 
    double E;
-   eos_ eos;
    double rho, p, vx1=0, vx2=0, vx3=0;
+   double P[3];
+   eos_ eos;
    rho = u[RHO];
    p   = u[PRE];
 
@@ -29,7 +30,10 @@ void Prim2FluxF(double *f, double *v, double *u, gauge_ *local_grid)
    vx3 = u[VX3];
 #endif
 
-   EoS(&eos,u,local_grid);
+   P[0] = rho;
+   P[1] = p;
+   P[2] = 0.0;
+   EoS(&eos,P,local_grid);
 
    E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
 

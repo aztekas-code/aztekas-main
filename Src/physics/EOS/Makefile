@@ -22,6 +22,9 @@ endif
 ifeq ($(EOS),Ryu)
         PARAM += -DEOS=RYU
 endif
+ifeq ($(EOS),Helmholtz)
+        PARAM += -DEOS=HELMHOLTZ
+endif
 
 ifneq ($(EOS),User)
    include $(AZTPATH)/Src/physics/EOS/$(EOS)/Makefile

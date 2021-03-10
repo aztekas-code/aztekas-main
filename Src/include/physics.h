@@ -25,6 +25,7 @@ typedef struct
 
 typedef struct
 {
+   double p;
    double e;
    double cs;
    double h;
@@ -59,3 +60,12 @@ void Scalar_Contraction_Range1(double *scalar, double *cov, double *con);
 void Raise_Index_Range1(double *con, double *cov, gauge_ *local_grid);
 void Low_Index_Range1(double *cov, double *con, gauge_ *local_grid);
 void Low_Index_Range2(double **diag, double **con, gauge_ *local_grid);
+
+
+extern void nad_eos_dt_(double *dens, double *pres, double xxMass[], double AA[], double ZZ[], double term_var[]);
+
+extern void nad_eos_dp_(double *dens, double *pres, double xxMass[], double AA[], double ZZ[], double term_var[]);
+
+extern void nad_eos_de_(double *dens, double *pres, double xxMass[], double AA[], double ZZ[], double term_var[]);
+
+

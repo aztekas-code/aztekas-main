@@ -28,7 +28,7 @@ binary = 0
 %%%%%%%%%%%%%%%
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
-Nx1 = 1280
+Nx1 = 128
 Nx2 = 0
 Nx3 = 0
 
@@ -45,9 +45,9 @@ x3min = 0.0
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
-tmax     = 0.2
+tmax     = 4.0e-10 %0.2
 timefile = 0.01
-numfile  = 0
+numfile  = 1
 
 %%%%%%%%%%%%%%%%%%
 % COURANT FACTOR %
@@ -67,15 +67,15 @@ K = 1.6666666666666666666666666
 % BOUNDARY AND INITIAL PARAMETERS %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % LEFT STATE
-rhol = 1.0
-pl   = 1.0
+rhol = 1.0e+07 %1.0
+pl   = 2.688409e+24 %1.0
 vx1l = 0.0
 vx2l = 0.0
 vx3l = 0.0
 
 % RIGHT STATE
-rhor = 0.125
-pr   = 0.1
+rhor = 0.125e+07 %0.125
+pr   = 2.688409e+23 %0.1
 vx1r = 0.0
 vx2r = 0.0
 vx3r = 0.0

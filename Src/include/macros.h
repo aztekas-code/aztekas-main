@@ -26,10 +26,11 @@
 #define RHD   1
 
 /* EOS */
-#define IDEAL 0
-#define DUST  1
-#define STIFF 2
-#define RYU   3
+#define IDEAL     0
+#define DUST      1
+#define STIFF     2
+#define RYU       3
+#define HELMHOLTZ 4
 
 /* GRAVITY */
 #define NONE   0

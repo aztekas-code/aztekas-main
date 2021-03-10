@@ -33,22 +33,23 @@ void Prim2Cons_All(double *q, double *u)
       local_grid.x[2] = M_PI_2;
       #endif
     
-      rho = u(0,i);
-      p   = u(1,i);
-      vx1 = u(2,i);
+      rho = u(RHO,i);
+      p   = u(PRE,i);
+      vx1 = u(VX1,i);
       vx2 = 0.0;
       vx3 = 0.0;
 
       P[0] = rho;
       P[1] = p;
+      P[2] = 0.0;
 
       EoS(&eos,P,&local_grid);
 
       E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
 
-      q(RHO,i) = rho;
-      q(PRE,i) = E;
-      q(VX1,i) = rho*vx1;
+      q(DEN,i) = rho;
+      q(ENE,i) = E;
+      q(MX1,i) = rho*vx1;
    }
 
 #elif DIM == 2
@@ -69,14 +70,15 @@ void Prim2Cons_All(double *q, double *u)
          local_grid.x[2] = M_PI_2;
          #endif
        
-         rho = u(0,i,j);
-         p   = u(1,i,j);
-         vx1 = u(2,i,j);
-         vx2 = u(3,i,j);
+         rho = u(RHO,i,j);
+         p   = u(PRE,i,j);
+         vx1 = u(VX1,i,j);
+         vx2 = u(VX2,i,j);
          vx3 = 0.0;
 
          P[0] = rho;
          P[1] = p;
+         P[2] = 0.0;
 
          EoS(&eos,P,&local_grid);
 
@@ -104,24 +106,25 @@ void Prim2Cons_All(double *q, double *u)
          local_grid.x[2] = grid.X2[j];
          local_grid.x[3] = 0.0;
        
-         rho = u(0,i,j);
-         p   = u(1,i,j);
-         vx1 = u(2,i,j);
-         vx2 = u(3,i,j);
-         vx3 = u(4,i,j);
+         rho = u(RHO,i,j);
+         p   = u(PRE,i,j);
+         vx1 = u(VX1,i,j);
+         vx2 = u(VX2,i,j);
+         vx3 = u(VX3,i,j);
 
          P[0] = rho;
          P[1] = p;
+         P[2] = 0.0;
 
          EoS(&eos,P,&local_grid);
 
          E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
    
-         q(0,i,j) = rho;
-         q(1,i,j) = E;
-         q(2,i,j) = rho*vx1;
-         q(3,i,j) = rho*vx2;
-         q(4,i,j) = rho*vx3;
+         q(DEN,i,j) = rho;
+         q(ENE,i,j) = E;
+         q(MX1,i,j) = rho*vx1;
+         q(MX2,i,j) = rho*vx2;
+         q(MX3,i,j) = rho*vx3;
       }
    }
 
@@ -138,24 +141,25 @@ void Prim2Cons_All(double *q, double *u)
             local_grid.x[2] = grid.X2[j];
             local_grid.x[3] = grid.X3[k];
         
-            rho = u(0,i,j,k);
-            p   = u(1,i,j,k);
-            vx1 = u(2,i,j,k);
-            vx2 = u(3,i,j,k);
-            vx3 = u(4,i,j,k);
+            rho = u(RHO,i,j,k);
+            p   = u(PRE,i,j,k);
+            vx1 = u(VX1,i,j,k);
+            vx2 = u(VX2,i,j,k);
+            vx3 = u(VX3,i,j,k);
 
             P[0] = rho;
             P[1] = p;
+            P[2] = 0.0;
 
             EoS(&eos,P,local_grid);
 
             E = 0.5 * rho * (vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
           
-            q(0,i,j,k) = rho;
-            q(1,i,j,k) = E;
-            q(2,i,j,k) = rho*vx1;
-            q(3,i,j,k) = rho*vx2;
-            q(4,i,j,k) = rho*vx3;
+            q(DEN,i,j,k) = rho;
+            q(ENE,i,j,k) = E;
+            q(MX1,i,j,k) = rho*vx1;
+            q(MX2,i,j,k) = rho*vx2;
+            q(MX3,i,j,k) = rho*vx3;
          }
       }
    }

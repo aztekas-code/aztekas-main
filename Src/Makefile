@@ -172,7 +172,7 @@ include $(AZTPATH)/Src/physics/Makefile
 
 THREADS = $(shell grep '^core id' /proc/cpuinfo |sort -u|wc -l)
 
-FLAGS = -lm -fcommon -std=gnu99
+FLAGS = -lm -fcommon -std=gnu99 -lgfortran
 ifneq ($(OMP_NUM),1)
    FLAGS += -fopenmp
 endif
@@ -191,7 +191,7 @@ all:
 	@echo ""
 	@echo "Compiling files..."
 	@echo ""
-	@-$(COMPILER) $(PARAM) $(MAIN) $(USR) $(PHYSICS) $(HEADERS) $(FLAGS) -o $(EXEC) && echo "\033[0;32m=== Compilation for $(EXEC) SUCCEED ===\033[0m" || echo "\033[1;31m=== Compilation $(EXEC) FAILED ===\033[0m";
+	$(COMPILER) $(PARAM) $(MAIN) $(USR) $(PHYSICS) $(HEADERS) $(FLAGS) $(FORTRAN) -o $(EXEC) && echo "\033[0;32m=== Compilation for $(EXEC) SUCCEED ===\033[0m" || echo "\033[1;31m=== Compilation $(EXEC) FAILED ===\033[0m";
 	@echo ""
 	@echo "###########################################################"
 	@echo "############ AZTEKAS code Makefile parameters #############"

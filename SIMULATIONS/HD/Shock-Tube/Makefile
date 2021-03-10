@@ -23,7 +23,7 @@ AZTPATH = $(AZTEKAS_PATH)
 # $ grep '^core id' /proc/cpuinfo |sort -u|wc -l
 ##################################################
 
-OMP_NUM = 1
+OMP_NUM = 4
 
 ##################################################
 # Physics (HD)
@@ -37,6 +37,7 @@ OMP_NUM = 1
 PHY = HD
 
 HYDRO = True
+TOV   = True
 
 ##################################################
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
