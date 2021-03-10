@@ -4,7 +4,7 @@
  * author: Alejandro Aguayo-Ortiz
  */
 
-//#include"macros.h"
+#include"macros.h"
 
 #define outflow_x1max      FALSE
 #define outflow_x1min      TRUE
