@@ -18,10 +18,10 @@ int Cons2Prim(double *u, double *q)
    
 #if DIM == 1
 
-//#ifdef _OPENMP
-//   #pragma omp parallel
-//   #pragma omp for private(D,E,S1,S2,S3,CONS,eos,local_grid)
-//#endif
+#ifdef _OPENMP
+   #pragma omp parallel
+   #pragma omp for private(D,E,S1,S2,S3,CONS,eos,local_grid)
+#endif
    for(int i = gc; i <= Nx1-gc; i++)
    {
       D  = q(0,i);

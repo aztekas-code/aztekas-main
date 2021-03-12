@@ -19,10 +19,10 @@ void Prim2Cons_All(double *q, double *u)
 
 #if DIM == 1
 
-//#ifdef _OPENMP
-//   #pragma omp parallel shared(grid)
-//   #pragma omp for private(rho,p,vx1,vx2,vx3,E,local_grid,eos,P)
-//#endif
+#ifdef _OPENMP
+   #pragma omp parallel shared(grid)
+   #pragma omp for private(rho,p,vx1,vx2,vx3,E,local_grid,eos,P)
+#endif
    for(int i = 0; i <= Nx1; i++)
    {
       local_grid.x[0] = grid.time;
