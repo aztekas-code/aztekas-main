@@ -32,6 +32,10 @@
 #define RYU       3
 #define HELMHOLTZ 4
 
+/* HELMHOLTZ COMPOSITION */
+#define DEFAULT   0
+#define CO        1  
+
 /* GRAVITY */
 #define NONE   0
 #define NEWTON 1
