@@ -26,7 +26,7 @@ void Initial()
       for(j = 0; j <= Nx2; j++)
       {
          U(RHO,i,j) =  density_0;
-         U(PRE,i,j) =  pow(U(RHO,i,j),K)/K;
+         U(PRE,i,j) =  pressure_0;//pow(U(RHO,i,j),K)/K;
          U(VX1,i,j) =  velocity_0*cos(grid.X2[j]);
          U(VX2,i,j) = -velocity_0*sin(grid.X2[j]);
       }

@@ -6,7 +6,7 @@
 # the equation of state manipulation
 #---------------------------------------------
 
-$(shell gfortran -c $(AZTPATH)/Src/physics/EOS/$(EOS)/helmholtz.f90)
+$(shell gfortran -c $(AZTPATH)/Src/physics/EOS/$(EOS)/helmholtz.f90 -fopenmp -lgomp) 
 FORTRAN = helmholtz.o
 
 PHYSICS += $(AZTPATH)/Src/physics/EOS/$(EOS)/eos.c

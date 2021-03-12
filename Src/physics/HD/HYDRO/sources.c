@@ -55,13 +55,17 @@ void Source_Terms(double *s, double *u, gauge_ *local_grid)
 #elif COORDINATES == SPHERICAL
 
    double E;
+   double P[3];
    eos_ eos;
    double t     = local_grid->x[0];
    double r     = local_grid->x[1];
    double theta = local_grid->x[2];
    double phi   = local_grid->x[3];
 
-   EoS(&eos,u,local_grid);
+   P[0] = rho;
+   P[1] = p;
+   P[2] = 0.0;
+   EoS(&eos,P,local_grid);
 
    E = 0.5*rho*(vx1*vx1 + vx2*vx2 + vx3*vx3) + rho*eos.e;
 

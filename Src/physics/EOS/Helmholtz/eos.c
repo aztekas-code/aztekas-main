@@ -33,12 +33,12 @@ void EoS(eos_ *eos, double *u, gauge_ *local_grid)
 
    // Density and Pressure (prim2cons and fluxes and sources)
    if (e == 0.0)
-      nad_eos_dp_(&rho,&p,xMass,A,Z,term_var);
+      nad_eos_dp_(u,xMass,A,Z,term_var);
 
    // Density and Energy (cons2prim)
    if (p == 0.0)
    {
-      nad_eos_de_(&rho,&e,xMass,A,Z,term_var);
+      nad_eos_de_(u,xMass,A,Z,term_var);
    }
 
    eos->p  = term_var[1];

@@ -174,7 +174,7 @@ THREADS = $(shell grep '^core id' /proc/cpuinfo |sort -u|wc -l)
 
 FLAGS = -lm -fcommon -std=gnu99 -lgfortran
 ifneq ($(OMP_NUM),1)
-   FLAGS += -fopenmp
+   FLAGS += -fopenmp -lgomp
 endif
 
 COMPILER = gcc

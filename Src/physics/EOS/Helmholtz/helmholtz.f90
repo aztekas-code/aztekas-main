@@ -40,7 +40,7 @@
 
 
 
-      subroutine nad_eos_dp(dens,pres,xxMass,AA,ZZ,term_var)
+      subroutine nad_eos_dp(var,xxMass,AA,ZZ,term_var)
       include 'implno.dek'
       include 'vector_eos.dek'
 
@@ -54,7 +54,7 @@
       parameter        (ionmax=3)
       parameter        (nrow=1)
       double precision xmass(ionmax),aion(ionmax),zion(ionmax),abar,zbar
-      double precision dens,pres
+      double precision var(3)
       double precision xxMass(ionmax),AA(ionmax),ZZ(ionmax)
       double precision term_var(6)
       double precision D(nrow),P(nrow),E(nrow),tguess(nrow)
@@ -73,8 +73,8 @@
       abar   = 1.0d0/sum(xmass(1:ionmax)/aion(1:ionmax))
       zbar   = abar * sum(xmass(1:ionmax) * zion(1:ionmax)/aion(1:ionmax))
 
-      D(1) = dens
-      P(1) = pres
+      D(1) = var(1)
+      P(1) = var(2)
       A(1) = abar
       Z(1) = zbar
       tguess(1) = 1.0d7
@@ -85,7 +85,7 @@
 
 
 
-      subroutine nad_eos_de(dens,ener,xxMass,AA,ZZ,term_var)
+      subroutine nad_eos_de(var,xxMass,AA,ZZ,term_var)
       include 'implno.dek'
       include 'vector_eos.dek'
 
@@ -99,7 +99,7 @@
       parameter        (ionmax=3)
       parameter        (nrow=1)
       double precision xmass(ionmax),aion(ionmax),zion(ionmax),abar,zbar
-      double precision dens,ener
+      double precision var(3)
       double precision xxMass(ionmax),AA(ionmax),ZZ(ionmax)
       double precision term_var(6)
       double precision D(nrow),P(nrow),E(nrow),tguess(nrow)
@@ -118,8 +118,8 @@
       abar   = 1.0d0/sum(xmass(1:ionmax)/aion(1:ionmax))
       zbar   = abar * sum(xmass(1:ionmax) * zion(1:ionmax)/aion(1:ionmax))
 
-      D(1) = dens
-      E(1) = ener
+      D(1) = var(1)
+      E(1) = var(3)
       A(1) = abar
       Z(1) = zbar
       tguess(1) = 1.0d7
@@ -174,8 +174,6 @@
 ! write out the results
       call pretty_eos_out('nados:  ')
 
-      write(*,*) "bajslkedj"
-
       density(1) = 1.0d7
       tguess(1) = 1.0d7
       pres(1)   = 2.68840907d24
@@ -183,16 +181,12 @@
       Z(1) = zbar
       call call_helmeos_DP(nrow, density, pres, A, Z, tguess, term_var)
 
-      write(*,*) "bajslkedj"
-
       density(1) = 1.0d7
       tguess(1) = 1.0d7
       ener(1)   = 5.07259918d24
       A(1) = abar
       Z(1) = zbar
       call call_helmeos_DE(nrow, density, ener, A, Z, tguess, term_var)
-
-      write(*,*) "bajslkedj"
 
       end   
 
@@ -2164,6 +2158,8 @@
 
 
 
+
+
       subroutine pretty_eos_out(whose)
       include 'implno.dek'
       include 'vector_eos.dek'
@@ -2184,16 +2180,16 @@
 
 
 ! popular formats
-01    format(1x,t2,a,t11,a,t27,a,t43,a,t59,a,t75,a,t91,a,t107,a)
-02    format(1x,t2,a,1p7e16.8)
-03    format(1x,t2,a7,1pe12.4,t22,a7,1pe12.4, &
-               t42,a7,1pe12.4,t62,a7,1pe12.4)
-04    format(1x,t2,a,t11,'total',t24,'ion',t34,'e- + e+', &
-             t58,'radiation',t70,'coulomb')
-05    format(1x,t2,a,1p3e12.4,t56,1p2e12.4)
-06    format(1x,t2,a,a,1pe12.4, &
-                t30,a,a,1pe12.4, &
-                t58,a,a,1pe12.4)
+!01    format(1x,t2,a,t11,a,t27,a,t43,a,t59,a,t75,a,t91,a,t107,a)
+!02    format(1x,t2,a,1p7e16.8)
+!03    format(1x,t2,a7,1pe12.4,t22,a7,1pe12.4, &
+!               t42,a7,1pe12.4,t62,a7,1pe12.4)
+!04    format(1x,t2,a,t11,'total',t24,'ion',t34,'e- + e+', &
+!             t58,'radiation',t70,'coulomb')
+!05    format(1x,t2,a,1p3e12.4,t56,1p2e12.4)
+!06    format(1x,t2,a,a,1pe12.4, &
+!                t30,a,a,1pe12.4, &
+!                t58,a,a,1pe12.4)
 
 
 
@@ -2202,22 +2198,22 @@
 
 
 ! the input
-      write(6,*)  ' '
-      write(6,03) 'temp  =',temp_row(j),'den   =',den_row(j), &
-                  'abar  =',abar_row(j),'zbar  =',zbar_row(j)
+!      write(6,*)  ' '
+!      write(6,03) 'temp  =',temp_row(j),'den   =',den_row(j), &
+!                  'abar  =',abar_row(j),'zbar  =',zbar_row(j)
 
       ye = zbar_row(1)/abar_row(1)
       xcess = 1.0d0 - 2.0d0*ye
-      write(6,03) 'ye    =',ye,'xcess =',xcess
-      write(6,*) ' '
+!      write(6,03) 'ye    =',ye,'xcess =',xcess
+!      write(6,*) ' '
 
 
 ! and the output
 
-       write(6,01)  whose,'value','d/dd','d/dt','d/da','d/dz'
+!       write(6,01)  whose,'value','d/dd','d/dt','d/da','d/dz'
 
-       write(6,02) 'p tot=',ptot_row(j), &
-                    dpd_row(j),dpt_row(j),dpa_row(j),dpz_row(j)
+!       write(6,02) 'p tot=',ptot_row(j), &
+!                    dpd_row(j),dpt_row(j),dpa_row(j),dpz_row(j)
 !       write(6,02) 'p gas=',pgas_row(j), &
 !                 dpgasd_row(j),dpgast_row(j),dpgasa_row(j),dpgasz_row(j)
 !       write(6,02) 'p rad=',prad_row(j), &
@@ -2231,9 +2227,9 @@
 !                dpcoud_row(j),dpcout_row(j),dpcoua_row(j),dpcouz_row(j)
 
 
-       write(6,*)  ' '
-       write(6,02) 'e tot=',etot_row(j), &
-                    ded_row(j),det_row(j),dea_row(j),dez_row(j)
+!       write(6,*)  ' '
+!       write(6,02) 'e tot=',etot_row(j), &
+!                    ded_row(j),det_row(j),dea_row(j),dez_row(j)
 !       write(6,02) 'e gas=',egas_row(j), &
 !                 degasd_row(j),degast_row(j),degasa_row(j),degasz_row(j)
 !       write(6,02) 'e rad=',erad_row(j), &
@@ -2246,9 +2242,9 @@
 !       write(6,02) 'e cou=',ecou_row(j), &
 !                decoud_row(j),decout_row(j),decoua_row(j),decouz_row(j)
 
-       write(6,*)  ' '
-       write(6,02) 's tot=',stot_row(j), &
-                    dsd_row(j),dst_row(j),dsa_row(j),dsz_row(j)
+!       write(6,*)  ' '
+!       write(6,02) 's tot=',stot_row(j), &
+!                    dsd_row(j),dst_row(j),dsa_row(j),dsz_row(j)
 !       write(6,02) 's/xka=',stot_row(j)/xka, &
 !             dsd_row(j)/xka,dst_row(j)/xka,dsa_row(j)/xka,dsz_row(j)/xka
 !       write(6,02) 's gas=',sgas_row(j), &
@@ -2282,11 +2278,11 @@
 !       write(6,02) 'gam3=',gam3_row(j), &
 !                    dgam3dd_row(j),dgam3dt_row(j), &
 !                    dgam3da_row(j),dgam3dz_row(j)
-       write(6,02) 'cs  =',cs_row(j), &
-                    dcsdd_row(j),dcsdt_row(j), &
-                    dcsda_row(j),dcsdz_row(j)
+!       write(6,02) 'cs  =',cs_row(j), &
+!                    dcsdd_row(j),dcsdt_row(j), &
+!                    dcsda_row(j),dcsdz_row(j)
 
-       write(6,*)  ' '
+!       write(6,*)  ' '
 !       write(6,02) 'cvgas=',cv_gas_row(j)/(kerg*avo)*abar_row(1), &
 !                    dcv_gasdd_row(j),dcv_gasdt_row(j), &
 !                    dcv_gasda_row(j),dcv_gasdz_row(j)
@@ -2302,9 +2298,9 @@
 !       write(6,02) 'g3gas=',gam3_gas_row(j), &
 !                    dgam3_gasdd_row(j),dgam3_gasdt_row(j), &
 !                    dgam3_gasda_row(j),dgam3_gasdz_row(j)
-       write(6,02) 'csgas=',cs_gas_row(j), &
-                    dcs_gasdd_row(j),dcs_gasdt_row(j), &
-                    dcs_gasda_row(j),dcs_gasdz_row(j)
+!       write(6,02) 'csgas=',cs_gas_row(j), &
+!                    dcs_gasdd_row(j),dcs_gasdt_row(j), &
+!                    dcs_gasda_row(j),dcs_gasdz_row(j)
 
 
 ! the thermodynamic consistency relations, these should all be

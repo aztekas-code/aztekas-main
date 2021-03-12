@@ -15,7 +15,7 @@ void User_Boundaries(double *B)
          if(grid.X2[j] >= M_PI_2 && i >= Nx1-gc)
          {
             B(RHO,i,j) =  density_0;
-            B(PRE,i,j) =  pow(B(RHO,i,j),K)/K;
+            B(PRE,i,j) =  pressure_0;//pow(B(RHO,i,j),K)/K;
             B(VX1,i,j) =  velocity_0*cos(grid.X2[j]);
             B(VX2,i,j) = -velocity_0*sin(grid.X2[j]);
          }
