@@ -110,18 +110,3 @@ void Initial()
    #endif
 #endif
 }
-
-void test_module()
-{
-   double P[3];
-   eos_ eos;
-   gauge_ local_grid;
-
-   P[0] = 1.0e+7;
-   P[1] = 0.0;
-   P[2] = 5.072599e+17;
-
-   EoS(&eos,P,&local_grid);
-//   printf("Hello world\n");
-//   printf("Pressure = %e\n",eos.p);
-}

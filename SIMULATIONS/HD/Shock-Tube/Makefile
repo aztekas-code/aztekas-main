@@ -37,7 +37,7 @@ OMP_NUM = 1
 PHY = HD
 
 HYDRO = True
-TOV   = True
+TOV   = False
 
 ##################################################
 # Dimension (1, 2 or 3. Enter 4 for 2.5)
