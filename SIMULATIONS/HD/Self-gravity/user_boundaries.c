@@ -12,10 +12,6 @@ void User_Boundaries(double *B)
 
    double r, r1,r2,rho1,rho2,m1, m2, mass_aux;
 
-   polyK = (K-1.)/K*(1.- r_acc/Rad)/r_acc ;
-   
-   pressure_0 = polyK*pow(density_0,K);
-   
    mass_aux = 0.0;
    // update mass vector 
    for(int i = gc-1; i < Nx1-gc; i++)
@@ -39,39 +35,11 @@ void User_Boundaries(double *B)
    }  
 
   
-   for(int i = 0; i <= Nx1; i++)
+   for(int i = Nx1-gc; i <= Nx1; i++)
    {
-
-/*
-      if(i <= gc)
-      {
-
-		  r = grid.X1[i];
-	      B(RHO,i) = pow(1. - Rad/r*((r-1.)/(Rad-1.)),1./(K-1.));
-    	  B(PRE,i) = polyK*pow(B(RHO,i),K);
-    	  B(VX1,i) = 0.0;
-	  }
-	  
-
-      if(i <= gc)
-      {
-
-	      B(RHO,i) = B(RHO,gc);
-    	  B(PRE,i) = B(PRE,gc);
-    	  B(VX1,i) = B(VX1,gc);
-    	  if (B(VX1,gc) > 0) 
-    	  {
-    	    B(VX1,i) = 0.0;
-    	  }
-	  }
-*/
-
-      if(i >= Nx1-gc)
-      {
          B(RHO,i) = density_atm;
          B(PRE,i) = pressure_atm;
          B(VX1,i) = 0.0;
-      }
    }
 
 #elif DIM == 2

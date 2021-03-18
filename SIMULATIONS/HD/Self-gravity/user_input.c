@@ -44,14 +44,15 @@ int User_Parameters(char const *paramfile_name)
 
          if(fscanf (paramfile, "%s = %s", t_key, t_value) == 2)
          {
-            if(strcmp(t_key,"density_0")==0)
+            if(strcmp(t_key,"density_atm")==0)
             {
-               density_0 = atof(t_value);
+               density_atm = atof(t_value);
             }
 
-            if(strcmp(t_key,"pressure_0")==0)
+            if(strcmp(t_key,"pressure_atm")==0)
             {
-               pressure_0 = atof(t_value);
+               pressure_atm = atof(t_value);
+               //printf("%e\n",pressure_atm);
             }
 
             if(strcmp(t_key,"velocity_0")==0)

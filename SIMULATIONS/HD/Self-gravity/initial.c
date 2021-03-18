@@ -49,10 +49,10 @@ void Initial()
       U(VX1,i) = 0.0;
    }
    
-   // define atmosphere density as 1000 times less 
+   // define atmosphere density as 10 times less 
    // than the minimum cloud's density 
    //printf( "%e %e \n", grid.X1[iRad], U(RHO,iRad) );   
-   density_atm = 1.e-3*U(RHO,iRad);
+   density_atm = 1.e-1*U(RHO,iRad);
    //printf( "%e %e \n", grid.X1[iRad+1], density_atm );
    pressure_atm = polyK*pow(density_atm,K);
 
@@ -76,7 +76,8 @@ void Initial()
         m2 = 4.*M_PI*r2*r2*rho2 ;
         mass[i] = mass_aux + 0.5*(m1+m2)*(r2-r1);  
         mass_aux = mass[i];
-        printf( "%e %e \n", r1, mass[i] );
+        //printf( "%e %e \n", r1, mass[i] );
+        //printf( "%e \n", r1 );
    }
    //initial gas cloud's mass
    mass_tot = mass[Nx1-gc-1];

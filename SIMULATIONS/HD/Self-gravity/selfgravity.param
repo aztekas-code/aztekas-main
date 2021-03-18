@@ -1,14 +1,14 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % OUTPUT FILE AND DIRECTORY %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-outputdirectory = ./TEST/
+outputdirectory = ./SG/
 outputfile      = data_
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RESTART SIMULATION (1 -> true, 0 -> false) %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-restart_simulation = 0
-restartfile = ./TEST/bondi_0.dat
+restart_simulation = 1
+restartfile = ./SG/initial.dat
 restart_filecount = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -24,12 +24,12 @@ binary = 0
 %%%%%%%%%%%%%%%
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
-Nx1 = 256
+Nx1 = 100
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINE DOMAIN LIMITS %
 %%%%%%%%%%%%%%%%%%%%%%%%
-x1max = 11.0
+x1max = 37.29627
 x1min = 1.0
 
 %%%%%%%%%%%%%%%%%%%
@@ -51,12 +51,14 @@ cou = 0.25
 %%%%%%%%%%%%%%%%%%%%
 % POLYTROPIC INDEX %
 %%%%%%%%%%%%%%%%%%%%
-K = 1.333333333333
+%K = 1.333333333333
+K = 1.6666666666
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% BOUNDARY AND INITIAL PARAMETERS %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-density_0  = 1.0
-Rad = 10.0
+density_atm  = 1.0509578181826557e-09
+pressure_atm  = 2.0169825155218137e-14
+Rad = 37.29627
 r_acc = 1.0
