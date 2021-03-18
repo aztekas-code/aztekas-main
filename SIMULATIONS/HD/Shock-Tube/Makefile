@@ -58,7 +58,7 @@ METRIC = Minkowski
 # Equation of State (User, Ideal, Dust, Stiff)
 ##################################################
 
-EOS = Helmholtz
+EOS = Ideal
 
 ##################################################
 # Coordinates (Cartesian, Cylindrical, Spherical)
