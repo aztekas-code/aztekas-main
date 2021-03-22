@@ -1,4 +1,4 @@
-      subroutine nad_eos_dt(dens,temp,xxMass,AA,ZZ,term_var)
+      subroutine nad_eos_dt(var,xxMass,AA,ZZ,term_var)
       include 'implno.dek'
       include 'vector_eos.dek'
 
@@ -13,6 +13,7 @@
       parameter        (nrow=1)
       double precision xmass(ionmax),aion(ionmax),zion(ionmax),abar,zbar
       double precision dens,temp
+      double precision var(3)
       double precision xxMass(ionmax),AA(ionmax),ZZ(ionmax)
       double precision term_var(6)
 
@@ -29,7 +30,7 @@
       abar   = 1.0d0/sum(xmass(1:ionmax)/aion(1:ionmax))
       zbar   = abar * sum(xmass(1:ionmax) * zion(1:ionmax)/aion(1:ionmax))
 
-      temp_row(1) = temp ; den_row(1)  = dens ; abar_row(1) = abar ; zbar_row(1) = zbar
+      temp_row(1) = var(2); den_row(1)  = var(1); abar_row(1) = abar ; zbar_row(1) = zbar
       jlo_eos = 1 ; jhi_eos = 1
 
 ! call the eos

@@ -34,7 +34,8 @@
 
 /* HELMHOLTZ COMPOSITION */
 #define DEFAULT   0
-#define CO        1  
+#define CO1       1  
+#define CO2       2  
 
 /* GRAVITY */
 #define NONE   0
