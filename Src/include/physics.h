@@ -56,6 +56,7 @@ void User_Source_Terms(double *s, double *u, gauge_ *local_grid);
 void Matrix_A(double *a, double *u, gauge_ local_grid);
 
 void EoS(eos_ *e, double *u, gauge_ *local_grid);
+void EoS_DT(eos_ *e, double *u);
 
 void Get_Metric_Components(gauge_ *local_grid);
 void Gauge_Derivatives(der_gauge_ *der, gauge_ *local_grid);
