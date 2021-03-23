@@ -1,14 +1,18 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%% PARAMETERS FOR BONDI SIMULATION %%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % OUTPUT FILE AND DIRECTORY %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-outputdirectory = ./gamma7_5/
-outputfile      = bondi_
+outputdirectory = ./TEST/
+outputfile      = wind_
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RESTART SIMULATION (1 -> true, 0 -> false) %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 restart_simulation = 0
-restartfile = ./TEST/bondi_0.dat
+restartfile = ./TEST/wind_0.dat
 restart_filecount = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -24,45 +28,40 @@ binary = 0
 %%%%%%%%%%%%%%%
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
-Nx1 = 256
-Nx2 = 0
+Nx1 = 128
+Nx2 = 64
 Nx3 = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINE DOMAIN LIMITS %
 %%%%%%%%%%%%%%%%%%%%%%%%
-x1max = 10.0
-x2max = 0.5
-x3max = 1.0 
-x1min = 0.1
+x1max = 10.0e+08
+x2max = 1.0
+x3max = 1.0
+x1min = 0.5e+08
 x2min = 0.0
 x3min = 0.0
 
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
-tmax = 10000.0
-timefile = 10.0
+tmax = 100.0e+10
+timefile = 0.1
+numfile  = 100
 
 %%%%%%%%%%%%%%%%%%
 % COURANT FACTOR %
 %%%%%%%%%%%%%%%%%%
-cou = 0.25
+cou = 0.5
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%% USER PARAMETERS %%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%%%%%%%%%%%%%%%%%%%%
-% POLYTROPIC INDEX %
-%%%%%%%%%%%%%%%%%%%%
-K = 1.4
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%% BOUNDARY AND INITIAL PARAMETERS %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Bondi Accretion (Gamma = 7/5, r0 = 10 r_B)
-
-density_0  =  1.103003
-pressure_0 =  0.819369
-velocity_0 = -0.005666
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BOUNDARY AND INITIAL PARAMETERS %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+density_0     = 1.0e+07
+pressure_0    = 1.0e+24
+velocity_0    = 1.0e+08
+temperature_0 = 1.0e+07

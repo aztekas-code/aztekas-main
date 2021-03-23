@@ -64,7 +64,7 @@ EOS = Ideal
 # Coordinates (Cartesian, Cylindrical, Spherical)
 ##################################################
 
-COORD = Cartesian
+COORD = Spherical
 
 ##################################################
 # User Source Terms (True,False)

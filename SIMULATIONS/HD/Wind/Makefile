@@ -23,7 +23,7 @@ AZTPATH = $(AZTEKAS_PATH)
 # $ grep '^core id' /proc/cpuinfo |sort -u|wc -l
 ##################################################
 
-OMP_NUM = 5
+OMP_NUM = 4
 
 ##################################################
 # Physics (HD)
@@ -83,7 +83,7 @@ INT = Standard
 
 USR = initial.c \
       user_boundaries.c \
-		user_input.c 
+		user_input.c
 
 ##################################################
 # Include a global Makefile in the /Src/ 

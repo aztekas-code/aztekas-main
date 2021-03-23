@@ -12,9 +12,11 @@
 #define reflective_x2min   TRUE
 
 #define RECONST            MC
-#define FLUX               HLL
+#define FLUX               HLLC
 #define GRID               LOGMESH
 #define lfac               1.0
 #define PRINT_EVOLV        TRUE
+//#define HELMHOLTZ_COMP     CO2
 
-double density_0, pressure_0, velocity_0;
+double density_0, pressure_0, velocity_0, temperature_0;
+double G, M;

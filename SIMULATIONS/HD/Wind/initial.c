@@ -9,7 +9,9 @@
 
 void Initial()
 {
-   int n, i, j, k, cell;
+   double u[3];
+   eos_ eos;
+   gauge_ local_grid;
 
    //Initialize grid.time
    grid.time = 0.0;
@@ -21,9 +23,22 @@ void Initial()
    //---------Wind----------//
    ///////////////////////////
 
-   for(i = 0; i <= Nx1; i++)
+#ifdef HELMHOLTZ_COMP
+   u[0] = density_0;
+   u[1] = temperature_0;
+   u[2] = 0.0;
+
+   EoS_DT(&eos,u);
+
+   pressure_0 = eos.p;
+#endif
+
+   G = 6.67e-08; 
+   M = 2.0e+33;
+
+   for(int i = 0; i <= Nx1; i++)
    {
-      for(j = 0; j <= Nx2; j++)
+      for(int j = 0; j <= Nx2; j++)
       {
          U(RHO,i,j) =  density_0;
          U(PRE,i,j) =  pressure_0;//pow(U(RHO,i,j),K)/K;

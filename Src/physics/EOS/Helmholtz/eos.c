@@ -77,6 +77,7 @@ void EoS(eos_ *eos, double *u, gauge_ *local_grid)
    p   = u[1];
    e   = u[2];
 
+
    // Density and Pressure (prim2cons and fluxes and sources)
    if (e == 0.0)
       nad_eos_dp_(u,xMass,A,Z,term_var);

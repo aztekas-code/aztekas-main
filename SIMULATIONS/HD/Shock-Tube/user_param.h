@@ -21,6 +21,7 @@
 #define FLUX               HLL
 #define GRID               UNIFORM
 #define PRINT_EVOLV        TRUE
+#define HELMHOLTZ_COMP     CO2  
 
 #define INTERFACE          HORIZONTAL
 

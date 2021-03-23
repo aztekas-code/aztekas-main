@@ -35,19 +35,19 @@ Nx3 = 0
 %%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINE DOMAIN LIMITS %
 %%%%%%%%%%%%%%%%%%%%%%%%
-x1max = 10.0
+x1max = 10.0e+08
 x2max = 1.0
-x3max = 1.0 
-x1min = 0.5
+x3max = 1.0
+x1min = 0.5e+08
 x2min = 0.0
 x3min = 0.0
 
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
-tmax = 100.0
+tmax = 100.0e-10
 timefile = 0.1
-numfile  = 1
+numfile  = 100
 
 %%%%%%%%%%%%%%%%%%
 % COURANT FACTOR %
@@ -66,6 +66,7 @@ K = 1.4
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % BOUNDARY AND INITIAL PARAMETERS %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-density_0  = 1.0
-pressure_0 = 1.0
-velocity_0 = 2.0
+density_0     = 1.0e+07
+pressure_0    = 2.688409e+24
+velocity_0    = 1.0e+08
+temperature_0 = 1.0e+07

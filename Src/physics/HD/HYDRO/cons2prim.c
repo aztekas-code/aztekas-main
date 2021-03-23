@@ -24,9 +24,9 @@ int Cons2Prim(double *u, double *q)
 #endif
    for(int i = gc; i <= Nx1-gc; i++)
    {
-      D  = q(0,i);
-      E  = q(1,i);
-      S1 = q(2,i);
+      D  = q(DEN,i);
+      E  = q(ENE,i);
+      S1 = q(MX1,i);
       S2 = 0;
       S3 = 0;
 
@@ -36,13 +36,20 @@ int Cons2Prim(double *u, double *q)
       #elif EOS == DUST
       u(PRE,i) = 0.0;
       #elif EOS == HELMHOLTZ
-      CONS[0] = D;
-      CONS[1] = 0.0;
-      CONS[2] = (E - 0.5 * (S1 * S1 + S2 * S2 + S3 * S3) / D);
+      if(D == D)
+      {
+         CONS[0] = D;
+         CONS[1] = 0.0;
+         CONS[2] = (E - 0.5 * (S1 * S1 + S2 * S2 + S3 * S3))/D;
 
-      EoS(&eos,CONS,&local_grid);
+         EoS(&eos,CONS,&local_grid);
 
-      u(PRE,i) = eos.p;
+         u(PRE,i) = eos.p;
+      }
+      else if(D != D)
+      {
+         u(PRE,i) = 1.0;
+      }
       #endif
       u(VX1,i) = S1/D;
    }
@@ -69,13 +76,20 @@ int Cons2Prim(double *u, double *q)
          #elif EOS == DUST
          u(PRE,i,j) = 0.0;
          #elif EOS == HELMHOLTZ
-         CONS[0] = D;
-         CONS[1] = 0.0;
-         CONS[2] = E - 0.5 * (S1 * S1 + S2 * S2 + S3 * S3) / D;
+         if(D == D)
+         {
+            CONS[0] = D;
+            CONS[1] = 0.0;
+            CONS[2] = (E - 0.5 * (S1 * S1 + S2 * S2 + S3 * S3)) / D;
 
-         EoS(&eos,CONS,&local_grid);
+            EoS(&eos,CONS,&local_grid);
 
-         u(PRE,i,j) = eos.p;
+            u(PRE,i,j) = eos.p;
+         }
+         else if(D != D)
+         {
+            u(PRE,i,j) = 1.0;
+         }
          #endif
          u(VX1,i,j) = S1/D;
          u(VX2,i,j) = S2/D;
@@ -106,7 +120,7 @@ int Cons2Prim(double *u, double *q)
          #elif EOS == HELMHOLTZ
          CONS[0] = D;
          CONS[1] = 0.0;
-         CONS[2] = E - 0.5 * (S1 * S1 + S2 * S2 + S3 * S3) / D;
+         CONS[2] = (E - 0.5 * (S1 * S1 + S2 * S2 + S3 * S3)) / D;
 
          EoS(&eos,CONS,&local_grid);
 

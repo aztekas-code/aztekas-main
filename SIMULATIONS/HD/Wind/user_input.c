@@ -58,6 +58,11 @@ int User_Parameters(char const *paramfile_name)
             {
                velocity_0 = atof(t_value);
             }
+
+            if(strcmp(t_key,"temperature_0")==0)
+            {
+               temperature_0 = atof(t_value);
+            }
          }
       }
             
