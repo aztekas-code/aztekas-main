@@ -12,22 +12,23 @@ void User_Boundaries(double *B)
 
    double r, r1,r2,rho1,rho2,m1, m2, mass_aux;
 
-   mass_aux = 0.0;
    // update mass vector 
-   for(int i = gc-1; i < Nx1-gc; i++)
+   r1 = grid.X1[gc];
+   rho1 = B(RHO,gc);
+   mass[gc] = 4.*M_PI*r1*r1*r1*rho1/3. ;   
+   for(int i = gc+1; i < Nx1-gc; i++)
    {
-        r1 = grid.X1[i];
-        r2 = grid.X1[i+1];        
-        rho1 = B(RHO,i);
-        rho2 = B(RHO,i+1);        
+        r1 = grid.X1[i-1];
+        r2 = grid.X1[i];        
+        rho1 = B(RHO,i-1);
+        rho2 = B(RHO,i);        
         m1 = 4.*M_PI*r1*r1*rho1 ;
         m2 = 4.*M_PI*r2*r2*rho2 ;
-        mass[i] = mass_aux + 0.5*(m1+m2);  
-        mass_aux = mass[i];
+        mass[i] = mass[i-1] + 0.5*(m1+m2)*(r2-r1);
    }
    // accreted mass so far
    mass_acc = mass_tot - mass[Nx1-gc-1];
-   
+   //printf( "accreted mass : %e \n", mass_acc );
    // shift mass vector by mass_acc
     for(int i = gc-1; i < Nx1-gc; i++)
    {
