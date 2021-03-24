@@ -49,7 +49,7 @@ void Initial()
    // define atmosphere density as 1000 times less 
    // than the minimum cloud's density 
    //printf( "%e %e \n", grid.X1[iRad], U(RHO,iRad) );   
-   density_atm = 1.e-3*density_0;
+   density_atm = 1e-3*density_0;
    pressure_atm = pressure_0;
 
    for(i = iRad+1; i <= Nx1; i++)

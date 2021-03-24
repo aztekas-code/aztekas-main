@@ -16,7 +16,7 @@
 #define GRID               LOGMESH
 #define lfac               1.0
 #define PRINT_EVOLV        TRUE
-#define selfgravity        FALSE
+#define selfgravity        TRUE
 
 
 double density_0, pressure_0, velocity_0, Rad, polyK, r_acc;

@@ -2,7 +2,7 @@
 % OUTPUT FILE AND DIRECTORY %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 outputdirectory = ./DATA/
-outputfile      = data_
+outputfile      = test_
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % RESTART SIMULATION (1 -> true, 0 -> false) %
@@ -24,7 +24,7 @@ binary = 0
 %%%%%%%%%%%%%%%
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
-Nx1 = 200
+Nx1 = 400
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINE DOMAIN LIMITS %
@@ -35,14 +35,14 @@ x1min = 0.1
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
-tmax     = 10.0
+tmax     = 1.0
 timefile = 0.1
 numfile  = 0
 
 %%%%%%%%%%%%%%%%%%
 % COURANT FACTOR %
 %%%%%%%%%%%%%%%%%%
-cou = 0.25
+cou = 0.001
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%% USER PARAMETERS %%%%%%%%%%%%%%%%%%%%%%
@@ -62,4 +62,4 @@ K = 3
 Rad = 10.0
 r_acc = 0.1
 density_0 = 1.0
-pressure_0 = 1e-6
+pressure_0 = 1e-8

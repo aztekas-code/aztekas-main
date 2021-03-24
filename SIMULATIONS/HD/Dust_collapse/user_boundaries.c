@@ -28,12 +28,18 @@ void User_Boundaries(double *B)
    }
    // accreted mass so far
    mass_acc = mass_tot - mass[Nx1-gc-1];
+   if (mass_acc < 0.0) { mass_acc = 0.0 ;}
    //printf( "accreted mass : %e \n", mass_acc );
    // shift mass vector by mass_acc
     for(int i = gc-1; i < Nx1-gc; i++)
    {
         mass[i] = mass[i] + mass_acc;
    }  
+
+   for(int i = 0; i < Nx1; i++)
+   {
+         B(PRE,i) = pressure_0;
+   }
 
   
    for(int i = Nx1-gc; i <= Nx1; i++)
