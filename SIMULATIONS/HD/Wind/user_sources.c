@@ -26,8 +26,8 @@ void User_Source_Terms(double *s, double *u, gauge_ *local_grid)
    r = local_grid->x[1];
 
    s[RHO] = 0.0;
-   s[PRE] = -rho*G*M*vx1/(r*r);
-   s[VX1] = -rho*G*M/(r*r);
+   s[PRE] = -rho*vx1/(r*r);
+   s[VX1] = -rho/(r*r);
    s[VX2] = 0.0;
    s[VX3] = 0.0;
 }

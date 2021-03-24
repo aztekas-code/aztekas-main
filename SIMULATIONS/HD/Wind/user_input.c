@@ -44,24 +44,44 @@ int User_Parameters(char const *paramfile_name)
 
          if(fscanf (paramfile, "%s = %s", t_key, t_value) == 2)
          {
-            if(strcmp(t_key,"density_0")==0)
+            if(strcmp(t_key,"dens_units")==0)
             {
-               density_0 = atof(t_value);
+               dens_units = atof(t_value);
             }
 
-            if(strcmp(t_key,"pressure_0")==0)
+            if(strcmp(t_key,"vel_units")==0)
             {
-               pressure_0 = atof(t_value);
+               vel_units = atof(t_value);
             }
 
-            if(strcmp(t_key,"velocity_0")==0)
+            if(strcmp(t_key,"temp_units")==0)
             {
-               velocity_0 = atof(t_value);
+               temp_units = atof(t_value);
             }
 
-            if(strcmp(t_key,"temperature_0")==0)
+            if(strcmp(t_key,"density_inf")==0)
             {
-               temperature_0 = atof(t_value);
+               density_inf = atof(t_value);
+            }
+
+            if(strcmp(t_key,"velocity_inf")==0)
+            {
+               velocity_inf = atof(t_value);
+            }
+
+            if(strcmp(t_key,"temperature_inf")==0)
+            {
+               temperature_inf = atof(t_value);
+            }
+
+            if(strcmp(t_key,"Mach_inf")==0)
+            {
+               Mach_inf = atof(t_value);
+            }
+
+            if(strcmp(t_key,"pressure_inf")==0)
+            {
+               pressure_inf = atof(t_value);
             }
          }
       }

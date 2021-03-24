@@ -73,27 +73,26 @@ void EoS(eos_ *eos, double *u, gauge_ *local_grid)
    Z[2] = 8.0;
 #endif
 
-   rho = u[0];
-   p   = u[1];
-   e   = u[2];
-
+   u[0] = u[0]*dens_units;
+   u[1] = u[1]*dens_units*vel_units*vel_units;
+   u[2] = u[2]*vel_units*vel_units;
 
    // Density and Pressure (prim2cons and fluxes and sources)
-   if (e == 0.0)
+   if (u[2] == 0.0)
       nad_eos_dp_(u,xMass,A,Z,term_var);
 
    // Density and Energy (cons2prim)
-   if (p == 0.0)
+   if (u[1] == 0.0)
    {
       nad_eos_de_(u,xMass,A,Z,term_var);
    }
 
-   eos->rho  = term_var[0];
-   eos->p    = term_var[1];
-   eos->e    = term_var[2];
-   eos->s    = term_var[3];
-   eos->temp = term_var[4];
-   eos->cs   = term_var[5];
+   eos->rho  = term_var[0]/(dens_units);
+   eos->p    = term_var[1]/(dens_units*vel_units*vel_units);
+   eos->e    = term_var[2]/(vel_units*vel_units);
+   eos->s    = term_var[3]/(vel_units*vel_units/temp_units);
+   eos->temp = term_var[4]/(temp_units);
+   eos->cs   = term_var[5]/(vel_units);
 }
 
 void EoS_DT(eos_ *eos, double *u)
@@ -151,15 +150,15 @@ void EoS_DT(eos_ *eos, double *u)
    Z[2] = 8.0;
 #endif
 
-   rho  = u[0];
-   temp = u[1];
+   u[0] = u[0]*dens_units;
+   u[1] = u[1]*temp_units;
 
    nad_eos_dt_(u,xMass,A,Z,term_var);
 
-   eos->rho  = term_var[0];
-   eos->p    = term_var[1];
-   eos->e    = term_var[2];
-   eos->s    = term_var[3];
-   eos->temp = term_var[4];
-   eos->cs   = term_var[5];
+   eos->rho  = term_var[0]/(dens_units);
+   eos->p    = term_var[1]/(dens_units*vel_units*vel_units);
+   eos->e    = term_var[2]/(vel_units*vel_units);
+   eos->s    = term_var[3]/(vel_units*vel_units/temp_units);
+   eos->temp = term_var[4]/(temp_units);
+   eos->cs   = term_var[5]/(vel_units);
 }
