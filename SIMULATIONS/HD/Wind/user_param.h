@@ -16,7 +16,8 @@
 #define GRID               LOGMESH
 #define lfac               1.0
 #define PRINT_EVOLV        TRUE
-#define HELMHOLTZ_COMP     CO2
+#define HELMHOLTZ_COMP     CO1
+#define ANALYSIS           TRUE
 
 double density_inf, pressure_inf, velocity_inf, temperature_inf, Mach_inf;
 double dens_units, vel_units, temp_units;

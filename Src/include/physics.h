@@ -31,6 +31,8 @@ typedef struct
    double s;
    double temp;
    double cs;
+   double dpt;
+   double det;
    double h;
    double dhdrho;
    double dhdp;

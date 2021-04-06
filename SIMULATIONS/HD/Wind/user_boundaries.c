@@ -28,10 +28,10 @@ void User_Boundaries(double *B)
             B(VX2,i,j) = B(VX2,gc+1,j);
          }
 
-         if(B(RHO,i,j) < density_inf)
-         {
-            B(RHO,i,j) = density_inf;
-         }
+         //if(B(RHO,i,j) < density_inf)
+         //{
+         //   B(RHO,i,j) = density_inf;
+         //}
       }
    }
 }

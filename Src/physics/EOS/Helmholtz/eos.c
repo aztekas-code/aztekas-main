@@ -12,7 +12,7 @@
 void EoS(eos_ *eos, double *u, gauge_ *local_grid)
 {
    double xMass[3], A[3], Z[3];
-   double term_var[6];
+   double term_var[8];
    double rho, p, e;
 
 #ifndef HELMHOLTZ_COMP
@@ -72,6 +72,12 @@ void EoS(eos_ *eos, double *u, gauge_ *local_grid)
    Z[1] = 6.0;
    Z[2] = 8.0;
 #endif
+   
+   //u[0] = roundf(u[0] * 10)/ 10;
+   //u[1] = roundf(u[1] * 10)/ 10;
+   //u[2] = roundf(u[2] * 10)/ 10;
+   
+   //printf("%e\n",u[1]);
 
    u[0] = u[0]*dens_units;
    u[1] = u[1]*dens_units*vel_units*vel_units;
@@ -93,12 +99,14 @@ void EoS(eos_ *eos, double *u, gauge_ *local_grid)
    eos->s    = term_var[3]/(vel_units*vel_units/temp_units);
    eos->temp = term_var[4]/(temp_units);
    eos->cs   = term_var[5]/(vel_units);
+   eos->dpt  = term_var[6]/(dens_units*vel_units*vel_units/temp_units);
+   eos->det  = term_var[7]/(vel_units*vel_units/temp_units);
 }
 
 void EoS_DT(eos_ *eos, double *u)
 {
    double xMass[3], A[3], Z[3];
-   double term_var[6];
+   double term_var[8];
    double rho, p, e, temp;
 
 #ifndef HELMHOLTZ_COMP
@@ -161,4 +169,6 @@ void EoS_DT(eos_ *eos, double *u)
    eos->s    = term_var[3]/(vel_units*vel_units/temp_units);
    eos->temp = term_var[4]/(temp_units);
    eos->cs   = term_var[5]/(vel_units);
+   eos->dpt  = term_var[6]/(dens_units*vel_units*vel_units/temp_units);
+   eos->det  = term_var[7]/(vel_units*vel_units/temp_units);
 }

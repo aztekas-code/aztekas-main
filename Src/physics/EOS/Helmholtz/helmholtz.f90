@@ -15,7 +15,7 @@
       double precision dens,temp
       double precision var(3)
       double precision xxMass(ionmax),AA(ionmax),ZZ(ionmax)
-      double precision term_var(6)
+      double precision term_var(8)
 
 ! set the mass fractions, z's and a's of the composition
 ! hydrogen, heliu, and carbon
@@ -57,7 +57,7 @@
       double precision xmass(ionmax),aion(ionmax),zion(ionmax),abar,zbar
       double precision var(3)
       double precision xxMass(ionmax),AA(ionmax),ZZ(ionmax)
-      double precision term_var(6)
+      double precision term_var(8)
       double precision D(nrow),P(nrow),E(nrow),tguess(nrow)
       double precision A(nrow),Z(nrow)
 
@@ -80,6 +80,7 @@
       Z(1) = zbar
       tguess(1) = 1.0d7
       call call_helmeos_DP(nrow,D,P,A,Z,tguess,term_var)
+!      write(*,*) term_var(1),term_var(2),term_var(3),term_var(4),term_var(5), var(1), var(2), abar, zbar
 
       end   
 
@@ -102,7 +103,7 @@
       double precision xmass(ionmax),aion(ionmax),zion(ionmax),abar,zbar
       double precision var(3)
       double precision xxMass(ionmax),AA(ionmax),ZZ(ionmax)
-      double precision term_var(6)
+      double precision term_var(8)
       double precision D(nrow),P(nrow),E(nrow),tguess(nrow)
       double precision A(nrow),Z(nrow)
 
@@ -146,7 +147,7 @@
       integer          ionmax
       parameter        (ionmax=3)
       parameter        (nrow=1)
-      double precision term_var(6)
+      double precision term_var(8)
       double precision xmass(ionmax),aion(ionmax),zion(ionmax),abar,zbar
       double precision xxMass(ionmax),AA(ionmax),ZZ(ionmax),temp,dens,pre
       double precision density(nrow),pres(nrow),ener(nrow),tguess(nrow),A(nrow),Z(nrow)
@@ -453,7 +454,7 @@
       include 'vector_eos.dek'
 
 
-      double precision term_var(6)
+      double precision term_var(8)
       double precision chit,chid,cv,cp,gam1,gam2,gam3,nabad,sound,zz,z, &
                        prad,pion,dpiondd,dpiondt,erad,eion,srad,sion
       double precision clight,con2,me,mecc,kerg,avo
@@ -2153,6 +2154,8 @@
       term_var(4) = stot_row(1)
       term_var(5) = temp_row(1)
       term_var(6) = cs_row(1)
+      term_var(7) = dpt_row(1)
+      term_var(8) = det_row(1)
       end
 
 
@@ -2358,7 +2361,7 @@
 ! zion    = number of protons in isotope i
 
       integer, intent(in) :: nrow
-      double precision :: term_var(6)
+      double precision :: term_var(8), t_guess(nrow)
       double precision, intent(in), dimension(nrow) :: den, pres, abar, zbar, tguess
       !f2py INTEGER, INTENT(hide) :: nrow
       !f2py DOUBLE PRECISION, DIMENSION(nrow), INTENT(in) :: den, pres, abar, zbar, tguess
@@ -2368,8 +2371,8 @@
       double precision, dimension(nrow) :: Pgoal
       logical, dimension(nrow) :: NR_converged
 
-      double precision, parameter :: temp_floor = 1e4
-      double precision, parameter :: rtol = 1e-6
+      double precision, parameter :: temp_floor = 1.0d4
+      double precision, parameter :: rtol = 1.0d-4
 
       integer :: i, iter
       integer, parameter :: max_iter  = 100
@@ -2386,13 +2389,14 @@
       do i = 1, nrow
          Pgoal(i) = pres(i)
          temp_row(i) = tguess(i)
+         t_guess(i)  = temp_row(i)
          den_row(i)  = den(i)
          abar_row(i) = abar(i)
          zbar_row(i) = zbar(i)
       end do
 
       T_lower = temp_floor
-      T_upper = 1e12
+      T_upper = 1.0d12
       NR_converged = .FALSE.
 
       ! do the NR iteration
@@ -2419,6 +2423,7 @@
             ! update temperature
             delta_T(i) = delta_P(i) / dpt_row(i)
             temp_row(i) = temp_row(i) + delta_T(i)
+            !write(*,*) delta_T(i)
 
             ! if this took us out of bounds, don't let it happen
             ! choose a new point inside the interval [t_lower, t_upper]
@@ -2426,6 +2431,7 @@
 
             if ((temp_row(i).gt.t_upper(i)).OR.(temp_row(i).lt.t_lower(i))) then
                temp_row(i) = sqrt(t_lower(i) * t_upper(i))
+               !write(*,*) temp_row(i) , delta_T(i), t_upper(i)
             end if
 
             ! calculate relative errors
@@ -2433,7 +2439,7 @@
             rerr_T(i) = delta_T(i) / temp_row(i)
 
             ! if we're at tolerances, end this
-            if ((abs(rerr_P(i)).LE.rtol).AND.(abs(rerr_T(i)).LE.rtol)) then
+            if (((abs(rerr_P(i)).LE.rtol).AND.(abs(rerr_T(i)).LE.rtol)).OR.(abs(1.0 - tguess(i)/temp_row(i)).LE.rtol)) then
                NR_converged(i) = .TRUE.
             endif
 
@@ -2443,6 +2449,8 @@
                temp_row(i) = temp_floor
             end if
 
+            t_guess(i) = temp_row(i)
+
          end do
 
          if (ALL(NR_converged)) exit
@@ -2451,6 +2459,8 @@
 
       ! once more, with feeling
       NR_converged = .FALSE.
+
+      !write(*,*) "asdf",temp_row(1)
 
       call nados(term_var)
 
@@ -2469,7 +2479,7 @@
 
       integer, intent(in) :: nrow
       double precision, intent(in), dimension(nrow) :: den, ener, abar, zbar, tguess
-      double precision :: term_var(6)
+      double precision :: term_var(8), t_guess(nrow)
       !f2py INTEGER, INTENT(hide) :: nrow
       !f2py DOUBLE PRECISION, DIMENSION(nrow), INTENT(in) :: den, ener, abar, zbar, tguess
       double precision, dimension(nrow) :: rerr_e, rerr_T
@@ -2496,6 +2506,7 @@
       do i = 1, nrow
          egoal(i) = ener(i) / den(i) ! eos works on specific internal energy
          temp_row(i) = tguess(i)
+         t_guess(i)  = temp_row(i)
          den_row(i)  = den(i)
          abar_row(i) = abar(i)
          zbar_row(i) = zbar(i)
@@ -2543,7 +2554,7 @@
             rerr_T(i) = delta_T(i) / temp_row(i)
 
             ! if we're at tolerances, end this
-            if ((abs(rerr_e(i)).LE.rtol).AND.(abs(rerr_T(i)).LE.rtol)) then
+            if (((abs(rerr_e(i)).LE.rtol).AND.(abs(rerr_T(i)).LE.rtol)).OR.(abs(1.0 - tguess(i)/temp_row(i)).LE.rtol)) then
                NR_converged(i) = .TRUE.
             endif
 
@@ -2552,6 +2563,8 @@
                NR_converged(i) = .TRUE.
                temp_row(i) = temp_floor
             end if
+
+            t_guess(i) = temp_row(i)
 
          end do
 

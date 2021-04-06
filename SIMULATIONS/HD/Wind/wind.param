@@ -54,7 +54,7 @@ numfile  = 100
 %%%%%%%%%%%%%%%%%%
 % COURANT FACTOR %
 %%%%%%%%%%%%%%%%%%
-cou = 0.5
+cou = 0.9
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%% USER PARAMETERS %%%%%%%%%%%%%%%%%%%%%%
@@ -69,11 +69,11 @@ K = 1.4
 % BOUNDARY AND INITIAL PARAMETERS %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 dens_units = 1.0e+07 % g cm⁻³
-vel_units  = 1.0e+09 % cm s⁻¹
+vel_units  = 1.0e+09 % cm s⁻¹ (Wind velocity)
 temp_units = 1.0e+07 % K
 
 density_inf     = 1.0 
-velocity_inf    = 1.0 
+velocity_inf    = 1.0 % Keep as 1.0
 temperature_inf = 1.0 
 %pressure_inf    = 1.0 
 %Mach_inf        = 1.0 

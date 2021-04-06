@@ -31,6 +31,8 @@ char restartfile[50];
 
 void Alternative_Termination();
 
+void Analysis(double *B);
+
 void Check_Paramfile(char *param, int argc, char *argv[]);
 
 void Check_Sim_Parameters();

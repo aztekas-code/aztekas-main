@@ -13,6 +13,9 @@ void Print_Time_Values(double *tprint, double *dtprint, int *itprint)
    /**
     * Print the Mass Accretion Rate \f[ \dot{M} \f]
     */
+   #if ANALYSIS == TRUE
+   Analysis(U);
+   #endif
    #if MDOT == TRUE
    Mass_Accretion_Rate(U);
    #endif
