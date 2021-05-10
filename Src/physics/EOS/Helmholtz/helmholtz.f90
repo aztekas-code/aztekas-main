@@ -78,7 +78,7 @@
       P(1) = var(2)
       A(1) = abar
       Z(1) = zbar
-      tguess(1) = 1.0d7
+      tguess(1) = 1.0d11
       call call_helmeos_DP(nrow,D,P,A,Z,tguess,term_var)
 !      write(*,*) term_var(1),term_var(2),term_var(3),term_var(4),term_var(5), var(1), var(2), abar, zbar
 
@@ -124,7 +124,7 @@
       E(1) = var(3)
       A(1) = abar
       Z(1) = zbar
-      tguess(1) = 1.0d7
+      tguess(1) = 1.0d11
       call call_helmeos_DE(nrow,D,E,A,Z,tguess,term_var)
 
       end   
@@ -2371,7 +2371,7 @@
       double precision, dimension(nrow) :: Pgoal
       logical, dimension(nrow) :: NR_converged
 
-      double precision, parameter :: temp_floor = 1.0d4
+      double precision, parameter :: temp_floor = 1.0d7
       double precision, parameter :: rtol = 1.0d-4
 
       integer :: i, iter
@@ -2488,7 +2488,7 @@
       double precision, dimension(nrow) :: egoal
       logical, dimension(nrow) :: NR_converged
 
-      double precision, parameter :: temp_floor = 1e4
+      double precision, parameter :: temp_floor = 1e7
       double precision, parameter :: rtol = 1e-4
 
       integer :: i, iter
