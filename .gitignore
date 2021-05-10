@@ -18,6 +18,7 @@
 *.bak
 *.o
 fort.*
+*.jpg
 
 SIMULATIONS/**/aztekas
 SIMULATIONS/**/TEST/
