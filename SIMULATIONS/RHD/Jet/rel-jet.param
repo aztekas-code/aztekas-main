@@ -45,8 +45,8 @@ x3min = 0.0
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
-tmax = 5%120
-timefile = 120
+tmax = 120
+timefile = 110.67
 numfile = 1
 
 %%%%%%%%%%%%%%%%%%
@@ -83,5 +83,5 @@ vx2_atm = 0.0
 vx3_atm = 0.0
 
 % JET RADII
-r_jet = 0.1
-z_jet = 0.1
+r_jet = 1.0
+z_jet = 1.0

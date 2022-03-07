@@ -1,3 +1,5 @@
+#!/usr/bin/env python 
+
 import sys, math
 import numpy as np
 import matplotlib
@@ -26,11 +28,9 @@ matplotlib.rcParams['xtick.direction'] = 'out'
 matplotlib.rcParams['ytick.direction'] = 'out'
 matplotlib.rcParams['xtick.top'] = False
 matplotlib.rcParams['ytick.right'] = False
-matplotlib.rcParams['text.usetex'] = True
-#matplotlib.rcParams['axes.facecolor'] = 'white'
 
 # Fontsize and orientation
-fontsize = 12
+fontsize = 10
 orientation = 'v'
 
 # LaTeX text
@@ -43,7 +43,6 @@ plt.rc('text', usetex=True)
 
 fname = sys.argv[1] # Filename
 oname = sys.argv[2] # Number output
-spin  = float(sys.argv[3]) # Spin parameter
 
 ######################
 # Reading from fname #
@@ -55,7 +54,6 @@ time = float(linecache.getline(fname,2))
 #Mesh reading
 Nx1 = int(linecache.getline(fname,3))
 Nx2 = int(linecache.getline(fname,4))
-dum = str(linecache.getline(fname,4))
  
 # Data reading
 x1, x2, n, p, u, v = np.loadtxt(fname,skiprows=5,unpack=True)
@@ -78,17 +76,8 @@ nx1 = np.linspace(x1.min(), x1.max(), Nx1)
 nx2 = np.linspace(x2.min(), x2.max(), Nx2)
 X1,X2 = np.meshgrid(nx1,nx2)
 
-###############################
-## Turn (r,theta) into (R,z) ##
-###############################
-
-a = spin
-
-r = X1;
-t = X2 - (a/np.sqrt(4.*(1 - a**2)))*np.log(abs(r - 1.0 - np.sqrt(1. - a**2))/abs(r - 1.0 + np.sqrt(1 - a**2)));
-
-X1 = r * np.sin(t);
-X2 = r * np.cos(t);
+X1 = X1
+X2 = X2
 
 ###############################################
 ############## Contour graphic ################
@@ -99,30 +88,25 @@ plt.figure(figsize=(18,18),dpi=300)
 fig, ax = plt.subplots(1, 1)
 
 # Graph limits
-x1min = -20
-x1max = 20
+x1min = -X1.max()
+x1max =  X1.max()
 
-x2min = -20
-x2max = 20
+x2min = X2.min()
+x2max = X2.max()
+
 
 # Colorbar limits
-cbar_min = np.log10(1) # Min
-cbar_max = 2.5#np.log10(n.max()/n.min()) # Max
+m_h = 1
+cbar_min = -3#np.log10(n.min()/m_h) # Min
+cbar_max = 1
 
 # Contour levels
 levels = np.linspace(cbar_min,cbar_max,400) # Levels
 
-rho_min = -10
-for i in range(Nx1):
-    for j in range(Nx2):
-        if np.log10(n[j,i]) <= rho_min:
-            p[j,i] = 10**rho_min
-        else:
-            p[j,i] = n[j,i]
-
-
 # Contour colormap 
-cmap = plt.get_cmap('CMRmap_r') # Colormap
+#cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["black","brown","orange","yellow"])
+#cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", ["white","#8B0000","grey"])
+cmap = plt.get_cmap('gist_heat_r') # Colormap
 # RdYlGn
 # YlOrBr
 # RdBu
@@ -130,6 +114,7 @@ cmap = plt.get_cmap('CMRmap_r') # Colormap
 # afmhot
 # jet
 # RdGy
+# copper
 
 # Contour normalization
 #norm = BoundaryNorm(levels, ncolors=cmap.N) # Normalization
@@ -138,18 +123,26 @@ cmap = plt.get_cmap('CMRmap_r') # Colormap
 # Contour plot #
 ################
 if orientation == 'v':
-    cn = ax.contour(X1,X2,(p/0.0000000001),levels=20,colors='k',linewidths=0.1)
-    cn = ax.contourf(X1,X2,np.log10(p/0.0000000001),cmap=cmap,levels=levels,extend="max")
+#    cn = ax.contour(X1,X2,np.log10(n/m_h),20,linewidths=0.5,colors='k')
+    cn = ax.contourf(X1,X2,np.log10(n/m_h),levels,cmap=cmap)
+    cn = ax.contourf(X1,X2,np.log10(n/m_h),levels,cmap=cmap)
+    cn = ax.contourf(X1,X2,np.log10(n/m_h),levels,cmap=cmap)
+#    cn = ax.contour(-X1,X2,np.log10(n/m_h),20,linewidths=0.5,colors='k')
+    cn = ax.contourf(-X1,X2,np.log10(n/m_h),levels,cmap=cmap)
+    cn = ax.contourf(-X1,X2,np.log10(n/m_h),levels,cmap=cmap)
+    cn = ax.contourf(-X1,X2,np.log10(n/m_h),levels,cmap=cmap)
 
 if orientation == 'h':
-    cn = ax.contourf(X2,X1,np.log10(n),cmap=cmap,levels=levels)
-    cn = ax.contourf(X2,-X1,np.log10(n),cmap=cmap,levels=levels)
-
-if orientation == 'c':
-    cn = ax.contourf(X1,X2,n,cmap=cmap,levels=levels)
-    cn = ax.contourf(-X1,X2,n,cmap=cmap,levels=levels)
-    cn = ax.contourf(X1,-X2,n,cmap=cmap,levels=levels)
-    cn = ax.contourf(-X1,-X2,n,cmap=cmap,levels=levels)
+#    cn = ax.contour(X1,X2,np.log10(n/m_h),20,linewidths=0.5,colors='k')
+    cn = ax.contourf(X2,X1,np.log10(n/m_h),levels,cmap=cmap)
+    cn = ax.contourf(X2,X1,np.log10(n/m_h),levels,cmap=cmap)
+    cn = ax.contourf(X2,X1,np.log10(n/m_h),levels,cmap=cmap)
+#    cn = ax.contour(-X1,X2,np.log10(n/m_h),20,linewidths=0.5,colors='k')
+    cn = ax.contourf(X2,-X1,np.log10(n/m_h),levels,cmap=cmap)
+    cn = ax.contourf(X2,-X1,np.log10(n/m_h),levels,cmap=cmap)
+    cn = ax.contourf(X2,-X1,np.log10(n/m_h),levels,cmap=cmap)
+#    cn = ax.contourf(X2,X1,np.log10(n),cmap=cmap,levels=levels,norm=norm)
+#    cn = ax.contourf(X2,-X1,np.log10(n),cmap=cmap,levels=levels,norm=norm)
 
 ###############
 # Vector plot #
@@ -162,24 +155,18 @@ if vector == 1:
 
     uu = np.nan_to_num(u)
     vv = np.nan_to_num(v)
-
-    uu = u
-    vv = v/(r*r)
-    ur = uu*X1/r + X2*vv
-    uz = uu*X2/r - X1*vv
-
     if orientation == 'v':
-        q = plt.quiver(X1[::qx,::qy],X2[::qx,::qy],ur[::qx,::qy],uz[::qx,::qy],
+        q = plt.quiver(X1[::qx,::qy],X2[::qx,::qy],uu[::qx,::qy],vv[::qx,::qy],
                     units='width')
         ax.quiverkey(q,0.9,0.9,1,r'',labelpos='E',coordinates='figure')
-        q = plt.quiver(-X1[::qx,::qy],X2[::qx,::qy],-ur[::qx,::qy],uz[::qx,::qy],
+        q = plt.quiver(-X1[::qx,::qy],X2[::qx,::qy],-uu[::qx,::qy],vv[::qx,::qy],
                     units='width')
         ax.quiverkey(q,0.9,0.9,1,r'',labelpos='E',coordinates='figure')
     if orientation == 'h':
-        q = plt.quiver(X2[::qx,::qy],X1[::qx,::qy],uz[::qx,::qy],ur[::qx,::qy],
+        q = plt.quiver(X2[::qx,::qy],X1[::qx,::qy],vv[::qx,::qy],uu[::qx,::qy],
                     units='width')
         ax.quiverkey(q,0.9,0.9,1,r'',labelpos='E',coordinates='figure')
-        q = plt.quiver(X2[::qx,::qy],-X1[::qx,::qy],uz[::qx,::qy],-ur[::qx,::qy],
+        q = plt.quiver(X2[::qx,::qy],-X1[::qx,::qy],vv[::qx,::qy],-uu[::qx,::qy],
                     units='width')
         ax.quiverkey(q,0.9,0.9,1,r'',labelpos='E',coordinates='figure')
 
@@ -189,14 +176,6 @@ if vector == 1:
 stream = 0
 
 if stream == 1:
-    uu = np.nan_to_num(u)
-    vv = np.nan_to_num(v)
-
-    uu = u
-    vv = v/(r*r)
-    ur = uu*X1/r + X2*vv
-    uz = uu*X2/r - X1*vv
-
     if orientation == 'v':
         sx1 = np.linspace(X1.min(),X1.max(),Nx1)
         sx2 = np.linspace(X2.min(),X2.max(),Nx2)
@@ -204,8 +183,8 @@ if stream == 1:
 
         px1 = X1.flatten()
         px2 = X2.flatten()
-        pu = ur.flatten()
-        pv = uz.flatten()
+        pu = u.flatten()
+        pv = v.flatten()
 
         gu = griddata((px1,px2),pu,(sX1,sX2))
         gv = griddata((px1,px2),pv,(sX1,sX2))
@@ -220,8 +199,8 @@ if stream == 1:
 
         px1 = X1.flatten()
         px2 = X2.flatten()
-        pu = ur.flatten()
-        pv = uz.flatten()
+        pu = u.flatten()
+        pv = v.flatten()
 
         gu = griddata((px2,px1),pu,(sX2,sX1))
         gv = griddata((px2,px1),pv,(sX2,sX1))
@@ -238,37 +217,33 @@ if orientation == 'v':
 if orientation == 'h':
     plt.xlim(x2min,x2max)
     plt.ylim(x1min,x1max)
-if orientation == 'c':
-    plt.xlim(x1min,x1max)
-    x2min = -x2max
-    plt.ylim(x2min,x2max)
 
-#plt.axis('off')
 #################
 # X1 and X2 ticks #
 #################
-x1labels = np.linspace(x1min,x1max, num=5, endpoint=True) # num of ticks in X1 axis
-x2labels = np.linspace(x2min,x2max, num=5, endpoint=True) # num of ticks in X2 axis
+x1labels = np.linspace(x1min,x1max, num=7, endpoint=True) # num of ticks in X1 axis
+x2labels = np.linspace(x2min,x2max, num=6, endpoint=True) # num of ticks in X2 axis
 
 if orientation == 'v':
     plt.xticks(x1labels)
     ax.set_xticklabels(['{:.0f}'.format(x) for x in x1labels],fontsize=fontsize)
     plt.yticks(x2labels)
     ax.set_yticklabels(['{:.0f}'.format(x) for x in x2labels],fontsize=fontsize)
-    plt.xlabel(r'$x$',fontsize=fontsize)
-    plt.ylabel(r'$y$',fontsize=fontsize)
+    plt.xlabel(r'$R/R_j$',fontsize=fontsize)
+    plt.ylabel(r'$z/R_j$',fontsize=fontsize)
 
 if orientation == 'h':
     plt.xticks(x2labels)
-    ax.set_xticklabels(['{:.1f}'.format(x) for x in x2labels],fontsize=fontsize)
+    ax.set_xticklabels(['{:.0f}'.format(x) for x in x2labels],fontsize=fontsize)
     plt.yticks(x1labels)
-    ax.set_yticklabels(['{:.1f}'.format(x) for x in x1labels],fontsize=fontsize)
-    plt.xlabel(r'$x$',fontsize=fontsize)
-    plt.ylabel(r'$y$',fontsize=fontsize)
+    ax.set_yticklabels(['{:.0f}'.format(x) for x in x1labels],fontsize=fontsize)
+    plt.ylabel(r'$R/R_j$',fontsize=fontsize)
+    plt.xlabel(r'$z/R_j$',fontsize=fontsize)
 
-###########################################
+
+############################################
 # Colorbar positon (right,left,top,bottom) #
-###########################################
+############################################
 cbpos = "right"
 if (cbpos == "right") or (cbpos == "left"):
     cbor = 'vertical'
@@ -277,9 +252,10 @@ if (cbpos == "top") or (cbpos == "bottom"):
     cbor = 'horizontal'
     rotation = 0
 
-cax = inset_axes(ax,width='5%',height="100%",loc = 'lower right',bbox_to_anchor = (0.1,0.0,1,1),bbox_transform = ax.transAxes,borderpad = 0)
+cax = inset_axes(ax,width='7%',height="100%",loc = 'lower right',bbox_to_anchor = (0.15,0.0,1,1),bbox_transform = ax.transAxes,borderpad = 0)
 cbarn = fig.colorbar(cn,orientation=cbor,cax=cax)
-cbarn.set_label(r'$\log (\rho/\rho_\infty)$',rotation=rotation,fontsize=fontsize,labelpad=20)
+cbarn.set_label(r'$\log (\rho/\rho_0)$',rotation=rotation,fontsize=fontsize,labelpad=20)
+
 if (cbpos == "right") or (cbpos == "left"):
    cax.yaxis.set_ticks_position(cbpos) 
    cax.yaxis.set_label_position(cbpos) 
@@ -287,9 +263,9 @@ if (cbpos == "top") or (cbpos == "bottom"):
    cax.xaxis.set_ticks_position(cbpos) 
    cax.xaxis.set_label_position(cbpos) 
 
-#################
+##################
 # Colorbar ticks #
-#################
+##################
 cbax1labels = np.linspace(cbar_min,cbar_max,num=7, endpoint=True) # num of ticks in the colorbar
 cbarn.set_ticks(cbax1labels)
 if (cbpos == "right") or (cbpos == "left"):
@@ -298,11 +274,6 @@ if (cbpos == "top") or (cbpos == "bottom"):
     cbarn.ax.set_xticklabels(['{:.2f}'.format(x) for x in cbax1labels],fontsize=fontsize)
 
 ax.set_aspect('equal')
-
-#circle = plt.Circle((0,0),1.0 + np.sqrt(1.0 - a*a),color='k',ls='-',lw=1.0)
-circle = plt.Circle((0,0),1.0 + np.sqrt(1.0 + a*a),color='k',ls='-',lw=1.0)
-ax.add_artist(circle)
-#plt.style.use('dark_background')
 
 #Graph name
 plt.savefig(oname,dpi=300,bbox_inches="tight")

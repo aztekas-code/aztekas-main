@@ -28,18 +28,18 @@ binary = 0
 %%%%%%%%%%%%%%%
 % DEFINE MESH %
 %%%%%%%%%%%%%%%
-Nx1 = 64
-Nx2 = 32
+Nx1 = 256
+Nx2 = 128
 Nx3 = 0
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 % DEFINE DOMAIN LIMITS %
 %%%%%%%%%%%%%%%%%%%%%%%%
-% Length in units of R_acc = GM/v_inf²
-x1max = 20.0
+% Length in units of R_acc = 2GM/v_inf²
+x1max = 10.0
 x2max = 1.0
 x3max = 1.0 
-x1min = 0.5
+x1min = 0.1
 x2min = 0.0
 x3min = 0.0
 
@@ -47,9 +47,9 @@ x3min = 0.0
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
 % Time in units of t_acc = GM/v_inf³
-tmax = 50.0
+tmax = 200.0
 timefile = 0.1
-numfile  = 100
+numfile  = 1000
 
 %%%%%%%%%%%%%%%%%%
 % COURANT FACTOR %
@@ -63,17 +63,17 @@ cou = 0.9
 %%%%%%%%%%%%%%%%%%%%
 % POLYTROPIC INDEX %
 %%%%%%%%%%%%%%%%%%%%
-K = 1.4 
+K = 1.66666666666666666666666666
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % BOUNDARY AND INITIAL PARAMETERS %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 dens_units = 1.0e+07 % g cm⁻³
-vel_units  = 1.0e+09 % cm s⁻¹ (Wind velocity)
+vel_units  = 1.0e+08 % cm s⁻¹ (Wind velocity)
 temp_units = 1.0e+07 % K
 
 density_inf     = 1.0 
 velocity_inf    = 1.0 % Keep as 1.0
 temperature_inf = 1.0 
-%pressure_inf    = 1.0 
-%Mach_inf        = 1.0 
+%pressure_inf   = 1.0 
+Mach_inf        = 3

@@ -44,7 +44,7 @@ matplotlib.rcParams['ytick.right'] = False
 matplotlib.rcParams['text.usetex'] = True
 matplotlib.rcParams['savefig.pad_inches'] = 0.03
 
-plt.style.use('dark_background')
+#plt.style.use('dark_background')
 
 # Fontsize and orientation
 fontsize = 12

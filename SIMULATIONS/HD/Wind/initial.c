@@ -49,16 +49,21 @@ void Initial()
    pressure_inf = (density_inf * dens_units) * K_B_cgs * (temperature_inf * temp_units) / (dens_units * vel_units * vel_units * mH_cgs);
    eos.cs     = sqrt(K * pressure_inf / density_inf);
 
-   Mach_inf = velocity_inf/eos.cs;
+//   Mach_inf = velocity_inf/eos.cs;
+   velocity_inf = Mach_inf * eos.cs;
 
 #endif
+
+   velocity_inf = sqrt(2.0);
+   eos.cs = velocity_inf / Mach_inf;
+   pressure_inf = density_inf * eos.cs * eos.cs / K;
 
    for(int i = 0; i <= Nx1; i++)
    {
       for(int j = 0; j <= Nx2; j++)
       {
          U(RHO,i,j) =  density_inf;
-         U(PRE,i,j) =  pressure_inf;//U(RHO,i,j)/K;//pressure_inf;//pow(U(RHO,i,j),K)/K;
+         U(PRE,i,j) =  pressure_inf;
          U(VX1,i,j) =  velocity_inf*cos(grid.X2[j]);
          U(VX2,i,j) = -velocity_inf*sin(grid.X2[j]);
       }
@@ -82,7 +87,7 @@ void Initial()
    fprintf(file,"Pressure in units of: %e erg cm⁻³\n",dens_units*vel_units*vel_units);
    fprintf(file,"Velocity in units of: %e g cm⁻³\n",vel_units);
    fprintf(file,"Temperature in units of: %e K\n",temp_units);
-   fprintf(file,"Distances in units of GM/%e cm\n",vel_units*vel_units);
+   fprintf(file,"Distances in units of 2GM/%e cm\n",vel_units*vel_units);
    fprintf(file,"Time in units of GM/%e sec\n",vel_units*vel_units*vel_units);
 
    fclose(file);

@@ -17,7 +17,22 @@
 #define lfac               1.0
 #define PRINT_EVOLV        TRUE
 #define HELMHOLTZ_COMP     CO1
-#define ANALYSIS           TRUE
+#define ANALYSIS           FALSE
+
+#define MDOT               TRUE
+#define MDOT_END           FALSE
+#define MDOT_TIME          1.0
+#define MDOT_ERR           1.0e-04
 
 double density_inf, pressure_inf, velocity_inf, temperature_inf, Mach_inf;
 double dens_units, vel_units, temp_units;
+
+double rho_atm;
+char last[50];
+int count, plus, minus, restart_file;
+int Mdot_end;
+double Mdot_Max, Mdot_Min;
+double Mdot_0, Mdot_tprint, Mdot_Mean;
+
+void Mass_Accretion_Rate(double *B);
+double gtheta(double th);

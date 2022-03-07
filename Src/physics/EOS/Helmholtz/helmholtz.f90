@@ -2371,7 +2371,7 @@
       double precision, dimension(nrow) :: Pgoal
       logical, dimension(nrow) :: NR_converged
 
-      double precision, parameter :: temp_floor = 1.0d7
+      double precision, parameter :: temp_floor = 1.0d4
       double precision, parameter :: rtol = 1.0d-4
 
       integer :: i, iter
@@ -2488,7 +2488,7 @@
       double precision, dimension(nrow) :: egoal
       logical, dimension(nrow) :: NR_converged
 
-      double precision, parameter :: temp_floor = 1e7
+      double precision, parameter :: temp_floor = 1e4
       double precision, parameter :: rtol = 1e-4
 
       integer :: i, iter

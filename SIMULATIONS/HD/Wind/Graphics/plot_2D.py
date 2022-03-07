@@ -29,7 +29,7 @@ if len(sys.argv) < 4:
 # Matplotlib params and other variables #
 #########################################
 
-lwidth = 0.5
+lwidth = 0.3
 tsize  = 2.0
 
 matplotlib.rcParams['axes.linewidth'] = lwidth
@@ -42,10 +42,11 @@ matplotlib.rcParams['ytick.direction'] = 'out'
 matplotlib.rcParams['xtick.top'] = False
 matplotlib.rcParams['ytick.right'] = False
 matplotlib.rcParams['text.usetex'] = True
+matplotlib.rcParams['axes.facecolor'] = 'black'
 
 # Fontsize and orientation
 fontsize = 12
-orientation = 'v'
+orientation = 'h'
 
 # LaTeX text
 plt.rc('font', family='serif')
@@ -114,7 +115,7 @@ if COORD == 'SPHERICAL' or COORD == 'POLAR':
 ###############################################
 
 # Figure size
-plt.figure(figsize=(18,18),dpi=300)
+plt.figure(figsize=(200,100),dpi=300)
 fig, ax = plt.subplots(1, 1)
 
 # Graph limits
@@ -126,20 +127,27 @@ x1max = X1.max()
 x2min = X2.min()
 x2max = X2.max()
 
+#x2min = -5
+#x2max = 15
+x2min = -7
+x2max = 4
+x1min = -3
+x1max = 3
+
 if scale == 'lin':
     plot = rho
 if scale == 'log':
     plot = np.log10(rho)
 
 # Colorbar limits
-cbar_min = plot.min() # Min
-cbar_max = plot.max() # Max
+cbar_min = 0.0#plot.min() # Min
+cbar_max = 1.5#plot.max() # Max
 
 # Contour levels
 levels = np.linspace(cbar_min,cbar_max,400) # Levels
 
 # Contour colormap 
-cmap = plt.get_cmap('YlOrBr') # Colormap
+cmap = plt.get_cmap('CMRmap_r') # Colormap
 # RdYlGn
 # YlOrBr
 # RdBu
@@ -148,21 +156,22 @@ cmap = plt.get_cmap('YlOrBr') # Colormap
 # jet
 # RdGy
 
-# Contour normalization
-norm = BoundaryNorm(levels, ncolors=cmap.N) # Normalization
+mask = plot < 0.0
+
+plot[mask] = 0.0
 
 ################
 # Contour plot #
 ################
 if orientation == 'v':
-    cn = ax.contourf(X1,X2,plot,cmap=cmap,levels=levels,norm=norm)
+    cn = ax.contourf(X1,X2,plot,cmap=cmap,levels=levels)
     if (COORD == 'CYLINDRICAL') or (COORD == 'SPHERICAL'):
-        cn = ax.contourf(-X1,X2,plot,cmap=cmap,levels=levels,norm=norm)
+        cn = ax.contourf(-X1,X2,plot,cmap=cmap,levels=levels)
 
 if orientation == 'h':
-    cn = ax.contourf(X2,X1,plot,cmap=cmap,levels=levels,norm=norm)
+    cn = ax.contourf(-X2,X1,plot,cmap=cmap,levels=levels)
     if (COORD == 'CYLINDRICAL') or (COORD == 'SPHERICAL'):
-        cn = ax.contourf(X2,-X1,plot,cmap=cmap,levels=levels,norm=norm)
+        cn = ax.contourf(-X2,-X1,plot,cmap=cmap,levels=levels)
 
 ###############
 # Vector plot #
@@ -213,19 +222,20 @@ if stream == 1:
         ax.streamplot(-sx1,sx2,-gu,gv,density=[1,1],color='k',linewidth=0.1)
 
     if orientation == 'h':
-        sx1 = np.linspace(X1.min(),X1.max(),Nx1)
-        sx2 = np.linspace(X2.min(),X2.max(),Nx2)
+        sx1 = np.linspace(x1min,x1max,Nx1)
+        sx2 = np.linspace(x2min,x2max,Nx2)
         sX2, sX1 = np.meshgrid(sx2,sx1)
 
         px1 = X1.flatten()
-        px2 = X2.flatten()
-        pu = u.flatten()
-        pv = v.flatten()
+        px2 = -X2.flatten()
+        pu = ur.flatten()
+        pv = -uz.flatten()
 
         gu = griddata((px2,px1),pu,(sX2,sX1))
         gv = griddata((px2,px1),pv,(sX2,sX1))
 
-        ax.streamplot(sx2, sx1,gv, gu,density=[2,1],color='k',linewidth=np.sqrt(gu*gu + gv*gv))
+        ax.streamplot(sx2, sx1,gv, gu,density=[2,1],color='k',linewidth=0.2*np.sqrt(gu*gu + gv*gv))
+        ax.streamplot(sx2,-sx1,gv, -gu,density=[2,1],color='k',linewidth=0.2*np.sqrt(gu*gu + gv*gv))
 
 ############
 # Set ZOOM #
@@ -242,12 +252,12 @@ if orientation == 'h':
 ###################
 
 dens = (x2max-x2min)/(x1max-x1min)
-num_tick = 5
+num_tick = 7
 num_x1 = int(num_tick)
-num_x2 = int(num_tick*dens)
+num_x2 = 6#int(num_tick*dens)
 
 x1labels = np.linspace(x1min,x1max, num=num_x1, endpoint=True) # num of ticks in X1 axis
-x2labels = np.linspace(x2min,x2max, num=num_x2, endpoint=True) # num of ticks in X2 axis
+x2labels = np.linspace(-6,4, num=num_x2, endpoint=True) # num of ticks in X2 axis
 
 if orientation == 'v':
     plt.xticks(x1labels)
@@ -258,20 +268,20 @@ if orientation == 'v':
         plt.xlabel(r'$x$',fontsize=fontsize)
         plt.ylabel(r'$y$',fontsize=fontsize)
     if (COORD == 'CYLINDRICAL') or (COORD == 'SPHERICAL'):
-        plt.xlabel(r'$R/R_{\mathrm{acc}}$',fontsize=fontsize)
-        plt.ylabel(r'$z/R_{\mathrm{acc}}$',fontsize=fontsize)
+        plt.xlabel(r'$R/\zeta_\mathrm{HL}$',fontsize=fontsize)
+        plt.ylabel(r'$z/\zeta_{\mathrm{HL}}$',fontsize=fontsize)
 
 if orientation == 'h':
     plt.xticks(x2labels)
-    ax.set_xticklabels(['{:.1f}'.format(x) for x in x2labels],fontsize=fontsize)
+    ax.set_xticklabels(['{:.0f}'.format(x) for x in x2labels],fontsize=fontsize)
     plt.yticks(x1labels)
-    ax.set_yticklabels(['{:.1f}'.format(x) for x in x1labels],fontsize=fontsize)
+    ax.set_yticklabels(['{:.0f}'.format(x) for x in x1labels],fontsize=fontsize)
     if COORD == 'CARTESIAN':
         plt.xlabel(r'$x$',fontsize=fontsize)
         plt.ylabel(r'$y$',fontsize=fontsize)
     if (COORD == 'CYLINDRICAL') or (COORD == 'SPHERICAL'):
-        plt.xlabel(r'$z$',fontsize=fontsize)
-        plt.ylabel(r'$R$',fontsize=fontsize)
+        plt.ylabel(r'$R/\zeta_\mathrm{HL}$',fontsize=fontsize)
+        plt.xlabel(r'$z/\zeta_{\mathrm{HL}}$',fontsize=fontsize)
 
 ############################################
 # Colorbar positon (right,left,top,bottom) #
@@ -284,13 +294,16 @@ if (cbpos == "top") or (cbpos == "bottom"):
     cbor = 'horizontal'
     rotation = 0
 
-cax = inset_axes(ax,width='5%',height="100%",loc = 'lower right',bbox_to_anchor = (0.1,0.0,1,1),bbox_transform = ax.transAxes,borderpad = 0)
+#cax = inset_axes(ax,width='3%',height="100%",loc = 'lower right',bbox_to_anchor = (0.05,0.0,1,1),bbox_transform = ax.transAxes,borderpad = 0)
+#cbarn = fig.colorbar(cn,orientation=cbor,cax=cax)
+divider = make_axes_locatable(ax)
+cax = divider.append_axes(cbpos,size="3%",pad=0.05)
 cbarn = fig.colorbar(cn,orientation=cbor,cax=cax)
 
 if scale == 'lin':
     cbarn.set_label(r'$\rho/\rho_0$',rotation=rotation,fontsize=fontsize,labelpad=20)
 if scale == 'log':
-    cbarn.set_label(r'$\log(\rho/\rho_0)$',rotation=rotation,fontsize=fontsize,labelpad=20)
+    cbarn.set_label(r'$\log(\rho/\rho_\infty)$',rotation=rotation,fontsize=fontsize,labelpad=15)
 
 if (cbpos == "right") or (cbpos == "left"):
    cax.yaxis.set_ticks_position(cbpos) 

@@ -23,7 +23,7 @@ AZTPATH = $(AZTEKAS_PATH)
 # $ grep '^core id' /proc/cpuinfo |sort -u|wc -l
 ##################################################
 
-OMP_NUM = 1
+OMP_NUM = 5
 
 ##################################################
 # Physics (HD)
@@ -63,13 +63,13 @@ EOS = Ideal
 # Coordinates (Cartesian, Cylindrical, Spherical)
 ##################################################
 
-COORD = Spherical
+COORD = Cartesian
 
 ##################################################
 # User Source Terms (True,False)
 ##################################################
 
-USER_SOURCE = True
+USER_SOURCE = False
 
 ##################################################
 # Integration method
@@ -81,11 +81,9 @@ INT = Standard
 # All user *.c are written here
 ##################################################
 
-USR = analysis.c \
-		functions.c \
-		initial.c \
+USR = initial.c \
       user_boundaries.c \
-		user_input.c
+		user_input.c 
 
 ##################################################
 # Include a global Makefile in the /Src/ 

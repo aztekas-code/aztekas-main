@@ -18,7 +18,7 @@
 #define PRINT_EVOLV        TRUE
 
 #define Black_Hole_Mass    1.0
-#define Black_Hole_Spin    0.995
+#define Black_Hole_Spin    0.99
 #define Mach               5.0
 #define vinf               0.5
 

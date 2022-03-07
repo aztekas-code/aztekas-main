@@ -1,5 +1,3 @@
-#!/usr/bin/env python 
-
 import sys, math
 import numpy as np
 import matplotlib
@@ -29,7 +27,7 @@ matplotlib.rcParams['ytick.direction'] = 'out'
 matplotlib.rcParams['xtick.top'] = False
 matplotlib.rcParams['ytick.right'] = False
 matplotlib.rcParams['text.usetex'] = True
-matplotlib.rcParams['axes.facecolor'] = 'black'
+#matplotlib.rcParams['axes.facecolor'] = 'white'
 
 # Fontsize and orientation
 fontsize = 12
@@ -134,23 +132,23 @@ cmap = plt.get_cmap('gist_heat') # Colormap
 # RdGy
 
 # Contour normalization
-norm = BoundaryNorm(levels, ncolors=cmap.N) # Normalization
+#norm = BoundaryNorm(levels, ncolors=cmap.N) # Normalization
 
 ################
 # Contour plot #
 ################
 if orientation == 'v':
-    cn = ax.contourf(X1,X2,np.log10(p),cmap=cmap,levels=levels,norm=norm)
+    cn = ax.contourf(X1,X2,np.log10(p),cmap=cmap,levels=levels,extend="min")
 
 if orientation == 'h':
-    cn = ax.contourf(X2,X1,np.log10(n),cmap=cmap,levels=levels,norm=norm)
-    cn = ax.contourf(X2,-X1,np.log10(n),cmap=cmap,levels=levels,norm=norm)
+    cn = ax.contourf(X2,X1,np.log10(n),cmap=cmap,levels=levels)
+    cn = ax.contourf(X2,-X1,np.log10(n),cmap=cmap,levels=levels)
 
 if orientation == 'c':
-    cn = ax.contourf(X1,X2,n,cmap=cmap,levels=levels,norm=norm)
-    cn = ax.contourf(-X1,X2,n,cmap=cmap,levels=levels,norm=norm)
-    cn = ax.contourf(X1,-X2,n,cmap=cmap,levels=levels,norm=norm)
-    cn = ax.contourf(-X1,-X2,n,cmap=cmap,levels=levels,norm=norm)
+    cn = ax.contourf(X1,X2,n,cmap=cmap,levels=levels)
+    cn = ax.contourf(-X1,X2,n,cmap=cmap,levels=levels)
+    cn = ax.contourf(X1,-X2,n,cmap=cmap,levels=levels)
+    cn = ax.contourf(-X1,-X2,n,cmap=cmap,levels=levels)
 
 ###############
 # Vector plot #
@@ -244,65 +242,65 @@ if orientation == 'c':
     x2min = -x2max
     plt.ylim(x2min,x2max)
 
-plt.axis('off')
+#plt.axis('off')
 #################
 # X1 and X2 ticks #
 #################
-#x1labels = np.linspace(x1min,x1max, num=5, endpoint=True) # num of ticks in X1 axis
-#x2labels = np.linspace(x2min,x2max, num=5, endpoint=True) # num of ticks in X2 axis
-#
-#if orientation == 'v':
-#    plt.xticks(x1labels)
-#    ax.set_xticklabels(['{:.1f}'.format(x) for x in x1labels],fontsize=fontsize)
-#    plt.yticks(x2labels)
-#    ax.set_yticklabels(['{:.1f}'.format(x) for x in x2labels],fontsize=fontsize)
-#    plt.xlabel(r'$r$',fontsize=fontsize)
-#    plt.ylabel(r'$z$',fontsize=fontsize)
-#
-#if orientation == 'h':
-#    plt.xticks(x2labels)
-#    ax.set_xticklabels(['{:.1f}'.format(x) for x in x2labels],fontsize=fontsize)
-#    plt.yticks(x1labels)
-#    ax.set_yticklabels(['{:.1f}'.format(x) for x in x1labels],fontsize=fontsize)
-#    plt.xlabel(r'$z$',fontsize=fontsize)
-#    plt.ylabel(r'$r$',fontsize=fontsize)
+x1labels = np.linspace(x1min,x1max, num=5, endpoint=True) # num of ticks in X1 axis
+x2labels = np.linspace(x2min,x2max, num=5, endpoint=True) # num of ticks in X2 axis
 
-############################################
+if orientation == 'v':
+    plt.xticks(x1labels)
+    ax.set_xticklabels(['{:.0f}'.format(x) for x in x1labels],fontsize=fontsize)
+    plt.yticks(x2labels)
+    ax.set_yticklabels(['{:.0f}'.format(x) for x in x2labels],fontsize=fontsize)
+    plt.xlabel(r'$x/M$',fontsize=fontsize)
+    plt.ylabel(r'$y/M$',fontsize=fontsize)
+
+if orientation == 'h':
+    plt.xticks(x2labels)
+    ax.set_xticklabels(['{:.1f}'.format(x) for x in x2labels],fontsize=fontsize)
+    plt.yticks(x1labels)
+    ax.set_yticklabels(['{:.1f}'.format(x) for x in x1labels],fontsize=fontsize)
+    plt.xlabel(r'$x$',fontsize=fontsize)
+    plt.ylabel(r'$y$',fontsize=fontsize)
+
+###########################################
 # Colorbar positon (right,left,top,bottom) #
-############################################
-#cbpos = "right"
-#if (cbpos == "right") or (cbpos == "left"):
-#    cbor = 'vertical'
-#    rotation = 270
-#if (cbpos == "top") or (cbpos == "bottom"):
-#    cbor = 'horizontal'
-#    rotation = 0
-#
-#cax = inset_axes(ax,width='5%',height="100%",loc = 'lower right',bbox_to_anchor = (0.1,0.0,1,1),bbox_transform = ax.transAxes,borderpad = 0)
-#cbarn = fig.colorbar(cn,orientation=cbor,cax=cax)
-#cbarn.set_label(r'$\log (\rho)$',rotation=rotation,fontsize=fontsize,labelpad=20)
-#if (cbpos == "right") or (cbpos == "left"):
-#   cax.yaxis.set_ticks_position(cbpos) 
-#   cax.yaxis.set_label_position(cbpos) 
-#if (cbpos == "top") or (cbpos == "bottom"):
-#   cax.xaxis.set_ticks_position(cbpos) 
-#   cax.xaxis.set_label_position(cbpos) 
+###########################################
+cbpos = "right"
+if (cbpos == "right") or (cbpos == "left"):
+    cbor = 'vertical'
+    rotation = 270
+if (cbpos == "top") or (cbpos == "bottom"):
+    cbor = 'horizontal'
+    rotation = 0
 
-##################
+cax = inset_axes(ax,width='5%',height="100%",loc = 'lower right',bbox_to_anchor = (0.1,0.0,1,1),bbox_transform = ax.transAxes,borderpad = 0)
+cbarn = fig.colorbar(cn,orientation=cbor,cax=cax)
+cbarn.set_label(r'$\log (\rho)$',rotation=rotation,fontsize=fontsize,labelpad=20)
+if (cbpos == "right") or (cbpos == "left"):
+   cax.yaxis.set_ticks_position(cbpos) 
+   cax.yaxis.set_label_position(cbpos) 
+if (cbpos == "top") or (cbpos == "bottom"):
+   cax.xaxis.set_ticks_position(cbpos) 
+   cax.xaxis.set_label_position(cbpos) 
+
+#################
 # Colorbar ticks #
-##################
-#cbax1labels = np.linspace(cbar_min,cbar_max,num=7, endpoint=True) # num of ticks in the colorbar
-#cbarn.set_ticks(cbax1labels)
-#if (cbpos == "right") or (cbpos == "left"):
-#    cbarn.ax.set_yticklabels(['{:.2f}'.format(x) for x in cbax1labels],fontsize=fontsize)
-#if (cbpos == "top") or (cbpos == "bottom"):
-#    cbarn.ax.set_xticklabels(['{:.2f}'.format(x) for x in cbax1labels],fontsize=fontsize)
+#################
+cbax1labels = np.linspace(cbar_min,cbar_max,num=7, endpoint=True) # num of ticks in the colorbar
+cbarn.set_ticks(cbax1labels)
+if (cbpos == "right") or (cbpos == "left"):
+    cbarn.ax.set_yticklabels(['{:.2f}'.format(x) for x in cbax1labels],fontsize=fontsize)
+if (cbpos == "top") or (cbpos == "bottom"):
+    cbarn.ax.set_xticklabels(['{:.2f}'.format(x) for x in cbax1labels],fontsize=fontsize)
 
 ax.set_aspect('equal')
 
 circle = plt.Circle((0,0),1.0 + np.sqrt(1.0 - a*a),color='k',ls='-',lw=1.0)
 ax.add_artist(circle)
-plt.style.use('dark_background')
+#plt.style.use('dark_background')
 
 #Graph name
 plt.savefig(oname,dpi=300,bbox_inches="tight")
