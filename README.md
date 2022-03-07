@@ -1,4 +1,4 @@
-# ****__aztekas__****-code
+# \textsc{aztekas}-code
 
 &copy; 2017 Alejandro Aguayo-Ortiz \& Sergio Mendoza and &copy; Alejandro Aguayo-Ortiz 2019-2021.
 
