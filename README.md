@@ -1,7 +1,5 @@
 # *******aztekas*******-code
 
-&copy; 2017 Alejandro Aguayo-Ortiz \& Sergio Mendoza and &copy; Alejandro Aguayo-Ortiz 2018-2022.
-
 _aztekas_ is a program that solves hyperbolic partial differential equations in conservative form using High Resolution Shock-Capturing (HRSC) schemes. This version of _aztekas_ allows to solve the non-relativistic and relativistic hydrodynamic equations of motion (Euler equations) for a perfect fluid. The relativistic part can solve these equations on a background fixed metric (Schwarzschild, Minkowski, Kerr-Schild, etc.).
 
 ## Introduction
