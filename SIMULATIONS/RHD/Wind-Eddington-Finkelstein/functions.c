@@ -5,7 +5,7 @@
  *
  * @author Alejandro Aguayo-Ortiz
  *
- * @date 19-10-2020 - 19:05:28
+ * @date 12-05-2022 - 18:25:00
  *
  * E-mail: aaguayoo92@ciencias.unam.mx
  *
@@ -131,11 +131,11 @@ void Mass_Accretion_Rate(double *B)
 
          if(j == gc+1 || j == Nx2-gc-1)
          {
-            Mdot = Mdot - 4.0*M_PI*rho*Ur*lapse*dety*(grid.X2p[j] - grid.X2m[j])/(4.0*M_PI*density_inf);
+            Mdot = Mdot - 2.0*M_PI*rho*Ur*lapse*dety*(grid.X2p[j] - grid.X2m[j])/(4.0*M_PI*density_inf);
          }
          else
          {
-            Mdot = Mdot - 4.0*M_PI*rho*Ur*lapse*dety*(grid.X2p[j] - grid.X2m[j])/(4.0*M_PI*density_inf);
+            Mdot = Mdot - 2.0*M_PI*rho*Ur*lapse*dety*(grid.X2p[j] - grid.X2m[j])/(4.0*M_PI*density_inf);
          }
       }
       Mean[i] = Mdot;

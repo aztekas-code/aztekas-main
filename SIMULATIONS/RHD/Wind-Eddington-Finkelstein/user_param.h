@@ -18,7 +18,9 @@
 
 #define RECONST            MC
 #define FLUX               HLL
-#define GRID               UNIFORM
+#define GRID               LOG
+#define lfac               1.0
+#define PRINT_EVOLV        TRUE
 
 #define Black_Hole_Mass    1.0
 #define Black_Hole_Spin    0.0
@@ -27,6 +29,7 @@
 #define MDOT_END           FALSE
 #define MDOT_ERR           1.0e-4 // only if MDOT_END TRUE
 #define MDOT_TIME          1.0
+double r_acc;
 int Mdot_end;
 double Mdot_0;
 double Mdot_tprint;

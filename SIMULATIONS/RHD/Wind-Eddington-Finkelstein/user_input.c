@@ -72,6 +72,11 @@ int User_Parameters(char const *paramfile_name)
       
    fclose(paramfile);         
 
+   r_acc = 1.0 / (pow(velocity_inf,2.0)*(1.0 + 1.0/pow(Mach,2.0)));
+
+   x1max = x1max * r_acc;
+   printf("%f \n", x1max);
+
    if(*outputfile == '\0')
    {
       printf("Check parameters file: Didn't find a name for output file\n");

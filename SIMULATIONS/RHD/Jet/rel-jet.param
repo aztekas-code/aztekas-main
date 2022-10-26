@@ -45,7 +45,7 @@ x3min = 0.0
 %%%%%%%%%%%%%%%%%%%
 % TIME PARAMETERS %
 %%%%%%%%%%%%%%%%%%%
-tmax = 120
+tmax = 110.67
 timefile = 110.67
 numfile = 1
 
