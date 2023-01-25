@@ -81,7 +81,7 @@ void Get_Metric_Components(gauge_ *local_grid)
    local_grid->gamma_con[1][2] = 0.0;
    local_grid->gamma_con[2][0] = 0.0;
    local_grid->gamma_con[2][1] = 0.0;
-   local_grid->gamma_con[2][2] = 1.0/(r*r*sin_theta*sin_theta);
+   local_grid->gamma_con[2][2] = 1.0/(r*r*sin_theta*sin_theta + 1e-06);
 
    local_grid->dety = sqrt(r*r*r*sin_theta*sin_theta*(2.0*M + r));
 

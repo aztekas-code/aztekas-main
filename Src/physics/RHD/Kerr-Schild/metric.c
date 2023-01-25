@@ -105,7 +105,7 @@ void Get_Metric_Components(gauge_ *local_grid)
    local_grid->gamma_con[1][2] = 0.0;
    local_grid->gamma_con[2][0] = a/rho2;
    local_grid->gamma_con[2][1] = 0.0;
-   local_grid->gamma_con[2][2] = 1.0/(rho2*sin2);
+   local_grid->gamma_con[2][2] = 1.0/(rho2*sin2 + 1.0e-6);
 
    local_grid->gamma_cov[0][0] = 1.0 + 2.0*M*r/rho2;
    local_grid->gamma_cov[0][1] = 0.0;
@@ -123,7 +123,7 @@ void Get_Metric_Components(gauge_ *local_grid)
    local_grid->gamma_con[0][1] = a/rho2;
    local_grid->gamma_con[0][2] = 0.0;
    local_grid->gamma_con[1][0] = a/rho2;
-   local_grid->gamma_con[1][1] = 1.0/(rho2*sin2);
+   local_grid->gamma_con[1][1] = 1.0/(rho2*sin2 + 1.0e-6);
    local_grid->gamma_con[1][2] = 0.0;
    local_grid->gamma_con[2][0] = 0.0;
    local_grid->gamma_con[2][1] = 0.0;
