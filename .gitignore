@@ -19,6 +19,7 @@
 *.o
 fort.*
 *.jpg
+*.dat
 
 SIMULATIONS/**/aztekas
 SIMULATIONS/**/TEST/
