@@ -26,3 +26,6 @@ SIMULATIONS/**/**/INFO
 SIMULATIONS/
 
 .old/
+
+# Poetry
+poetry.lock

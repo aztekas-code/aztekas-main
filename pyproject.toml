@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "aztekas-main"
+version = "0.1.0"
+description = ""
+authors = ["ALEJANDRO AGUAYO ORTIZ <alejandro.aguayo.ortiz@bbva.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pre-commit = "^4.1.0"
+clang-format = "^19.1.7"
+commitizen = "^4.1.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
