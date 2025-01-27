@@ -11,7 +11,7 @@ include $(AZTEKAS_PATH)/src/Makefile
 clean:
 	rm -rf obj/*.o $(EXECUTABLE)
 
-commit:
+commit: pre-commit
 	cz commit
 
 ## Genera documentación con Doxygen

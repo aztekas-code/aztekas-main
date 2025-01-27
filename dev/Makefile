@@ -13,10 +13,9 @@
 # PATH TO AZTEKAS
 ##################################################
 
-EXECUTABLE = $(shell pwd)/aztekas.run
-OBJDIR = $(shell pwd)
-LOCAL_SRCS = initial.cpp
-LOCAL_OBJS = $(LOCAL_SRCS:%.cpp=$(OBJDIR)/%.o)
+EXECUTABLE = aztekas.run
+OBJDIR = ./obj
+OBJS := $(wildcard $(OBJDIR)/*.o)
 
 ##################################################
 # SET NUMBER OF THREADS USED BY OMP
@@ -82,15 +81,17 @@ USER_SOURCE = False
 INT = Standard
 
 ##################################################
-# All user *.c are written here
+# All user *.cpp are written here
 ##################################################
 
-#USR = initial.c \
-#      user_boundaries.c \
-#		user_input.c 
+LOCAL_SRCS = initial.cpp
+LOCAL_OBJS = $(LOCAL_SRCS:%.cpp=$(OBJDIR)/%.o)
+
+$(OBJDIR)/%.o: %.cpp 
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 ##################################################
-# Include a global Makefile in the /Src/ 
+# Include a global Makefile in the /src/ 
 # directory, which has some definitions
 # of parameters, inclusions of other makefiles
 # and compilation orders. Change this Makefile,
@@ -99,6 +100,13 @@ INT = Standard
 ##################################################
 include $(AZTEKAS_PATH)/Makefile
 
-pre-commit:
+clean:
 
 commit:
+
+pre-commit:
+
+previous: previous_$(EXECUTABLE)
+
+previous_$(EXECUTABLE): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $@ $^
