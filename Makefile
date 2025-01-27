@@ -1,43 +1,27 @@
 # Makefile en la raíz: mi_proyecto/Makefile
 # Solo tiene instrucciones de desarrollo e invoca los Makefiles de subdirectorios
 
-.PHONY: all build clean pre-commit commit docs help
+include $(AZTEKAS_PATH)/include/Makefile
+include $(AZTEKAS_PATH)/src/Makefile
 
-##################################################
-# PATH TO AZTEKAS
-##################################################
-
-AZTPATH = $(AZTEKAS_PATH)
-
-
-## Este target compila todo el proyecto llamando a los Makefiles de subdirectorios
-all: build
-
-## Construcción completa del proyecto
-build:
-	@$(MAKE) -C $(AZTPATH)/include
-	@$(MAKE) -C $(AZTPATH)/include/aztekas
-	@$(MAKE) -C $(AZTPATH)/src
-
-## Limpieza de todos los binarios/object files intermedios
-clean:
-	@$(MAKE) -C $(AZTPATH)/include clean
-	@$(MAKE) -C $(AZTPATH)/include/aztekas clean
-	@$(MAKE) -C $(AZTPATH)/src clean
-
-## Ejecuta pre-commit (formatos, linters, etc.)
-pre-commit:
-	git add $(AZTPATH)
-	pre-commit run 
+.PHONY: pre-commit commit docs help
 
 ## Realiza un commit rápido (como ejemplo). 
 ## Puedes personalizar el mensaje o quitar este target si no lo necesitas.
+clean:
+	rm -rf obj/*.o $(EXECUTABLE)
+
 commit:
 	cz commit
 
 ## Genera documentación con Doxygen
 docs:
 	doxygen docs/Doxyfile
+
+## Ejecuta pre-commit (formatos, linters, etc.)
+pre-commit:
+	git add $(AZTEKAS_PATH)
+	pre-commit run 
 
 ## Ayuda
 help:

@@ -1,12 +1,10 @@
-# Makefile en mi_proyecto/include/mi_proyecto/Makefile
-
-CXX      = g++
-CXXFLAGS = -Wall -Wextra -std=c++17 -I../../..
+# include/aztekas/Makefile
+OBJDIR ?= .
 
 .PHONY: all clean
 
 all:
-	@echo "No hay archivos .cpp en aztekas-main/include/aztekas. (Placeholder)"
+	@echo "No hay .cpp en aztekas, nada que compilar."
 
 clean:
-	@echo "Limpieza en aztekas-main/include/aztekas. (Placeholder)"
+	@echo "No hay .o que limpiar en aztekas."

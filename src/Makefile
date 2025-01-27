@@ -1,38 +1,19 @@
 # src/Makefile
+include $(AZTEKAS_PATH)/src/common/Makefile
 
-# Detectar sistema operativo
-OS := $(shell uname -s)
-
-# Opciones por defecto (válidas para ambos sistemas, si no las sobrescribes)
+# Si no se define desde afuera, será "."
+OBJDIR ?= .
 CXX      = g++
-CXXFLAGS = -Wall -Wextra -std=c++17
-
-# Configuraciones específicas para macOS vs. Linux
-ifeq ($(OS),Darwin)  # Darwin = macOS
-    CXX      = clang++
-    CXXFLAGS += -fopenmp -I../include -I../include/aztekas -I.
-    # Agrega aquí cualquier otra bandera específica de macOS
-    # Por ejemplo, -framework CoreFoundation (si fuera necesario) 
-endif
-
-ifeq ($(OS),Linux) 
-    CXX      = g++
-    CXXFLAGS += -fopenmp -I../include -I../include/aztekas -I.
-    # Agrega aquí cualquier otra bandera específica de Linux
-    # Por ejemplo, -pthread para threads, -ldl, etc.
-endif
-
-TARGET   = main
+CXXFLAGS = -Wall -std=c++17 -I$(AZTEKAS_PATH)/include/aztekas
 
 .PHONY: all clean
 
-all: $(TARGET)
+all: $(EXECUTABLE)
 
-$(TARGET): main.o 
-	$(CXX) $(CXXFLAGS) main.o -o $(TARGET)
+$(EXECUTABLE): $(LOCAL_OBJS) \
+               $(COMMON_OBJS) \
+               $(OBJDIR)/main.o 
+	$(CXX) $(CXXFLAGS) -o $@ $^ && mv *.o $(OBJDIR)/obj
 
-main.o: main.cpp
-	$(CXX) $(CXXFLAGS) -c main.cpp 
-
-clean:
-	rm -f *.o $(TARGET)
+$(OBJDIR)/%.o: $(AZTEKAS_PATH)/src/%.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@

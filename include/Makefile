@@ -1,9 +1,7 @@
-# Makefile en mi_proyecto/include/Makefile
+# include/Makefile
+OBJDIR ?= .    # Por si no nos pasan OBJDIR desde fuera
 
 .PHONY: all clean
 
 all:
-	@$(MAKE) -C aztekas
-
-clean:
-	@$(MAKE) -C aztekas clean
+	@echo "No hay .cpp en include, nada que compilar."

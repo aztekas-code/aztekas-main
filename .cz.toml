@@ -1,0 +1,61 @@
+[tool.commitizen]
+name = "cz_customize"
+
+[tool.commitizen.customize]
+message_template = "{{change_type}}{% if scope %}({{scope}}){% endif %}{%if breaking_change %}!{% endif %}: {{body}}{%if additional_info %}\n\n{{additional_info}}{% endif %}{% if breaking_change %}\n\nBREAKING CHANGE: {{breaking_change_footer}}{% endif %}"
+example = "feature (scope): this feature enable customize through config file"
+schema = "<type> (scope): <body>"
+info_path = "cz_customize_info.txt"
+info = """
+This is customized info
+"""
+
+[[tool.commitizen.customize.questions]]
+type = "list"
+name = "change_type"
+choices = [
+    { value= 'feat', name= '✨ feat: Adding a new feature' },
+    { value= 'fix', name= '🐛 fix: Fixing a bug' },
+    { value= 'docs', name= '📝 docs: Add or update documentation' },
+    { value= 'style', name= '💄 style: Add or update styles, ui or ux' },
+    { value= 'refactor', name= '🔄 refactor: Code change that neither fixes a bug nor adds a feature' },
+    { value= 'test', name= '✅ pre-commit: Code change to pass pre-commit hooks' },
+    { value= 'notebook', name= '🪐 notebook: Jupyter notebook modification.' },
+    { value= 'perf', name= '🔨 perf: Code change that improves performance' },
+    { value= 'test', name= '🧪 test: Adding tests cases' },
+    { value= 'profile', name= '📈 profile: Running profilings' },
+    { value= 'chore', name= '🚚 chore: Changes to the build process or auxiliary tools and libraries such as documentation generation' },
+    { value= 'demo', name= '🎬 demo: Changes related to a demo, like an Streamlit app.' },
+    { value= 'revert', name= '⏪️ revert: Revert to a commit' },
+    { value= 'merge', name= '🛠️  merge: Resolve merge conflict' },
+    { value= 'wip', name= '🚧 wip: Work in progress' },
+    { value= 'build', name= '👷 build: Add or update regards to build process' },
+    { value= 'ci', name= '💚 ci: Add or update regards to build process' },
+]
+message = "Select the type of change you are committing"
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "scope"
+message = "What is the scope of this change? (class or file name): (press [enter] to skip)\n"
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "body"
+message = "Write a short and imperative summary of the code changes: (lower case and no period)\n"
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "additional_info"
+message = "Provide additional contextual information about the code changes: (press [enter] to skip)\n"
+
+[[tool.commitizen.customize.questions]]
+type = "confirm"
+name = "breaking_change"
+message = "Is this a BREAKING CHANGE?"
+default = false
+
+[[tool.commitizen.customize.questions]]
+type = "input"
+name = "breaking_change_footer"
+message = "Footer. Information about Breaking Changes and reference issues thatthis commit closes: (press [enter] to skip)\n"

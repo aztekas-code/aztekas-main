@@ -29,3 +29,6 @@ SIMULATIONS/
 
 # Poetry
 poetry.lock
+
+# Exectuables
+*.run

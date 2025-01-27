@@ -13,7 +13,10 @@
 # PATH TO AZTEKAS
 ##################################################
 
-AZTPATH = $(AZTEKAS_PATH)
+EXECUTABLE = $(shell pwd)/aztekas.run
+OBJDIR = $(shell pwd)
+LOCAL_SRCS = initial.cpp
+LOCAL_OBJS = $(LOCAL_SRCS:%.cpp=$(OBJDIR)/%.o)
 
 ##################################################
 # SET NUMBER OF THREADS USED BY OMP
@@ -94,7 +97,7 @@ INT = Standard
 # and recursive Makefiles only if you know what
 # your doing.
 ##################################################
-include $(AZTPATH)/Makefile
+include $(AZTEKAS_PATH)/Makefile
 
 pre-commit:
 
