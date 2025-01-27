@@ -1,34 +1,82 @@
-# Makefile en la raíz: mi_proyecto/Makefile
-# Solo tiene instrucciones de desarrollo e invoca los Makefiles de subdirectorios
+##################################################
+##         MAIN AZTEKAS PROJECT MAKEFILE         #
+##################################################
 
+##################################################
+# Global Include
+##################################################
+# Include Makefiles from subdirectories
 include $(AZTEKAS_PATH)/include/Makefile
 include $(AZTEKAS_PATH)/src/Makefile
 
-.PHONY: pre-commit commit docs help
+.PHONY: init clean pre-commit commit docs help
 
-## Realiza un commit rápido (como ejemplo). 
-## Puedes personalizar el mensaje o quitar este target si no lo necesitas.
-clean:
-	rm -rf obj/*.o $(EXECUTABLE)
+##################################################
+# Environment Management
+##################################################
+# Install dependencies and activate the virtual environment with Poetry
 
+## Install dependencies and activate the virtual environment
+init: aztekas-simulation
+	@echo "Installing dependencies and activating virtual environment..."
+	@poetry config virtualenvs.path '${AZTEKAS_PATH}/.venv-dev' --local
+	@poetry install --no-root
+	@poetry shell
+
+aztekas-simulation:
+	@echo ""
+	@echo "\033[1;39m#################################\033[0m"
+	@echo "\033[1;39m######### AZTEKAS-CODE ##########\033[0m"
+	@echo "\033[1;39m#################################\033[0m"
+	@echo ""
+
+##################################################
+# Cleaning Targets
+##################################################
+# Clean temporary files and executables
+
+## Clean temporary files and executables
+clean: aztekas-simulation
+	@echo "Cleaning temporary files..."
+	rm -rf obj/*.o $(EXECUTABLE) last_$(EXECUTABLE)
+
+##################################################
+# Code Quality and Git
+##################################################
+# Manage pre-commit hooks and Git operations
+
+## Run pre-commit hooks on all files
+pre-commit: aztekas-simulation
+	@echo "Running pre-commit hooks..."
+	@git add $(AZTEKAS_PATH)
+	@pre-commit run
+
+## Perform a commit with Commitizen
 commit: pre-commit
-	cz commit
+	@echo "Performing a commit with Commitizen..."
+	@cz commit
 
-## Genera documentación con Doxygen
+##################################################
+# Documentation
+##################################################
+# Generate project documentation
+
+## Generate documentation with Doxygen
 docs:
+	@echo "Generating documentation with Doxygen..."
 	doxygen docs/Doxyfile
 
-## Ejecuta pre-commit (formatos, linters, etc.)
-pre-commit:
-	git add $(AZTEKAS_PATH)
-	pre-commit run 
+##################################################
+# Help System
+##################################################
+# Display available commands and their descriptions
 
-## Ayuda
-help:
-	@echo "Comandos disponibles:"
-	@echo "  make all (o make build)   -> Compila todo el proyecto"
-	@echo "  make clean                -> Limpia archivos intermedios"
-	@echo "  make pre-commit           -> Ejecuta hooks pre-commit en todos los archivos"
-	@echo "  make commit               -> Realiza git add y git commit con un mensaje genérico"
-	@echo "  make docs                 -> Genera la documentación con Doxygen"
-	@echo "  make help                 -> Muestra esta ayuda"
+## Display available commands and descriptions
+help: aztekas-simulation
+	@echo "Available commands:"
+	@echo "init:         Install dependencies and activate the virtual environment with Poetry"
+	@echo "clean:        Clean temporary files and executables"
+	@echo "pre-commit:   Run pre-commit hooks on all files"
+	@echo "commit:       Perform a Git commit with Commitizen"
+	@echo "docs:         Generate project documentation with Doxygen"
+	@echo "help:         Display this help message"

@@ -23,12 +23,12 @@ endif
 
 .PHONY: all clean
 
-all: $(EXECUTABLE)
+all: aztekas-simulation $(EXECUTABLE)
 
 $(EXECUTABLE): $(LOCAL_OBJS) \
                $(COMMON_OBJS) \
-               $(OBJDIR)/main.o 
-	$(CXX) $(CXXFLAGS) -o $@ $^ 
+               $(OBJDIR)/main.o
+	$(CXX) $(CXXFLAGS) -o $@ $^
 
 $(OBJDIR)/%.o: $(AZTEKAS_PATH)/src/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@

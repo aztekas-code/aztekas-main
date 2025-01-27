@@ -1,6 +1,26 @@
 repos:
   - repo: local
     hooks:
+      - id: trailing-whitespace
+        name: Remove whitespaces
+        entry: trailing-whitespace-fixer
+        language: system
+        types: [text]
+      - id: end-of-file-fixer
+        name: Fix end of file
+        entry: end-of-file-fixer
+        language: system
+        types: [text]
+      - id: debug-statements
+        name: Debug statements
+        entry: debug-statement-hook
+        language: system
+        types: [python]
+      - id: check-merge-conflict
+        name: Check merge conflicts
+        entry: check-merge-conflict
+        language: system
+        types: [python]
       # -----------------------------------------------------------------
       # Hook para clang-format (formatea el código C/C++ según un estilo)
       # -----------------------------------------------------------------
