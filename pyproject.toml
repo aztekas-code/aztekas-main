@@ -10,6 +10,7 @@ python = "^3.10"
 pre-commit = "^4.1.0"
 clang-format = "^19.1.7"
 commitizen = "^4.1.1"
+cpplint = "^2.0.0"
 
 
 [build-system]

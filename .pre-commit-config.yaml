@@ -35,3 +35,11 @@ repos:
         args:
           - --style=file  # Usa la configuración del archivo .clang-format si existe
           - -i            # Reescribe los archivos (in-place)
+      - id: cpplint
+        name: cpplint
+        description: Static code analysis of C/C++ files
+        language: python
+        files: \.(h\+\+|h|hh|hxx|hpp|cuh|c|cc|cpp|cu|c\+\+|cxx|tpp|txx)$
+        entry: cpplint
+        args: ['--filter=-whitespace/line_length,-whitespace/indent,-whitespace/comments,-legal/copyright,-runtime/references,-build/c++11,-build/namespaces']
+        exclude: 3rd_party/

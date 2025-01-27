@@ -3,7 +3,8 @@
 OBJDIR ?= .
 
 COMMON_SRCS = messages.cpp \
-		boundaries.cpp
+		boundaries.cpp \
+		example.cpp
 COMMON_OBJS = $(COMMON_SRCS:%.cpp=$(OBJDIR)/%.o)
 
 $(OBJDIR)/%.o: $(AZTEKAS_PATH)/src/common/%.cpp

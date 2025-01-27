@@ -90,7 +90,10 @@ INT = Standard
 # Local Source Files
 ##################################################
 # Define local source files and their corresponding object files
-LOCAL_SRCS = initial.cpp
+LOCAL_SRCS = initial.cpp \
+		user_boundaries.cpp \
+		user_input.cpp \
+		user_sources.cpp
 LOCAL_OBJS = $(LOCAL_SRCS:%.cpp=$(OBJDIR)/%.o)
 
 # Rule to compile .cpp files into .o files
