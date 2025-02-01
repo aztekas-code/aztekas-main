@@ -41,5 +41,5 @@ repos:
         language: python
         files: \.(h\+\+|h|hh|hxx|hpp|cuh|c|cc|cpp|cu|c\+\+|cxx|tpp|txx)$
         entry: cpplint
-        args: ['--filter=-whitespace/line_length,-whitespace/indent,-whitespace/comments,-legal/copyright,-runtime/references,-build/c++11,-build/namespaces']
+        args: ['--filter=-build/include_subdir, -whitespace/line_length,-whitespace/indent,-whitespace/comments,-legal/copyright,-runtime/references,-build/c++11,-build/namespaces']
         exclude: 3rd_party/
