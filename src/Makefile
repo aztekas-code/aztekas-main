@@ -1,5 +1,6 @@
 # src/Makefile
 include $(AZTEKAS_PATH)/src/common/Makefile
+include $(AZTEKAS_PATH)/src/grid/Makefile
 
 # Si no se define desde afuera, será "."
 OBJDIR ?= .
@@ -27,6 +28,7 @@ all: aztekas-simulation $(EXECUTABLE)
 
 $(EXECUTABLE): $(LOCAL_OBJS) \
                $(COMMON_OBJS) \
+               $(GRID_OBJS) \
                $(OBJDIR)/main.o
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
