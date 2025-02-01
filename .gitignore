@@ -1,4 +1,4 @@
-*.tex 
+*.tex
 *.log
 *.aux
 *.toc
@@ -25,3 +25,11 @@ SIMULATIONS/**/aztekas
 SIMULATIONS/**/TEST/
 SIMULATIONS/**/**/INFO
 SIMULATIONS/
+
+.old/
+
+# Poetry
+poetry.lock
+
+# Exectuables
+*.run
